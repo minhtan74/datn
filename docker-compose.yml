@@ -1,0 +1,68 @@
+# StudyOnline — triển khai nhanh: MySQL + Backend (FastAPI) + Frontend (Nginx)
+#   docker compose up -d --build
+#   Frontend:  http://localhost:8088
+#   API:       http://localhost:8080  (Swagger: /docs)
+
+services:
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: studyonline
+      MYSQL_DATABASE: studyonline_db
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/studyonline_db.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./database/migration_add_payments.sql:/docker-entrypoint-initdb.d/02-payments.sql:ro
+      - ./database/sample_data.sql:/docker-entrypoint-initdb.d/03-sample.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-pstudyonline"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  backend:
+    build: ./backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_NAME: studyonline_db
+      DB_USER: root
+      DB_PASS: studyonline
+      JWT_SECRET: studyonline_super_secret_key_2026
+      JWT_EXPIRE: "604800"
+      FRONTEND_ORIGIN: "*"
+      PUBLIC_BASE_URL: "http://localhost:8080"
+      # VNPay Sandbox: điền TMN code + hash secret do VNPay cấp (đăng ký tại sandbox.vnpayment.vn/devreg)
+      VNPAY_TMN_CODE: ${VNPAY_TMN_CODE:-}
+      VNPAY_HASH_SECRET: ${VNPAY_HASH_SECRET:-}
+      VNPAY_RETURN_URL: "http://localhost:8088/api/payments/vnpay/return"
+      FRONTEND_URL: "http://localhost:8088"
+      # AI (tuỳ chọn): điền để dùng LLM thật, bỏ trống -> chế độ offline
+      LLM_PROVIDER: gemini
+      LLM_MODEL: gemini-2.0-flash
+      LLM_API_KEY: ""
+    ports:
+      - "8080:8080"
+    volumes:
+      - backend_uploads:/app/uploads
+      - backend_data:/app/data
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "8088:80"
+
+volumes:
+  db_data:
+  backend_uploads:
+  backend_data:

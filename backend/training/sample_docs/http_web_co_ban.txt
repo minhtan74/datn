@@ -1,0 +1,31 @@
+TÀI LIỆU: HTTP VÀ NỀN TẢNG WEB
+
+1. HTTP là gì
+HTTP (HyperText Transfer Protocol) là giao thức tầng ứng dụng dùng để truyền tải dữ liệu
+giữa trình duyệt (client) và máy chủ web (server). HTTP là giao thức phi trạng thái
+(stateless): mỗi request độc lập, server không tự ghi nhớ các request trước đó.
+
+2. HTTP Request
+Một HTTP request gồm: dòng yêu cầu (method + đường dẫn + phiên bản), các header, và
+phần thân (body) tuỳ chọn. Các method phổ biến: GET (lấy dữ liệu), POST (gửi dữ liệu
+tạo mới), PUT (cập nhật toàn bộ), PATCH (cập nhật một phần), DELETE (xoá).
+GET không nên có body và có thể được cache; POST thường mang dữ liệu trong body.
+
+3. HTTP Response và mã trạng thái
+Response gồm dòng trạng thái (status line), header và body. Nhóm mã trạng thái:
+1xx thông tin, 2xx thành công (200 OK, 201 Created), 3xx chuyển hướng (301, 304),
+4xx lỗi phía client (400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found),
+5xx lỗi phía server (500 Internal Server Error, 503 Service Unavailable).
+
+4. Header thường gặp
+Content-Type mô tả kiểu dữ liệu của body (ví dụ application/json). Authorization mang
+thông tin xác thực, ví dụ "Bearer <token>". Cache-Control điều khiển việc lưu đệm.
+
+5. HTTPS
+HTTPS là HTTP chạy trên TLS, mã hoá dữ liệu trên đường truyền, chống nghe lén và
+giả mạo. HTTPS dùng cổng mặc định 443, HTTP dùng cổng 80.
+
+6. REST API
+REST là kiểu kiến trúc cho web service: mỗi tài nguyên có một URL, thao tác trên tài
+nguyên bằng các HTTP method, dữ liệu thường trao đổi dưới dạng JSON. API REST tốt nên
+phi trạng thái và dùng đúng ngữ nghĩa của các HTTP method và mã trạng thái.

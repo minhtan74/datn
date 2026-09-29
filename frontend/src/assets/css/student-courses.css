@@ -1,0 +1,70 @@
+/* Trích từ <style> inline trong _legacy/pages/student/courses.html */
+
+/* Hero */
+.explore-hero{background:linear-gradient(135deg,#1e3a8a,#2563EB 40%,#7C3AED 80%,#06B6D4);border-radius:var(--s-radius);padding:2.5rem 2rem;color:#fff;margin-bottom:2rem;position:relative;overflow:hidden;}
+.explore-hero::before{content:'';position:absolute;top:-60px;right:-60px;width:260px;height:260px;background:rgba(255,255,255,.06);border-radius:50%;}
+.explore-hero::after{content:'🔍';position:absolute;right:2rem;top:50%;transform:translateY(-50%);font-size:5rem;opacity:.12;}
+.explore-hero h1{font-size:1.6rem;font-weight:800;margin-bottom:.35rem;}
+.explore-hero p{opacity:.85;font-size:.9rem;margin-bottom:1.25rem;}
+.hero-search{display:flex;gap:.75rem;max-width:600px;}
+.hero-search input{flex:1;min-width:0;padding:.7rem 1.1rem;border-radius:10px;border:none;font-size:.9rem;font-family:inherit;outline:none;box-shadow:0 2px 12px rgba(0,0,0,.15);color:var(--s-text);}
+.hero-search button{padding:.7rem 1.4rem;background:#fff;color:var(--s-primary);border:none;border-radius:10px;font-weight:700;font-size:.875rem;font-family:inherit;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.hero-search button:hover{background:var(--s-surface-2);transform:translateY(-1px);}
+.stats-row{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:.75rem;font-size:.82rem;}
+.stats-row span{background:rgba(255,255,255,.15);border-radius:999px;padding:.2rem .75rem;font-weight:600;}
+/* Category pills */
+.cat-pills{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.cat-pill{padding:.4rem .9rem;border-radius:999px;border:1.5px solid var(--s-border);font-size:.8rem;font-weight:600;cursor:pointer;background:var(--s-surface);color:var(--s-text-muted);transition:all .2s;font-family:inherit;}
+.cat-pill:hover{border-color:var(--s-primary);color:var(--s-primary);}
+.cat-pill.active{background:var(--s-primary);color:#fff;border-color:var(--s-primary);}
+/* Sort bar */
+.sort-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:.75rem;}
+.sort-bar .count{font-size:.875rem;color:var(--s-text-muted);}
+.sort-bar .count strong{color:var(--s-text);}
+.sort-bar select{padding:.4rem .875rem;border:1.5px solid var(--s-border);border-radius:8px;font-size:.85rem;font-family:inherit;background:var(--s-surface);color:var(--s-text);outline:none;cursor:pointer;}
+/* Level badge */
+.level-badge{font-size:.72rem;font-weight:700;padding:.15rem .5rem;border-radius:5px;}
+.level-begin{background:rgba(16,185,129,.1);color:var(--s-success);}
+.level-mid{background:rgba(245,158,11,.1);color:var(--s-warning);}
+.level-adv{background:rgba(239,68,68,.1);color:var(--s-danger);}
+/* Price */
+.price-free{font-size:.78rem;font-weight:700;color:var(--s-success);}
+.price-paid{font-size:.82rem;font-weight:700;color:var(--s-primary);}
+/* Enroll badge */
+.enroll-badge{position:absolute;top:.75rem;right:.75rem;background:rgba(255,255,255,.2);color:#fff;padding:.2rem .6rem;border-radius:999px;font-size:.72rem;font-weight:700;backdrop-filter:blur(4px);}
+.enrolled-badge{background:rgba(16,185,129,.8)!important;}
+.s-course-thumb{position:relative;}
+/* Empty / no-result */
+.no-result{grid-column:1/-1;text-align:center;padding:4rem 1rem;color:var(--s-text-muted);}
+.no-result .icon{font-size:3rem;margin-bottom:1rem;}
+.no-result h3{font-size:1.1rem;font-weight:700;color:var(--s-text);margin-bottom:.35rem;}
+/* Skeleton */
+.skeleton-card{background:var(--s-surface);border-radius:var(--s-radius);border:1px solid var(--s-border);overflow:hidden;}
+.sk{background:var(--s-surface-2);border-radius:6px;animation:pulse 1.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.sk-thumb{height:150px;border-radius:0;}
+.sk-body{padding:1.125rem;}
+.sk-line{height:12px;margin-bottom:.6rem;}
+.sk-line.w80{width:80%}.sk-line.w60{width:60%}.sk-line.w40{width:40%}
+/* Modal */
+.modal-wrap{display:none;position:fixed;inset:0;z-index:500;align-items:center;justify-content:center;padding:1rem;}
+.modal-wrap.open{display:flex;}
+.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(3px);}
+/* Fix: modal không giới hạn chiều cao — trên màn hình thấp (mobile ngang)
+   phần dưới modal (nút Đóng/Đăng ký) có thể bị che khuất, không cuộn được. */
+.modal-box{position:relative;background:var(--s-surface);border-radius:16px;width:100%;max-width:520px;max-height:90vh;overflow-x:hidden;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25);animation:modalIn .25s ease;}
+@keyframes modalIn{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-body{padding:1.5rem;}
+.detail-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;background:var(--s-surface-2);border-radius:10px;padding:1rem;text-align:center;}
+.detail-stats div{display:flex;flex-direction:column;gap:.2rem;}
+.detail-stats strong{font-size:1rem;font-weight:800;color:var(--s-text);}
+.detail-stats span{font-size:.72rem;color:var(--s-text-muted);}
+/* Fix: 4 cột số liệu quá chật trên điện thoại nhỏ, chữ dễ bị vỡ dòng/đè nhau */
+@media (max-width: 420px) {
+  .detail-stats { grid-template-columns: repeat(2, 1fr); }
+}
+/* Payment */
+.pay-methods{display:flex;flex-direction:column;gap:.5rem;}
+.pay-method{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;border:1.5px solid var(--s-border);border-radius:10px;cursor:pointer;transition:all .2s;font-size:.875rem;font-weight:500;}
+.pay-method input{accent-color:var(--s-primary);}
+.pay-method.active{border-color:var(--s-primary);background:rgba(37,99,235,.05);}

@@ -1,0 +1,222 @@
+/* Trích từ <style> inline trong _legacy/pages/chapters.html */
+
+/* ─── Breadcrumb ───
+ * Renamed to .chapters-breadcrumb (was plain .breadcrumb): studyonline.css
+ * (loaded globally for the whole SPA) also defines a `.breadcrumb` class used
+ * by every admin/teacher page, with a different (var(--text-muted) vs
+ * var(--s-text-muted)) design system. In the original app these never
+ * coexisted since each page linked only one stylesheet; here all CSS is
+ * bundled together, so the shared name must be scoped to avoid clobbering.
+ */
+.chapters-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--s-text-muted);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.chapters-breadcrumb a { color: var(--s-primary); text-decoration: none; font-weight: 500; }
+.chapters-breadcrumb a:hover { text-decoration: underline; }
+.chapters-breadcrumb .sep { opacity: 0.4; }
+
+/* ─── Course Hero ─── */
+.course-hero {
+  background: linear-gradient(135deg, #1e3a6e 0%, #2563EB 50%, #7C3AED 100%);
+  border-radius: var(--s-radius);
+  padding: 2rem 2.5rem;
+  color: #fff;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.course-hero::after {
+  content: '📚';
+  position: absolute;
+  right: 2rem; top: 50%;
+  transform: translateY(-50%);
+  font-size: 7rem;
+  opacity: 0.1;
+  pointer-events: none;
+}
+.course-hero h1 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+.course-hero p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+@media (max-width: 600px) {
+  .course-hero { padding: 1.5rem 1.25rem; }
+  .course-hero h1 { font-size: 1.3rem; }
+}
+.course-hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+.course-hero-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  opacity: 0.85;
+  background: rgba(255,255,255,0.12);
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+}
+
+/* ─── Chapter Accordion ─── */
+.chapter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.chapter-item {
+  background: var(--s-surface);
+  border: 1px solid var(--s-border);
+  border-radius: var(--s-radius);
+  box-shadow: var(--s-shadow);
+  overflow: hidden;
+  transition: box-shadow var(--s-transition);
+}
+.chapter-item:hover { box-shadow: var(--s-shadow-lg); }
+
+.chapter-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.125rem 1.375rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background var(--s-transition);
+}
+.chapter-header:hover { background: var(--s-surface-2); }
+
+.chapter-num {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--s-primary), var(--s-accent));
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.chapter-info { flex: 1; min-width: 0; }
+.chapter-info h3 {
+  font-size: 0.975rem;
+  font-weight: 700;
+  color: var(--s-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.chapter-info p {
+  font-size: 0.78rem;
+  color: var(--s-text-muted);
+  margin-top: 0.1rem;
+}
+
+.chapter-arrow {
+  font-size: 0.8rem;
+  color: var(--s-text-muted);
+  transition: transform var(--s-transition);
+  flex-shrink: 0;
+}
+.chapter-item.open .chapter-arrow { transform: rotate(180deg); }
+
+/* ─── Lessons inside chapter ─── */
+.lesson-list {
+  display: none;
+  flex-direction: column;
+  border-top: 1px solid var(--s-border);
+}
+.chapter-item.open .lesson-list { display: flex; }
+
+.lesson-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 1.375rem 0.875rem 2rem;
+  border-bottom: 1px solid var(--s-border);
+  transition: background var(--s-transition);
+  text-decoration: none;
+  color: var(--s-text);
+}
+.lesson-row:last-child { border-bottom: none; }
+.lesson-row:hover { background: rgba(37,99,235,0.04); }
+
+.lesson-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: rgba(37,99,235,0.08);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.lesson-info { flex: 1; min-width: 0; }
+.lesson-info .title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lesson-info .desc {
+  font-size: 0.75rem;
+  color: var(--s-text-muted);
+  margin-top: 0.1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lesson-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.875rem;
+  background: var(--s-primary);
+  color: #fff;
+  border-radius: 7px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all var(--s-transition);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.lesson-cta:hover {
+  background: var(--s-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(37,99,235,0.3);
+}
+
+/* ─── Loading / Empty ─── */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1rem;
+  color: var(--s-text-muted);
+  gap: 1rem;
+}
+.spin {
+  width: 40px; height: 40px;
+  border: 3px solid var(--s-border);
+  border-top-color: var(--s-primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }

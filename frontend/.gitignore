@@ -1,0 +1,16 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# Build output
+dist/
+dist-ssr/
+
+# Env
+.env
+.env.local
+
+# Editor / OS
+.vscode/
+*.local
+.DS_Store

@@ -1,0 +1,419 @@
+/*
+ * Teacher dashboard — styles extracted from _legacy/pages/teacher/dashboard.html
+ * (inline <style> block) and _legacy/pages/teacher/quiz-questions.html.
+ *
+ * Only the rules NOT already covered by the shared studyonline.css dashboard
+ * layout system (sidebar/topbar/main-content/stats-grid/card/badge/etc.) are
+ * kept here. The generic modal overlay is now handled by the shared
+ * <Modal /> component, so the old `.modal` overlay rule was dropped; the
+ * `modalFadeIn` keyframe is kept and applied inline on modal panels.
+ * The old manual `.toast-container` / `.toast` rules were dropped because
+ * toasts are now rendered globally by ToastContext (different markup).
+ */
+
+@keyframes modalFadeIn {
+  from {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* CSS Bar Chart styling */
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 200px;
+  padding-top: 20px;
+  border-bottom: 2px solid var(--border);
+  border-left: 2px solid var(--border);
+  margin-top: 1rem;
+}
+
+.bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.bar-value {
+  width: 60%;
+  max-width: 32px;
+  background: linear-gradient(180deg, var(--primary) 0%, #3b82f6 100%);
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  cursor: pointer;
+}
+
+.bar-value:hover {
+  background: linear-gradient(180deg, var(--primary-hover) 0%, var(--primary) 100%);
+}
+
+.bar-value::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--secondary);
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: 700;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.bar-value:hover::after {
+  opacity: 1;
+}
+
+.bar-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  font-weight: 600;
+}
+
+/* Tree View (Course -> Chapter -> Lesson) styling */
+.tree-chapter {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  margin-bottom: 1rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.tree-chapter-header {
+  padding: 1rem 1.5rem;
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.tree-chapter-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tree-lessons-list {
+  padding: 0.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tree-lesson-item {
+  padding: 0.75rem 1rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  transition: var(--transition);
+}
+
+.tree-lesson-item:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+/* Course Cards Dashboard */
+.course-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.course-dash-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+
+.course-dash-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.course-dash-thumb {
+  height: 160px;
+  width: 100%;
+  background: var(--primary-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.course-dash-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.course-dash-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.course-dash-body {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-dash-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+  color: var(--secondary);
+}
+
+.course-dash-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.course-dash-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  padding-top: 0.75rem;
+  margin-top: auto;
+}
+
+.course-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--surface-2);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 0.5rem 0 1rem;
+}
+
+.course-progress-fill {
+  height: 100%;
+  background: var(--success);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+/* Profile section layouts */
+.profile-hero {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--secondary) 0%, #1e293b 100%);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 576px) {
+  .profile-hero {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/*
+ * Quiz Questions page (_legacy/pages/teacher/quiz-questions.html) — question
+ * cards + the "modal-box" panel style used for the question create/edit
+ * modal (visually distinct from the plain `.card` modal panels used by the
+ * course/chapter/lesson/quiz modals elsewhere in the teacher dashboard).
+ *
+ * NOTE: these are prefixed `tq-` (Teacher Quiz-questions) because the
+ * unprefixed names (.question-card/.option-item/.modal-box/...) are ALSO
+ * defined by src/assets/css/student.css for the student quiz pages
+ * (Quiz/QuizShow/QuizResult). In the original vanilla app each page loaded
+ * only its own <link>ed stylesheet, so the duplicate names never collided;
+ * in this SPA all CSS is bundled and active on every route at once, so an
+ * unprefixed rule here would leak into/clobber the student quiz pages
+ * (or vice versa) depending on bundle order. Prefixing avoids that.
+ */
+.tq-question-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.tq-question-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-light);
+}
+.tq-question-num {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+.tq-question-content {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--secondary);
+  line-height: 1.6;
+}
+.tq-option-item {
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  border: 1.5px solid transparent;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+.tq-option-item.correct {
+  color: var(--success);
+  font-weight: 600;
+  background: rgba(16, 185, 129, 0.05);
+  border-color: var(--success);
+}
+.tq-option-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.tq-modal-box {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  width: 100%;
+  max-width: 620px;
+  max-height: none;
+  overflow-y: visible;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--border);
+  animation: modalFadeIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.tq-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+}
+.tq-modal-header h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--secondary);
+}
+.tq-modal-close {
+  background: var(--surface-2);
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+.tq-modal-close:hover {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 576px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+/* Thanh tab trang Quiz trắc nghiệm: Danh sách Quiz / Tạo bằng AI */
+.quiz-tabs {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+}
+
+.quiz-tab {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.quiz-tab:hover {
+  color: var(--primary);
+}
+
+.quiz-tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}

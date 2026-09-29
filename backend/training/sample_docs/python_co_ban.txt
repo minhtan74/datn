@@ -1,0 +1,37 @@
+TÀI LIỆU: PYTHON CƠ BẢN CHO NGƯỜI MỚI BẮT ĐẦU
+
+1. Giới thiệu
+Python là ngôn ngữ lập trình bậc cao, thông dịch, đa mục đích, chú trọng tính dễ đọc.
+Python được Guido van Rossum tạo ra và phát hành lần đầu năm 1991. Python được dùng
+rộng rãi trong phát triển web, khoa học dữ liệu, tự động hoá và trí tuệ nhân tạo.
+
+2. Biến và kiểu dữ liệu
+Trong Python không cần khai báo kiểu tường minh; kiểu được xác định lúc chạy.
+Các kiểu dữ liệu cơ bản gồm: int (số nguyên), float (số thực), str (chuỗi),
+bool (True/False). Kiểu danh sách có thể thay đổi là list, ví dụ: numbers = [1, 2, 3].
+Ngoài ra còn có tuple (bất biến), dict (từ điển key-value) và set (tập hợp).
+Hàm type(x) trả về kiểu của giá trị x; ví dụ type(3.14) trả về <class 'float'>.
+
+3. Toán tử
+Toán tử số học: +, -, *, /, // (chia lấy phần nguyên), % (chia lấy dư), ** (luỹ thừa).
+Toán tử so sánh bằng là ==; toán tử khác là !=. Không được nhầm == với phép gán =.
+Toán tử logic: and, or, not.
+
+4. Cấu trúc điều khiển
+Câu lệnh rẽ nhánh dùng if / elif / else. Khối lệnh trong Python được xác định bằng
+thụt lề (thường 4 dấu cách), không dùng dấu ngoặc nhọn.
+
+5. Vòng lặp
+Vòng lặp for dùng để lặp qua từng phần tử của một dãy (list, tuple, str, range).
+Ví dụ: for item in [10, 20, 30]: print(item). Vòng lặp while lặp trong khi điều kiện
+còn đúng. Lệnh break thoát khỏi vòng lặp, lệnh continue bỏ qua phần còn lại của vòng lặp
+hiện tại và sang vòng kế tiếp.
+
+6. Hàm
+Từ khoá def dùng để định nghĩa hàm, ví dụ: def add(a, b): return a + b.
+Hàm có thể có tham số mặc định và trả về giá trị bằng return. Nếu không có return,
+hàm trả về None.
+
+7. Lập trình hướng đối tượng
+Từ khoá class dùng để định nghĩa lớp. Phương thức khởi tạo là __init__. Tham số đầu
+tiên của phương thức thường là self, tham chiếu tới đối tượng hiện tại.

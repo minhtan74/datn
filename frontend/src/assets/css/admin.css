@@ -1,0 +1,31 @@
+/*
+ * Extracted from the inline <style> block of _legacy/pages/admin/dashboard.html.
+ *
+ * NOTE (judgment call): the legacy inline <style> block only ever contained two
+ * things: (1) the .modal / modalFadeIn presentation for the create/edit modals,
+ * and (2) .toast-container / .toast(-success|-error) styling for a bespoke toast
+ * widget. Everything else visible on the admin dashboard (.sidebar, .topbar,
+ * .stat-card, .table-wrapper, .card, .badge, .form-control, .page-header, etc.)
+ * lives in the already-imported src/assets/css/studyonline.css, not in this
+ * inline block, so it is NOT duplicated here.
+ *
+ * The toast rules are intentionally NOT ported: this app's shared toast system
+ * (src/context/ToastContext.jsx via useToast()) already renders its own
+ * `.toast-container` / `.toast-item` markup and is mounted globally in
+ * src/main.jsx for every route (student/teacher/admin alike). Re-declaring
+ * `.toast-container` / `.toast` here — with the legacy's slightly different
+ * class names and a global (non-scoped) CSS import — would only add dead
+ * selectors (`.toast` never matches `.toast-item`) and risk clobbering the
+ * shared toast styles for the other page groups. Only the modal entrance
+ * animation is reused as-is, applied inline on the admin modal cards.
+ */
+@keyframes modalFadeIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

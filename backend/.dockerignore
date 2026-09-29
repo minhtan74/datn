@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+data/
+uploads/videos/*
+uploads/images/*
+uploads/documents/*
+.env
+eval_*.json

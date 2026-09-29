@@ -1,0 +1,33 @@
+TÀI LIỆU: JAVASCRIPT TỪ ZERO ĐẾN HERO — KIẾN THỨC NỀN TẢNG
+
+1. Khai báo biến
+ES6 bổ sung let và const. const dùng để khai báo biến không đổi (không gán lại được);
+let dùng cho biến có thể thay đổi và có phạm vi khối. var là cách cũ, có phạm vi hàm
+và dễ gây lỗi hoisting.
+
+2. Kiểu dữ liệu
+JavaScript có các kiểu nguyên thuỷ: number, string, boolean, null, undefined, symbol,
+bigint. Một điểm gây nhầm lẫn nổi tiếng: typeof null trả về "object" (đây là lỗi lịch sử
+của ngôn ngữ, vẫn được giữ để tương thích ngược).
+
+3. Hàm và arrow function
+Arrow function là cú pháp ngắn gọn: const add = (a, b) => a + b; Với một tham số có thể
+bỏ ngoặc: x => x * 2. Arrow function không có this riêng, nó kế thừa this từ ngữ cảnh
+bao quanh.
+
+4. DOM (Document Object Model)
+DOM là biểu diễn cây của trang HTML. Để chọn một phần tử theo id, dùng
+document.getElementById("myId"). Các phương thức khác: querySelector, querySelectorAll,
+getElementsByClassName. Có thể thay đổi nội dung bằng thuộc tính textContent hoặc
+innerHTML, và gắn sự kiện bằng addEventListener("click", handler).
+
+5. Bất đồng bộ (Asynchronous)
+Promise là đối tượng đại diện cho một tác vụ bất đồng bộ. Promise có ba trạng thái:
+pending (đang chờ), fulfilled (hoàn thành thành công) và rejected (thất bại).
+Sau khi hoàn thành thành công, Promise ở trạng thái fulfilled và trả kết quả qua .then().
+Cú pháp async/await giúp viết mã bất đồng bộ trông giống mã đồng bộ: từ khoá await
+tạm dừng hàm async cho tới khi Promise được giải quyết.
+
+6. Sự kiện
+Mô hình sự kiện gồm giai đoạn capturing (từ ngoài vào) và bubbling (từ trong ra ngoài).
+Mặc định addEventListener lắng nghe ở giai đoạn bubbling.

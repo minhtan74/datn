@@ -1,0 +1,138 @@
+TÀI LIỆU: HTML & CSS NHẬP MÔN
+
+1. HTML là gì
+HTML (HyperText Markup Language) là ngôn ngữ đánh dấu dùng để mô tả cấu trúc của trang web.
+HTML không phải ngôn ngữ lập trình vì không có biến, vòng lặp hay điều kiện.
+Trình duyệt đọc mã HTML và hiển thị nội dung theo các thẻ (tag) được khai báo.
+
+2. Cấu trúc tài liệu HTML
+Dòng khai báo <!DOCTYPE html> cho trình duyệt biết tài liệu dùng chuẩn HTML5.
+Thẻ gốc của mọi trang web là thẻ html, bên trong gồm hai phần head và body.
+Phần head chứa thông tin mô tả trang như title, meta charset và liên kết tới file CSS.
+Phần body chứa toàn bộ nội dung hiển thị cho người dùng.
+
+3. Thẻ và thuộc tính HTML
+Một phần tử HTML gồm thẻ mở, nội dung và thẻ đóng, ví dụ <p>Xin chào</p>.
+Thuộc tính (attribute) là thông tin bổ sung đặt trong thẻ mở, ví dụ href hoặc class.
+Thẻ tự đóng như img, br và input không có nội dung và không cần thẻ đóng.
+
+4. Thẻ tiêu đề và đoạn văn
+Các thẻ tiêu đề từ h1 đến h6, trong đó h1 là tiêu đề quan trọng nhất của trang.
+Thẻ p dùng để tạo một đoạn văn bản, thẻ br dùng để xuống dòng.
+
+5. Tạo liên kết trong HTML
+Liên kết (link) trong HTML được tạo bằng thẻ a.
+Địa chỉ đích của liên kết được khai báo trong thuộc tính href, ví dụ <a href="https://example.com">Trang chủ</a>.
+Thuộc tính target="_blank" mở liên kết trong một tab mới.
+
+6. Chèn hình ảnh
+Hình ảnh được chèn bằng thẻ img.
+Đường dẫn ảnh nằm trong thuộc tính src, mô tả thay thế cho ảnh nằm trong thuộc tính alt.
+
+7. Danh sách
+Danh sách không thứ tự dùng thẻ ul, danh sách có thứ tự dùng thẻ ol.
+Mỗi mục trong danh sách được đặt trong thẻ li.
+Danh sách thường được dùng để xây dựng thanh menu điều hướng của trang web.
+
+8. Bảng biểu
+Bảng trong HTML được tạo bằng thẻ table.
+Mỗi hàng của bảng là thẻ tr, ô tiêu đề là thẻ th và ô dữ liệu là thẻ td.
+Thuộc tính colspan dùng để gộp nhiều cột, thuộc tính rowspan dùng để gộp nhiều hàng.
+
+9. Form nhập liệu
+Form là thành phần dùng để thu thập dữ liệu người dùng, được tạo bằng thẻ form.
+Thuộc tính action chỉ địa chỉ nhận dữ liệu, thuộc tính method chọn phương thức GET hoặc POST.
+Thẻ input có nhiều kiểu như text, email, password, checkbox, radio và submit.
+
+10. Thẻ label
+Thẻ label dùng để gắn nhãn cho ô nhập liệu.
+Thuộc tính for của label trùng với id của input, bấm vào nhãn sẽ đưa con trỏ vào ô nhập.
+
+11. Semantic HTML
+Semantic HTML là cách dùng thẻ có ý nghĩa (thẻ ngữ nghĩa) để mô tả đúng vai trò của nội dung.
+Các thẻ ngữ nghĩa phổ biến gồm header, nav, main, section, article, aside và footer.
+Dùng thẻ ngữ nghĩa giúp trang tốt hơn cho công cụ tìm kiếm (SEO) và trình đọc màn hình.
+
+12. Thẻ div và span
+Thẻ div là thẻ khối không mang ý nghĩa, chỉ dùng để nhóm nội dung.
+Thẻ span là thẻ nội dòng không mang ý nghĩa, dùng để định dạng một phần văn bản.
+
+13. CSS là gì
+CSS (Cascading Style Sheets) là ngôn ngữ dùng để định dạng giao diện cho trang HTML.
+HTML mô tả cấu trúc nội dung, còn CSS quy định màu sắc, phông chữ và bố cục.
+
+14. Cách nhúng CSS vào HTML
+Có ba cách nhúng CSS: inline trong thuộc tính style, internal trong thẻ style và external qua file .css.
+Cách được khuyến khích là external CSS, liên kết bằng thẻ link đặt trong phần head.
+
+15. Selector trong CSS
+Selector là mẫu dùng để chọn phần tử HTML cần áp dụng kiểu.
+Selector theo tên thẻ viết trực tiếp tên thẻ, ví dụ p hoặc h1.
+Selector class bắt đầu bằng dấu chấm, ví dụ .card; selector id bắt đầu bằng dấu thăng, ví dụ #header.
+
+16. Pseudo-class
+Pseudo-class là selector chọn phần tử theo trạng thái, viết sau dấu hai chấm.
+Ví dụ :hover áp dụng kiểu khi rê chuột lên phần tử, :first-child chọn phần tử con đầu tiên.
+
+17. Độ ưu tiên trong CSS (specificity)
+Độ ưu tiên (specificity) quyết định quy tắc nào được áp dụng khi nhiều quy tắc cùng chọn một phần tử.
+Thứ tự ưu tiên tăng dần là selector thẻ, selector class, selector id; style inline mạnh hơn cả.
+Khi hai quy tắc có cùng độ ưu tiên, quy tắc viết sau sẽ được áp dụng.
+
+18. Thuộc tính màu sắc và phông chữ
+Thuộc tính color đổi màu chữ, background-color đổi màu nền.
+Thuộc tính font-size đặt cỡ chữ, font-family chọn phông chữ.
+Đơn vị px là đơn vị tuyệt đối; rem là đơn vị tương đối theo cỡ chữ của phần tử html.
+
+19. Box Model
+Box Model là mô hình coi mỗi phần tử HTML như một hộp chữ nhật.
+Hộp gồm bốn lớp từ trong ra ngoài: content, padding, border và margin.
+Padding là khoảng đệm bên trong viền, margin là khoảng cách bên ngoài viền.
+
+20. Thuộc tính box-sizing
+Mặc định width chỉ tính phần content, nên thêm padding và border sẽ làm hộp to hơn.
+Khi đặt box-sizing: border-box, chiều rộng đã bao gồm cả padding và border.
+
+21. Thuộc tính display
+Phần tử block như div và p luôn bắt đầu trên dòng mới và chiếm hết chiều ngang.
+Phần tử inline như span và a nằm trên cùng dòng và không nhận width, height.
+Giá trị display: none dùng để ẩn hoàn toàn phần tử khỏi bố cục.
+
+22. Flexbox
+Flexbox là mô hình bố cục một chiều, dùng để sắp xếp các phần tử theo hàng hoặc theo cột.
+Để bật Flexbox, đặt display: flex cho phần tử cha (flex container).
+Flexbox thường dùng để làm thanh menu, căn giữa phần tử hoặc chia đều khoảng cách.
+
+23. Thuộc tính của Flexbox
+Thuộc tính justify-content căn các phần tử theo trục chính, align-items căn theo trục phụ.
+Thuộc tính flex-direction chọn hướng trục chính là row (hàng) hoặc column (cột).
+Thuộc tính flex-wrap cho phép các phần tử xuống dòng khi không đủ chỗ.
+
+24. CSS Grid
+CSS Grid là mô hình bố cục hai chiều, chia vùng hiển thị thành hàng và cột.
+Để bật Grid, đặt display: grid cho phần tử cha.
+Thuộc tính grid-template-columns khai báo các cột, ví dụ repeat(3, 1fr) tạo ba cột bằng nhau; gap đặt khoảng cách giữa các ô.
+
+25. Phân biệt Grid và Flexbox
+Flexbox là bố cục một chiều, chỉ sắp xếp theo một hàng hoặc một cột tại một thời điểm.
+Grid là bố cục hai chiều, điều khiển đồng thời cả hàng và cột.
+Thường dùng Flexbox cho các thành phần nhỏ như menu, dùng Grid cho bố cục tổng thể của trang.
+
+26. Responsive Design
+Responsive Design là kỹ thuật thiết kế giúp trang web hiển thị tốt trên mọi kích thước màn hình.
+Thẻ meta viewport với width=device-width giúp trang hiển thị đúng tỉ lệ trên điện thoại.
+Ảnh co giãn theo khung thường dùng max-width: 100%.
+
+27. Media Query
+Media Query là cú pháp CSS dùng để áp dụng kiểu theo điều kiện của thiết bị, bắt đầu bằng @media.
+Ví dụ @media (max-width: 768px) chỉ áp dụng kiểu khi màn hình rộng không quá 768px.
+Điểm ngắt (breakpoint) là độ rộng màn hình mà tại đó bố cục thay đổi.
+
+28. Mobile First
+Mobile First là cách viết CSS cho màn hình nhỏ trước, sau đó mở rộng cho màn hình lớn.
+Theo cách này, media query thường dùng min-width thay vì max-width.
+
+29. Dự án Landing Page
+Landing Page là trang giới thiệu một sản phẩm hoặc dịch vụ với mục tiêu kêu gọi hành động.
+Một landing page thường gồm header, phần giới thiệu (hero), tính năng, đánh giá và footer.
+Bố cục dùng Flexbox cho thanh menu, Grid cho khối tính năng và media query cho điện thoại.

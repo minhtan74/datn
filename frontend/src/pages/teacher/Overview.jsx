@@ -297,7 +297,7 @@ export default function TeacherOverview() {
             <div className="card">
               <div className="card-header">
                 <h3 style={{ fontSize: '1.05rem', fontWeight: 700 }}>👨‍🎓 Học viên mới đăng ký</h3>
-                <Link to="/teacher/students" className="btn btn-ghost btn-sm">
+                <Link to="/teacher/reports" className="btn btn-ghost btn-sm">
                   Tất cả
                 </Link>
               </div>

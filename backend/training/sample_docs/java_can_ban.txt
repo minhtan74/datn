@@ -1,0 +1,143 @@
+TÀI LIỆU: LẬP TRÌNH JAVA CĂN BẢN
+
+1. Java là gì
+Java là ngôn ngữ lập trình hướng đối tượng, được Sun Microsystems phát hành năm 1995.
+Java được dùng nhiều để xây dựng ứng dụng backend, ứng dụng doanh nghiệp và ứng dụng Android.
+
+2. Máy ảo Java (JVM)
+JVM (Java Virtual Machine) là máy ảo chạy bytecode của Java.
+Mã nguồn Java được biên dịch thành bytecode, sau đó JVM thông dịch hoặc biên dịch bytecode thành mã máy.
+Nhờ JVM, chương trình Java chạy được trên nhiều hệ điều hành, theo khẩu hiệu "viết một lần, chạy mọi nơi".
+
+3. JDK và JRE
+JDK (Java Development Kit) là bộ công cụ phát triển gồm trình biên dịch javac và JRE.
+JRE (Java Runtime Environment) là môi trường chạy chương trình Java, gồm JVM và thư viện chuẩn.
+Muốn viết và biên dịch chương trình cần cài JDK; chỉ chạy chương trình thì cần JRE.
+
+4. Cài đặt JDK và IntelliJ
+IntelliJ IDEA là môi trường phát triển tích hợp (IDE) phổ biến để viết mã Java.
+Sau khi cài JDK, kiểm tra bằng lệnh java -version trong cửa sổ dòng lệnh.
+
+5. Chương trình Java đầu tiên
+Mỗi chương trình Java bắt đầu chạy từ phương thức public static void main(String[] args).
+Tên file .java phải trùng với tên lớp public bên trong file.
+Lệnh System.out.println dùng để in một dòng ra màn hình.
+
+6. Kiểu dữ liệu nguyên thủy
+Java có tám kiểu nguyên thủy: byte, short, int, long, float, double, char và boolean.
+Kiểu int lưu số nguyên 32 bit, kiểu long lưu số nguyên 64 bit.
+Kiểu double là kiểu số thực mặc định, kiểu char lưu một ký tự Unicode.
+
+7. Biến và hằng số
+Java là ngôn ngữ định kiểu tĩnh, mỗi biến phải được khai báo kiểu trước khi dùng, ví dụ int age = 20.
+Từ khoá final dùng để khai báo hằng số, giá trị không thể gán lại.
+
+8. Chuỗi String
+String là kiểu tham chiếu dùng để lưu chuỗi ký tự và là đối tượng bất biến (immutable).
+Để so sánh nội dung hai chuỗi phải dùng phương thức equals, không dùng toán tử ==.
+Toán tử == chỉ so sánh hai biến có cùng trỏ tới một đối tượng hay không.
+
+9. Câu lệnh rẽ nhánh
+Câu lệnh rẽ nhánh gồm if, else if, else và switch.
+Câu lệnh switch chọn một nhánh theo giá trị của biểu thức, mỗi nhánh thường kết thúc bằng break.
+
+10. Vòng lặp
+Vòng lặp for dùng khi biết trước số lần lặp, vòng lặp while lặp khi điều kiện còn đúng.
+Vòng lặp do-while luôn thực hiện thân vòng lặp ít nhất một lần.
+Lệnh break thoát khỏi vòng lặp, lệnh continue bỏ qua phần còn lại của lần lặp hiện tại.
+
+11. Mảng
+Mảng là cấu trúc lưu nhiều phần tử cùng kiểu với kích thước cố định, ví dụ int[] a = new int[5].
+Chỉ số mảng bắt đầu từ 0, thuộc tính length cho biết số phần tử.
+Truy cập chỉ số ngoài phạm vi sẽ gây ra ngoại lệ ArrayIndexOutOfBoundsException.
+
+12. Lớp và đối tượng
+Lớp (class) là bản thiết kế mô tả thuộc tính và phương thức của một nhóm đối tượng.
+Đối tượng (object) là một thể hiện cụ thể của lớp, được tạo bằng từ khoá new.
+Thuộc tính lưu trạng thái của đối tượng, phương thức mô tả hành vi của đối tượng.
+
+13. Constructor
+Constructor là phương thức đặc biệt được gọi khi tạo đối tượng, có tên trùng với tên lớp.
+Constructor không có kiểu trả về, kể cả void.
+Nếu lớp không khai báo constructor nào, Java tự tạo constructor mặc định không tham số.
+
+14. Từ khoá this và static
+Từ khoá this tham chiếu tới đối tượng hiện tại, thường dùng khi tên tham số trùng tên thuộc tính.
+Thành phần static thuộc về lớp chứ không thuộc về từng đối tượng, gọi được qua tên lớp.
+
+15. Tính đóng gói (encapsulation)
+Đóng gói (encapsulation) là việc che giấu dữ liệu bên trong lớp và chỉ cho truy cập qua phương thức.
+Thuộc tính thường được khai báo private, kèm phương thức getter và setter public.
+Các phạm vi truy cập trong Java gồm private, default, protected và public.
+
+16. Kế thừa (inheritance)
+Kế thừa (inheritance) cho phép lớp con dùng lại thuộc tính và phương thức của lớp cha.
+Java dùng từ khoá extends để kế thừa và chỉ hỗ trợ đơn kế thừa với lớp.
+Từ khoá super dùng để gọi constructor hoặc phương thức của lớp cha.
+Mọi lớp trong Java đều kế thừa ngầm định từ lớp Object.
+
+17. Đa hình (polymorphism)
+Đa hình (polymorphism) là khả năng một lời gọi phương thức cho ra hành vi khác nhau tùy đối tượng thực tế.
+Ví dụ biến kiểu Animal trỏ tới đối tượng Dog thì lời gọi speak() chạy phương thức của Dog.
+
+18. Phân biệt overloading và overriding
+Nạp chồng (overloading) là khai báo nhiều phương thức cùng tên trong một lớp nhưng khác danh sách tham số.
+Ghi đè (overriding) là lớp con định nghĩa lại phương thức của lớp cha với cùng tên và cùng tham số.
+Overloading được xác định lúc biên dịch, overriding được xác định lúc chạy; chú thích @Override giúp kiểm tra ghi đè.
+
+19. Lớp trừu tượng (abstract class)
+Lớp trừu tượng (abstract class) là lớp không thể tạo đối tượng trực tiếp, khai báo bằng từ khoá abstract.
+Lớp trừu tượng có thể chứa cả phương thức trừu tượng (không có thân) và phương thức thường có thân.
+Lớp con phải cài đặt mọi phương thức trừu tượng, trừ khi nó cũng là lớp trừu tượng.
+
+20. Interface
+Interface là bản hợp đồng khai báo các phương thức mà lớp cài đặt phải thực hiện.
+Một lớp dùng từ khoá implements để cài đặt interface.
+Từ Java 8, interface có thể chứa phương thức default có sẵn phần thân.
+
+21. Phân biệt interface và abstract class
+Một lớp chỉ kế thừa (extends) được một abstract class nhưng cài đặt (implements) được nhiều interface.
+Abstract class có thể có thuộc tính thường và constructor, interface chỉ có hằng số và không có constructor.
+Dùng abstract class khi các lớp có chung phần cài đặt, dùng interface khi chỉ cần chung khả năng.
+
+22. Ngoại lệ (exception)
+Ngoại lệ (exception) là sự kiện bất thường xảy ra khi chương trình đang chạy, làm gián đoạn luồng thực thi.
+Checked exception bắt buộc phải xử lý hoặc khai báo throws, ví dụ IOException.
+Unchecked exception kế thừa từ RuntimeException, ví dụ NullPointerException và ArithmeticException.
+
+23. Khối try-catch
+Khối try chứa đoạn mã có thể phát sinh ngoại lệ, khối catch bắt và xử lý ngoại lệ đó.
+Một khối try có thể đi kèm nhiều khối catch cho các loại ngoại lệ khác nhau.
+
+24. Khối finally
+Khối finally dùng để chứa đoạn mã luôn được thực thi dù có ngoại lệ hay không.
+Khối finally thường dùng để giải phóng tài nguyên như đóng file hoặc đóng kết nối cơ sở dữ liệu.
+
+25. Từ khoá throw và throws
+Từ khoá throw dùng để ném một ngoại lệ, ví dụ throw new IllegalArgumentException("Sai giá trị").
+Từ khoá throws dùng để khai báo các ngoại lệ mà phương thức có thể ném ra ở chữ ký phương thức.
+
+26. Ngoại lệ tự định nghĩa (custom exception)
+Custom exception là lớp ngoại lệ do lập trình viên tự định nghĩa để mô tả lỗi nghiệp vụ.
+Lớp ngoại lệ tự định nghĩa thường kế thừa từ Exception hoặc RuntimeException.
+Ví dụ lớp InvalidPriceException được ném ra khi giá sản phẩm nhỏ hơn 0.
+
+27. Collection Framework
+Collection Framework là tập hợp các interface và lớp dùng để lưu trữ và thao tác nhóm đối tượng.
+Các interface chính gồm List (có thứ tự, cho trùng), Set (không trùng lặp) và Map (cặp khóa - giá trị).
+Collection chỉ lưu đối tượng, nên kiểu nguyên thủy được tự động đóng gói, ví dụ int thành Integer.
+
+28. ArrayList
+ArrayList là lớp cài đặt List dựa trên mảng động, tự tăng kích thước khi thêm phần tử.
+Phương thức add thêm phần tử, get lấy phần tử theo chỉ số, remove xoá phần tử và size trả về số phần tử.
+Generic như ArrayList<String> giúp kiểm tra kiểu dữ liệu ngay lúc biên dịch.
+
+29. HashMap
+HashMap là lớp cài đặt Map lưu dữ liệu theo cặp khóa - giá trị, mỗi khóa là duy nhất.
+Phương thức put thêm hoặc cập nhật giá trị, get lấy giá trị theo khóa, containsKey kiểm tra khóa có tồn tại.
+HashMap không đảm bảo thứ tự phần tử; cần giữ thứ tự thêm vào thì dùng LinkedHashMap.
+
+30. Dự án quản lý sản phẩm
+Dự án xây dựng lớp Product gồm các thuộc tính id, name, price và phương thức getter, setter.
+Danh sách sản phẩm được lưu trong ArrayList, còn HashMap dùng để tra cứu nhanh sản phẩm theo id.
+Chức năng thêm sản phẩm ném InvalidPriceException khi giá không hợp lệ.

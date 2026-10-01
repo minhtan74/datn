@@ -45,15 +45,14 @@ export default function StudentSidebar({ collapsed, mobileOpen }) {
           <span className="nav-icon">📝</span>
           <span className="nav-label">Quiz</span>
         </NavLink>
-        <NavLink className={navClass} to="/student/quiz-history">
-          <span className="nav-icon">📜</span>
-          <span className="nav-label">Lịch sử làm bài</span>
-        </NavLink>
         <NavLink className={navClass} to="/student/ai-tutor">
           <span className="nav-icon">🤖</span>
           <span className="nav-label">AI Tutor</span>
         </NavLink>
-
+        <NavLink className={navClass} to="/student/profile">
+          <span className="nav-icon">👤</span>
+          <span className="nav-label">Hồ sơ cá nhân</span>
+        </NavLink>
       </nav>
 
       <div className="s-sidebar-footer">

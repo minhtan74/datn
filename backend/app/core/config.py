@@ -50,12 +50,19 @@ class Settings(BaseSettings):
     llm_provider: str = "gemini"
     llm_model: str = ""
     llm_api_key: str = ""
+    # Địa chỉ API chuẩn OpenAI khác (Ollama, Groq, DeepSeek, OpenRouter...) khi LLM_PROVIDER=openai; trống = OpenAI
+    llm_base_url: str = ""
     embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
     vector_db_path: str = "./data/chroma"
     base_model: str = "Qwen/Qwen2.5-1.5B-Instruct"
     lora_adapter_path: str = ""
     ai_max_context_chunks: int = 5
     rag_similarity_threshold: float = 0.55
+    # Khi có LLM: chỉ từ chối ngay nếu đoạn tốt nhất dưới ngưỡng thấp này; từ ngưỡng này trở lên để LLM đọc
+    # tài liệu rồi tự quyết định trả lời hay nói "không tìm thấy" (ngưỡng 0.55 ở trên dùng cho chế độ offline)
+    rag_llm_min_similarity: float = 0.30
+    # ...hoặc đoạn tốt nhất trùng từ 50% "trọng lượng" từ khoá hiếm của câu hỏi (IDF) — vẫn để LLM quyết định cuối cùng
+    rag_llm_min_lexical: float = 0.50
     rag_max_question_length: int = 2000
 
     # Chuỗi kết nối SQLAlchemy tới MySQL (mật khẩu được mã hóa URL để không vỡ ký tự đặc biệt)

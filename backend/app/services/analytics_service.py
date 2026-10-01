@@ -27,19 +27,37 @@ def official(qz: str) -> str:
     return f"{qz}.chapter_id IS NULL AND {qz}.review_lesson_id IS NULL"
 
 
-# Phạm vi tính điểm theo chủ đề: mọi lượt của bài chính thức + CHỈ lượt gần nhất của mỗi bộ ôn tập
-# (vẫn dùng dữ liệu ôn tập để phát hiện chủ đề yếu, nhưng làm lại nhiều lần không làm lệch kết quả)
+# Lượt được tính điểm của bài chính thức theo cách tính của quiz (khớp _graded ở routers/quizzes.py):
+# trung bình -> mọi lượt; lần đầu / lần cuối -> 1 lượt; cao nhất (mặc định) -> lượt điểm cao nhất, bằng điểm lấy lượt sớm nhất
+def counted_attempt(qz: str, r: str) -> str:
+    same = f"rx.user_id = {r}.user_id AND rx.quiz_id = {r}.quiz_id"
+    return f"""(
+        {qz}.grading_method = 'average'
+        OR ({qz}.grading_method = 'first' AND {r}.id = (SELECT MIN(rx.id) FROM results rx WHERE {same}))
+        OR ({qz}.grading_method = 'latest' AND {r}.id = (SELECT MAX(rx.id) FROM results rx WHERE {same}))
+        OR (COALESCE({qz}.grading_method, 'highest') NOT IN ('average', 'first', 'latest')
+            AND {r}.id = (SELECT rx.id FROM results rx WHERE {same}
+                          ORDER BY ROUND(rx.score * 100 / NULLIF(rx.total, 0)) DESC, rx.id ASC LIMIT 1))
+    )"""
+
+
+# Phạm vi tính điểm theo chủ đề: lượt được tính điểm của bài chính thức + CHỈ lượt gần nhất của mỗi bộ ôn tập
+# (bài chính thức làm 20% rồi 100% với cách tính "cao nhất" thì chủ đề chỉ tính lượt 100%, giống điểm quiz;
+# vẫn dùng dữ liệu ôn tập để phát hiện chủ đề yếu, nhưng làm lại nhiều lần không làm lệch kết quả)
 def topic_scope(qz: str, r: str) -> str:
     return (
-        f"({official(qz)} OR {r}.id = (SELECT MAX(rl.id) FROM results rl "
-        f"WHERE rl.user_id = {r}.user_id AND rl.quiz_id = {r}.quiz_id))"
+        f"(({official(qz)} AND {counted_attempt(qz, r)}) OR (NOT ({official(qz)}) AND {r}.id = "
+        f"(SELECT MAX(rl.id) FROM results rl WHERE rl.user_id = {r}.user_id AND rl.quiz_id = {r}.quiz_id)))"
     )
 
 
-# Điều kiện "đạt" của 1 lượt làm: theo điểm đạt của quiz LÚC NỘP BÀI (lưu ở results.passing_score),
-# quiz không đặt điểm đạt thì lấy 50% — đổi điểm đạt của quiz về sau không làm đổi kết quả cũ
+# Điều kiện "đạt" của 1 lượt làm: theo điểm đạt của quiz LÚC NỘP BÀI (lưu ở results.passing_score), điểm % làm tròn
+# như ở trang quiz. Quiz không đặt điểm đạt -> NULL (không có khái niệm đạt), giống nhãn Đạt / Chưa đạt ở trang quiz
 def passed_expr(r: str) -> str:
-    return f"({r}.score * 100 >= COALESCE({r}.passing_score, 50) * {r}.total)"
+    return (
+        f"(CASE WHEN COALESCE({r}.passing_score, 0) = 0 THEN NULL "
+        f"ELSE ROUND({r}.score * 100 / NULLIF({r}.total, 0)) >= {r}.passing_score END)"
+    )
 
 
 # Cách tính điểm khi làm nhiều lượt (quizzes.grading_method)
@@ -60,7 +78,8 @@ def graded_sql() -> str:
                 ELSE a.max_pct
             END AS pct,
             CASE q.grading_method
-                WHEN 'average' THEN a.avg_pct >= COALESCE(rl.passing_score, 50)
+                WHEN 'average' THEN (CASE WHEN COALESCE(rl.passing_score, 0) = 0 THEN NULL
+                                          ELSE ROUND(a.avg_pct) >= rl.passing_score END)
                 WHEN 'first'   THEN {passed_expr("rf")}
                 WHEN 'latest'  THEN {passed_expr("rl")}
                 ELSE a.any_passed

@@ -5,7 +5,7 @@ import { chapterService } from '../services/chapterService';
 import { lessonService } from '../services/lessonService';
 import { progressService } from '../services/progressService';
 import { aiService } from '../services/aiService';
-import { isYoutubeUrl, getEmbedUrl } from '../utils/videoUrl';
+import { isYoutubeUrl, getEmbedUrl, isUsableMediaUrl } from '../utils/videoUrl';
 
 /** Tương đương _legacy/pages/lesson.html (logic inline trong file đó, lessons.js là dead code) */
 export default function Lesson() {
@@ -127,7 +127,9 @@ export default function Lesson() {
       if (cancelled) return;
 
       document.title = `${lessonData.title} — StudyOnline`;
-      setPlayerTab(lessonData.video_url ? 'video' : 'doc');
+      // Mở tab có nội dung dùng được: ưu tiên video, video chưa có file thật mà có tài liệu thì mở tài liệu
+      const videoOk = isUsableMediaUrl(lessonData.video_src || lessonData.video_url);
+      setPlayerTab(videoOk || !lessonData.document_url ? 'video' : 'doc');
       setLesson(lessonData);
       setChapter(currentChapter);
       setCourse(courseData);
@@ -247,6 +249,9 @@ export default function Lesson() {
   const doneCount = completedIds.size;
   const pct = totalCount > 0 ? Math.round((doneCount / totalCount) * 100) : 0;
   const isCompleted = completedIds.has(lesson.id);
+  // Link dùng được để nhúng; đường dẫn mẫu chưa có file thật (vd "docs/py_02.pdf") thì hiện thông báo thay vì nhúng nhầm trang web
+  const docSrc = isUsableMediaUrl(lesson.document_src || lesson.document_url) ? lesson.document_src || lesson.document_url : null;
+  const videoSrc = isUsableMediaUrl(lesson.video_src || lesson.video_url) ? lesson.video_src || lesson.video_url : null;
 
   return (
     <main className="s-main">
@@ -289,14 +294,28 @@ export default function Lesson() {
           {/* Video / Tài liệu / Placeholder */}
           <div
             className="l-video-container"
-            style={playerTab === 'doc' && lesson.document_url ? { aspectRatio: 'auto', height: 'min(85vh, 950px)' } : undefined}
+            style={playerTab === 'doc' && docSrc ? { aspectRatio: 'auto', height: 'min(85vh, 950px)' } : undefined}
           >
             {playerTab === 'doc' && lesson.document_url ? (
-              <iframe
-                src={`${lesson.document_src || lesson.document_url}#view=FitH`}
-                title={`Tài liệu — ${lesson.title}`}
-                style={{ width: '100%', height: '100%', border: 'none', background: '#fff', display: 'block' }}
-              />
+              docSrc ? (
+                <iframe
+                  src={`${docSrc}#view=FitH`}
+                  title={`Tài liệu — ${lesson.title}`}
+                  style={{ width: '100%', height: '100%', border: 'none', background: '#fff', display: 'block' }}
+                />
+              ) : (
+                <div className="l-video-placeholder">
+                  <span className="icon">📄</span>
+                  <p>Tài liệu PDF của bài này chưa được tải lên</p>
+                  <span>Giảng viên sẽ bổ sung sớm. Bạn có thể đọc phần mô tả bên dưới.</span>
+                </div>
+              )
+            ) : lesson.video_url && !videoSrc ? (
+              <div className="l-video-placeholder">
+                <span className="icon">🎬</span>
+                <p>Video của bài này chưa được tải lên</p>
+                <span>Giảng viên sẽ bổ sung sớm. Bạn có thể đọc phần mô tả bên dưới.</span>
+              </div>
             ) : lesson.video_url ? (
               isYoutubeUrl(lesson.video_url) ? (
                 /* ── YouTube: dùng iframe với URL embed đã chuẩn hoá ── */
@@ -314,7 +333,7 @@ export default function Lesson() {
                   id="lessonVideo"
                   ref={videoRef}
                   controls
-                  src={lesson.video_src || lesson.video_url}
+                  src={videoSrc}
                   onTimeUpdate={handleTimeUpdate}
                   onEnded={handleEnded}
                 >
@@ -403,7 +422,7 @@ export default function Lesson() {
                       </div>
                     </div>
                     <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
-                      {lesson.video_url && (
+                      {docSrc && lesson.video_url && (
                         <button
                           type="button"
                           onClick={() => {
@@ -416,15 +435,13 @@ export default function Lesson() {
                           👁 Xem ở trên
                         </button>
                       )}
-                      <a
-                        href={lesson.document_src || lesson.document_url}
-                        target="_blank"
-                        rel="noreferrer"
-                        download
-                        className="s-btn s-btn-primary s-btn-sm"
-                      >
-                        📥 Tải xuống
-                      </a>
+                      {docSrc ? (
+                        <a href={docSrc} target="_blank" rel="noreferrer" download className="s-btn s-btn-primary s-btn-sm">
+                          📥 Tải xuống
+                        </a>
+                      ) : (
+                        <span className="s-badge s-badge-warn">Chưa có file</span>
+                      )}
                     </div>
                   </div>
                 </div>

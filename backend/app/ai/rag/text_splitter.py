@@ -28,9 +28,14 @@ def split_pages(pages: list[tuple[int | None, str]]) -> list[dict]:
     return chunks
 
 
+# Phần "Bài tập vận dụng" ở cuối bài học: đề bài lặp lại đúng từ khoá của kiến thức nên khi tìm kiếm dễ được chọn
+# thay cho phần giải thích, mà bản thân đề bài không phải kiến thức -> cắt bỏ từ tiêu đề này tới hết trang
+_EXERCISES = re.compile(r"^[ \t]*Bài tập vận dụng\b.*\Z", re.IGNORECASE | re.MULTILINE | re.DOTALL)
+
+
 # Chia 1 trang: tách theo mục đánh số; mục ngắn giữ nguyên, mục dài thì gom câu thành đoạn; bỏ đoạn < 40 ký tự
 def _split_one(text: str) -> list[str]:
-    text = text.strip()
+    text = _EXERCISES.sub("", text).strip()
     if not text:
         return []
 

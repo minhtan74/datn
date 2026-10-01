@@ -7,7 +7,7 @@ const LETTERS = ['A', 'B', 'C', 'D'];
 /**
  * Thẻ sửa 1 câu hỏi trong bản nháp (AI sinh hoặc nhập từ Word) trước khi duyệt & lưu:
  * nội dung, 4 phương án, đáp án đúng, độ khó, giải thích; nút bỏ câu.
- * q: { question, options: {A..D}, correct_answer, explanation, difficulty, verify?, verified? }
+ * q: { question, options: {A..D}, correct_answer, explanation, difficulty, objectives?, evidence?, grounded?, verify?, verified? }
  * meta: dòng thông tin phụ cạnh số câu (chương / chủ đề / nguồn đáp án...)
  * onPatch(field, value) · onPatchOption(letter, value) · onRemove()
  */
@@ -36,6 +36,12 @@ export default function DraftQuestionCard({ q, index, meta, onPatch, onPatchOpti
         </div>
         <button className="btn btn-ghost btn-sm" style={{ color: 'var(--danger,#DC2626)' }} onClick={onRemove}>✕ Xóa</button>
       </div>
+      {/* Các mục tiêu bài học câu hỏi này liên quan (1 hoặc vài; AI gắn khi tài liệu có phần "Mục tiêu bài học") */}
+      {q.objectives?.length > 0 && (
+        <div style={{ marginTop: '.35rem', fontSize: '.78rem', color: 'var(--primary,#2563EB)' }}>
+          🎯 Mục tiêu: {q.objectives.join(' · ')}
+        </div>
+      )}
       <textarea
         className="form-control"
         rows={2}
@@ -115,6 +121,23 @@ export default function DraftQuestionCard({ q, index, meta, onPatch, onPatchOpti
               Giữ {q.correct_answer}
             </button>
           </div>
+        </div>
+      )}
+      {/* Căn cứ trong tài liệu AI trích cho đáp án đúng; không khớp tài liệu gốc -> cảnh báo */}
+      {q.evidence && (
+        <div
+          style={{
+            marginTop: '.35rem', fontSize: '.75rem',
+            color: q.grounded === false ? 'var(--danger,#DC2626)' : 'var(--text-muted,#64748b)',
+          }}
+        >
+          {q.grounded === false ? '📄⚠️ Không tìm thấy căn cứ này trong tài liệu — kiểm tra lại câu hỏi: ' : '📄 Căn cứ: '}
+          <em>“{q.evidence}”</em>
+        </div>
+      )}
+      {q.grounded === false && !q.evidence && (
+        <div style={{ marginTop: '.35rem', fontSize: '.75rem', color: 'var(--danger,#DC2626)' }}>
+          📄⚠️ AI không trích được căn cứ trong tài liệu — kiểm tra lại câu hỏi
         </div>
       )}
       {q.verified && q.verified === q.correct_answer && (

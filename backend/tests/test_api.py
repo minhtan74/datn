@@ -360,10 +360,14 @@ def test_answers_hidden_until_last_attempt_and_fair_analytics(tokens, course):
     # Danh sách quiz của học viên kèm tình trạng làm bài
     st = [q for q in client.get("/api/quizzes", headers=S).json()["data"] if q["id"] == qz][0]["my_status"]
     assert st["submitted"] == 2 and st["graded_percent"] == 100 and st["attempts_left"] == 0
-    # Chủ đề: bài chính thức tính mọi lượt (1/2 đúng), ôn tập chỉ tính lượt gần nhất (đúng)
-    tp = {t["topic"]: t for t in client.get(f"/api/analytics/topics?course_id={course}", headers=S).json()["data"]}
-    assert (tp["Chủ đề CT"]["answered"], tp["Chủ đề CT"]["correct"]) == (2, 1)
-    assert (tp["Chủ đề ÔT"]["answered"], tp["Chủ đề ÔT"]["correct"]) == (1, 1)
+    # Chủ đề: bài chính thức chỉ tính lượt được tính điểm theo cách tính của quiz (2 lượt: sai rồi đúng),
+    # ôn tập chỉ tính lượt gần nhất (đúng)
+    for method, expect in (("latest", (1, 1)), ("first", (1, 0)), ("average", (2, 1)), ("highest", (1, 1))):
+        client.put("/api/quizzes", headers=T, json={
+            "id": qz, "course_id": course, "title": "Chính thức", "max_attempts": 2, "grading_method": method})
+        tp = {t["topic"]: t for t in client.get(f"/api/analytics/topics?course_id={course}", headers=S).json()["data"]}
+        assert (tp["Chủ đề CT"]["answered"], tp["Chủ đề CT"]["correct"]) == expect, method
+        assert (tp["Chủ đề ÔT"]["answered"], tp["Chủ đề ÔT"]["correct"]) == (1, 1)
     client.request("DELETE", f"/api/enrollments?course_id={course}", headers=S)
 
 

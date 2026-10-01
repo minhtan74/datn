@@ -72,7 +72,7 @@ cd ..\backend
 - Side effect được port đúng: `POST /api/progress` tự enroll; `POST /api/payments` mock-complete + enroll.
 - `GET /api/reports/summary` chỉ cho admin (đề bài bỏ Admin khỏi phạm vi chính — endpoint vẫn giữ, không phát triển thêm).
 
-Danh sách 40 endpoint gốc: xem `../MIGRATION_PLAN.md` §5.
+Danh sách endpoint: xem `../docs/api.md`.
 
 ## Endpoint mới (Phase 4–5)
 

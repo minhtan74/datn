@@ -13,8 +13,8 @@
 | CSDL | MySQL 8 |
 | AI | fastembed (embedding ONNX, không cần PyTorch) · vector store trên MySQL · LLM qua REST (Gemini/OpenAI, tuỳ chọn) · LoRA/QLoRA (PEFT+TRL, fine-tune trên Colab) |
 
-> Backend cũ viết bằng PHP đã được thay bằng FastAPI. Migration đã đạt parity 100%
-> (xem [MIGRATION_PLAN.md](MIGRATION_PLAN.md)); mã nguồn PHP/vanilla-JS cũ đã được gỡ bỏ khỏi thư mục làm việc
+> Backend cũ viết bằng PHP đã được thay bằng FastAPI. Migration đã đạt parity 100%;
+> mã nguồn PHP/vanilla-JS cũ đã được gỡ bỏ khỏi thư mục làm việc
 > (vẫn còn trong lịch sử Git ở các commit trước migration nếu cần đối chiếu lại).
 
 ---
@@ -42,8 +42,7 @@ studyonline/
 │   └── tests/            smoke_writes.py · test_api.py (pytest)
 ├── database/            studyonline_db.sql · migration_add_payments.sql · sample_data.sql
 ├── docs/               architecture · rag · fine-tuning · recommendation · api
-├── docker-compose.yml
-└── MIGRATION_PLAN.md    phân tích + kế hoạch migration PHP → FastAPI
+└── docker-compose.yml
 ```
 
 ---
@@ -151,7 +150,6 @@ cd backend
 
 | File | Nội dung |
 |---|---|
-| [MIGRATION_PLAN.md](MIGRATION_PLAN.md) | Phân tích hệ thống cũ + bản đồ migration PHP → FastAPI |
 | [docs/architecture.md](docs/architecture.md) | Kiến trúc tổng thể, luồng xác thực, quyết định thiết kế |
 | [docs/rag.md](docs/rag.md) | RAG AI Tutor: ingest, retrieval, đánh giá |
 | [docs/fine-tuning.md](docs/fine-tuning.md) | Dataset, LoRA/QLoRA, đánh giá Base vs Fine-tuned |

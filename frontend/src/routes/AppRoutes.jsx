@@ -27,7 +27,6 @@ import StudentMyCourses from '../pages/student/MyCourses.jsx';
 import StudentProfile from '../pages/student/Profile.jsx';
 import StudentProgress from '../pages/student/Progress.jsx';
 import StudentQuizResult from '../pages/student/QuizResult.jsx';
-import StudentQuizHistory from '../pages/student/QuizHistory.jsx';
 import StudentAiTutor from '../pages/student/AiTutor.jsx';
 import StudentPaymentResult from '../pages/student/PaymentResult.jsx';
 
@@ -45,8 +44,7 @@ import TeacherChapters from '../pages/teacher/Chapters.jsx';
 import TeacherLessons from '../pages/teacher/Lessons.jsx';
 import TeacherQuizzes from '../pages/teacher/Quizzes.jsx';
 import TeacherQuizQuestions from '../pages/teacher/QuizQuestions.jsx';
-import TeacherStudents from '../pages/teacher/Students.jsx';
-import TeacherStats from '../pages/teacher/Stats.jsx';
+import TeacherReports from '../pages/teacher/Reports.jsx';
 import TeacherProfile from '../pages/teacher/Profile.jsx';
 import TeacherDocuments from '../pages/teacher/Documents.jsx';
 
@@ -104,7 +102,7 @@ export default function AppRoutes() {
         <Route path="/student/profile" element={<StudentProfile />} />
         <Route path="/student/progress" element={<StudentProgress />} />
         <Route path="/student/quiz-result" element={<StudentQuizResult />} />
-        <Route path="/student/quiz-history" element={<StudentQuizHistory />} />
+        <Route path="/student/quiz-history" element={<Navigate to="/quiz" replace />} />
         <Route path="/student/ai-tutor" element={<StudentAiTutor />} />
         {/* VNPay chuyển về đây (qua backend) sau khi thanh toán */}
         <Route path="/student/payment-result" element={<StudentPaymentResult />} />
@@ -151,8 +149,10 @@ export default function AppRoutes() {
         <Route path="lessons" element={<TeacherLessons />} />
         <Route path="quizzes" element={<TeacherQuizzes />} />
         <Route path="quizzes/:quizId/questions" element={<TeacherQuizQuestions />} />
-        <Route path="students" element={<TeacherStudents />} />
-        <Route path="stats" element={<TeacherStats />} />
+        <Route path="reports" element={<TeacherReports />} />
+        {/* Trang Học viên và Thống kê cũ đã gộp vào Báo cáo */}
+        <Route path="students" element={<Navigate to="/teacher/reports" replace />} />
+        <Route path="stats" element={<Navigate to="/teacher/reports" replace />} />
         <Route path="profile" element={<TeacherProfile />} />
         <Route path="documents" element={<TeacherDocuments />} />
         {/* AI Quiz Generator đã gộp vào trang Quiz (tab "Tạo bằng AI"); giữ đường dẫn cũ để chuyển hướng */}

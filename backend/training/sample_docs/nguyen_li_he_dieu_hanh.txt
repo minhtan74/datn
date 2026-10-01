@@ -1,0 +1,202 @@
+TÀI LIỆU: NGUYÊN LÍ HỆ ĐIỀU HÀNH
+
+1. Hệ điều hành là gì
+Hệ điều hành (operating system) là phần mềm quản lý tài nguyên phần cứng và cung cấp dịch vụ cho các chương trình ứng dụng.
+Vai trò của hệ điều hành là cầu nối trung gian, đứng giữa người dùng, chương trình ứng dụng và phần cứng máy tính.
+Ví dụ các hệ điều hành phổ biến gồm Windows, Linux, macOS, Android và iOS.
+
+2. Chức năng của hệ điều hành
+Hệ điều hành có các chức năng chính: quản lý tiến trình, quản lý bộ nhớ, quản lý hệ thống file và quản lý thiết bị vào/ra.
+Hệ điều hành còn đảm nhiệm bảo vệ, bảo mật và cung cấp giao diện cho người dùng.
+Giao diện người dùng có thể là dòng lệnh (CLI) hoặc giao diện đồ họa (GUI).
+
+3. Nhân hệ điều hành (kernel)
+Nhân (kernel) là phần cốt lõi của hệ điều hành, luôn thường trú trong bộ nhớ và điều khiển trực tiếp phần cứng.
+Nhân nguyên khối (monolithic kernel) đặt hầu hết dịch vụ trong không gian nhân, ví dụ nhân Linux.
+Vi nhân (microkernel) chỉ giữ các chức năng tối thiểu trong nhân, các dịch vụ khác chạy ở không gian người dùng.
+
+4. Chế độ nhân và chế độ người dùng
+CPU có hai chế độ hoạt động là chế độ nhân (kernel mode) và chế độ người dùng (user mode).
+Chương trình ứng dụng chạy ở chế độ người dùng nên không được truy cập trực tiếp phần cứng.
+Chỉ mã của hệ điều hành chạy ở chế độ nhân mới được thực hiện các lệnh đặc quyền.
+
+5. Lời gọi hệ thống (system call)
+Lời gọi hệ thống (system call) là cơ chế để chương trình yêu cầu dịch vụ từ hệ điều hành.
+Khi gọi system call, CPU chuyển từ chế độ người dùng sang chế độ nhân để hệ điều hành xử lý.
+Ví dụ các lời gọi hệ thống gồm fork, exec, read, write và open.
+
+6. Tiến trình (process)
+Tiến trình (process) là một chương trình đang được thực thi.
+Không gian địa chỉ của tiến trình gồm các vùng code, data, heap và stack.
+Mỗi tiến trình được hệ điều hành cấp một mã định danh duy nhất gọi là PID.
+
+7. Phân biệt tiến trình và chương trình
+Chương trình là thực thể thụ động, là tập lệnh lưu trên đĩa.
+Tiến trình là thực thể chủ động, là chương trình đã được nạp vào bộ nhớ và đang chạy.
+Một chương trình có thể sinh ra nhiều tiến trình, ví dụ mở hai cửa sổ trình duyệt.
+
+8. Trạng thái của tiến trình
+Một tiến trình có năm trạng thái cơ bản: new, ready, running, waiting và terminated.
+Trạng thái ready nghĩa là tiến trình đã sẵn sàng và đang chờ được cấp CPU.
+Trạng thái waiting nghĩa là tiến trình đang chờ một sự kiện như hoàn tất thao tác vào/ra.
+
+9. Khối điều khiển tiến trình (PCB)
+Khối điều khiển tiến trình (PCB) là cấu trúc dữ liệu hệ điều hành dùng để lưu thông tin của mỗi tiến trình.
+PCB chứa PID, trạng thái, bộ đếm chương trình, giá trị các thanh ghi và thông tin bộ nhớ của tiến trình.
+
+10. Chuyển ngữ cảnh (context switch)
+Chuyển ngữ cảnh (context switch) là việc lưu trạng thái tiến trình đang chạy vào PCB rồi nạp trạng thái của tiến trình khác.
+Chuyển ngữ cảnh là chi phí thuần, vì trong lúc đó CPU không thực hiện công việc hữu ích của tiến trình nào.
+
+11. Tạo tiến trình với fork và exec
+Trên Unix, lời gọi hệ thống fork dùng để tạo tiến trình con là bản sao của tiến trình cha.
+Lời gọi exec thay thế không gian địa chỉ của tiến trình bằng một chương trình mới.
+Tiến trình zombie là tiến trình đã kết thúc nhưng tiến trình cha chưa đọc trạng thái kết thúc của nó.
+
+12. Giao tiếp giữa các tiến trình (IPC)
+Giao tiếp liên tiến trình (IPC) là cơ chế cho phép các tiến trình trao đổi dữ liệu với nhau.
+Hai mô hình IPC chính là bộ nhớ chia sẻ (shared memory) và truyền thông điệp (message passing).
+Đường ống (pipe) là kênh truyền dữ liệu một chiều giữa hai tiến trình.
+
+13. Luồng (thread)
+Luồng (thread) là đơn vị thực thi nhỏ nhất được hệ điều hành lập lịch.
+Một tiến trình có thể chứa nhiều luồng cùng chạy, gọi là đa luồng (multithreading).
+Đa luồng giúp ứng dụng phản hồi nhanh hơn và tận dụng được CPU nhiều nhân.
+
+14. Phân biệt luồng và tiến trình
+Các luồng trong cùng một tiến trình dùng chung code, data và các file đang mở.
+Mỗi luồng có stack, bộ đếm chương trình và tập thanh ghi riêng.
+Các tiến trình khác nhau có không gian địa chỉ tách biệt, nên tạo và chuyển đổi luồng nhẹ hơn tiến trình.
+
+15. Lập lịch CPU (CPU scheduling)
+Lập lịch CPU (CPU scheduling) là việc chọn một tiến trình trong hàng đợi ready để cấp CPU.
+Bộ lập lịch cố gắng tận dụng CPU tối đa và giảm thời gian chờ của các tiến trình.
+
+16. Lập lịch độc quyền và không độc quyền
+Lập lịch không độc quyền (preemptive) cho phép hệ điều hành thu hồi CPU từ tiến trình đang chạy.
+Lập lịch độc quyền (non-preemptive) chỉ giải phóng CPU khi tiến trình kết thúc hoặc tự chuyển sang trạng thái chờ.
+
+17. Tiêu chí đánh giá lập lịch
+Thời gian chờ (waiting time) là tổng thời gian tiến trình nằm trong hàng đợi ready.
+Thời gian hoàn thành (turnaround time) là khoảng thời gian từ lúc tiến trình đến cho tới khi kết thúc.
+Thông lượng (throughput) là số tiến trình hoàn thành trong một đơn vị thời gian.
+
+18. Thuật toán FCFS
+FCFS (First Come First Served) là thuật toán lập lịch cấp CPU theo thứ tự đến trước phục vụ trước.
+FCFS đơn giản nhưng tiến trình ngắn có thể phải chờ rất lâu sau tiến trình dài, gọi là hiệu ứng đoàn xe (convoy effect).
+
+19. Thuật toán SJF
+SJF (Shortest Job First) là thuật toán lập lịch ưu tiên tiến trình có thời gian chạy ngắn nhất.
+SJF cho thời gian chờ trung bình nhỏ nhất, nhưng khó áp dụng vì phải biết trước thời gian chạy của tiến trình.
+Phiên bản không độc quyền của SJF gọi là SRTF (Shortest Remaining Time First).
+
+20. Thuật toán Round Robin
+Round Robin (RR) là thuật toán lập lịch luân phiên, mỗi tiến trình được cấp CPU trong một lượng thời gian cố định gọi là quantum.
+Hết quantum mà chưa xong, tiến trình bị thu hồi CPU và quay về cuối hàng đợi ready.
+Quantum quá lớn khiến Round Robin giống FCFS, quantum quá nhỏ làm tăng chi phí chuyển ngữ cảnh.
+
+21. Lập lịch theo độ ưu tiên
+Lập lịch theo độ ưu tiên (priority scheduling) cấp CPU cho tiến trình có độ ưu tiên cao nhất.
+Tiến trình độ ưu tiên thấp có thể chờ mãi không được chạy, gọi là đói CPU (starvation).
+Kỹ thuật aging khắc phục đói CPU bằng cách tăng dần độ ưu tiên của tiến trình chờ lâu.
+
+22. Tranh đoạt dữ liệu (race condition)
+Tình trạng tranh đoạt (race condition) xảy ra khi nhiều tiến trình cùng truy cập dữ liệu chung và kết quả phụ thuộc thứ tự thực thi.
+Ví dụ hai luồng cùng tăng một biến đếm có thể làm mất một lần cập nhật.
+
+23. Đoạn găng (critical section)
+Đoạn găng (critical section) là đoạn mã truy cập tài nguyên dùng chung giữa các tiến trình.
+Lời giải bài toán đoạn găng phải đảm bảo ba điều kiện: loại trừ tương hỗ, tiến triển và chờ đợi có giới hạn.
+Loại trừ tương hỗ (mutual exclusion) nghĩa là tại một thời điểm chỉ một tiến trình được ở trong đoạn găng.
+
+24. Mutex
+Mutex là khóa nhị phân đảm bảo tại một thời điểm chỉ một luồng được vào đoạn găng.
+Luồng gọi lock trước khi vào đoạn găng và gọi unlock khi ra khỏi đoạn găng.
+
+25. Semaphore
+Semaphore là biến nguyên chỉ được truy cập qua hai thao tác nguyên tử wait (P) và signal (V).
+Thao tác wait giảm giá trị semaphore và chặn tiến trình nếu giá trị âm; thao tác signal tăng giá trị và đánh thức tiến trình đang chờ.
+Semaphore đếm quản lý tài nguyên có nhiều thể hiện, semaphore nhị phân hoạt động giống mutex.
+
+26. Bài toán đồng bộ kinh điển
+Bài toán nhà sản xuất - người tiêu dùng (producer-consumer) mô tả việc dùng chung một bộ đệm có giới hạn.
+Bài toán bữa ăn của các triết gia (dining philosophers) minh họa nguy cơ bế tắc khi tranh chấp tài nguyên.
+Bài toán người đọc - người ghi (readers-writers) cho phép nhiều người đọc cùng lúc nhưng chỉ một người ghi.
+
+27. Bế tắc (deadlock)
+Bế tắc (deadlock) là tình trạng các tiến trình chờ nhau vô hạn để được cấp tài nguyên mà tiến trình khác đang giữ.
+Ví dụ tiến trình A giữ tài nguyên 1 và chờ tài nguyên 2, trong khi tiến trình B giữ tài nguyên 2 và chờ tài nguyên 1.
+
+28. Điều kiện xảy ra bế tắc
+Bốn điều kiện cần của bế tắc là loại trừ tương hỗ, giữ và chờ, không thu hồi và chờ vòng.
+Bế tắc chỉ xảy ra khi cả bốn điều kiện cùng thỏa mãn.
+
+29. Ngăn chặn và tránh bế tắc
+Ngăn chặn bế tắc là cách làm cho ít nhất một trong bốn điều kiện cần không xảy ra.
+Thuật toán Banker (thuật toán nhà băng) dùng để tránh bế tắc bằng cách chỉ cấp tài nguyên khi hệ thống vẫn ở trạng thái an toàn.
+Phát hiện và khôi phục là cách cho phép bế tắc xảy ra, sau đó kết thúc tiến trình hoặc thu hồi tài nguyên.
+
+30. Địa chỉ logic và địa chỉ vật lý
+Địa chỉ logic là địa chỉ do CPU sinh ra, còn địa chỉ vật lý là địa chỉ thật trong bộ nhớ chính.
+Bộ phận quản lý bộ nhớ MMU (Memory Management Unit) chuyển đổi địa chỉ logic thành địa chỉ vật lý.
+
+31. Phân mảnh bộ nhớ
+Phân mảnh ngoài (external fragmentation) là tình trạng tổng bộ nhớ trống đủ nhưng không nằm liên tục.
+Phân mảnh trong (internal fragmentation) là phần bộ nhớ thừa bên trong một khối đã cấp phát.
+
+32. Phân trang (paging)
+Phân trang (paging) là kỹ thuật chia bộ nhớ logic thành các trang (page) và bộ nhớ vật lý thành các khung (frame) cùng kích thước.
+Bảng trang (page table) lưu ánh xạ từ số trang sang số khung.
+Phân trang loại bỏ phân mảnh ngoài nhưng vẫn có phân mảnh trong ở trang cuối.
+
+33. TLB
+TLB (Translation Lookaside Buffer) là bộ nhớ đệm tốc độ cao dùng để tăng tốc việc tra bảng trang.
+Nếu số trang có trong TLB (TLB hit) thì không cần đọc bảng trang trong bộ nhớ chính.
+
+34. Phân đoạn (segmentation)
+Phân đoạn (segmentation) là kỹ thuật chia bộ nhớ theo các đơn vị logic như code, data và stack.
+Mỗi đoạn có kích thước khác nhau, địa chỉ logic gồm số hiệu đoạn và độ dời trong đoạn.
+
+35. Bộ nhớ ảo (virtual memory)
+Bộ nhớ ảo (virtual memory) là kỹ thuật cho phép chạy chương trình lớn hơn bộ nhớ vật lý hiện có.
+Phân trang theo yêu cầu (demand paging) chỉ nạp một trang vào bộ nhớ khi trang đó thực sự được dùng.
+
+36. Lỗi trang (page fault)
+Lỗi trang (page fault) xảy ra khi tiến trình truy cập một trang chưa có trong bộ nhớ chính.
+Khi có lỗi trang, hệ điều hành nạp trang từ đĩa vào một khung trống, hoặc chọn một trang để thay thế nếu hết khung.
+
+37. Thuật toán thay trang FIFO
+FIFO là thuật toán thay trang được nạp vào bộ nhớ sớm nhất.
+FIFO có thể gặp nghịch lý Belady: tăng số khung trang mà số lỗi trang lại tăng.
+
+38. Thuật toán thay trang OPT
+OPT (tối ưu) là thuật toán thay trang sẽ không được dùng trong khoảng thời gian lâu nhất ở tương lai.
+OPT cho số lỗi trang ít nhất nhưng không cài đặt được thực tế, chỉ dùng làm mốc so sánh.
+
+39. Thuật toán thay trang LRU
+LRU (Least Recently Used) là thuật toán thay trang lâu nhất chưa được sử dụng.
+LRU dựa trên giả định trang vừa dùng gần đây sẽ sớm được dùng lại, cho kết quả gần với OPT.
+
+40. Trì trệ (thrashing)
+Trì trệ (thrashing) là tình trạng hệ thống dành phần lớn thời gian để hoán đổi trang thay vì thực thi tiến trình.
+Thrashing xảy ra khi tiến trình không có đủ khung trang cho tập trang đang làm việc (working set).
+
+41. Hệ thống file
+File là đơn vị lưu trữ logic được hệ điều hành đặt tên và quản lý trên thiết bị lưu trữ.
+Thư mục (directory) là cấu trúc dùng để tổ chức và định vị các file.
+Trên Unix, inode là cấu trúc lưu thông tin mô tả file như quyền, kích thước và vị trí các khối dữ liệu.
+
+42. Phương pháp cấp phát file
+Cấp phát liên tục đặt các khối của file liền nhau, đọc nhanh nhưng dễ gây phân mảnh ngoài.
+Cấp phát liên kết nối các khối bằng con trỏ, không phân mảnh ngoài nhưng truy cập ngẫu nhiên chậm.
+Cấp phát chỉ mục dùng một khối chỉ mục chứa địa chỉ mọi khối của file.
+
+43. Quản lý vào/ra
+Trình điều khiển thiết bị (device driver) là phần mềm giúp hệ điều hành giao tiếp với một thiết bị phần cứng cụ thể.
+Ngắt (interrupt) là tín hiệu thiết bị gửi tới CPU để báo có sự kiện cần xử lý.
+DMA (Direct Memory Access) là cơ chế cho phép thiết bị truyền dữ liệu trực tiếp với bộ nhớ mà không cần CPU tham gia từng byte.
+
+44. Lập lịch đĩa
+Lập lịch đĩa là việc sắp xếp thứ tự phục vụ các yêu cầu đọc ghi để giảm thời gian di chuyển đầu đọc.
+Thuật toán SSTF ưu tiên yêu cầu có vị trí gần đầu đọc nhất.
+Thuật toán SCAN, còn gọi là thuật toán thang máy, di chuyển đầu đọc theo một chiều rồi đảo chiều.

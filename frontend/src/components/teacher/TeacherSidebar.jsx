@@ -68,13 +68,10 @@ export default function TeacherSidebar({ mobileOpen, onNavigate }) {
       </div>
 
       <div className="sidebar-section">
-        <div className="sidebar-section-label">Quản lý &amp; Báo cáo</div>
+        <div className="sidebar-section-label">Báo cáo</div>
         <nav className="sidebar-menu">
-          <NavLink to="/teacher/students" className={navLinkClass}>
-            <span className="menu-icon">👨‍🎓</span> Học viên
-          </NavLink>
-          <NavLink to="/teacher/stats" className={navLinkClass}>
-            <span className="menu-icon">📈</span> Thống kê
+          <NavLink to="/teacher/reports" className={navLinkClass}>
+            <span className="menu-icon">📊</span> Báo cáo
           </NavLink>
           <NavLink to="/teacher/profile" className={navLinkClass}>
             <span className="menu-icon">👤</span> Hồ sơ cá nhân

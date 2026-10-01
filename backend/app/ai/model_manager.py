@@ -9,14 +9,18 @@
 """
 from __future__ import annotations
 
+import logging
 import time
 
 import httpx
 
 from app.core.config import settings
 
+logger = logging.getLogger("llm")
+
 # Model mặc định của từng nhà cung cấp khi .env không chỉ định LLM_MODEL
-_GEMINI_DEFAULT = "gemini-2.0-flash"
+# (gemini-2.0-flash đã bị Google ngừng -> 404; ghim bản ổn định cụ thể thay vì alias "-latest" để kết quả đo không tự đổi)
+_GEMINI_DEFAULT = "gemini-3.1-flash-lite"
 _OPENAI_DEFAULT = "gpt-4o-mini"
 _CLAUDE_DEFAULT = "claude-opus-5"
 
@@ -49,10 +53,13 @@ def _post_with_retry(url: str, *, json: dict, timeout: float, headers: dict | No
     raise last_error  # không thể tới đây, giữ để mypy/an toàn
 
 
-# Nhà cung cấp đang dùng: chỉ bật LLM khi provider hợp lệ VÀ có API key, ngược lại là 'stub' (offline)
+# Nhà cung cấp đang dùng: chỉ bật LLM khi provider hợp lệ VÀ có API key, ngược lại là 'stub' (offline).
+# Riêng openai trỏ tới LLM_BASE_URL (vd. Ollama chạy trên máy) thì không bắt buộc key
 def active_provider() -> str:
     p = (settings.llm_provider or "stub").strip().lower()
     if p in _PROVIDERS and settings.llm_api_key.strip():
+        return p
+    if p == "openai" and settings.llm_base_url.strip():
         return p
     return "stub"
 
@@ -76,33 +83,38 @@ def generate(system: str, user: str, *, max_tokens: int = 700) -> str:
         if p == "claude":
             return _claude(system, user, max_tokens)
     except Exception as e:  # noqa: BLE001 -> luôn có đường lui
-        return f"[Lỗi gọi LLM: {e}]"
+        # Chỉ trả loại lỗi + mã HTTP, không trả nguyên thông báo (có thể chứa URL, khoá, dữ liệu nhạy cảm)
+        status = getattr(getattr(e, "response", None), "status_code", None)
+        reason = {429: "quá giới hạn lượt gọi", 401: "khoá không hợp lệ", 403: "không có quyền", 404: "model không tồn tại"}
+        detail = f"HTTP {status} — {reason.get(status, 'lỗi dịch vụ')}" if status else type(e).__name__
+        logger.warning("LLM %s error: %s", p, detail)
+        return f"[Lỗi gọi LLM: {detail}]"
     return _stub(system, user)
 
 
 # Gọi Google Gemini qua REST (generateContent); temperature thấp 0.2 để câu trả lời bám ngữ cảnh
 def _gemini(system: str, user: str, max_tokens: int) -> str:
     model = settings.llm_model.strip() or _GEMINI_DEFAULT
-    url = (
-        f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
-        f"?key={settings.llm_api_key.strip()}"
-    )
+    # Khoá gửi qua header, KHÔNG đặt trong URL: URL xuất hiện trong thông báo lỗi / log và từng lộ khoá ra câu trả lời
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
     payload = {
         "systemInstruction": {"parts": [{"text": system}]},
         "contents": [{"role": "user", "parts": [{"text": user}]}],
         "generationConfig": {"temperature": 0.2, "maxOutputTokens": max_tokens},
     }
-    r = _post_with_retry(url, json=payload, timeout=60)
+    r = _post_with_retry(url, json=payload, timeout=60, headers={"x-goog-api-key": settings.llm_api_key.strip()})
     data = r.json()
     return data["candidates"][0]["content"]["parts"][0]["text"].strip()
 
 
-# Gọi OpenAI Chat Completions qua REST
+# Gọi Chat Completions chuẩn OpenAI qua REST: mặc định OpenAI, hoặc dịch vụ tương thích theo LLM_BASE_URL
 def _openai(system: str, user: str, max_tokens: int) -> str:
     model = settings.llm_model.strip() or _OPENAI_DEFAULT
+    base_url = settings.llm_base_url.strip().rstrip("/") or "https://api.openai.com/v1"
+    key = settings.llm_api_key.strip()
     r = _post_with_retry(
-        "https://api.openai.com/v1/chat/completions",
-        headers={"Authorization": f"Bearer {settings.llm_api_key.strip()}"},
+        f"{base_url}/chat/completions",
+        headers={"Authorization": f"Bearer {key}"} if key else None,
         json={
             "model": model,
             "temperature": 0.2,
@@ -112,7 +124,8 @@ def _openai(system: str, user: str, max_tokens: int) -> str:
                 {"role": "user", "content": user},
             ],
         },
-        timeout=60,
+        # Model chạy trên máy (Ollama, CPU) trả lời chậm hơn API đám mây nhiều -> chờ lâu hơn
+        timeout=180 if settings.llm_base_url.strip() else 60,
     )
     return r.json()["choices"][0]["message"]["content"].strip()
 

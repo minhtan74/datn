@@ -72,3 +72,15 @@ export function getEmbedUrl(url) {
 
   return `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
 }
+
+/**
+ * Địa chỉ file video / tài liệu có dùng được để nhúng hay không.
+ * Chỉ nhận link tuyệt đối (http/https, gồm link có chữ ký /api/lessons/media do backend cấp).
+ * Đường dẫn tương đối kiểu "docs/py_02.pdf" (dữ liệu mẫu, chưa có file thật) sẽ bị trình duyệt hiểu là
+ * trang của chính website -> khung PDF hiện nhầm trang web, nên coi là chưa có file.
+ * @param {string|null|undefined} url
+ * @returns {boolean}
+ */
+export function isUsableMediaUrl(url) {
+  return /^https?:\/\//i.test(url || '');
+}

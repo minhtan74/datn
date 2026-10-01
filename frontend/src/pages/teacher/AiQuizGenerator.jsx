@@ -256,6 +256,8 @@ export default function AiQuizGenerator({ embedded = false, onSaved }) {
   const needsReview = (q) => Boolean(q.verify) && q.verify.answer !== q.correct_answer && !q.verify_dismissed;
   const flaggedCount = questions.filter(needsReview).length;
   const verifiedCount = questions.filter((q) => q.verified && q.verified === q.correct_answer).length;
+  // Câu AI trích căn cứ không có trong tài liệu (có thể hỏi ngoài tài liệu)
+  const ungroundedCount = questions.filter((q) => q.grounded === false).length;
 
   // Bật / tắt 1 chương cho 1 mức độ khó
   function toggleLevelChapter(level, chId) {
@@ -688,9 +690,27 @@ export default function AiQuizGenerator({ embedded = false, onSaved }) {
         {/* Thông tin lần sinh: model đã dùng, số câu nhận được, số đoạn ngữ liệu */}
         {meta && (
           <p style={{ fontSize: '.78rem', color: 'var(--text-muted,#64748b)', marginTop: '.5rem' }}>
-            Nguồn sinh: <strong>{meta.generated_by}</strong> · {meta.returned}/{meta.requested} câu ·
-            {' '}{meta.context_chunks} đoạn ngữ cảnh
+            Nguồn sinh: <strong>{meta.generated_by}</strong> · {meta.returned}/{meta.requested} câu ·{' '}
+            {meta.context_mode === 'full_document'
+              ? `ngữ liệu: toàn bộ tài liệu (${Number(meta.context_chars || 0).toLocaleString('vi-VN')} ký tự)`
+              : `${meta.context_chunks} đoạn ngữ cảnh`}
           </p>
+        )}
+        {/* Độ phủ mục tiêu bài học: số câu hiện có trong bản nháp cho từng mục tiêu (mục tiêu chưa có câu tô đỏ) */}
+        {meta?.objectives?.length > 0 && (
+          <div style={{ fontSize: '.8rem', marginTop: '.5rem' }}>
+            <strong>🎯 Mục tiêu bài học ({meta.objectives.length})</strong>
+            <ul style={{ margin: '.25rem 0 0', paddingLeft: '1.2rem' }}>
+              {meta.objectives.map((o) => {
+                const count = questions.filter((q) => q.objectives?.includes(o)).length;
+                return (
+                  <li key={o} style={{ color: count ? undefined : 'var(--danger,#DC2626)' }}>
+                    {o} — <strong>{count}</strong> câu{count ? '' : ' (chưa có câu nào)'}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         )}
       </div>
 
@@ -764,6 +784,18 @@ export default function AiQuizGenerator({ embedded = false, onSaved }) {
             <p style={{ fontSize: '0.8rem', margin: '-0.5rem 0 1rem', color: flaggedCount ? 'var(--danger,#DC2626)' : 'var(--success,#059669)' }}>
               🔎 AI tự giải lại đề: {verifiedCount} câu khớp đáp án
               {flaggedCount > 0 ? ` · ${flaggedCount} câu ra đáp án khác, cần bạn kiểm tra (đánh dấu ⚠️)` : ''}
+            </p>
+          )}
+          {/* Căn cứ trong tài liệu: câu có trích dẫn không khớp tài liệu gốc thì cảnh báo */}
+          {questions.some((q) => q.grounded !== undefined) && (
+            <p
+              style={{
+                fontSize: '0.8rem', margin: '-0.5rem 0 1rem',
+                color: ungroundedCount ? 'var(--danger,#DC2626)' : 'var(--success,#059669)',
+              }}
+            >
+              📄 Căn cứ trong tài liệu: {questions.filter((q) => q.grounded).length} câu trích đúng tài liệu
+              {ungroundedCount > 0 ? ` · ${ungroundedCount} câu không tìm thấy căn cứ, cần bạn kiểm tra (đánh dấu 📄⚠️)` : ''}
             </p>
           )}
 

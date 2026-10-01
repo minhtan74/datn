@@ -6,13 +6,15 @@ Lesson/tài liệu -> ngữ cảnh -> (LLM fine-tuned / Gemini / heuristic) -> J
 from __future__ import annotations
 
 import json
+import os
 import re
 
 from sqlalchemy.orm import Session
 
 from app.ai import model_manager
-from app.ai.rag import ingest, retriever
+from app.ai.rag import document_loader, ingest, retriever
 from app.core.database import q_all, q_one
+from app.core.media import resolve_upload_path
 
 # Tên tiếng Việt của các mức độ khó (dùng trong prompt)
 DIFF_VI = {"easy": "dễ", "medium": "trung bình", "hard": "khó"}
@@ -21,8 +23,11 @@ DIFF_VI = {"easy": "dễ", "medium": "trung bình", "hard": "khó"}
 _SYSTEM = (
     "Bạn là công cụ sinh đề trắc nghiệm của StudyOnline. Trả về DUY NHẤT một đối tượng JSON "
     "hợp lệ theo schema: "
-    '{"questions":[{"question","options":{"A","B","C","D"},"correct_answer","explanation","difficulty","topic"}]}. '
-    "correct_answer là một trong A/B/C/D. Không thêm bất kỳ chữ nào ngoài JSON. "
+    '{"questions":[{"question","options":{"A","B","C","D"},"correct_answer","explanation","difficulty","topic",'
+    '"objectives","evidence"}]}. '
+    "correct_answer là một trong A/B/C/D; objectives là mảng số thứ tự các mục tiêu bài học mà câu hỏi liên quan "
+    "(1 hoặc vài mục tiêu; [] nếu không có danh sách mục tiêu hoặc câu không gắn mục tiêu cụ thể); evidence là câu/cụm trích NGUYÊN VĂN từ NGỮ LIỆU (tối đa 200 ký tự) "
+    "làm căn cứ cho đáp án đúng. Không thêm bất kỳ chữ nào ngoài JSON. "
     "Câu hỏi phải bám sát NGỮ LIỆU được cung cấp, không bịa kiến thức ngoài ngữ liệu."
 )
 
@@ -32,11 +37,117 @@ class QuizGenError(Exception):
     pass
 
 
+# ── mục tiêu bài học ───────────────────────────────────────────────────────
+
+# Dòng tiêu đề phần mục tiêu: "Mục tiêu bài học", "Mục tiêu:", "Sau bài học này, học viên có thể:"...
+_OBJ_HEAD = re.compile(
+    r"^(?:#+\s*)?(?:mục tiêu(?: bài học| học tập| của bài(?: học)?)?"
+    r"|sau (?:khi học xong |khi hoàn thành )?bài(?: học)?(?: này)?,? (?:học viên|bạn|người học) (?:có thể|sẽ)[^:]*)"
+    r"\s*:?$",
+    re.IGNORECASE,
+)
+# Dòng báo hết phần mục tiêu: tiêu đề mục đánh số ("1. Biến trong Python"), số La Mã, hoặc tên phần khác
+_OBJ_END = re.compile(r"^(?:#+\s|\d+[.)]\s|[IVX]+[.)]\s|(?:chương|phần|nội dung|giới thiệu|tóm tắt)\b)", re.IGNORECASE)
+_OBJ_BULLET = re.compile(r"^[-•*–▪●◦+]\s*")
+_OBJ_NUM = re.compile(r"^\d+[.)]\s+")
+MAX_OBJECTIVES = 10
+
+
+# Tách danh sách mục tiêu nằm ngay sau dòng "Mục tiêu bài học" trong văn bản tài liệu.
+# Mục tiêu gạch đầu dòng (hoặc dòng thường, vì PDF mất ký hiệu bullet) kết thúc ở tiêu đề mục kế tiếp;
+# mục tiêu đánh số "1. ..." thì lấy hết các dòng đánh số. Dòng bắt đầu bằng chữ thường là phần bị PDF
+# ngắt xuống dòng của mục tiêu trước -> nối lại.
+def _parse_objectives(text: str) -> list[str]:
+    lines = [l.strip() for l in (text or "").splitlines()]
+    start = next((i for i, l in enumerate(lines) if _OBJ_HEAD.match(l)), None)
+    if start is None:
+        return []
+    items: list[str] = []
+    numbered = None
+    for line in lines[start + 1:]:
+        if not line:
+            if items:
+                break
+            continue
+        is_num = bool(_OBJ_NUM.match(line))
+        if numbered is None:
+            numbered = is_num
+        if items and line[0].islower():
+            items[-1] += " " + line
+        elif numbered and is_num:
+            items.append(_OBJ_NUM.sub("", line))
+        elif not numbered and (_OBJ_BULLET.match(line) or not _OBJ_END.match(line)) and len(line) <= 250:
+            items.append(_OBJ_BULLET.sub("", line))
+        else:
+            break
+        if len(items) >= MAX_OBJECTIVES:
+            break
+    return [o.strip(" .;") for o in items if 5 <= len(o.strip()) <= 300]
+
+
+# Tài liệu bài học dài tối đa bao nhiêu ký tự thì đưa NGUYÊN VĂN vào prompt (tài liệu mẫu mỗi bài ~2–3 nghìn ký tự);
+# dài hơn mới phải truy hồi từng đoạn liên quan. Ôn tập chương được gấp rưỡi vì gồm nhiều bài.
+FULL_DOC_MAX = 12000
+
+
+# Tài liệu của 1 bài học + mục tiêu bài học. Đọc file đã nạp RAG của bài, hoặc PDF đính kèm bài học;
+# tài liệu không có phần "Mục tiêu bài học" thì thử tìm trong mô tả bài. Không có -> ("", [])
+def _lesson_material(db: Session, lesson_id: int) -> tuple[str, list[str]]:
+    lesson = q_one(db, "SELECT document_url, description FROM lessons WHERE id = :id", id=lesson_id) or {}
+    files = [
+        (d["file_path"], d["file_type"])
+        for d in q_all(db, "SELECT file_path, file_type FROM documents WHERE lesson_id = :l ORDER BY id", l=lesson_id)
+    ]
+    attached = resolve_upload_path(lesson.get("document_url"))
+    if attached:
+        ext = os.path.splitext(attached)[1].lstrip(".").lower()
+        files.append((attached, ext if ext in ("pdf", "docx", "txt") else "pdf"))
+    text = ""
+    for path, file_type in files:
+        if not path or not os.path.exists(path):
+            continue
+        try:
+            pages, _ = document_loader.extract(path, file_type)
+        except Exception:  # noqa: BLE001 — file hỏng thì thử nguồn khác
+            continue
+        text = "\n".join(t for _, t in pages).strip()
+        if text:
+            break
+    objectives = _parse_objectives(text) or _parse_objectives(lesson.get("description") or "")
+    return text, objectives
+
+
+# Tách từ để so khớp căn cứ: chữ thường, bỏ dấu câu / ký hiệu code
+def _words(text: str) -> list[str]:
+    return re.findall(r"[\wÀ-ỹ]+", (text or "").lower())
+
+
+# Căn cứ AI trích có thật sự nằm trong tài liệu không: >= 85% số từ của căn cứ xuất hiện trong ngữ liệu
+# (cho phép lệch nhẹ do PDF ngắt dòng / model sửa dấu câu, nhưng không chấp nhận căn cứ tự bịa)
+def _grounded(evidence: str, context_words: set[str]) -> bool:
+    words = [w for w in _words(evidence) if len(w) > 1]
+    if len(words) < 3:
+        return False
+    return sum(w in context_words for w in words) / len(words) >= 0.85
+
+
+# Bỏ các đoạn tài liệu trùng khi gom kết quả truy hồi của nhiều truy vấn
+def _unique_chunks(chunks: list[dict]) -> list[dict]:
+    seen: set = set()
+    out = []
+    for c in chunks:
+        key = c.get("chunk_id") or c.get("content")
+        if key not in seen:
+            seen.add(key)
+            out.append(c)
+    return out
+
+
 # ── ngữ cảnh ───────────────────────────────────────────────────────────────
 
-# Ngữ liệu cho câu hỏi ôn tập chương: gom tài liệu của từng bài trong chương (chia đều số đoạn),
-# không có thì tìm trong tài liệu toàn khóa theo tên chương + tên các bài
-def _build_chapter_context(db: Session, course_id: int, chapter_id: int) -> tuple[str, str, list[dict]]:
+# Ngữ liệu cho câu hỏi ôn tập chương: tài liệu các bài trong chương đủ ngắn thì dùng nguyên văn từng bài;
+# dài thì gom đoạn liên quan của từng bài (chia đều số đoạn); không có thì tìm trong tài liệu toàn khóa
+def _build_chapter_context(db: Session, course_id: int, chapter_id: int) -> tuple[str, str, list[dict], list[str]]:
     chapter = q_one(
         db, "SELECT id, chapter_name FROM chapters WHERE id = :id AND course_id = :c",
         id=chapter_id, c=course_id,
@@ -57,11 +168,25 @@ def _build_chapter_context(db: Session, course_id: int, chapter_id: int) -> tupl
     )
 
     chunks: list[dict] = []
+    objectives: list[str] = []
+    texts: list[tuple[str, str]] = []  # (tên bài, nguyên văn tài liệu bài)
+    for l in lessons:
+        # Bài có PDF đính kèm nhưng chưa nạp vào RAG -> nạp luôn (giống AI Tutor)
+        ingest.ensure_lesson_document(db, l["id"])
+        text, lesson_goals = _lesson_material(db, l["id"])
+        if text:
+            texts.append((l["title"], text))
+        # Mục tiêu của chương = mục tiêu các bài trong chương, ghi kèm tên bài
+        objectives += [f"{l['title']}: {o}" for o in lesson_goals]
+    objectives = objectives[:15]
+
+    if texts and sum(len(t) for _, t in texts) <= FULL_DOC_MAX * 3 // 2:
+        body = "\n\n".join(f"=== Bài: {title} ===\n{text}" for title, text in texts)
+        return f"{header}\n\n{body}".strip(), name, [{"content": body, "full_document": True}], objectives
+
     if lessons:
         per_lesson = max(2, 8 // len(lessons))
         for l in lessons:
-            # Bài có PDF đính kèm nhưng chưa nạp vào RAG -> nạp luôn (giống AI Tutor)
-            ingest.ensure_lesson_document(db, l["id"])
             chunks += retriever.retrieve(
                 db, l["title"], course_id=course_id, lesson_id=l["id"], lesson_only=True, k=per_lesson
             )
@@ -73,17 +198,20 @@ def _build_chapter_context(db: Session, course_id: int, chapter_id: int) -> tupl
     if not chunks:
         # Không có tài liệu RAG: chỉ dùng được khi các bài có mô tả làm ngữ liệu
         if any(l.get("description") for l in lessons):
-            return header, name, []
+            return header, name, [], objectives
         raise QuizGenError(
             "Chương chưa có tài liệu hoặc mô tả bài học để sinh câu hỏi. Hãy thêm mô tả bài học "
             "hoặc tải tài liệu trong mục \"Tài liệu AI Tutor\" trước."
         )
     body = "\n\n".join(c["content"] for c in chunks)
-    return f"{header}\n\n{body}".strip(), name, chunks
+    return f"{header}\n\n{body}".strip(), name, chunks, objectives
 
 
-# Tạo ngữ liệu cho việc sinh câu hỏi: lấy tiêu đề bài/khóa làm truy vấn, rồi truy hồi 6 đoạn tài liệu liên quan
-def _build_context(db: Session, course_id: int, lesson_id: int | None) -> tuple[str, str, list[dict]]:
+# Tạo ngữ liệu cho việc sinh câu hỏi:
+# - bài học có tài liệu đủ ngắn -> dùng NGUYÊN VĂN tài liệu bài (câu hỏi phủ toàn bộ bài, không sót phần nào)
+# - tài liệu dài -> truy hồi theo TỪNG mục tiêu bài học để ngữ liệu phủ đủ các mục tiêu
+# - còn lại -> lấy tiêu đề bài/khóa làm truy vấn, truy hồi 6 đoạn tài liệu liên quan
+def _build_context(db: Session, course_id: int, lesson_id: int | None) -> tuple[str, str, list[dict], list[str]]:
     course = q_one(db, "SELECT id, title FROM courses WHERE id = :id", id=course_id)
     if not course:
         raise QuizGenError("Khóa học không tồn tại.")
@@ -100,12 +228,26 @@ def _build_context(db: Session, course_id: int, lesson_id: int | None) -> tuple[
         header = f"Khóa học: {course['title']}"
         topic_hint = course["title"]
 
+    objectives: list[str] = []
+    chunks: list[dict] = []
+    if lesson_id:
+        # PDF đính kèm bài chưa nạp vào RAG -> nạp luôn (giống AI Tutor và câu hỏi ôn tập chương)
+        ingest.ensure_lesson_document(db, lesson_id)
+        text, objectives = _lesson_material(db, lesson_id)
+        if text and len(text) <= FULL_DOC_MAX:
+            return f"{header}\n\n{text}", topic_hint, [{"content": text, "full_document": True}], objectives
+        for o in objectives:
+            chunks += retriever.retrieve(
+                db, f"{topic_hint}. {o}", course_id=course_id, lesson_id=lesson_id, lesson_only=True, k=3
+            )
+        chunks = _unique_chunks(chunks)[:10]
     # Dùng lại bộ truy hồi của RAG, tìm trong tài liệu của khóa (và bài, nếu có)
-    chunks = retriever.retrieve(db, query, course_id=course_id, lesson_id=lesson_id, k=6)
+    if not chunks:
+        chunks = retriever.retrieve(db, query, course_id=course_id, lesson_id=lesson_id, k=6)
     if not chunks:
         # chưa có tài liệu RAG -> dùng nội dung bài học / mô tả khóa
         if lesson_id and header:
-            return header, topic_hint, []
+            return header, topic_hint, [], objectives
         raise QuizGenError(
             "Khóa học chưa có tài liệu nào được lập chỉ mục. Hãy tải tài liệu trong mục "
             "\"Tài liệu AI Tutor\" trước, hoặc chọn một bài học đã có mô tả."
@@ -113,7 +255,7 @@ def _build_context(db: Session, course_id: int, lesson_id: int | None) -> tuple[
 
     # Ghép tiêu đề + các đoạn tài liệu thành ngữ liệu
     body = "\n\n".join(c["content"] for c in chunks)
-    return f"{header}\n\n{body}".strip(), topic_hint, chunks
+    return f"{header}\n\n{body}".strip(), topic_hint, chunks, objectives
 
 
 # Tập câu hỏi đã có trong khóa (đã chuẩn hóa) để loại câu AI sinh trùng
@@ -160,7 +302,7 @@ def _extract_json(text: str) -> dict | None:
 
 # Kiểm tra từng câu LLM trả về: đủ nội dung, đủ 4 phương án, đáp án A–D, không trùng; lấy tối đa n câu
 def _clean_questions(data: dict, *, n: int, difficulty: str, topic_hint: str,
-                     seen: set[str]) -> list[dict]:
+                     seen: set[str], objectives: list[str] | None = None) -> list[dict]:
     raw = data.get("questions") if isinstance(data, dict) else None
     if not isinstance(raw, list):
         return []
@@ -182,6 +324,13 @@ def _clean_questions(data: dict, *, n: int, difficulty: str, topic_hint: str,
         if key in seen:
             continue
         seen.add(key)
+        # Các số thứ tự mục tiêu model gắn cho câu (mảng, 1 số, hoặc chuỗi "1, 3") -> nội dung mục tiêu;
+        # số ngoài danh sách thì bỏ, câu không gắn mục tiêu nào vẫn giữ
+        related: list[str] = []
+        if objectives:
+            for num in re.findall(r"\d+", json.dumps(q.get("objectives", q.get("objective")))):
+                if 1 <= int(num) <= len(objectives) and objectives[int(num) - 1] not in related:
+                    related.append(objectives[int(num) - 1])
         out.append(
             {
                 "question": content,
@@ -191,6 +340,8 @@ def _clean_questions(data: dict, *, n: int, difficulty: str, topic_hint: str,
                 "difficulty": (str(q.get("difficulty") or difficulty).strip().lower()
                                if str(q.get("difficulty") or "").strip().lower() in DIFF_VI else difficulty),
                 "topic": str(q.get("topic") or topic_hint).strip()[:100],
+                "objectives": related,
+                "evidence": str(q.get("evidence") or "").strip()[:300],
             }
         )
         if len(out) >= n:
@@ -337,7 +488,8 @@ def _verify(context: str, questions: list[dict]) -> None:
 
 # Sinh 1 lô n câu ở đúng 1 mức độ khó (LLM hoặc heuristic); seen dùng chung để các lô không trùng nhau
 def _generate_batch(context: str, topic_hint: str, *, n: int, difficulty: str,
-                    seen: set[str], provider: str) -> list[dict]:
+                    seen: set[str], provider: str, objectives: list[str] | None = None,
+                    coverage: dict[str, int] | None = None) -> list[dict]:
     if provider == "stub":
         # Heuristic điền chỗ trống: chỉ gắn nhãn độ khó, không điều chỉnh được độ khó thật
         return _heuristic(context, n=n, difficulty=difficulty, topic_hint=topic_hint, seen=seen)
@@ -347,19 +499,39 @@ def _generate_batch(context: str, topic_hint: str, *, n: int, difficulty: str,
         f"Tạo {n} câu hỏi trắc nghiệm mức {DIFF_VI[difficulty]} ({DIFF_GUIDE[difficulty]}) về \"{topic_hint}\", "
         "mỗi câu 4 lựa chọn A-D, một đáp án đúng và một giải thích ngắn. Trả JSON schema StudyOnline."
     )
-    user = f"Hướng dẫn: {instr}\n\nNGỮ LIỆU:\n{context}"
-    # ~230 token/câu (JSON tiếng Việt: question + 4 lựa chọn + explanation) + đệm.
-    # Cố định 1400 sẽ bị cắt cụt JSON khi n lớn (vd n=20 cần ~4900 token) -> parse lỗi.
-    max_tokens = min(8192, 300 + 230 * n)
+    goals = ""
+    if objectives:
+        # Đề xoay quanh mục tiêu bài học: mỗi câu liên quan 1 hoặc vài mục tiêu (không bắt buộc gắn đúng 1),
+        # cả đề nhìn chung bao quát các mục tiêu; gợi ý (không ép) các mục tiêu mà các lô trước còn ít câu
+        coverage = coverage or {}
+        least = min(coverage.get(o, 0) for o in objectives)
+        todo = [str(i) for i, o in enumerate(objectives, 1) if coverage.get(o, 0) == least]
+        instr += (
+            " Câu hỏi xoay quanh các MỤC TIÊU BÀI HỌC bên dưới: mỗi câu có thể liên quan tới 1 hoặc vài mục tiêu "
+            "(ghi các số thứ tự vào mảng \"objectives\"), không bắt buộc mỗi câu chỉ gắn 1 mục tiêu; cả đề nên bao quát "
+            f"các mục tiêu, chú ý thêm các mục tiêu số {', '.join(todo)}. Tránh hỏi chi tiết vụn vặt không phục vụ "
+            "mục tiêu nào."
+        )
+        goals = "MỤC TIÊU BÀI HỌC:\n" + "\n".join(f"{i}. {o}" for i, o in enumerate(objectives, 1)) + "\n\n"
+    user = f"Hướng dẫn: {instr}\n\n{goals}NGỮ LIỆU:\n{context}"
+    # ~300 token/câu (JSON tiếng Việt: question + 4 lựa chọn + explanation + evidence) + đệm.
+    # Cố định 1400 sẽ bị cắt cụt JSON khi n lớn (vd n=20 cần ~6300 token) -> parse lỗi.
+    max_tokens = min(8192, 300 + 300 * n)
+    context_words = set(_words(context))
     # Gọi LLM tối đa 2 lần; lần 2 nhắc thêm "chỉ trả về JSON" nếu lần 1 không parse được
     for extra in ("", "\n\nLƯU Ý: chỉ trả về JSON hợp lệ, không giải thích thêm."):
         text = model_manager.generate(_SYSTEM, user + extra, max_tokens=max_tokens)
         data = _extract_json(text)
-        questions = _clean_questions(data, n=n, difficulty=difficulty, topic_hint=topic_hint, seen=seen) if data else []
+        questions = (
+            _clean_questions(data, n=n, difficulty=difficulty, topic_hint=topic_hint, seen=seen, objectives=objectives)
+            if data else []
+        )
         if questions:
             # Lô được yêu cầu ở mức nào thì gắn đúng mức đó (model đôi khi tự gắn nhãn khác)
             for q in questions:
                 q["difficulty"] = difficulty
+                # Đối chiếu căn cứ AI trích với tài liệu: không khớp -> giảng viên cần kiểm tra câu này
+                q["grounded"] = _grounded(q["evidence"], context_words)
             # AI tự giải lại để bắt câu đánh sai đáp án (hay gặp ở câu khó / câu đọc code)
             _verify(context, questions)
             return questions
@@ -384,19 +556,25 @@ def generate(db: Session, *, course_id: int, lesson_id: int | None,
 
     # Có chapter_id -> sinh câu hỏi ôn tập bao quát cả chương
     if chapter_id:
-        context, topic_hint, chunks = _build_chapter_context(db, course_id, chapter_id)
+        context, topic_hint, chunks, objectives = _build_chapter_context(db, course_id, chapter_id)
     else:
-        context, topic_hint, chunks = _build_context(db, course_id, lesson_id)
+        context, topic_hint, chunks, objectives = _build_context(db, course_id, lesson_id)
     seen = _existing_questions(db, course_id)
     provider = model_manager.active_provider()
 
     # Sinh lần lượt từng mức; mức nào lỗi thì bỏ qua, vẫn trả các mức sinh được (meta báo thiếu)
     questions: list[dict] = []
     distribution: dict[str, int] = {}
+    coverage: dict[str, int] = {o: 0 for o in objectives}  # số câu đã có của mỗi mục tiêu bài học
     for lvl, k in plan:
-        batch = _generate_batch(context, topic_hint, n=k, difficulty=lvl, seen=seen, provider=provider)
+        batch = _generate_batch(context, topic_hint, n=k, difficulty=lvl, seen=seen, provider=provider,
+                                objectives=objectives, coverage=coverage)
         distribution[lvl] = len(batch)
         questions += batch
+        for q in batch:
+            for o in q.get("objectives") or []:
+                if o in coverage:
+                    coverage[o] += 1
     gen_by = "heuristic" if provider == "stub" else f"{provider}:{model_manager.info()['model']}"
 
     if not questions:
@@ -420,8 +598,15 @@ def generate(db: Session, *, course_id: int, lesson_id: int | None,
             "verification": {
                 "verified": sum(1 for q in questions if q.get("verified")),
                 "flagged": sum(1 for q in questions if q.get("verify")),
+                # Số câu có căn cứ AI trích KHÔNG tìm thấy trong tài liệu (chế độ offline không có căn cứ -> không tính)
+                "ungrounded": sum(1 for q in questions if q.get("grounded") is False),
             },
+            # Ngữ liệu: nguyên văn tài liệu bài/chương, hoặc các đoạn truy hồi khi tài liệu quá dài
+            "context_mode": "full_document" if chunks and chunks[0].get("full_document") else "retrieval",
+            "context_chars": len(context),
             "context_chunks": len(chunks),
             "topic": topic_hint,
+            # Mục tiêu bài học đọc từ tài liệu (rỗng = tài liệu không có phần mục tiêu, sinh theo nội dung như cũ)
+            "objectives": objectives,
         },
     }

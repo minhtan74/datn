@@ -1,0 +1,106 @@
+﻿course_id,type,question,verdict,judged,best_cosine,rank,latency_ms,answer
+1,in_scope,Python do ai tạo ra?,ĐÚNG,False,0.7542,1,4185,Python do Guido van Rossum tạo ra.
+1,in_scope,Kiểu dữ liệu nào trong Python là danh sách có thể thay đổi?,ĐÚNG,False,0.789,1,2527,Kiểu dữ liệu danh sách có thể thay đổi trong Python là list.
+1,in_scope,Toán tử // trong Python làm gì?,TỪ CHỐI SAI,,0.7266,,3178,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+1,in_scope,Khối lệnh trong Python được xác định bằng gì?,ĐÚNG,False,0.7264,1,2078,"Khối lệnh trong Python được xác định bằng thụt lề (thường 4 dấu cách), không dùng dấu ngoặc nhọn."
+1,in_scope,Lệnh continue có tác dụng gì?,TỪ CHỐI SAI,,0.3635,2,64,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+1,in_scope,Hàm không có return thì trả về gì?,TỪ CHỐI SAI,,0.4637,1,78,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+1,in_scope,Phương thức khởi tạo của lớp trong Python tên là gì?,ĐÚNG,False,0.7335,1,2010,Phương thức khởi tạo của lớp trong Python là __init__.
+1,in_scope,Làm sao kiểm tra đã cài Python thành công?,ĐÚNG,False,0.6428,1,2797,"Để kiểm tra cài đặt thành công, bạn mở terminal và gõ lệnh `python --version`."
+1,in_scope,Viết chú thích trong code Python như thế nào?,ĐÚNG,False,0.7578,1,5721,"Trong Python, bạn có thể viết chú thích bằng các cách sau: - Chú thích 1 dòng: Sử dụng ký tự `#`. - Chú thích nhiều dòng: Sử dụng cặp ba dấu ngoặc kép `""""""`."
+1,in_scope,Hàm type() dùng để làm gì?,ĐÚNG,False,0.6237,1,2977,Hàm type() dùng để kiểm tra kiểu của giá trị.
+2,in_scope,const khác let thế nào?,TỪ CHỐI SAI,,0.3875,1,105,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+2,in_scope,typeof null trả về gì?,ĐÚNG,False,0.7172,1,5488,"typeof null trả về ""object""."
+2,in_scope,Arrow function có this riêng không?,ĐÚNG,False,0.8072,1,9169,"Arrow function không có this riêng, nó kế thừa this từ ngữ cảnh bao quanh."
+2,in_scope,Chọn phần tử theo id trong DOM dùng hàm nào?,ĐÚNG,False,0.7138,1,3451,"Để chọn một phần tử theo id trong DOM, bạn dùng hàm `document.getElementById(""myId"")`."
+2,in_scope,Promise có những trạng thái nào?,ĐÚNG,False,0.8179,1,3993,"Promise có ba trạng thái: pending (đang chờ), fulfilled (hoàn thành thành công) và rejected (thất bại)."
+2,in_scope,Event bubbling là gì?,ĐÚNG,False,0.6736,1,3758,Event bubbling là giai đoạn sự kiện lan truyền từ trong ra ngoài trong mô hình sự kiện.
+2,in_scope,HTTP có ghi nhớ các request trước không?,ĐÚNG,False,0.6576,1,7502,"Không, HTTP là giao thức phi trạng thái (stateless), mỗi request độc lập và server không tự ghi nhớ các request trước đó."
+2,in_scope,Mã lỗi 404 nghĩa là gì?,TỪ CHỐI SAI,,0.4422,1,273,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+2,in_scope,HTTPS dùng cổng mặc định nào?,ĐÚNG,False,0.872,1,3718,HTTPS dùng cổng mặc định là 443.
+2,in_scope,PUT và PATCH khác nhau thế nào?,TỪ CHỐI SAI,,0.2488,1,197,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+3,in_scope,Bytecode Java được chạy trên đâu?,ĐÚNG,False,0.6471,1,5263,Bytecode Java được chạy trên máy ảo Java (JVM).
+3,in_scope,Muốn biên dịch chương trình Java cần cài gì?,ĐÚNG,False,0.6984,1,3344,"Muốn biên dịch chương trình Java, bạn cần cài đặt JDK (Java Development Kit)."
+3,in_scope,Java có bao nhiêu kiểu dữ liệu nguyên thủy?,ĐÚNG,False,0.7175,1,8301,Java có tám kiểu dữ liệu nguyên thủy.
+3,in_scope,Vì sao không nên so sánh String bằng ==?,SAI NỘI DUNG,False,0.7886,1,6113,"Không nên so sánh String bằng toán tử == vì toán tử này chỉ kiểm tra xem hai biến có cùng trỏ tới một đối tượng hay không, thay vì so sánh nội dung của chuỗi."
+3,in_scope,Vòng lặp nào luôn chạy ít nhất một lần?,ĐÚNG,False,0.7871,1,3339,Vòng lặp do-while luôn thực hiện thân vòng lặp ít nhất một lần.
+3,in_scope,Từ khóa nào dùng để kế thừa lớp trong Java?,ĐÚNG,False,0.7074,1,3087,Từ khóa dùng để kế thừa lớp trong Java là extends.
+3,in_scope,Java có hỗ trợ đa kế thừa lớp không?,ĐÚNG,False,0.6971,1,4395,"Java không hỗ trợ đa kế thừa lớp, Java chỉ hỗ trợ đơn kế thừa với lớp."
+3,in_scope,NullPointerException thuộc loại ngoại lệ nào?,ĐÚNG,False,0.7712,2,9445,NullPointerException thuộc loại Unchecked exception (kế thừa từ RuntimeException).
+3,in_scope,throw và throws khác nhau ra sao?,ĐÚNG,False,0.6475,1,4576,"Sự khác biệt giữa throw và throws là: - **throw**: Dùng để ném một ngoại lệ cụ thể (ví dụ: `throw new IllegalArgumentException(""Sai giá trị"")`). - **throws**: Dùng để khai báo các ngoại lệ mà phương thức có thể ném ra ở chữ ký phương thức."
+3,in_scope,ArrayList khác mảng thường ở điểm nào?,ĐÚNG,False,0.7959,1,2691,"ArrayList là mảng động có thể tự tăng kích thước, trong khi mảng thường có kích thước cố định."
+3,in_scope,Muốn HashMap giữ thứ tự thêm vào thì dùng lớp nào?,ĐÚNG,False,0.8306,1,6598,Muốn HashMap giữ thứ tự thêm vào thì dùng LinkedHashMap.
+4,in_scope,Phần head của trang HTML chứa những gì?,ĐÚNG,False,0.8215,1,3032,"Phần head chứa thông tin mô tả trang như title, meta charset và liên kết tới file CSS."
+4,in_scope,Làm sao mở liên kết trong tab mới?,TỪ CHỐI SAI,,0.4573,1,247,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+4,in_scope,Thuộc tính alt của ảnh để làm gì?,TỪ CHỐI SAI,,0.1056,,320,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+4,in_scope,Gộp nhiều cột trong bảng dùng thuộc tính gì?,ĐÚNG,False,0.6747,1,2730,Gộp nhiều cột trong bảng dùng thuộc tính colspan.
+4,in_scope,Selector class viết bắt đầu bằng ký tự gì?,ĐÚNG,False,0.596,1,3045,Selector class bắt đầu bằng dấu chấm.
+4,in_scope,Margin và padding khác nhau thế nào?,TỪ CHỐI SAI,,0.4206,1,189,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+4,in_scope,box-sizing border-box có tác dụng gì?,ĐÚNG,False,0.8065,1,2723,"Khi đặt `box-sizing: border-box`, chiều rộng của phần tử đã bao gồm cả padding và border."
+4,in_scope,Làm sao ẩn hoàn toàn một phần tử bằng CSS?,ĐÚNG,False,0.6909,1,2740,"Để ẩn hoàn toàn một phần tử bằng CSS, bạn sử dụng giá trị `display: none`."
+4,in_scope,Căn các phần tử theo trục chính trong flexbox dùng thuộc tính nào?,ĐÚNG,False,0.8487,1,3043,"Để căn các phần tử theo trục chính trong Flexbox, bạn dùng thuộc tính `justify-content`."
+4,in_scope,Tạo 3 cột bằng nhau với CSS Grid thế nào?,ĐÚNG,False,0.8403,1,7729,"Để tạo 3 cột bằng nhau với CSS Grid, bạn cần đặt `display: grid` cho phần tử cha và sử dụng thuộc tính `grid-template-columns: repeat(3, 1fr)`."
+4,in_scope,Viết CSS theo kiểu mobile first thì media query dùng gì?,ĐÚNG,False,0.7318,1,2720,Viết CSS theo kiểu mobile first thì media query thường dùng min-width.
+5,in_scope,Reconciliation trong React là gì?,TỪ CHỐI SAI,,0.5454,1,126,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+5,in_scope,Trong JSX thay thuộc tính class bằng gì?,ĐÚNG,False,0.7306,1,2032,"Trong JSX, thuộc tính class được thay bằng className."
+5,in_scope,Fragment trong React dùng để làm gì?,TỪ CHỐI SAI,,0.5561,,2528,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+5,in_scope,Component con có được tự sửa props không?,ĐÚNG,False,0.6631,1,2062,"Không, component con không được tự sửa props nhận được vì props là dữ liệu chỉ đọc (read-only)."
+5,in_scope,Tại sao không nên dùng chỉ số mảng làm key?,ĐÚNG,False,0.6751,1,2462,"Không nên dùng chỉ số mảng làm key khi danh sách có thể thêm, xoá hoặc đổi thứ tự."
+5,in_scope,Làm sao chặn form tải lại trang khi submit?,TỪ CHỐI SAI,,0.4809,1,102,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+5,in_scope,useEffect không truyền mảng phụ thuộc thì chạy khi nào?,ĐÚNG,False,0.7157,2,5324,useEffect không có mảng phụ thuộc sẽ chạy lại sau mọi lần render.
+5,in_scope,Hàm cleanup trong useEffect dùng để làm gì?,ĐÚNG,False,0.6967,1,9277,"Hàm cleanup trong useEffect dùng để huỷ hẹn giờ, huỷ đăng ký sự kiện hoặc huỷ yêu cầu API đang chờ."
+5,in_scope,Reducer là gì?,TỪ CHỐI SAI,,0.5144,1,70,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+5,in_scope,useCallback dùng để làm gì?,TỪ CHỐI SAI,,0.4794,1,71,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+5,in_scope,Chuyển trang bằng code trong React Router dùng gì?,ĐÚNG,False,0.8211,1,2367,Chuyển trang bằng code trong React Router dùng hook useNavigate.
+6,in_scope,MySQL mặc định chạy ở cổng nào?,ĐÚNG,False,0.5739,1,1972,MySQL mặc định lắng nghe ở cổng 3306.
+6,in_scope,Khóa ngoại dùng để làm gì?,TỪ CHỐI SAI,,0.388,1,65,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+6,in_scope,Nhóm lệnh DDL gồm những lệnh nào?,ĐÚNG,False,0.5926,1,2922,"Nhóm lệnh DDL gồm các lệnh: CREATE, ALTER và DROP."
+6,in_scope,Lưu số tiền nên dùng kiểu dữ liệu gì?,ĐÚNG,False,0.5999,1,4198,Lưu số tiền nên dùng kiểu dữ liệu DECIMAL.
+6,in_scope,Kiểm tra giá trị rỗng trong SQL thế nào?,ĐÚNG,False,0.701,1,2142,"Để kiểm tra giá trị rỗng, bạn phải dùng IS NULL, không dùng dấu bằng."
+6,in_scope,Tìm kiếm theo mẫu chuỗi trong SQL dùng toán tử gì?,ĐÚNG,False,0.593,1,2903,Tìm kiếm theo mẫu chuỗi trong SQL dùng toán tử LIKE.
+6,in_scope,DELETE khác TRUNCATE thế nào?,TỪ CHỐI SAI,,0.4574,1,71,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+6,in_scope,COUNT(*) khác COUNT(tên cột) ra sao?,ĐÚNG,False,0.6185,1,4966,"COUNT(*) đếm mọi dòng trong kết quả truy vấn, trong khi COUNT(tên_cột) chỉ đếm các dòng có giá trị khác NULL ở cột đó."
+6,in_scope,Truy vấn con có thể đặt ở những đâu?,TỪ CHỐI SAI,,0.5378,1,77,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+6,in_scope,Thế nào là vi phạm dạng chuẩn 1NF?,ĐÚNG,False,0.7244,1,5327,Vi phạm dạng chuẩn 1NF khi bảng có cột chứa giá trị không phải là giá trị nguyên tố hoặc có chứa nhóm lặp (ví dụ: cột số điện thoại chứa nhiều số cách nhau bởi dấu phẩy).
+6,in_scope,View có lưu dữ liệu riêng không?,ĐÚNG,False,0.7132,1,3560,View không lưu dữ liệu riêng mà lấy dữ liệu từ các bảng gốc mỗi khi được truy vấn.
+35,in_scope,Kernel là gì?,ĐÚNG,False,0.7796,1,13658,"Nhân (kernel) là phần cốt lõi của hệ điều hành, luôn thường trú trong bộ nhớ và điều khiển trực tiếp phần cứng."
+35,in_scope,System call dùng để làm gì?,ĐÚNG,False,0.8302,1,2023,Lời gọi hệ thống (system call) là cơ chế để chương trình yêu cầu dịch vụ từ hệ điều hành.
+35,in_scope,Tiến trình ở trạng thái ready nghĩa là gì?,ĐÚNG,False,0.7572,1,1724,Trạng thái ready nghĩa là tiến trình đã sẵn sàng và đang chờ được cấp CPU.
+35,in_scope,PCB lưu những thông tin gì?,ĐÚNG,False,0.7897,1,2103,"PCB chứa PID, trạng thái, bộ đếm chương trình, giá trị các thanh ghi và thông tin bộ nhớ của tiến trình."
+35,in_scope,Tiến trình zombie là gì?,TỪ CHỐI SAI,,0.3818,1,70,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,in_scope,Hiệu ứng đoàn xe trong lập lịch là gì?,TỪ CHỐI SAI,,0.4647,,71,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,in_scope,Quantum quá nhỏ trong Round Robin gây ra vấn đề gì?,ĐÚNG,False,0.625,1,5108,Quantum quá nhỏ trong Round Robin làm tăng chi phí chuyển ngữ cảnh.
+35,in_scope,Khắc phục đói CPU bằng cách nào?,ĐÚNG,False,0.6705,1,3982,Kỹ thuật aging khắc phục đói CPU bằng cách tăng dần độ ưu tiên của tiến trình chờ lâu.
+35,in_scope,Thuật toán Banker dùng để làm gì?,TỪ CHỐI SAI,,0.5436,1,75,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,in_scope,Nghịch lý Belady là gì?,TỪ CHỐI SAI,,0.3707,1,68,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,in_scope,Thrashing là gì?,ĐÚNG,False,0.7747,1,4114,"Trì trệ (thrashing) là tình trạng hệ thống dành phần lớn thời gian để hoán đổi trang thay vì thực thi tiến trình, xảy ra khi tiến trình không có đủ khung trang cho tập trang đang làm việc."
+1,out_of_scope,Cách nấu canh chua cá lóc?,TỪ CHỐI ĐÚNG,True,0.228,,66,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+1,out_of_scope,Ai là tác giả Truyện Kiều?,TỪ CHỐI ĐÚNG,True,0.2126,,65,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+2,out_of_scope,Giá xăng hôm nay bao nhiêu?,TỪ CHỐI ĐÚNG,True,0.0944,,61,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+2,out_of_scope,Đội nào vô địch Euro 2024?,TỪ CHỐI ĐÚNG,True,0.1169,,60,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+3,out_of_scope,Uống cà phê buổi tối có hại không?,TỪ CHỐI ĐÚNG,True,0.1632,,72,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+3,out_of_scope,Thủ đô của Úc là thành phố nào?,TỪ CHỐI ĐÚNG,True,0.1312,,77,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+4,out_of_scope,Nên đi du lịch Đà Lạt vào tháng mấy?,TỪ CHỐI ĐÚNG,True,0.128,,75,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+4,out_of_scope,Cách chữa đau lưng tại nhà?,TỪ CHỐI ĐÚNG,True,0.1291,,77,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+5,out_of_scope,Tỷ giá đô la hôm nay thế nào?,TỪ CHỐI ĐÚNG,True,0.1949,,69,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+5,out_of_scope,Chiến tranh thế giới thứ hai kết thúc năm nào?,TỪ CHỐI ĐÚNG,True,0.0995,,70,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+6,out_of_scope,Làm sao để ngủ ngon hơn?,TỪ CHỐI ĐÚNG,True,0.1663,,65,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+6,out_of_scope,Bài hát nào đang hot nhất hiện nay?,TỪ CHỐI ĐÚNG,True,0.1327,,63,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,out_of_scope,Dự báo thời tiết Sài Gòn cuối tuần?,TỪ CHỐI ĐÚNG,True,0.2158,,65,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,out_of_scope,Cách trồng rau sạch trên sân thượng?,TỪ CHỐI ĐÚNG,True,0.1611,,63,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,out_of_scope,Ai là người giàu nhất thế giới?,TỪ CHỐI ĐÚNG,True,0.152,,74,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+1,near_miss,Decorator trong Python là gì?,TỪ CHỐI ĐÚNG,True,0.528,,67,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+1,near_miss,Cách dùng list comprehension trong Python?,TỪ CHỐI ĐÚNG,True,0.7091,,2727,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+2,near_miss,Closure trong JavaScript là gì?,TỪ CHỐI ĐÚNG,True,0.5204,,57,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+2,near_miss,WebSocket hoạt động thế nào?,TỪ CHỐI ĐÚNG,True,0.4692,,57,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+3,near_miss,Spring Boot là gì?,TỪ CHỐI ĐÚNG,True,0.1734,,71,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+3,near_miss,Lambda expression trong Java viết thế nào?,TỪ CHỐI ĐÚNG,True,0.5088,,76,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+4,near_miss,Vẽ hình bằng thẻ canvas trong HTML5 thế nào?,TỪ CHỐI ĐÚNG,True,0.6716,,1864,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+4,near_miss,Sass là gì?,TỪ CHỐI ĐÚNG,True,0.2998,,53,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+5,near_miss,Redux Toolkit dùng thế nào?,TỪ CHỐI ĐÚNG,True,0.4107,,66,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+5,near_miss,Next.js là gì?,TỪ CHỐI ĐÚNG,True,0.4362,,68,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+6,near_miss,Stored procedure viết thế nào?,TỪ CHỐI ĐÚNG,True,0.3435,,77,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+6,near_miss,Index B-tree hoạt động ra sao?,TỪ CHỐI ĐÚNG,True,0.3723,,80,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+6,near_miss,MongoDB khác MySQL thế nào?,TỪ CHỐI ĐÚNG,True,0.6227,,2201,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,near_miss,Docker khác máy ảo thế nào?,TỪ CHỐI ĐÚNG,True,0.5141,,65,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,near_miss,Lệnh ls trong Linux dùng để làm gì?,TỪ CHỐI ĐÚNG,True,0.5783,,3087,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.

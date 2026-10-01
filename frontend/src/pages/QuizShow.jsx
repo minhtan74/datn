@@ -208,14 +208,14 @@ export default function QuizShow() {
 
   if (!quizId) {
     return (
-      <main className="s-main q-container">
+      <main className="s-main q-container qh-page">
         <div className="alert alert-danger">Thiếu tham số quiz.</div>
       </main>
     );
   }
 
   return (
-    <main className="s-main q-container">
+    <main className="s-main q-container qh-page">
       {/* Breadcrumb */}
       <nav className="q-breadcrumb" aria-label="Breadcrumb">
         <Link to="/student/dashboard">Dashboard</Link>

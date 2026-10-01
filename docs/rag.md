@@ -109,7 +109,8 @@ Ví dụ kết quả với dữ liệu mẫu (3 tài liệu, 21 chunk):
 ```
 EMBEDDING_MODEL=sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
 AI_MAX_CONTEXT_CHUNKS=6
-LLM_PROVIDER=gemini            # gemini | openai | (bỏ trống → offline)
-LLM_MODEL=gemini-2.0-flash
+LLM_PROVIDER=gemini            # gemini | openai | claude | (bỏ trống → offline)
+LLM_MODEL=gemini-3.1-flash-lite
 LLM_API_KEY=
+LLM_BASE_URL=                  # chỉ với openai: API cùng chuẩn, vd. Ollama http://localhost:11434/v1
 ```

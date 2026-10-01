@@ -13,10 +13,6 @@
 .stats-row{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:.75rem;font-size:.82rem;}
 .stats-row span{background:rgba(255,255,255,.15);border-radius:999px;padding:.2rem .75rem;font-weight:600;}
 /* Category pills */
-.cat-pills{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;}
-.cat-pill{padding:.4rem .9rem;border-radius:999px;border:1.5px solid var(--s-border);font-size:.8rem;font-weight:600;cursor:pointer;background:var(--s-surface);color:var(--s-text-muted);transition:all .2s;font-family:inherit;}
-.cat-pill:hover{border-color:var(--s-primary);color:var(--s-primary);}
-.cat-pill.active{background:var(--s-primary);color:#fff;border-color:var(--s-primary);}
 /* Sort bar */
 .sort-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:.75rem;}
 .sort-bar .count{font-size:.875rem;color:var(--s-text-muted);}

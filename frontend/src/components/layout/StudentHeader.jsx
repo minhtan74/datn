@@ -1,16 +1,9 @@
-import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
-import { useClickOutside } from '../../hooks/useClickOutside';
 
-/** Tương đương <header class="s-header"> — avatar dropdown + toggle sidebar, dùng chung mọi trang student */
+/** Tương đương <header class="s-header"> — avatar + toggle sidebar, dùng chung mọi trang student */
 export default function StudentHeader({ onToggleSidebar }) {
   const { user } = useAuth();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const wrapRef = useRef(null);
-
-  // Click ra ngoài thì đóng menu avatar
-  useClickOutside(wrapRef, () => setDropdownOpen(false));
 
   // Avatar = chữ cái đầu của 2 từ cuối trong tên; tên hiển thị = từ cuối (tên gọi)
   const initials = user?.fullname
@@ -29,26 +22,15 @@ export default function StudentHeader({ onToggleSidebar }) {
         ☰
       </button>
       <div className="s-header-actions">
-        <div
-          className="s-avatar-wrap"
-          id="avatarWrap"
-          ref={wrapRef}
-          onClick={(e) => {
-            e.stopPropagation();
-            setDropdownOpen((v) => !v);
-          }}
-        >
+        {/* Bấm avatar mở trang hồ sơ (mục "Hồ sơ cá nhân" đã có ở thanh bên trái) */}
+        <Link className="s-avatar-wrap" id="avatarWrap" to="/student/profile" title="Hồ sơ cá nhân" style={{ textDecoration: 'none' }}>
           <div className="s-avatar" id="headerAvatar">
             {initials}
           </div>
           <span className="s-avatar-name" id="headerName">
             {displayName}
           </span>
-          <span style={{ color: 'var(--s-text-muted)', fontSize: '.8rem' }}>▾</span>
-          <div className={`s-dropdown${dropdownOpen ? ' open' : ''}`} id="avatarDropdown">
-            <Link to="/student/profile">👤 Hồ sơ</Link>
-          </div>
-        </div>
+        </Link>
       </div>
     </header>
   );

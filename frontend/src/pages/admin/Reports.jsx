@@ -237,7 +237,7 @@ function LearningTab({ data }) {
   const kpis = [
     { label: 'Lượt làm quiz', value: fmt(ov.quiz_attempts), sub: `${fmt(ov.active_learners)} học viên tham gia` },
     { label: 'Điểm quiz TB', value: `${ov.avg_quiz_score ?? 0}%`, sub: 'Trên tất cả lượt làm', color: scoreColor(ov.avg_quiz_score) },
-    { label: 'Tỷ lệ đạt (≥ 50%)', value: `${ov.pass_rate ?? 0}%`, sub: 'Số lượt đạt / tổng lượt' },
+    { label: 'Tỷ lệ đạt', value: ov.pass_rate != null ? `${ov.pass_rate}%` : '—', sub: 'Theo điểm đạt của từng quiz (bỏ quiz không đặt điểm đạt)' },
     { label: 'Câu hỏi AI Tutor', value: fmt(ov.ai_questions), sub: `${ov.ai_no_answer_rate ?? 0}% không tìm thấy trong tài liệu` },
   ];
 

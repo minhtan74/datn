@@ -47,8 +47,10 @@ services:
       FRONTEND_URL: "http://localhost:8088"
       # AI (tuỳ chọn): điền để dùng LLM thật, bỏ trống -> chế độ offline
       LLM_PROVIDER: gemini
-      LLM_MODEL: gemini-2.0-flash
+      LLM_MODEL: gemini-3.1-flash-lite
       LLM_API_KEY: ""
+      # Ollama chạy trên máy host: LLM_PROVIDER=openai + LLM_BASE_URL=http://host.docker.internal:11434/v1
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
     ports:
       - "8080:8080"
     volumes:

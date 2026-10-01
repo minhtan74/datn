@@ -76,7 +76,7 @@ def _enrollments(db: Session, limit: int | None = None) -> list[dict]:
 
 
 # Học tập theo từng khóa: số học viên, lượt làm bài kiểm tra chính thức, điểm TB,
-# tỷ lệ đạt (theo điểm đạt của từng quiz, mặc định 50%), % hoàn thành TB
+# tỷ lệ đạt (theo điểm đạt của từng quiz; quiz không đặt điểm đạt không tính vào), % hoàn thành TB
 def _learning_by_course(db: Session) -> list[dict]:
     rows = q_all(
         db,
@@ -186,7 +186,8 @@ def learning(
                 "quiz_attempts": int(quiz.get("attempts") or 0),
                 "active_learners": int(quiz.get("learners") or 0),
                 "avg_quiz_score": float(quiz.get("avg_score") or 0),
-                "pass_rate": float(quiz.get("pass_rate") or 0),
+                # Không quiz nào đặt điểm đạt -> None (giao diện hiện "—")
+                "pass_rate": float(quiz["pass_rate"]) if quiz.get("pass_rate") is not None else None,
                 "ai_questions": questions,
                 "ai_no_answer_rate": round(no_answer * 100.0 / questions, 1) if questions else 0.0,
             },
@@ -408,7 +409,8 @@ def _revenue_series(db: Session, rng: str) -> list[dict]:
             db,
             "SELECT DATE_FORMAT(paid_at, '%Y-%m') AS slot, SUM(amount) AS revenue, COUNT(*) AS orders "
             "FROM payments WHERE status='completed' "
-            "AND paid_at >= DATE_SUB(CURDATE(), INTERVAL 11 MONTH) "
+            # Mốc bắt đầu là NGÀY 1 của tháng cách đây 11 tháng (lùi từ hôm nay sẽ cắt mất nửa đầu tháng đầu tiên)
+            "AND paid_at >= DATE_SUB(DATE_FORMAT(CURDATE(), '%Y-%m-01'), INTERVAL 11 MONTH) "
             "GROUP BY slot ORDER BY slot ASC",
         )
         m = {str(r["slot"]): r for r in rows}

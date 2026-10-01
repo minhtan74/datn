@@ -47,15 +47,15 @@ export default function QuizResult() {
 
   if (error) {
     return (
-      <main className="s-main q-container">
+      <main className="s-main q-container qh-page">
         <div className="alert alert-danger">{error}</div>
-        <Link to="/student/quiz-history">← Lịch sử làm bài</Link>
+        <Link to="/quiz">← Danh sách Quiz</Link>
       </main>
     );
   }
   if (!data) {
     return (
-      <main className="s-main q-container" style={{ textAlign: 'center', padding: '5rem 0' }}>
+      <main className="s-main q-container qh-page" style={{ textAlign: 'center', padding: '5rem 0' }}>
         <div className="spinner mb-4"></div>
       </main>
     );
@@ -66,7 +66,7 @@ export default function QuizResult() {
   const color = percent >= 80 ? 'var(--s-success)' : percent >= 50 ? 'var(--s-warning)' : 'var(--s-danger)';
 
   return (
-    <main className="s-main q-container">
+    <main className="s-main q-container qh-page">
       {/* Breadcrumbs */}
       <nav className="q-breadcrumb" aria-label="Breadcrumb">
         <Link to="/student/dashboard">Dashboard</Link>
@@ -76,6 +76,9 @@ export default function QuizResult() {
         <span className="q-breadcrumb-current">Kết quả bài làm</span>
       </nav>
 
+      {/* Bố cục 2 cột: ô điểm bên trái (dính khi cuộn), danh sách câu hỏi bên phải */}
+      <div className="qr-layout">
+      <aside className="qr-side">
       {/* Score Overview Panel */}
       <div className="q-score-panel">
         <div
@@ -141,7 +144,7 @@ export default function QuizResult() {
           {/* Lượt đã lưu (học viên) -> xem các lượt khác của quiz này */}
           {(data.result_id || !fromSubmit) && (
             <Link
-              to={`/student/quiz-history?quiz_id=${quiz.id}`}
+              to={`/quiz?history=${quiz.id}`}
               style={{ display: 'inline-block', fontSize: '0.85rem', marginBottom: '0.5rem' }}
             >
               📜 Lịch sử làm bài quiz này
@@ -158,7 +161,9 @@ export default function QuizResult() {
           )}
         </div>
       </div>
+      </aside>
 
+      <div className="qr-content">
       {/* Đề giới hạn lượt làm: chưa phải lượt cuối thì chỉ báo đúng/sai, đáp án đúng để dành tới lượt cuối */}
       {revealed === false && (
         <div className="alert alert-warning" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
@@ -261,6 +266,8 @@ export default function QuizResult() {
             )}
           </div>
         ))}
+      </div>
+      </div>
       </div>
     </main>
   );

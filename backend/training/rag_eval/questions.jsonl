@@ -1,0 +1,105 @@
+{"course_id": 1, "type": "in_scope", "question": "Python do ai tạo ra?", "expect": [["Guido"]]}
+{"course_id": 1, "type": "in_scope", "question": "Kiểu dữ liệu nào trong Python là danh sách có thể thay đổi?", "expect": [["list"]]}
+{"course_id": 1, "type": "in_scope", "question": "Toán tử // trong Python làm gì?", "expect": [["phần nguyên"]]}
+{"course_id": 1, "type": "in_scope", "question": "Khối lệnh trong Python được xác định bằng gì?", "expect": [["thụt lề"]]}
+{"course_id": 1, "type": "in_scope", "question": "Lệnh continue có tác dụng gì?", "expect": [["bỏ qua"]]}
+{"course_id": 1, "type": "in_scope", "question": "Hàm không có return thì trả về gì?", "expect": [["None"]]}
+{"course_id": 1, "type": "in_scope", "question": "Phương thức khởi tạo của lớp trong Python tên là gì?", "expect": [["__init__"]]}
+{"course_id": 1, "type": "in_scope", "question": "Làm sao kiểm tra đã cài Python thành công?", "expect": [["--version"]]}
+{"course_id": 1, "type": "in_scope", "question": "Viết chú thích trong code Python như thế nào?", "expect": [["#", "\"\"\""]]}
+{"course_id": 1, "type": "in_scope", "question": "Hàm type() dùng để làm gì?", "expect": [["kiểu"]]}
+{"course_id": 2, "type": "in_scope", "question": "const khác let thế nào?", "expect": [["gán lại"]]}
+{"course_id": 2, "type": "in_scope", "question": "typeof null trả về gì?", "expect": [["object"]]}
+{"course_id": 2, "type": "in_scope", "question": "Arrow function có this riêng không?", "expect": [["this"]]}
+{"course_id": 2, "type": "in_scope", "question": "Chọn phần tử theo id trong DOM dùng hàm nào?", "expect": [["getElementById"]]}
+{"course_id": 2, "type": "in_scope", "question": "Promise có những trạng thái nào?", "expect": [["pending"], ["rejected"]]}
+{"course_id": 2, "type": "in_scope", "question": "Event bubbling là gì?", "expect": [["trong ra ngoài"]]}
+{"course_id": 2, "type": "in_scope", "question": "HTTP có ghi nhớ các request trước không?", "expect": [["phi trạng thái", "stateless"]]}
+{"course_id": 2, "type": "in_scope", "question": "Mã lỗi 404 nghĩa là gì?", "expect": [["Not Found"]]}
+{"course_id": 2, "type": "in_scope", "question": "HTTPS dùng cổng mặc định nào?", "expect": [["443"]]}
+{"course_id": 2, "type": "in_scope", "question": "PUT và PATCH khác nhau thế nào?", "expect": [["một phần"]]}
+{"course_id": 3, "type": "in_scope", "question": "Bytecode Java được chạy trên đâu?", "expect": [["JVM", "máy ảo"]]}
+{"course_id": 3, "type": "in_scope", "question": "Muốn biên dịch chương trình Java cần cài gì?", "expect": [["JDK"]]}
+{"course_id": 3, "type": "in_scope", "question": "Java có bao nhiêu kiểu dữ liệu nguyên thủy?", "expect": [["tám", "8"]]}
+{"course_id": 3, "type": "in_scope", "question": "Vì sao không nên so sánh String bằng ==?", "expect": [["equals"]]}
+{"course_id": 3, "type": "in_scope", "question": "Vòng lặp nào luôn chạy ít nhất một lần?", "expect": [["do-while"]]}
+{"course_id": 3, "type": "in_scope", "question": "Từ khóa nào dùng để kế thừa lớp trong Java?", "expect": [["extends"]]}
+{"course_id": 3, "type": "in_scope", "question": "Java có hỗ trợ đa kế thừa lớp không?", "expect": [["đơn kế thừa"]]}
+{"course_id": 3, "type": "in_scope", "question": "NullPointerException thuộc loại ngoại lệ nào?", "expect": [["unchecked", "RuntimeException"]]}
+{"course_id": 3, "type": "in_scope", "question": "throw và throws khác nhau ra sao?", "expect": [["khai báo"]]}
+{"course_id": 3, "type": "in_scope", "question": "ArrayList khác mảng thường ở điểm nào?", "expect": [["mảng động", "tự tăng"]]}
+{"course_id": 3, "type": "in_scope", "question": "Muốn HashMap giữ thứ tự thêm vào thì dùng lớp nào?", "expect": [["LinkedHashMap"]]}
+{"course_id": 4, "type": "in_scope", "question": "Phần head của trang HTML chứa những gì?", "expect": [["title", "meta"]]}
+{"course_id": 4, "type": "in_scope", "question": "Làm sao mở liên kết trong tab mới?", "expect": [["_blank"]]}
+{"course_id": 4, "type": "in_scope", "question": "Thuộc tính alt của ảnh để làm gì?", "expect": [["mô tả"]]}
+{"course_id": 4, "type": "in_scope", "question": "Gộp nhiều cột trong bảng dùng thuộc tính gì?", "expect": [["colspan"]]}
+{"course_id": 4, "type": "in_scope", "question": "Selector class viết bắt đầu bằng ký tự gì?", "expect": [["dấu chấm"]]}
+{"course_id": 4, "type": "in_scope", "question": "Margin và padding khác nhau thế nào?", "expect": [["bên trong"]]}
+{"course_id": 4, "type": "in_scope", "question": "box-sizing border-box có tác dụng gì?", "expect": [["bao gồm"]]}
+{"course_id": 4, "type": "in_scope", "question": "Làm sao ẩn hoàn toàn một phần tử bằng CSS?", "expect": [["display: none"]]}
+{"course_id": 4, "type": "in_scope", "question": "Căn các phần tử theo trục chính trong flexbox dùng thuộc tính nào?", "expect": [["justify-content"]]}
+{"course_id": 4, "type": "in_scope", "question": "Tạo 3 cột bằng nhau với CSS Grid thế nào?", "expect": [["repeat(3, 1fr)"]]}
+{"course_id": 4, "type": "in_scope", "question": "Viết CSS theo kiểu mobile first thì media query dùng gì?", "expect": [["min-width"]]}
+{"course_id": 5, "type": "in_scope", "question": "Reconciliation trong React là gì?", "expect": [["so sánh"]]}
+{"course_id": 5, "type": "in_scope", "question": "Trong JSX thay thuộc tính class bằng gì?", "expect": [["className"]]}
+{"course_id": 5, "type": "in_scope", "question": "Fragment trong React dùng để làm gì?", "expect": [["thẻ thừa", "nhóm"]]}
+{"course_id": 5, "type": "in_scope", "question": "Component con có được tự sửa props không?", "expect": [["chỉ đọc", "read-only"]]}
+{"course_id": 5, "type": "in_scope", "question": "Tại sao không nên dùng chỉ số mảng làm key?", "expect": [["thứ tự", "thêm, xoá"]]}
+{"course_id": 5, "type": "in_scope", "question": "Làm sao chặn form tải lại trang khi submit?", "expect": [["preventDefault"]]}
+{"course_id": 5, "type": "in_scope", "question": "useEffect không truyền mảng phụ thuộc thì chạy khi nào?", "expect": [["mọi lần render"]]}
+{"course_id": 5, "type": "in_scope", "question": "Hàm cleanup trong useEffect dùng để làm gì?", "expect": [["huỷ", "gỡ"]]}
+{"course_id": 5, "type": "in_scope", "question": "Reducer là gì?", "expect": [["hàm thuần"]]}
+{"course_id": 5, "type": "in_scope", "question": "useCallback dùng để làm gì?", "expect": [["ghi nhớ"]]}
+{"course_id": 5, "type": "in_scope", "question": "Chuyển trang bằng code trong React Router dùng gì?", "expect": [["useNavigate"]]}
+{"course_id": 6, "type": "in_scope", "question": "MySQL mặc định chạy ở cổng nào?", "expect": [["3306"]]}
+{"course_id": 6, "type": "in_scope", "question": "Khóa ngoại dùng để làm gì?", "expect": [["tham chiếu"]]}
+{"course_id": 6, "type": "in_scope", "question": "Nhóm lệnh DDL gồm những lệnh nào?", "expect": [["CREATE"]]}
+{"course_id": 6, "type": "in_scope", "question": "Lưu số tiền nên dùng kiểu dữ liệu gì?", "expect": [["DECIMAL"]]}
+{"course_id": 6, "type": "in_scope", "question": "Kiểm tra giá trị rỗng trong SQL thế nào?", "expect": [["IS NULL"]]}
+{"course_id": 6, "type": "in_scope", "question": "Tìm kiếm theo mẫu chuỗi trong SQL dùng toán tử gì?", "expect": [["LIKE"]]}
+{"course_id": 6, "type": "in_scope", "question": "DELETE khác TRUNCATE thế nào?", "expect": [["TRUNCATE"]]}
+{"course_id": 6, "type": "in_scope", "question": "COUNT(*) khác COUNT(tên cột) ra sao?", "expect": [["NULL"]]}
+{"course_id": 6, "type": "in_scope", "question": "Truy vấn con có thể đặt ở những đâu?", "expect": [["WHERE"], ["FROM"]]}
+{"course_id": 6, "type": "in_scope", "question": "Thế nào là vi phạm dạng chuẩn 1NF?", "expect": [["nguyên tố", "nhiều số"]]}
+{"course_id": 6, "type": "in_scope", "question": "View có lưu dữ liệu riêng không?", "expect": [["không lưu"]]}
+{"course_id": 35, "type": "in_scope", "question": "Kernel là gì?", "expect": [["cốt lõi"]]}
+{"course_id": 35, "type": "in_scope", "question": "System call dùng để làm gì?", "expect": [["yêu cầu dịch vụ"]]}
+{"course_id": 35, "type": "in_scope", "question": "Tiến trình ở trạng thái ready nghĩa là gì?", "expect": [["chờ được cấp CPU"]]}
+{"course_id": 35, "type": "in_scope", "question": "PCB lưu những thông tin gì?", "expect": [["PID"]]}
+{"course_id": 35, "type": "in_scope", "question": "Tiến trình zombie là gì?", "expect": [["chưa đọc trạng thái"]]}
+{"course_id": 35, "type": "in_scope", "question": "Hiệu ứng đoàn xe trong lập lịch là gì?", "expect": [["convoy", "chờ rất lâu"]]}
+{"course_id": 35, "type": "in_scope", "question": "Quantum quá nhỏ trong Round Robin gây ra vấn đề gì?", "expect": [["chuyển ngữ cảnh"]]}
+{"course_id": 35, "type": "in_scope", "question": "Khắc phục đói CPU bằng cách nào?", "expect": [["aging"]]}
+{"course_id": 35, "type": "in_scope", "question": "Thuật toán Banker dùng để làm gì?", "expect": [["tránh bế tắc", "an toàn"]]}
+{"course_id": 35, "type": "in_scope", "question": "Nghịch lý Belady là gì?", "expect": [["số lỗi trang"]]}
+{"course_id": 35, "type": "in_scope", "question": "Thrashing là gì?", "expect": [["hoán đổi trang"]]}
+{"course_id": 1, "type": "out_of_scope", "question": "Cách nấu canh chua cá lóc?", "expect": []}
+{"course_id": 1, "type": "out_of_scope", "question": "Ai là tác giả Truyện Kiều?", "expect": []}
+{"course_id": 2, "type": "out_of_scope", "question": "Giá xăng hôm nay bao nhiêu?", "expect": []}
+{"course_id": 2, "type": "out_of_scope", "question": "Đội nào vô địch Euro 2024?", "expect": []}
+{"course_id": 3, "type": "out_of_scope", "question": "Uống cà phê buổi tối có hại không?", "expect": []}
+{"course_id": 3, "type": "out_of_scope", "question": "Thủ đô của Úc là thành phố nào?", "expect": []}
+{"course_id": 4, "type": "out_of_scope", "question": "Nên đi du lịch Đà Lạt vào tháng mấy?", "expect": []}
+{"course_id": 4, "type": "out_of_scope", "question": "Cách chữa đau lưng tại nhà?", "expect": []}
+{"course_id": 5, "type": "out_of_scope", "question": "Tỷ giá đô la hôm nay thế nào?", "expect": []}
+{"course_id": 5, "type": "out_of_scope", "question": "Chiến tranh thế giới thứ hai kết thúc năm nào?", "expect": []}
+{"course_id": 6, "type": "out_of_scope", "question": "Làm sao để ngủ ngon hơn?", "expect": []}
+{"course_id": 6, "type": "out_of_scope", "question": "Bài hát nào đang hot nhất hiện nay?", "expect": []}
+{"course_id": 35, "type": "out_of_scope", "question": "Dự báo thời tiết Sài Gòn cuối tuần?", "expect": []}
+{"course_id": 35, "type": "out_of_scope", "question": "Cách trồng rau sạch trên sân thượng?", "expect": []}
+{"course_id": 35, "type": "out_of_scope", "question": "Ai là người giàu nhất thế giới?", "expect": []}
+{"course_id": 1, "type": "near_miss", "question": "Decorator trong Python là gì?", "expect": []}
+{"course_id": 1, "type": "near_miss", "question": "Cách dùng list comprehension trong Python?", "expect": []}
+{"course_id": 2, "type": "near_miss", "question": "Closure trong JavaScript là gì?", "expect": []}
+{"course_id": 2, "type": "near_miss", "question": "WebSocket hoạt động thế nào?", "expect": []}
+{"course_id": 3, "type": "near_miss", "question": "Spring Boot là gì?", "expect": []}
+{"course_id": 3, "type": "near_miss", "question": "Lambda expression trong Java viết thế nào?", "expect": []}
+{"course_id": 4, "type": "near_miss", "question": "Vẽ hình bằng thẻ canvas trong HTML5 thế nào?", "expect": []}
+{"course_id": 4, "type": "near_miss", "question": "Sass là gì?", "expect": []}
+{"course_id": 5, "type": "near_miss", "question": "Redux Toolkit dùng thế nào?", "expect": []}
+{"course_id": 5, "type": "near_miss", "question": "Next.js là gì?", "expect": []}
+{"course_id": 6, "type": "near_miss", "question": "Stored procedure viết thế nào?", "expect": []}
+{"course_id": 6, "type": "near_miss", "question": "Index B-tree hoạt động ra sao?", "expect": []}
+{"course_id": 6, "type": "near_miss", "question": "MongoDB khác MySQL thế nào?", "expect": []}
+{"course_id": 35, "type": "near_miss", "question": "Docker khác máy ảo thế nào?", "expect": []}
+{"course_id": 35, "type": "near_miss", "question": "Lệnh ls trong Linux dùng để làm gì?", "expect": []}

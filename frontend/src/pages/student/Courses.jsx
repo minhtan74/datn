@@ -18,32 +18,18 @@ const COLORS = [
   '#1D4ED8,#06B6D4',
   '#7C3AED,#2563EB',
 ];
-// Danh mục và trình độ dùng cho bộ lọc / nhãn hiển thị
-const CATS = ['web', 'mobile', 'data', 'design', 'backend', 'other'];
-const CAT_LABELS = ['🌐 Web', '📱 Mobile', '📊 Data', '🎨 Design', '⚙️ Backend', '📦 Khác'];
+// Trình độ dùng cho nhãn hiển thị
 const LEVELS = ['Cơ bản', 'Trung cấp', 'Nâng cao'];
 const LEVEL_DB = ['beginner', 'intermediate', 'advanced'];
 const LEVEL_CLS = ['level-begin', 'level-mid', 'level-adv'];
 
-// Các nút lọc theo danh mục
-const CAT_PILLS = [
-  { key: 'all', label: '🌟 Tất cả' },
-  { key: 'web', label: '🌐 Web' },
-  { key: 'mobile', label: '📱 Mobile' },
-  { key: 'data', label: '📊 Data' },
-  { key: 'design', label: '🎨 Design' },
-  { key: 'backend', label: '⚙️ Backend' },
-  { key: 'other', label: '📦 Khác' },
-];
-
 // courseMeta() — hàm deterministic theo course.id, giữ nguyên công thức gốc dù có vẻ "hack"
-// (thay thế cho các trường lessons/hours/level/category chưa có thật ở backend)
+// (thay thế cho các trường lessons/hours/level chưa có thật ở backend)
 function courseMeta(c, i) {
   const lessons = 5 + ((c.id || i) * 7) % 20;
   const hours = (lessons * 0.5).toFixed(0);
   const lvlIdx = LEVEL_DB.indexOf(c.level) >= 0 ? LEVEL_DB.indexOf(c.level) : (c.id || i) % 3;
-  const catIdx = (c.id || i) % CATS.length;
-  return { lessons, hours, lvlIdx, catIdx };
+  return { lessons, hours, lvlIdx };
 }
 
 // Hiển thị giá: 0 -> "Miễn phí", còn lại dạng 499.000đ
@@ -59,9 +45,8 @@ export default function Courses() {
   const [allCourses, setAllCourses] = useState(null); // null = đang tải
   const [enrolledIds, setEnrolledIds] = useState(new Set());
 
-  // Bộ lọc: từ khóa tìm kiếm, danh mục, cách sắp xếp
+  // Bộ lọc: từ khóa tìm kiếm, cách sắp xếp
   const [searchVal, setSearchVal] = useState('');
-  const [currentCat, setCurrentCat] = useState('all');
   const [currentSort, setCurrentSort] = useState('newest');
 
   // Hộp thoại chi tiết khóa học và hộp thoại xác nhận thanh toán VNPay
@@ -70,7 +55,7 @@ export default function Courses() {
   const [payError, setPayError] = useState(null);
   const [paying, setPaying] = useState(false);
 
-  // Khi mở trang: tải danh sách khóa học + id các khóa đã ghi danh (để hiện nút "Vào học" thay cho "Đăng ký")
+  // Khi mở trang: tải danh sách khóa học + id các khóa đã ghi danh (để ẩn các khóa đã đăng ký)
   useEffect(() => {
     (async () => {
       const [coursesRes, enrollRes] = await Promise.allSettled([courseService.getCourses(), enrollmentService.getEnrolledIds()]);
@@ -88,22 +73,24 @@ export default function Courses() {
     };
   }, [detailCourse, paymentCourse]);
 
-  // Lọc theo danh mục + từ khóa (tên hoặc mô tả), rồi sắp xếp theo lựa chọn (A-Z, Z-A, giá tăng/giảm)
+  // Khóa chưa đăng ký: trang Khám phá chỉ hiện các khóa này (khóa đã đăng ký nằm ở "Khóa học của tôi")
+  const available = useMemo(
+    () => (allCourses ? allCourses.filter((c) => !enrolledIds.has(Number(c.id))) : []),
+    [allCourses, enrolledIds],
+  );
+
+  // Lọc theo từ khóa (tên hoặc mô tả), rồi sắp xếp theo lựa chọn (A-Z, Z-A, giá tăng/giảm)
   const filtered = useMemo(() => {
-    if (!allCourses) return [];
-    let list = allCourses.filter((c, i) => {
-      const { catIdx } = courseMeta(c, i);
-      const matchCat = currentCat === 'all' || CATS[catIdx] === currentCat;
-      const q = searchVal.toLowerCase();
-      const matchSearch = !q || (c.title || '').toLowerCase().includes(q) || (c.description || '').toLowerCase().includes(q);
-      return matchCat && matchSearch;
-    });
+    const q = searchVal.toLowerCase();
+    let list = available.filter(
+      (c) => !q || (c.title || '').toLowerCase().includes(q) || (c.description || '').toLowerCase().includes(q),
+    );
     if (currentSort === 'az') list = [...list].sort((a, b) => (a.title || '').localeCompare(b.title || ''));
     if (currentSort === 'za') list = [...list].sort((a, b) => (b.title || '').localeCompare(a.title || ''));
     if (currentSort === 'price_asc') list = [...list].sort((a, b) => (+a.price || 0) - (+b.price || 0));
     if (currentSort === 'price_desc') list = [...list].sort((a, b) => (+b.price || 0) - (+a.price || 0));
     return list;
-  }, [allCourses, currentCat, searchVal, currentSort]);
+  }, [available, searchVal, currentSort]);
 
   // Mở / đóng hộp thoại chi tiết khóa học
   function openDetail(course) {
@@ -137,8 +124,8 @@ export default function Courses() {
     showToast('⏳ Đang đăng ký...', 'info');
     const res = await enrollmentService.enroll(courseId);
     if (res?.data?.success) {
-      setEnrolledIds((prev) => new Set(prev).add(courseId));
-      showToast('✅ Đăng ký khóa học thành công!', 'success');
+      setEnrolledIds((prev) => new Set(prev).add(Number(courseId)));
+      showToast('✅ Đăng ký thành công! Khóa học đã chuyển sang "Khóa học của tôi".', 'success');
     } else {
       showToast('❌ ' + (res?.data?.message || 'Đăng ký thất bại'), 'error');
     }
@@ -158,9 +145,9 @@ export default function Courses() {
     setPaying(false);
     // Trường hợp khóa đã chuyển thành miễn phí: backend ghi danh luôn
     if (res?.data?.success && res.data.enrolled) {
-      setEnrolledIds((prev) => new Set(prev).add(paymentCourse.id));
+      setEnrolledIds((prev) => new Set(prev).add(Number(paymentCourse.id)));
       setPaymentCourse(null);
-      showToast('✅ Đăng ký khóa học thành công!', 'success');
+      showToast('✅ Đăng ký thành công! Khóa học đã chuyển sang "Khóa học của tôi".', 'success');
       return;
     }
     setPayError('❌ ' + (res?.data?.message || 'Không thể tạo đơn thanh toán. Vui lòng thử lại.'));
@@ -188,21 +175,12 @@ export default function Courses() {
             <span>⏳ Đang tải...</span>
           ) : (
             <>
-              <span>📚 {allCourses.length} khóa học</span>
+              <span>📚 {available.length} khóa học chưa đăng ký</span>
               <span>👨‍🏫 Nhiều giảng viên</span>
               <span>✅ {enrolledIds.size} đã đăng ký</span>
             </>
           )}
         </div>
-      </div>
-
-      {/* Category pills */}
-      <div className="cat-pills" id="catPills">
-        {CAT_PILLS.map((p) => (
-          <button key={p.key} className={`cat-pill${currentCat === p.key ? ' active' : ''}`} onClick={() => setCurrentCat(p.key)}>
-            {p.label}
-          </button>
-        ))}
       </div>
 
       {/* Sort bar */}
@@ -212,7 +190,7 @@ export default function Courses() {
             'Đang tải...'
           ) : (
             <>
-              Hiển thị <strong>{filtered.length}</strong> / {allCourses.length} khóa học
+              Hiển thị <strong>{filtered.length}</strong> / {available.length} khóa học
             </>
           )}
         </div>
@@ -257,27 +235,38 @@ export default function Courses() {
         )}
 
         {allCourses !== null && filtered.length === 0 && (
+          // Đã đăng ký hết mọi khóa -> báo riêng, khác với trường hợp lọc không ra kết quả
           <div className="no-result">
-            <div className="icon">🔎</div>
-            <h3>Không tìm thấy khóa học</h3>
-            <p>Thử từ khóa khác hoặc chọn danh mục khác nhé.</p>
+            {allCourses.length > 0 && available.length === 0 ? (
+              <>
+                <div className="icon">🎉</div>
+                <h3>Bạn đã đăng ký tất cả khóa học</h3>
+                <p>
+                  Tiếp tục học tại <Link to="/student/my-courses">Khóa học của tôi</Link>.
+                </p>
+              </>
+            ) : (
+              <>
+                <div className="icon">🔎</div>
+                <h3>Không tìm thấy khóa học</h3>
+                <p>Thử từ khóa khác nhé.</p>
+              </>
+            )}
           </div>
         )}
 
         {allCourses !== null &&
           filtered.map((c) => {
             const origIdx = allCourses.indexOf(c);
-            const { lessons, hours, lvlIdx, catIdx } = courseMeta(c, origIdx);
+            const { lessons, hours, lvlIdx } = courseMeta(c, origIdx);
             const emoji = EMOJIS[origIdx % EMOJIS.length];
             const color = COLORS[origIdx % COLORS.length];
             const isNew = origIdx < 3;
-            const isEnrolled = enrolledIds.has(c.id);
 
             return (
               <div key={c.id} className="s-course-card" id={`card-${c.id}`}>
                 <div className="s-course-thumb" style={{ background: `linear-gradient(135deg,${color})` }}>
-                  {isNew && !isEnrolled && <span className="enroll-badge">🆕 Mới</span>}
-                  {isEnrolled && <span className="enroll-badge enrolled-badge">✅ Đã đăng ký</span>}
+                  {isNew && <span className="enroll-badge">🆕 Mới</span>}
                   <span style={{ fontSize: '2.5rem' }}>{emoji}</span>
                 </div>
                 <div className="s-course-body">
@@ -286,7 +275,6 @@ export default function Courses() {
                   <div className="s-course-meta">
                     <span>📖 {lessons} bài</span>
                     <span>⏱ {hours}h</span>
-                    <span>{CAT_LABELS[catIdx]}</span>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 'auto' }}>
                     <span className={`level-badge ${LEVEL_CLS[lvlIdx]}`}>{LEVELS[lvlIdx]}</span>
@@ -297,15 +285,9 @@ export default function Courses() {
                   <button className="s-btn s-btn-outline s-btn-sm" onClick={() => openDetail(c)}>
                     🔍 Xem chi tiết
                   </button>
-                  {isEnrolled ? (
-                    <Link to={`/chapters?course_id=${c.id}`} className="s-btn s-btn-primary s-btn-sm">
-                      ▶ Vào học
-                    </Link>
-                  ) : (
-                    <button className="s-btn s-btn-primary s-btn-sm" onClick={() => startEnroll(c)}>
-                      {+c.price > 0 ? '💳 Mua ngay' : '📥 Đăng ký'}
-                    </button>
-                  )}
+                  <button className="s-btn s-btn-primary s-btn-sm" onClick={() => startEnroll(c)}>
+                    {+c.price > 0 ? '💳 Mua ngay' : '📥 Đăng ký'}
+                  </button>
                 </div>
               </div>
             );
@@ -316,9 +298,8 @@ export default function Courses() {
       {detailCourse &&
         (() => {
           const origIdx = allCourses.indexOf(detailCourse);
-          const { lessons, hours, lvlIdx, catIdx } = courseMeta(detailCourse, origIdx);
+          const { lessons, hours, lvlIdx } = courseMeta(detailCourse, origIdx);
           const color = COLORS[origIdx % COLORS.length];
-          const isEnrolled = enrolledIds.has(detailCourse.id);
           return (
             <div className="modal-wrap open" id="detailModal">
               <div className="modal-backdrop" onClick={closeDetail}></div>
@@ -340,7 +321,6 @@ export default function Courses() {
                 <div className="modal-body">
                   <div style={{ display: 'flex', gap: '.5rem', flexWrap: 'wrap', marginBottom: '.75rem' }}>
                     <span className={`level-badge ${LEVEL_CLS[lvlIdx]}`}>{LEVELS[lvlIdx]}</span>
-                    <span className="s-badge s-badge-blue">{CAT_LABELS[catIdx]}</span>
                   </div>
                   <h2 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '.5rem' }}>{detailCourse.title || 'Khóa học'}</h2>
                   <p style={{ fontSize: '.85rem', color: 'var(--s-text-muted)', marginBottom: '1rem', lineHeight: 1.6 }}>
@@ -368,27 +348,17 @@ export default function Courses() {
                     <button className="s-btn s-btn-ghost s-btn-sm" style={{ flex: 1 }} onClick={closeDetail}>
                       Đóng
                     </button>
-                    {isEnrolled ? (
-                      <Link
-                        to={`/chapters?course_id=${detailCourse.id}`}
-                        className="s-btn s-btn-primary"
-                        style={{ flex: 2, justifyContent: 'center' }}
-                      >
-                        ▶ Vào học ngay
-                      </Link>
-                    ) : (
-                      <button
-                        className="s-btn s-btn-primary"
-                        style={{ flex: 2 }}
-                        onClick={() => {
-                          const course = detailCourse;
-                          closeDetail();
-                          startEnroll(course);
-                        }}
-                      >
-                        {+detailCourse.price > 0 ? '💳 Mua khóa học' : '📥 Đăng ký miễn phí'}
-                      </button>
-                    )}
+                    <button
+                      className="s-btn s-btn-primary"
+                      style={{ flex: 2 }}
+                      onClick={() => {
+                        const course = detailCourse;
+                        closeDetail();
+                        startEnroll(course);
+                      }}
+                    >
+                      {+detailCourse.price > 0 ? '💳 Mua khóa học' : '📥 Đăng ký miễn phí'}
+                    </button>
                   </div>
                 </div>
               </div>

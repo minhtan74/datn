@@ -28,6 +28,7 @@ docker compose exec backend python training/seed_documents.py
 docker compose exec backend python training/seed_result_answers.py
 docker compose exec backend python training/seed_learning_data.py
 docker compose exec backend python training/fix_report_data.py
+docker compose exec backend python training/lesson_docs/seed_lesson_docs.py
 ```
 
 Dừng: `docker compose down` (thêm `-v` để xoá luôn dữ liệu).
@@ -83,7 +84,10 @@ cd backend
 .venv\Scripts\python training\seed_result_answers.py   # để trang "Phân tích học tập" có dữ liệu
 .venv\Scripts\python training\seed_learning_data.py     # thêm câu hỏi/chủ đề, nhiều lượt làm quiz & tiến độ bài học
 .venv\Scripts\python training\fix_report_data.py        # sửa ngày tháng cho trang Báo cáo (chạy SAU seed_learning_data)
+.venv\Scripts\python training\lesson_docs\seed_lesson_docs.py   # gắn PDF tài liệu cho các bài học (bài nào đã có PDF thật thì giữ nguyên)
 ```
+
+> PDF của 52 bài nằm sẵn trong `backend/training/lesson_docs/pdf/`. Muốn sửa nội dung: chỉnh file `.md` trong `training/lesson_docs/content/` rồi chạy `python training\lesson_docs\build_pdfs.py` (cần Chrome/Edge) để dựng lại.
 
 ---
 
@@ -157,9 +161,21 @@ mà không cần khoá API. Để dùng LLM thật, sửa `backend/.env`:
 
 ```ini
 LLM_PROVIDER=gemini
-LLM_MODEL=gemini-2.0-flash
+LLM_MODEL=gemini-3.1-flash-lite
 LLM_API_KEY=<khoá của bạn>
 ```
+
+Các lựa chọn khác:
+
+| Nhà cung cấp | Cấu hình |
+|---|---|
+| OpenAI | `LLM_PROVIDER=openai`, `LLM_MODEL=gpt-4o-mini`, `LLM_API_KEY=sk-...` |
+| Claude | `LLM_PROVIDER=claude`, `LLM_MODEL=claude-haiku-4-5-20251001`, `LLM_API_KEY=sk-ant-...` |
+| Ollama (chạy trên máy, offline, không cần khoá) | `LLM_PROVIDER=openai`, `LLM_MODEL=qwen2.5:7b`, `LLM_BASE_URL=http://localhost:11434/v1` |
+| Groq / DeepSeek / OpenRouter | `LLM_PROVIDER=openai` + `LLM_BASE_URL` của dịch vụ + khoá (xem `backend/.env.example`) |
+
+Dùng Ollama: cài từ ollama.com, chạy `ollama pull qwen2.5:7b` một lần, giữ Ollama chạy nền rồi
+khởi động lại backend. Máy dưới 16GB RAM nên dùng `qwen2.5:3b`.
 
 Fine-tune AI Quiz Generator (LoRA/QLoRA) chạy trên Google Colab — xem
 `backend/training/README.md`.

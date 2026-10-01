@@ -6,6 +6,7 @@ lấy top-k. Đủ nhanh cho quy mô DATN (vài trăm–vài nghìn chunk / khó
 from __future__ import annotations
 
 import json
+from collections.abc import Callable
 
 import numpy as np
 from sqlalchemy.orm import Session
@@ -70,6 +71,8 @@ def search(
     lesson_id: int | None = None,
     lesson_only: bool = False,
     k: int = 5,
+    lexical_score: Callable[[list[str]], list[float]] | None = None,
+    k_lexical: int = 0,
 ) -> list[dict]:
     # Tải toàn bộ vector ứng viên của khóa học
     rows = _load(db, course_id, lesson_id, lesson_only)
@@ -85,11 +88,18 @@ def search(
     denom = (np.linalg.norm(mat, axis=1) * (np.linalg.norm(q) or 1e-9)) + 1e-9
     sims = (mat @ q) / denom
 
-    # Lấy k đoạn có độ tương đồng cao nhất
-    order = np.argsort(-sims)[:k]
+    # Lấy k đoạn có độ tương đồng cao nhất; thêm k_lexical đoạn trùng từ khoá nhiều nhất (nếu có hàm chấm từ khoá)
+    # để không bỏ lỡ đoạn chứa thuật ngữ hiếm ("alt", "Fragment", "đoàn xe") mà embedding chấm thấp
+    order = [int(i) for i in np.argsort(-sims)[:k]]
+    lex = [0.0] * len(rows)
+    if lexical_score and k_lexical:
+        lex = lexical_score([r["content"] for r in rows])
+        for i in sorted(range(len(rows)), key=lambda j: -lex[j])[:k_lexical]:
+            if lex[i] > 0 and i not in order:
+                order.append(i)
     out = []
     for i in order:
-        r = rows[int(i)]
+        r = rows[i]
         out.append(
             {
                 "chunk_id": r["id"],
@@ -97,7 +107,8 @@ def search(
                 "document_title": r["document_title"],
                 "page": r["page"],
                 "content": r["content"],
-                "score": round(float(sims[int(i)]), 4),
+                "score": round(float(sims[i]), 4),
+                "lexical": round(float(lex[i]), 4),
             }
         )
     return out

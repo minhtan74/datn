@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { quizService } from '../services/quizService';
 import { formatClock, gradingShort } from '../utils/quizGrading';
+import QuizHistoryPanel from '../components/quiz/QuizHistoryPanel.jsx';
 
 /** Tình trạng làm bài của học viên với 1 quiz: chưa làm / đang làm dở / điểm được tính + đạt, số lượt còn lại */
 function QuizStatus({ quiz }) {
@@ -43,6 +44,8 @@ function actionOf(quiz) {
 export default function Quiz() {
   const [searchParams] = useSearchParams();
   const courseId = searchParams.get('course_id');
+  // Quiz đang mở lịch sử làm bài (mở sẵn nếu URL có ?history=<id>, vd từ trang kết quả)
+  const [historyId, setHistoryId] = useState(Number(searchParams.get('history')) || null);
   const { user } = useAuth();
   // Admin / giảng viên thấy thêm nút quản lý (sửa, xóa quiz)
   const isManager = user?.role === 'admin' || user?.role === 'teacher';
@@ -72,7 +75,7 @@ export default function Quiz() {
   }
 
   return (
-    <main className="s-main q-container">
+    <main className="s-main q-container qh-page">
       <div className="q-header">
         <h1 className="q-title">📝 Danh sách Quiz</h1>
         <p className="q-subtitle">Chọn một bài tập trắc nghiệm dưới đây để kiểm tra và củng cố kiến thức học tập.</p>
@@ -153,9 +156,14 @@ export default function Quiz() {
                     </Link>
                   )}
                   {q.my_status?.submitted > 0 && (
-                    <Link className="s-btn s-btn-outline s-btn-sm" to={`/student/quiz-history?quiz_id=${q.id}`}>
-                      Lịch sử
-                    </Link>
+                    <button
+                      type="button"
+                      className={`s-btn s-btn-sm ${historyId === q.id ? 's-btn-primary' : 's-btn-outline'}`}
+                      aria-expanded={historyId === q.id}
+                      onClick={() => setHistoryId(historyId === q.id ? null : q.id)}
+                    >
+                      📜 Lịch sử
+                    </button>
                   )}
                   {isManager && (
                     <>
@@ -169,6 +177,8 @@ export default function Quiz() {
                   )}
                 </div>
               </div>
+              {/* Lịch sử làm bài của quiz này, mở ngay tại thẻ */}
+              {historyId === q.id && <QuizHistoryPanel quizId={q.id} />}
             </div>
           ))}
       </div>

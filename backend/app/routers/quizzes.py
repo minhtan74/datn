@@ -743,9 +743,12 @@ def results(
     for r in rows:
         by_quiz.setdefault(r["quiz_id"], []).append(r)
     for quiz_rows in by_quiz.values():
-        _, _, counted_id = _graded(quiz_rows[0]["grading_method"], quiz_rows)
+        graded_percent, graded_passed, counted_id = _graded(quiz_rows[0]["grading_method"], quiz_rows)
         for n, r in enumerate(quiz_rows, start=1):
             r["attempt_no"] = n
+            # Điểm / kết quả đạt chính thức của quiz này (theo cách tính điểm), giống ở trang danh sách quiz
+            r["graded_percent"] = graded_percent
+            r["graded_passed"] = graded_passed
             r["percent"] = _percent(r["score"], r["total"])
             r["passed"] = _passed(r["percent"], r["passing_score"])
             # Trung bình: mọi lượt đều được tính; cách khác: chỉ 1 lượt

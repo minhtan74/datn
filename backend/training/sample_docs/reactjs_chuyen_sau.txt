@@ -1,0 +1,122 @@
+TÀI LIỆU: REACTJS CHUYÊN SÂU
+
+1. React là gì
+React là thư viện JavaScript dùng để xây dựng giao diện người dùng, do Meta (Facebook) phát triển.
+React chia giao diện thành các component nhỏ, độc lập và có thể tái sử dụng.
+
+2. Virtual DOM
+Virtual DOM là bản sao nhẹ của DOM thật, được lưu trong bộ nhớ dưới dạng đối tượng JavaScript.
+Khi state thay đổi, React so sánh Virtual DOM mới với bản cũ, quá trình này gọi là reconciliation.
+Sau đó React chỉ cập nhật những phần thực sự thay đổi lên DOM thật, giúp giao diện nhanh hơn.
+
+3. JSX
+JSX là cú pháp mở rộng cho phép viết mã giống HTML ngay trong JavaScript.
+JSX được công cụ như Babel biên dịch thành lời gọi React.createElement.
+Biểu thức JavaScript trong JSX được đặt trong dấu ngoặc nhọn, ví dụ {user.name}.
+
+4. Quy tắc viết JSX
+Trong JSX dùng className thay cho class và htmlFor thay cho for.
+Mỗi component chỉ được trả về một phần tử gốc; muốn nhóm nhiều phần tử không thêm thẻ thừa thì dùng Fragment <>...</>.
+Mọi thẻ trong JSX đều phải được đóng, kể cả thẻ tự đóng như <img />.
+
+5. Component
+Component là hàm JavaScript nhận dữ liệu đầu vào và trả về JSX mô tả giao diện.
+Tên component phải bắt đầu bằng chữ in hoa, ví dụ UserCard.
+React hiện đại dùng function component kết hợp Hooks thay cho class component.
+
+6. Props
+Props (properties) là dữ liệu mà component cha truyền xuống component con.
+Props chỉ đọc (read-only): component con không được tự sửa props nhận được.
+Prop đặc biệt children chứa nội dung đặt giữa thẻ mở và thẻ đóng của component.
+
+7. State
+State là dữ liệu nội bộ của component, khi state thay đổi thì component được render lại.
+State do chính component quản lý, còn props được truyền từ bên ngoài vào.
+
+8. Hook useState
+Hook useState dùng để khai báo state trong function component.
+useState trả về một mảng gồm giá trị hiện tại và hàm cập nhật, ví dụ const [count, setCount] = useState(0).
+Không được gán trực tiếp count = 1; phải gọi setCount để React biết cần render lại.
+
+9. Cập nhật state đúng cách
+Khi giá trị mới phụ thuộc giá trị cũ, nên dùng dạng hàm: setCount(prev => prev + 1).
+State dạng object hoặc mảng phải được thay bằng bản sao mới, ví dụ dùng toán tử spread (...).
+Cập nhật state là bất đồng bộ nên giá trị chưa đổi ngay sau lời gọi hàm set.
+
+10. Render danh sách với map
+Danh sách được render bằng phương thức map của mảng, trả về một phần tử JSX cho mỗi mục.
+Ví dụ: {courses.map(c => <li key={c.id}>{c.title}</li>)}.
+
+11. Thuộc tính key
+Thuộc tính key giúp React nhận diện phần tử nào trong danh sách được thêm, xoá hay thay đổi.
+Mỗi phần tử trong danh sách cần key duy nhất và ổn định, thường là id.
+Không nên dùng chỉ số mảng làm key khi danh sách có thể thêm, xoá hoặc đổi thứ tự.
+
+12. Xử lý sự kiện
+Sự kiện trong React viết theo kiểu camelCase, ví dụ onClick và onChange.
+Hàm xử lý được truyền dưới dạng tham chiếu: onClick={handleClick}, không phải onClick={handleClick()}.
+Để chặn hành vi mặc định của form, gọi e.preventDefault() trong hàm xử lý onSubmit.
+
+13. Hook useEffect
+useEffect là Hook dùng để chạy side effect như gọi API, đăng ký sự kiện hoặc hẹn giờ.
+useEffect nhận hai tham số: hàm effect và mảng phụ thuộc (dependency array).
+Mảng phụ thuộc quyết định khi nào effect chạy lại.
+
+14. useEffect với mảng phụ thuộc
+useEffect với mảng rỗng [] chỉ chạy một lần sau lần render đầu tiên, khi component được gắn vào (mount).
+useEffect có mảng [id] chạy lại mỗi khi giá trị id thay đổi.
+useEffect không có mảng phụ thuộc chạy lại sau mọi lần render.
+
+15. Hàm cleanup trong useEffect
+Hàm được return trong effect gọi là cleanup, chạy trước khi effect chạy lại hoặc khi component bị gỡ (unmount).
+Cleanup dùng để huỷ hẹn giờ, huỷ đăng ký sự kiện hoặc huỷ yêu cầu API đang chờ.
+
+16. Vòng đời component
+Vòng đời component gồm ba giai đoạn: mount (gắn vào), update (cập nhật) và unmount (gỡ bỏ).
+Với function component, cả ba giai đoạn đều được xử lý qua useEffect.
+Quên cleanup khi unmount có thể gây rò rỉ bộ nhớ (memory leak).
+
+17. Context và useContext
+Context là cơ chế truyền dữ liệu xuống nhiều tầng component mà không cần truyền props qua từng tầng.
+Tình trạng phải truyền props qua nhiều tầng trung gian được gọi là prop drilling.
+Context được tạo bằng createContext, cung cấp bằng Provider và đọc bằng Hook useContext.
+
+18. Hook useReducer
+useReducer là Hook quản lý state phức tạp bằng một hàm reducer.
+Reducer là hàm thuần nhận state hiện tại và action, rồi trả về state mới.
+Component gửi action bằng hàm dispatch, ví dụ dispatch({ type: 'add', payload: item }).
+
+19. Custom Hook
+Custom Hook là hàm JavaScript tự viết, có tên bắt đầu bằng use và gọi các Hook khác bên trong.
+Custom Hook dùng để tái sử dụng logic có state giữa nhiều component, ví dụ useFetch hoặc useLocalStorage.
+
+20. Quy tắc của Hooks
+Chỉ gọi Hook ở cấp cao nhất của component, không gọi trong vòng lặp, điều kiện hay hàm lồng nhau.
+Chỉ gọi Hook trong function component hoặc trong custom Hook.
+
+21. React.memo
+React.memo là hàm bọc component để bỏ qua việc render lại khi props không thay đổi.
+React.memo giúp tối ưu hiệu năng cho component render tốn kém.
+
+22. useMemo và useCallback
+Hook useMemo dùng để ghi nhớ kết quả của phép tính tốn kém giữa các lần render.
+Hook useCallback dùng để ghi nhớ một hàm, tránh tạo hàm mới ở mỗi lần render.
+
+23. Gọi API với Axios
+Axios là thư viện gửi yêu cầu HTTP dựa trên Promise, dùng được trong trình duyệt và Node.js.
+Lời gọi API thường đặt trong useEffect và dùng async/await để chờ kết quả.
+Nên quản lý ba trạng thái khi tải dữ liệu: đang tải (loading), thành công (data) và lỗi (error).
+
+24. React Router
+React Router là thư viện điều hướng giữa các trang trong ứng dụng một trang (SPA).
+Các route được khai báo bằng thành phần Routes và Route, mỗi Route gắn path với một element.
+Thành phần Link dùng để chuyển trang mà không tải lại toàn bộ trang web.
+
+25. useParams và useNavigate
+Hook useParams dùng để đọc tham số trên URL, ví dụ id trong đường dẫn /courses/:id.
+Hook useNavigate dùng để chuyển trang bằng code, ví dụ sau khi đăng nhập thành công.
+
+26. Dự án trang quản lý khoá học
+Dự án gồm các trang danh sách khoá học, chi tiết khoá học và form thêm, sửa khoá học.
+Dữ liệu khoá học được tải từ API bằng Axios và lưu trong state của component.
+Trạng thái đăng nhập dùng chung toàn ứng dụng thường được lưu trong Context.

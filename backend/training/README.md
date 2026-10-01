@@ -73,5 +73,5 @@ python evaluate.py --provider hf --model Qwen/Qwen2.5-1.5B-Instruct --adapter ./
 | Không trùng câu hỏi (%) | _đo_ | _đo_ |
 | Khớp số câu yêu cầu (%) | _đo_ | _đo_ |
 
-Không có GPU vẫn chấm nhanh được bằng Gemini: `--provider gemini --model gemini-2.0-flash`
+Không có GPU vẫn chấm nhanh được bằng Gemini: `--provider gemini --model gemini-3.1-flash-lite`
 (đặt `LLM_API_KEY`).

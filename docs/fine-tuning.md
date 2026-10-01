@@ -96,7 +96,7 @@ Chấm `test.jsonl`, đo:
 python evaluate.py --provider hf --model Qwen/Qwen2.5-1.5B-Instruct                                  --label base
 python evaluate.py --provider hf --model Qwen/Qwen2.5-1.5B-Instruct --adapter ./adapters/quizgen-lora --label finetuned
 # hoặc chấm nhanh không cần GPU:
-python evaluate.py --provider gemini --model gemini-2.0-flash --label gemini   # cần LLM_API_KEY
+python evaluate.py --provider gemini --model gemini-3.1-flash-lite --label gemini   # cần LLM_API_KEY
 ```
 
 Bảng kết quả (điền số đo thật từ `eval_*.json`):

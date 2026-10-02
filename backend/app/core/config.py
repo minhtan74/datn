@@ -66,7 +66,7 @@ class Settings(BaseSettings):
     # Mở rộng ngữ cảnh khi có LLM: ghép mỗi đoạn tìm được với đoạn liền trước / liền sau trong cùng tài liệu
     # (đoạn ~380 ký tự hay cắt ngang danh sách, định nghĩa dài); tổng ngữ cảnh tối đa rag_max_context_chars ký tự
     rag_neighbor_before: int = 1
-    rag_neighbor_after: int = 2
+    rag_neighbor_after: int = 3
     rag_max_context_chars: int = 9000
     rag_max_question_length: int = 2000
 

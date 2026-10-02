@@ -7,6 +7,7 @@ KHÔNG bịa nguồn.
 from __future__ import annotations
 
 import logging
+import re
 
 from sqlalchemy.orm import Session
 
@@ -33,8 +34,25 @@ _SYSTEM = (
 _REWRITE_SYSTEM = (
     "Viết lại câu hỏi cuối của học viên thành MỘT câu hỏi đầy đủ, tự hiểu được mà không cần đọc hội thoại "
     "(thay các từ như 'nó', 'cái đó', 'ví dụ đi' bằng chủ đề cụ thể trong hội thoại). "
+    "Nếu câu hỏi viết tiếng Việt không dấu thì viết lại bằng tiếng Việt có dấu đầy đủ, giữ nguyên thuật ngữ "
+    "tiếng Anh, tên riêng, ký hiệu và đoạn code. "
     "Nếu câu hỏi đã đầy đủ thì giữ nguyên. Chỉ trả về câu hỏi, không giải thích."
 )
+
+# Chữ có dấu tiếng Việt; từ không dấu rất hay gặp trong câu hỏi gõ không dấu ("la gi", "the nao", "cach"...)
+_VI_MARKS = re.compile(r"[À-ỹđĐ]")
+_VI_PLAIN_WORDS = {
+    "la", "gi", "cua", "nhung", "cach", "nao", "the", "khi", "de", "va", "trong", "co", "khong", "bao", "nhieu",
+    "sao", "lam", "dung", "tai", "vi", "duoc", "cac", "mot", "nhu", "voi", "hay", "hoac", "gom", "nghia", "khac",
+    "ve", "cho", "tu", "den", "ra", "phan", "biet", "loai", "dau", "ai", "nen", "vao", "may", "nay",
+}
+
+
+# Câu hỏi tiếng Việt gõ không dấu: không có chữ có dấu nào và chứa ít nhất 1 từ tiếng Việt không dấu thường gặp
+# (câu toàn thuật ngữ tiếng Anh như "React Hooks" thì không tính)
+def _no_diacritics(text: str) -> bool:
+    words = re.findall(r"[A-Za-z]+", text.lower())
+    return len(words) >= 2 and not _VI_MARKS.search(text) and any(w in _VI_PLAIN_WORDS for w in words)
 
 
 # Câu trả lời của LLM là lời từ chối (LLM có thể diễn đạt hơi khác câu mẫu NO_ANSWER)
@@ -42,17 +60,21 @@ def _is_refusal(text: str) -> bool:
     return "không tìm thấy thông tin phù hợp" in text.lower()
 
 
-# Câu dùng để tìm tài liệu: câu hỏi nối tiếp phải được bổ sung ngữ cảnh từ hội thoại, nếu không phần tìm kiếm
-# chỉ thấy "cho ví dụ đi" và từ chối nhầm. Có LLM thì nhờ LLM viết lại; offline thì ghép câu hỏi trước nếu câu hiện tại ngắn.
+# Câu dùng để tìm tài liệu:
+# - câu hỏi nối tiếp phải được bổ sung ngữ cảnh từ hội thoại, nếu không phần tìm kiếm chỉ thấy "cho ví dụ đi"
+#   và từ chối nhầm;
+# - câu hỏi gõ không dấu ("Python do ai tao ra?") phải thêm dấu, vì tài liệu viết có dấu nên tìm kiếm không dấu
+#   chỉ đúng ~72% so với ~96% khi có dấu.
+# Có LLM thì nhờ LLM viết lại (1 lượt gọi, chỉ khi cần); offline thì ghép câu hỏi trước nếu câu hiện tại ngắn.
 def _search_query(question: str, history: list[dict] | None, use_llm: bool) -> str:
     prev_user = [m["content"] for m in (history or []) if m.get("role") == "user"]
-    if not prev_user:
+    if not prev_user and not (use_llm and _no_diacritics(question)):
         return question
     if use_llm:
         convo = "\n".join(
             f"{'Học viên' if m['role'] == 'user' else 'Trợ giảng'}: {m['content'][:400]}" for m in (history or [])[-4:]
         )
-        prompt = f"HỘI THOẠI:\n{convo}\n\nCÂU HỎI CUỐI: {question}"
+        prompt = (f"HỘI THOẠI:\n{convo}\n\n" if prev_user else "") + f"CÂU HỎI CUỐI: {question}"
         out = model_manager.generate(_REWRITE_SYSTEM, prompt, max_tokens=120)
         out = out.strip().strip('"').strip()
         return question if (not out or out.startswith("[Lỗi gọi LLM") or len(out) > 400) else out
@@ -83,7 +105,7 @@ def answer(
     # Truy hồi các đoạn liên quan trong tài liệu của khóa (hoặc của bài học); câu hỏi nối tiếp được viết lại trước
     query = _search_query(question, history, use_llm)
     if query != question:
-        logger.info("[RAG] follow-up rewritten -> %r", query)
+        logger.info("[RAG] question rewritten (follow-up / thêm dấu) -> %r", query)
     chunks = retriever.retrieve(
         db, query, course_id=course_id, lesson_id=lesson_id, lesson_only=lesson_only
     )

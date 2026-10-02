@@ -27,14 +27,13 @@ function StatusBadge({ status }) {
   return <span className={`badge ${s.cls}`} style={{ whiteSpace: 'nowrap' }}>{s.label}</span>;
 }
 
-// Tên phương thức thanh toán
+// Tên phương thức thanh toán (hệ thống chỉ thanh toán qua VNPay)
 const METHODS = {
   vnpay: '🔴 VNPay',
-  card: '💳 Thẻ',
-  bank_transfer: '🏦 Chuyển khoản',
-  momo: '🟣 MoMo',
-  zalopay: '🔵 ZaloPay',
 };
+
+// Đơn có mã giao dịch VNPay mới hoàn tiền qua VNPay được; không có (giả lập, dữ liệu mẫu) -> ghi nhận thủ công
+const viaGateway = (p) => p.method === 'vnpay' && !!p.gateway_txn_no;
 
 // Tab lọc theo trạng thái (kèm số lượng)
 const STATUS_TABS = [
@@ -46,7 +45,7 @@ const STATUS_TABS = [
 ];
 
 const PAGE_SIZE = 20;
-const emptyFilters = { method: '', course_id: '', date_from: '', date_to: '' };
+const emptyFilters = { course_id: '', date_from: '', date_to: '' };
 
 /** Trang Quản lý giao dịch (admin): toàn bộ giao dịch, lọc / tìm kiếm / phân trang, xem chi tiết đơn. */
 export default function AdminPayments() {
@@ -173,7 +172,7 @@ export default function AdminPayments() {
       setSyncResult({ outcome: 'error', message: 'Vui lòng nhập lý do hoàn tiền (ít nhất 5 ký tự).' });
       return;
     }
-    const via = detail.method === 'vnpay' ? 'qua VNPay' : '(ghi nhận thủ công)';
+    const via = viaGateway(detail) ? 'qua VNPay' : '(ghi nhận thủ công)';
     const revokeText = revokeAccess ? ' và THU HỒI quyền học của học viên' : '';
     if (!window.confirm(`Hoàn ${fmtMoney(detail.amount)} ${via} cho ${detail.user_name}${revokeText}? Thao tác không thể hoàn tác.`)) return;
     setRefunding(true);
@@ -247,15 +246,6 @@ export default function AdminPayments() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-            </div>
-            <div style={{ flex: '0 1 160px' }}>
-              <label className="form-label">Phương thức</label>
-              <select className="form-control" value={filters.method} onChange={(e) => setFilter('method', e.target.value)}>
-                <option value="">Tất cả</option>
-                {Object.entries(METHODS).map(([k, v]) => (
-                  <option key={k} value={k}>{v}</option>
-                ))}
-              </select>
             </div>
             <div style={{ flex: '0 1 220px' }}>
               <label className="form-label">Khóa học</label>
@@ -414,7 +404,7 @@ export default function AdminPayments() {
               {detail.status === 'completed' && refundOpen && (
                 <div style={{ marginTop: '1rem', padding: '0.9rem', border: '1px solid var(--border)', borderRadius: 8 }}>
                   <div style={{ fontWeight: 700, marginBottom: '0.5rem' }}>
-                    ↩️ Hoàn tiền toàn phần {fmtMoney(detail.amount)} {detail.method === 'vnpay' ? 'qua VNPay' : '(ghi nhận thủ công)'}
+                    ↩️ Hoàn tiền toàn phần {fmtMoney(detail.amount)} {viaGateway(detail) ? 'qua VNPay' : '(ghi nhận thủ công)'}
                   </div>
                   <textarea
                     className="form-control"

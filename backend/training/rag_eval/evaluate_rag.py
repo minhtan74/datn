@@ -96,6 +96,19 @@ def _pct(a: int, b: int) -> str:
     return f"{a * 100 / b:.1f}%" if b else "—"
 
 
+# Dòng báo cáo riêng cho câu hỏi gõ KHÔNG DẤU (questions.jsonl có "variant": "khong_dau"), so với các câu có dấu
+def _variant_lines(rows: list[dict]) -> list[str]:
+    nd = [r for r in rows if r.get("variant") == "khong_dau"]
+    if not nd:
+        return []
+    acc = [r for r in rows if r.get("variant") != "khong_dau"]
+    ok_nd, ok_acc = sum(r["correct"] for r in nd), sum(r["correct"] for r in acc)
+    return [
+        f"| Câu hỏi có dấu | {_pct(ok_acc, len(acc))} ({ok_acc}/{len(acc)}) |",
+        f"| Câu hỏi gõ không dấu | {_pct(ok_nd, len(nd))} ({ok_nd}/{len(nd)}) |",
+    ]
+
+
 def main() -> None:
     cases = _load()
     db = SessionLocal()
@@ -187,6 +200,7 @@ def main() -> None:
         f"| Độ đúng khi đã trả lời | {_pct(ok_in, ans_in)} ({ok_in}/{ans_in}) |",
         f"| Từ chối đúng câu lạc đề | {_pct(ref_far, len(far))} ({ref_far}/{len(far)}) |",
         f"| Từ chối đúng câu gần lĩnh vực | {_pct(ref_near, len(near))} ({ref_near}/{len(near)}) |",
+        *_variant_lines(rows),
         "",
         "## Truy hồi (câu trong phạm vi)",
         "",

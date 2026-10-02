@@ -122,3 +122,28 @@
 {"course_id": 35, "type": "near_miss", "question": "Hệ điều hành Android sử dụng nhân gì?", "expect": []}
 {"course_id": 35, "type": "out_of_scope", "question": "Cách nấu phở bò ngon?", "expect": []}
 {"course_id": 35, "type": "out_of_scope", "question": "Thủ đô của nước Úc là gì?", "expect": []}
+{"course_id": 1, "type": "in_scope", "question": "Python do ai tao ra?", "expect": [["Guido"]], "variant": "khong_dau"}
+{"course_id": 1, "type": "in_scope", "question": "Khoi lenh trong Python duoc xac dinh bang gi?", "expect": [["thụt lề"]], "variant": "khong_dau"}
+{"course_id": 1, "type": "in_scope", "question": "Phuong thuc khoi tao cua lop trong Python ten la gi?", "expect": [["__init__"]], "variant": "khong_dau"}
+{"course_id": 2, "type": "in_scope", "question": "const khac let the nao?", "expect": [["gán lại"]], "variant": "khong_dau"}
+{"course_id": 2, "type": "in_scope", "question": "Chon phan tu theo id trong DOM dung ham nao?", "expect": [["getElementById"]], "variant": "khong_dau"}
+{"course_id": 2, "type": "in_scope", "question": "HTTP co ghi nho cac request truoc khong?", "expect": [["phi trạng thái", "stateless"]], "variant": "khong_dau"}
+{"course_id": 3, "type": "in_scope", "question": "Bytecode Java duoc chay tren dau?", "expect": [["JVM", "máy ảo"]], "variant": "khong_dau"}
+{"course_id": 3, "type": "in_scope", "question": "Vi sao khong nen so sanh String bang ==?", "expect": [["equals"]], "variant": "khong_dau"}
+{"course_id": 3, "type": "in_scope", "question": "Java co ho tro da ke thua lop khong?", "expect": [["đơn kế thừa"]], "variant": "khong_dau"}
+{"course_id": 4, "type": "in_scope", "question": "Phan head cua trang HTML chua nhung gi?", "expect": [["title", "meta"]], "variant": "khong_dau"}
+{"course_id": 4, "type": "in_scope", "question": "Gop nhieu cot trong bang dung thuoc tinh gi?", "expect": [["colspan"]], "variant": "khong_dau"}
+{"course_id": 4, "type": "in_scope", "question": "box-sizing border-box co tac dung gi?", "expect": [["bao gồm"]], "variant": "khong_dau"}
+{"course_id": 5, "type": "in_scope", "question": "Reconciliation trong React la gi?", "expect": [["so sánh"]], "variant": "khong_dau"}
+{"course_id": 5, "type": "in_scope", "question": "Component con co duoc tu sua props khong?", "expect": [["chỉ đọc", "read-only"]], "variant": "khong_dau"}
+{"course_id": 5, "type": "in_scope", "question": "useEffect khong truyen mang phu thuoc thi chay khi nao?", "expect": [["mọi lần render"]], "variant": "khong_dau"}
+{"course_id": 6, "type": "in_scope", "question": "MySQL mac dinh chay o cong nao?", "expect": [["3306"]], "variant": "khong_dau"}
+{"course_id": 6, "type": "in_scope", "question": "Luu so tien nen dung kieu du lieu gi?", "expect": [["DECIMAL"]], "variant": "khong_dau"}
+{"course_id": 6, "type": "in_scope", "question": "DELETE khac TRUNCATE the nao?", "expect": [["TRUNCATE"]], "variant": "khong_dau"}
+{"course_id": 35, "type": "in_scope", "question": "Kernel la gi?", "expect": [["cốt lõi"]], "variant": "khong_dau"}
+{"course_id": 35, "type": "in_scope", "question": "Thuat toan Banker dung de lam gi?", "expect": [["tránh bế tắc", "an toàn"]], "variant": "khong_dau"}
+{"course_id": 35, "type": "in_scope", "question": "Moi tieu trinh co nhung thanh phan rieng nao?", "expect": [["stack"], ["thanh ghi"]], "variant": "khong_dau"}
+{"course_id": 1, "type": "near_miss", "question": "Decorator trong Python la gi?", "expect": [], "variant": "khong_dau"}
+{"course_id": 4, "type": "near_miss", "question": "Ve hinh bang the canvas trong HTML5 the nao?", "expect": [], "variant": "khong_dau"}
+{"course_id": 1, "type": "out_of_scope", "question": "Cach nau canh chua ca loc?", "expect": [], "variant": "khong_dau"}
+{"course_id": 5, "type": "out_of_scope", "question": "Ty gia do la hom nay the nao?", "expect": [], "variant": "khong_dau"}

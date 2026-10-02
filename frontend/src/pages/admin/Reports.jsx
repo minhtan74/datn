@@ -34,8 +34,9 @@ function statusBadge(status) {
   return <span className={`badge ${s.cls}`}>{s.label}</span>;
 }
 // Tên + biểu tượng của các phương thức thanh toán
-const METHOD_NAMES = { card: 'Thẻ', bank_transfer: 'Chuyển khoản', momo: 'MoMo', zalopay: 'ZaloPay', vnpay: 'VNPay' };
-const METHOD_ICONS = { card: '💳', bank_transfer: '🏦', momo: '🟣', zalopay: '🔵', vnpay: '🔴' };
+// Hệ thống chỉ thanh toán qua VNPay
+const METHOD_NAMES = { vnpay: 'VNPay' };
+const METHOD_ICONS = { vnpay: '🔴' };
 function methodLabel(m) {
   return METHOD_ICONS[m] ? `${METHOD_ICONS[m]} ${METHOD_NAMES[m]}` : m;
 }

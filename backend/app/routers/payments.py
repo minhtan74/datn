@@ -18,8 +18,15 @@ from ._common import iv, sv
 
 router = APIRouter(prefix="/api/payments", tags=["payments"])
 
-# Các phương thức thanh toán được chấp nhận (khớp enum cột payments.method)
-VALID_METHODS = ("card", "bank_transfer", "momo", "zalopay")
+# Hệ thống chỉ thanh toán qua VNPay (học viên chọn thẻ / ngân hàng / QR ngay trên trang VNPay).
+# Các giá trị cũ card / bank_transfer / momo / zalopay chỉ còn trong enum CSDL cho dữ liệu cũ.
+METHOD = "vnpay"
+
+
+# Đơn có đi qua cổng VNPay thật không: có mã giao dịch VNPay mới hỏi / hoàn tiền với VNPay được
+# (đơn giả lập, dữ liệu mẫu không có mã này -> chỉ xử lý thủ công)
+def _via_gateway(payment: dict) -> bool:
+    return payment["method"] == METHOD and bool(payment.get("gateway_txn_no"))
 
 
 # Kiểm tra user đã có giao dịch thanh toán thành công cho khóa học này chưa
@@ -93,13 +100,10 @@ def create(
     db: Session = Depends(get_db),
 ):
     course_id = iv(body, "course_id")
-    method = sv(body, "method", "card") or "card"
 
-    # Kiểm tra dữ liệu đầu vào: phải có khóa học và phương thức hợp lệ
+    # Kiểm tra dữ liệu đầu vào: phải có khóa học
     if not course_id:
         raise ApiError("Thiếu course_id.")
-    if method not in VALID_METHODS:
-        raise ApiError("Phương thức không hợp lệ.")
 
     course = _purchasable_course(db, user, course_id)
     amount = float(course["price"] or 0)
@@ -115,15 +119,15 @@ def create(
         raise ApiError("Khóa học có phí — vui lòng thanh toán qua VNPay.", 400)
 
     ref = _new_ref()
-    # Tạo giao dịch ở trạng thái chờ (pending)
+    # Tạo giao dịch ở trạng thái chờ (pending); đơn giả lập không có mã giao dịch VNPay
     res = execute(
         db,
-        "INSERT INTO payments (user_id, course_id, amount, method, status, transaction_ref) "
-        "VALUES (:u, :c, :amount, :method, 'pending', :ref)",
+        "INSERT INTO payments (user_id, course_id, amount, method, status, transaction_ref, note) "
+        "VALUES (:u, :c, :amount, :method, 'pending', :ref, 'Thanh toán giả lập (PAYMENT_MOCK)')",
         u=user["id"],
         c=course_id,
         amount=amount,
-        method=method,
+        method=METHOD,
         ref=ref,
     )
     payment_id = res.lastrowid
@@ -146,7 +150,7 @@ def create(
         payment_id=int(payment_id),
         transaction_ref=ref,
         amount=amount,
-        method=method,
+        method=METHOD,
         enrolled=True,
         payment_required=True,
     )
@@ -380,7 +384,7 @@ def manage(
     # Ghép điều kiện lọc (luôn dùng tham số, không nối chuỗi giá trị người dùng)
     conds, params = [], {}
     if method:
-        if method not in VALID_METHODS + ("vnpay",):
+        if method != METHOD:
             raise ApiError("Phương thức không hợp lệ.")
         conds.append("p.method = :method")
         params["method"] = method
@@ -486,7 +490,7 @@ def reconcile_payment(db: Session, payment: dict, *, cancel_note: str | None = N
     expired = _is_expired(payment)
 
     # Đơn không qua cổng thanh toán (đơn giả lập cũ): không có gì để hỏi -> hết hạn thì hủy
-    if payment["method"] != "vnpay":
+    if payment["method"] != METHOD:
         if cancel_note or expired:
             _mark_failed(db, payment, note=cancel_note or "Đơn không qua cổng thanh toán, đã quá hạn — hủy.")
             return ("cancelled" if cancel_note else "expired"), ""
@@ -581,8 +585,8 @@ def reconcile_all(user: dict = Depends(get_current_user), db: Session = Depends(
 # ── Hoàn tiền (admin) ──────────────────────────────────────────────────────
 
 # POST /api/payments/refund {id, reason, revoke_access} — hoàn tiền toàn phần 1 đơn đã thanh toán.
-#   Đơn VNPay: gửi yêu cầu hoàn tiền sang VNPay, VNPay đồng ý (mã 00) mới cập nhật đơn.
-#   Đơn giả lập cũ (không qua cổng): chỉ ghi nhận hoàn tiền thủ công.
+#   Đơn có mã giao dịch VNPay: gửi yêu cầu hoàn tiền sang VNPay, VNPay đồng ý (mã 00) mới cập nhật đơn.
+#   Đơn không có mã giao dịch VNPay (giả lập, dữ liệu mẫu): chỉ ghi nhận hoàn tiền thủ công.
 #   revoke_access=true: xóa ghi danh (thu hồi quyền học); điểm quiz / tiến độ vẫn được giữ lại.
 @router.post("/refund")
 def refund(
@@ -605,7 +609,8 @@ def refund(
         raise ApiError("Chỉ hoàn tiền được đơn đã thanh toán thành công.", 409)
 
     refund_txn = None
-    if payment["method"] == "vnpay":
+    gateway = _via_gateway(payment)
+    if gateway:
         tdate = payment.get("vnp_create_date") or payment["created_at"].strftime("%Y%m%d%H%M%S")
         ip = (request.headers.get("x-forwarded-for") or "").split(",")[0].strip() or (
             request.client.host if request.client else "127.0.0.1"
@@ -637,7 +642,7 @@ def refund(
         by=user["id"],
         reason=reason[:255],
         rtxn=refund_txn,
-        note="Đã hoàn tiền qua VNPay." if payment["method"] == "vnpay" else "Đã ghi nhận hoàn tiền thủ công.",
+        note="Đã hoàn tiền qua VNPay." if gateway else "Đã ghi nhận hoàn tiền thủ công.",
     )
     if not res.rowcount:
         raise ApiError("Đơn đã được xử lý bởi thao tác khác.", 409)
@@ -660,6 +665,6 @@ def refund(
         "JOIN users u ON u.id = p.user_id JOIN courses c ON c.id = p.course_id WHERE p.id = :id",
         id=payment["id"],
     )
-    msg = "Đã hoàn tiền" + (" qua VNPay" if payment["method"] == "vnpay" else " (ghi nhận thủ công)")
+    msg = "Đã hoàn tiền" + (" qua VNPay" if gateway else " (ghi nhận thủ công)")
     msg += " và thu hồi quyền học." if revoked else "; học viên vẫn giữ quyền học." if not revoke else "."
     return ok(msg, revoked=revoked, data=_decorate(db, row))

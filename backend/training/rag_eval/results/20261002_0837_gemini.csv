@@ -1,0 +1,125 @@
+﻿course_id,type,question,verdict,judged,best_cosine,rank,latency_ms,answer
+1,in_scope,Python do ai tạo ra?,ĐÚNG,,0.7542,1,1194,Python do Guido van Rossum tạo ra.
+1,in_scope,Kiểu dữ liệu nào trong Python là danh sách có thể thay đổi?,ĐÚNG,,0.789,1,1620,Kiểu dữ liệu danh sách có thể thay đổi trong Python là list.
+1,in_scope,Toán tử // trong Python làm gì?,ĐÚNG,,0.7266,3,1660,Toán tử // trong Python dùng để chia lấy phần nguyên.
+1,in_scope,Khối lệnh trong Python được xác định bằng gì?,ĐÚNG,,0.7264,1,1364,"Khối lệnh trong Python được xác định bằng thụt lề (thường 4 dấu cách), không dùng dấu ngoặc nhọn."
+1,in_scope,Lệnh continue có tác dụng gì?,ĐÚNG,,0.3635,2,1541,Lệnh continue có tác dụng bỏ qua phần còn lại của vòng lặp hiện tại và chuyển sang vòng lặp kế tiếp.
+1,in_scope,Hàm không có return thì trả về gì?,ĐÚNG,,0.4637,1,1649,Hàm không có return thì trả về None.
+1,in_scope,Phương thức khởi tạo của lớp trong Python tên là gì?,ĐÚNG,,0.7335,1,1625,Phương thức khởi tạo của lớp trong Python là __init__.
+1,in_scope,Làm sao kiểm tra đã cài Python thành công?,ĐÚNG,,0.6428,1,1914,"Để kiểm tra cài đặt Python thành công, bạn hãy mở terminal và gõ lệnh `python --version`."
+1,in_scope,Viết chú thích trong code Python như thế nào?,ĐÚNG,,0.7578,1,1786,"Trong Python, bạn có thể viết chú thích như sau: - Dùng dấu `#` cho chú thích 1 dòng hoặc cuối dòng. - Dùng cặp ba dấu nháy kép `""""""` cho chú thích nhiều dòng."
+1,in_scope,Hàm type() dùng để làm gì?,ĐÚNG,,0.6236,1,1250,Hàm type() dùng để kiểm tra kiểu của giá trị.
+2,in_scope,const khác let thế nào?,ĐÚNG,,0.3875,1,1757,"`const` dùng để khai báo biến không đổi (không thể gán lại), trong khi `let` dùng cho biến có thể thay đổi và có phạm vi khối."
+2,in_scope,typeof null trả về gì?,ĐÚNG,,0.7172,1,1303,"typeof null trả về ""object""."
+2,in_scope,Arrow function có this riêng không?,ĐÚNG,,0.8071,1,1397,"Arrow function không có this riêng, nó kế thừa this từ ngữ cảnh bao quanh."
+2,in_scope,Chọn phần tử theo id trong DOM dùng hàm nào?,ĐÚNG,,0.7139,1,1661,"Để chọn một phần tử theo id trong DOM, dùng hàm `document.getElementById(""myId"")`."
+2,in_scope,Promise có những trạng thái nào?,ĐÚNG,,0.818,1,1418,"Promise có ba trạng thái: pending (đang chờ), fulfilled (hoàn thành thành công) và rejected (thất bại)."
+2,in_scope,Event bubbling là gì?,ĐÚNG,,0.6737,1,1514,Event bubbling là giai đoạn sự kiện lan truyền từ trong ra ngoài.
+2,in_scope,HTTP có ghi nhớ các request trước không?,ĐÚNG,,0.6576,1,321359,"Không, HTTP là giao thức phi trạng thái (stateless), mỗi request độc lập và server không tự ghi nhớ các request trước đó."
+2,in_scope,Mã lỗi 404 nghĩa là gì?,ĐÚNG,,0.4422,1,7967,Mã lỗi 404 có nghĩa là Not Found (lỗi phía client).
+2,in_scope,HTTPS dùng cổng mặc định nào?,ĐÚNG,,0.872,1,3511,HTTPS dùng cổng mặc định là 443.
+2,in_scope,PUT và PATCH khác nhau thế nào?,ĐÚNG,,0.2437,1,2071,"PUT dùng để cập nhật toàn bộ, trong khi PATCH dùng để cập nhật một phần."
+3,in_scope,Bytecode Java được chạy trên đâu?,ĐÚNG,,0.6471,1,2044,Bytecode Java được chạy trên máy ảo Java (JVM).
+3,in_scope,Muốn biên dịch chương trình Java cần cài gì?,ĐÚNG,,0.6984,1,2698,"Muốn biên dịch chương trình Java, bạn cần cài đặt JDK (Java Development Kit)."
+3,in_scope,Java có bao nhiêu kiểu dữ liệu nguyên thủy?,ĐÚNG,,0.7175,1,8997,Java có tám kiểu dữ liệu nguyên thủy.
+3,in_scope,Vì sao không nên so sánh String bằng ==?,SAI NỘI DUNG,,0.7886,1,1319,"Vì toán tử == chỉ so sánh xem hai biến có cùng trỏ tới một đối tượng hay không, thay vì so sánh nội dung của chuỗi."
+3,in_scope,Vòng lặp nào luôn chạy ít nhất một lần?,ĐÚNG,,0.7871,1,2295,Vòng lặp do-while luôn thực hiện thân vòng lặp ít nhất một lần.
+3,in_scope,Từ khóa nào dùng để kế thừa lớp trong Java?,ĐÚNG,,0.7074,1,1621,Từ khóa dùng để kế thừa lớp trong Java là extends.
+3,in_scope,Java có hỗ trợ đa kế thừa lớp không?,ĐÚNG,,0.6971,1,2733,"Java không hỗ trợ đa kế thừa lớp, nó chỉ hỗ trợ đơn kế thừa với lớp."
+3,in_scope,NullPointerException thuộc loại ngoại lệ nào?,ĐÚNG,,0.7712,2,3289,NullPointerException thuộc loại Unchecked exception (kế thừa từ RuntimeException).
+3,in_scope,throw và throws khác nhau ra sao?,ĐÚNG,,0.6475,1,1664,"Sự khác biệt giữa throw và throws là: - **throw**: Dùng để ném một ngoại lệ (ví dụ: `throw new IllegalArgumentException(""Sai giá trị"")`). - **throws**: Dùng để khai báo các ngoại lệ mà phương thức có thể ném ra ở chữ ký phương thức."
+3,in_scope,ArrayList khác mảng thường ở điểm nào?,ĐÚNG,,0.7959,1,1633,"ArrayList khác mảng thường ở chỗ ArrayList là mảng động, có khả năng tự tăng kích thước khi thêm phần tử, trong khi mảng thường có kích thước cố định."
+3,in_scope,Muốn HashMap giữ thứ tự thêm vào thì dùng lớp nào?,ĐÚNG,,0.8306,1,55083,Muốn HashMap giữ thứ tự thêm vào thì dùng LinkedHashMap.
+4,in_scope,Phần head của trang HTML chứa những gì?,ĐÚNG,,0.8215,1,1954,"Phần head chứa thông tin mô tả trang như title, meta charset và liên kết tới file CSS."
+4,in_scope,Làm sao mở liên kết trong tab mới?,ĐÚNG,,0.4573,1,9350,"Để mở liên kết trong một tab mới, bạn sử dụng thuộc tính `target=""_blank""` trong thẻ `a`."
+4,in_scope,Thuộc tính alt của ảnh để làm gì?,ĐÚNG,,0.1055,1,3238,Thuộc tính alt dùng để mô tả thay thế cho ảnh.
+4,in_scope,Gộp nhiều cột trong bảng dùng thuộc tính gì?,ĐÚNG,,0.6747,1,16101,Gộp nhiều cột trong bảng dùng thuộc tính colspan.
+4,in_scope,Selector class viết bắt đầu bằng ký tự gì?,ĐÚNG,,0.596,1,10096,Selector class bắt đầu bằng dấu chấm.
+4,in_scope,Margin và padding khác nhau thế nào?,ĐÚNG,,0.4206,1,10290,"Padding là khoảng đệm bên trong viền, còn margin là khoảng cách bên ngoài viền."
+4,in_scope,box-sizing border-box có tác dụng gì?,ĐÚNG,,0.8065,1,3604,"Khi đặt box-sizing: border-box, chiều rộng của phần tử đã bao gồm cả padding và border."
+4,in_scope,Làm sao ẩn hoàn toàn một phần tử bằng CSS?,ĐÚNG,,0.6911,1,2826,"Để ẩn hoàn toàn một phần tử bằng CSS, bạn sử dụng thuộc tính `display: none`."
+4,in_scope,Căn các phần tử theo trục chính trong flexbox dùng thuộc tính nào?,ĐÚNG,,0.8487,1,2741,Căn các phần tử theo trục chính trong Flexbox dùng thuộc tính justify-content.
+4,in_scope,Tạo 3 cột bằng nhau với CSS Grid thế nào?,ĐÚNG,,0.8403,1,16737,"Để tạo 3 cột bằng nhau với CSS Grid, bạn cần đặt `display: grid` cho phần tử cha và sử dụng thuộc tính `grid-template-columns: repeat(3, 1fr)`."
+4,in_scope,Viết CSS theo kiểu mobile first thì media query dùng gì?,ĐÚNG,,0.7318,1,2213,Viết CSS theo kiểu mobile first thì media query thường dùng min-width.
+5,in_scope,Reconciliation trong React là gì?,ĐÚNG,,0.5455,1,4742,Reconciliation là quá trình React so sánh Virtual DOM mới với bản cũ khi state thay đổi.
+5,in_scope,Trong JSX thay thuộc tính class bằng gì?,ĐÚNG,,0.7306,1,3549,"Trong JSX, thuộc tính class được thay bằng className."
+5,in_scope,Fragment trong React dùng để làm gì?,ĐÚNG,,0.556,2,10975,Fragment (<>...</>) dùng để nhóm nhiều phần tử mà không cần thêm thẻ thừa vào giao diện.
+5,in_scope,Component con có được tự sửa props không?,ĐÚNG,,0.6631,1,3662,Component con không được tự sửa props nhận được vì props là dữ liệu chỉ đọc (read-only).
+5,in_scope,Tại sao không nên dùng chỉ số mảng làm key?,ĐÚNG,,0.6751,1,3750,"Không nên dùng chỉ số mảng làm key khi danh sách có thể thêm, xoá hoặc đổi thứ tự."
+5,in_scope,Làm sao chặn form tải lại trang khi submit?,ĐÚNG,,0.4809,1,5815,"Để chặn hành vi mặc định của form khi submit, bạn cần gọi `e.preventDefault()` trong hàm xử lý `onSubmit`."
+5,in_scope,useEffect không truyền mảng phụ thuộc thì chạy khi nào?,ĐÚNG,,0.7157,2,3017,useEffect không có mảng phụ thuộc sẽ chạy lại sau mọi lần render.
+5,in_scope,Hàm cleanup trong useEffect dùng để làm gì?,ĐÚNG,,0.6967,1,2400,"Hàm cleanup trong useEffect dùng để huỷ hẹn giờ, huỷ đăng ký sự kiện hoặc huỷ yêu cầu API đang chờ."
+5,in_scope,Reducer là gì?,ĐÚNG,,0.5144,1,2026,"Reducer là hàm thuần nhận state hiện tại và action, rồi trả về state mới."
+5,in_scope,useCallback dùng để làm gì?,ĐÚNG,,0.4793,1,1966,"Hook useCallback dùng để ghi nhớ một hàm, tránh tạo hàm mới ở mỗi lần render."
+5,in_scope,Chuyển trang bằng code trong React Router dùng gì?,ĐÚNG,,0.8212,1,5992,Chuyển trang bằng code trong React Router dùng hook useNavigate.
+6,in_scope,MySQL mặc định chạy ở cổng nào?,ĐÚNG,,0.5738,1,1948,MySQL mặc định lắng nghe ở cổng 3306.
+6,in_scope,Khóa ngoại dùng để làm gì?,ĐÚNG,,0.3881,1,2098,Khóa ngoại dùng để tham chiếu tới khóa chính của bảng khác nhằm tạo liên kết giữa hai bảng và đảm bảo tính toàn vẹn tham chiếu.
+6,in_scope,Nhóm lệnh DDL gồm những lệnh nào?,ĐÚNG,,0.5927,1,3590,"Nhóm lệnh DDL gồm các lệnh: CREATE, ALTER và DROP."
+6,in_scope,Lưu số tiền nên dùng kiểu dữ liệu gì?,ĐÚNG,,0.5999,1,4830,Lưu số tiền nên dùng kiểu dữ liệu DECIMAL.
+6,in_scope,Kiểm tra giá trị rỗng trong SQL thế nào?,ĐÚNG,,0.701,1,2527,"Để kiểm tra giá trị rỗng, bạn phải dùng IS NULL, không dùng dấu bằng."
+6,in_scope,Tìm kiếm theo mẫu chuỗi trong SQL dùng toán tử gì?,ĐÚNG,,0.5929,1,5933,Tìm kiếm theo mẫu chuỗi trong SQL dùng toán tử LIKE.
+6,in_scope,DELETE khác TRUNCATE thế nào?,ĐÚNG,,0.4574,1,3510,"Câu lệnh DELETE dùng để xoá bản ghi, còn TRUNCATE dùng để xoá toàn bộ dữ liệu của bảng."
+6,in_scope,COUNT(*) khác COUNT(tên cột) ra sao?,ĐÚNG,,0.6185,1,5038,"COUNT(*) đếm mọi dòng, trong khi COUNT(tên_cột) chỉ đếm các dòng có giá trị khác NULL ở cột đó."
+6,in_scope,Truy vấn con có thể đặt ở những đâu?,ĐÚNG,,0.5378,1,3317,"Truy vấn con có thể đặt trong WHERE, FROM hoặc SELECT."
+6,in_scope,Thế nào là vi phạm dạng chuẩn 1NF?,ĐÚNG,,0.7244,1,2911,Vi phạm dạng chuẩn 1NF khi một cột chứa giá trị không phải là giá trị nguyên tố hoặc có chứa nhóm lặp (ví dụ: cột số điện thoại chứa nhiều số cách nhau bởi dấu phẩy).
+6,in_scope,View có lưu dữ liệu riêng không?,ĐÚNG,,0.7133,1,8867,View không lưu dữ liệu riêng mà lấy dữ liệu từ các bảng gốc mỗi khi được truy vấn.
+35,in_scope,Kernel là gì?,ĐÚNG,,0.7797,1,4194,"Nhân (kernel) là phần cốt lõi của hệ điều hành, luôn thường trú trong bộ nhớ và điều khiển trực tiếp phần cứng. Đối với Windows NT, kernel chịu trách nhiệm điều phối tiến trình, cung cấp các cơ chế đồng bộ hóa, xử lý ngắt, xử lý ngoại lệ và giao tiếp với HAL."
+35,in_scope,System call dùng để làm gì?,ĐÚNG,,0.8302,1,5538,Lời gọi hệ thống (system call) là cơ chế để chương trình yêu cầu dịch vụ từ hệ điều hành.
+35,in_scope,Tiến trình ở trạng thái ready nghĩa là gì?,ĐÚNG,,0.7572,1,3068,Trạng thái ready nghĩa là tiến trình đã sẵn sàng và đang chờ được cấp CPU để xử lý.
+35,in_scope,PCB lưu những thông tin gì?,ĐÚNG,,0.8226,1,3254,PCB lưu trữ các thông tin sau: - Định danh tiến trình (PID). - Trạng thái tiến trình. - Bộ đếm chương trình (địa chỉ câu lệnh kế tiếp). - Giá trị các thanh ghi. - Thông tin bộ nhớ (danh sách các khối nhớ được cấp). - Thông tin bộ xử lý (số hiệu CPU đang sử dụng). - Độ ưu tiên của tiến trình và các thống kê điều phối (đối với WinNT).
+35,in_scope,Tiến trình zombie là gì?,ĐÚNG,,0.3818,1,2846,Tiến trình zombie là tiến trình đã kết thúc nhưng tiến trình cha chưa đọc trạng thái kết thúc của nó.
+35,in_scope,Hiệu ứng đoàn xe trong lập lịch là gì?,ĐÚNG,,0.537,1,2885,Hiệu ứng đoàn xe (convoy effect) là tình trạng các tiến trình ngắn phải chờ rất lâu sau các tiến trình dài trong thuật toán lập lịch FCFS.
+35,in_scope,Quantum quá nhỏ trong Round Robin gây ra vấn đề gì?,ĐÚNG,,0.625,1,2695,Quantum quá nhỏ làm tăng chi phí chuyển ngữ cảnh.
+35,in_scope,Khắc phục đói CPU bằng cách nào?,ĐÚNG,,0.7485,1,7779,Kỹ thuật aging khắc phục đói CPU bằng cách tăng dần độ ưu tiên của tiến trình chờ lâu.
+35,in_scope,Thuật toán Banker dùng để làm gì?,ĐÚNG,,0.7563,1,7414,Thuật toán Banker dùng để tránh bế tắc bằng cách chỉ cấp tài nguyên khi hệ thống vẫn ở trạng thái an toàn.
+35,in_scope,Nghịch lý Belady là gì?,ĐÚNG,,0.2984,1,2929,Nghịch lý Belady là hiện tượng khi tăng số khung trang mà số lỗi trang lại tăng.
+35,in_scope,Thrashing là gì?,ĐÚNG,,0.7747,1,2788,"Trì trệ (thrashing) là tình trạng hệ thống dành phần lớn thời gian để hoán đổi trang thay vì thực thi tiến trình, xảy ra khi tiến trình không có đủ khung trang cho tập trang đang làm việc."
+1,out_of_scope,Cách nấu canh chua cá lóc?,TỪ CHỐI ĐÚNG,,0.228,,98,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+1,out_of_scope,Ai là tác giả Truyện Kiều?,TỪ CHỐI ĐÚNG,,0.2126,,112,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+2,out_of_scope,Giá xăng hôm nay bao nhiêu?,TỪ CHỐI ĐÚNG,,0.0944,,140,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+2,out_of_scope,Đội nào vô địch Euro 2024?,TỪ CHỐI ĐÚNG,,0.1169,,103,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+3,out_of_scope,Uống cà phê buổi tối có hại không?,TỪ CHỐI ĐÚNG,,0.1632,,123,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+3,out_of_scope,Thủ đô của Úc là thành phố nào?,TỪ CHỐI ĐÚNG,,0.1312,,121,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+4,out_of_scope,Nên đi du lịch Đà Lạt vào tháng mấy?,TỪ CHỐI ĐÚNG,,0.128,,117,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+4,out_of_scope,Cách chữa đau lưng tại nhà?,TỪ CHỐI ĐÚNG,,0.1434,,109,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+5,out_of_scope,Tỷ giá đô la hôm nay thế nào?,TỪ CHỐI ĐÚNG,,0.1949,,103,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+5,out_of_scope,Chiến tranh thế giới thứ hai kết thúc năm nào?,TỪ CHỐI ĐÚNG,,0.0995,,128,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+6,out_of_scope,Làm sao để ngủ ngon hơn?,TỪ CHỐI ĐÚNG,,0.1662,,115,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+6,out_of_scope,Bài hát nào đang hot nhất hiện nay?,TỪ CHỐI ĐÚNG,,0.1327,,115,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,out_of_scope,Dự báo thời tiết Sài Gòn cuối tuần?,TỪ CHỐI ĐÚNG,,0.3968,,5790,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,out_of_scope,Cách trồng rau sạch trên sân thượng?,TỪ CHỐI ĐÚNG,,0.2582,,801,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,out_of_scope,Ai là người giàu nhất thế giới?,TỪ CHỐI ĐÚNG,,0.3142,,2877,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+1,near_miss,Decorator trong Python là gì?,TỪ CHỐI ĐÚNG,,0.528,,4318,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+1,near_miss,Cách dùng list comprehension trong Python?,TỪ CHỐI ĐÚNG,,0.7091,,3646,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+2,near_miss,Closure trong JavaScript là gì?,TỪ CHỐI ĐÚNG,,0.6913,,6698,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+2,near_miss,WebSocket hoạt động thế nào?,TỪ CHỐI ĐÚNG,,0.5061,,3254,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+3,near_miss,Spring Boot là gì?,TỪ CHỐI ĐÚNG,,0.1733,,101,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+3,near_miss,Lambda expression trong Java viết thế nào?,TỪ CHỐI ĐÚNG,,0.5087,,6282,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+4,near_miss,Vẽ hình bằng thẻ canvas trong HTML5 thế nào?,TỪ CHỐI ĐÚNG,,0.6716,,1680,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+4,near_miss,Sass là gì?,TỪ CHỐI ĐÚNG,,0.2998,,54,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+5,near_miss,Redux Toolkit dùng thế nào?,TỪ CHỐI ĐÚNG,,0.4107,,3230,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+5,near_miss,Next.js là gì?,TỪ CHỐI ĐÚNG,,0.4361,,3078,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+6,near_miss,Stored procedure viết thế nào?,TỪ CHỐI ĐÚNG,,0.3434,,1189,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+6,near_miss,Index B-tree hoạt động ra sao?,TỪ CHỐI ĐÚNG,,0.3724,,1582,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+6,near_miss,MongoDB khác MySQL thế nào?,TỪ CHỐI ĐÚNG,,0.6228,,1657,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,near_miss,Docker khác máy ảo thế nào?,TỪ CHỐI ĐÚNG,,0.5141,,2122,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,near_miss,Lệnh ls trong Linux dùng để làm gì?,TỪ CHỐI ĐÚNG,,0.7121,,2928,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,in_scope,Bốn điều kiện cần để xảy ra deadlock là gì?,TỪ CHỐI SAI,,0.9608,,2111,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,in_scope,Tiến trình có thể ở những trạng thái nào?,ĐÚNG,,0.7822,,2231,"Tại một thời điểm, một tiến trình có thể ở các trạng thái sau: Mới tạo, Running, Waiting (hoặc Blocked), Ready và Kết thúc."
+35,in_scope,"Hệ thống máy tính được chia làm mấy phần chính, gồm những phần nào?",ĐÚNG,,0.8665,1,2025,"Hệ thống máy tính được chia làm bốn phần chính: phần cứng, hệ điều hành, các chương trình ứng dụng và người sử dụng."
+35,in_scope,Quantum trong thuật toán Round Robin là gì?,ĐÚNG,,0.7793,2,2132,Quantum là một lượng thời gian cố định (hoặc khoảng thời gian sử dụng CPU) mà mỗi tiến trình được cấp phát khi thực hiện thuật toán lập lịch Round Robin.
+35,in_scope,DMA là viết tắt của gì?,ĐÚNG,,0.6989,3,2048,DMA là viết tắt của Direct Memory Access.
+35,in_scope,Mỗi tiểu trình có những thành phần riêng nào?,TỪ CHỐI SAI,,0.7676,4,3348,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,in_scope,Giải thuật Banker gồm những giải thuật con nào?,ĐÚNG,,0.7552,4,3169,Giải thuật Banker gồm giải thuật an toàn và giải thuật yêu cầu tài nguyên.
+35,in_scope,"Trong ma trận quyền truy xuất, dòng và cột biểu diễn gì?",ĐÚNG,,0.7397,1,1905,"Trong ma trận quyền truy xuất, các dòng biểu diễn các miền bảo vệ và các cột tương ứng với các đối tượng trong hệ thống."
+35,in_scope,Các cơ chế liên lạc giữa các tiến trình gồm những cơ chế nào?,TỪ CHỐI SAI,,0.6431,,30743,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,in_scope,Có những thuật toán thay thế trang nào?,SAI NỘI DUNG,,0.7125,,5995,"Dựa trên tài liệu được cung cấp, các thuật toán thay thế trang bao gồm: thuật toán FIFO và thuật toán OPT (tối ưu)."
+35,in_scope,Đồng bộ hóa tiến trình cần đáp ứng hai yêu cầu nào?,TỪ CHỐI SAI,,0.6346,,2923,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,in_scope,Phân biệt địa chỉ logic và địa chỉ vật lý.,ĐÚNG,,0.8632,1,2703,"Địa chỉ logic là địa chỉ do CPU sinh ra, trong khi địa chỉ vật lý là địa chỉ thật trong bộ nhớ chính. Bộ phận quản lý bộ nhớ (MMU) có vai trò chuyển đổi địa chỉ logic thành địa chỉ vật lý."
+35,in_scope,Hiện tượng phân mảnh ngoại vi là gì?,ĐÚNG,,0.5742,1,3067,"Phân mảnh ngoại vi là tình trạng tổng bộ nhớ trống đủ nhưng không nằm liên tục, hoặc khi các khối nhớ tự do đều quá nhỏ, không đủ để chứa một phân đoạn."
+35,in_scope,"Trong phân trang, địa chỉ logic gồm những phần nào?",ĐÚNG,,0.7424,,2929,"Trong phân đoạn (kết hợp phân trang), địa chỉ logic là một bộ ba gồm: số hiệu phân đoạn (s), số hiệu trang (p) và địa chỉ tương đối trong trang (d)."
+35,in_scope,Có những phương pháp xử lý deadlock nào?,ĐÚNG,,0.818,2,3316,"Các phương pháp xử lý deadlock bao gồm: ngăn chặn, tránh, phát hiện và phục hồi deadlock."
+35,near_miss,Cơ chế copy-on-write hoạt động như thế nào?,TỪ CHỐI ĐÚNG,,0.5763,,2958,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,near_miss,Hệ điều hành Android sử dụng nhân gì?,TỪ CHỐI ĐÚNG,,0.5468,,2786,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,out_of_scope,Cách nấu phở bò ngon?,TỪ CHỐI ĐÚNG,,0.2697,,774,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.
+35,out_of_scope,Thủ đô của nước Úc là gì?,TỪ CHỐI ĐÚNG,,0.3127,,2853,Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.

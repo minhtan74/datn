@@ -31,12 +31,41 @@ _PROVIDERS = ("gemini", "openai", "claude")
 _RETRYABLE_STATUS = {429, 500, 502, 503, 504}
 _MAX_ATTEMPTS = 3
 _RETRY_BASE_DELAY = 1.5  # giây, tăng dần theo cấp số nhân
+_RETRY_MAX_WAIT = 30.0  # giây — chờ lâu nhất khi nhà cung cấp yêu cầu đợi (vượt giới hạn lượt gọi / phút)
 
 
-# Gửi POST tới API LLM; gặp lỗi tạm thời (quá tải, mất kết nối) thì thử lại tối đa 3 lần, chờ tăng dần
+# 429 do hết hạn mức THEO NGÀY (gói miễn phí): chờ vài giây rồi gọi lại cũng vô ích -> báo lỗi ngay
+def _daily_quota(resp: httpx.Response) -> bool:
+    try:
+        return any(
+            "PerDay" in str(v.get("quotaId", ""))
+            for d in resp.json().get("error", {}).get("details", [])
+            for v in d.get("violations", [])
+        )
+    except (ValueError, AttributeError):
+        return False
+
+
+# Thời gian nhà cung cấp yêu cầu chờ khi trả 429: header Retry-After, hoặc retryDelay "23s" trong lỗi của Gemini
+def _retry_after(resp: httpx.Response) -> float | None:
+    try:
+        if resp.headers.get("retry-after"):
+            return float(resp.headers["retry-after"])
+        for d in resp.json().get("error", {}).get("details", []):
+            if str(d.get("retryDelay", "")).endswith("s"):
+                return float(d["retryDelay"][:-1])
+    except (ValueError, TypeError, AttributeError):
+        pass
+    return None
+
+
+# Gửi POST tới API LLM; gặp lỗi tạm thời (quá tải, mất kết nối) thì thử lại tối đa 3 lần, chờ tăng dần.
+# Vượt giới hạn lượt gọi (429) thì chờ đúng thời gian nhà cung cấp yêu cầu (tối đa _RETRY_MAX_WAIT) rồi gọi lại.
+# Quá thời gian chờ phản hồi thì KHÔNG thử lại (model chạy chậm, thử lại chỉ khiến người dùng chờ gấp 3).
 def _post_with_retry(url: str, *, json: dict, timeout: float, headers: dict | None = None) -> httpx.Response:
     last_error: Exception | None = None
     for attempt in range(1, _MAX_ATTEMPTS + 1):
+        wait = _RETRY_BASE_DELAY * attempt
         try:
             r = httpx.post(url, json=json, headers=headers, timeout=timeout)
             r.raise_for_status()
@@ -45,11 +74,17 @@ def _post_with_retry(url: str, *, json: dict, timeout: float, headers: dict | No
             last_error = e
             if e.response.status_code not in _RETRYABLE_STATUS or attempt == _MAX_ATTEMPTS:
                 raise
+            if e.response.status_code == 429 and _daily_quota(e.response):
+                raise
+            if e.response.status_code == 429:
+                wait = min(_retry_after(e.response) or wait * 4, _RETRY_MAX_WAIT)
+        except httpx.TimeoutException:
+            raise
         except httpx.TransportError as e:
             last_error = e
             if attempt == _MAX_ATTEMPTS:
                 raise
-        time.sleep(_RETRY_BASE_DELAY * attempt)
+        time.sleep(wait)
     raise last_error  # không thể tới đây, giữ để mypy/an toàn
 
 
@@ -86,7 +121,9 @@ def generate(system: str, user: str, *, max_tokens: int = 700) -> str:
         # Chỉ trả loại lỗi + mã HTTP, không trả nguyên thông báo (có thể chứa URL, khoá, dữ liệu nhạy cảm)
         status = getattr(getattr(e, "response", None), "status_code", None)
         reason = {429: "quá giới hạn lượt gọi", 401: "khoá không hợp lệ", 403: "không có quyền", 404: "model không tồn tại"}
-        detail = f"HTTP {status} — {reason.get(status, 'lỗi dịch vụ')}" if status else type(e).__name__
+        resp = getattr(e, "response", None)
+        why = "hết hạn mức lượt gọi trong ngày" if status == 429 and _daily_quota(resp) else reason.get(status, "lỗi dịch vụ")
+        detail = f"HTTP {status} — {why}" if status else type(e).__name__
         logger.warning("LLM %s error: %s", p, detail)
         return f"[Lỗi gọi LLM: {detail}]"
     return _stub(system, user)

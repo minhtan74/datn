@@ -46,17 +46,44 @@ _OBJ_HEAD = re.compile(
     r"\s*:?$",
     re.IGNORECASE,
 )
-# Dòng báo hết phần mục tiêu: tiêu đề mục đánh số ("1. Biến trong Python"), số La Mã, hoặc tên phần khác
-_OBJ_END = re.compile(r"^(?:#+\s|\d+[.)]\s|[IVX]+[.)]\s|(?:chương|phần|nội dung|giới thiệu|tóm tắt)\b)", re.IGNORECASE)
+# Dòng báo hết phần mục tiêu: tiêu đề mục đánh số ("1. Biến trong Python"), số La Mã, "Chương 2 / Phần II",
+# hoặc dòng CHỈ gồm tên phần ("Nội dung", "Giới thiệu:") — mục tiêu bắt đầu bằng "Giới thiệu tên..." không bị cắt
+_OBJ_END = re.compile(
+    r"^(?:#+\s|\d+[.)]\s|\d+(?:\.\d+)+\.?\s|[IVX]+[.)]\s|(?:chương|phần)\s+(?:\d+|[IVX]+)\b"
+    r"|(?:nội dung|giới thiệu|tóm tắt)(?: bài học| chính)?\s*:?$)",
+    re.IGNORECASE,
+)
 _OBJ_BULLET = re.compile(r"^[-•*–▪●◦+]\s*")
 _OBJ_NUM = re.compile(r"^\d+[.)]\s+")
 MAX_OBJECTIVES = 10
 
 
+# Mục tiêu là 1 câu ngắn; dài hơn mức này là đoạn văn nội dung
+OBJ_MAX_LEN = 200
+# Từ nối hay mở đầu câu văn nội dung, gần như không bao giờ mở đầu một mục tiêu bài học
+_BODY_START = re.compile(
+    r"^(?:để|nhưng|vì|do đó|khi|nếu|tuy|mặc dù|ngoài ra|như vậy|theo|trong|đây là|điều này|nói cách khác|ví dụ)\b",
+    re.IGNORECASE,
+)
+
+
+# Mục tiêu bị coi là đoạn văn nội dung: câu dẫn kết thúc bằng ":", quá dài, gồm từ 2 câu trở lên,
+# hoặc mở đầu bằng từ nối của câu văn ("Để hỗ trợ...", "Trong môi trường...")
+def _looks_like_body(item: str) -> bool:
+    return (
+        item.endswith(":")
+        or len(item) > OBJ_MAX_LEN
+        or bool(re.search(r"[.!?]\s+[A-ZÀ-Ỹ]", item))
+        or bool(_BODY_START.match(item))
+    )
+
+
 # Tách danh sách mục tiêu nằm ngay sau dòng "Mục tiêu bài học" trong văn bản tài liệu.
-# Mục tiêu gạch đầu dòng (hoặc dòng thường, vì PDF mất ký hiệu bullet) kết thúc ở tiêu đề mục kế tiếp;
-# mục tiêu đánh số "1. ..." thì lấy hết các dòng đánh số. Dòng bắt đầu bằng chữ thường là phần bị PDF
-# ngắt xuống dòng của mục tiêu trước -> nối lại.
+# B1: gom dòng — mục tiêu gạch đầu dòng (hoặc dòng thường, vì PDF hay mất ký hiệu bullet) kết thúc ở tiêu đề mục
+#     kế tiếp ("1.2.1 ..."); mục tiêu đánh số "1. ..." lấy hết các dòng đánh số; dòng bắt đầu bằng chữ thường là
+#     phần PDF tự ngắt xuống dòng của mục tiêu trước -> nối lại.
+# B2: lọc — PDF mất bullet thì đoạn văn ngay sau phần mục tiêu trông giống mục tiêu: dừng ở mục đầu tiên trông
+#     như đoạn văn (_looks_like_body).
 def _parse_objectives(text: str) -> list[str]:
     lines = [l.strip() for l in (text or "").splitlines()]
     start = next((i for i, l in enumerate(lines) if _OBJ_HEAD.match(l)), None)
@@ -76,13 +103,20 @@ def _parse_objectives(text: str) -> list[str]:
             items[-1] += " " + line
         elif numbered and is_num:
             items.append(_OBJ_NUM.sub("", line))
-        elif not numbered and (_OBJ_BULLET.match(line) or not _OBJ_END.match(line)) and len(line) <= 250:
+        elif not numbered and (_OBJ_BULLET.match(line) or not _OBJ_END.match(line)):
             items.append(_OBJ_BULLET.sub("", line))
         else:
             break
-        if len(items) >= MAX_OBJECTIVES:
+        if len(items) > MAX_OBJECTIVES:
             break
-    return [o.strip(" .;") for o in items if 5 <= len(o.strip()) <= 300]
+
+    out: list[str] = []
+    for item in items[:MAX_OBJECTIVES]:
+        item = item.strip()
+        if _looks_like_body(item):
+            break
+        out.append(item.strip(" .;"))
+    return [o for o in out if len(o) >= 5]
 
 
 # Tài liệu bài học dài tối đa bao nhiêu ký tự thì đưa NGUYÊN VĂN vào prompt (tài liệu mẫu mỗi bài ~2–3 nghìn ký tự);
@@ -190,7 +224,7 @@ def _build_chapter_context(db: Session, course_id: int, chapter_id: int) -> tupl
             chunks += retriever.retrieve(
                 db, l["title"], course_id=course_id, lesson_id=l["id"], lesson_only=True, k=per_lesson
             )
-        chunks = chunks[:8]
+        chunks = retriever.expand_neighbors(db, chunks[:8], max_chars=FULL_DOC_MAX * 3 // 2)
     if not chunks:
         query = " ".join([name] + [l["title"] for l in lessons])
         chunks = retriever.retrieve(db, query, course_id=course_id, k=6)
@@ -240,7 +274,8 @@ def _build_context(db: Session, course_id: int, lesson_id: int | None) -> tuple[
             chunks += retriever.retrieve(
                 db, f"{topic_hint}. {o}", course_id=course_id, lesson_id=lesson_id, lesson_only=True, k=3
             )
-        chunks = _unique_chunks(chunks)[:10]
+        # Ghép đoạn liền kề để mỗi phần ngữ liệu trọn ý (danh sách, định nghĩa dài không bị cắt ngang)
+        chunks = retriever.expand_neighbors(db, _unique_chunks(chunks)[:10], max_chars=FULL_DOC_MAX)
     # Dùng lại bộ truy hồi của RAG, tìm trong tài liệu của khóa (và bài, nếu có)
     if not chunks:
         chunks = retriever.retrieve(db, query, course_id=course_id, lesson_id=lesson_id, k=6)

@@ -27,19 +27,46 @@ def extract(path: str, file_type: str) -> tuple[list[tuple[int | None, str]], in
     return _extract_txt(path)
 
 
+_PAGE_NO = re.compile(r"^(?:trang|page)\s*\d+(?:\s*/\s*\d+)?$|^\d+$", re.IGNORECASE)
+
+
+# Bỏ tiêu đề / chân trang lặp lại (vd "Bài giảng Hệ điều hành", "Bộ môn CNPM – Khoa CNTT", "Trang 3"):
+# dòng nằm ở vài dòng đầu / cuối trang và lặp lại trên >= 60% số trang, cùng các dòng chỉ ghi số trang.
+# Không bỏ thì chúng chen vào giữa nội dung ở mỗi chỗ chuyển trang, làm nhiễu embedding và ngữ cảnh của AI.
+def _strip_page_furniture(pages: list[str]) -> list[str]:
+    edge = lambda lines: lines[:4] + lines[-3:]  # noqa: E731
+    split = [[l.strip() for l in p.splitlines()] for p in pages]
+    repeated: set[str] = set()
+    if len(pages) >= 2:
+        counts: dict[str, int] = {}
+        for lines in split:
+            for l in set(edge(lines)):
+                counts[l] = counts.get(l, 0) + 1
+        repeated = {l for l, n in counts.items() if l and n >= max(2, 0.6 * len(pages))}
+    out = []
+    for lines in split:
+        top, bottom = set(lines[:4]), set(lines[-3:])
+        kept = [l for i, l in enumerate(lines)
+                if not _PAGE_NO.match(l) and not (l in repeated and (l in top or l in bottom))]
+        out.append(_clean("\n".join(kept)))
+    return out
+
+
 # PDF: đọc từng trang bằng pypdf, giữ số trang để trích dẫn nguồn; trang lỗi / không có chữ thì bỏ qua
 def _extract_pdf(path: str):
     from pypdf import PdfReader
 
     reader = PdfReader(path)
-    out: list[tuple[int | None, str]] = []
+    raw: list[tuple[int, str]] = []
     for i, page in enumerate(reader.pages, start=1):
         try:
             txt = _clean(page.extract_text() or "")
         except Exception:  # noqa: BLE001
             txt = ""
         if txt:
-            out.append((i, txt))
+            raw.append((i, txt))
+    cleaned = _strip_page_furniture([t for _, t in raw])
+    out: list[tuple[int | None, str]] = [(i, t) for (i, _), t in zip(raw, cleaned) if t]
     return out, len(reader.pages)
 
 

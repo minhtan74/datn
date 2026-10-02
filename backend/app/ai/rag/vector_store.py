@@ -49,7 +49,7 @@ def add_chunks(
 # (lesson_only=True: chỉ tài liệu của bài; False: tài liệu của bài + tài liệu chung của khóa)
 def _load(db: Session, course_id: int, lesson_id: int | None, lesson_only: bool = False) -> list[dict]:
     sql = (
-        "SELECT dc.id, dc.document_id, dc.page, dc.content, dc.embedding, d.title AS document_title "
+        "SELECT dc.id, dc.document_id, dc.chunk_index, dc.page, dc.content, dc.embedding, d.title AS document_title "
         "FROM document_chunks dc JOIN documents d ON d.id = dc.document_id "
         "WHERE dc.course_id = :c AND d.status = 'indexed'"
     )
@@ -104,6 +104,7 @@ def search(
             {
                 "chunk_id": r["id"],
                 "document_id": r["document_id"],
+                "chunk_index": r["chunk_index"],
                 "document_title": r["document_title"],
                 "page": r["page"],
                 "content": r["content"],

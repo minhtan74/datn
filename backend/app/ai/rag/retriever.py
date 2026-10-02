@@ -11,6 +11,7 @@ import re
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
+from app.core.database import q_all
 
 from . import embeddings, vector_store
 
@@ -77,3 +78,69 @@ def retrieve(
     for c in top:
         c["score"] = c["cosine"]
     return top
+
+
+# Nối 2 đoạn liền nhau của cùng tài liệu: đoạn sau bắt đầu bằng phần đuôi của đoạn trước (overlap của
+# text_splitter) -> bỏ phần trùng để không lặp chữ
+def _join(a: str, b: str) -> str:
+    for k in range(min(len(a), len(b), 120), 9, -1):
+        if a.endswith(b[:k]):
+            return a + b[k:]
+    return f"{a}\n{b}"
+
+
+# Mở rộng ngữ cảnh: đoạn tìm được thường chỉ là phần đầu của một ý dài (vd "bốn điều kiện sau ..." mà các
+# điều kiện nằm ở các đoạn liền sau, do đoạn chỉ ~380 ký tự). Ghép mỗi đoạn với `before` đoạn liền trước và
+# `after` đoạn liền sau trong cùng tài liệu thành 1 đoạn văn liền mạch; các cửa sổ chồng nhau thì gộp lại.
+# Giữ thứ tự xếp hạng và thông tin (điểm, trang, tài liệu) của đoạn tìm được tốt nhất trong mỗi đoạn văn.
+def expand_neighbors(db: Session, chunks: list[dict], *, before: int | None = None, after: int | None = None,
+                     max_chars: int | None = None) -> list[dict]:
+    before = settings.rag_neighbor_before if before is None else before
+    after = settings.rag_neighbor_after if after is None else after
+    max_chars = max_chars or settings.rag_max_context_chars
+    hits = [c for c in chunks if c.get("chunk_index") is not None]
+    if not hits or (before == 0 and after == 0):
+        return chunks
+
+    # Gộp cửa sổ [idx - before, idx + after] của các đoạn cùng tài liệu; cửa sổ chạm / chồng nhau thành 1 đoạn văn
+    windows: dict[int, list[list]] = {}
+    for rank, c in enumerate(hits):
+        lo, hi = c["chunk_index"] - before, c["chunk_index"] + after
+        spans = windows.setdefault(c["document_id"], [])
+        for s in spans:
+            if lo <= s[1] + 1 and hi >= s[0] - 1:
+                s[0], s[1] = min(s[0], lo), max(s[1], hi)
+                s[2].append(rank)
+                break
+        else:
+            spans.append([lo, hi, [rank]])
+
+    # Lấy nội dung các đoạn cần thêm (1 truy vấn cho mỗi tài liệu)
+    texts: dict[tuple[int, int], str] = {}
+    for doc_id, spans in windows.items():
+        lo, hi = min(s[0] for s in spans), max(s[1] for s in spans)
+        for r in q_all(db, "SELECT chunk_index, content FROM document_chunks WHERE document_id = :d "
+                           "AND chunk_index BETWEEN :lo AND :hi", d=doc_id, lo=lo, hi=hi):
+            texts[(doc_id, r["chunk_index"])] = r["content"]
+
+    out = []
+    for doc_id, spans in windows.items():
+        for lo, hi, ranks in spans:
+            best = dict(hits[min(ranks)])
+            body = ""
+            for i in range(lo, hi + 1):
+                if (doc_id, i) in texts:
+                    body = _join(body, texts[(doc_id, i)]) if body else texts[(doc_id, i)]
+            best["content"] = body or best["content"]
+            best["rank"] = min(ranks)
+            out.append(best)
+    out.sort(key=lambda c: c["rank"])
+
+    # Giới hạn tổng độ dài ngữ cảnh: giữ các đoạn văn xếp hạng cao trước (luôn giữ đoạn đầu tiên)
+    kept, total = [], 0
+    for c in out:
+        if kept and total + len(c["content"]) > max_chars:
+            break
+        kept.append(c)
+        total += len(c["content"])
+    return kept

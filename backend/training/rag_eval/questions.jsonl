@@ -103,3 +103,22 @@
 {"course_id": 6, "type": "near_miss", "question": "MongoDB khác MySQL thế nào?", "expect": []}
 {"course_id": 35, "type": "near_miss", "question": "Docker khác máy ảo thế nào?", "expect": []}
 {"course_id": 35, "type": "near_miss", "question": "Lệnh ls trong Linux dùng để làm gì?", "expect": []}
+{"course_id": 35, "type": "in_scope", "question": "Bốn điều kiện cần để xảy ra deadlock là gì?", "expect": [["loại trừ hỗ tương"], ["giữ và chờ"], ["không đòi lại", "không thể bị đòi lại"], ["chu trình"]]}
+{"course_id": 35, "type": "in_scope", "question": "Tiến trình có thể ở những trạng thái nào?", "expect": [["mới tạo"], ["running"], ["waiting"], ["ready"], ["kết thúc"]]}
+{"course_id": 35, "type": "in_scope", "question": "Hệ thống máy tính được chia làm mấy phần chính, gồm những phần nào?", "expect": [["phần cứng"], ["hệ điều hành"], ["ứng dụng"], ["người sử dụng", "người dùng"]]}
+{"course_id": 35, "type": "in_scope", "question": "Quantum trong thuật toán Round Robin là gì?", "expect": [["lượng tử thời gian", "khoảng thời gian"]]}
+{"course_id": 35, "type": "in_scope", "question": "DMA là viết tắt của gì?", "expect": [["direct memory access"]]}
+{"course_id": 35, "type": "in_scope", "question": "Mỗi tiểu trình có những thành phần riêng nào?", "expect": [["stack"], ["thanh ghi"]]}
+{"course_id": 35, "type": "in_scope", "question": "Giải thuật Banker gồm những giải thuật con nào?", "expect": [["an toàn"], ["yêu cầu tài nguyên"]]}
+{"course_id": 35, "type": "in_scope", "question": "Trong ma trận quyền truy xuất, dòng và cột biểu diễn gì?", "expect": [["miền bảo vệ"], ["đối tượng"]]}
+{"course_id": 35, "type": "in_scope", "question": "Các cơ chế liên lạc giữa các tiến trình gồm những cơ chế nào?", "expect": [["tín hiệu", "signal"], ["pipe"], ["chia sẻ"], ["thông điệp", "message"], ["socket"]]}
+{"course_id": 35, "type": "in_scope", "question": "Có những thuật toán thay thế trang nào?", "expect": [["fifo"], ["tối ưu", "optimal"], ["lru"]]}
+{"course_id": 35, "type": "in_scope", "question": "Đồng bộ hóa tiến trình cần đáp ứng hai yêu cầu nào?", "expect": [["độc quyền truy xuất", "mutual exclusion"], ["phối hợp"]]}
+{"course_id": 35, "type": "in_scope", "question": "Phân biệt địa chỉ logic và địa chỉ vật lý.", "expect": [["logic", "lôgic"], ["vật lý"]]}
+{"course_id": 35, "type": "in_scope", "question": "Hiện tượng phân mảnh ngoại vi là gì?", "expect": [["phân mảnh"]]}
+{"course_id": 35, "type": "in_scope", "question": "Trong phân trang, địa chỉ logic gồm những phần nào?", "expect": [["số hiệu trang"], ["độ dời", "offset", "tương đối"]]}
+{"course_id": 35, "type": "in_scope", "question": "Có những phương pháp xử lý deadlock nào?", "expect": [["ngăn chặn"], ["tránh"], ["phát hiện"]]}
+{"course_id": 35, "type": "near_miss", "question": "Cơ chế copy-on-write hoạt động như thế nào?", "expect": []}
+{"course_id": 35, "type": "near_miss", "question": "Hệ điều hành Android sử dụng nhân gì?", "expect": []}
+{"course_id": 35, "type": "out_of_scope", "question": "Cách nấu phở bò ngon?", "expect": []}
+{"course_id": 35, "type": "out_of_scope", "question": "Thủ đô của nước Úc là gì?", "expect": []}

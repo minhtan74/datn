@@ -151,15 +151,16 @@ export default function TeacherQuizQuestions() {
 
   return (
     <>
-      <div className="breadcrumb">
+      {/* Điều hướng: nút quay lại trang danh sách (to, dễ bấm) + tên quiz đang xem */}
+      <nav className="tq-breadcrumb" aria-label="Điều hướng">
         {isReview ? (
-          <Link to={`/teacher/chapters?course_id=${quiz.course_id}`}>📖 Quản lý Chương</Link>
+          <Link className="tq-back" to={`/teacher/chapters?course_id=${quiz.course_id}`}>← 📖 Quản lý Chương</Link>
         ) : (
-          <Link to="/teacher/quizzes">📚 Quản lý Quiz</Link>
+          <Link className="tq-back" to="/teacher/quizzes">← 📚 Quản lý Quiz</Link>
         )}
         <span className="sep">›</span>
-        <span>{quiz?.title || 'Câu hỏi'}</span>
-      </div>
+        <span className="tq-current">{quiz?.title || 'Câu hỏi'}</span>
+      </nav>
 
       <div className="page-header">
         <div>

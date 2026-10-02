@@ -104,7 +104,9 @@ def answer(
     if not chunks or not passes:
         logger.info("[RAG] below threshold -> refusing (no_answer)")
         return {"answer": NO_ANSWER, "sources": [], "used_context": False}
-    relevant = chunks
+    # Có LLM: ghép thêm đoạn liền trước / liền sau để LLM đọc trọn ý (danh sách, định nghĩa bị cắt ngang giữa
+    # 2 đoạn). Offline giữ nguyên đoạn ngắn vì bộ trích xuất chọn câu theo từng đoạn.
+    relevant = retriever.expand_neighbors(db, chunks) if use_llm else chunks
 
     # Ghép các đoạn thành NGỮ CẢNH, mỗi đoạn gắn nhãn [Nguồn i] + tên tài liệu + số trang
     ctx_parts = []
@@ -133,7 +135,13 @@ def answer(
         text = model_manager.generate(_SYSTEM, user_prompt)
 
         if text.startswith("[Lỗi gọi LLM"):
-            return {"answer": text.strip(), "sources": [], "used_context": False}
+            # LLM lỗi (hết hạn mức, mất mạng...): dự phòng bằng trích xuất offline từ chính các đoạn tìm được,
+            # chỉ khi tài liệu đủ liên quan theo ngưỡng chặt của chế độ offline (tránh trả lời câu lạc đề)
+            fallback = extractive.answer(question, chunks) if best_cosine >= settings.rag_similarity_threshold else ""
+            if not fallback:
+                return {"answer": text.strip(), "sources": [], "used_context": False}
+            logger.warning("[RAG] LLM lỗi -> trả lời trích xuất dự phòng")
+            text = f"{fallback}\n\n(Trợ giảng AI đang tạm gián đoạn — đây là nội dung trích trực tiếp từ tài liệu khóa học.)"
         if _is_refusal(text):
             return {"answer": NO_ANSWER, "sources": [], "used_context": False}
 

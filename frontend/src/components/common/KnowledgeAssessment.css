@@ -1,0 +1,133 @@
+.knowledge-assessment {
+  container: knowledge / inline-size;
+}
+
+.knowledge-chapter {
+  border: 1px solid var(--s-border);
+  border-radius: 8px;
+  padding: .7rem .85rem;
+  margin-bottom: .65rem;
+  min-width: 0;
+}
+
+.knowledge-unit-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(145px, .65fr) minmax(0, .8fr);
+  align-items: center;
+  gap: .45rem .85rem;
+}
+
+.knowledge-unit-name {
+  min-width: 0;
+  font-size: .875rem;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+}
+
+.knowledge-unit-result {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .3rem .5rem;
+  font-size: .8rem;
+  color: var(--s-text-muted);
+}
+
+.knowledge-unit-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: .4rem;
+  max-width: 100%;
+}
+
+.knowledge-unit-actions > details {
+  max-width: 100%;
+}
+
+.knowledge-unit-actions .s-btn {
+  white-space: normal;
+  text-align: center;
+}
+
+.knowledge-status {
+  display: inline-block;
+  padding: .15rem .45rem;
+  border-radius: 5px;
+  font-size: .75rem;
+  line-height: 1.5;
+}
+
+.knowledge-status-review {
+  color: #92400e;
+  background: #fef3c7;
+  font-weight: 700;
+}
+
+.knowledge-status-insufficient,
+.knowledge-status-good {
+  color: var(--s-text-muted);
+  background: var(--s-surface-2);
+  font-weight: 500;
+}
+
+.knowledge-evidence {
+  margin-top: .35rem;
+  font-size: .78rem;
+  color: var(--s-text-muted);
+  overflow-wrap: anywhere;
+}
+
+.knowledge-evidence summary {
+  cursor: pointer;
+}
+
+.knowledge-evidence p,
+.knowledge-evidence ul {
+  margin-top: .4rem;
+  line-height: 1.5;
+}
+
+.knowledge-lesson-list {
+  margin-top: .4rem;
+  padding-left: .75rem;
+  border-left: 2px solid var(--s-border);
+}
+
+.knowledge-lesson {
+  padding: .7rem 0;
+}
+
+.knowledge-lesson + .knowledge-lesson {
+  border-top: 1px solid var(--s-border);
+}
+
+@container knowledge (max-width: 760px) {
+  .knowledge-unit-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .knowledge-unit-name {
+    grid-column: 1 / -1;
+  }
+
+  .knowledge-unit-actions {
+    max-width: 230px;
+  }
+
+  .knowledge-chapter {
+    padding: .65rem;
+  }
+}
+
+@container knowledge (max-width: 420px) {
+  .knowledge-unit-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .knowledge-unit-actions {
+    justify-content: flex-start;
+    max-width: 100%;
+  }
+}

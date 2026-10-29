@@ -4,8 +4,17 @@ Tính các chỉ số học tập từ dữ liệu thật: results / result_answ
 Phân loại năng lực theo thang cố định (dùng lại ở Rule-based Recommendation, Phase 5).
 """
 from sqlalchemy.orm import Session
+import unicodedata
 
 from app.core.database import q_all, q_one, q_scalar
+
+MIN_TOPIC_QUESTIONS = 5
+TOPIC_REVIEW_THRESHOLD = 70
+
+
+def normalize_topic(value: str | None) -> str:
+    """Merge Unicode, whitespace and case variants; never guess synonyms."""
+    return ' '.join(unicodedata.normalize('NFC', value or '').split()).casefold()
 
 
 def level_for(score: float | None) -> str:
@@ -172,41 +181,77 @@ def overview(db: Session, user_id: int, course_id: int | None = None) -> dict:
 
 # Điểm theo chủ đề: từ chi tiết từng câu trả lời (result_answers), nhóm theo topic của câu hỏi.
 # Sắp xếp chủ đề yếu nhất lên đầu để bộ gợi ý dùng
-def topics(db: Session, user_id: int, course_id: int | None = None) -> list[dict]:
+def topics(db: Session, user_id: int, course_id: int | None = None, after_result_id: int | None = None) -> list[dict]:
     cf, cp = _course_filter(course_id)
     rows = q_all(
         db,
         f"""
-        SELECT q.topic,
-            COUNT(*)                                   AS answered,
-            SUM(ra.is_correct)                         AS correct,
-            ROUND(SUM(ra.is_correct) * 100.0 / COUNT(*), 1) AS avg_score
+        SELECT CASE WHEN ra.classification_version>0 THEN ra.topic_name ELSE q.topic END AS topic,
+            CASE WHEN ra.classification_version>0 THEN ra.topic_id ELSE q.topic_id END AS topic_id,
+            q.id AS question_id, ra.is_correct, qz.course_id,
+            r.id AS result_id, r.submit_time, qz.id AS quiz_id,qz.title AS quiz_title,
+            ra.classification_version,
+            c.title AS course_title, COALESCE(qz.review_lesson_id, qz.lesson_id) AS lesson_id
         FROM result_answers ra
         JOIN results r   ON r.id = ra.result_id
         JOIN questions q ON q.id = ra.question_id
         JOIN quizzes qz  ON qz.id = r.quiz_id
-        WHERE r.user_id = :uid AND q.topic IS NOT NULL AND {topic_scope("qz", "r")}
+        JOIN courses c ON c.id = qz.course_id
+        WHERE r.user_id = :uid
+        AND EXISTS (SELECT 1 FROM enrollments e WHERE e.user_id=:uid AND e.course_id=qz.course_id)
+        AND r.id = (SELECT MAX(rl.id) FROM results rl WHERE rl.user_id=r.user_id AND rl.quiz_id=r.quiz_id)
         { cf.replace("q.course_id", "qz.course_id") }
-        GROUP BY q.topic
-        ORDER BY avg_score ASC, answered DESC
+        AND (:after_id IS NULL OR r.id>:after_id)
+        ORDER BY qz.course_id, q.id
         """,
-        uid=user_id,
+        uid=user_id, after_id=after_result_id,
         **cp,
     )
-    # Gắn mức năng lực (Weak/Average/Good/Excellent) cho từng chủ đề
-    out = []
+    return summarize_topics(rows)
+
+
+def unclassified_answers(db: Session, user_id: int, course_id: int | None = None) -> int:
+    cf, cp = _course_filter(course_id)
+    return int(q_scalar(db, f"""
+        SELECT COUNT(DISTINCT q.id) FROM result_answers ra
+        JOIN results r ON r.id=ra.result_id JOIN questions q ON q.id=ra.question_id
+        JOIN quizzes qz ON qz.id=r.quiz_id
+        WHERE r.user_id=:uid AND (CASE WHEN ra.classification_version>0 THEN ra.topic_name ELSE q.topic END IS NULL OR TRIM(CASE WHEN ra.classification_version>0 THEN ra.topic_name ELSE q.topic END)='')
+        AND EXISTS (SELECT 1 FROM enrollments e WHERE e.user_id=:uid AND e.course_id=qz.course_id)
+        AND r.id=(SELECT MAX(rl.id) FROM results rl WHERE rl.user_id=r.user_id AND rl.quiz_id=r.quiz_id)
+        {cf.replace('q.course_id','qz.course_id')}
+    """, uid=user_id, **cp) or 0)
+
+
+def summarize_topics(rows: list[dict]) -> list[dict]:
+    """Content uses latest attempts, independently of the official grading policy."""
+    groups = {}
     for r in rows:
-        score = float(r["avg_score"]) if r["avg_score"] is not None else 0.0
-        out.append(
-            {
-                "topic": r["topic"],
-                "answered": int(r["answered"]),
-                "correct": int(r["correct"] or 0),
-                "avg_score": score,
-                "status": level_for(score),
-            }
-        )
-    return out
+        key = normalize_topic(r['topic'])
+        if not key:
+            continue
+        g = groups.setdefault((r['course_id'], r.get('topic_id') or key), dict(topic=' '.join(r['topic'].split()), topic_id=r.get('topic_id'),
+            course_id=r['course_id'], course_title=r['course_title'], answers={}, lesson_ids=set(), sources={}))
+        g['answers'][r['question_id']] = int(r['is_correct'] or 0)
+        if r.get('result_id'):
+            source=g['sources'].setdefault(r['result_id'],dict(result_id=r['result_id'],quiz_id=r['quiz_id'],quiz_title=r['quiz_title'],topic_name=r['topic'],submitted_at=str(r['submit_time']),answers={},reconstructed=r.get('classification_version')==1))
+            source['answers'][r['question_id']]=int(r['is_correct'] or 0)
+        if r.get('lesson_id'):
+            g['lesson_ids'].add(int(r['lesson_id']))
+    out = []
+    for g in groups.values():
+        answers = g.pop('answers')
+        n, correct = len(answers), sum(answers.values())
+        score = round(correct * 100 / n, 1)
+        for source in g['sources'].values():
+            source_answers=source.pop('answers')
+            source.update(answered=len(source_answers),correct=sum(source_answers.values()))
+        g.update(answered=n, correct=correct, avg_score=score, question_ids=sorted(answers), sources=list(g['sources'].values()),
+                 sufficient_data=n >= MIN_TOPIC_QUESTIONS,
+                 status=level_for(score) if n >= MIN_TOPIC_QUESTIONS else 'Insufficient',
+                 lesson_ids=sorted(g['lesson_ids']))
+        out.append(g)
+    return sorted(out, key=lambda t: (not t['sufficient_data'], t['avg_score'], -t['answered'], t['course_id'], t['topic']))
 
 
 # Lịch sử các lần làm 1 quiz theo thời gian + mức tiến bộ (điểm lần cuối - điểm lần đầu)

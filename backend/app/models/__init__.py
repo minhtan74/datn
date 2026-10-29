@@ -18,6 +18,7 @@ from sqlalchemy import (
     UniqueConstraint,
     func,
 )
+from sqlalchemy.dialects.mysql import TINYINT
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
@@ -189,7 +190,10 @@ class Question(Base):
     option_c: Mapped[str] = mapped_column(Text, nullable=False)
     option_d: Mapped[str] = mapped_column(Text, nullable=False)
     correct_answer: Mapped[str] = mapped_column(ANSWER_ENUM, nullable=False)
+    topic_id: Mapped[int | None] = mapped_column(ForeignKey("course_topics.id", ondelete="SET NULL"))
     topic: Mapped[str | None] = mapped_column(String(100))
+    knowledge_chapter_id: Mapped[int | None] = mapped_column(ForeignKey('chapters.id', ondelete='SET NULL'))
+    knowledge_lesson_id: Mapped[int | None] = mapped_column(ForeignKey('lessons.id', ondelete='SET NULL'))
     difficulty: Mapped[str | None] = mapped_column(DIFFICULTY_ENUM)
     explanation: Mapped[str | None] = mapped_column(Text)
     order_index: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
@@ -226,6 +230,7 @@ class QuizAttempt(Base):
     )
     started_ts: Mapped[int] = mapped_column(Integer, nullable=False)
     finished_ts: Mapped[int | None] = mapped_column(Integer)
+    shuffle_version: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
     result_id: Mapped[int | None] = mapped_column(ForeignKey("results.id", ondelete="SET NULL"))
 
 
@@ -240,6 +245,14 @@ class ResultAnswer(Base):
     question_id: Mapped[int] = mapped_column(
         ForeignKey("questions.id", ondelete="CASCADE"), nullable=False
     )
+    topic_id: Mapped[int | None] = mapped_column(Integer)
+    topic_name: Mapped[str | None] = mapped_column(String(100))
+    classification_version: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
+    knowledge_chapter_id: Mapped[int | None] = mapped_column(Integer)
+    knowledge_lesson_id: Mapped[int | None] = mapped_column(Integer)
+    knowledge_chapter_name: Mapped[str | None] = mapped_column(String(255))
+    knowledge_lesson_name: Mapped[str | None] = mapped_column(String(255))
+    knowledge_version: Mapped[int] = mapped_column(Integer, nullable=False, server_default='0')
     chosen: Mapped[str | None] = mapped_column(String(1))
     is_correct: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
 
@@ -256,7 +269,7 @@ class LearningAnalytics(Base):
     course_id: Mapped[int] = mapped_column(
         ForeignKey("courses.id", ondelete="CASCADE"), nullable=False
     )
-    avg_quiz_score: Mapped[float] = mapped_column(DECIMAL(5, 2), nullable=False, default=0)
+    avg_quiz_score: Mapped[float | None] = mapped_column(DECIMAL(5, 2), nullable=True)
     completion_pct: Mapped[float] = mapped_column(DECIMAL(5, 2), nullable=False, default=0)
     completed_lessons: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     total_lessons: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
@@ -281,7 +294,7 @@ class Recommendation(Base):
         ForeignKey("courses.id", ondelete="CASCADE")
     )
     level: Mapped[str] = mapped_column(
-        Enum("Weak", "Average", "Good", "Excellent", name="rec_level"), nullable=False
+        Enum("Weak", "Average", "Good", "Excellent", "Insufficient", "ContentBased", name="rec_level"), nullable=False
     )
     summary: Mapped[str] = mapped_column(String(255), nullable=False)
     items: Mapped[dict] = mapped_column(JSON, nullable=False)
@@ -321,3 +334,37 @@ __all__ = [
     "Quiz", "Question", "Result", "ResultAnswer", "LearningAnalytics",
     "Recommendation", "Payment",
 ]
+
+
+class CourseTopic(Base):
+    __tablename__ = 'course_topics'
+    __table_args__ = (UniqueConstraint('course_id','normalized_name',name='uq_course_topic'),)
+    id: Mapped[int] = mapped_column(Integer,primary_key=True,autoincrement=True)
+    course_id: Mapped[int] = mapped_column(ForeignKey('courses.id',ondelete='CASCADE'))
+    name: Mapped[str] = mapped_column(String(100))
+    normalized_name: Mapped[str] = mapped_column(String(200,collation='utf8mb4_bin'))
+    lesson_id: Mapped[int | None] = mapped_column(ForeignKey('lessons.id',ondelete='SET NULL'))
+    practice_quiz_id: Mapped[int | None] = mapped_column(ForeignKey('quizzes.id',ondelete='SET NULL'))
+    confirmed: Mapped[int] = mapped_column(TINYINT,nullable=False,server_default='0')
+
+
+class StudyCheckpoint(Base):
+    __tablename__ = 'study_checkpoints'
+    id: Mapped[int] = mapped_column(Integer,primary_key=True,autoincrement=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey('users.id',ondelete='CASCADE'))
+    topic_id: Mapped[int] = mapped_column(ForeignKey('course_topics.id',ondelete='CASCADE'))
+    baseline: Mapped[dict] = mapped_column(JSON)
+    baseline_result_id: Mapped[int] = mapped_column(Integer)
+    started_at: Mapped[dt.datetime] = mapped_column(TIMESTAMP,server_default=func.now())
+
+
+class KnowledgeStudyCheckpoint(Base):
+    __tablename__ = 'knowledge_study_checkpoints'
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+    course_id: Mapped[int] = mapped_column(ForeignKey('courses.id', ondelete='CASCADE'), nullable=False)
+    unit_kind: Mapped[str] = mapped_column(String(10), nullable=False)
+    unit_id: Mapped[int] = mapped_column(Integer, nullable=False)
+    baseline: Mapped[dict] = mapped_column(JSON, nullable=False)
+    baseline_result_id: Mapped[int] = mapped_column(Integer, nullable=False)
+    started_at: Mapped[dt.datetime] = mapped_column(TIMESTAMP, server_default=func.now(), nullable=False)

@@ -1,0 +1,587 @@
+[
+  {
+    "lesson_id": 1,
+    "course": "Python Cơ Bản Cho Người Mới Bắt Đầu",
+    "title": "Cài đặt Python & IDE",
+    "pages": 2,
+    "text_chars": 2882,
+    "os_original_preserved": false,
+    "sha256": "0ebd80e5466b85a9693f4d20b4225e847a0b39b52d9d57a3a4b3213906bfc635"
+  },
+  {
+    "lesson_id": 2,
+    "course": "Python Cơ Bản Cho Người Mới Bắt Đầu",
+    "title": "Biến và kiểu dữ liệu",
+    "pages": 2,
+    "text_chars": 2049,
+    "os_original_preserved": false,
+    "sha256": "359461d6d4c21cec4d010e8d48f3f732087d8e3dd20aa79d7174c24e4970e948"
+  },
+  {
+    "lesson_id": 3,
+    "course": "Python Cơ Bản Cho Người Mới Bắt Đầu",
+    "title": "Toán tử trong Python",
+    "pages": 2,
+    "text_chars": 1779,
+    "os_original_preserved": false,
+    "sha256": "99c6b83cdbdf18d805a51a041352121ec40f9b51db77e4f6be70d05f3eabd15c"
+  },
+  {
+    "lesson_id": 4,
+    "course": "Python Cơ Bản Cho Người Mới Bắt Đầu",
+    "title": "Câu lệnh if - else",
+    "pages": 2,
+    "text_chars": 1761,
+    "os_original_preserved": false,
+    "sha256": "fe137fa4307187f3681d8621da9984364430d18b2793f95036810f8152f91cf8"
+  },
+  {
+    "lesson_id": 5,
+    "course": "Python Cơ Bản Cho Người Mới Bắt Đầu",
+    "title": "Vòng lặp for, while",
+    "pages": 2,
+    "text_chars": 1845,
+    "os_original_preserved": false,
+    "sha256": "50726baa52279d89969c156dac5eb42eb8c505b9e8b46b3b21db194ef1e70886"
+  },
+  {
+    "lesson_id": 6,
+    "course": "Python Cơ Bản Cho Người Mới Bắt Đầu",
+    "title": "Định nghĩa và sử dụng hàm",
+    "pages": 2,
+    "text_chars": 1769,
+    "os_original_preserved": false,
+    "sha256": "bb18ec2cad30972693284b427c4508f1284be314cfcb98fd1fa62ed54c44b727"
+  },
+  {
+    "lesson_id": 7,
+    "course": "Python Cơ Bản Cho Người Mới Bắt Đầu",
+    "title": "Class và Object",
+    "pages": 2,
+    "text_chars": 1994,
+    "os_original_preserved": false,
+    "sha256": "2f34bc46a779853cc3a874636ba581fb7f666758b5b229856396c20b38ef7c04"
+  },
+  {
+    "lesson_id": 8,
+    "course": "Python Cơ Bản Cho Người Mới Bắt Đầu",
+    "title": "Kế thừa (Inheritance)",
+    "pages": 2,
+    "text_chars": 2128,
+    "os_original_preserved": false,
+    "sha256": "1e7888efa9f6a6f9aff3fdd5cb8dc08040793c7ffb966cc90a284d99e6c3674e"
+  },
+  {
+    "lesson_id": 9,
+    "course": "Python Cơ Bản Cho Người Mới Bắt Đầu",
+    "title": "Dự án nhỏ: Quản lý sinh viên",
+    "pages": 6,
+    "text_chars": 2203,
+    "os_original_preserved": false,
+    "sha256": "cd3d566c18409810ed4f9885b42bbe9f7f9c1ca317d6fbc09fc47106db5b80b0"
+  },
+  {
+    "lesson_id": 10,
+    "course": "JavaScript Từ Zero Đến Hero",
+    "title": "JavaScript là gì?",
+    "pages": 2,
+    "text_chars": 1749,
+    "os_original_preserved": false,
+    "sha256": "c741d05f8e55299c0f56106bfe9af1f444e4fd73cb35645d6b45603b44b40828"
+  },
+  {
+    "lesson_id": 11,
+    "course": "JavaScript Từ Zero Đến Hero",
+    "title": "Biến, kiểu dữ liệu & toán tử",
+    "pages": 2,
+    "text_chars": 2137,
+    "os_original_preserved": false,
+    "sha256": "62471e1cb2f92f488dbde2f5776f7d62334f98ea26eb1a244c4eb5a5614b9b91"
+  },
+  {
+    "lesson_id": 12,
+    "course": "JavaScript Từ Zero Đến Hero",
+    "title": "Hàm trong JavaScript",
+    "pages": 2,
+    "text_chars": 1934,
+    "os_original_preserved": false,
+    "sha256": "3b3d4ddf5e12aa0890da8cbd88d5d82aad85fdb5c667eae8e78c09cf453ba1b0"
+  },
+  {
+    "lesson_id": 13,
+    "course": "JavaScript Từ Zero Đến Hero",
+    "title": "Tổng quan về DOM",
+    "pages": 2,
+    "text_chars": 2002,
+    "os_original_preserved": false,
+    "sha256": "3d19f8846d990ffd1dc685c65729d1b67528e54e1fd9b491a4f8888704f0c77c"
+  },
+  {
+    "lesson_id": 14,
+    "course": "JavaScript Từ Zero Đến Hero",
+    "title": "Xử lý sự kiện click, submit",
+    "pages": 2,
+    "text_chars": 1984,
+    "os_original_preserved": false,
+    "sha256": "0fdc5e8b655eb073fd071bc02b37f031b4e2f40d4f16a19ba78cd988f99b96e4"
+  },
+  {
+    "lesson_id": 15,
+    "course": "JavaScript Từ Zero Đến Hero",
+    "title": "Dự án: To-do List",
+    "pages": 2,
+    "text_chars": 2107,
+    "os_original_preserved": false,
+    "sha256": "e59bb0031414737597a851c5c3f9e9413402eff2c062ebcfb2a9f77c76b71447"
+  },
+  {
+    "lesson_id": 16,
+    "course": "JavaScript Từ Zero Đến Hero",
+    "title": "Arrow function & Destructuring",
+    "pages": 2,
+    "text_chars": 2011,
+    "os_original_preserved": false,
+    "sha256": "7c59aea94061f87ad927dc6ee7df3d06de3fbdc20566a31662238adb506cf4b0"
+  },
+  {
+    "lesson_id": 17,
+    "course": "JavaScript Từ Zero Đến Hero",
+    "title": "Promise & Async/Await",
+    "pages": 2,
+    "text_chars": 2140,
+    "os_original_preserved": false,
+    "sha256": "d1d58a144df44a6b4fd9e12937099e677a5e6ec6c26d481aede89c8385583ed2"
+  },
+  {
+    "lesson_id": 18,
+    "course": "JavaScript Từ Zero Đến Hero",
+    "title": "Module & Fetch API",
+    "pages": 6,
+    "text_chars": 2160,
+    "os_original_preserved": false,
+    "sha256": "6c86155acd30eee79719c81237be2c1ef4d8e3fe6fe5404a45c5d2f1898bbf9d"
+  },
+  {
+    "lesson_id": 19,
+    "course": "Lập Trình Java Căn Bản",
+    "title": "Cài đặt JDK & IntelliJ",
+    "pages": 2,
+    "text_chars": 1993,
+    "os_original_preserved": false,
+    "sha256": "00f704fc5064f8042957598adacf316c9f63a93f1bd2e363235c4c085a819922"
+  },
+  {
+    "lesson_id": 20,
+    "course": "Lập Trình Java Căn Bản",
+    "title": "Biến, kiểu dữ liệu trong Java",
+    "pages": 2,
+    "text_chars": 2090,
+    "os_original_preserved": false,
+    "sha256": "675e21ec2dd2d1e2a3adaac263ac29adfa06a7298b0e4ee0ca4b166713bae935"
+  },
+  {
+    "lesson_id": 21,
+    "course": "Lập Trình Java Căn Bản",
+    "title": "Cấu trúc điều khiển",
+    "pages": 2,
+    "text_chars": 1984,
+    "os_original_preserved": false,
+    "sha256": "0a919296eee2e0778277e040cc82371f856abc6827855eb5b58c2dec14f0d9c2"
+  },
+  {
+    "lesson_id": 22,
+    "course": "Lập Trình Java Căn Bản",
+    "title": "Class, Object, Constructor",
+    "pages": 2,
+    "text_chars": 2311,
+    "os_original_preserved": false,
+    "sha256": "5297d995dfd8bd97993b128c49fc28130e764588bfa8df433c991ecc937a5140"
+  },
+  {
+    "lesson_id": 23,
+    "course": "Lập Trình Java Căn Bản",
+    "title": "Kế thừa & Đa hình",
+    "pages": 2,
+    "text_chars": 2319,
+    "os_original_preserved": false,
+    "sha256": "571a51d0d12770cfa67dd0726066dd7a53bf8565aa5eb8b2818f32489adf5b96"
+  },
+  {
+    "lesson_id": 24,
+    "course": "Lập Trình Java Căn Bản",
+    "title": "Interface & Abstract Class",
+    "pages": 2,
+    "text_chars": 2433,
+    "os_original_preserved": false,
+    "sha256": "9539d0a4da07a5fbec56d3a92b6453c175d884eee240a546f8bd45ef03cccd0c"
+  },
+  {
+    "lesson_id": 25,
+    "course": "Lập Trình Java Căn Bản",
+    "title": "Try-catch & Custom Exception",
+    "pages": 2,
+    "text_chars": 2308,
+    "os_original_preserved": false,
+    "sha256": "6c0bb7d6f08f3dbaab809ae06af796a0f66427812430c9ffd78a5cddb4a93b07"
+  },
+  {
+    "lesson_id": 26,
+    "course": "Lập Trình Java Căn Bản",
+    "title": "ArrayList & HashMap",
+    "pages": 2,
+    "text_chars": 2332,
+    "os_original_preserved": false,
+    "sha256": "b518eb528cb2c203da78a7a2f606c3fc94213b824f3eb161f8e69387e135384f"
+  },
+  {
+    "lesson_id": 27,
+    "course": "Lập Trình Java Căn Bản",
+    "title": "Dự án: Quản lý sản phẩm",
+    "pages": 5,
+    "text_chars": 2061,
+    "os_original_preserved": false,
+    "sha256": "da22f07c15b2fa5f9d4752481559d5a2572cf09d8c97aff99821a2637983b409"
+  },
+  {
+    "lesson_id": 28,
+    "course": "HTML & CSS Nhập Môn",
+    "title": "Cấu trúc tài liệu HTML",
+    "pages": 2,
+    "text_chars": 2412,
+    "os_original_preserved": false,
+    "sha256": "a1e78b2f5c69a049efde3c5cff5940d96a94fe7aa76e3aeb4b5aa92988bc75fd"
+  },
+  {
+    "lesson_id": 29,
+    "course": "HTML & CSS Nhập Môn",
+    "title": "Form và bảng biểu",
+    "pages": 2,
+    "text_chars": 2175,
+    "os_original_preserved": false,
+    "sha256": "b58b13eb340a4f8c658d55e25789b0087910b12f447f5083806db850fe31ca7e"
+  },
+  {
+    "lesson_id": 30,
+    "course": "HTML & CSS Nhập Môn",
+    "title": "Semantic HTML",
+    "pages": 2,
+    "text_chars": 2182,
+    "os_original_preserved": false,
+    "sha256": "42f59a5a133f32572b4119e9074a4b165923229f7c45108b90f1f88b70f31ec2"
+  },
+  {
+    "lesson_id": 31,
+    "course": "HTML & CSS Nhập Môn",
+    "title": "Selector & thuộc tính CSS",
+    "pages": 2,
+    "text_chars": 2511,
+    "os_original_preserved": false,
+    "sha256": "40da29ef00ffb190ba27512bf086a35d570c3a617218ed21856a4ec896107de5"
+  },
+  {
+    "lesson_id": 32,
+    "course": "HTML & CSS Nhập Môn",
+    "title": "Box Model & Flexbox",
+    "pages": 2,
+    "text_chars": 2148,
+    "os_original_preserved": false,
+    "sha256": "67e77e5b59a61b67f629df6dfd5214c0ac7c72aba7d77775d893a6a99b93f782"
+  },
+  {
+    "lesson_id": 33,
+    "course": "HTML & CSS Nhập Môn",
+    "title": "CSS Grid",
+    "pages": 2,
+    "text_chars": 1990,
+    "os_original_preserved": false,
+    "sha256": "ef761df5d16c839b42d7c22ea3644960ca750538cc76551da37e866149d62fa5"
+  },
+  {
+    "lesson_id": 34,
+    "course": "HTML & CSS Nhập Môn",
+    "title": "Media Query",
+    "pages": 2,
+    "text_chars": 2013,
+    "os_original_preserved": false,
+    "sha256": "857007c33c981d458fca0cba43e99e833912ea845bcb9da78714ac5cdac413d5"
+  },
+  {
+    "lesson_id": 35,
+    "course": "HTML & CSS Nhập Môn",
+    "title": "Mobile First Design",
+    "pages": 2,
+    "text_chars": 2065,
+    "os_original_preserved": false,
+    "sha256": "5ac2c8f11888334d7d9cf1cff108ebc08898000fcd154e92f138a704b089ddcd"
+  },
+  {
+    "lesson_id": 36,
+    "course": "HTML & CSS Nhập Môn",
+    "title": "Dự án: Landing Page Responsive",
+    "pages": 5,
+    "text_chars": 2176,
+    "os_original_preserved": false,
+    "sha256": "964d3ab294913a94a16681f78c4d8154d5777fda151e94ef868d3af4923ccf87"
+  },
+  {
+    "lesson_id": 37,
+    "course": "ReactJS Chuyên Sâu",
+    "title": "Giới thiệu React & JSX",
+    "pages": 2,
+    "text_chars": 2034,
+    "os_original_preserved": false,
+    "sha256": "89996059a1425943936d60b83a5d45bf1d35524932e9283ce1a4946d26e5d4c7"
+  },
+  {
+    "lesson_id": 38,
+    "course": "ReactJS Chuyên Sâu",
+    "title": "Component & Props",
+    "pages": 2,
+    "text_chars": 2097,
+    "os_original_preserved": false,
+    "sha256": "422297bef577447bc6d823aa8e1725b42784ef6dd25b84cd7ea4df384676ea90"
+  },
+  {
+    "lesson_id": 39,
+    "course": "ReactJS Chuyên Sâu",
+    "title": "State & useState",
+    "pages": 2,
+    "text_chars": 2350,
+    "os_original_preserved": false,
+    "sha256": "6298d8495da59833028704f5bba5170324cb035ed4784b5b6d04328b0ef89def"
+  },
+  {
+    "lesson_id": 40,
+    "course": "ReactJS Chuyên Sâu",
+    "title": "useEffect & vòng đời component",
+    "pages": 2,
+    "text_chars": 2102,
+    "os_original_preserved": false,
+    "sha256": "b45df02cab69f4645634f74696b12c3fea4ff4833283f27a6575b01749b8ba56"
+  },
+  {
+    "lesson_id": 41,
+    "course": "ReactJS Chuyên Sâu",
+    "title": "useContext & useReducer",
+    "pages": 2,
+    "text_chars": 2449,
+    "os_original_preserved": false,
+    "sha256": "34dc893013b479709555dbe6ffd78d59185079ee1056044baeee96c96b73cc12"
+  },
+  {
+    "lesson_id": 42,
+    "course": "ReactJS Chuyên Sâu",
+    "title": "Custom Hooks",
+    "pages": 2,
+    "text_chars": 2405,
+    "os_original_preserved": false,
+    "sha256": "7703c19e9389b78e5c9b8dae292bbf824ff944313ea8e363e7a1737ea41d84d0"
+  },
+  {
+    "lesson_id": 43,
+    "course": "ReactJS Chuyên Sâu",
+    "title": "Kết nối API với Axios",
+    "pages": 2,
+    "text_chars": 2434,
+    "os_original_preserved": false,
+    "sha256": "17e283dc94cedb2d495bc3d9a36f3053144c1cba7c1d5516a51a9784e3388f13"
+  },
+  {
+    "lesson_id": 44,
+    "course": "ReactJS Chuyên Sâu",
+    "title": "Routing với React Router",
+    "pages": 2,
+    "text_chars": 2630,
+    "os_original_preserved": false,
+    "sha256": "4f1622c77c54529184766312f5d76a9d0cae29ccae40a99906e56b5ca190534d"
+  },
+  {
+    "lesson_id": 45,
+    "course": "ReactJS Chuyên Sâu",
+    "title": "Dự án: Trang quản lý khoá học",
+    "pages": 5,
+    "text_chars": 2322,
+    "os_original_preserved": false,
+    "sha256": "1714ceb47b408396cac34f38067f1441be8912a8bca39d6fc04728e89d1d5da1"
+  },
+  {
+    "lesson_id": 46,
+    "course": "MySQL & Thiết Kế Cơ Sở Dữ Liệu",
+    "title": "Khái niệm cơ sở dữ liệu",
+    "pages": 3,
+    "text_chars": 3600,
+    "os_original_preserved": false,
+    "sha256": "df4dbc76fbba89ebd9d97e3123efe33a9671d2f65b581cbd9b52c82c0fb0889c"
+  },
+  {
+    "lesson_id": 47,
+    "course": "MySQL & Thiết Kế Cơ Sở Dữ Liệu",
+    "title": "Cài đặt MySQL & Workbench",
+    "pages": 2,
+    "text_chars": 2313,
+    "os_original_preserved": false,
+    "sha256": "6276074f68a7c5ed02f4369c563daad745c7cde5a1142fdf5ece615b083f25cf"
+  },
+  {
+    "lesson_id": 48,
+    "course": "MySQL & Thiết Kế Cơ Sở Dữ Liệu",
+    "title": "Câu lệnh SELECT cơ bản",
+    "pages": 2,
+    "text_chars": 2207,
+    "os_original_preserved": false,
+    "sha256": "854c3f03907698463000c79c5d26f39ade09f265810df38abf6e782ebff756f2"
+  },
+  {
+    "lesson_id": 49,
+    "course": "MySQL & Thiết Kế Cơ Sở Dữ Liệu",
+    "title": "JOIN nhiều bảng",
+    "pages": 2,
+    "text_chars": 2225,
+    "os_original_preserved": false,
+    "sha256": "b208d5e1bf2168245f9d62cd742801ef97678be93e434765465a5c6010af7d36"
+  },
+  {
+    "lesson_id": 50,
+    "course": "MySQL & Thiết Kế Cơ Sở Dữ Liệu",
+    "title": "GROUP BY & Aggregate Function",
+    "pages": 2,
+    "text_chars": 2129,
+    "os_original_preserved": false,
+    "sha256": "264f75c79c6c7758f5c206639ca04201d61f073a0506cba805070e5e83ada572"
+  },
+  {
+    "lesson_id": 51,
+    "course": "MySQL & Thiết Kế Cơ Sở Dữ Liệu",
+    "title": "Subquery & View",
+    "pages": 2,
+    "text_chars": 2371,
+    "os_original_preserved": false,
+    "sha256": "93040c9bb68e04fb95de184dd0f59d080d74c927afc0c8497d9286a881c188cf"
+  },
+  {
+    "lesson_id": 52,
+    "course": "MySQL & Thiết Kế Cơ Sở Dữ Liệu",
+    "title": "Chuẩn hoá dữ liệu (1NF-3NF)",
+    "pages": 2,
+    "text_chars": 2541,
+    "os_original_preserved": false,
+    "sha256": "742c2c4fc19133826c506258f883d2f28bfe2ff2c2139cb8fc3862eaff03b40b"
+  },
+  {
+    "lesson_id": 53,
+    "course": "MySQL & Thiết Kế Cơ Sở Dữ Liệu",
+    "title": "Thiết kế ERD",
+    "pages": 2,
+    "text_chars": 2247,
+    "os_original_preserved": false,
+    "sha256": "6217272b824a65895ab64a001bc438275ada7d0bef69eb377c140f990888ccd2"
+  },
+  {
+    "lesson_id": 54,
+    "course": "MySQL & Thiết Kế Cơ Sở Dữ Liệu",
+    "title": "Dự án: Thiết kế CSDL website học trực tuyến",
+    "pages": 5,
+    "text_chars": 2808,
+    "os_original_preserved": false,
+    "sha256": "940631f8c355cb5bb450aea91ed23abd0cf9ef96effb44d380e8e687ad32d29d"
+  },
+  {
+    "lesson_id": 55,
+    "course": "Nguyên Lí HDH",
+    "title": "Bài 1: Khái niệm về hệ điều hành",
+    "pages": 2,
+    "text_chars": 3153,
+    "os_original_preserved": true,
+    "sha256": "6931dffa4f9bf943d2cdaf3e893ba106698d010a9718311d2c43ecf975ae605d"
+  },
+  {
+    "lesson_id": 56,
+    "course": "Nguyên Lí HDH",
+    "title": "Bài 2: Phân loại hệ điều hành",
+    "pages": 4,
+    "text_chars": 9193,
+    "os_original_preserved": true,
+    "sha256": "a756f4292502ad79983964fca8f720822426369add6357f8dabfb6a281c9e202"
+  },
+  {
+    "lesson_id": 57,
+    "course": "Nguyên Lí HDH",
+    "title": "Bài 3: Nhu cầu xử lí đồng thời",
+    "pages": 2,
+    "text_chars": 1906,
+    "os_original_preserved": true,
+    "sha256": "79c76e0304205a38b94a4afbfa6bf42ec6196643b351b32486a514c79ebd73c1"
+  },
+  {
+    "lesson_id": 58,
+    "course": "Nguyên Lí HDH",
+    "title": "Bài 4: Khái niệm tiến trình và mô hình đa tiến trình",
+    "pages": 2,
+    "text_chars": 2428,
+    "os_original_preserved": true,
+    "sha256": "547dac7592e4a4d42759decd69d2b3fea88ee9c093564f58741d834eee31b12f"
+  },
+  {
+    "lesson_id": 59,
+    "course": "Nguyên Lí HDH",
+    "title": "Bài 5: Khái niệm tiến trình và mô hình tiểu tiến trình",
+    "pages": 3,
+    "text_chars": 4111,
+    "os_original_preserved": true,
+    "sha256": "45a19aef0ffb29785f1b3ca8cfb295145d0dc3d842ffb092ed67513ae1a36a51"
+  },
+  {
+    "lesson_id": 60,
+    "course": "Nguyên Lí HDH",
+    "title": "Bài 6: Tổ chức quản lí tiến trình",
+    "pages": 6,
+    "text_chars": 9709,
+    "os_original_preserved": true,
+    "sha256": "eedf9fae2d59231670a2bbf79370fd912320df283c7f4b4ce12622f34cbf07cc"
+  },
+  {
+    "lesson_id": 61,
+    "course": "Nguyên Lí HDH",
+    "title": "Bài 7: Lập trình tiến trình",
+    "pages": 12,
+    "text_chars": 17950,
+    "os_original_preserved": true,
+    "sha256": "77223c0c7449d9de96dafb03278e066ef6cc10b2de7704f5f61659a7cd72d0e3"
+  },
+  {
+    "lesson_id": 62,
+    "course": "Nguyên Lí HDH",
+    "title": "Bài 8: Liên lạc tiến trình",
+    "pages": 2,
+    "text_chars": 2904,
+    "os_original_preserved": true,
+    "sha256": "de3dd41523133525b6f13eed205f94b73e89d9a0b24710977a368e04f2946784"
+  },
+  {
+    "lesson_id": 63,
+    "course": "Nguyên Lí HDH",
+    "title": "Bài 9: Các cơ chế thông tin liên lạc",
+    "pages": 6,
+    "text_chars": 8502,
+    "os_original_preserved": true,
+    "sha256": "05a4af73566cc2a2ab3196788b637c46808fd9890a9ad5816ce1103bd402110a"
+  },
+  {
+    "lesson_id": 64,
+    "course": "Nguyên Lí HDH",
+    "title": "Bài 10: Nhu cầu đồng bộ hóa",
+    "pages": 3,
+    "text_chars": 4990,
+    "os_original_preserved": true,
+    "sha256": "35dce82c1440778e427ebec7c49abd85cb2c1e531879cefcffeb3f5f5e25f95e"
+  },
+  {
+    "lesson_id": 65,
+    "course": "Nguyên Lí HDH",
+    "title": "Bài 11: Các giải pháp đồng bộ hóa",
+    "pages": 12,
+    "text_chars": 19094,
+    "os_original_preserved": true,
+    "sha256": "6f7f504385a1c4c85620f62f79928d178a107b321a99e2b5ead920adcfbdaa5b"
+  }
+]

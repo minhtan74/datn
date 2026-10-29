@@ -1,0 +1,3 @@
+# Rebuildable embedding vectors and temporary example compilation output
+generated/*.rag.json
+generated/code_checks/

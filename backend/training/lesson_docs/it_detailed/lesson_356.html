@@ -1,0 +1,77 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Cấu trúc dữ liệu và giải thuật cơ bản</div>
+<p class="path">Chương 3: Phân tích thuật toán và đệ quy · Bài 2</p>
+<h1>Đệ quy và ngăn xếp lời gọi</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Cấu trúc dữ liệu và giải thuật cơ bản.</li><li>Chương 3: Phân tích thuật toán và đệ quy.</li><li>Các bài trong chương: Big-O, bất biến và kiểm tra thuật toán; Đệ quy và ngăn xếp lời gọi.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Xác định trường hợp cơ sở, bước tiến triển và chi phí của lời giải đệ quy.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Hàm đệ quy gọi lại chính nó để giải bài toán nhỏ hơn. Cần có trường hợp cơ sở và đại lượng giảm tới trường hợp đó. Với giai thừa n không âm: 0! = 1 và n! = n*(n-1)!. Nếu không kiểm tra miền đầu vào, lời gọi với số âm có thể không bao giờ tới cơ sở.</p>
+<p>Mỗi lời gọi lưu trạng thái trên ngăn xếp lời gọi. Tính giai thừa theo cách trên có n bước và độ sâu O(n). Đệ quy không tự làm thuật toán nhanh hơn; phiên bản lặp có thể giảm bộ nhớ phụ.</p>
+<p>Một bài toán chia thành nhiều nhánh có thể lặp lại tính toán. Fibonacci đệ quy trực tiếp tính nhiều lần cùng giá trị; memoization lưu lời giải bài toán con để tái sử dụng. Phải phân biệt số lời gọi với độ sâu ngăn xếp. Trong thực tế, giới hạn ngăn xếp có thể làm đệ quy sâu thất bại.</p>
+<h2>1. Ba câu hỏi bắt buộc</h2>
+<p>Đầu vào nào hợp lệ? Khi nào giải trực tiếp? Mỗi lời gọi tiến gần cơ sở bằng cách nào? Thiếu một câu trả lời có thể gây không kết thúc hoặc xử lý sai biên. Không đặt cơ sở theo cảm tính chỉ để chương trình dừng.</p>
+<h2>2. Giai thừa và điều kiện miền</h2>
+<pre><code>def factorial(n):
+    if not isinstance(n, int) or isinstance(n, bool) or n &lt; 0:
+        raise ValueError('n must be a non-negative integer')
+    def solve(k):
+        if k == 0:
+            return 1
+        return k * solve(k - 1)
+    return solve(n)
+
+assert factorial(0) == 1
+assert factorial(5) == 120</code></pre>
+<p>Ví dụ dùng số nhỏ để học; Python giới hạn độ sâu đệ quy. Với dữ liệu lớn nên lựa chọn cách lặp hoặc hàm thư viện phù hợp, không tự tăng giới hạn ngăn xếp để che thiết kế.</p>
+<h2>3. Truy vết thời gian và bộ nhớ</h2>
+<p>factorial(3) tạo các lời gọi 3,2,1,0 rồi trả ngược. Số phép nhân là ba, ngăn xếp sâu tuyến tính. Với Fibonacci trực tiếp, cây lời gọi có các nhánh lặp; độ sâu không bằng tổng số nút trong cây. Memoization giảm tính lại bằng bộ nhớ lưu kết quả.</p>
+<h2>4. Bài tập có hướng giải</h2>
+<p>Viết tổng danh sách bằng đệ quy với chỉ số thay vì cắt danh sách ở mỗi bước. Cơ sở index==len(values) trả 0; bước tiếp cộng values[index]. Phân tích O(n) thời gian và O(n) ngăn xếp trong mô hình phép cộng hằng số. Kiểm thử danh sách rỗng, âm và một phần tử; ghi rõ giả định về kích thước số nguyên nếu phân tích chi phí bit.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>Viết giả mã giai thừa có kiểm tra n&gt;=0. Vẽ cây lời gọi Fibonacci(5) và đánh dấu các giá trị được tính lại; đề xuất cách lưu kết quả.</p>
+</div>
+<h2>Hướng giải bài tập bổ sung</h2>
+<p>Có cơ sở, miền đầu vào và bước tiến triển rõ ràng. Memoization tránh tính lại, còn vòng lặp có thể tránh ngăn xếp sâu cho giai thừa.</p>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Đệ quy kết thúc thường cần gì?</li><li>Giá trị 0! theo định nghĩa thông thường là gì?</li><li>Ngăn xếp lời gọi lưu gì?</li><li>Memoization giúp gì?</li><li>Đệ quy có luôn nhanh hơn lặp không?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Cơ sở và bước tiến tới cơ sở. Bài toán phải giảm tới tình huống giải trực tiếp.</li><li>1. 0! = 1 làm cơ sở cho công thức giai thừa.</li><li>Trạng thái các lời gọi chưa hoàn tất. Lời gọi con trả về để tiếp tục lời gọi cha.</li><li>Tái sử dụng kết quả bài toán con. Các trạng thái đã giải được lưu lại.</li><li>Không. Thời gian và bộ nhớ phụ thuộc cách phân rã và triển khai.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://opendatastructures.org/</li><li>https://docs.python.org/3/tutorial/datastructures.html</li><li>https://docs.python.org/3/library/heapq.html</li></ul></body></html>

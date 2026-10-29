@@ -1,0 +1,70 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Mạng máy tính cơ bản</div>
+<p class="path">Chương 6: Chẩn đoán và bài thực hành tổng hợp · Bài 2</p>
+<h1>Dự án nhỏ: thiết kế mạng cho phòng học</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Mạng máy tính cơ bản.</li><li>Chương 6: Chẩn đoán và bài thực hành tổng hợp.</li><li>Các bài trong chương: Chẩn đoán lỗi mạng theo từng lớp; Dự án nhỏ: thiết kế mạng cho phòng học.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Tổng hợp địa chỉ, phân vùng, dịch vụ và kiểm tra nghiệm thu thành một phương án mạng.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Một thiết kế nhập môn cần danh sách thiết bị, nhóm người dùng, nhu cầu truy cập và sơ đồ logic. Tách yêu cầu khỏi giải pháp: số máy và nhu cầu của khách là yêu cầu; VLAN và dải IP là lựa chọn triển khai. Không cấp địa chỉ trước khi ước lượng số host cần dùng.</p>
+<p>Chọn các mạng con không chồng lấn, địa chỉ gateway, vùng DHCP và địa chỉ dành riêng cho hạ tầng. Ghi resolver DNS, đường ra Internet và các luồng bị giới hạn. Đề xuất vị trí AP dựa trên khảo sát, không chỉ số lượng thiết bị.</p>
+<p>Bàn giao gồm sơ đồ, bảng địa chỉ, chính sách, kế hoạch kiểm tra và cách khôi phục. Chất lượng được đánh giá bằng bằng chứng: máy học viên có cấu hình đúng, web hoạt động, khách bị cách ly và lỗi có thể được chẩn đoán. Quiz chỉ kiểm tra quyết định thiết kế, không tự chấm sản phẩm thực hành.</p>
+<h2>1. Đề bài và phạm vi sản phẩm</h2>
+<p>Thiết kế mạng lab có 20 máy học viên, 2 máy giảng viên, một máy chủ học tập và tối đa 10 khách không dây. Học viên cần LMS và Internet; khách không được vào vùng quản trị. Ghi các giả định như thiết bị hỗ trợ VLAN, có kết nối Internet mô phỏng hoặc đường ra được phép.</p>
+<h2>2. Một phương án địa chỉ minh họa</h2>
+<pre><code>Vùng       Mạng                 Gateway         Địa chỉ dành riêng
+Student    192.168.10.0/24      .1              .2-.20
+Teacher    192.168.20.0/24      .1              .2-.20
+Guest      192.168.30.0/24      .1              .2-.20</code></pre>
+<p>Đây là phương án dễ quản lý cho lab, không tối ưu tiết kiệm địa chỉ. Có thể đề xuất subnet nhỏ hơn nếu giải thích đủ số host và dự phòng. Pool .50–.200 chỉ là lựa chọn minh họa trong từng mạng, không cấp chung một pool cho cả ba VLAN.</p>
+<h2>3. Hồ sơ phải nộp</h2>
+<ol><li>Sơ đồ vật lý và logic, đánh dấu AP, access, trunk và gateway.</li><li>Bảng địa chỉ, DHCP, DNS, route và quyền truy cập.</li><li>Kế hoạch cấu hình từng bước cùng cách hoàn nguyên.</li><li>Ít nhất sáu ca nghiệm thu có kết quả mong đợi, thực tế và bằng chứng.</li><li>Nhật ký một lỗi được đưa vào lab có kiểm soát và quá trình chẩn đoán.</li></ol>
+<h2>4. Tiêu chí tự đánh giá</h2>
+<p>Chấm theo bốn nhóm: thiết kế đáp ứng yêu cầu; địa chỉ và dịch vụ nhất quán; phân vùng được kiểm chứng; hồ sơ tái hiện được. Không coi đạt quiz là hoàn thành cấu hình. Lời giải tốt có cả ca Student vào LMS thành công và Guest vào quản trị bị chặn; nếu dùng giả lập phải ghi giới hạn so với thiết bị thật. Ghi rõ phần chưa kiểm tra thay vì tự điền kết quả thành công.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>Nộp sơ đồ hai vùng, bảng IP/gateway/DHCP, ba quy tắc truy cập và năm ca nghiệm thu. Thực hiện bằng mô phỏng hoặc mạng lab được phép; ghi ảnh bằng chứng không chứa bí mật.</p>
+</div>
+<h2>Hướng giải bài tập bổ sung</h2>
+<p>Tiêu chí đạt: dải IP không trùng; gateway thuộc mạng host; DHCP không cấp địa chỉ dành riêng; có cả kiểm tra được phép, bị chặn và tình huống DNS lỗi.</p>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Trước khi chọn mạng con cần biết gì?</li><li>Hai mạng con dùng cho hai vùng nên có đặc điểm gì?</li><li>DHCP pool cần tránh cấp gì?</li><li>Nghiệm thu cách ly khách cần làm gì?</li><li>Quiz của dự án có tự chứng nhận cấu hình thực tế đúng không?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Số host và nhu cầu kết nối. Yêu cầu dung lượng và luồng truy cập quyết định thiết kế.</li><li>Không chồng lấn địa chỉ. Dải không chồng lấn giúp định tuyến và quản lý rõ ràng.</li><li>Địa chỉ đã dành riêng cho hạ tầng. Tránh xung đột giữa cấp động và địa chỉ dành riêng.</li><li>Thử cả truy cập Internet và truy cập nội bộ bị cấm. Cần chứng minh chức năng và ràng buộc đều hoạt động.</li><li>Không, cần sản phẩm và bằng chứng thực hành. Câu hỏi lý thuyết không thay thế kiểm chứng triển khai.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://www.netacad.com/courses/networking-basics</li><li>https://developer.mozilla.org/en-US/docs/Web/HTTP</li></ul></body></html>

@@ -155,6 +155,7 @@ export default function AppRoutes() {
         <Route path="stats" element={<Navigate to="/teacher/reports" replace />} />
         <Route path="profile" element={<TeacherProfile />} />
         <Route path="documents" element={<TeacherDocuments />} />
+        <Route path="topics" element={<Navigate to="/teacher/quizzes" replace />} />
         {/* AI Quiz Generator đã gộp vào trang Quiz (tab "Tạo bằng AI"); giữ đường dẫn cũ để chuyển hướng */}
         <Route path="ai-quiz" element={<AiQuizRedirect />} />
       </Route>

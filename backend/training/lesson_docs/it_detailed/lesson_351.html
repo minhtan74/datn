@@ -1,0 +1,70 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Mạng máy tính cơ bản</div>
+<p class="path">Chương 5: Giao vận và vận hành an toàn · Bài 1</p>
+<h1>Cổng, socket và vòng đời kết nối TCP</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Mạng máy tính cơ bản.</li><li>Chương 5: Giao vận và vận hành an toàn.</li><li>Các bài trong chương: Cổng, socket và vòng đời kết nối TCP; Tường lửa và phân vùng truy cập.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Phân biệt cổng dịch vụ với địa chỉ IP; mô tả bắt tay TCP.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Địa chỉ IP nhận diện giao diện ở tầng mạng; cổng giúp phân biệt ứng dụng ở tầng giao vận. Một dịch vụ lắng nghe tại địa chỉ và cổng, còn client thường dùng cổng nguồn tạm thời. Cùng số cổng nhưng TCP và UDP là hai không gian khác nhau.</p>
+<p>TCP mở kết nối điển hình bằng SYN, SYN-ACK, ACK. Số thứ tự và xác nhận hỗ trợ truyền luồng byte có thứ tự. TCP không giữ ranh giới thông điệp ứng dụng; chương trình cần tự xác định độ dài hoặc ký hiệu kết thúc thông điệp. Đóng kết nối và timeout cũng cần được xử lý.</p>
+<p>Một phiên TCP thường được nhận diện bằng cặp IP/cổng hai đầu trong ngữ cảnh giao thức. Không thể kết luận dịch vụ an toàn chỉ vì dùng cổng quen thuộc. Khi kiểm tra kết nối, phân biệt không tới được host, không có dịch vụ lắng nghe, bị lọc và sai giao thức ứng dụng.</p>
+<h2>1. Nhận diện phiên trao đổi</h2>
+<p>Endpoint giao vận gồm địa chỉ và cổng trong ngữ cảnh giao thức. Hai kết nối tới cùng web server được phân biệt bằng các endpoint nguồn/đích. Cổng 443 là quy ước phổ biến cho HTTPS, không phải bằng chứng tự thân về TLS; kiểm tra giao thức thực tế và cấu hình dịch vụ.</p>
+<h2>2. Trình tự mở và đóng</h2>
+<p>Client gửi SYN với số thứ tự ban đầu; server phản hồi SYN-ACK; client ACK. Mỗi bên quản lý số thứ tự và xác nhận. Mất gói có thể dẫn tới truyền lại; dữ liệu nhận có thể được sắp lại trước khi ứng dụng đọc. Đóng có trật tự có thể trao đổi FIN/ACK, còn RST biểu thị kết thúc đột ngột trong những tình huống thích hợp.</p>
+<h2>3. Bài toán ranh giới thông điệp</h2>
+<pre><code>Ứng dụng gửi hai lần: "HELLO" rồi "WORLD"
+Ứng dụng nhận có thể đọc: "HEL" và "LOWORLD"
+Hoặc đọc một lần: "HELLOWORLD"</code></pre>
+<p>Không coi mỗi recv tương ứng đúng một send. Một giao thức ứng dụng có thể dùng độ dài đầu thông điệp hoặc dấu phân cách có quy tắc escape. Cần xử lý đọc thiếu, hết kết nối và timeout.</p>
+<h2>4. Lập luận xử lý lỗi</h2>
+<p>Connection refused có thể do không có listener hoặc thiết bị chủ động từ chối. Timeout có nhiều nguyên nhân như mất gói, lọc hoặc đường đi lỗi. Cả hai khác lỗi xác thực HTTP sau khi kết nối đã mở.</p>
+<p>Tự luyện: vẽ hai client cùng dùng nguồn 51000 nhưng IP khác, kết nối server:443; chỉ ra vì sao không trùng phiên. Nộp thiết kế tách thông điệp dạng độ dài và ví dụ nhận thành ba mảnh. Đáp án cần giữ bộ đệm tới khi đủ độ dài, không parse ngay mảnh đầu.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>Vẽ ba bước bắt tay. Giải thích tại sao hai lần ghi dữ liệu ở ứng dụng không bảo đảm bên nhận có đúng hai lần đọc tương ứng. Chỉ thử kết nối tới dịch vụ lab bạn được phép dùng.</p>
+</div>
+<h2>Hướng giải bài tập bổ sung</h2>
+<p>TCP là luồng byte; ứng dụng phải đóng khung thông điệp. Bắt tay thành công chưa chứng minh đăng nhập hoặc nghiệp vụ thành công.</p>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Cổng ở tầng giao vận giúp phân biệt điều gì?</li><li>Bắt tay TCP điển hình có thứ tự nào?</li><li>TCP cung cấp kiểu dữ liệu trao đổi nào?</li><li>Hai client cùng truy cập cổng 443 có thể được phân biệt nhờ gì?</li><li>Kết nối TCP thành công chứng minh điều gì?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Ứng dụng hoặc dịch vụ. Cổng tách các endpoint ứng dụng trên host.</li><li>SYN, SYN-ACK, ACK. Ba bước đồng bộ và xác nhận mở kết nối.</li><li>Luồng byte có thứ tự. TCP không bảo toàn ranh giới thông điệp ứng dụng.</li><li>IP và cổng hai đầu kết nối. Các endpoint phân biệt từng kết nối TCP.</li><li>Đã thiết lập kết nối giao vận tới endpoint. Giao vận thành công không đồng nghĩa nghiệp vụ thành công.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://www.netacad.com/courses/networking-basics</li><li>https://developer.mozilla.org/en-US/docs/Web/HTTP</li></ul></body></html>

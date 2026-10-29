@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "result_lesson_breakdown": true,
+    "study_and_practice_links": true,
+    "explainable_evidence": true,
+    "current_knowledge_on_progress": true,
+    "chapter_link_opens_correct_chapter": true,
+    "mobile_no_horizontal_overflow": true,
+    "teacher_chapter_scope_locked": true,
+    "teacher_can_select_lesson": true
+  },
+  "js_errors": []
+}

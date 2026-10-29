@@ -69,7 +69,7 @@ cd ..\backend
 - JWT payload giữ khoá `id` (không phải `user_id`) + `fullname/email/role` để frontend không đổi.
 - Quy ước route giữ nguyên kiểu bản PHP: 1 URL / resource, phân biệt bằng method + query
   (`?id=`, `?course_id=`, `?weekly=1`, `?ids_only=1`), `id` nằm trong body khi `PUT`.
-- Side effect được port đúng: `POST /api/progress` tự enroll; `POST /api/payments` mock-complete + enroll.
+- Khóa có phí chỉ thanh toán qua `POST /api/payments/vnpay/create`; xác nhận VNPay thành công mới ghi danh. `POST /api/payments` chỉ hỗ trợ ghi danh khóa miễn phí.
 - `GET /api/reports/summary` chỉ cho admin (đề bài bỏ Admin khỏi phạm vi chính — endpoint vẫn giữ, không phát triển thêm).
 
 Danh sách endpoint: xem `../docs/api.md`.

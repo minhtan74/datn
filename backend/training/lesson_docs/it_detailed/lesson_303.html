@@ -1,0 +1,67 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Mạng máy tính cơ bản</div>
+<p class="path">Chương 1: Nền tảng kết nối mạng · Bài 1</p>
+<h1>Mô hình TCP/IP và thiết bị mạng</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Mạng máy tính cơ bản.</li><li>Chương 1: Nền tảng kết nối mạng.</li><li>Các bài trong chương: Mô hình TCP/IP và thiết bị mạng; Địa chỉ IPv4 và mạng con.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Phân biệt chức năng các tầng và thiết bị mạng cơ bản.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Mạng máy tính cho phép các thiết bị trao đổi dữ liệu theo giao thức chung. Mô hình TCP/IP thường được trình bày với bốn tầng: ứng dụng, giao vận, Internet và truy nhập mạng. HTTP và DNS thuộc tầng ứng dụng; TCP và UDP thuộc tầng giao vận; IP thực hiện địa chỉ hóa và chuyển gói ở tầng Internet.</p>
+<p>Switch chuyển tiếp khung trong mạng LAN dựa trên địa chỉ MAC. Router chuyển tiếp gói giữa các mạng IP dựa trên bảng định tuyến. Điểm truy cập không dây kết nối thiết bị Wi-Fi vào mạng; không nên đồng nhất mọi điểm truy cập với router dù thiết bị gia đình thường tích hợp nhiều chức năng.</p>
+<p>TCP cung cấp luồng byte có thứ tự và cơ chế truyền lại. UDP gửi datagram, không tự bảo đảm giao hàng hoặc thứ tự. Ứng dụng chọn giao thức theo nhu cầu; không thể kết luận UDP luôn tốt hơn TCP.</p>
+<h2>1. Từ yêu cầu người dùng đến dữ liệu trên đường truyền</h2>
+<p>Giả sử học viên mở trang khóa học. Ứng dụng tạo yêu cầu HTTP; giao vận quản lý trao đổi giữa các tiến trình; tầng Internet xử lý địa chỉ và đường đi; tầng truy nhập mạng chuyển khung trên liên kết hiện tại. Khi nhận, máy đích xử lý theo chiều ngược lại. Đây là cách nhìn theo chức năng, không phải mỗi tầng luôn tương ứng một thiết bị riêng.</p>
+<ul><li>Tầng ứng dụng: nội dung và quy tắc trao đổi của dịch vụ, ví dụ HTTP, DNS.</li><li>Tầng giao vận: endpoint ứng dụng và cơ chế vận chuyển, ví dụ TCP, UDP.</li><li>Tầng Internet: gói IP, địa chỉ nguồn/đích và chuyển tiếp qua mạng.</li><li>Tầng truy nhập: khung Ethernet hoặc kết nối vô tuyến của chặng hiện tại.</li></ul>
+<h2>2. Chọn thiết bị theo vai trò</h2>
+<p>Một switch lớp 2 chuyển khung trong LAN, router nối các mạng IP, AP cung cấp truy nhập Wi-Fi. Thiết bị tích hợp ở nhà có thể làm cả router, switch, AP, DHCP và NAT. Hãy gọi tên chức năng đang xét thay vì suy luận mọi hộp có anten đều chỉ là AP.</p>
+<h2>3. Truy vết có hướng dẫn</h2>
+<ol><li>Máy học viên biết địa chỉ IP của máy chủ qua DNS hoặc bộ đệm.</li><li>Máy xác định đích cùng mạng hay cần gửi qua gateway.</li><li>Giao vận và IP đóng gói dữ liệu; liên kết tạo khung cho chặng kế tiếp.</li><li>Router kiểm tra địa chỉ đích, chuyển gói bằng liên kết thích hợp.</li><li>Máy chủ đưa dữ liệu lên ứng dụng và tạo phản hồi.</li></ol>
+<p>Không có yêu cầu rằng gói đi và gói về phải qua cùng một dãy router.</p>
+<h2>4. Bài tập phân tích và lời giải</h2>
+<p>Một máy vẫn liên lạc được máy in nội bộ nhưng không ra Internet. Có thể bỏ qua mọi lỗi LAN không? Không: kết quả chỉ chứng minh đường tới máy in hoạt động. Tiếp tục kiểm tra gateway, route, DNS và dịch vụ đích. Không thay ngay switch chỉ vì website không mở.</p>
+<p>Hãy vẽ hai host, switch, router và server; ghi địa chỉ IP, MAC và cổng ở nơi chúng có ý nghĩa. Đạt yêu cầu khi giải thích được khác nhau giữa chuyển khung trong LAN và định tuyến IP.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>vẽ đường đi từ máy tính qua switch và router tới máy chủ; ghi giao thức ứng dụng và giao vận tại mỗi đầu.</p>
+</div>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>HTTP thuộc tầng nào của mô hình TCP/IP?</li><li>Thiết bị nào thường chuyển tiếp gói giữa hai mạng IP?</li><li>Switch lớp 2 thường chuyển tiếp khung dựa trên thông tin nào?</li><li>Đặc điểm nào do TCP cung cấp?</li><li>Phát biểu nào đúng về UDP?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Ứng dụng. HTTP quy định trao đổi thông điệp giữa ứng dụng khách và máy chủ.</li><li>Router. Router dùng địa chỉ IP và bảng định tuyến để chuyển gói giữa các mạng.</li><li>Địa chỉ MAC. Switch học địa chỉ MAC và cổng tương ứng trong LAN.</li><li>Luồng byte có thứ tự và truyền lại khi cần. TCP hỗ trợ thứ tự và độ tin cậy; bản thân TCP không mã hóa dữ liệu.</li><li>Không tự bảo đảm giao hàng và thứ tự datagram. Ứng dụng sử dụng UDP phải tự xử lý các bảo đảm bổ sung nếu cần.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://www.netacad.com/courses/networking-basics</li><li>https://developer.mozilla.org/en-US/docs/Web/HTTP</li></ul></body></html>

@@ -21,6 +21,31 @@ from ._common import assert_owns_course, can_access_course, course_id_of, iv, ow
 router = APIRouter(prefix="/api/quizzes", tags=["quizzes"])
 
 
+def _option_map(question: dict, attempt_id: int) -> dict:
+    keys = [k for k in "ABCD" if question.get(f"option_{k.lower()}")]
+    order = sorted(keys, key=lambda k: hashlib.sha256(
+        f"options-v1:{attempt_id}:{question.get('id', question.get('question_id'))}:{k}".encode()
+    ).digest())
+    return dict(zip(keys, order))  # chữ hiển thị -> chữ gốc
+
+
+def _shuffle_rows(rows: list[dict], attempt_id: int) -> list[dict]:
+    output = []
+    for row in rows:
+        mapping = _option_map(row, attempt_id)
+        shuffled = dict(row)
+        for displayed, original in mapping.items():
+            shuffled[f"option_{displayed.lower()}"] = row[f"option_{original.lower()}"]
+        inverse = {original: displayed for displayed, original in mapping.items()}
+        for field in ("correct_answer", "chosen"):
+            if field in row:
+                shuffled[field] = inverse.get(row[field], row[field])
+        output.append(shuffled)
+    return sorted(output, key=lambda q: hashlib.sha256(
+        f"questions-v1:{attempt_id}:{q.get('id', q.get('question_id'))}".encode()
+    ).digest())
+
+
 # Đếm số câu hỏi của một quiz (hiển thị "N câu" trên danh sách)
 def _count_questions(db: Session, quiz_id: int) -> int:
     return int(q_scalar(db, "SELECT COUNT(*) FROM questions WHERE quiz_id = :q", q=quiz_id) or 0)
@@ -111,15 +136,16 @@ def _start_or_resume(db: Session, user: dict, quiz: dict) -> dict:
         now = int(time.time())
         res = execute(
             db,
-            "INSERT INTO quiz_attempts (user_id, quiz_id, started_ts) VALUES (:u, :q, :t)",
+            "INSERT INTO quiz_attempts (user_id, quiz_id, started_ts, shuffle_version) VALUES (:u, :q, :t, 1)",
             u=user["id"],
             q=quiz["id"],
             t=now,
         )
-        attempt = {"id": res.lastrowid, "started_ts": now}
+        attempt = {"id": res.lastrowid, "started_ts": now, "shuffle_version": 1}
     info = {
         "attempt_token": f"{attempt['id']}.{_attempt_sig(user['id'], quiz['id'], attempt['id'])}",
         "attempts_used": _attempts_used(db, user["id"], quiz["id"]),
+        "shuffle_version": attempt.get("shuffle_version", 0),
     }
     if quiz["duration"]:
         # Thời gian còn lại tính từ giờ mở đề lần đầu -> tải lại trang không được cấp thêm giờ
@@ -478,6 +504,13 @@ def _strip_answers(q: dict) -> dict:
 
 
 # GET /api/quizzes/questions — ?id=X: 1 câu hỏi; ?quiz_id=X: toàn bộ câu hỏi của quiz
+@router.get('/knowledge-outline')
+def knowledge_outline(course_id: int, user=Depends(require_roles('teacher', 'admin')), db: Session = Depends(get_db)):
+    assert_owns_course(db, user, course_id)
+    from app.services.knowledge import outline
+    return ok(data=outline(db, course_id))
+
+
 @router.get("/questions")
 def index_questions(
     id: int | None = Query(default=None),
@@ -507,7 +540,9 @@ def index_questions(
             return ok(data=rows)
         # Học viên: đề có giới hạn thời gian / số lượt -> mở đề là bắt đầu (hoặc tiếp tục) 1 lượt làm;
         # đề ôn tập không giới hạn thì làm tự do, không cần token
-        extra = _start_or_resume(db, user, quiz) if _is_tracked(quiz) and rows else {}
+        extra = _start_or_resume(db, user, quiz) if rows else {}
+        if extra.get("shuffle_version") == 1:
+            rows = _shuffle_rows(rows, int(extra["attempt_token"].split(".")[0]))
         return ok(data=[_strip_answers(r) for r in rows], **extra)
     raise ApiError("Cần truyền quiz_id hoặc id.")
 
@@ -524,13 +559,20 @@ def create_question(
         raise ApiError("Dữ liệu không hợp lệ.")
     # Kiểm tra dữ liệu câu hỏi, rồi kiểm tra quyền sở hữu khóa chứa quiz
     fields = _question_fields(body)
-    assert_owns_course(db, user, course_id_of(db, "quizzes", quiz_id))
+    cid=course_id_of(db, "quizzes", quiz_id)
+    assert_owns_course(db, user, cid)
+    from app.services.topic_catalog import resolve_topic
+    topic=resolve_topic(db,cid,body.get('topic_id'),fields['topic'])
+    fields.update(topic_id=topic['id'] if topic else None,topic=topic['name'] if topic else None)
+    from app.services.knowledge import resolve
+    quiz = q_one(db, 'SELECT * FROM quizzes WHERE id=:q', q=quiz_id)
+    fields.update(resolve(db, cid, {**body, 'topic': fields['topic']}, quiz))
     execute(
         db,
         "INSERT INTO questions (quiz_id, content, option_a, option_b, option_c, option_d, "
-        "correct_answer, order_index, topic, difficulty, explanation) "
+        "correct_answer, order_index, topic, difficulty, explanation, topic_id, knowledge_chapter_id, knowledge_lesson_id) "
         "VALUES (:q, :content, :option_a, :option_b, :option_c, :option_d, "
-        ":correct_answer, :order_index, :topic, :difficulty, :explanation)",
+        ":correct_answer, :order_index, :topic, :difficulty, :explanation, :topic_id, :knowledge_chapter_id, :knowledge_lesson_id)",
         q=quiz_id,
         **fields,
     )
@@ -553,6 +595,14 @@ def update_question(
         if key not in body:
             fields.pop(key)
     assert_owns_course(db, user, course_id_of(db, "questions", qid))
+    if 'knowledge_chapter_id' in body or 'knowledge_lesson_id' in body:
+        from app.services.knowledge import resolve
+        quiz = q_one(db, 'SELECT qz.* FROM quizzes qz JOIN questions q ON q.quiz_id=qz.id WHERE q.id=:q', q=qid)
+        fields.update(resolve(db, quiz['course_id'], body, quiz))
+    if 'topic_id' in body or 'topic' in body:
+        from app.services.topic_catalog import resolve_topic
+        topic=resolve_topic(db,course_id_of(db,'questions',qid),body.get('topic_id'),fields.get('topic'))
+        fields.update(topic_id=topic['id'] if topic else None,topic=topic['name'] if topic else None)
     # Ghép câu UPDATE động theo các trường cần cập nhật
     sets = ", ".join(f"{k} = :{k}" for k in fields)
     execute(db, f"UPDATE questions SET {sets} WHERE id = :id", id=qid, **fields)
@@ -614,8 +664,10 @@ def submit(
     # Chủ khóa/admin làm thử không bị giới hạn; học viên làm đề có ràng buộc phải nộp đúng lượt đang làm
     attempt = None
     result_id = None
-    if not is_owner and _is_tracked(quiz):
+    if not is_owner and (_is_tracked(quiz) or body.get("attempt_token")):
         attempt = _check_attempt_token(db, user["id"], quiz, sv(body, "attempt_token"))
+    elif not is_owner and _open_attempt(db, user["id"], quiz):
+        raise ApiError("Vui lòng nộp bài kèm token của lượt đang làm.", 400)
 
     # Chấm từng câu: so đáp án học viên chọn với correct_answer, cộng 1 điểm mỗi câu đúng
     score = 0
@@ -627,6 +679,8 @@ def submit(
         if raw is None:
             raw = answers.get(q["id"], "")
         chosen = str(raw or "").upper()
+        if attempt and attempt.get("shuffle_version") == 1:
+            chosen = _option_map(q, attempt["id"]).get(chosen, "")
         correct = q["correct_answer"]
         is_right = chosen == correct
         if is_right:
@@ -664,24 +718,41 @@ def submit(
         result_id = res.lastrowid
         # Lưu chi tiết từng câu -> phục vụ phân tích topic mạnh/yếu (Phase 4/5)
         if result_id:
+            from app.services.knowledge import outline, snapshot
+            structure = outline(db, quiz['course_id'])
+            question_meta={q['id']:q for q in questions}
             for d in details:
                 execute(
                     db,
-                    "INSERT INTO result_answers (result_id, question_id, chosen, is_correct) "
-                    "VALUES (:r, :q, :c, :ic)",
+                    "INSERT INTO result_answers (result_id, question_id, chosen, is_correct, topic_id, topic_name, classification_version, "
+                    "knowledge_chapter_id,knowledge_lesson_id,knowledge_chapter_name,knowledge_lesson_name,knowledge_version) "
+                    "VALUES (:r, :q, :c, :ic, :tid, :tn, 2, :knowledge_chapter_id,:knowledge_lesson_id,:knowledge_chapter_name,:knowledge_lesson_name,2)",
                     r=result_id,
                     q=d["question_id"],
                     c=(d["chosen"] or None) if len(d["chosen"] or "") <= 1 else None,
                     ic=1 if d["is_right"] else 0,
+                    tid=question_meta[d['question_id']].get('topic_id'),
+                    tn=question_meta[d['question_id']].get('topic'),
+                    **snapshot(db, question_meta[d['question_id']], structure),
                 )
         # Chốt lượt làm của đề có ràng buộc, gắn với kết quả vừa lưu
         if attempt:
             _close_attempt(db, attempt["id"], result_id)
 
+    if attempt and attempt.get("shuffle_version") == 1:
+        details = _shuffle_rows(details, attempt["id"])
     return ok(
         result_id=result_id,
+        knowledge=_knowledge_result(db, user['id'], result_id),
         **_result_payload(db, user, quiz, details, score, total, is_owner, quiz["passing_score"]),
     )
+
+
+def _knowledge_result(db, user_id, result_id):
+    if not result_id:
+        return None
+    from app.services.knowledge import assessment
+    return assessment(db, user_id, result_id)
 
 
 # Dựng dữ liệu kết quả 1 lượt làm (dùng cho cả lúc nộp bài và lúc xem lại lịch sử)
@@ -797,10 +868,14 @@ def _result_detail(db: Session, user: dict, result_id: int) -> dict:
         for a in answers
     ]
     # Xem lại với tư cách học viên làm bài (chủ khóa xem bài của học viên thì luôn thấy đáp án)
+    attempt = q_one(db, "SELECT id, shuffle_version FROM quiz_attempts WHERE result_id = :r", r=result_id)
+    if attempt and attempt.get("shuffle_version") == 1:
+        details = _shuffle_rows(details, attempt["id"])
     owner_view = is_owner and r["user_id"] != user["id"]
     student = {"id": r["user_id"]}
     payload = _result_payload(db, student, quiz, details, r["score"], r["total"], owner_view, r["passing_score"])
-    return {**payload, "result_id": r["id"], "submit_time": r["submit_time"]}
+    return {**payload, "result_id": r["id"], "submit_time": r["submit_time"],
+            "knowledge": _knowledge_result(db, r['user_id'], r['id']), 'own_result': r['user_id'] == user['id']}
 
 
 # ── NHẬP BỘ ĐỀ TỪ FILE WORD ───────────────────────────────────────────────────

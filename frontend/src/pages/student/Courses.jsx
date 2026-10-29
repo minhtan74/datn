@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { courseService } from '../../services/courseService';
 import { enrollmentService } from '../../services/enrollmentService';
@@ -23,13 +23,12 @@ const LEVELS = ['Cơ bản', 'Trung cấp', 'Nâng cao'];
 const LEVEL_DB = ['beginner', 'intermediate', 'advanced'];
 const LEVEL_CLS = ['level-begin', 'level-mid', 'level-adv'];
 
-// courseMeta() — hàm deterministic theo course.id, giữ nguyên công thức gốc dù có vẻ "hack"
-// (thay thế cho các trường lessons/hours/level chưa có thật ở backend)
-function courseMeta(c, i) {
-  const lessons = 5 + ((c.id || i) * 7) % 20;
-  const hours = (lessons * 0.5).toFixed(0);
-  const lvlIdx = LEVEL_DB.indexOf(c.level) >= 0 ? LEVEL_DB.indexOf(c.level) : (c.id || i) % 3;
-  return { lessons, hours, lvlIdx };
+// Use actual published lesson/document counts supplied by the course API.
+function courseMeta(c) {
+  const lessons = Number(c.lesson_count) || 0;
+  const documents = Number(c.document_count) || 0;
+  const lvlIdx = Math.max(0, LEVEL_DB.indexOf(c.level));
+  return { lessons, documents, lvlIdx };
 }
 
 // Hiển thị giá: 0 -> "Miễn phí", còn lại dạng 499.000đ
@@ -44,6 +43,8 @@ export default function Courses() {
 
   const [allCourses, setAllCourses] = useState(null); // null = đang tải
   const [enrolledIds, setEnrolledIds] = useState(new Set());
+  const [enrollingId, setEnrollingId] = useState(null);
+  const enrollmentPending = useRef(false);
 
   // Bộ lọc: từ khóa tìm kiếm, cách sắp xếp
   const [searchVal, setSearchVal] = useState('');
@@ -121,13 +122,22 @@ export default function Courses() {
 
   // Ghi danh khóa miễn phí
   async function doFreeEnroll(courseId) {
-    showToast('⏳ Đang đăng ký...', 'info');
-    const res = await enrollmentService.enroll(courseId);
-    if (res?.data?.success) {
-      setEnrolledIds((prev) => new Set(prev).add(Number(courseId)));
-      showToast('✅ Đăng ký thành công! Khóa học đã chuyển sang "Khóa học của tôi".', 'success');
-    } else {
-      showToast('❌ ' + (res?.data?.message || 'Đăng ký thất bại'), 'error');
+    if (enrollmentPending.current) return;
+    enrollmentPending.current = true;
+    setEnrollingId(Number(courseId));
+    try {
+      const res = await enrollmentService.enroll(courseId);
+      if (res?.ok && res.data?.success) {
+        setEnrolledIds((prev) => new Set(prev).add(Number(courseId)));
+        showToast('Đã đăng ký khóa học. Bạn có thể bắt đầu học trong “Khóa học của tôi”.', 'success');
+      } else {
+        showToast(res?.data?.message || 'Đăng ký thất bại. Vui lòng thử lại.', 'error');
+      }
+    } catch {
+      showToast('Không thể kết nối để đăng ký. Vui lòng thử lại.', 'error');
+    } finally {
+      enrollmentPending.current = false;
+      setEnrollingId(null);
     }
   }
 
@@ -147,7 +157,7 @@ export default function Courses() {
     if (res?.data?.success && res.data.enrolled) {
       setEnrolledIds((prev) => new Set(prev).add(Number(paymentCourse.id)));
       setPaymentCourse(null);
-      showToast('✅ Đăng ký thành công! Khóa học đã chuyển sang "Khóa học của tôi".', 'success');
+      showToast('Đã đăng ký khóa học. Bạn có thể bắt đầu học trong “Khóa học của tôi”.', 'success');
       return;
     }
     setPayError('❌ ' + (res?.data?.message || 'Không thể tạo đơn thanh toán. Vui lòng thử lại.'));
@@ -258,7 +268,7 @@ export default function Courses() {
         {allCourses !== null &&
           filtered.map((c) => {
             const origIdx = allCourses.indexOf(c);
-            const { lessons, hours, lvlIdx } = courseMeta(c, origIdx);
+            const { lessons, documents, lvlIdx } = courseMeta(c, origIdx);
             const emoji = EMOJIS[origIdx % EMOJIS.length];
             const color = COLORS[origIdx % COLORS.length];
             const isNew = origIdx < 3;
@@ -274,7 +284,7 @@ export default function Courses() {
                   <p className="teacher">👨‍🏫 {c.teacher_name || 'Giảng viên StudyOnline'}</p>
                   <div className="s-course-meta">
                     <span>📖 {lessons} bài</span>
-                    <span>⏱ {hours}h</span>
+                    <span>📄 {documents} PDF</span>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 'auto' }}>
                     <span className={`level-badge ${LEVEL_CLS[lvlIdx]}`}>{LEVELS[lvlIdx]}</span>
@@ -285,8 +295,8 @@ export default function Courses() {
                   <button className="s-btn s-btn-outline s-btn-sm" onClick={() => openDetail(c)}>
                     🔍 Xem chi tiết
                   </button>
-                  <button className="s-btn s-btn-primary s-btn-sm" onClick={() => startEnroll(c)}>
-                    {+c.price > 0 ? '💳 Mua ngay' : '📥 Đăng ký'}
+                  <button className="s-btn s-btn-primary s-btn-sm" disabled={enrollingId !== null} aria-busy={enrollingId === Number(c.id)} onClick={() => startEnroll(c)}>
+                    {enrollingId === Number(c.id) ? 'Đang đăng ký…' : +c.price > 0 ? '💳 Mua ngay' : '📥 Đăng ký'}
                   </button>
                 </div>
               </div>
@@ -298,7 +308,7 @@ export default function Courses() {
       {detailCourse &&
         (() => {
           const origIdx = allCourses.indexOf(detailCourse);
-          const { lessons, hours, lvlIdx } = courseMeta(detailCourse, origIdx);
+          const { lessons, documents, lvlIdx } = courseMeta(detailCourse, origIdx);
           const color = COLORS[origIdx % COLORS.length];
           return (
             <div className="modal-wrap open" id="detailModal">
@@ -332,8 +342,8 @@ export default function Courses() {
                       <span>Bài học</span>
                     </div>
                     <div>
-                      <strong>{hours}h</strong>
-                      <span>Thời lượng</span>
+                      <strong>{documents}</strong>
+                      <span>Tài liệu PDF</span>
                     </div>
                     <div>
                       <strong>{LEVELS[lvlIdx]}</strong>
@@ -351,6 +361,7 @@ export default function Courses() {
                     <button
                       className="s-btn s-btn-primary"
                       style={{ flex: 2 }}
+                      disabled={enrollingId !== null}
                       onClick={() => {
                         const course = detailCourse;
                         closeDetail();
@@ -411,11 +422,10 @@ export default function Courses() {
                   </div>
 
                   <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '1rem' }}>💳 Phương thức thanh toán</h3>
-                  {/* Thanh toán qua cổng VNPay (Sandbox): thẻ ATM nội địa, thẻ quốc tế, QR ngân hàng */}
+                  {/* Một cổng thanh toán duy nhất; chọn ngân hàng tại VNPay. */}
                   <div className="pay-method active" style={{ cursor: 'default' }}>
                     <span style={{ fontWeight: 800, color: '#005BAA' }}>VN</span>
                     <span style={{ fontWeight: 800, color: '#ED1C24', marginRight: 6 }}>PAY</span>
-                    Thẻ ATM / Thẻ quốc tế / QR ngân hàng
                   </div>
                   <div
                     style={{

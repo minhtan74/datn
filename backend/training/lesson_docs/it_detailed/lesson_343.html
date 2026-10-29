@@ -1,0 +1,76 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Kiểm thử phần mềm nhập môn</div>
+<p class="path">Chương 5: Kiểm thử dữ liệu và dịch vụ · Bài 1</p>
+<h1>Kiểm thử API và phân quyền</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Kiểm thử phần mềm nhập môn.</li><li>Chương 5: Kiểm thử dữ liệu và dịch vụ.</li><li>Các bài trong chương: Kiểm thử API và phân quyền; Kiểm thử cơ sở dữ liệu và tính toàn vẹn.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Thiết kế ca kiểm thử hợp đồng HTTP và quyền truy cập theo tài khoản.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>API test cần kiểm tra phương thức, đường dẫn, tham số, kiểu dữ liệu, mã trạng thái và nội dung phản hồi theo hợp đồng. Mã 200 không đủ chứng minh đúng: cần xác nhận dữ liệu, tác dụng phụ và quyền. Lỗi có thể nằm ở nghiệp vụ dù phản hồi vẫn là JSON hợp lệ.</p>
+<p>Phân biệt xác thực danh tính với phân quyền tài nguyên. Kiểm tra người chưa đăng nhập, đúng chủ sở hữu, người khác và vai trò quản trị theo yêu cầu. Thay ID tài nguyên là tình huống kiểm tra quyền ở mức đối tượng quan trọng; chỉ thực hiện trên dữ liệu lab được phép.</p>
+<p>Test đầu vào gồm thiếu trường, sai kiểu, giá trị biên và tài nguyên không tồn tại. Không đưa token vào báo cáo hoặc nguồn mã. Tạo dữ liệu test riêng và dọn trong phạm vi đó. Các mã phản hồi cụ thể phụ thuộc hợp đồng API, không suy ra mọi lỗi đều phải cùng một mã.</p>
+<h2>1. Hợp đồng request và response</h2>
+<p>Ghi method, path, headers cần thiết, schema body, trạng thái và schema response. Test API không chỉ kiểm tra “có JSON”: một JSON trả danh sách tài nguyên của người khác vẫn là sai quyền. Không ghi token vào fixture công khai hoặc ảnh minh chứng.</p>
+<h2>2. Mẫu yêu cầu minh họa</h2>
+<pre><code>POST /api/enrollments
+Authorization: Bearer &lt;TOKEN_TEST_KHÔNG_CÔNG_KHAI&gt;
+Content-Type: application/json
+
+{"course_id": 513}</code></pre>
+<p>Đây là mẫu minh họa; trước khi chạy phải đối chiếu endpoint và trường thực tế của môi trường thử. Không tự gửi hàng loạt tới production vì thấy một URL trong tài liệu.</p>
+<h2>3. Ma trận tài khoản và tài nguyên</h2>
+<pre><code>Người gọi       Tài nguyên                  Kỳ vọng
+Chưa xác thực   Bài làm riêng               Từ chối theo hợp đồng
+U1              Bài làm U1                  Cho phép
+U1              Bài làm U2                  Từ chối, không lộ nội dung
+Giảng viên      Bài làm khóa mình phụ trách Theo quy tắc vai trò</code></pre>
+<p>Kiểm tra cả mã phản hồi lẫn nội dung bị rò rỉ. Trường hợp tài nguyên không tồn tại khác tài nguyên tồn tại nhưng không được phép, dù ứng dụng có thể cố ý dùng cùng phản hồi để giảm tiết lộ thông tin.</p>
+<h2>4. Bài tập và lời giải</h2>
+<p>Với API tạo ghi danh, viết test thiếu trường, chuỗi sai kiểu, khóa không tồn tại, lặp và đồng thời. Xác minh không tạo thanh toán với khóa miễn phí, không tạo dữ liệu khi bị từ chối. Hợp đồng có thể chấp nhận một số phép chuyển kiểu nên không tự coi mọi chuỗi số là lỗi nếu chưa xác nhận yêu cầu.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>Lập năm test cho API đăng ký: hợp lệ, khóa không tồn tại, thiếu xác thực, đăng ký trùng và ID sai kiểu. Nêu điều kiện dữ liệu trước/sau, dùng môi trường thử nghiệm.</p>
+</div>
+<h2>Hướng giải bài tập bổ sung</h2>
+<p>Kiểm tra đồng thời mã, schema, quyền và tác dụng dữ liệu. Không ghi token thật vào minh chứng.</p>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>API trả 200 đã đủ kết luận đúng nghiệp vụ chưa?</li><li>Xác thực trả lời câu hỏi nào?</li><li>Phân quyền trả lời câu hỏi nào?</li><li>Đổi ID sang tài nguyên của tài khoản khác nhằm kiểm tra gì?</li><li>Token test nên được quản lý thế nào?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Chưa, cần kiểm tra nội dung và dữ liệu. Thành công HTTP không bảo đảm kết quả nghiệp vụ đúng.</li><li>Người gọi là ai. Authentication xác định danh tính.</li><li>Người gọi được phép truy cập gì. Authorization áp dụng quyền trên thao tác và tài nguyên.</li><li>Quyền ở mức đối tượng. Server phải kiểm tra quyền với tài nguyên được yêu cầu.</li><li>Giữ bí mật và không đưa vào báo cáo. Token là thông tin xác thực cần bảo vệ.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf</li></ul></body></html>

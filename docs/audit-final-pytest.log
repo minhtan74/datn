@@ -1,0 +1,32 @@
+.........F.FF.......F......F............................................ [ 64%]
+.......................................                                  [100%]
+================================== FAILURES ===================================
+___________________________ test_full_learning_flow ___________________________
+tests\test_api.py:164: in test_full_learning_flow
+    assert sub["score"] == 1 and sub["total"] == 1 and sub["percent"] == 100
+E   KeyError: 'score'
+____________________ test_lesson_review_and_quiz_settings _____________________
+tests\test_api.py:294: in test_lesson_review_and_quiz_settings
+    assert sub["percent"] == 100 and sub["passed"] is True
+E   assert (0 == 100)
+__________ test_answers_hidden_until_last_attempt_and_fair_analytics __________
+tests\test_api.py:327: in test_answers_hidden_until_last_attempt_and_fair_analytics
+    assert s1["details"][0]["correct_answer"] is None and s1["details"][0]["is_right"] is False
+E   assert (None is None and True is False)
+__________________________ test_recommendation_flow ___________________________
+tests\test_api.py:496: in test_recommendation_flow
+    assert cur["current"]["level"] in {"Weak", "Average", "Good", "Excellent"}
+E   AssertionError: assert 'ContentBased' in {'Average', 'Excellent', 'Good', 'Weak'}
+______________________ test_ai_generate_and_approve_quiz ______________________
+tests\test_api.py:571: in test_ai_generate_and_approve_quiz
+    assert gen["success"], gen
+E   AssertionError: {'message': 'Ch\u1ebf \u0111\u1ed9 offline ch\u1ec9 t\u1ea1o c\xe2u nh\u1eadn bi\u1ebft m\u1ee9c d\u1ec5. H\xe3y ch\u1ecdn c\xe2u d\u1ec5 ho\u1eb7c c\u1ea5u h\xecnh LLM \u0111\u1ec3 t\u1ea1o c\xe2u trung b\xecnh/kh\xf3.', 'success': False}
+E   assert False
+- generated xml file: F:\studyonline-main\studyonline-main\docs\audit-final-results.xml -
+=========================== short test summary info ===========================
+FAILED tests/test_api.py::test_full_learning_flow - KeyError: 'score'
+FAILED tests/test_api.py::test_lesson_review_and_quiz_settings - assert (0 ==...
+FAILED tests/test_api.py::test_answers_hidden_until_last_attempt_and_fair_analytics
+FAILED tests/test_api.py::test_recommendation_flow - AssertionError: assert '...
+FAILED tests/test_api.py::test_ai_generate_and_approve_quiz - AssertionError:...
+5 failed, 106 passed in 14.60s

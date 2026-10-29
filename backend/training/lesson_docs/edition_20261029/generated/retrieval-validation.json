@@ -1,0 +1,420 @@
+[
+  {
+    "course_id": 1,
+    "lesson_id": 2,
+    "question": "Sao print(\"2\" + 3) báo lỗi, cần đổi số hay chuỗi?",
+    "new_document_retrieved": true,
+    "top_sources": [
+      {
+        "document_id": 91,
+        "page": 3,
+        "score": 0.5347
+      },
+      {
+        "document_id": 65,
+        "page": 1,
+        "score": 0.6121
+      },
+      {
+        "document_id": 65,
+        "page": 2,
+        "score": 0.5326
+      },
+      {
+        "document_id": 65,
+        "page": 1,
+        "score": 0.5699
+      },
+      {
+        "document_id": 91,
+        "page": 3,
+        "score": 0.5346
+      },
+      {
+        "document_id": 91,
+        "page": 3,
+        "score": 0.5386
+      }
+    ]
+  },
+  {
+    "course_id": 2,
+    "lesson_id": 11,
+    "question": "const rồi mà sao vẫn push vào array được?",
+    "new_document_retrieved": true,
+    "top_sources": [
+      {
+        "document_id": 100,
+        "page": 3,
+        "score": 0.3672
+      },
+      {
+        "document_id": 100,
+        "page": 3,
+        "score": 0.535
+      },
+      {
+        "document_id": 73,
+        "page": 1,
+        "score": 0.4015
+      },
+      {
+        "document_id": 73,
+        "page": 2,
+        "score": 0.3735
+      },
+      {
+        "document_id": 73,
+        "page": 1,
+        "score": 0.3462
+      },
+      {
+        "document_id": 73,
+        "page": 1,
+        "score": 0.4334
+      }
+    ]
+  },
+  {
+    "course_id": 3,
+    "lesson_id": 20,
+    "question": "Scanner nextInt rồi đọc tên bị chuỗi rỗng, nên làm gì?",
+    "new_document_retrieved": true,
+    "top_sources": [
+      {
+        "document_id": 109,
+        "page": 3,
+        "score": 0.4942
+      },
+      {
+        "document_id": 109,
+        "page": 3,
+        "score": 0.2605
+      },
+      {
+        "document_id": 38,
+        "page": 2,
+        "score": 0.2899
+      },
+      {
+        "document_id": 38,
+        "page": 2,
+        "score": 0.3072
+      },
+      {
+        "document_id": 38,
+        "page": 2,
+        "score": 0.244
+      },
+      {
+        "document_id": 38,
+        "page": 2,
+        "score": 0.2904
+      }
+    ]
+  },
+  {
+    "course_id": 4,
+    "lesson_id": 29,
+    "question": "Input cần label và dùng bàn phím như thế nào?",
+    "new_document_retrieved": true,
+    "top_sources": [
+      {
+        "document_id": 118,
+        "page": 3,
+        "score": 0.5402
+      },
+      {
+        "document_id": 29,
+        "page": 2,
+        "score": 0.5031
+      },
+      {
+        "document_id": 29,
+        "page": 1,
+        "score": 0.4959
+      },
+      {
+        "document_id": 118,
+        "page": 3,
+        "score": 0.3547
+      },
+      {
+        "document_id": 29,
+        "page": 2,
+        "score": 0.3323
+      },
+      {
+        "document_id": 118,
+        "page": 3,
+        "score": 0.358
+      }
+    ]
+  },
+  {
+    "course_id": 5,
+    "lesson_id": 39,
+    "question": "setState nhiều lần nhưng không tăng đúng, nên dùng updater ra sao?",
+    "new_document_retrieved": true,
+    "top_sources": [
+      {
+        "document_id": 128,
+        "page": 3,
+        "score": 0.5196
+      },
+      {
+        "document_id": 128,
+        "page": 3,
+        "score": 0.5022
+      },
+      {
+        "document_id": 48,
+        "page": 1,
+        "score": 0.5022
+      },
+      {
+        "document_id": 128,
+        "page": 3,
+        "score": 0.4951
+      },
+      {
+        "document_id": 48,
+        "page": 1,
+        "score": 0.5236
+      },
+      {
+        "document_id": 48,
+        "page": 1,
+        "score": 0.3339
+      }
+    ]
+  },
+  {
+    "course_id": 6,
+    "lesson_id": 46,
+    "question": "Hai học sinh có cùng id khóa chính được không?",
+    "new_document_retrieved": true,
+    "top_sources": [
+      {
+        "document_id": 135,
+        "page": 4,
+        "score": 0.5945
+      },
+      {
+        "document_id": 135,
+        "page": 4,
+        "score": 0.5151
+      },
+      {
+        "document_id": 135,
+        "page": 4,
+        "score": 0.3877
+      },
+      {
+        "document_id": 135,
+        "page": 4,
+        "score": 0.4923
+      },
+      {
+        "document_id": 55,
+        "page": 2,
+        "score": 0.3941
+      },
+      {
+        "document_id": 55,
+        "page": 2,
+        "score": 0.4189
+      }
+    ]
+  },
+  {
+    "course_id": 6,
+    "lesson_id": 49,
+    "question": "Tìm học viên chưa ghi danh khóa nào bằng LEFT JOIN",
+    "new_document_retrieved": true,
+    "top_sources": [
+      {
+        "document_id": 138,
+        "page": 3,
+        "score": 0.5884
+      },
+      {
+        "document_id": 138,
+        "page": 3,
+        "score": 0.6811
+      },
+      {
+        "document_id": 58,
+        "page": 2,
+        "score": 0.6716
+      },
+      {
+        "document_id": 58,
+        "page": 2,
+        "score": 0.8157
+      },
+      {
+        "document_id": 58,
+        "page": 1,
+        "score": 0.6086
+      },
+      {
+        "document_id": 138,
+        "page": 3,
+        "score": 0.5288
+      }
+    ]
+  },
+  {
+    "course_id": 7,
+    "lesson_id": 55,
+    "question": "Máy mở nhiều app thì lag, có liên quan CPU RAM và I/O không?",
+    "new_document_retrieved": true,
+    "top_sources": [
+      {
+        "document_id": 144,
+        "page": 3,
+        "score": 0.579
+      },
+      {
+        "document_id": 144,
+        "page": 3,
+        "score": 0.7353
+      },
+      {
+        "document_id": 144,
+        "page": 3,
+        "score": 0.6894
+      },
+      {
+        "document_id": 1,
+        "page": 1,
+        "score": 0.489
+      },
+      {
+        "document_id": 1,
+        "page": 1,
+        "score": 0.4492
+      },
+      {
+        "document_id": 1,
+        "page": 1,
+        "score": 0.4319
+      }
+    ]
+  },
+  {
+    "course_id": 513,
+    "lesson_id": 351,
+    "question": "Connection refused và timeout khác nhau thế nào?",
+    "new_document_retrieved": true,
+    "top_sources": [
+      {
+        "document_id": 163,
+        "page": 2,
+        "score": 0.7582
+      },
+      {
+        "document_id": 163,
+        "page": 4,
+        "score": 0.6277
+      },
+      {
+        "document_id": 163,
+        "page": 1,
+        "score": 0.4354
+      },
+      {
+        "document_id": 163,
+        "page": 4,
+        "score": 0.4965
+      },
+      {
+        "document_id": 163,
+        "page": 1,
+        "score": 0.4001
+      },
+      {
+        "document_id": 163,
+        "page": 2,
+        "score": 0.4117
+      }
+    ]
+  },
+  {
+    "course_id": 514,
+    "lesson_id": 309,
+    "question": "bisect_left trả vị trí chèn, làm sao biết đã tìm thấy?",
+    "new_document_retrieved": true,
+    "top_sources": [
+      {
+        "document_id": 169,
+        "page": 4,
+        "score": 0.6179
+      },
+      {
+        "document_id": 169,
+        "page": 4,
+        "score": 0.4972
+      },
+      {
+        "document_id": 169,
+        "page": 2,
+        "score": 0.4425
+      },
+      {
+        "document_id": 169,
+        "page": 1,
+        "score": 0.2986
+      },
+      {
+        "document_id": 169,
+        "page": 1,
+        "score": 0.1995
+      },
+      {
+        "document_id": 169,
+        "page": 1,
+        "score": 0.2008
+      }
+    ]
+  },
+  {
+    "course_id": 515,
+    "lesson_id": 343,
+    "question": "AI trả HTTP 200 nhưng có thông báo lỗi thì có tính thành công không?",
+    "new_document_retrieved": true,
+    "top_sources": [
+      {
+        "document_id": 187,
+        "page": 4,
+        "score": 0.6998
+      },
+      {
+        "document_id": 187,
+        "page": 1,
+        "score": 0.5293
+      },
+      {
+        "document_id": 187,
+        "page": 1,
+        "score": 0.3554
+      },
+      {
+        "document_id": 187,
+        "page": 4,
+        "score": 0.3478
+      },
+      {
+        "document_id": 187,
+        "page": 4,
+        "score": 0.4026
+      },
+      {
+        "document_id": 187,
+        "page": 1,
+        "score": 0.3314
+      }
+    ]
+  }
+]

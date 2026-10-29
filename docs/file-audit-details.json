@@ -1,0 +1,1080 @@
+{
+  "folder_sizes": {
+    ".gitignore": {
+      "files": 1,
+      "bytes": 145
+    },
+    "docker-compose.yml": {
+      "files": 1,
+      "bytes": 2334
+    },
+    "README.md": {
+      "files": 1,
+      "bytes": 19986
+    },
+    "start-dev.ps1": {
+      "files": 1,
+      "bytes": 3073
+    },
+    "stop-dev.ps1": {
+      "files": 1,
+      "bytes": 895
+    },
+    "StudyOnline.postman_collection.json": {
+      "files": 1,
+      "bytes": 25027
+    },
+    "StudyOnline.postman_environment.json": {
+      "files": 1,
+      "bytes": 909
+    },
+    "backend/.dockerignore": {
+      "files": 1,
+      "bytes": 118
+    },
+    "backend/.env": {
+      "files": 1,
+      "bytes": 2376
+    },
+    "backend/.env.example": {
+      "files": 1,
+      "bytes": 2670
+    },
+    "backend/.gitignore": {
+      "files": 1,
+      "bytes": 139
+    },
+    "backend/alembic.ini": {
+      "files": 1,
+      "bytes": 692
+    },
+    "backend/Dockerfile": {
+      "files": 1,
+      "bytes": 612
+    },
+    "backend/pytest.ini": {
+      "files": 1,
+      "bytes": 131
+    },
+    "backend/README.md": {
+      "files": 1,
+      "bytes": 8488
+    },
+    "backend/requirements.txt": {
+      "files": 1,
+      "bytes": 1013
+    },
+    "backend/.venv": {
+      "files": 11152,
+      "bytes": 255640637
+    },
+    "backend/alembic": {
+      "files": 20,
+      "bytes": 29088
+    },
+    "python_cache": {
+      "files": 74,
+      "bytes": 879487
+    },
+    "backend/app": {
+      "files": 45,
+      "bytes": 384168
+    },
+    "backend/data": {
+      "files": 214,
+      "bytes": 276633042
+    },
+    "backend/tests": {
+      "files": 5,
+      "bytes": 85492
+    },
+    "backend/training": {
+      "files": 73,
+      "bytes": 1304770
+    },
+    "backend/training/lesson_docs/completed": {
+      "files": 36,
+      "bytes": 3501714
+    },
+    "backend/training/lesson_docs/pdf": {
+      "files": 70,
+      "bytes": 5605312
+    },
+    "backend/training/lesson_docs/rebuilt": {
+      "files": 78,
+      "bytes": 31070072
+    },
+    "backend/uploads": {
+      "files": 245,
+      "bytes": 40925907
+    },
+    "database/migration_add_payments.sql": {
+      "files": 1,
+      "bytes": 1183
+    },
+    "database/sample_data.sql": {
+      "files": 1,
+      "bytes": 24731
+    },
+    "database/studyonline_db.sql": {
+      "files": 1,
+      "bytes": 6795
+    },
+    "docs/api.md": {
+      "files": 1,
+      "bytes": 9897
+    },
+    "docs/architecture.md": {
+      "files": 1,
+      "bytes": 9686
+    },
+    "docs/fine-tuning.md": {
+      "files": 1,
+      "bytes": 4987
+    },
+    "docs/materials-audit.md": {
+      "files": 1,
+      "bytes": 3998
+    },
+    "docs/pdf-rebuild-20261013.md": {
+      "files": 1,
+      "bytes": 3462
+    },
+    "docs/quiz-ai-evaluation.md": {
+      "files": 1,
+      "bytes": 7761
+    },
+    "docs/rag.md": {
+      "files": 1,
+      "bytes": 5385
+    },
+    "docs/recommendation.md": {
+      "files": 1,
+      "bytes": 4761
+    },
+    "frontend/.dockerignore": {
+      "files": 1,
+      "bytes": 32
+    },
+    "frontend/.env": {
+      "files": 1,
+      "bytes": 84
+    },
+    "frontend/.env.example": {
+      "files": 1,
+      "bytes": 40
+    },
+    "frontend/.gitignore": {
+      "files": 1,
+      "bytes": 133
+    },
+    "frontend/Dockerfile": {
+      "files": 1,
+      "bytes": 427
+    },
+    "frontend/index.html": {
+      "files": 1,
+      "bytes": 581
+    },
+    "frontend/nginx.conf": {
+      "files": 1,
+      "bytes": 901
+    },
+    "frontend/package-lock.json": {
+      "files": 1,
+      "bytes": 93771
+    },
+    "frontend/package.json": {
+      "files": 1,
+      "bytes": 563
+    },
+    "frontend/vite.config.js": {
+      "files": 1,
+      "bytes": 229
+    },
+    "frontend/dist": {
+      "files": 62,
+      "bytes": 2208424
+    },
+    "frontend/node_modules": {
+      "files": 3329,
+      "bytes": 79376852
+    },
+    "frontend/src": {
+      "files": 90,
+      "bytes": 680900
+    }
+  },
+  "frontend_unreachable": [],
+  "frontend_broken_imports": [],
+  "uploads": {
+    "total": 242,
+    "referenced": 72,
+    "backup_only": [
+      "backend/uploads/documents/1790318759_2a6dbb28b2e9.pdf",
+      "backend/uploads/documents/1790356699_fc1653cd2e18.pdf",
+      "backend/uploads/documents/1790356703_dc0e07558068.pdf",
+      "backend/uploads/documents/1790356707_fed403225bd6.pdf",
+      "backend/uploads/documents/1790356710_2b7ebca0485f.pdf",
+      "backend/uploads/documents/1790356713_f90411c46be1.pdf",
+      "backend/uploads/documents/1790356716_21f53222b382.pdf",
+      "backend/uploads/documents/1790356720_52edb97ab51c.pdf",
+      "backend/uploads/documents/1790356723_ca62da0dc753.pdf",
+      "backend/uploads/documents/1790356725_4b30c763f5da.pdf",
+      "backend/uploads/documents/1790357140_cc0801d96630.pdf",
+      "backend/uploads/documents/1790357143_9091029f76dc.pdf",
+      "backend/uploads/documents/1790357145_68bb1c35d086.pdf",
+      "backend/uploads/documents/1790357147_2eebb0cb962a.pdf",
+      "backend/uploads/documents/1790357149_6022389fd521.pdf",
+      "backend/uploads/documents/1790357151_a978c2a4a7bd.pdf",
+      "backend/uploads/documents/1790357153_340f4446115c.pdf",
+      "backend/uploads/documents/1790357155_2db92b8ffd1f.pdf",
+      "backend/uploads/documents/1790357158_d94ff289a048.pdf",
+      "backend/uploads/documents/1790357382_d77c675a04d6.pdf",
+      "backend/uploads/documents/1790357384_b14866b7491d.pdf",
+      "backend/uploads/documents/1790357386_7054fc246841.pdf",
+      "backend/uploads/documents/1790357388_19fe5babfd27.pdf",
+      "backend/uploads/documents/1790357391_2c4f362a2382.pdf",
+      "backend/uploads/documents/1790357393_6240bc95d801.pdf",
+      "backend/uploads/documents/1790357396_16dd6f2fade9.pdf",
+      "backend/uploads/documents/1790357398_ef6347ddb0af.pdf",
+      "backend/uploads/documents/1790357400_1832bb08915c.pdf",
+      "backend/uploads/documents/1790357603_515b241672ce.pdf",
+      "backend/uploads/documents/1790357605_3cec9e49245f.pdf",
+      "backend/uploads/documents/1790357607_c64405573079.pdf",
+      "backend/uploads/documents/1790357610_f94edc6a86aa.pdf",
+      "backend/uploads/documents/1790357612_9c80a167dd63.pdf",
+      "backend/uploads/documents/1790357615_eb16aae99f50.pdf",
+      "backend/uploads/documents/1790357617_9fb7962d9797.pdf",
+      "backend/uploads/documents/1790357619_53c6ef37f52a.pdf",
+      "backend/uploads/documents/1790357622_193e0cd762a5.pdf",
+      "backend/uploads/documents/completed_bundle_lesson_18.pdf",
+      "backend/uploads/documents/completed_bundle_lesson_27.pdf",
+      "backend/uploads/documents/completed_bundle_lesson_36.pdf",
+      "backend/uploads/documents/completed_bundle_lesson_45.pdf",
+      "backend/uploads/documents/completed_bundle_lesson_54.pdf",
+      "backend/uploads/documents/completed_bundle_lesson_9.pdf",
+      "backend/uploads/documents/completed_lesson_1.pdf",
+      "backend/uploads/documents/completed_lesson_10.pdf",
+      "backend/uploads/documents/completed_lesson_11.pdf",
+      "backend/uploads/documents/completed_lesson_12.pdf",
+      "backend/uploads/documents/completed_lesson_13.pdf",
+      "backend/uploads/documents/completed_lesson_14.pdf",
+      "backend/uploads/documents/completed_lesson_15.pdf",
+      "backend/uploads/documents/completed_lesson_16.pdf",
+      "backend/uploads/documents/completed_lesson_17.pdf",
+      "backend/uploads/documents/completed_lesson_2.pdf",
+      "backend/uploads/documents/completed_lesson_3.pdf",
+      "backend/uploads/documents/completed_lesson_4.pdf",
+      "backend/uploads/documents/completed_lesson_5.pdf",
+      "backend/uploads/documents/completed_lesson_6.pdf",
+      "backend/uploads/documents/completed_lesson_7.pdf",
+      "backend/uploads/documents/completed_lesson_8.pdf"
+    ],
+    "candidates": [
+      "backend/uploads/documents/1789547183_8115d8761c91.pdf",
+      "backend/uploads/documents/1789547292_2e7cdf1e69a3.pdf",
+      "backend/uploads/documents/1789547296_301cd1842885.pdf",
+      "backend/uploads/documents/1789547466_f1df8a42cc08.pdf"
+    ],
+    "candidate_bytes": 288780,
+    "sql_backup_references": [
+      "backend/uploads/documents/1789530044_3fc86e099f4c.pdf",
+      "backend/uploads/documents/1789547498_c276bec77285.pdf",
+      "backend/uploads/documents/1790789488_00ec3d34712f.pdf",
+      "backend/uploads/documents/1790789488_01d4e83b3650.pdf",
+      "backend/uploads/documents/1790789488_037f79542be1.pdf",
+      "backend/uploads/documents/1790789488_06f37c639066.pdf",
+      "backend/uploads/documents/1790789488_07b45cc597d1.pdf",
+      "backend/uploads/documents/1790789488_1321e78f4c12.pdf",
+      "backend/uploads/documents/1790789488_14e54907057b.pdf",
+      "backend/uploads/documents/1790789488_183e3a548b18.pdf",
+      "backend/uploads/documents/1790789488_18ca79bb4439.pdf",
+      "backend/uploads/documents/1790789488_1cbe1599b17c.pdf",
+      "backend/uploads/documents/1790789488_354fe42d28c9.pdf",
+      "backend/uploads/documents/1790789488_360f6ffd5448.pdf",
+      "backend/uploads/documents/1790789488_3631cc194ba1.pdf",
+      "backend/uploads/documents/1790789488_366658a36b5e.pdf",
+      "backend/uploads/documents/1790789488_39f913841b9c.pdf",
+      "backend/uploads/documents/1790789488_3a9d18150e4e.pdf",
+      "backend/uploads/documents/1790789488_4a51c63141ab.pdf",
+      "backend/uploads/documents/1790789488_4e336ae0b64c.pdf",
+      "backend/uploads/documents/1790789488_568960fca322.pdf",
+      "backend/uploads/documents/1790789488_5820a48bba48.pdf",
+      "backend/uploads/documents/1790789488_6972a134cf77.pdf",
+      "backend/uploads/documents/1790789488_6a83cd6e8030.pdf",
+      "backend/uploads/documents/1790789488_6d4da9518d97.pdf",
+      "backend/uploads/documents/1790789488_72c05ec510b8.pdf",
+      "backend/uploads/documents/1790789488_72f6b7c1e9f1.pdf",
+      "backend/uploads/documents/1790789488_749fb30a77e8.pdf",
+      "backend/uploads/documents/1790789488_78d19642b238.pdf",
+      "backend/uploads/documents/1790789488_87d7a78aef78.pdf",
+      "backend/uploads/documents/1790789488_88b2276980ee.pdf",
+      "backend/uploads/documents/1790789488_8a16c8696a70.pdf",
+      "backend/uploads/documents/1790789488_9140f55895d2.pdf",
+      "backend/uploads/documents/1790789488_967843b47fa4.pdf",
+      "backend/uploads/documents/1790789488_ae05c93647a5.pdf",
+      "backend/uploads/documents/1790789488_b52f1d05f748.pdf",
+      "backend/uploads/documents/1790789488_b61fac9d57d5.pdf",
+      "backend/uploads/documents/1790789488_b6eefebd48f3.pdf",
+      "backend/uploads/documents/1790789488_b8834c0e3567.pdf",
+      "backend/uploads/documents/1790789488_ba693e1ad8b0.pdf",
+      "backend/uploads/documents/1790789488_c065561e012e.pdf",
+      "backend/uploads/documents/1790789488_c2d6e7aca3cb.pdf",
+      "backend/uploads/documents/1790789488_cda1d94f91d1.pdf",
+      "backend/uploads/documents/1790789488_d022fcb56597.pdf",
+      "backend/uploads/documents/1790789488_d9144e67cf31.pdf",
+      "backend/uploads/documents/1790789488_dfbc0578284e.pdf",
+      "backend/uploads/documents/1790789488_dfff4b436c27.pdf",
+      "backend/uploads/documents/1790789488_e0b6bab47868.pdf",
+      "backend/uploads/documents/1790789488_e6bda5aca9a2.pdf",
+      "backend/uploads/documents/1790789488_ee86c5c49f88.pdf",
+      "backend/uploads/documents/1790789488_eebb907d875a.pdf",
+      "backend/uploads/documents/1790789488_f45700fdc85a.pdf",
+      "backend/uploads/documents/1790789488_fb4d21cfe418.pdf",
+      "backend/uploads/documents/1790789488_fc7a310af10e.pdf",
+      "backend/uploads/documents/1790866565_09a39a3a4532.pdf",
+      "backend/uploads/documents/1790866565_0eda02f69a43.pdf",
+      "backend/uploads/documents/1790866565_333847515ff9.pdf",
+      "backend/uploads/documents/1790866565_35ac9d7e5f06.pdf",
+      "backend/uploads/documents/1790866565_362d0f2e1e44.pdf",
+      "backend/uploads/documents/1790866565_485d9c5c9f7c.pdf",
+      "backend/uploads/documents/1790866565_76bc2833e73f.pdf",
+      "backend/uploads/documents/1790866565_9a6ec27fa593.pdf",
+      "backend/uploads/documents/1790866565_aa67da2cb3ca.pdf",
+      "backend/uploads/documents/1790873974_14e3311eff2d.pdf",
+      "backend/uploads/documents/1790873974_2fb67924bb1d.pdf",
+      "backend/uploads/documents/1790873974_5e88b10e20f0.pdf",
+      "backend/uploads/documents/1790873974_69e2bf1c5ddc.pdf",
+      "backend/uploads/documents/1790873974_a2a5d1d6ddec.pdf",
+      "backend/uploads/documents/1790873974_b5a604317bc2.pdf",
+      "backend/uploads/documents/1790873974_b5f2bb3d3d22.pdf",
+      "backend/uploads/documents/1790873974_ea8af14cf46c.pdf",
+      "backend/uploads/documents/1790873974_efa5aced77b9.pdf",
+      "backend/uploads/documents/1790903148_8a2872cf9012.pdf",
+      "backend/uploads/documents/1790903152_aa5c2a3fc209.pdf",
+      "backend/uploads/documents/1790903157_d937eff1ac04.pdf",
+      "backend/uploads/documents/1790903159_af4f8cbecb1e.pdf",
+      "backend/uploads/documents/1790903160_6706ee1e7a48.pdf",
+      "backend/uploads/documents/1790903163_c4805cec49b9.pdf",
+      "backend/uploads/documents/1790903170_8b0aed3138b4.pdf",
+      "backend/uploads/documents/1790903182_ee2dfaf06010.pdf",
+      "backend/uploads/documents/1790903184_f5e500cfc875.pdf",
+      "backend/uploads/documents/1790903191_a2ee8e13c9a2.pdf",
+      "backend/uploads/documents/1790903194_fd0d8086c27c.pdf",
+      "backend/uploads/documents/1790903206_644b5dfeecb2.pdf",
+      "backend/uploads/documents/1790903209_0a092740f2b5.pdf",
+      "backend/uploads/documents/1790903214_846b759d76a9.pdf",
+      "backend/uploads/documents/1790903217_2f4c2f8243ac.pdf",
+      "backend/uploads/documents/1790903223_cf4a752473f4.pdf",
+      "backend/uploads/documents/1790903232_cc6cd1f14178.pdf",
+      "backend/uploads/documents/1790903234_d8f3e376783b.pdf",
+      "backend/uploads/documents/1790903235_6302569ce04a.pdf",
+      "backend/uploads/documents/1790903237_daca30c8a303.pdf",
+      "backend/uploads/documents/1790903246_d1d1a36cd8bf.pdf",
+      "backend/uploads/documents/1790903258_c3c81443ec5f.pdf",
+      "backend/uploads/documents/1790903259_e3c5cae5a34a.pdf",
+      "backend/uploads/documents/1790903268_66ad0a2212b4.pdf",
+      "backend/uploads/documents/1790903274_bdbf86c3fee0.pdf",
+      "backend/uploads/documents/1790903275_f22edfe54768.pdf",
+      "backend/uploads/documents/1790903282_fcaa3e1af59b.pdf",
+      "backend/uploads/documents/1790903287_079671d89065.pdf",
+      "backend/uploads/documents/1790903288_d11db325d80f.pdf",
+      "backend/uploads/documents/1790903291_b4657328405a.pdf",
+      "backend/uploads/documents/1790903294_e720244683f8.pdf",
+      "backend/uploads/documents/1790903297_d930cd85e688.pdf",
+      "backend/uploads/documents/1790903301_2f666e571549.pdf",
+      "backend/uploads/documents/1790903302_e1e81b6f947e.pdf",
+      "backend/uploads/documents/1790903309_1c6a49aae5f0.pdf"
+    ],
+    "candidates_identical_to_active_pdf": []
+  },
+  "duplicate_pdf_groups": [
+    [
+      "backend/training/lesson_docs/completed/bundle_lesson_18.pdf",
+      "backend/uploads/documents/completed_bundle_lesson_18.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/bundle_lesson_27.pdf",
+      "backend/uploads/documents/completed_bundle_lesson_27.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/bundle_lesson_36.pdf",
+      "backend/uploads/documents/completed_bundle_lesson_36.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/bundle_lesson_45.pdf",
+      "backend/uploads/documents/completed_bundle_lesson_45.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/bundle_lesson_54.pdf",
+      "backend/uploads/documents/completed_bundle_lesson_54.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/bundle_lesson_65.pdf",
+      "backend/training/lesson_docs/rebuilt/lesson_65.pdf",
+      "backend/uploads/documents/completed_bundle_lesson_65.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/bundle_lesson_9.pdf",
+      "backend/uploads/documents/completed_bundle_lesson_9.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/lesson_1.pdf",
+      "backend/uploads/documents/completed_lesson_1.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/lesson_10.pdf",
+      "backend/uploads/documents/completed_lesson_10.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/lesson_11.pdf",
+      "backend/uploads/documents/completed_lesson_11.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/lesson_12.pdf",
+      "backend/uploads/documents/completed_lesson_12.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/lesson_13.pdf",
+      "backend/uploads/documents/completed_lesson_13.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/lesson_14.pdf",
+      "backend/uploads/documents/completed_lesson_14.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/lesson_15.pdf",
+      "backend/uploads/documents/completed_lesson_15.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/lesson_16.pdf",
+      "backend/uploads/documents/completed_lesson_16.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/lesson_17.pdf",
+      "backend/uploads/documents/completed_lesson_17.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/lesson_2.pdf",
+      "backend/uploads/documents/completed_lesson_2.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/lesson_3.pdf",
+      "backend/uploads/documents/completed_lesson_3.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/lesson_4.pdf",
+      "backend/uploads/documents/completed_lesson_4.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/lesson_5.pdf",
+      "backend/uploads/documents/completed_lesson_5.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/lesson_6.pdf",
+      "backend/uploads/documents/completed_lesson_6.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/lesson_7.pdf",
+      "backend/uploads/documents/completed_lesson_7.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/lesson_8.pdf",
+      "backend/uploads/documents/completed_lesson_8.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/supplement_course_1.pdf",
+      "backend/uploads/documents/completed_supplement_course_1.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/supplement_course_2.pdf",
+      "backend/uploads/documents/completed_supplement_course_2.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/supplement_course_3.pdf",
+      "backend/uploads/documents/completed_supplement_course_3.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/supplement_course_4.pdf",
+      "backend/uploads/documents/completed_supplement_course_4.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/supplement_course_5.pdf",
+      "backend/uploads/documents/completed_supplement_course_5.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/supplement_course_6.pdf",
+      "backend/uploads/documents/completed_supplement_course_6.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/completed/supplement_course_7.pdf",
+      "backend/uploads/documents/completed_supplement_course_7.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_10.pdf",
+      "backend/uploads/documents/1790789488_8a16c8696a70.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_11.pdf",
+      "backend/uploads/documents/1790789488_6a83cd6e8030.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_12.pdf",
+      "backend/uploads/documents/1790789488_f45700fdc85a.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_13.pdf",
+      "backend/uploads/documents/1790789488_fb4d21cfe418.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_14.pdf",
+      "backend/uploads/documents/1790789488_d022fcb56597.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_15.pdf",
+      "backend/uploads/documents/1790789488_eebb907d875a.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_16.pdf",
+      "backend/uploads/documents/1790789488_ae05c93647a5.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_17.pdf",
+      "backend/uploads/documents/1790789488_cda1d94f91d1.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_18.pdf",
+      "backend/uploads/documents/1790789488_360f6ffd5448.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_19.pdf",
+      "backend/uploads/documents/1790789488_6d4da9518d97.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_2.pdf",
+      "backend/uploads/documents/1790789488_b6eefebd48f3.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_20.pdf",
+      "backend/uploads/documents/1790789488_1cbe1599b17c.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_21.pdf",
+      "backend/uploads/documents/1790789488_b52f1d05f748.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_22.pdf",
+      "backend/uploads/documents/1790789488_5820a48bba48.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_23.pdf",
+      "backend/uploads/documents/1790789488_b8834c0e3567.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_24.pdf",
+      "backend/uploads/documents/1790789488_00ec3d34712f.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_25.pdf",
+      "backend/uploads/documents/1790789488_39f913841b9c.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_26.pdf",
+      "backend/uploads/documents/1790789488_b61fac9d57d5.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_27.pdf",
+      "backend/uploads/documents/1790789488_dfbc0578284e.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_28.pdf",
+      "backend/uploads/documents/1790789488_06f37c639066.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_29.pdf",
+      "backend/uploads/documents/1790789488_ee86c5c49f88.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_3.pdf",
+      "backend/uploads/documents/1790789488_c2d6e7aca3cb.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_30.pdf",
+      "backend/uploads/documents/1790789488_ba693e1ad8b0.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_31.pdf",
+      "backend/uploads/documents/1790789488_e0b6bab47868.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_32.pdf",
+      "backend/uploads/documents/1790789488_354fe42d28c9.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_33.pdf",
+      "backend/uploads/documents/1790789488_568960fca322.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_34.pdf",
+      "backend/uploads/documents/1790789488_78d19642b238.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_35.pdf",
+      "backend/uploads/documents/1790789488_183e3a548b18.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_36.pdf",
+      "backend/uploads/documents/1790789488_dfff4b436c27.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_37.pdf",
+      "backend/uploads/documents/1790789488_967843b47fa4.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_38.pdf",
+      "backend/uploads/documents/1790789488_749fb30a77e8.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_39.pdf",
+      "backend/uploads/documents/1790789488_88b2276980ee.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_4.pdf",
+      "backend/uploads/documents/1790789488_72c05ec510b8.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_40.pdf",
+      "backend/uploads/documents/1790789488_4e336ae0b64c.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_41.pdf",
+      "backend/uploads/documents/1790789488_c065561e012e.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_42.pdf",
+      "backend/uploads/documents/1790789488_72f6b7c1e9f1.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_43.pdf",
+      "backend/uploads/documents/1790789488_87d7a78aef78.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_44.pdf",
+      "backend/uploads/documents/1790789488_4a51c63141ab.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_45.pdf",
+      "backend/uploads/documents/1790789488_e6bda5aca9a2.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_47.pdf",
+      "backend/uploads/documents/1790789488_3a9d18150e4e.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_48.pdf",
+      "backend/uploads/documents/1790789488_d9144e67cf31.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_49.pdf",
+      "backend/uploads/documents/1790789488_6972a134cf77.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_5.pdf",
+      "backend/uploads/documents/1790789488_14e54907057b.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_50.pdf",
+      "backend/uploads/documents/1790789488_07b45cc597d1.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_51.pdf",
+      "backend/uploads/documents/1790789488_9140f55895d2.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_52.pdf",
+      "backend/uploads/documents/1790789488_fc7a310af10e.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_53.pdf",
+      "backend/uploads/documents/1790789488_18ca79bb4439.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_54.pdf",
+      "backend/uploads/documents/1790789488_1321e78f4c12.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_6.pdf",
+      "backend/uploads/documents/1790789488_037f79542be1.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_7.pdf",
+      "backend/uploads/documents/1790789488_3631cc194ba1.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_76.pdf",
+      "backend/uploads/documents/1790866565_76bc2833e73f.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_77.pdf",
+      "backend/uploads/documents/1790866565_35ac9d7e5f06.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_78.pdf",
+      "backend/uploads/documents/1790866565_aa67da2cb3ca.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_79.pdf",
+      "backend/uploads/documents/1790866565_9a6ec27fa593.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_8.pdf",
+      "backend/uploads/documents/1790789488_01d4e83b3650.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_80.pdf",
+      "backend/uploads/documents/1790866565_09a39a3a4532.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_81.pdf",
+      "backend/uploads/documents/1790866565_485d9c5c9f7c.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_82.pdf",
+      "backend/uploads/documents/1790866565_362d0f2e1e44.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_83.pdf",
+      "backend/uploads/documents/1790866565_333847515ff9.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_84.pdf",
+      "backend/uploads/documents/1790866565_0eda02f69a43.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_85.pdf",
+      "backend/uploads/documents/1790873974_a2a5d1d6ddec.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_86.pdf",
+      "backend/uploads/documents/1790873974_efa5aced77b9.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_87.pdf",
+      "backend/uploads/documents/1790873974_b5f2bb3d3d22.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_88.pdf",
+      "backend/uploads/documents/1790873974_14e3311eff2d.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_89.pdf",
+      "backend/uploads/documents/1790873974_5e88b10e20f0.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_9.pdf",
+      "backend/uploads/documents/1790789488_366658a36b5e.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_90.pdf",
+      "backend/uploads/documents/1790873974_69e2bf1c5ddc.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_91.pdf",
+      "backend/uploads/documents/1790873974_2fb67924bb1d.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_92.pdf",
+      "backend/uploads/documents/1790873974_ea8af14cf46c.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/pdf/lesson_93.pdf",
+      "backend/uploads/documents/1790873974_b5a604317bc2.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_1.pdf",
+      "backend/uploads/documents/os_structure_lesson_1.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_10.pdf",
+      "backend/uploads/documents/os_structure_lesson_10.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_11.pdf",
+      "backend/uploads/documents/os_structure_lesson_11.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_12.pdf",
+      "backend/uploads/documents/os_structure_lesson_12.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_13.pdf",
+      "backend/uploads/documents/os_structure_lesson_13.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_14.pdf",
+      "backend/uploads/documents/os_structure_lesson_14.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_15.pdf",
+      "backend/uploads/documents/os_structure_lesson_15.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_16.pdf",
+      "backend/uploads/documents/os_structure_lesson_16.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_17.pdf",
+      "backend/uploads/documents/os_structure_lesson_17.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_18.pdf",
+      "backend/uploads/documents/os_structure_lesson_18.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_19.pdf",
+      "backend/uploads/documents/os_structure_lesson_19.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_2.pdf",
+      "backend/uploads/documents/os_structure_lesson_2.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_20.pdf",
+      "backend/uploads/documents/os_structure_lesson_20.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_21.pdf",
+      "backend/uploads/documents/os_structure_lesson_21.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_22.pdf",
+      "backend/uploads/documents/os_structure_lesson_22.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_23.pdf",
+      "backend/uploads/documents/os_structure_lesson_23.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_24.pdf",
+      "backend/uploads/documents/os_structure_lesson_24.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_25.pdf",
+      "backend/uploads/documents/os_structure_lesson_25.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_26.pdf",
+      "backend/uploads/documents/os_structure_lesson_26.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_27.pdf",
+      "backend/uploads/documents/os_structure_lesson_27.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_28.pdf",
+      "backend/uploads/documents/os_structure_lesson_28.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_29.pdf",
+      "backend/uploads/documents/os_structure_lesson_29.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_3.pdf",
+      "backend/uploads/documents/os_structure_lesson_3.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_30.pdf",
+      "backend/uploads/documents/os_structure_lesson_30.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_31.pdf",
+      "backend/uploads/documents/os_structure_lesson_31.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_32.pdf",
+      "backend/uploads/documents/os_structure_lesson_32.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_33.pdf",
+      "backend/uploads/documents/os_structure_lesson_33.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_34.pdf",
+      "backend/uploads/documents/os_structure_lesson_34.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_35.pdf",
+      "backend/uploads/documents/os_structure_lesson_35.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_36.pdf",
+      "backend/uploads/documents/os_structure_lesson_36.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_37.pdf",
+      "backend/uploads/documents/os_structure_lesson_37.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_38.pdf",
+      "backend/uploads/documents/os_structure_lesson_38.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_39.pdf",
+      "backend/uploads/documents/os_structure_lesson_39.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_4.pdf",
+      "backend/uploads/documents/os_structure_lesson_4.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_40.pdf",
+      "backend/uploads/documents/os_structure_lesson_40.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_41.pdf",
+      "backend/uploads/documents/os_structure_lesson_41.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_42.pdf",
+      "backend/uploads/documents/os_structure_lesson_42.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_43.pdf",
+      "backend/uploads/documents/os_structure_lesson_43.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_44.pdf",
+      "backend/uploads/documents/os_structure_lesson_44.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_45.pdf",
+      "backend/uploads/documents/os_structure_lesson_45.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_46.pdf",
+      "backend/uploads/documents/os_structure_lesson_46.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_47.pdf",
+      "backend/uploads/documents/os_structure_lesson_47.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_48.pdf",
+      "backend/uploads/documents/os_structure_lesson_48.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_49.pdf",
+      "backend/uploads/documents/os_structure_lesson_49.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_5.pdf",
+      "backend/uploads/documents/os_structure_lesson_5.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_50.pdf",
+      "backend/uploads/documents/os_structure_lesson_50.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_51.pdf",
+      "backend/uploads/documents/os_structure_lesson_51.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_52.pdf",
+      "backend/uploads/documents/os_structure_lesson_52.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_53.pdf",
+      "backend/uploads/documents/os_structure_lesson_53.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_54.pdf",
+      "backend/uploads/documents/os_structure_lesson_54.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_55.pdf",
+      "backend/uploads/documents/1790239493_9a583b48f6d8.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_56.pdf",
+      "backend/uploads/documents/1790239563_d6e24eb0ec20.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_57.pdf",
+      "backend/uploads/documents/1790318245_602b671318bd.pdf",
+      "backend/uploads/documents/1790903157_d937eff1ac04.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_58.pdf",
+      "backend/uploads/documents/1790318289_bf43cd9e32a4.pdf",
+      "backend/uploads/documents/1790903159_af4f8cbecb1e.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_59.pdf",
+      "backend/uploads/documents/1790318327_ab8151fc894d.pdf",
+      "backend/uploads/documents/1790903160_6706ee1e7a48.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_6.pdf",
+      "backend/uploads/documents/os_structure_lesson_6.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_60.pdf",
+      "backend/uploads/documents/1790318577_52d902a720e9.pdf",
+      "backend/uploads/documents/1790903163_c4805cec49b9.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_61.pdf",
+      "backend/uploads/documents/1790318635_3c33650e038d.pdf",
+      "backend/uploads/documents/1790903170_8b0aed3138b4.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_62.pdf",
+      "backend/uploads/documents/1790318688_99ebbc6acb1f.pdf",
+      "backend/uploads/documents/1790903182_ee2dfaf06010.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_63.pdf",
+      "backend/uploads/documents/1790318728_dd8873667197.pdf",
+      "backend/uploads/documents/1790903184_f5e500cfc875.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_64.pdf",
+      "backend/uploads/documents/1790318745_8427be92e4b7.pdf",
+      "backend/uploads/documents/1790903191_a2ee8e13c9a2.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_7.pdf",
+      "backend/uploads/documents/os_structure_lesson_7.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_8.pdf",
+      "backend/uploads/documents/os_structure_lesson_8.pdf"
+    ],
+    [
+      "backend/training/lesson_docs/rebuilt/lesson_9.pdf",
+      "backend/uploads/documents/os_structure_lesson_9.pdf"
+    ],
+    [
+      "backend/uploads/documents/1789530044_3fc86e099f4c.pdf",
+      "backend/uploads/documents/1789547466_f1df8a42cc08.pdf"
+    ],
+    [
+      "backend/uploads/documents/1789547183_8115d8761c91.pdf",
+      "backend/uploads/documents/1789547292_2e7cdf1e69a3.pdf",
+      "backend/uploads/documents/1789547296_301cd1842885.pdf",
+      "backend/uploads/documents/1789547498_c276bec77285.pdf"
+    ],
+    [
+      "backend/uploads/documents/1790318759_2a6dbb28b2e9.pdf",
+      "backend/uploads/documents/1790903194_fd0d8086c27c.pdf"
+    ]
+  ],
+  "backend_app_unreachable_from_main": [],
+  "inaccessible_paths": [
+    {
+      "path": "backend\\.pytest_cache",
+      "error": "Access is denied"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Mạng máy tính cơ bản</div>
+<p class="path">Chương 4: Cấp phát địa chỉ và chuyển tiếp · Bài 2</p>
+<h1>Định tuyến cơ bản và làm quen IPv6</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Mạng máy tính cơ bản.</li><li>Chương 4: Cấp phát địa chỉ và chuyển tiếp.</li><li>Các bài trong chương: DHCP và NAT trong mạng gia đình; Định tuyến cơ bản và làm quen IPv6.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Đọc tuyến mặc định, chọn tuyến theo tiền tố dài nhất và nhận diện IPv6.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Router chọn tuyến phù hợp địa chỉ đích; khi có nhiều tiền tố khớp, nguyên tắc tiền tố dài nhất giúp chọn tuyến cụ thể nhất. Tuyến mặc định IPv4 là 0.0.0.0/0, được dùng khi không có tuyến cụ thể hơn. Một tuyến mô tả mạng đích cùng next hop hoặc giao diện ra.</p>
+<p>IPv6 có địa chỉ 128 bit, viết bằng các nhóm thập lục phân. Có thể bỏ số 0 đầu mỗi nhóm và rút gọn một chuỗi nhóm 0 bằng dấu :: một lần trong một địa chỉ. IPv6 không dùng broadcast như IPv4; multicast có vai trò quan trọng trong nhiều giao thức.</p>
+<p>Địa chỉ link-local IPv6 dùng trên liên kết cục bộ. Host có thể chạy IPv4 và IPv6 đồng thời theo dual stack. Không chỉ kiểm tra có địa chỉ: muốn liên lạc còn cần tuyến, dịch vụ và chính sách phù hợp. Bài này chưa đi sâu OSPF, BGP hoặc cấu hình định tuyến động.</p>
+<h2>1. Thực hành longest-prefix match</h2>
+<pre><code>Đích tiền tố         Next hop
+0.0.0.0/0            R0
+10.0.0.0/8           R1
+10.1.0.0/16          R2
+10.1.2.0/24          R3</code></pre>
+<p>Đích 10.1.2.9 chọn R3; 10.1.8.9 chọn R2; 10.2.8.9 chọn R1; đích không có tuyến cụ thể hơn dùng R0 nếu tuyến hợp lệ. Nếu nhiều tuyến cùng tiền tố, các tiêu chí chọn tiếp phụ thuộc giao thức và nền tảng; không quyết định bằng vị trí dòng đầu theo bảng minh họa.</p>
+<h2>2. IPv6 từ cách viết tới phạm vi</h2>
+<p>Một địa chỉ đầy đủ có tám nhóm 16 bit. 2001:0db8:0000:0000:0000:0000:0000:0001 rút gọn thành 2001:db8::1. Dải 2001:db8::/32 dùng cho tài liệu minh họa. ::1 là loopback. Link-local thường nhận diện bằng tiền tố fe80::/10, dùng trong liên kết và có thể cần thông tin interface để xác định vùng.</p>
+<p>IPv6 không dùng ARP; Neighbor Discovery xử lý các chức năng láng giềng. Không được chặn mọi ICMPv6 một cách tùy tiện vì nó tham gia các hoạt động thiết yếu của mạng IPv6.</p>
+<h2>3. Kết nối và chẩn đoán</h2>
+<p>Một host có IPv6 global chưa chắc có đường tới mọi dịch vụ; kiểm tra route, DNS AAAA, khả năng hỗ trợ của đích và chính sách. Dual stack có thể khiến một phần truy cập hoạt động qua một giao thức còn giao thức kia lỗi.</p>
+<h2>4. Bài tập có lời giải</h2>
+<p>Chọn tuyến cho bốn đích từ bảng; ghi tiền tố khớp và lý do bỏ các tuyến còn lại. Giải thích vì sao 2001:db8::1::2 không hợp lệ: hai dấu rút gọn khiến không xác định được số nhóm 0 ở mỗi vị trí. Với host dual stack, lập checklist IPv4 và IPv6 riêng thay vì kết luận chỉ từ một lệnh ping.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>Với các tuyến /0, 192.168.0.0/16 và 192.168.2.0/24, chọn tuyến cho 192.168.2.9. Rút gọn 2001:0db8:0000:0000:0000:0000:0000:0001.</p>
+</div>
+<h2>Hướng giải bài tập bổ sung</h2>
+<p>Chọn /24 vì cụ thể nhất. IPv6 rút gọn thành 2001:db8::1; không dùng hai dấu :: trong cùng địa chỉ.</p>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Khi nhiều tuyến đều khớp đích, ưu tiên thông thường là gì?</li><li>Tuyến mặc định IPv4 viết thế nào?</li><li>IPv6 có độ dài địa chỉ bao nhiêu?</li><li>Dấu :: có thể dùng tối đa mấy lần trong một địa chỉ IPv6?</li><li>Dual stack nghĩa là gì?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Tiền tố dài nhất. Longest-prefix match chọn tuyến cụ thể nhất.</li><li>0.0.0.0/0. /0 khớp mọi địa chỉ khi không có tuyến cụ thể hơn.</li><li>128 bit. IPv6 dùng không gian địa chỉ 128 bit.</li><li>Một lần. Chỉ một vị trí rút gọn để khôi phục số nhóm 0 một cách rõ ràng.</li><li>Cùng hỗ trợ IPv4 và IPv6. Dual stack vận hành hai bộ giao thức IP song song.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://www.netacad.com/courses/networking-basics</li><li>https://developer.mozilla.org/en-US/docs/Web/HTTP</li></ul></body></html>

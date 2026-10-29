@@ -1,0 +1,70 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Mạng máy tính cơ bản</div>
+<p class="path">Chương 4: Cấp phát địa chỉ và chuyển tiếp · Bài 1</p>
+<h1>DHCP và NAT trong mạng gia đình</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Mạng máy tính cơ bản.</li><li>Chương 4: Cấp phát địa chỉ và chuyển tiếp.</li><li>Các bài trong chương: DHCP và NAT trong mạng gia đình; Định tuyến cơ bản và làm quen IPv6.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Mô tả cấp phát cấu hình tự động và phân biệt với chuyển đổi địa chỉ.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>DHCPv4 cấp cấu hình IP theo thời hạn thuê. Trong luồng cấp mới điển hình, client gửi Discover, server Offer, client Request rồi server Acknowledge. Cấu hình có thể gồm địa chỉ IP, subnet mask, gateway và DNS. DHCP không phải dịch vụ phân giải tên.</p>
+<p>NAT chuyển đổi địa chỉ khi gói đi qua thiết bị biên. PAT thường cho nhiều host dùng chung một IPv4 công khai bằng cách phân biệt thêm cổng giao vận. Router duy trì trạng thái ánh xạ cho lưu lượng phản hồi. NAT không đồng nghĩa với tường lửa và không thay thế kiểm soát truy cập.</p>
+<p>Nếu một máy không lấy được cấu hình, cần kiểm tra liên kết, DHCP server, phạm vi cấp phát và xung đột. Địa chỉ 169.254.x.x có thể là địa chỉ link-local tự gán, không mặc nhiên là cấu hình Internet hoạt động. Trước khi đổi cấu hình, ghi nhận giá trị hiện tại để có thể khôi phục.</p>
+<h2>1. Vòng đời thuê địa chỉ</h2>
+<p>DORA mô tả cấp mới điển hình, còn gia hạn có thể không phát lại đủ bốn bước theo đúng hình thức ban đầu. Lease có thời hạn; client cố gia hạn theo quy trình giao thức. Khi không có cấu hình hợp lệ, lỗi cần được phân tích theo client, server, relay và phạm vi mạng.</p>
+<p>DHCP pool nên loại địa chỉ gateway và địa chỉ đã cấp tĩnh. Reservation gắn cấu hình dự kiến cho một định danh client theo triển khai, khác việc tự gõ địa chỉ tĩnh trên máy. Nếu DHCP ở mạng khác, có thể cần relay phù hợp.</p>
+<h2>2. Theo dõi bảng PAT</h2>
+<pre><code>Nguồn bên trong        Nguồn sau PAT            Đích
+192.168.1.10:51000     198.51.100.5:40001        203.0.113.8:443
+192.168.1.20:51000     198.51.100.5:40002        203.0.113.8:443</code></pre>
+<p>Các địa chỉ 198.51.100.0/24 và 203.0.113.0/24 ở đây dùng minh họa, không phải dịch vụ lab công khai để truy cập. Bảng ánh xạ giúp đưa lưu lượng trả về đúng phiên nội bộ. Hai máy có thể dùng cùng cổng nguồn nội bộ mà vẫn được phân biệt sau PAT.</p>
+<h2>3. Những lỗi dễ gặp</h2>
+<p>IP tĩnh nằm trong pool có thể xung đột; gateway sai làm truy cập LAN được nhưng ra ngoài lỗi; DNS sai ảnh hưởng tên miền; pool hết địa chỉ làm máy mới không nhận lease. Không reset toàn mạng chỉ vì một máy chưa cấp IP.</p>
+<h2>4. Bài tập và đáp án</h2>
+<p>Một /24 có gateway .1, máy chủ .10–.20 và DHCP .10–.200. Chỉ ra xung đột thiết kế rồi đề xuất pool .50–.200 hoặc cơ chế loại trừ tương ứng. NAT có tạo quyền truy cập vào ứng dụng không? Không: vẫn cần xác thực và phân quyền. Nộp bảng cấu hình, bằng chứng cấp mới và phân tích đường về của một phiên PAT.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>Trên mạng lab, liệt kê địa chỉ IP, mask, gateway, DNS và thời hạn thuê. Vẽ hai máy truy cập cùng một web server qua PAT, đánh dấu cổng nguồn khác nhau.</p>
+</div>
+<h2>Hướng giải bài tập bổ sung</h2>
+<p>Không dùng IP riêng làm bằng chứng về địa chỉ công khai. Hai máy có thể chia sẻ IP công khai nhưng có các ánh xạ cổng riêng.</p>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Chuỗi cấp mới DHCPv4 điển hình là gì?</li><li>DHCP có thể cung cấp thông tin nào?</li><li>PAT phân biệt nhiều kết nối chung IP công khai bằng gì?</li><li>NAT có thay thế tường lửa không?</li><li>Máy chỉ có 169.254.x.x sau khi không nhận DHCP cần kiểm tra gì?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Discover, Offer, Request, Acknowledge. DORA mô tả luồng cấp mới DHCP phổ biến.</li><li>IP, mask, gateway và DNS. DHCP phân phối các tùy chọn cấu hình mạng.</li><li>Cổng giao vận trong ánh xạ. PAT sử dụng thông tin cổng cùng địa chỉ để phân biệt luồng.</li><li>Không. Chuyển đổi địa chỉ khác với chính sách lọc truy cập.</li><li>Liên kết và khả năng cấp cấu hình DHCP. Link-local không chứng minh đã nhận được cấu hình ra Internet.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://www.netacad.com/courses/networking-basics</li><li>https://developer.mozilla.org/en-US/docs/Web/HTTP</li></ul></body></html>

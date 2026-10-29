@@ -1,0 +1,72 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Mạng máy tính cơ bản</div>
+<p class="path">Chương 5: Giao vận và vận hành an toàn · Bài 2</p>
+<h1>Tường lửa và phân vùng truy cập</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Mạng máy tính cơ bản.</li><li>Chương 5: Giao vận và vận hành an toàn.</li><li>Các bài trong chương: Cổng, socket và vòng đời kết nối TCP; Tường lửa và phân vùng truy cập.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Đề xuất chính sách truy cập tối thiểu trong một mạng lab.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Tường lửa cho phép hoặc chặn lưu lượng theo chính sách như IP, cổng, giao thức và trạng thái kết nối. Chính sách nên xuất phát từ luồng nghiệp vụ cần thiết thay vì mở mọi cổng để thử. Stateful firewall theo dõi trạng thái để xử lý lưu lượng phản hồi phù hợp.</p>
+<p>Phân vùng đặt thiết bị có nhu cầu và mức tin cậy khác nhau vào vùng riêng. Mạng khách thường chỉ cần Internet, không cần truy cập máy chủ quản trị nội bộ. Quyền tối thiểu nghĩa là chỉ cấp truy cập cần cho công việc, rồi kiểm tra cả luồng được phép và luồng phải bị chặn.</p>
+<p>Ghi log có ích nhưng phải tránh lưu mật khẩu và token. Thay đổi chính sách cần kế hoạch khôi phục, đặc biệt nếu đang quản trị từ xa. HTTPS bảo vệ đường truyền, tường lửa kiểm soát luồng; hai công cụ không thay thế nhau. Không tiến hành quét hoặc thử vượt quyền trên mạng bên ngoài phạm vi được cho phép.</p>
+<h2>1. Chuyển yêu cầu thành chính sách</h2>
+<p>Lập danh sách tài sản, vùng, người dùng và luồng nghiệp vụ trước. Mỗi quy tắc cần nguồn, đích, giao thức, cổng hoặc dịch vụ, hành động và lý do. Thứ tự xử lý và mặc định phụ thuộc nền tảng; phải hiểu cơ chế đang dùng thay vì chép cấu hình từ thiết bị khác.</p>
+<h2>2. Ví dụ ma trận truy cập</h2>
+<pre><code>Nguồn       Đích                 Nhu cầu              Quyết định
+Student     LMS                  HTTPS                Cho phép
+Guest       Vùng quản trị        Mọi dịch vụ           Từ chối
+Admin       Máy lab quản trị     Kênh quản trị chọn    Cho phép có giới hạn
+Student     DNS resolver nội bộ  DNS                  Theo thiết kế</code></pre>
+<p>Ma trận là mô hình lab. Không mặc định nó đã bao phủ mọi lưu lượng cần cho một hệ thống thật. Nêu DNS, đồng bộ giờ và các phụ thuộc nếu ứng dụng yêu cầu.</p>
+<h2>3. Thực thi và kiểm chứng</h2>
+<p>Sao lưu cấu hình; có đường khôi phục; áp dụng thay đổi nhỏ; kiểm tra luồng được phép và luồng bị cấm; so sánh log với nguồn/đích thực tế. Lọc theo hướng sai hoặc gắn sai interface có thể khiến quy tắc đúng trên giấy nhưng không có hiệu lực.</p>
+<p>Stateful firewall theo dõi phiên để xử lý lưu lượng liên quan, nhưng không tự hiểu đúng mọi yêu cầu nghiệp vụ. WAF, firewall mạng và phân quyền ứng dụng giải quyết các phạm vi khác nhau.</p>
+<h2>4. Bài tập có tiêu chí chấm</h2>
+<p>Viết sáu quy tắc cho mạng lớp học và giải thích từng quy tắc. Chọn một thay đổi có thể khóa quản trị từ xa, mô tả cách hoàn nguyên không phụ thuộc phiên đang bị ảnh hưởng. Đáp án đạt cần tối thiểu quyền, không để mật khẩu trong log và có ca thử âm; chỉ nói ping được chưa đủ.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>Viết bảng nguồn, đích, giao thức/cổng và quyết định cho ba luồng: học viên mở web, khách vào trang quản trị nội bộ, quản trị viên kết nối máy lab. Ghi cách kiểm tra và hoàn nguyên.</p>
+</div>
+<h2>Hướng giải bài tập bổ sung</h2>
+<p>Không chỉ kiểm tra có thể truy cập web; cần xác nhận khách bị chặn đúng vùng. Không dùng việc NAT hoạt động để kết luận chính sách đã an toàn.</p>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Nguyên tắc quyền tối thiểu là gì?</li><li>Stateful firewall theo dõi thông tin gì?</li><li>Kiểm tra chính sách mạng khách nên bao gồm gì?</li><li>Khi sửa firewall từ xa cần chuẩn bị gì?</li><li>Thông tin nào không nên ghi vào log?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Chỉ cấp truy cập cần thiết cho nhiệm vụ. Quyền được giới hạn theo nhu cầu thực tế.</li><li>Trạng thái kết nối. Trạng thái giúp áp dụng chính sách cho lưu lượng liên quan phiên.</li><li>Cả truy cập được phép và bị chặn. Cần xác nhận cho phép và từ chối đều đúng.</li><li>Kế hoạch khôi phục truy cập. Quy tắc sai có thể khóa chính người quản trị.</li><li>Mật khẩu và token. Bí mật xác thực cần được loại khỏi nhật ký.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://www.netacad.com/courses/networking-basics</li><li>https://developer.mozilla.org/en-US/docs/Web/HTTP</li></ul></body></html>

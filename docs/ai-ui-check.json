@@ -1,0 +1,12 @@
+{
+  "checks": {
+    "elapsed_visible": true,
+    "cancel_resets_state": true,
+    "error_persists_after_toast": true,
+    "unexpected_error_resets_state": true,
+    "timeout_resets_state": true,
+    "success_renders_draft": true,
+    "verification_warning_visible": true
+  },
+  "js_errors": []
+}

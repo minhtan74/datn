@@ -584,20 +584,20 @@
           }
         },
         {
-          "name": "Create Payment",
+          "name": "Create VNPay Payment",
           "request": {
             "method": "POST",
             "header": [
               { "key": "Content-Type", "value": "application/json" },
               { "key": "Authorization", "value": "Bearer {{token}}" }
             ],
-            "url": "{{base_url}}/api/payments",
+            "url": "{{base_url}}/api/payments/vnpay/create",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"course_id\": 1,\n  \"method\": \"momo\"\n}"
+              "raw": "{\n  \"course_id\": 1\n}"
             }
           },
-          "description": "method: card | bank_transfer | momo | zalopay"
+          "description": "Chỉ thanh toán qua VNPay: tạo đơn pending và mở payment_url trả về để thanh toán."
         }
       ]
     },

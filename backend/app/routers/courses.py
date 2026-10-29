@@ -12,7 +12,12 @@ router = APIRouter(prefix="/api/courses", tags=["courses"])
 
 # Câu SELECT gốc: lấy khóa học kèm tên giảng viên phụ trách
 _SELECT = (
-    "SELECT c.*, u.fullname AS teacher_name "
+    "SELECT c.*, u.fullname AS teacher_name, "
+    "(SELECT COUNT(*) FROM lessons l JOIN chapters ch ON ch.id=l.chapter_id "
+    "WHERE ch.course_id=c.id AND l.status='published') AS lesson_count, "
+    "(SELECT COUNT(*) FROM lessons l JOIN chapters ch ON ch.id=l.chapter_id "
+    "WHERE ch.course_id=c.id AND l.status='published' "
+    "AND l.document_url IS NOT NULL AND l.document_url<>'') AS document_count "
     "FROM courses c LEFT JOIN users u ON c.teacher_id = u.id"
 )
 

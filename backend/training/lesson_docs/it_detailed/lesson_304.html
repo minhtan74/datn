@@ -1,0 +1,72 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Mạng máy tính cơ bản</div>
+<p class="path">Chương 1: Nền tảng kết nối mạng · Bài 2</p>
+<h1>Địa chỉ IPv4 và mạng con</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Mạng máy tính cơ bản.</li><li>Chương 1: Nền tảng kết nối mạng.</li><li>Các bài trong chương: Mô hình TCP/IP và thiết bị mạng; Địa chỉ IPv4 và mạng con.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Đọc địa chỉ IPv4, ký hiệu CIDR và xác định mạng con đơn giản.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>IPv4 dùng địa chỉ 32 bit, thường viết thành bốn số thập phân từ 0 đến 255. Ký hiệu /24 cho biết 24 bit đầu là phần mạng; mặt nạ tương ứng là 255.255.255.0. Với mạng thông thường 192.168.1.0/24, địa chỉ mạng là 192.168.1.0, broadcast là 192.168.1.255 và các địa chỉ host thông thường là .1 đến .254.</p>
+<p>Hai host 192.168.1.10/24 và 192.168.1.20/24 cùng mạng con. Host 192.168.2.10/24 nằm ở mạng khác. Khi đích ngoài mạng con, máy thường gửi gói đến default gateway để chuyển tiếp; gateway không phải máy chủ DNS.</p>
+<p>Các dải riêng gồm 10.0.0.0/8, 172.16.0.0/12 và 192.168.0.0/16. Chúng không được định tuyến công khai trên Internet. Không suy ra mọi địa chỉ bắt đầu bằng 172 đều là địa chỉ riêng.</p>
+<h2>1. Đọc địa chỉ và tính phần mạng</h2>
+<p>Mỗi octet của IPv4 biểu diễn 8 bit. Ví dụ 192 = 128+64 nên ở dạng nhị phân là 11000000. Subnet mask có các bit mạng là 1, phần host là 0; phép AND giữa địa chỉ và mask cho địa chỉ mạng. Ký hiệu CIDR /p là số bit mạng, không phải số host.</p>
+<h2>2. Ví dụ chia /24 thành /26</h2>
+<p>Mạng 192.168.10.0/24 chia thành bốn mạng /26. Mỗi mạng có 64 địa chỉ vì còn 6 bit host. Các địa chỉ mạng là .0, .64, .128 và .192. Với mạng con thông thường, bỏ địa chỉ mạng và broadcast còn 62 host dùng được.</p>
+<p>Với host 192.168.10.70/26: 70 thuộc khối 64–127; mạng là 192.168.10.64, broadcast .127, dải host .65–.126. Gateway có thể là một địa chỉ host được chọn trong dải; không bắt buộc phải .1 trên mọi mạng.</p>
+<pre><code>Mạng /26       Host đầu      Host cuối     Broadcast
+.0             .1            .62           .63
+.64            .65           .126          .127
+.128           .129          .190          .191
+.192           .193          .254          .255</code></pre>
+<h2>3. Quy trình tự giải bài subnet</h2>
+<ol><li>Xác định số bit host bằng 32 trừ độ dài tiền tố.</li><li>Tính kích thước khối và tìm mạng chứa địa chỉ.</li><li>Xác định broadcast và dải host theo loại mạng con.</li><li>Kiểm tra hai host có cùng network ID với mask của chúng hay không.</li><li>Kiểm tra gateway có truy cập trực tiếp trên liên kết phù hợp không.</li></ol>
+<p>Quy tắc trừ hai địa chỉ không dùng máy móc cho /31 điểm-điểm hoặc /32.</p>
+<h2>4. Bài tập có đáp án</h2>
+<p>Host 10.1.2.140/27 thuộc khối nào? /27 còn 5 bit host, khối 32 địa chỉ. 140 thuộc 128–159: mạng .128, broadcast .159, host .129–.158. Hai host .140/27 và .170/27 khác mạng.</p>
+<p>Thiết kế mạng cho 25 máy và một gateway: /27 có 30 host thông thường nên đủ nếu không có thêm nhu cầu vượt số còn lại. Ghi rõ dự phòng và địa chỉ dành riêng thay vì chỉ nêu tiền tố.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>với 10.0.5.0/24, tìm địa chỉ mạng, broadcast và hai địa chỉ host hợp lệ. Quy tắc trừ hai địa chỉ chỉ áp dụng mạng con thông thường; /31 và /32 có cách sử dụng riêng.</p>
+</div>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Địa chỉ IPv4 có bao nhiêu bit?</li><li>Mặt nạ nào tương ứng với /24?</li><li>Host nào cùng mạng con với 192.168.1.10/24?</li><li>Broadcast của mạng thông thường 192.168.1.0/24 là gì?</li><li>Default gateway thường được dùng khi nào?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>32. IPv4 có 32 bit; IPv6 có 128 bit.</li><li>255.255.255.0. /24 đặt 24 bit đầu của mặt nạ thành 1.</li><li>192.168.1.20/24. Với /24, hai host có cùng ba octet đầu thuộc cùng mạng con.</li><li>192.168.1.255. Địa chỉ broadcast đặt toàn bộ 8 bit host thành 1.</li><li>Gửi gói tới đích ngoài mạng con. Gateway là bước chuyển tiếp ra khỏi mạng con hiện tại.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://www.netacad.com/courses/networking-basics</li><li>https://developer.mozilla.org/en-US/docs/Web/HTTP</li></ul></body></html>

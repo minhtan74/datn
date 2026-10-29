@@ -1,0 +1,2902 @@
+[
+  {
+    "path": "training\\lesson_docs\\completed\\bundle_lesson_18.pdf",
+    "bytes": 147064,
+    "sha256": "82455f4081c232370ab86fe0c8a717a62fca76756c4024e9322c92791017d9a4",
+    "pages": 5,
+    "text_chars": 6522,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\bundle_lesson_27.pdf",
+    "bytes": 113056,
+    "sha256": "1b3fb711d36b27b28070b6ccfe978dda56586dcf1cdb6984066d0b2c4989443a",
+    "pages": 4,
+    "text_chars": 6511,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\bundle_lesson_36.pdf",
+    "bytes": 116470,
+    "sha256": "59073aafd732cc3ef8192f189c13395716104bb6503ada42fd957f62c5070bd7",
+    "pages": 5,
+    "text_chars": 7338,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\bundle_lesson_45.pdf",
+    "bytes": 113008,
+    "sha256": "7cb3757ad54d1e54e7f2c88531a399e5f2ae2f0c52ecf6256435cba672859fdf",
+    "pages": 4,
+    "text_chars": 6914,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\bundle_lesson_54.pdf",
+    "bytes": 118405,
+    "sha256": "ee9861808c0b3df8ad7ed22658499629c615fc178e7680bbbbfac39260c5d75f",
+    "pages": 4,
+    "text_chars": 7243,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\bundle_lesson_65.pdf",
+    "bytes": 666099,
+    "sha256": "6f7f504385a1c4c85620f62f79928d178a107b321a99e2b5ead920adcfbdaa5b",
+    "pages": 12,
+    "text_chars": 19094,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\bundle_lesson_9.pdf",
+    "bytes": 141874,
+    "sha256": "dcdbe6526397a81b97368e272102d3c0a1277e6a9e7b62b38b3a6999c3c7500d",
+    "pages": 5,
+    "text_chars": 6548,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\lesson_1.pdf",
+    "bytes": 75173,
+    "sha256": "3bbef567b704bb8e8103b70e421bc52f57e0787b25db5264880faec250151d25",
+    "pages": 2,
+    "text_chars": 2654,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\lesson_10.pdf",
+    "bytes": 74773,
+    "sha256": "01f8f74e0d8ef65b88e3afeff26fcd77213818a13ccc762223e65470f6b5c129",
+    "pages": 2,
+    "text_chars": 1536,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\lesson_11.pdf",
+    "bytes": 93024,
+    "sha256": "974fec484e9560ece3915677aada365931a4dceae3fd1fb4eee31804c4d2e485",
+    "pages": 2,
+    "text_chars": 1934,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\lesson_12.pdf",
+    "bytes": 73359,
+    "sha256": "056342ddb47b336d4002ef9ed5424671c5847deebefdf0d68927c2e6eb891c73",
+    "pages": 2,
+    "text_chars": 1744,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\lesson_13.pdf",
+    "bytes": 82114,
+    "sha256": "f9e656e6923749fc3e7cb0c9dd803c2d77f5dcfd427c6693eed0afb78d3d486b",
+    "pages": 2,
+    "text_chars": 1789,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\lesson_14.pdf",
+    "bytes": 79971,
+    "sha256": "7fa3eae9414ebb3479b78f7daba8a8a1de82b8f4a6f7cb7bc99ba55428d4ed7c",
+    "pages": 2,
+    "text_chars": 1779,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\lesson_15.pdf",
+    "bytes": 74598,
+    "sha256": "ccbcd1a79d12cf94a832357f64a03b19c98dc4ed6fc25f3c7b3e7447c05da55a",
+    "pages": 2,
+    "text_chars": 1910,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\lesson_16.pdf",
+    "bytes": 77114,
+    "sha256": "531273978349dfc12dd559eb59882df37445608a74bc3c0cac4e48bd7cfb9f03",
+    "pages": 2,
+    "text_chars": 1806,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\lesson_17.pdf",
+    "bytes": 81477,
+    "sha256": "451d6a44d559a891063b8ae40b3b12a760aa4703525480834de4baadba06526c",
+    "pages": 2,
+    "text_chars": 1934,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\lesson_18.pdf",
+    "bytes": 85480,
+    "sha256": "c6e38bf79e715fe0b7ce64a211e9b7f4ce6a6f9c4a7adb1bab8db533f9697d92",
+    "pages": 2,
+    "text_chars": 1962,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\lesson_2.pdf",
+    "bytes": 93012,
+    "sha256": "68ab6b1f61158d887efdebc387c2a492715efe84b5ff4c6ce63ace0fc1b217f8",
+    "pages": 2,
+    "text_chars": 1836,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\lesson_3.pdf",
+    "bytes": 96766,
+    "sha256": "f8e366f3ea5c059f7db05ec5b63744835f1209d889e11f0507fc914909e6c82d",
+    "pages": 2,
+    "text_chars": 1555,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\lesson_4.pdf",
+    "bytes": 81110,
+    "sha256": "7e744025e3bbc05a5d940d748d28e13e5b6e70c9e2fd0260f3aaa1bfafce130e",
+    "pages": 2,
+    "text_chars": 1534,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\lesson_5.pdf",
+    "bytes": 78492,
+    "sha256": "3dd93caac7222ec5a6bdc91dfddebb9da8057a36d53849050f000c4eb99c4362",
+    "pages": 2,
+    "text_chars": 1622,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\lesson_6.pdf",
+    "bytes": 73413,
+    "sha256": "548521bdb634c196bb0dc354295ce8356f724004f9ea1fef50269fafffa66fd6",
+    "pages": 2,
+    "text_chars": 1550,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\lesson_7.pdf",
+    "bytes": 75584,
+    "sha256": "5d8938cdb938e41f159879f81149cc18300322737f85ae40f79862190aa51b21",
+    "pages": 2,
+    "text_chars": 1783,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\lesson_8.pdf",
+    "bytes": 73682,
+    "sha256": "8b245e87332203ab2e6d9ecb53a3cf45ea31a494620b08d209075846ddff2731",
+    "pages": 2,
+    "text_chars": 1922,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\lesson_9.pdf",
+    "bytes": 79062,
+    "sha256": "16e539a638eddef9a32c42ef3862fc5561602a44f3984ea793bb405f59c2caf4",
+    "pages": 2,
+    "text_chars": 2003,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\supplement_course_1.pdf",
+    "bytes": 83924,
+    "sha256": "741e636d4e5729a45271fde52b1f0352d090feb47599027d5ebaa9b6886d499d",
+    "pages": 3,
+    "text_chars": 4544,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\supplement_course_2.pdf",
+    "bytes": 84897,
+    "sha256": "ef1f9f441194452ef8e45f7804e50a21736964c5a48a724a369eeba38278b919",
+    "pages": 3,
+    "text_chars": 4559,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\supplement_course_3.pdf",
+    "bytes": 81825,
+    "sha256": "2a330337fbcf6f75757983a64ee1b60b8da1666b23fc8a68d6c80eeaeebdeaa7",
+    "pages": 3,
+    "text_chars": 4272,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\supplement_course_4.pdf",
+    "bytes": 82427,
+    "sha256": "dfe293e65844efee2e78f8b046fcf8c0dea795c3a1754bf3f14ee913581ffea4",
+    "pages": 3,
+    "text_chars": 4230,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\supplement_course_5.pdf",
+    "bytes": 82063,
+    "sha256": "8062b9c8d254fffc933286c51cac2bb994660cae74d76870e891182a5710ebd4",
+    "pages": 3,
+    "text_chars": 4345,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\supplement_course_6.pdf",
+    "bytes": 84876,
+    "sha256": "4bb732e246add28385d83a33244ded183552369e3d63a8095248689eec3cd627",
+    "pages": 3,
+    "text_chars": 4517,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\completed\\supplement_course_7.pdf",
+    "bytes": 82657,
+    "sha256": "c3f26c966cd30804dc06d9a2b53137df605e0494fa21624a744f6a466cee3270",
+    "pages": 3,
+    "text_chars": 4820,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_10.pdf",
+    "bytes": 74768,
+    "sha256": "abdfdfe18004fff2f1b52f2b7d3e45814930948e73288390901309dbfe6ab3fb",
+    "pages": 2,
+    "text_chars": 1536,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_11.pdf",
+    "bytes": 93019,
+    "sha256": "970131344c0377e01fa6606a90d539159fdaca83b56444f6cfd3fe74933dab54",
+    "pages": 2,
+    "text_chars": 1934,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_12.pdf",
+    "bytes": 73354,
+    "sha256": "35223b436329d1c9dd8c18ff6c1b9a78cef2ac8db2107613a1fca29919577d79",
+    "pages": 2,
+    "text_chars": 1744,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_13.pdf",
+    "bytes": 82109,
+    "sha256": "db8a347bd1643f9ab47cb2b1eeb21df1a29d6c51f2c66c9d9b733f7f4e92c8fb",
+    "pages": 2,
+    "text_chars": 1789,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_14.pdf",
+    "bytes": 79966,
+    "sha256": "9455ed937f5aa999cfa44d6ba7c27d0c1267e52164ff9b05078ed48d90091a89",
+    "pages": 2,
+    "text_chars": 1779,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_15.pdf",
+    "bytes": 74593,
+    "sha256": "5f530e3f4ea126d9dcc380b103526a82ac2b6868de4cfb7a8b16d5fa1dc4b44e",
+    "pages": 2,
+    "text_chars": 1910,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_16.pdf",
+    "bytes": 77109,
+    "sha256": "c6dfb35a39ad8268973e25f78238306e1192f7e4ef4a9517dc034d71329f4bfd",
+    "pages": 2,
+    "text_chars": 1806,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_17.pdf",
+    "bytes": 81472,
+    "sha256": "8d153e4fa4fb290678b2c23859002ede87e2d2ca9cc9b2e6927ebdebe2969af0",
+    "pages": 2,
+    "text_chars": 1934,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_18.pdf",
+    "bytes": 85475,
+    "sha256": "a5a1ef9db558251121d5bfd6699fcf8ecedc6b82ca74f2e99064a5baa43b9b3a",
+    "pages": 2,
+    "text_chars": 1962,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_19.pdf",
+    "bytes": 84532,
+    "sha256": "9a293c1d8e249d2753646d6630427a5dc73eb8a3aed8c3e8524080f8d1fce221",
+    "pages": 2,
+    "text_chars": 1790,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_2.pdf",
+    "bytes": 93006,
+    "sha256": "77f0f06fc319e2d74c4bf7c7c8e83d362ae5b8e7588b7dc4fd809e6c0b4cc677",
+    "pages": 2,
+    "text_chars": 1836,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_20.pdf",
+    "bytes": 90015,
+    "sha256": "9fdd6675dbbe3bd80858e5e69c2588c1e7de449ec0973156ac0f8023b946fe08",
+    "pages": 2,
+    "text_chars": 1891,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_21.pdf",
+    "bytes": 87144,
+    "sha256": "c3ec07e46e1dd2226729dc6cda90fb6ce6a0c6726c3f150f069b9ff21115789e",
+    "pages": 2,
+    "text_chars": 1788,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_22.pdf",
+    "bytes": 76724,
+    "sha256": "b6f6cfb2f0b6e7b9afdfaaff1fbafbd21de7de82d04c251d6c2a470c506c9f81",
+    "pages": 2,
+    "text_chars": 2130,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_23.pdf",
+    "bytes": 77785,
+    "sha256": "ed3c486b98107dee325f511a5dde54052a10274ed3638e9d32b44ec9ff72df83",
+    "pages": 2,
+    "text_chars": 2137,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_24.pdf",
+    "bytes": 73398,
+    "sha256": "94dc7439cd43dff15660cfcb84d98757f712229498612751a3037da2fb1797aa",
+    "pages": 2,
+    "text_chars": 2267,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_25.pdf",
+    "bytes": 86179,
+    "sha256": "3eb754ef92d20084dae034785afff7130a31a699a3aea950d8ee17075def84c4",
+    "pages": 2,
+    "text_chars": 2104,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_26.pdf",
+    "bytes": 87135,
+    "sha256": "12ada95fec08ced81410d17bff8c229000d4dea70951afc3bcd8d3ded6002ba4",
+    "pages": 2,
+    "text_chars": 2136,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_27.pdf",
+    "bytes": 79970,
+    "sha256": "ab2493b0b3d321fb40e4abbcd9c2c3d82401be8e3fd9c4a3995f1010fed2fed8",
+    "pages": 2,
+    "text_chars": 1875,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_28.pdf",
+    "bytes": 94164,
+    "sha256": "93d9c5cae91610b4be9a36f06abca92d00f07dfb942e193fc14204e9f1106266",
+    "pages": 2,
+    "text_chars": 2206,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_29.pdf",
+    "bytes": 93419,
+    "sha256": "2e20f35cc3af7ff5666fedf0bd83cc44fa8e14a3af2c4ceccb4ac6e38ec4309e",
+    "pages": 2,
+    "text_chars": 1969,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_3.pdf",
+    "bytes": 96760,
+    "sha256": "ede624ab41bfd55441c6fb004f4d40bb72e162bce0aa7e71a18043900fd97efa",
+    "pages": 2,
+    "text_chars": 1555,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_30.pdf",
+    "bytes": 88787,
+    "sha256": "e09bfaa1d42ebbc4b6a7343519f6846c27d2685d3d1a770229c48ad588706bc8",
+    "pages": 2,
+    "text_chars": 1988,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_31.pdf",
+    "bytes": 86948,
+    "sha256": "46face031e192ee292ad065936235070a87e97a192d1caffbf02a1bf7c6eb12c",
+    "pages": 2,
+    "text_chars": 2305,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_32.pdf",
+    "bytes": 79764,
+    "sha256": "3e614cab8d21f1bcb8fb4ae80fa9194db133116d1eddaee903f784407b732909",
+    "pages": 2,
+    "text_chars": 1943,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_33.pdf",
+    "bytes": 78531,
+    "sha256": "53ad7856b95d7c1dd9c447f5f21b0e60f63721b382f5977bc09ed05cc8d0ba22",
+    "pages": 2,
+    "text_chars": 1779,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_34.pdf",
+    "bytes": 78902,
+    "sha256": "bf12dcc9ea05d327859664d0150385fe0967d0379ccf1f0d26cd23ef1c755ce0",
+    "pages": 2,
+    "text_chars": 1816,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_35.pdf",
+    "bytes": 75606,
+    "sha256": "924cef13343002772cd95ee27a3e8d4ce6859f20048617d6cbf600b8490f468d",
+    "pages": 2,
+    "text_chars": 1866,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_36.pdf",
+    "bytes": 74792,
+    "sha256": "07ccc5ec4560e6bb25c715b093767476bcf5b10969e19ce8bdbaa05193743988",
+    "pages": 2,
+    "text_chars": 1987,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_37.pdf",
+    "bytes": 74424,
+    "sha256": "6e0cc38bb582b0692626865dcb1eb12b29ba32d6a49613de623fb05f254e1c39",
+    "pages": 2,
+    "text_chars": 1830,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_38.pdf",
+    "bytes": 75931,
+    "sha256": "6d527d06056ea73b3bb6e9a4001aa3d115dccb9adbfae11048eaeb762d3f5290",
+    "pages": 2,
+    "text_chars": 1907,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_39.pdf",
+    "bytes": 82018,
+    "sha256": "5f5e23b0d0d10699f3fb26f20da80f5e01e1877885c0c6a7ed32ad0d73eca278",
+    "pages": 2,
+    "text_chars": 2155,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_4.pdf",
+    "bytes": 81104,
+    "sha256": "d782e98a908bac0ecbc46e9b509c64cf41eb6f68b9b8b74ab363aa86d0ff0d0f",
+    "pages": 2,
+    "text_chars": 1534,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_40.pdf",
+    "bytes": 79158,
+    "sha256": "56076522de7f028cb9596fb4b2f2dec9f188158b12aa37d224b431a3631b45e4",
+    "pages": 2,
+    "text_chars": 1916,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_41.pdf",
+    "bytes": 77024,
+    "sha256": "3c30f93e9c33265418553b3905f52063a4a3548b25153e992cc2f0c0f86c0d43",
+    "pages": 2,
+    "text_chars": 2279,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_42.pdf",
+    "bytes": 74330,
+    "sha256": "ae4b2fd966fbf154b6c84f18285d15a5cbd1b0e59d7506306c745ad26802755f",
+    "pages": 2,
+    "text_chars": 2231,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_43.pdf",
+    "bytes": 77338,
+    "sha256": "f99e451c4d70f7f2955619e4b55f5b84713649213a28b8e785493634ca72653c",
+    "pages": 2,
+    "text_chars": 2247,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_44.pdf",
+    "bytes": 85714,
+    "sha256": "34a8fad2857f728db83b8855c4ad57b671aaaff273b31b6245a1cf98e48250ea",
+    "pages": 2,
+    "text_chars": 2449,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_45.pdf",
+    "bytes": 85094,
+    "sha256": "4dd9e4fc92ea4e642e05667266273bab2c8417c835df91c65855cf6e1c85cfa5",
+    "pages": 2,
+    "text_chars": 2144,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_47.pdf",
+    "bytes": 87884,
+    "sha256": "df4ea0906fe4a74a2ea4ec0440f6dd67df8895a74f268a226a1f63760b3ea482",
+    "pages": 2,
+    "text_chars": 2107,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_48.pdf",
+    "bytes": 95799,
+    "sha256": "84b26c8ac3a54b414f2df844b11a017c3dc80e05913769b3b053deedee52e0eb",
+    "pages": 2,
+    "text_chars": 1991,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_49.pdf",
+    "bytes": 81278,
+    "sha256": "4fdaf4380786f54adbe0831a52d3ee3c059e964de5eabd5b2349e5caf30ff513",
+    "pages": 2,
+    "text_chars": 2007,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_5.pdf",
+    "bytes": 78486,
+    "sha256": "1415a1c193735c0ca7f3b370d4292cf93402074fe5ad794fb3e84634b19ab7ab",
+    "pages": 2,
+    "text_chars": 1622,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_50.pdf",
+    "bytes": 94073,
+    "sha256": "238b7970e7daa56e0c92d321ec71e5e574cdc4e5099424e5c45ebc4fd6fe1bb5",
+    "pages": 2,
+    "text_chars": 1919,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_51.pdf",
+    "bytes": 81712,
+    "sha256": "3b868a4b4ff276baa2c78068f3b4bd58ee4a6319dfe4c9cd11638e2c9322ad29",
+    "pages": 2,
+    "text_chars": 2156,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_52.pdf",
+    "bytes": 77939,
+    "sha256": "6115c4b5ef23e39e06e38f511a8b9beb00682427c69fa7e5808ec60a06deede6",
+    "pages": 2,
+    "text_chars": 2328,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_53.pdf",
+    "bytes": 77322,
+    "sha256": "58fc1cb8a91166bb8d7edb3798087ab4cdc6df8d1629abba05a5b6a6c1462ac1",
+    "pages": 2,
+    "text_chars": 2042,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_54.pdf",
+    "bytes": 92884,
+    "sha256": "51e4d418d862f17bb4e5dda05157da732ec9b2e07f94496c66e207f2a4404d70",
+    "pages": 2,
+    "text_chars": 2619,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_6.pdf",
+    "bytes": 73407,
+    "sha256": "f3193e432dc5923a13ce829625e0828743ed063f67c8eaf139d08d7c8be6c7c4",
+    "pages": 2,
+    "text_chars": 1550,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_7.pdf",
+    "bytes": 75578,
+    "sha256": "68e1a5b30bfb9d66ac59a916a01051ac8bd06a79f8752e89ff9e54e14b330090",
+    "pages": 2,
+    "text_chars": 1783,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_76.pdf",
+    "bytes": 84515,
+    "sha256": "3259236cb1875429b4571a6baf79831178a797b65ab17baaa380cc9c4b94c53e",
+    "pages": 2,
+    "text_chars": 1701,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_77.pdf",
+    "bytes": 83495,
+    "sha256": "6840ec79e5d7324986aa03d224a1d08fa590c9f4a26b9b2a534f4cd5b4052a6c",
+    "pages": 2,
+    "text_chars": 1541,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_78.pdf",
+    "bytes": 77054,
+    "sha256": "b2e78afac83cb5a09ad49725e894a3f51f52dcd29a40c1ed6892d434dc9c04e9",
+    "pages": 1,
+    "text_chars": 1589,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_79.pdf",
+    "bytes": 79881,
+    "sha256": "c5f2523636da0604ae047694c201cffbfd8d7475bd40ba649e9f92650f23d4ec",
+    "pages": 1,
+    "text_chars": 1446,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_8.pdf",
+    "bytes": 73676,
+    "sha256": "2ba4a3b5ba63b68c256f1808ff3bcbca05a4d82df50926e8e0ad5b8f4eb4995e",
+    "pages": 2,
+    "text_chars": 1922,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_80.pdf",
+    "bytes": 80642,
+    "sha256": "9631daa2079628282a97e9607554131b25ca350f6977c7c15259758eacaa7760",
+    "pages": 1,
+    "text_chars": 1529,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_81.pdf",
+    "bytes": 81574,
+    "sha256": "e3de81fd39f9c4deb56054f52b6cde626b74c536982abd705c8ffa6d26b7ef92",
+    "pages": 2,
+    "text_chars": 1611,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_82.pdf",
+    "bytes": 81501,
+    "sha256": "a92138d36aa137f8e4724c8a43d68bbb67dbfd2c291095b5e12f8608e356bca2",
+    "pages": 1,
+    "text_chars": 1534,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_83.pdf",
+    "bytes": 78259,
+    "sha256": "4365d96d1a90bf411592b42a2482f817b100c10302bbb50845472465fe81e9ec",
+    "pages": 1,
+    "text_chars": 1425,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_84.pdf",
+    "bytes": 76202,
+    "sha256": "f3d008b8ad0cc3677d248b56b0c7748b65134f3882f19d0975d0b05a82e34722",
+    "pages": 1,
+    "text_chars": 1638,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_85.pdf",
+    "bytes": 81438,
+    "sha256": "d8504035130a9a2065fd268c590f86a10fdd246817fc315c6318c30551f2fe7f",
+    "pages": 2,
+    "text_chars": 1897,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_86.pdf",
+    "bytes": 66126,
+    "sha256": "31402b7fdf85fbeb362c0853b8ec0b26b7ad55bc4b5dbfbb5691585e93165750",
+    "pages": 2,
+    "text_chars": 1795,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_87.pdf",
+    "bytes": 77490,
+    "sha256": "dc9c96283e904253a07cd119ef771b4d53bd7d24e0ffaf3fe219ee5c19b83a6b",
+    "pages": 2,
+    "text_chars": 1868,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_88.pdf",
+    "bytes": 63394,
+    "sha256": "985081d4320b5c65b177be0fa638332eca05f82520582da566e2649fe5b7a66f",
+    "pages": 2,
+    "text_chars": 1626,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_89.pdf",
+    "bytes": 53915,
+    "sha256": "58dc7ff39860b17cde8621cae8d67759283a3d1a56273e1bde8a9ef3c3c9bd67",
+    "pages": 2,
+    "text_chars": 1638,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_9.pdf",
+    "bytes": 79056,
+    "sha256": "0fd63d5170e7495ac386a8c867f08cb39fc5d8f42f87060f3afd1b3f45ecec8c",
+    "pages": 2,
+    "text_chars": 2003,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_90.pdf",
+    "bytes": 79015,
+    "sha256": "672382702da57691710989a72c7042c0e4ad0a1a01c645ca1d6debe0a233b304",
+    "pages": 2,
+    "text_chars": 1965,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_91.pdf",
+    "bytes": 67100,
+    "sha256": "c8b1946297e96e5b4c548c9919269a53f09bc73bb59802916f1dd71745a8e06c",
+    "pages": 2,
+    "text_chars": 1743,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_92.pdf",
+    "bytes": 69004,
+    "sha256": "d05924184787b4d967f2a61956ac97a43ff84b4420e280261aacebb98478afb9",
+    "pages": 2,
+    "text_chars": 2117,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "training\\lesson_docs\\pdf\\lesson_93.pdf",
+    "bytes": 58052,
+    "sha256": "1da3210c17d25aeb6b1884befd436eedb903f55e153553be44b28c3fda5976c0",
+    "pages": 2,
+    "text_chars": 1980,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1789530044_3fc86e099f4c.pdf",
+    "bytes": 792,
+    "sha256": "e6ebf1057b4bf14ab05079a3bceab725670dc0a209b40f544fc5ebc0b1bfa4a3",
+    "pages": 1,
+    "text_chars": 217,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1789547183_8115d8761c91.pdf",
+    "bytes": 95996,
+    "sha256": "85683154c70200749981b31da1c72a9d192d58dd2595ddf81ae4c9832594b121",
+    "pages": 2,
+    "text_chars": 3160,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1789547292_2e7cdf1e69a3.pdf",
+    "bytes": 95996,
+    "sha256": "85683154c70200749981b31da1c72a9d192d58dd2595ddf81ae4c9832594b121",
+    "pages": 2,
+    "text_chars": 3160,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1789547296_301cd1842885.pdf",
+    "bytes": 95996,
+    "sha256": "85683154c70200749981b31da1c72a9d192d58dd2595ddf81ae4c9832594b121",
+    "pages": 2,
+    "text_chars": 3160,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1789547466_f1df8a42cc08.pdf",
+    "bytes": 792,
+    "sha256": "e6ebf1057b4bf14ab05079a3bceab725670dc0a209b40f544fc5ebc0b1bfa4a3",
+    "pages": 1,
+    "text_chars": 217,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1789547498_c276bec77285.pdf",
+    "bytes": 95996,
+    "sha256": "85683154c70200749981b31da1c72a9d192d58dd2595ddf81ae4c9832594b121",
+    "pages": 2,
+    "text_chars": 3160,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790239493_9a583b48f6d8.pdf",
+    "bytes": 73953,
+    "sha256": "6931dffa4f9bf943d2cdaf3e893ba106698d010a9718311d2c43ecf975ae605d",
+    "pages": 2,
+    "text_chars": 3153,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790239563_d6e24eb0ec20.pdf",
+    "bytes": 81984,
+    "sha256": "a756f4292502ad79983964fca8f720822426369add6357f8dabfb6a281c9e202",
+    "pages": 4,
+    "text_chars": 9193,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790318245_602b671318bd.pdf",
+    "bytes": 95173,
+    "sha256": "79c76e0304205a38b94a4afbfa6bf42ec6196643b351b32486a514c79ebd73c1",
+    "pages": 2,
+    "text_chars": 1906,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790318289_bf43cd9e32a4.pdf",
+    "bytes": 97547,
+    "sha256": "547dac7592e4a4d42759decd69d2b3fea88ee9c093564f58741d834eee31b12f",
+    "pages": 2,
+    "text_chars": 2428,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790318327_ab8151fc894d.pdf",
+    "bytes": 117599,
+    "sha256": "45a19aef0ffb29785f1b3ca8cfb295145d0dc3d842ffb092ed67513ae1a36a51",
+    "pages": 3,
+    "text_chars": 4111,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790318577_52d902a720e9.pdf",
+    "bytes": 1510937,
+    "sha256": "eedf9fae2d59231670a2bbf79370fd912320df283c7f4b4ce12622f34cbf07cc",
+    "pages": 6,
+    "text_chars": 9709,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790318635_3c33650e038d.pdf",
+    "bytes": 4000374,
+    "sha256": "77223c0c7449d9de96dafb03278e066ef6cc10b2de7704f5f61659a7cd72d0e3",
+    "pages": 12,
+    "text_chars": 17950,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790318688_99ebbc6acb1f.pdf",
+    "bytes": 75059,
+    "sha256": "de3dd41523133525b6f13eed205f94b73e89d9a0b24710977a368e04f2946784",
+    "pages": 2,
+    "text_chars": 2904,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790318728_dd8873667197.pdf",
+    "bytes": 986382,
+    "sha256": "05a4af73566cc2a2ab3196788b637c46808fd9890a9ad5816ce1103bd402110a",
+    "pages": 6,
+    "text_chars": 8502,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790318745_8427be92e4b7.pdf",
+    "bytes": 117636,
+    "sha256": "35dce82c1440778e427ebec7c49abd85cb2c1e531879cefcffeb3f5f5e25f95e",
+    "pages": 3,
+    "text_chars": 4990,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790318759_2a6dbb28b2e9.pdf",
+    "bytes": 594695,
+    "sha256": "1ceaf0d70028d628b7ddfbf62037ff597ac0f9e2ff8664bbc389e022284d2f1a",
+    "pages": 9,
+    "text_chars": 14273,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790356699_fc1653cd2e18.pdf",
+    "bytes": 59525,
+    "sha256": "d44c9309a78648d1c0502e26b9287057dc2bb39d27dbeabc4fc6e60e920a26f2",
+    "pages": 2,
+    "text_chars": 3796,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790356703_dc0e07558068.pdf",
+    "bytes": 43853,
+    "sha256": "e31431020bba9cc9a5671c517d3c04b94194dc7059b9385d694a05881394c99b",
+    "pages": 2,
+    "text_chars": 3688,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790356707_fed403225bd6.pdf",
+    "bytes": 41887,
+    "sha256": "e3e51ca6c55c61a23bcee144ea93d20a24334579afaf38a283960662eeb675b1",
+    "pages": 2,
+    "text_chars": 3193,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790356710_2b7ebca0485f.pdf",
+    "bytes": 44640,
+    "sha256": "6866344a03ab4c65f50bb5f82498b439f54c641d84f1bf2af25d562708813634",
+    "pages": 2,
+    "text_chars": 3907,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790356713_f90411c46be1.pdf",
+    "bytes": 42223,
+    "sha256": "a1950dae386164979f2e271589336a62731d72a278ed42cb9a619785f2155f81",
+    "pages": 2,
+    "text_chars": 3450,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790356716_21f53222b382.pdf",
+    "bytes": 42942,
+    "sha256": "9ad837cc9c7f581bc7c0aa109ab429c6ed001c790b045678cef95d64220fc132",
+    "pages": 2,
+    "text_chars": 3207,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790356720_52edb97ab51c.pdf",
+    "bytes": 42351,
+    "sha256": "8f47a92756c352caeef969bb8af6c75a419412167dfc927fa41e871e191240ca",
+    "pages": 2,
+    "text_chars": 3095,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790356723_ca62da0dc753.pdf",
+    "bytes": 41977,
+    "sha256": "0dac57354e408c68fa104cf9fa8777031437a9baea094405708e50e566c93850",
+    "pages": 1,
+    "text_chars": 2930,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790356725_4b30c763f5da.pdf",
+    "bytes": 43171,
+    "sha256": "4217dc741d28c69060dce61e58209c7cecb78f253f0d94363bf242d50a004eed",
+    "pages": 2,
+    "text_chars": 3107,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357140_cc0801d96630.pdf",
+    "bytes": 42334,
+    "sha256": "b69cdf8611f2ae83894bde1cd54c81802e47ce17c9d5b45d3575469787196373",
+    "pages": 1,
+    "text_chars": 2265,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357143_9091029f76dc.pdf",
+    "bytes": 42571,
+    "sha256": "2abe892c41999c6db41714f50b0f637fd94710ce472a94f5f2ba0a3c25310cc4",
+    "pages": 1,
+    "text_chars": 2737,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357145_68bb1c35d086.pdf",
+    "bytes": 39315,
+    "sha256": "28ac1fe0a31f64e8d9100fbb022296b0b201bf579d20c6a20142d26ea710e148",
+    "pages": 1,
+    "text_chars": 2289,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357147_2eebb0cb962a.pdf",
+    "bytes": 37786,
+    "sha256": "17a7a53eca8ff013755f29ea3d580a8b056f57ff9c9245d88ee5953fb9018a35",
+    "pages": 1,
+    "text_chars": 2430,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357149_6022389fd521.pdf",
+    "bytes": 39473,
+    "sha256": "2f93f57dee79f996f05dcfd6919ff843cb50076551c99c84f3f16fdb1fcba3e1",
+    "pages": 1,
+    "text_chars": 2480,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357151_a978c2a4a7bd.pdf",
+    "bytes": 39231,
+    "sha256": "99b055462ad13d61e0fb24b83a47bc23472095b0603b1dd3a63aba2a639a6bcc",
+    "pages": 1,
+    "text_chars": 2354,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357153_340f4446115c.pdf",
+    "bytes": 40024,
+    "sha256": "83df2315f69a7f4be59c92eabd443582678ac77886d043d26d9d8244017bbd36",
+    "pages": 1,
+    "text_chars": 2866,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357155_2db92b8ffd1f.pdf",
+    "bytes": 40386,
+    "sha256": "cea5fa856567d3715ddfa5ebe9e30814c17de67878db712c7e8d0ff316ffbfb8",
+    "pages": 1,
+    "text_chars": 2407,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357158_d94ff289a048.pdf",
+    "bytes": 40524,
+    "sha256": "ace857a7fb430f16cc6280336852e304a12001adce0d7faecfd7632e669c35f4",
+    "pages": 1,
+    "text_chars": 2238,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357382_d77c675a04d6.pdf",
+    "bytes": 41033,
+    "sha256": "25a06ccba13f7af55d7508a3891a2da984b88ab3f2413e374e3e5281ac86caab",
+    "pages": 1,
+    "text_chars": 2337,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357384_b14866b7491d.pdf",
+    "bytes": 40398,
+    "sha256": "d04981ba5496afd3ffb94ef971a962d09e48b9f32cef9fa14426ca3b9da7cd9d",
+    "pages": 1,
+    "text_chars": 2244,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357386_7054fc246841.pdf",
+    "bytes": 42184,
+    "sha256": "fba9842296118bd40c34ff84835c9f34d66f48e181a1bf243e498ca55fa42a4d",
+    "pages": 1,
+    "text_chars": 2501,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357388_19fe5babfd27.pdf",
+    "bytes": 41709,
+    "sha256": "5754033cd226de53c6b9d57fee787ce6d3100dc9392efa125f6ebad120953c8e",
+    "pages": 1,
+    "text_chars": 2754,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357391_2c4f362a2382.pdf",
+    "bytes": 40208,
+    "sha256": "713b0b26f083d14ffcb279bba2723fbbee35fd88781def18bbf5bdcd44226ff4",
+    "pages": 1,
+    "text_chars": 2517,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357393_6240bc95d801.pdf",
+    "bytes": 41097,
+    "sha256": "c8ce0c713109cc869d588d02a65a855c82e23b8367907847292ea717d90b9cc3",
+    "pages": 1,
+    "text_chars": 2395,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357396_16dd6f2fade9.pdf",
+    "bytes": 41551,
+    "sha256": "7c5baf5950c8795921cb00a5fc9735a6c465d4e2b00cf698952c8061aeecbdca",
+    "pages": 1,
+    "text_chars": 2275,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357398_ef6347ddb0af.pdf",
+    "bytes": 40538,
+    "sha256": "7f85afdf479d204992003d7c74f5e52675257b3a2b7ed7a63fde24cfe93f020d",
+    "pages": 1,
+    "text_chars": 2317,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357400_1832bb08915c.pdf",
+    "bytes": 40110,
+    "sha256": "00e59b647614d1118dba05f0a86d6f5b78536ee50207da4ea806c80643175a9e",
+    "pages": 1,
+    "text_chars": 2568,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357603_515b241672ce.pdf",
+    "bytes": 40600,
+    "sha256": "03f005a8d6436cb8194597dc9c008c346671b66f860c82849a70ad328e8c9810",
+    "pages": 1,
+    "text_chars": 2607,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357605_3cec9e49245f.pdf",
+    "bytes": 43069,
+    "sha256": "0da7713db40a0cdfffbc516d2e34364ec971c4e648a29eacacdc5f5aa60bb398",
+    "pages": 1,
+    "text_chars": 2293,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357607_c64405573079.pdf",
+    "bytes": 43159,
+    "sha256": "52d9c3177790628579c7b9d4ff500cb30726629ee8fdc30f4390a55231d8ea5a",
+    "pages": 1,
+    "text_chars": 2474,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357610_f94edc6a86aa.pdf",
+    "bytes": 40561,
+    "sha256": "a5131e47a1d899613e9a1c44e56055cd3dc60f1df9e5288a85b5ef1de8fe8143",
+    "pages": 1,
+    "text_chars": 2429,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357612_9c80a167dd63.pdf",
+    "bytes": 44129,
+    "sha256": "35af127783a8b8e8f08fc37c58c8de37142670526cae701062c8de4bbb9707a9",
+    "pages": 1,
+    "text_chars": 2423,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357615_eb16aae99f50.pdf",
+    "bytes": 43071,
+    "sha256": "7a9dbca1be011416ce307848070d12dda90ca6a53387f8b8d72f23e157b54fb8",
+    "pages": 1,
+    "text_chars": 2721,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357617_9fb7962d9797.pdf",
+    "bytes": 41220,
+    "sha256": "178a81036595b63c1bdde4bfe805e501e484424206aca21400437aad7dd8239f",
+    "pages": 1,
+    "text_chars": 2659,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357619_53c6ef37f52a.pdf",
+    "bytes": 42344,
+    "sha256": "573bdb766a61bc28ba25125ee8b7729d7ade7d07e1971c012200f80033ad80d9",
+    "pages": 1,
+    "text_chars": 2502,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790357622_193e0cd762a5.pdf",
+    "bytes": 42769,
+    "sha256": "08395499d44c8998a081ae5961ad95e19ca022859e06767b8f8ce2ba9fb4a95b",
+    "pages": 1,
+    "text_chars": 2725,
+    "readable": true,
+    "objectives": false,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\1790789488_00ec3d34712f.pdf",
+    "bytes": 73398,
+    "sha256": "94dc7439cd43dff15660cfcb84d98757f712229498612751a3037da2fb1797aa",
+    "pages": 2,
+    "text_chars": 2267,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_01d4e83b3650.pdf",
+    "bytes": 73676,
+    "sha256": "2ba4a3b5ba63b68c256f1808ff3bcbca05a4d82df50926e8e0ad5b8f4eb4995e",
+    "pages": 2,
+    "text_chars": 1922,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_037f79542be1.pdf",
+    "bytes": 73407,
+    "sha256": "f3193e432dc5923a13ce829625e0828743ed063f67c8eaf139d08d7c8be6c7c4",
+    "pages": 2,
+    "text_chars": 1550,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_06f37c639066.pdf",
+    "bytes": 94164,
+    "sha256": "93d9c5cae91610b4be9a36f06abca92d00f07dfb942e193fc14204e9f1106266",
+    "pages": 2,
+    "text_chars": 2206,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_07b45cc597d1.pdf",
+    "bytes": 94073,
+    "sha256": "238b7970e7daa56e0c92d321ec71e5e574cdc4e5099424e5c45ebc4fd6fe1bb5",
+    "pages": 2,
+    "text_chars": 1919,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_1321e78f4c12.pdf",
+    "bytes": 92884,
+    "sha256": "51e4d418d862f17bb4e5dda05157da732ec9b2e07f94496c66e207f2a4404d70",
+    "pages": 2,
+    "text_chars": 2619,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_14e54907057b.pdf",
+    "bytes": 78486,
+    "sha256": "1415a1c193735c0ca7f3b370d4292cf93402074fe5ad794fb3e84634b19ab7ab",
+    "pages": 2,
+    "text_chars": 1622,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_183e3a548b18.pdf",
+    "bytes": 75606,
+    "sha256": "924cef13343002772cd95ee27a3e8d4ce6859f20048617d6cbf600b8490f468d",
+    "pages": 2,
+    "text_chars": 1866,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_18ca79bb4439.pdf",
+    "bytes": 77322,
+    "sha256": "58fc1cb8a91166bb8d7edb3798087ab4cdc6df8d1629abba05a5b6a6c1462ac1",
+    "pages": 2,
+    "text_chars": 2042,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_1cbe1599b17c.pdf",
+    "bytes": 90015,
+    "sha256": "9fdd6675dbbe3bd80858e5e69c2588c1e7de449ec0973156ac0f8023b946fe08",
+    "pages": 2,
+    "text_chars": 1891,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_354fe42d28c9.pdf",
+    "bytes": 79764,
+    "sha256": "3e614cab8d21f1bcb8fb4ae80fa9194db133116d1eddaee903f784407b732909",
+    "pages": 2,
+    "text_chars": 1943,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_360f6ffd5448.pdf",
+    "bytes": 85475,
+    "sha256": "a5a1ef9db558251121d5bfd6699fcf8ecedc6b82ca74f2e99064a5baa43b9b3a",
+    "pages": 2,
+    "text_chars": 1962,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_3631cc194ba1.pdf",
+    "bytes": 75578,
+    "sha256": "68e1a5b30bfb9d66ac59a916a01051ac8bd06a79f8752e89ff9e54e14b330090",
+    "pages": 2,
+    "text_chars": 1783,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_366658a36b5e.pdf",
+    "bytes": 79056,
+    "sha256": "0fd63d5170e7495ac386a8c867f08cb39fc5d8f42f87060f3afd1b3f45ecec8c",
+    "pages": 2,
+    "text_chars": 2003,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_39f913841b9c.pdf",
+    "bytes": 86179,
+    "sha256": "3eb754ef92d20084dae034785afff7130a31a699a3aea950d8ee17075def84c4",
+    "pages": 2,
+    "text_chars": 2104,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_3a9d18150e4e.pdf",
+    "bytes": 87884,
+    "sha256": "df4ea0906fe4a74a2ea4ec0440f6dd67df8895a74f268a226a1f63760b3ea482",
+    "pages": 2,
+    "text_chars": 2107,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_4a51c63141ab.pdf",
+    "bytes": 85714,
+    "sha256": "34a8fad2857f728db83b8855c4ad57b671aaaff273b31b6245a1cf98e48250ea",
+    "pages": 2,
+    "text_chars": 2449,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_4e336ae0b64c.pdf",
+    "bytes": 79158,
+    "sha256": "56076522de7f028cb9596fb4b2f2dec9f188158b12aa37d224b431a3631b45e4",
+    "pages": 2,
+    "text_chars": 1916,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_568960fca322.pdf",
+    "bytes": 78531,
+    "sha256": "53ad7856b95d7c1dd9c447f5f21b0e60f63721b382f5977bc09ed05cc8d0ba22",
+    "pages": 2,
+    "text_chars": 1779,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_5820a48bba48.pdf",
+    "bytes": 76724,
+    "sha256": "b6f6cfb2f0b6e7b9afdfaaff1fbafbd21de7de82d04c251d6c2a470c506c9f81",
+    "pages": 2,
+    "text_chars": 2130,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_6972a134cf77.pdf",
+    "bytes": 81278,
+    "sha256": "4fdaf4380786f54adbe0831a52d3ee3c059e964de5eabd5b2349e5caf30ff513",
+    "pages": 2,
+    "text_chars": 2007,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_6a83cd6e8030.pdf",
+    "bytes": 93019,
+    "sha256": "970131344c0377e01fa6606a90d539159fdaca83b56444f6cfd3fe74933dab54",
+    "pages": 2,
+    "text_chars": 1934,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_6d4da9518d97.pdf",
+    "bytes": 84532,
+    "sha256": "9a293c1d8e249d2753646d6630427a5dc73eb8a3aed8c3e8524080f8d1fce221",
+    "pages": 2,
+    "text_chars": 1790,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_72c05ec510b8.pdf",
+    "bytes": 81104,
+    "sha256": "d782e98a908bac0ecbc46e9b509c64cf41eb6f68b9b8b74ab363aa86d0ff0d0f",
+    "pages": 2,
+    "text_chars": 1534,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_72f6b7c1e9f1.pdf",
+    "bytes": 74330,
+    "sha256": "ae4b2fd966fbf154b6c84f18285d15a5cbd1b0e59d7506306c745ad26802755f",
+    "pages": 2,
+    "text_chars": 2231,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_749fb30a77e8.pdf",
+    "bytes": 75931,
+    "sha256": "6d527d06056ea73b3bb6e9a4001aa3d115dccb9adbfae11048eaeb762d3f5290",
+    "pages": 2,
+    "text_chars": 1907,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_78d19642b238.pdf",
+    "bytes": 78902,
+    "sha256": "bf12dcc9ea05d327859664d0150385fe0967d0379ccf1f0d26cd23ef1c755ce0",
+    "pages": 2,
+    "text_chars": 1816,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_87d7a78aef78.pdf",
+    "bytes": 77338,
+    "sha256": "f99e451c4d70f7f2955619e4b55f5b84713649213a28b8e785493634ca72653c",
+    "pages": 2,
+    "text_chars": 2247,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_88b2276980ee.pdf",
+    "bytes": 82018,
+    "sha256": "5f5e23b0d0d10699f3fb26f20da80f5e01e1877885c0c6a7ed32ad0d73eca278",
+    "pages": 2,
+    "text_chars": 2155,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_8a16c8696a70.pdf",
+    "bytes": 74768,
+    "sha256": "abdfdfe18004fff2f1b52f2b7d3e45814930948e73288390901309dbfe6ab3fb",
+    "pages": 2,
+    "text_chars": 1536,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_9140f55895d2.pdf",
+    "bytes": 81712,
+    "sha256": "3b868a4b4ff276baa2c78068f3b4bd58ee4a6319dfe4c9cd11638e2c9322ad29",
+    "pages": 2,
+    "text_chars": 2156,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_967843b47fa4.pdf",
+    "bytes": 74424,
+    "sha256": "6e0cc38bb582b0692626865dcb1eb12b29ba32d6a49613de623fb05f254e1c39",
+    "pages": 2,
+    "text_chars": 1830,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_ae05c93647a5.pdf",
+    "bytes": 77109,
+    "sha256": "c6dfb35a39ad8268973e25f78238306e1192f7e4ef4a9517dc034d71329f4bfd",
+    "pages": 2,
+    "text_chars": 1806,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_b52f1d05f748.pdf",
+    "bytes": 87144,
+    "sha256": "c3ec07e46e1dd2226729dc6cda90fb6ce6a0c6726c3f150f069b9ff21115789e",
+    "pages": 2,
+    "text_chars": 1788,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_b61fac9d57d5.pdf",
+    "bytes": 87135,
+    "sha256": "12ada95fec08ced81410d17bff8c229000d4dea70951afc3bcd8d3ded6002ba4",
+    "pages": 2,
+    "text_chars": 2136,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_b6eefebd48f3.pdf",
+    "bytes": 93006,
+    "sha256": "77f0f06fc319e2d74c4bf7c7c8e83d362ae5b8e7588b7dc4fd809e6c0b4cc677",
+    "pages": 2,
+    "text_chars": 1836,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_b8834c0e3567.pdf",
+    "bytes": 77785,
+    "sha256": "ed3c486b98107dee325f511a5dde54052a10274ed3638e9d32b44ec9ff72df83",
+    "pages": 2,
+    "text_chars": 2137,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_ba693e1ad8b0.pdf",
+    "bytes": 88787,
+    "sha256": "e09bfaa1d42ebbc4b6a7343519f6846c27d2685d3d1a770229c48ad588706bc8",
+    "pages": 2,
+    "text_chars": 1988,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_c065561e012e.pdf",
+    "bytes": 77024,
+    "sha256": "3c30f93e9c33265418553b3905f52063a4a3548b25153e992cc2f0c0f86c0d43",
+    "pages": 2,
+    "text_chars": 2279,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_c2d6e7aca3cb.pdf",
+    "bytes": 96760,
+    "sha256": "ede624ab41bfd55441c6fb004f4d40bb72e162bce0aa7e71a18043900fd97efa",
+    "pages": 2,
+    "text_chars": 1555,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_cda1d94f91d1.pdf",
+    "bytes": 81472,
+    "sha256": "8d153e4fa4fb290678b2c23859002ede87e2d2ca9cc9b2e6927ebdebe2969af0",
+    "pages": 2,
+    "text_chars": 1934,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_d022fcb56597.pdf",
+    "bytes": 79966,
+    "sha256": "9455ed937f5aa999cfa44d6ba7c27d0c1267e52164ff9b05078ed48d90091a89",
+    "pages": 2,
+    "text_chars": 1779,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_d9144e67cf31.pdf",
+    "bytes": 95799,
+    "sha256": "84b26c8ac3a54b414f2df844b11a017c3dc80e05913769b3b053deedee52e0eb",
+    "pages": 2,
+    "text_chars": 1991,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_dfbc0578284e.pdf",
+    "bytes": 79970,
+    "sha256": "ab2493b0b3d321fb40e4abbcd9c2c3d82401be8e3fd9c4a3995f1010fed2fed8",
+    "pages": 2,
+    "text_chars": 1875,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_dfff4b436c27.pdf",
+    "bytes": 74792,
+    "sha256": "07ccc5ec4560e6bb25c715b093767476bcf5b10969e19ce8bdbaa05193743988",
+    "pages": 2,
+    "text_chars": 1987,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_e0b6bab47868.pdf",
+    "bytes": 86948,
+    "sha256": "46face031e192ee292ad065936235070a87e97a192d1caffbf02a1bf7c6eb12c",
+    "pages": 2,
+    "text_chars": 2305,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_e6bda5aca9a2.pdf",
+    "bytes": 85094,
+    "sha256": "4dd9e4fc92ea4e642e05667266273bab2c8417c835df91c65855cf6e1c85cfa5",
+    "pages": 2,
+    "text_chars": 2144,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_ee86c5c49f88.pdf",
+    "bytes": 93419,
+    "sha256": "2e20f35cc3af7ff5666fedf0bd83cc44fa8e14a3af2c4ceccb4ac6e38ec4309e",
+    "pages": 2,
+    "text_chars": 1969,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_eebb907d875a.pdf",
+    "bytes": 74593,
+    "sha256": "5f530e3f4ea126d9dcc380b103526a82ac2b6868de4cfb7a8b16d5fa1dc4b44e",
+    "pages": 2,
+    "text_chars": 1910,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_f45700fdc85a.pdf",
+    "bytes": 73354,
+    "sha256": "35223b436329d1c9dd8c18ff6c1b9a78cef2ac8db2107613a1fca29919577d79",
+    "pages": 2,
+    "text_chars": 1744,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_fb4d21cfe418.pdf",
+    "bytes": 82109,
+    "sha256": "db8a347bd1643f9ab47cb2b1eeb21df1a29d6c51f2c66c9d9b733f7f4e92c8fb",
+    "pages": 2,
+    "text_chars": 1789,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790789488_fc7a310af10e.pdf",
+    "bytes": 77939,
+    "sha256": "6115c4b5ef23e39e06e38f511a8b9beb00682427c69fa7e5808ec60a06deede6",
+    "pages": 2,
+    "text_chars": 2328,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790866565_09a39a3a4532.pdf",
+    "bytes": 80642,
+    "sha256": "9631daa2079628282a97e9607554131b25ca350f6977c7c15259758eacaa7760",
+    "pages": 1,
+    "text_chars": 1529,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790866565_0eda02f69a43.pdf",
+    "bytes": 76202,
+    "sha256": "f3d008b8ad0cc3677d248b56b0c7748b65134f3882f19d0975d0b05a82e34722",
+    "pages": 1,
+    "text_chars": 1638,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790866565_333847515ff9.pdf",
+    "bytes": 78259,
+    "sha256": "4365d96d1a90bf411592b42a2482f817b100c10302bbb50845472465fe81e9ec",
+    "pages": 1,
+    "text_chars": 1425,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790866565_35ac9d7e5f06.pdf",
+    "bytes": 83495,
+    "sha256": "6840ec79e5d7324986aa03d224a1d08fa590c9f4a26b9b2a534f4cd5b4052a6c",
+    "pages": 2,
+    "text_chars": 1541,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790866565_362d0f2e1e44.pdf",
+    "bytes": 81501,
+    "sha256": "a92138d36aa137f8e4724c8a43d68bbb67dbfd2c291095b5e12f8608e356bca2",
+    "pages": 1,
+    "text_chars": 1534,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790866565_485d9c5c9f7c.pdf",
+    "bytes": 81574,
+    "sha256": "e3de81fd39f9c4deb56054f52b6cde626b74c536982abd705c8ffa6d26b7ef92",
+    "pages": 2,
+    "text_chars": 1611,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790866565_76bc2833e73f.pdf",
+    "bytes": 84515,
+    "sha256": "3259236cb1875429b4571a6baf79831178a797b65ab17baaa380cc9c4b94c53e",
+    "pages": 2,
+    "text_chars": 1701,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790866565_9a6ec27fa593.pdf",
+    "bytes": 79881,
+    "sha256": "c5f2523636da0604ae047694c201cffbfd8d7475bd40ba649e9f92650f23d4ec",
+    "pages": 1,
+    "text_chars": 1446,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790866565_aa67da2cb3ca.pdf",
+    "bytes": 77054,
+    "sha256": "b2e78afac83cb5a09ad49725e894a3f51f52dcd29a40c1ed6892d434dc9c04e9",
+    "pages": 1,
+    "text_chars": 1589,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790873974_14e3311eff2d.pdf",
+    "bytes": 63394,
+    "sha256": "985081d4320b5c65b177be0fa638332eca05f82520582da566e2649fe5b7a66f",
+    "pages": 2,
+    "text_chars": 1626,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790873974_2fb67924bb1d.pdf",
+    "bytes": 67100,
+    "sha256": "c8b1946297e96e5b4c548c9919269a53f09bc73bb59802916f1dd71745a8e06c",
+    "pages": 2,
+    "text_chars": 1743,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790873974_5e88b10e20f0.pdf",
+    "bytes": 53915,
+    "sha256": "58dc7ff39860b17cde8621cae8d67759283a3d1a56273e1bde8a9ef3c3c9bd67",
+    "pages": 2,
+    "text_chars": 1638,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790873974_69e2bf1c5ddc.pdf",
+    "bytes": 79015,
+    "sha256": "672382702da57691710989a72c7042c0e4ad0a1a01c645ca1d6debe0a233b304",
+    "pages": 2,
+    "text_chars": 1965,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790873974_a2a5d1d6ddec.pdf",
+    "bytes": 81438,
+    "sha256": "d8504035130a9a2065fd268c590f86a10fdd246817fc315c6318c30551f2fe7f",
+    "pages": 2,
+    "text_chars": 1897,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790873974_b5a604317bc2.pdf",
+    "bytes": 58052,
+    "sha256": "1da3210c17d25aeb6b1884befd436eedb903f55e153553be44b28c3fda5976c0",
+    "pages": 2,
+    "text_chars": 1980,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790873974_b5f2bb3d3d22.pdf",
+    "bytes": 77490,
+    "sha256": "dc9c96283e904253a07cd119ef771b4d53bd7d24e0ffaf3fe219ee5c19b83a6b",
+    "pages": 2,
+    "text_chars": 1868,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790873974_ea8af14cf46c.pdf",
+    "bytes": 69004,
+    "sha256": "d05924184787b4d967f2a61956ac97a43ff84b4420e280261aacebb98478afb9",
+    "pages": 2,
+    "text_chars": 2117,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790873974_efa5aced77b9.pdf",
+    "bytes": 66126,
+    "sha256": "31402b7fdf85fbeb362c0853b8ec0b26b7ad55bc4b5dbfbb5691585e93165750",
+    "pages": 2,
+    "text_chars": 1795,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903148_8a2872cf9012.pdf",
+    "bytes": 74347,
+    "sha256": "f77315a07efb46c135c386b2f73a9b4c27316d01d7c1fdbf7306be3cb05ee007",
+    "pages": 2,
+    "text_chars": 3158,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903152_aa5c2a3fc209.pdf",
+    "bytes": 83783,
+    "sha256": "08af6e3a0f1d43a04c5ad2b7c1a193a1f55d50f840fa7514557bfac602581456",
+    "pages": 4,
+    "text_chars": 9049,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903157_d937eff1ac04.pdf",
+    "bytes": 95173,
+    "sha256": "79c76e0304205a38b94a4afbfa6bf42ec6196643b351b32486a514c79ebd73c1",
+    "pages": 2,
+    "text_chars": 1906,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903159_af4f8cbecb1e.pdf",
+    "bytes": 97547,
+    "sha256": "547dac7592e4a4d42759decd69d2b3fea88ee9c093564f58741d834eee31b12f",
+    "pages": 2,
+    "text_chars": 2428,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903160_6706ee1e7a48.pdf",
+    "bytes": 117599,
+    "sha256": "45a19aef0ffb29785f1b3ca8cfb295145d0dc3d842ffb092ed67513ae1a36a51",
+    "pages": 3,
+    "text_chars": 4111,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903163_c4805cec49b9.pdf",
+    "bytes": 1510937,
+    "sha256": "eedf9fae2d59231670a2bbf79370fd912320df283c7f4b4ce12622f34cbf07cc",
+    "pages": 6,
+    "text_chars": 9709,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903170_8b0aed3138b4.pdf",
+    "bytes": 4000374,
+    "sha256": "77223c0c7449d9de96dafb03278e066ef6cc10b2de7704f5f61659a7cd72d0e3",
+    "pages": 12,
+    "text_chars": 17950,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903182_ee2dfaf06010.pdf",
+    "bytes": 75059,
+    "sha256": "de3dd41523133525b6f13eed205f94b73e89d9a0b24710977a368e04f2946784",
+    "pages": 2,
+    "text_chars": 2904,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903184_f5e500cfc875.pdf",
+    "bytes": 986382,
+    "sha256": "05a4af73566cc2a2ab3196788b637c46808fd9890a9ad5816ce1103bd402110a",
+    "pages": 6,
+    "text_chars": 8502,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903191_a2ee8e13c9a2.pdf",
+    "bytes": 117636,
+    "sha256": "35dce82c1440778e427ebec7c49abd85cb2c1e531879cefcffeb3f5f5e25f95e",
+    "pages": 3,
+    "text_chars": 4990,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903194_fd0d8086c27c.pdf",
+    "bytes": 594695,
+    "sha256": "1ceaf0d70028d628b7ddfbf62037ff597ac0f9e2ff8664bbc389e022284d2f1a",
+    "pages": 9,
+    "text_chars": 14273,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903206_644b5dfeecb2.pdf",
+    "bytes": 75743,
+    "sha256": "ccaabf0600306c54d826d235cf3741a26dd8fd2c9feef1805f586926309b9329",
+    "pages": 2,
+    "text_chars": 4395,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903209_0a092740f2b5.pdf",
+    "bytes": 566460,
+    "sha256": "90828dafa04913b69bce77c9bd3cc680c211509d55a9febee7efcbdab7674c1e",
+    "pages": 5,
+    "text_chars": 6573,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903214_846b759d76a9.pdf",
+    "bytes": 74695,
+    "sha256": "4d846b8d6015a1f1d446edc97632425cf6551fcdcb75bc32bee51ec2eb17eb2e",
+    "pages": 2,
+    "text_chars": 3325,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903217_2f4c2f8243ac.pdf",
+    "bytes": 82508,
+    "sha256": "e6552231f085eed3e68131b77e51c59b2d5dfefa8d03ccc1efc6137270cbf859",
+    "pages": 4,
+    "text_chars": 8233,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903223_cf4a752473f4.pdf",
+    "bytes": 254695,
+    "sha256": "fa3aa2eadb833fa333416e5c75c515a985b4a49e4f1dc3f4a8890670d09d0a90",
+    "pages": 6,
+    "text_chars": 11124,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903232_cc6cd1f14178.pdf",
+    "bytes": 72735,
+    "sha256": "e3f9186c1094d2964e7bef94f8c8b39d6a33892c1ba754b52457533b40f004a8",
+    "pages": 1,
+    "text_chars": 2201,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903234_d8f3e376783b.pdf",
+    "bytes": 72585,
+    "sha256": "1c89addbcf46bba5d0085eaebb896822abef264892f1c6912487a742a79fcd53",
+    "pages": 1,
+    "text_chars": 1681,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903235_6302569ce04a.pdf",
+    "bytes": 141953,
+    "sha256": "c2e02bdb877d3e91565ff10fc70655acea640fcf88068212f1c7175d358a2539",
+    "pages": 2,
+    "text_chars": 3151,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903237_daca30c8a303.pdf",
+    "bytes": 1891643,
+    "sha256": "2ae8efb676df1d503c0d0b910f42b1e733250cf2c296105f7f570ebba4b23a6e",
+    "pages": 9,
+    "text_chars": 12167,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903246_d1d1a36cd8bf.pdf",
+    "bytes": 402636,
+    "sha256": "3917a96aaefdd25a9f5522e1ea06ade85b74d6b0f19ed67dbd749ab419291e16",
+    "pages": 8,
+    "text_chars": 14295,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903258_c3c81443ec5f.pdf",
+    "bytes": 93402,
+    "sha256": "7d3ce0a2922aa79005f6d1f7d5acb703fdd45bdfffb0bec89fd709f9d1849e48",
+    "pages": 1,
+    "text_chars": 1576,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903259_e3c5cae5a34a.pdf",
+    "bytes": 489092,
+    "sha256": "4c49954e1f571f8d550cf1e42f8ec579bda8886e7444bfaef3156490737c2018",
+    "pages": 8,
+    "text_chars": 12157,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903268_66ad0a2212b4.pdf",
+    "bytes": 330226,
+    "sha256": "d2fce10e8d9c5fef2df57644b3568a2ae7e116aa86ec2ac13b57ea1b007620f8",
+    "pages": 7,
+    "text_chars": 8290,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903274_bdbf86c3fee0.pdf",
+    "bytes": 152793,
+    "sha256": "7acb29e787e745021318d18697265421bf159702d8441379cbac13fc97bc2a6f",
+    "pages": 1,
+    "text_chars": 1151,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903275_f22edfe54768.pdf",
+    "bytes": 259430,
+    "sha256": "2f9a4260d993b776dac1834784283dd2086b6449d52f6b196a8ce2029df82f76",
+    "pages": 5,
+    "text_chars": 7955,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903282_fcaa3e1af59b.pdf",
+    "bytes": 147837,
+    "sha256": "a1d1989732eeb1c7a49d68745f0c2eb606ce1ae7602c73a5dfec3342ee33e308",
+    "pages": 3,
+    "text_chars": 6949,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903287_079671d89065.pdf",
+    "bytes": 72194,
+    "sha256": "7f2007f04c72027983553c4596a6899a5a05042068f017bf3be898b779bb0561",
+    "pages": 1,
+    "text_chars": 1864,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903288_d11db325d80f.pdf",
+    "bytes": 141375,
+    "sha256": "5aeb7d3ece6e91c6d442ae9a49ac96fa9c6b751247d8aa84e38bf32ef445aea2",
+    "pages": 2,
+    "text_chars": 3936,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903291_b4657328405a.pdf",
+    "bytes": 412126,
+    "sha256": "a1d56a77a6c26fc8def69c09e908507b0de430bfb2dcb8dcf81a27068cc97252",
+    "pages": 4,
+    "text_chars": 3725,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903294_e720244683f8.pdf",
+    "bytes": 168244,
+    "sha256": "879464e6bbcacf7c9b62a64f727136f2806acecdc17026e50b4b0bb199cd7a5e",
+    "pages": 3,
+    "text_chars": 4173,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903297_d930cd85e688.pdf",
+    "bytes": 172471,
+    "sha256": "8c725c182e8cba2f24e827e750f6c0fad609df68868e0c0c0c7cd280bbd07d7b",
+    "pages": 4,
+    "text_chars": 4268,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903301_2f666e571549.pdf",
+    "bytes": 72262,
+    "sha256": "741e81c73fc790a3079836041a16cf187b99662332f6dc41804556b84d08499b",
+    "pages": 1,
+    "text_chars": 2134,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903302_e1e81b6f947e.pdf",
+    "bytes": 167843,
+    "sha256": "0dd00d1e1704f220980fe06c32efc48b3013fe592649c3d4bd1a70ab332e68db",
+    "pages": 5,
+    "text_chars": 10863,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\1790903309_1c6a49aae5f0.pdf",
+    "bytes": 76143,
+    "sha256": "9b1796f3d63ed821f3984d6f102ed78c87ab8f666c8bbb18acceb5e15382c9ad",
+    "pages": 4,
+    "text_chars": 2747,
+    "readable": true,
+    "objectives": true,
+    "review": false
+  },
+  {
+    "path": "uploads\\documents\\completed_bundle_lesson_18.pdf",
+    "bytes": 147064,
+    "sha256": "82455f4081c232370ab86fe0c8a717a62fca76756c4024e9322c92791017d9a4",
+    "pages": 5,
+    "text_chars": 6522,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_bundle_lesson_27.pdf",
+    "bytes": 113056,
+    "sha256": "1b3fb711d36b27b28070b6ccfe978dda56586dcf1cdb6984066d0b2c4989443a",
+    "pages": 4,
+    "text_chars": 6511,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_bundle_lesson_36.pdf",
+    "bytes": 116470,
+    "sha256": "59073aafd732cc3ef8192f189c13395716104bb6503ada42fd957f62c5070bd7",
+    "pages": 5,
+    "text_chars": 7338,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_bundle_lesson_45.pdf",
+    "bytes": 113008,
+    "sha256": "7cb3757ad54d1e54e7f2c88531a399e5f2ae2f0c52ecf6256435cba672859fdf",
+    "pages": 4,
+    "text_chars": 6914,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_bundle_lesson_54.pdf",
+    "bytes": 118405,
+    "sha256": "ee9861808c0b3df8ad7ed22658499629c615fc178e7680bbbbfac39260c5d75f",
+    "pages": 4,
+    "text_chars": 7243,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_bundle_lesson_65.pdf",
+    "bytes": 666099,
+    "sha256": "6f7f504385a1c4c85620f62f79928d178a107b321a99e2b5ead920adcfbdaa5b",
+    "pages": 12,
+    "text_chars": 19094,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_bundle_lesson_9.pdf",
+    "bytes": 141874,
+    "sha256": "dcdbe6526397a81b97368e272102d3c0a1277e6a9e7b62b38b3a6999c3c7500d",
+    "pages": 5,
+    "text_chars": 6548,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_lesson_1.pdf",
+    "bytes": 75173,
+    "sha256": "3bbef567b704bb8e8103b70e421bc52f57e0787b25db5264880faec250151d25",
+    "pages": 2,
+    "text_chars": 2654,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_lesson_10.pdf",
+    "bytes": 74773,
+    "sha256": "01f8f74e0d8ef65b88e3afeff26fcd77213818a13ccc762223e65470f6b5c129",
+    "pages": 2,
+    "text_chars": 1536,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_lesson_11.pdf",
+    "bytes": 93024,
+    "sha256": "974fec484e9560ece3915677aada365931a4dceae3fd1fb4eee31804c4d2e485",
+    "pages": 2,
+    "text_chars": 1934,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_lesson_12.pdf",
+    "bytes": 73359,
+    "sha256": "056342ddb47b336d4002ef9ed5424671c5847deebefdf0d68927c2e6eb891c73",
+    "pages": 2,
+    "text_chars": 1744,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_lesson_13.pdf",
+    "bytes": 82114,
+    "sha256": "f9e656e6923749fc3e7cb0c9dd803c2d77f5dcfd427c6693eed0afb78d3d486b",
+    "pages": 2,
+    "text_chars": 1789,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_lesson_14.pdf",
+    "bytes": 79971,
+    "sha256": "7fa3eae9414ebb3479b78f7daba8a8a1de82b8f4a6f7cb7bc99ba55428d4ed7c",
+    "pages": 2,
+    "text_chars": 1779,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_lesson_15.pdf",
+    "bytes": 74598,
+    "sha256": "ccbcd1a79d12cf94a832357f64a03b19c98dc4ed6fc25f3c7b3e7447c05da55a",
+    "pages": 2,
+    "text_chars": 1910,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_lesson_16.pdf",
+    "bytes": 77114,
+    "sha256": "531273978349dfc12dd559eb59882df37445608a74bc3c0cac4e48bd7cfb9f03",
+    "pages": 2,
+    "text_chars": 1806,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_lesson_17.pdf",
+    "bytes": 81477,
+    "sha256": "451d6a44d559a891063b8ae40b3b12a760aa4703525480834de4baadba06526c",
+    "pages": 2,
+    "text_chars": 1934,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_lesson_2.pdf",
+    "bytes": 93012,
+    "sha256": "68ab6b1f61158d887efdebc387c2a492715efe84b5ff4c6ce63ace0fc1b217f8",
+    "pages": 2,
+    "text_chars": 1836,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_lesson_3.pdf",
+    "bytes": 96766,
+    "sha256": "f8e366f3ea5c059f7db05ec5b63744835f1209d889e11f0507fc914909e6c82d",
+    "pages": 2,
+    "text_chars": 1555,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_lesson_4.pdf",
+    "bytes": 81110,
+    "sha256": "7e744025e3bbc05a5d940d748d28e13e5b6e70c9e2fd0260f3aaa1bfafce130e",
+    "pages": 2,
+    "text_chars": 1534,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_lesson_5.pdf",
+    "bytes": 78492,
+    "sha256": "3dd93caac7222ec5a6bdc91dfddebb9da8057a36d53849050f000c4eb99c4362",
+    "pages": 2,
+    "text_chars": 1622,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_lesson_6.pdf",
+    "bytes": 73413,
+    "sha256": "548521bdb634c196bb0dc354295ce8356f724004f9ea1fef50269fafffa66fd6",
+    "pages": 2,
+    "text_chars": 1550,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_lesson_7.pdf",
+    "bytes": 75584,
+    "sha256": "5d8938cdb938e41f159879f81149cc18300322737f85ae40f79862190aa51b21",
+    "pages": 2,
+    "text_chars": 1783,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_lesson_8.pdf",
+    "bytes": 73682,
+    "sha256": "8b245e87332203ab2e6d9ecb53a3cf45ea31a494620b08d209075846ddff2731",
+    "pages": 2,
+    "text_chars": 1922,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_supplement_course_1.pdf",
+    "bytes": 83924,
+    "sha256": "741e636d4e5729a45271fde52b1f0352d090feb47599027d5ebaa9b6886d499d",
+    "pages": 3,
+    "text_chars": 4544,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_supplement_course_2.pdf",
+    "bytes": 84897,
+    "sha256": "ef1f9f441194452ef8e45f7804e50a21736964c5a48a724a369eeba38278b919",
+    "pages": 3,
+    "text_chars": 4559,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_supplement_course_3.pdf",
+    "bytes": 81825,
+    "sha256": "2a330337fbcf6f75757983a64ee1b60b8da1666b23fc8a68d6c80eeaeebdeaa7",
+    "pages": 3,
+    "text_chars": 4272,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_supplement_course_4.pdf",
+    "bytes": 82427,
+    "sha256": "dfe293e65844efee2e78f8b046fcf8c0dea795c3a1754bf3f14ee913581ffea4",
+    "pages": 3,
+    "text_chars": 4230,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_supplement_course_5.pdf",
+    "bytes": 82063,
+    "sha256": "8062b9c8d254fffc933286c51cac2bb994660cae74d76870e891182a5710ebd4",
+    "pages": 3,
+    "text_chars": 4345,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_supplement_course_6.pdf",
+    "bytes": 84876,
+    "sha256": "4bb732e246add28385d83a33244ded183552369e3d63a8095248689eec3cd627",
+    "pages": 3,
+    "text_chars": 4517,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  },
+  {
+    "path": "uploads\\documents\\completed_supplement_course_7.pdf",
+    "bytes": 82657,
+    "sha256": "c3f26c966cd30804dc06d9a2b53137df605e0494fa21624a744f6a466cee3270",
+    "pages": 3,
+    "text_chars": 4820,
+    "readable": true,
+    "objectives": true,
+    "review": true
+  }
+]

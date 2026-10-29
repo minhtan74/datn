@@ -1,0 +1,81 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Cấu trúc dữ liệu và giải thuật cơ bản</div>
+<p class="path">Chương 3: Phân tích thuật toán và đệ quy · Bài 1</p>
+<h1>Big-O, bất biến và kiểm tra thuật toán</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Cấu trúc dữ liệu và giải thuật cơ bản.</li><li>Chương 3: Phân tích thuật toán và đệ quy.</li><li>Các bài trong chương: Big-O, bất biến và kiểm tra thuật toán; Đệ quy và ngăn xếp lời gọi.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Phân tích chi phí theo kích thước đầu vào và nêu điều kiện để thuật toán đúng.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Kích thước đầu vào n cần được xác định trước khi phân tích. Một vòng lặp thăm n phần tử thường O(n); hai vòng lặp lồng nhau, mỗi vòng n bước, thường O(n²). Hai vòng nối tiếp có chi phí O(n)+O(n), vẫn là O(n). Vòng lặp chia đôi miền mỗi bước thường gợi ý O(log n).</p>
+<p>Phân biệt trường hợp tốt nhất, xấu nhất và trung bình. Big-O là chặn trên tiệm cận; hằng số, kiểu dữ liệu và môi trường vẫn ảnh hưởng thời gian chạy thực tế. Bộ nhớ phụ phân tích riêng với bộ nhớ chứa đầu vào.</p>
+<p>Bất biến là mệnh đề đúng tại các mốc trong vòng lặp, giúp lập luận đúng đắn. Khi tìm số lớn nhất, sau k bước, biến best phải chứa giá trị lớn nhất trong k phần tử đã xét. Test rỗng, một phần tử, trùng lặp và biên giúp tìm lỗi; một vài test qua chưa chứng minh đúng với mọi đầu vào.</p>
+<h2>1. Đếm trước khi rút gọn</h2>
+<pre><code>for i in range(n): pass         -&gt; n bước
+Hai vòng trên nối tiếp          -&gt; 2n bước -&gt; O(n)
+Hai vòng n bước lồng nhau       -&gt; n*n bước -&gt; O(n²)
+while n &gt; 1: n //= 2            -&gt; khoảng log2(n) bước</code></pre>
+<p>Nếu vòng trong không chạy n lần mà phụ thuộc i, phải viết tổng thực tế. Với j từ 0 tới i-1, số bước là n(n-1)/2, vẫn O(n²). Không suy ra cứ thấy hai vòng là chắc O(n²).</p>
+<h2>2. Lập luận bằng bất biến</h2>
+<pre><code>def maximum(values):
+    if not values:
+        raise ValueError('empty input')
+    best = values[0]
+    for item in values[1:]:
+        if item &gt; best:
+            best = item
+    return best
+
+assert maximum([-9, -2, -5]) == -2
+assert maximum([7]) == 7</code></pre>
+<p>Khởi tạo: best đúng cho tiền tố dài một. Duy trì: so sánh phần tử mới giữ max của tiền tố đã xét. Kết thúc: tiền tố là toàn mảng. Bản dùng slicing ở ví dụ tạo danh sách phụ; nếu phân tích bộ nhớ phải tính chi phí này hoặc chuyển sang lặp chỉ số.</p>
+<h2>3. Thiết kế test theo đặc tính</h2>
+<p>Kết quả max phải thuộc dữ liệu và không nhỏ hơn mọi phần tử. Các đặc tính giúp chọn test rỗng, âm, lặp, tăng và giảm. Test chạy qua không thay thế chứng minh; chứng minh cũng không bảo đảm cài đặt không có lỗi gõ.</p>
+<h2>4. Bài tập và đáp án</h2>
+<p>Tính tổng từ i=0 đến n-1 của i: n(n-1)/2. Giải thích khác nhau giữa O(n), Θ(n) và một phép đo giây: chặn trên, chặn khít tiệm cận và kết quả thực nghiệm. Nếu chỉ biết thuật toán O(n²), không tự kết luận đó là chặn khít tốt nhất.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>Phân tích hai vòng nối tiếp và hai vòng lồng nhau. Viết hàm tìm max có quy ước khi đầu vào rỗng; thử [-5,-2,-9], [7], [2,2].</p>
+</div>
+<h2>Hướng giải bài tập bổ sung</h2>
+<p>Chi phí lần lượt O(n) và O(n²). Với mảng rỗng phải trả dấu hiệu không có kết quả hoặc báo lỗi đã quy định, không tự trả 0.</p>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Hai vòng n bước chạy nối tiếp thường có Big-O nào?</li><li>Hai vòng n bước lồng nhau thường có chi phí nào?</li><li>Bộ nhớ phụ nên được đánh giá thế nào?</li><li>Khởi tạo max bằng 0 dễ sai với dữ liệu nào?</li><li>Bất biến vòng lặp dùng để làm gì?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>O(n). Hệ số 2 được bỏ trong biểu diễn tiệm cận.</li><li>O(n²). Tổng số lần thực hiện phần thân thường là n nhân n.</li><li>Riêng với chi phí thời gian. Thuật toán có thể nhanh hơn nhưng dùng nhiều bộ nhớ hơn.</li><li>Mảng chỉ có số âm. 0 không thuộc mảng và lớn hơn mọi phần tử âm.</li><li>Hỗ trợ lập luận trạng thái và tính đúng đắn. Bất biến mô tả điều được giữ đúng trong quá trình lặp.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://opendatastructures.org/</li><li>https://docs.python.org/3/tutorial/datastructures.html</li><li>https://docs.python.org/3/library/heapq.html</li></ul></body></html>

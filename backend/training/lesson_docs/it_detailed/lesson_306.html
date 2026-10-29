@@ -1,0 +1,74 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Mạng máy tính cơ bản</div>
+<p class="path">Chương 2: Dịch vụ và ứng dụng mạng · Bài 2</p>
+<h1>HTTP và HTTPS</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Mạng máy tính cơ bản.</li><li>Chương 2: Dịch vụ và ứng dụng mạng.</li><li>Các bài trong chương: DNS và phân giải tên miền; HTTP và HTTPS.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Nhận biết request, response, phương thức và nhóm mã trạng thái.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>HTTP tổ chức trao đổi yêu cầu và phản hồi. Request có phương thức, đường dẫn, header và có thể có body; response có mã trạng thái, header và có thể có body. GET thường dùng để lấy biểu diễn tài nguyên; POST thường gửi dữ liệu để máy chủ xử lý. Không đặt dữ liệu bí mật vào URL chỉ vì đang dùng HTTPS, vì URL có thể xuất hiện trong lịch sử và nhật ký.</p>
+<p>Nhóm 2xx báo thành công, 3xx chuyển hướng, 4xx lỗi phía yêu cầu và 5xx lỗi máy chủ. 404 nghĩa là không tìm thấy tài nguyên theo yêu cầu; 500 là lỗi nội bộ máy chủ. Cần đọc cả phản hồi và ngữ cảnh để chẩn đoán.</p>
+<p>HTTPS là HTTP được bảo vệ bằng TLS: hỗ trợ bảo mật đường truyền, toàn vẹn và xác thực máy chủ theo chứng thư hợp lệ. HTTPS không bảo đảm nội dung website đáng tin hoặc ứng dụng không có lỗ hổng.</p>
+<h2>1. Cấu trúc trao đổi</h2>
+<p>Trong cách biểu diễn HTTP/1.1 để dễ học, request gồm dòng yêu cầu, header, dòng trống và body tùy phương thức. Response gồm dòng trạng thái, header và body nếu có. Các phiên bản HTTP khác có biểu diễn khung khác; mô hình request/response vẫn hữu ích.</p>
+<pre><code>GET /courses/513 HTTP/1.1
+Host: example.com
+Accept: application/json
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{"id": 513, "title": "Mạng máy tính cơ bản"}</code></pre>
+<h2>2. Phương thức và trạng thái</h2>
+<p>GET thường lấy biểu diễn; POST thường yêu cầu xử lý dữ liệu; PUT thay thế biểu diễn tại tài nguyên theo hợp đồng; PATCH cập nhật một phần; DELETE yêu cầu xóa. Không đánh giá nghiệp vụ chỉ từ tên phương thức. Phương thức và endpoint phải được kiểm tra cùng quyền và đầu vào.</p>
+<p>200 thường thành công có nội dung; 201 thường tài nguyên đã được tạo; 204 không có body; 400 yêu cầu không hợp lệ; 401 cần xác thực; 403 bị từ chối quyền; 404 không tìm thấy; 500 lỗi nội bộ. Ứng dụng cần hợp đồng cụ thể, không được tùy ý đổi mọi lỗi thành 200.</p>
+<h2>3. HTTPS bảo vệ những gì</h2>
+<p>TLS hỗ trợ bí mật đường truyền, toàn vẹn và xác thực máy chủ khi chứng thư được kiểm tra đúng. TLS không sửa lỗi phân quyền, không xác thực tính đúng đắn của nội dung bài học. Không đưa mật khẩu hay token vào URL vì có thể bị lưu trong lịch sử hoặc log.</p>
+<h2>4. Thực hành và lời giải</h2>
+<p>Quan sát tab Network của trình duyệt khi mở trang khóa học: ghi phương thức, URL, mã trạng thái, Content-Type và thời gian. Không chia sẻ header Authorization. Nếu HTML được trả khi client chờ JSON, cần kiểm tra tuyến, proxy hoặc lỗi server thay vì chỉ thử parse lại.</p>
+<p>Với 404 kiểm tra tài nguyên và đường dẫn; với 500 thu thập mã yêu cầu và log server đã được phép xem. Cùng nhìn thấy màn hình trống không có nghĩa hai nguyên nhân giống nhau.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>mô tả một request GET lấy trang khóa học; nêu cách xử lý khác nhau khi nhận 404 và 500.</p>
+</div>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Phương thức HTTP nào thường dùng để lấy tài nguyên?</li><li>Mã 404 thường có ý nghĩa gì?</li><li>Mã 500 thuộc nhóm nào?</li><li>HTTPS bổ sung cơ chế nào cho HTTP?</li><li>Một HTTP response thường chứa thành phần nào?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>GET. GET được thiết kế để lấy biểu diễn của tài nguyên.</li><li>Không tìm thấy tài nguyên được yêu cầu. 404 thuộc nhóm lỗi yêu cầu 4xx.</li><li>Lỗi máy chủ. 500 là Internal Server Error thuộc nhóm 5xx.</li><li>Bảo vệ đường truyền bằng TLS. TLS cung cấp các bảo đảm đường truyền, không thay thế bảo mật ứng dụng.</li><li>Mã trạng thái và header. Response có mã trạng thái, header và có thể có body.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://www.netacad.com/courses/networking-basics</li><li>https://developer.mozilla.org/en-US/docs/Web/HTTP</li></ul></body></html>

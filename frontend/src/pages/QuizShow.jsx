@@ -52,6 +52,7 @@ export default function QuizShow() {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({}); // { [questionId]: 'A'|'B'|'C'|'D' }
   const [alertMsg, setAlertMsg] = useState(null);
+  const alertRef = useRef(null);
   const [submitting, setSubmitting] = useState(false);
   // Không mở được đề (chưa đăng ký / hết lượt làm) -> ẩn phần câu hỏi
   const [blocked, setBlocked] = useState(false);
@@ -177,6 +178,7 @@ export default function QuizShow() {
         type: 'warning',
         text: `⚠️ Bạn còn ${unanswered.length} câu chưa trả lời. Vui lòng hoàn thành trước khi nộp bài.`,
       });
+      alertRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
     submitAnswers();
@@ -263,11 +265,11 @@ export default function QuizShow() {
         )}
       </div>
 
-      <div className="mb-4">
-        {alertMsg && <div className={`alert alert-${alertMsg.type}`}>{alertMsg.text}</div>}
+      <div className="mb-4" ref={alertRef}>
+        {alertMsg && <div role="alert" className={`alert alert-${alertMsg.type}`}>{alertMsg.text}</div>}
       </div>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate>
         <div className="space-y-6">
           {loading && (
             <div style={{ textAlign: 'center', padding: '5rem 0' }}>

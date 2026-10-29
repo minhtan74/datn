@@ -1,0 +1,896 @@
+{
+  "lessons": [
+    {
+      "lesson_id": 1,
+      "course_id": 1,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 5
+    },
+    {
+      "lesson_id": 2,
+      "course_id": 1,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 3,
+      "course_id": 1,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 4,
+      "course_id": 1,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 5,
+      "course_id": 1,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 6,
+      "course_id": 1,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 7,
+      "course_id": 1,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 5
+    },
+    {
+      "lesson_id": 8,
+      "course_id": 1,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 9,
+      "course_id": 1,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 7,
+      "rag_chunks": 5
+    },
+    {
+      "lesson_id": 10,
+      "course_id": 2,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 11,
+      "course_id": 2,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 12,
+      "course_id": 2,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 13,
+      "course_id": 2,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 14,
+      "course_id": 2,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 15,
+      "course_id": 2,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 16,
+      "course_id": 2,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 17,
+      "course_id": 2,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 18,
+      "course_id": 2,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 7,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 19,
+      "course_id": 3,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 20,
+      "course_id": 3,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 21,
+      "course_id": 3,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 22,
+      "course_id": 3,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 23,
+      "course_id": 3,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 24,
+      "course_id": 3,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 25,
+      "course_id": 3,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 26,
+      "course_id": 3,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 27,
+      "course_id": 3,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 6,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 28,
+      "course_id": 4,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 29,
+      "course_id": 4,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 30,
+      "course_id": 4,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 31,
+      "course_id": 4,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 32,
+      "course_id": 4,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 33,
+      "course_id": 4,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 34,
+      "course_id": 4,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 35,
+      "course_id": 4,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 36,
+      "course_id": 4,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 6,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 37,
+      "course_id": 5,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 38,
+      "course_id": 5,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 39,
+      "course_id": 5,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 40,
+      "course_id": 5,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 41,
+      "course_id": 5,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 42,
+      "course_id": 5,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 43,
+      "course_id": 5,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 44,
+      "course_id": 5,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 45,
+      "course_id": 5,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 6,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 46,
+      "course_id": 6,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 47,
+      "course_id": 6,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 48,
+      "course_id": 6,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 49,
+      "course_id": 6,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 50,
+      "course_id": 6,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 51,
+      "course_id": 6,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 52,
+      "course_id": 6,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 53,
+      "course_id": 6,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 54,
+      "course_id": 6,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 6,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 55,
+      "course_id": 7,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 56,
+      "course_id": 7,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 5,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 57,
+      "course_id": 7,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 58,
+      "course_id": 7,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 4
+    },
+    {
+      "lesson_id": 59,
+      "course_id": 7,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 60,
+      "course_id": 7,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 7,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 61,
+      "course_id": 7,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 13,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 62,
+      "course_id": 7,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 3,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 63,
+      "course_id": 7,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 7,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 64,
+      "course_id": 7,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 65,
+      "course_id": 7,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 13,
+      "rag_chunks": 3
+    },
+    {
+      "lesson_id": 303,
+      "course_id": 513,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 22
+    },
+    {
+      "lesson_id": 304,
+      "course_id": 513,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 19
+    },
+    {
+      "lesson_id": 305,
+      "course_id": 513,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 16
+    },
+    {
+      "lesson_id": 306,
+      "course_id": 513,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 19
+    },
+    {
+      "lesson_id": 347,
+      "course_id": 513,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 16
+    },
+    {
+      "lesson_id": 348,
+      "course_id": 513,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 16
+    },
+    {
+      "lesson_id": 349,
+      "course_id": 513,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 17
+    },
+    {
+      "lesson_id": 350,
+      "course_id": 513,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 16
+    },
+    {
+      "lesson_id": 351,
+      "course_id": 513,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 15
+    },
+    {
+      "lesson_id": 352,
+      "course_id": 513,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 16
+    },
+    {
+      "lesson_id": 353,
+      "course_id": 513,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 22
+    },
+    {
+      "lesson_id": 354,
+      "course_id": 513,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 21
+    },
+    {
+      "lesson_id": 307,
+      "course_id": 514,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 17
+    },
+    {
+      "lesson_id": 308,
+      "course_id": 514,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 17
+    },
+    {
+      "lesson_id": 309,
+      "course_id": 514,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 17
+    },
+    {
+      "lesson_id": 310,
+      "course_id": 514,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 18
+    },
+    {
+      "lesson_id": 355,
+      "course_id": 514,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 18
+    },
+    {
+      "lesson_id": 356,
+      "course_id": 514,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 15
+    },
+    {
+      "lesson_id": 357,
+      "course_id": 514,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 17
+    },
+    {
+      "lesson_id": 358,
+      "course_id": 514,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 17
+    },
+    {
+      "lesson_id": 359,
+      "course_id": 514,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 16
+    },
+    {
+      "lesson_id": 360,
+      "course_id": 514,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 18
+    },
+    {
+      "lesson_id": 361,
+      "course_id": 514,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 17
+    },
+    {
+      "lesson_id": 362,
+      "course_id": 514,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 18
+    },
+    {
+      "lesson_id": 311,
+      "course_id": 515,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 16
+    },
+    {
+      "lesson_id": 312,
+      "course_id": 515,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 16
+    },
+    {
+      "lesson_id": 313,
+      "course_id": 515,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 16
+    },
+    {
+      "lesson_id": 314,
+      "course_id": 515,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 16
+    },
+    {
+      "lesson_id": 339,
+      "course_id": 515,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 17
+    },
+    {
+      "lesson_id": 340,
+      "course_id": 515,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 18
+    },
+    {
+      "lesson_id": 341,
+      "course_id": 515,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 16
+    },
+    {
+      "lesson_id": 342,
+      "course_id": 515,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 16
+    },
+    {
+      "lesson_id": 343,
+      "course_id": 515,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 18
+    },
+    {
+      "lesson_id": 344,
+      "course_id": 515,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 18
+    },
+    {
+      "lesson_id": 345,
+      "course_id": 515,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 16
+    },
+    {
+      "lesson_id": 346,
+      "course_id": 515,
+      "http": 200,
+      "sha256_matches": true,
+      "pages": 4,
+      "rag_chunks": 18
+    }
+  ],
+  "protected_unchanged": true,
+  "total_lessons": 101,
+  "courses": [
+    {
+      "id": 1,
+      "title": "Python Cơ Bản Cho Người Mới Bắt Đầu",
+      "toc": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_1_toc.pdf",
+      "complete": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_1_complete.pdf",
+      "pages": 32,
+      "sha256": "7c9ec4b15a00be24efe3c0f925a8669ae078aefac697df82f31bcdc6d87f7134"
+    },
+    {
+      "id": 2,
+      "title": "JavaScript Từ Zero Đến Hero",
+      "toc": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_2_toc.pdf",
+      "complete": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_2_complete.pdf",
+      "pages": 32,
+      "sha256": "2df7e8ff4517022c039afeaa0af2767b04e1f03ee9d740e01eaf9eacaafc25c3"
+    },
+    {
+      "id": 3,
+      "title": "Lập Trình Java Căn Bản",
+      "toc": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_3_toc.pdf",
+      "complete": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_3_complete.pdf",
+      "pages": 31,
+      "sha256": "bb7bca02aeff06d99c3b63bf2228eeaae54a86226312a56291f95ed0da359583"
+    },
+    {
+      "id": 4,
+      "title": "HTML & CSS Nhập Môn",
+      "toc": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_4_toc.pdf",
+      "complete": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_4_complete.pdf",
+      "pages": 31,
+      "sha256": "053ef74c345d4e56eb820c82e32e95cbd011dffc3a2299ac6058dcc581b28f5d"
+    },
+    {
+      "id": 5,
+      "title": "ReactJS Chuyên Sâu",
+      "toc": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_5_toc.pdf",
+      "complete": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_5_complete.pdf",
+      "pages": 31,
+      "sha256": "461646e6095e62413aa75a51d3264289a0f09f0b8639833ee0366ab3a19327a5"
+    },
+    {
+      "id": 6,
+      "title": "MySQL & Thiết Kế Cơ Sở Dữ Liệu",
+      "toc": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_6_toc.pdf",
+      "complete": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_6_complete.pdf",
+      "pages": 32,
+      "sha256": "4016760ba6a0fc80a918893f87f3ff8a2d9587af6c56992dc3557f5083644b48"
+    },
+    {
+      "id": 7,
+      "title": "Nguyên Lí HDH",
+      "toc": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_7_toc.pdf",
+      "complete": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_7_complete.pdf",
+      "pages": 66,
+      "sha256": "126c025d4720c257acf184b3536e6c48b5c1d463f3daabc28b8a1fa3d53320f8"
+    },
+    {
+      "id": 513,
+      "title": "Mạng máy tính cơ bản",
+      "toc": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_513_toc.pdf",
+      "complete": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_513_complete.pdf",
+      "pages": 49,
+      "sha256": "dfb6941b535271661c8438df3c0e0ca7c4d0baa54b68ef48ecb2351e91dbf98f"
+    },
+    {
+      "id": 514,
+      "title": "Cấu trúc dữ liệu và giải thuật cơ bản",
+      "toc": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_514_toc.pdf",
+      "complete": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_514_complete.pdf",
+      "pages": 49,
+      "sha256": "7b5a0e486c0ba9370cbb6a050cccb7b2bdd5a900b249b75489d351e91f0d4e1f"
+    },
+    {
+      "id": 515,
+      "title": "Kiểm thử phần mềm nhập môn",
+      "toc": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_515_toc.pdf",
+      "complete": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\edition_20261029\\generated\\course_515_complete.pdf",
+      "pages": 49,
+      "sha256": "75988d57b476886523dfa74378c472292221f20417f10ded15e90bd503018444"
+    }
+  ]
+}

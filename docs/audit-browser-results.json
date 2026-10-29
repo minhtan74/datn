@@ -1,0 +1,338 @@
+{
+  "pages": [
+    {
+      "url": "/",
+      "title": "StudyOnline",
+      "chars": 1518,
+      "overflow": false,
+      "role": "public",
+      "requested": "/",
+      "events": [
+        {
+          "type": "http_error",
+          "status": 404,
+          "url": "http://127.0.0.1:5173/favicon.ico"
+        }
+      ]
+    },
+    {
+      "url": "/login",
+      "title": "StudyOnline",
+      "chars": 415,
+      "main": "\ud83c\udf93\nCh\u00e0o m\u1eebng quay tr\u1edf l\u1ea1i\n\n\u0110\u0103ng nh\u1eadp v\u00e0o t\u00e0i kho\u1ea3n StudyOnline c\u1ee7a b\u1ea1n\n\n\u0110\u1ecaA CH\u1ec8 EMAIL\nM\u1eacT KH\u1ea8U\nQu\u00ean m\u1eadt kh\u1ea9u?\n\ud83d\udd11 \u0110\u0103ng nh\u1eadp\n\nCh\u01b0a c\u00f3 t\u00e0i kho\u1ea3n? \u0110\u0103ng k\u00fd ngay",
+      "overflow": false,
+      "role": "public",
+      "requested": "/login",
+      "events": []
+    },
+    {
+      "url": "/register",
+      "title": "StudyOnline",
+      "chars": 459,
+      "main": "\ud83c\udf93\nT\u1ea1o t\u00e0i kho\u1ea3n m\u1edbi\n\n\u0110\u0103ng k\u00fd tham gia h\u1ecdc t\u1eadp mi\u1ec5n ph\u00ed h\u00f4m nay\n\nH\u1ecc V\u00c0 T\u00caN\n\u0110\u1ecaA CH\u1ec8 EMAIL\nVAI TR\u00d2 T\u00c0I KHO\u1ea2N\nH\u1ecdc vi\u00ean\nGi\u1ea3ng vi\u00ean\n\u25be\nM\u1eacT KH\u1ea8U\nX\u00c1C NH\u1eacN M\u1eacT KH\u1ea8U\n\ud83d\ude80 \u0110\u0103ng k\u00fd ngay\n\n\u0110\u00e3 c\u00f3 t\u00e0i kho\u1ea3n? \u0110\u0103ng nh\u1eadp",
+      "overflow": false,
+      "role": "public",
+      "requested": "/register",
+      "events": []
+    },
+    {
+      "url": "/admin",
+      "title": "StudyOnline",
+      "chars": 1966,
+      "main": "Admin / Dashboard\nDashboard T\u1ed5ng quan\n\nTh\u1ed1ng k\u00ea ho\u1ea1t \u0111\u1ed9ng v\u00e0 qu\u1ea3n l\u00fd h\u1ec7 th\u1ed1ng th\u1eddi gian th\u1ef1c.\n\n\ud83d\udc65\nT\u1ed4NG USER\n15\n1 t\u00e0i kho\u1ea3n \u0111ang kh\u00f3a\n\ud83d\udc68\u200d\ud83c\udfeb\nGI\u1ea2NG VI\u00caN\n4\n4 ng\u01b0\u1eddi \u0111ang c\u00f3 kh\u00f3a h\u1ecdc\n\ud83c\udf92\nH\u1eccC VI\u00caN\n10\n+0 trong 30 ng\u00e0y\n\ud83d\udcda\nKH\u00d3A H\u1eccC\n8\n8 xu\u1ea5t b\u1ea3n \u00b7 0 b\u1ea3n nh\u00e1p\n\ud83d\udcb0\nDOANH THU\n11.782.000\u00a0\u20ab\n18 \u0111\u01a1n th\u00e0nh c\u00f4ng \u00b7 0 \u0111ang ch\u1edd\n\ud83d\udcdd\nL\u01af\u1ee2T \u0110\u0102NG K\u00dd ",
+      "overflow": false,
+      "role": "admin",
+      "requested": "/admin",
+      "events": []
+    },
+    {
+      "url": "/admin/users",
+      "title": "StudyOnline",
+      "chars": 1814,
+      "main": "Admin / Qu\u1ea3n l\u00fd User\n\ud83d\udc65 Qu\u1ea3n l\u00fd Th\u00e0nh vi\u00ean\n\nXem danh s\u00e1ch, ph\u00e2n quy\u1ec1n v\u00e0 ch\u1ec9nh s\u1eeda th\u00f4ng tin th\u00e0nh vi\u00ean.\n\n\ud83d\udc65 T\u1ea5t c\u1ea3\n15\n\ud83d\udc68\u200d\ud83c\udfeb Teacher\n4\n\ud83c\udf92 Student\n10\n\ud83d\udc65 Qu\u1ea3n l\u00fd Th\u00e0nh vi\u00ean\n+ Th\u00eam Th\u00e0nh vi\u00ean\nT\u1ea5t c\u1ea3 vai tr\u00f2\nQu\u1ea3n tr\u1ecb vi\u00ean (Admin)\nGi\u1ea3ng vi\u00ean (Teacher)\nH\u1ecdc vi\u00ean (Student)\nH\u1ecc V\u00c0 T\u00caN\tEMAIL\tVAI TR\u00d2\tTR\u1ea0NG TH\u00c1I\tNG\u00c0Y THAM GIA\tH\u00c0NH ",
+      "overflow": false,
+      "role": "admin",
+      "requested": "/admin/users",
+      "events": []
+    },
+    {
+      "url": "/admin/courses",
+      "title": "StudyOnline",
+      "chars": 1038,
+      "main": "Admin / Qu\u1ea3n l\u00fd Kh\u00f3a h\u1ecdc\n\ud83d\udcda Qu\u1ea3n l\u00fd Kh\u00f3a h\u1ecdc\n\nThi\u1ebft l\u1eadp danh s\u00e1ch kh\u00f3a h\u1ecdc gi\u1ea3ng d\u1ea1y.\n\n\ud83d\udcda Qu\u1ea3n l\u00fd Kh\u00f3a h\u1ecdc\n+ Th\u00eam Kh\u00f3a h\u1ecdc\nTHUMBNAIL\tT\u00caN KH\u00d3A H\u1eccC\tGI\u1ea2NG VI\u00caN PH\u1ee4 TR\u00c1CH\tGI\u00c1\tTR\u1ea0NG TH\u00c1I\tH\u00c0NH \u0110\u1ed8NG\n\n\ud83d\udcd8\n\tAUDIT Browser Quiz\tNguy\u1ec5n V\u0103n An\tMi\u1ec5n ph\u00ed\t\u0110\u00c3 XU\u1ea4T B\u1ea2N\tS\u1eedaX\u00f3a\n\n\ud83d\udcd8\n\tNguy\u00ean L\u00ed HDH\tNguy\u1ec5n V\u0103n An\tMi\u1ec5n ph\u00ed\t\u0110\u00c3 XU\u1ea4T B\u1ea2N\tS\u1eedaX\u00f3a\n\n",
+      "overflow": false,
+      "role": "admin",
+      "requested": "/admin/courses",
+      "events": []
+    },
+    {
+      "url": "/admin/payments",
+      "title": "StudyOnline",
+      "chars": 3595,
+      "main": "Admin / Qu\u1ea3n l\u00fd Giao d\u1ecbch\n\ud83d\udcb3 Qu\u1ea3n l\u00fd Giao d\u1ecbch\n\nTra c\u1ee9u to\u00e0n b\u1ed9 \u0111\u01a1n thanh to\u00e1n kh\u00f3a h\u1ecdc, l\u1ecdc theo tr\u1ea1ng th\u00e1i v\u00e0 xem chi ti\u1ebft k\u1ebft qu\u1ea3 t\u1eeb VNPay.\n\nT\u1ea5t c\u1ea3\n32\nTh\u00e0nh c\u00f4ng\n18\n\u0110ang ch\u1edd\n0\nTh\u1ea5t b\u1ea1i\n12\n\u0110\u00e3 ho\u00e0n ti\u1ec1n\n2\n\ud83d\udd04 \u0110\u1ed1i so\u00e1t 0 \u0111\u01a1n \u0111ang ch\u1edd\nT\u00ecm ki\u1ebfm\nKh\u00f3a h\u1ecdc\nT\u1ea5t c\u1ea3 kh\u00f3a h\u1ecdc\nAUDIT Browser Quiz\nNguy\u00ean L\u00ed HDH\nMySQL & Thi\u1ebft K\u1ebf C\u01a1 ",
+      "overflow": false,
+      "role": "admin",
+      "requested": "/admin/payments",
+      "events": []
+    },
+    {
+      "url": "/admin/reports",
+      "title": "StudyOnline",
+      "chars": 2775,
+      "main": "Admin / B\u00e1o c\u00e1o\n\ud83d\udcc4 B\u00e1o c\u00e1o & Th\u1ed1ng k\u00ea\n\nPh\u00e2n t\u00edch doanh thu, h\u1ecdc vi\u00ean v\u00e0 hi\u1ec7u su\u1ea5t kh\u00f3a h\u1ecdc to\u00e0n h\u1ec7 th\u1ed1ng.\n\n\ud83d\udcb0\nT\u1ed4NG DOANH THU\n11.782.000\u00a0\u20ab\n18 \u0111\u01a1n th\u00e0nh c\u00f4ng\n\ud83c\udf92\nT\u1ed4NG H\u1eccC VI\u00caN\n10\n+0 trong 30 ng\u00e0y\n\ud83d\udcca\nT\u1ef6 L\u1ec6 HO\u00c0N TH\u00c0NH TB\n58.7%\nTr\u00ean t\u1ea5t c\u1ea3 kh\u00f3a h\u1ecdc\n\u23f3\n\u0110\u01a0N \u0110ANG X\u1eec L\u00dd\n0\n12 th\u1ea5t b\u1ea1i \u00b7 2 ho\u00e0n ti\u1ec1n (998.000\u00a0\u20ab)\n\ud83d\udcc8 Doanh thu 7 ng\u00e0y ",
+      "overflow": false,
+      "role": "admin",
+      "requested": "/admin/reports",
+      "events": []
+    },
+    {
+      "url": "/teacher",
+      "title": "StudyOnline",
+      "chars": 1297,
+      "main": "Dashboard Gi\u1ea3ng vi\u00ean\n\nXem nhanh th\u00f4ng s\u1ed1 l\u1edbp h\u1ecdc v\u00e0 ti\u1ebfn \u0111\u1ed9 \u0111\u00e0o t\u1ea1o c\u1ee7a b\u1ea1n.\n\n\ud83d\udcda\nT\u1ed4NG KH\u00d3A H\u1eccC\n3\n3 xu\u1ea5t b\u1ea3n \u00b7 0 b\u1ea3n nh\u00e1p\n\ud83d\udc68\u200d\ud83c\udf93\nT\u1ed4NG H\u1eccC VI\u00caN\n6\n9 l\u01b0\u1ee3t \u0111\u0103ng k\u00fd\n\ud83c\udfa5\nT\u1ed4NG B\u00c0I H\u1eccC\n20\nTr\u00ean 3 kh\u00f3a h\u1ecdc\n\ud83d\udcdd\nT\u1ed4NG QUIZ\n11\nB\u00e0i ki\u1ec3m tra tr\u1eafc nghi\u1ec7m\n\ud83d\udc41\ufe0f\nB\u00c0I H\u1eccC \u0110\u00c3 HO\u00c0N TH\u00c0NH\n36\nT\u1ed5ng c\u1ee7a m\u1ecdi h\u1ecdc vi\u00ean\n\ud83d\udcb5\nDOANH THU T\u1ea0M T\u00cdNH\n3.594.000\u0111\nT\u1eeb",
+      "overflow": false,
+      "role": "teacher",
+      "requested": "/teacher",
+      "events": []
+    },
+    {
+      "url": "/teacher/courses",
+      "title": "StudyOnline",
+      "chars": 833,
+      "main": "\ud83d\udcda Kh\u00f3a h\u1ecdc c\u1ee7a t\u00f4i\n\nQu\u1ea3n l\u00fd th\u00f4ng tin chi ti\u1ebft, tr\u1ea1ng th\u00e1i k\u00edch ho\u1ea1t kh\u00f3a h\u1ecdc.\n\nT\u1ea5t c\u1ea3 tr\u1ea1ng th\u00e1i\n\u0110\u00e3 xu\u1ea5t b\u1ea3n\nB\u1ea3n nh\u00e1p\nL\u01b0u tr\u1eef\n+ Th\u00eam Kh\u00f3a h\u1ecdc\n\u0110\u00e3 xu\u1ea5t b\u1ea3n\nAUDIT Browser Quiz\n\ntemporary\n\n0 VN\u0110\nTi\u1ebfn \u0111\u1ed9 h\u1ecdc vi\u00ean TB\n0%\n\ud83d\udc65 1 H\u1ecdc vi\u00ean\nQu\u1ea3n l\u00fd\n\u270f\ufe0f\n\u2715\n\u0110\u00e3 xu\u1ea5t b\u1ea3n\nNguy\u00ean L\u00ed HDH\n\nh\n\n0 VN\u0110\nTi\u1ebfn \u0111\u1ed9 h\u1ecdc vi\u00ean TB\n50%\n\ud83d\udc65 2 H\u1ecdc vi\u00ean\nQu\u1ea3",
+      "overflow": false,
+      "role": "teacher",
+      "requested": "/teacher/courses",
+      "events": []
+    },
+    {
+      "url": "/teacher/chapters?course_id=1",
+      "title": "StudyOnline",
+      "chars": 1264,
+      "main": "\ud83d\udcd6 Qu\u1ea3n l\u00fd Ch\u01b0\u01a1ng h\u1ecdc\n\nX\u00e2y d\u1ef1ng c\u1ea5u tr\u00fac c\u00e2y ch\u01b0\u01a1ng tr\u00ecnh gi\u1ea3ng d\u1ea1y.\n\nCh\u1ecdn kh\u00f3a h\u1ecdc c\u1ea7n qu\u1ea3n l\u00fd ch\u01b0\u01a1ng:\nAUDIT Browser Quiz\nNguy\u00ean L\u00ed HDH\nPython C\u01a1 B\u1ea3n Cho Ng\u01b0\u1eddi M\u1edbi B\u1eaft \u0110\u1ea7u\n+ Th\u00eam Ch\u01b0\u01a1ng m\u1edbi\n\ud83d\udcc1\nCh\u01b0\u01a1ng 1: L\u00e0m Quen V\u1edbi Python\n3 B\u00c0I GI\u1ea2NG\n\ud83d\udcdd C\u00e2u h\u1ecfi \u00f4n t\u1eadp (10)\n\u270f\ufe0f S\u1eeda\n\u2715 X\u00f3a\n\ud83c\udfa5 B\u00e0i 1:\nC\u00e0i \u0111\u1eb7t Python & IDE\n\ud83d\udcdd \u00d4n t\u1eadp (0)\n\ud83d\udc40 ",
+      "overflow": false,
+      "role": "teacher",
+      "requested": "/teacher/chapters?course_id=1",
+      "events": []
+    },
+    {
+      "url": "/teacher/lessons?chapter_id=1",
+      "title": "StudyOnline",
+      "chars": 634,
+      "main": "\ud83c\udfa5 Qu\u1ea3n l\u00fd B\u00e0i h\u1ecdc\n\nC\u1eadp nh\u1eadt t\u00e0i li\u1ec7u, video b\u00e0i gi\u1ea3ng cho t\u1eebng ch\u01b0\u01a1ng h\u1ecdc.\n\nCh\u1ecdn Kh\u00f3a h\u1ecdc:\nAUDIT Browser Quiz\nNguy\u00ean L\u00ed HDH\nPython C\u01a1 B\u1ea3n Cho Ng\u01b0\u1eddi M\u1edbi B\u1eaft \u0110\u1ea7u\nCh\u1ecdn Ch\u01b0\u01a1ng h\u1ecdc:\n(Ch\u01b0a c\u00f3 ch\u01b0\u01a1ng h\u1ecdc)\n+ Th\u00eam B\u00e0i h\u1ecdc m\u1edbi\n\ud83c\udfa5 Danh s\u00e1ch b\u00e0i gi\u1ea3ng\nSTT\tT\u00caN B\u00c0I H\u1eccC\tVIDEO URL\tT\u00c0I LI\u1ec6U PDF\tTRUY C\u1eacP\tNG\u00c0Y T\u1ea0O\tTHAO T\u00c1C\nVui l\u00f2ng ch\u1ecdn",
+      "overflow": false,
+      "role": "teacher",
+      "requested": "/teacher/lessons?chapter_id=1",
+      "events": []
+    },
+    {
+      "url": "/teacher/quizzes",
+      "title": "StudyOnline",
+      "chars": 2582,
+      "main": "\ud83d\udcdd B\u00e0i thi Tr\u1eafc nghi\u1ec7m\n\nBi\u00ean so\u1ea1n \u0111\u1ec1 thi, theo d\u00f5i k\u1ebft qu\u1ea3 t\u1ef1 \u0111\u1ed9ng.\n\n\ud83d\udcdd Qu\u1ea3n l\u00fd Quiz tr\u1eafc nghi\u1ec7m\n+ T\u1ea1o Quiz m\u1edbi\nKH\u00d3A H\u1eccC\tT\u00caN QUIZ\tS\u1ed0 C\u00c2U H\u1eceI\tTH\u1edcI GIAN\t\u0110I\u1ec2M \u0110\u1ea0T\tL\u01af\u1ee2T L\u00c0M\tTHAO T\u00c1C\nAUDIT Browser Quiz\tAUDIT Shuffle Quiz\n\u2014\n\t3 C\u00c2U H\u1eceI\tKh\u00f4ng gi\u1edbi h\u1ea1n\t\u2014\tKh\u00f4ng gi\u1edbi h\u1ea1n\nT\u00ednh \u0111i\u1ec3m: cao nh\u1ea5t\n\u0110\u00e3 c\u00f3 1 l\u01b0\u1ee3t l\u00e0m\n\t\nC\u00e2u h\u1ecfi\n\u270f\ufe0f\n\u2715\n\nNguy\u00ean",
+      "overflow": false,
+      "role": "teacher",
+      "requested": "/teacher/quizzes",
+      "events": []
+    },
+    {
+      "url": "/teacher/quizzes?tab=ai",
+      "title": "StudyOnline",
+      "chars": 750,
+      "main": "\ud83d\udcdd B\u00e0i thi Tr\u1eafc nghi\u1ec7m\n\nBi\u00ean so\u1ea1n \u0111\u1ec1 thi, theo d\u00f5i k\u1ebft qu\u1ea3 t\u1ef1 \u0111\u1ed9ng.\n\n\u2190 Quay l\u1ea1i danh s\u00e1ch\n\nAI sinh c\u00e2u h\u1ecfi t\u1eeb t\u00e0i li\u1ec7u kh\u00f3a h\u1ecdc. B\u1ea1n ch\u1ec9nh s\u1eeda & duy\u1ec7t tr\u01b0\u1edbc khi l\u01b0u \u2014 AI kh\u00f4ng t\u1ef1 l\u01b0u.\n\nKh\u00f3a h\u1ecdc\nAUDIT Browser Quiz\nNguy\u00ean L\u00ed HDH\nPython C\u01a1 B\u1ea3n Cho Ng\u01b0\u1eddi M\u1edbi B\u1eaft \u0110\u1ea7u\nPh\u1ea1m vi\nTheo t\u00e0i li\u1ec7u kh\u00f3a h\u1ecdc (kh\u00f3a ch\u01b0a c\u00f3 ch\u01b0\u01a1ng)\nT\u1ed5ng",
+      "overflow": false,
+      "role": "teacher",
+      "requested": "/teacher/quizzes?tab=ai",
+      "events": []
+    },
+    {
+      "url": "/teacher/quizzes?tab=word",
+      "title": "StudyOnline",
+      "chars": 661,
+      "main": "\ud83d\udcdd B\u00e0i thi Tr\u1eafc nghi\u1ec7m\n\nBi\u00ean so\u1ea1n \u0111\u1ec1 thi, theo d\u00f5i k\u1ebft qu\u1ea3 t\u1ef1 \u0111\u1ed9ng.\n\n\u2190 Quay l\u1ea1i danh s\u00e1ch\n\nNh\u1eadp b\u1ed9 \u0111\u1ec1 c\u00f3 s\u1eb5n trong file Word \u2014 h\u1ec7 th\u1ed1ng \u0111\u1ecdc \u0111\u00fang t\u1eebng c\u00e2u (kh\u00f4ng d\u00f9ng AI). B\u1ea1n xem l\u1ea1i, s\u1eeda r\u1ed3i m\u1edbi l\u01b0u.\n\nKh\u00f3a h\u1ecdc\nAUDIT Browser Quiz\nNguy\u00ean L\u00ed HDH\nPython C\u01a1 B\u1ea3n Cho Ng\u01b0\u1eddi M\u1edbi B\u1eaft \u0110\u1ea7u\nL\u01b0u v\u00e0o\nQuiz m\u1edbi\n\ud83d\udcc4 Ch\u1ecdn file Word (.doc",
+      "overflow": false,
+      "role": "teacher",
+      "requested": "/teacher/quizzes?tab=word",
+      "events": []
+    },
+    {
+      "url": "/teacher/documents",
+      "title": "StudyOnline",
+      "chars": 708,
+      "main": "\ud83e\udd16 T\u00e0i li\u1ec7u AI Tutor\n\nT\u1ea3i t\u00e0i li\u1ec7u (PDF, DOCX, TXT) \u0111\u1ec3 tr\u1ee3 gi\u1ea3ng AI tr\u1ea3 l\u1eddi c\u00e2u h\u1ecfi c\u1ee7a h\u1ecdc vi\u00ean d\u1ef1a tr\u00ean \u0111\u00f3.\n\nKh\u00f3a h\u1ecdc\nAUDIT Browser Quiz\nNguy\u00ean L\u00ed HDH\nPython C\u01a1 B\u1ea3n Cho Ng\u01b0\u1eddi M\u1edbi B\u1eaft \u0110\u1ea7u\nTi\u00eau \u0111\u1ec1 (t\u00f9y ch\u1ecdn)\nT\u1ec7p t\u00e0i li\u1ec7u (.pdf, .docx, .txt \u2014 t\u1ed1i \u0111a 20MB)\n\u2b06 T\u1ea3i l\u00ean & l\u1eadp ch\u1ec9 m\u1ee5c\nT\u00e0i li\u1ec7u c\u1ee7a kh\u00f3a\n0 t\u00e0i li\u1ec7u \u00b7 0 \u0111o\u1ea1n \u0111\u00e3 ",
+      "overflow": false,
+      "role": "teacher",
+      "requested": "/teacher/documents",
+      "events": []
+    },
+    {
+      "url": "/teacher/topics",
+      "title": "StudyOnline",
+      "chars": 842,
+      "main": "Ch\u1ee7 \u0111\u1ec1 ki\u1ebfn th\u1ee9c\n\nQu\u1ea3n l\u00fd t\u00ean ch\u1ee7 \u0111\u1ec1 d\u00f9ng chung cho nh\u1eadp tay, Word v\u00e0 AI. Ch\u1ecdn b\u00e0i h\u1ecdc, b\u1ed9 \u00f4n t\u1eadp ch\u1ee9a c\u00e2u h\u1ecfi c\u1ee7a ch\u1ee7 \u0111\u1ec1 r\u1ed3i x\u00e1c nh\u1eadn \u0111\u1ec3 h\u1ecdc vi\u00ean nh\u1eadn li\u00ean k\u1ebft c\u1ee5 th\u1ec3.\n\n\u0110\u1ed5i t\u00ean \u0111\u1ec3 l\u00e0m r\u00f5 c\u00f9ng m\u1ed9t n\u1ed9i dung. N\u1ebfu thay sang ki\u1ebfn th\u1ee9c kh\u00e1c, h\u00e3y t\u1ea1o ch\u1ee7 \u0111\u1ec1 m\u1edbi \u0111\u1ec3 gi\u1eef \u00fd ngh\u0129a c\u1ee7a k\u1ebft qu\u1ea3 c\u0169.\n\nAUDIT Browser Quiz\nNguy\u00ean L\u00ed HDH",
+      "overflow": false,
+      "role": "teacher",
+      "requested": "/teacher/topics",
+      "events": []
+    },
+    {
+      "url": "/teacher/reports",
+      "title": "StudyOnline",
+      "chars": 1802,
+      "main": "\ud83d\udcca B\u00e1o c\u00e1o\n\nH\u1ecdc vi\u00ean, ti\u1ebfn \u0111\u1ed9 h\u1ecdc t\u1eadp, k\u1ebft qu\u1ea3 ki\u1ec3m tra v\u00e0 doanh thu c\u00e1c kh\u00f3a h\u1ecdc c\u1ee7a b\u1ea1n.\n\nT\u1ea5t c\u1ea3 kh\u00f3a h\u1ecdc\nAUDIT Browser Quiz\nNguy\u00ean L\u00ed HDH\nPython C\u01a1 B\u1ea3n Cho Ng\u01b0\u1eddi M\u1edbi B\u1eaft \u0110\u1ea7u\n\ud83d\udc65\n6\nH\u1eccC VI\u00caN\n\ud83d\udcda\n9\nL\u01af\u1ee2T \u0110\u0102NG K\u00dd\n\ud83d\udcc8\n42%\nTI\u1ebeN \u0110\u1ed8 TRUNG B\u00ccNH\n\ud83d\udcb5\n3.6M\u0111\nDOANH THU\n\ud83d\udcc8 Doanh thu theo th\u00e1ng (6 th\u00e1ng g\u1ea7n nh\u1ea5t)\nTh5\nTh6\nTh7\nTh8\nTh9\nTh1",
+      "overflow": false,
+      "role": "teacher",
+      "requested": "/teacher/reports",
+      "events": []
+    },
+    {
+      "url": "/teacher/profile",
+      "title": "StudyOnline",
+      "chars": 607,
+      "main": "\ud83d\udc64 H\u1ed3 s\u01a1 Gi\u1ea3ng vi\u00ean\n\nC\u1eadp nh\u1eadt th\u00f4ng tin gi\u1ea3ng d\u1ea1y, l\u1ecbch s\u1eed chuy\u00ean m\u00f4n.\n\nNV\nNguy\u1ec5n V\u0103n An\n\nGi\u1ea3ng vi\u00ean chuy\u00ean m\u00f4n\n\n3 Kh\u00f3a h\u1ecdc\n6 H\u1ecdc vi\u00ean\n\ud83d\udc64 Th\u00f4ng tin chi ti\u1ebft\nH\u1ecd v\u00e0 t\u00ean\n\u0110\u1ecba ch\u1ec9 Email\nChuy\u00ean m\u00f4n gi\u1ea3ng d\u1ea1y\nGi\u1edbi thi\u1ec7u b\u1ea3n th\u00e2n\nL\u01b0u thay \u0111\u1ed5i\n\ud83d\udd11 \u0110\u1ed5i m\u1eadt kh\u1ea9u\nM\u1eadt kh\u1ea9u hi\u1ec7n t\u1ea1i\nM\u1eadt kh\u1ea9u m\u1edbi\nX\u00e1c nh\u1eadn m\u1eadt kh\u1ea9u m\u1edbi\nC\u1eadp nh\u1eadt m\u1eadt kh\u1ea9",
+      "overflow": false,
+      "role": "teacher",
+      "requested": "/teacher/profile",
+      "events": []
+    },
+    {
+      "url": "/student/dashboard",
+      "title": "StudyOnline",
+      "chars": 1885,
+      "main": "\ud83c\udf1f CH\u00c0O M\u1eeaNG TR\u1ede L\u1ea0I\n\nXin ch\u00e0o, Ho\u00e0ng V\u0103n Em! \ud83d\udc4b\n\nH\u00e3y ti\u1ebfp t\u1ee5c h\u00e0nh tr\u00ecnh h\u1ecdc t\u1eadp h\u00f4m nay nh\u00e9.\n\nKh\u00e1m ph\u00e1 kh\u00f3a h\u1ecdc \u2192\n\ud83d\udcda\n8\nT\u1ed5ng kh\u00f3a h\u1ecdc\n\u23f3\n6\n\u0110ang theo h\u1ecdc\n\u2705\n1\n\u0110\u00e3 ho\u00e0n th\u00e0nh\n\ud83c\udfaf G\u1ee3i \u00fd h\u1ecdc t\u1eadp cho b\u1ea1n\nTheo ch\u1ee7 \u0111\u1ec1\n\u21bb C\u1eadp nh\u1eadt\n\n\u01afu ti\u00ean \u00f4n c\u00e1c n\u1ed9i dung c\u1ea7n c\u1ee7ng c\u1ed1\n\nD\u1ef1a tr\u00ean l\u01b0\u1ee3t l\u00e0m g\u1ea7n nh\u1ea5t theo t\u1eebng ch\u1ee7 \u0111\u1ec1. C\u1ea7n \u00edt nh\u1ea5t 5 c\u00e2u ",
+      "overflow": false,
+      "role": "student",
+      "requested": "/student/dashboard",
+      "events": []
+    },
+    {
+      "url": "/student/courses",
+      "title": "StudyOnline",
+      "chars": 457,
+      "main": "\ud83c\udf10 Kh\u00e1m ph\u00e1 kh\u00f3a h\u1ecdc\n\nT\u00ecm ki\u1ebfm v\u00e0 \u0111\u0103ng k\u00fd h\u00e0ng tr\u0103m kh\u00f3a h\u1ecdc ch\u1ea5t l\u01b0\u1ee3ng cao \u2014 h\u1ecdc b\u1ea5t c\u1ee9 l\u00fac n\u00e0o.\n\n\ud83d\udd0d T\u00ecm ki\u1ebfm\n\ud83d\udcda 0 kh\u00f3a h\u1ecdc ch\u01b0a \u0111\u0103ng k\u00fd\n\ud83d\udc68\u200d\ud83c\udfeb Nhi\u1ec1u gi\u1ea3ng vi\u00ean\n\u2705 8 \u0111\u00e3 \u0111\u0103ng k\u00fd\nHi\u1ec3n th\u1ecb 0 / 0 kh\u00f3a h\u1ecdc\nM\u1edbi nh\u1ea5t\nA \u2192 Z\nZ \u2192 A\nGi\u00e1 th\u1ea5p \u2192 cao\nGi\u00e1 cao \u2192 th\u1ea5p\n\ud83c\udf89\nB\u1ea1n \u0111\u00e3 \u0111\u0103ng k\u00fd t\u1ea5t c\u1ea3 kh\u00f3a h\u1ecdc\n\nTi\u1ebfp t\u1ee5c h\u1ecdc t\u1ea1i Kh\u00f3a h\u1ecdc c\u1ee7a t\u00f4i.",
+      "overflow": false,
+      "role": "student",
+      "requested": "/student/courses",
+      "events": []
+    },
+    {
+      "url": "/student/my-courses",
+      "title": "StudyOnline",
+      "chars": 1266,
+      "main": "\ud83d\udcda Kh\u00f3a h\u1ecdc c\u1ee7a t\u00f4i\nDanh s\u00e1ch c\u00e1c kh\u00f3a h\u1ecdc b\u1ea1n \u0111ang theo h\u1ecdc\nT\u1ea5t c\u1ea3\n\u0110ang h\u1ecdc\nHo\u00e0n th\u00e0nh\nCh\u01b0a b\u1eaft \u0111\u1ea7u\n\ud83c\udfa8\nAUDIT Browser Quiz\n\n\ud83d\udc68\u200d\ud83c\udfeb Nguy\u1ec5n V\u0103n An\n\n\ud83d\udcd6 0/0 b\u00e0i ho\u00e0n th\u00e0nh\n0% ho\u00e0n th\u00e0nh\n\u23f8 Ch\u01b0a b\u1eaft \u0111\u1ea7u\n\ud83d\udcc5 C\u1eadp nh\u1eadt g\u1ea7n \u0111\u00e2y\n\ud83d\ude80 B\u1eaft \u0111\u1ea7u\n\ud83d\udcbb\nNguy\u00ean L\u00ed HDH\n\n\ud83d\udc68\u200d\ud83c\udfeb Nguy\u1ec5n V\u0103n An\n\n\ud83d\udcd6 5/11 b\u00e0i ho\u00e0n th\u00e0nh\n45% ho\u00e0n th\u00e0nh\n\u25b6 \u0110ang h\u1ecdc\n\ud83d\udcc5 C\u1ead",
+      "overflow": false,
+      "role": "student",
+      "requested": "/student/my-courses",
+      "events": []
+    },
+    {
+      "url": "/chapters?course_id=2",
+      "title": "JavaScript T\u1eeb Zero \u0110\u1ebfn Hero \u2014 StudyOnline",
+      "chars": 714,
+      "main": "Dashboard\n\u203a\nKh\u00f3a h\u1ecdc c\u1ee7a t\u00f4i\n\u203a\nJavaScript T\u1eeb Zero \u0110\u1ebfn Hero\nJavaScript T\u1eeb Zero \u0110\u1ebfn Hero\n\nH\u1ecdc JavaScript t\u1eeb c\u01a1 b\u1ea3n \u0111\u1ebfn n\u00e2ng cao: DOM, s\u1ef1 ki\u1ec7n, ES6+, b\u1ea5t \u0111\u1ed3ng b\u1ed9 v\u00e0 x\u00e2y d\u1ef1ng \u1ee9ng d\u1ee5ng th\u1ef1c t\u1ebf.\n\n\ud83d\udcc2 3 ch\u01b0\u01a1ng\n\ud83d\udcd6 9 b\u00e0i h\u1ecdc\n1\nNh\u1eadp M\u00f4n JavaScript\n\n3 b\u00e0i h\u1ecdc\n\n\u25bc\n\ud83c\udfac\nJavaScript l\u00e0 g\u00ec?\nGi\u1edbi thi\u1ec7u t\u1ed5ng quan v\u1ec1 JavaScript.\n\u25b6 Xem b\u00e0i\n\ud83c\udfac",
+      "overflow": false,
+      "role": "student",
+      "requested": "/chapters?course_id=2",
+      "events": []
+    },
+    {
+      "url": "/lesson?id=7",
+      "title": "Class v\u00e0 Object \u2014 StudyOnline",
+      "chars": 945,
+      "main": "Dashboard\n\u203a\nKh\u00f3a h\u1ecdc c\u1ee7a t\u00f4i\n\u203a\nPython C\u01a1 B\u1ea3n Cho Ng\u01b0\u1eddi M\u1edbi B\u1eaft \u0110\u1ea7u\n\u203a\nCh\u01b0\u01a1ng 3: L\u1eadp Tr\u00ecnh H\u01b0\u1edbng \u0110\u1ed1i T\u01b0\u1ee3ng C\u01a1 B\u1ea3n\n\u203a\nClass v\u00e0 Object\n\ud83c\udfac Video b\u00e0i gi\u1ea3ng\n\ud83d\udcc4 T\u00e0i li\u1ec7u PDF\n\ud83c\udfac B\u00e0i h\u1ecdc Video\nCh\u01b0\u01a1ng 3: L\u1eadp Tr\u00ecnh H\u01b0\u1edbng \u0110\u1ed1i T\u01b0\u1ee3ng C\u01a1 B\u1ea3n\nClass v\u00e0 Object\nM\u00f4 t\u1ea3 b\u00e0i h\u1ecdc\nT\u00e0i li\u1ec7u \u0111\u00ednh k\u00e8m\nKh\u00e1i ni\u1ec7m l\u1edbp v\u00e0 \u0111\u1ed1i t\u01b0\u1ee3ng trong Python.\n\u2705 \u0110\u00e1nh",
+      "overflow": false,
+      "role": "student",
+      "requested": "/lesson?id=7",
+      "events": []
+    },
+    {
+      "url": "/quiz",
+      "title": "StudyOnline",
+      "chars": 2229,
+      "main": "\ud83d\udcdd Danh s\u00e1ch Quiz\n\nCh\u1ecdn m\u1ed9t b\u00e0i t\u1eadp tr\u1eafc nghi\u1ec7m d\u01b0\u1edbi \u0111\u00e2y \u0111\u1ec3 ki\u1ec3m tra v\u00e0 c\u1ee7ng c\u1ed1 ki\u1ebfn th\u1ee9c h\u1ecdc t\u1eadp.\n\nAUDIT Shuffle Quiz\n3 c\u00e2u h\u1ecfiAUDIT Browser Quiz\n\n\u0110i\u1ec3m: 100% (cao nh\u1ea5t)\n\u0110\u00e3 l\u00e0m 1 l\u1ea7n\nL\u00e0m l\u1ea1i\n\ud83d\udcdc L\u1ecbch s\u1eed\nKi\u1ec3m tra HTML & CSS\n15 c\u00e2u h\u1ecfiHTML & CSS Nh\u1eadp M\u00f4n\n\nB\u00e0i ki\u1ec3m tra ki\u1ebfn th\u1ee9c HTML, CSS v\u00e0 responsive design.\n\n\u0110i\u1ec3m: 80% (",
+      "overflow": false,
+      "role": "student",
+      "requested": "/quiz",
+      "events": []
+    },
+    {
+      "url": "/student/progress",
+      "title": "StudyOnline",
+      "chars": 5979,
+      "main": "\ud83d\udcc8 Ti\u1ebfn \u0111\u1ed9 & ph\u00e2n t\u00edch h\u1ecdc t\u1eadp\nTheo d\u00f5i h\u00e0nh tr\u00ecnh h\u1ecdc t\u1eadp v\u00e0 \u0111i\u1ec3m m\u1ea1nh / \u0111i\u1ec3m y\u1ebfu c\u1ee7a b\u1ea1n\n63%\nho\u00e0n th\u00e0nh\n\n41/65 b\u00e0i h\u1ecdc \u0111\u00e3 ho\u00e0n th\u00e0nh\n\nN\u0103ng l\u1ef1c: Kh\u00e1\n\u0110i\u1ec3m quiz trung b\u00ecnh\n80.2%\nL\u01b0\u1ee3t l\u00e0m quiz\n34\nB\u00e0i c\u00f2n l\u1ea1i\n24\n\n\u0110i\u1ec3m quiz: m\u1ed7i b\u00e0i ki\u1ec3m tra l\u1ea5y 1 \u0111i\u1ec3m theo c\u00e1ch t\u00ednh c\u1ee7a quiz; kh\u00f4ng t\u00ednh b\u1ed9 \u00f4n t\u1eadp.\n\n\ud83c\udfaf G\u1ee3i \u00fd h\u1ecdc t\u1eadp cho b\u1ea1",
+      "overflow": false,
+      "role": "student",
+      "requested": "/student/progress",
+      "events": []
+    },
+    {
+      "url": "/student/ai-tutor",
+      "title": "StudyOnline",
+      "chars": 740,
+      "main": "\ud83e\udd16 AI Tutor\nH\u1ecfi \u0111\u00e1p d\u1ef1a tr\u00ean t\u00e0i li\u1ec7u c\u1ee7a kh\u00f3a h\u1ecdc \u2014 c\u00e2u tr\u1ea3 l\u1eddi lu\u00f4n k\u00e8m ngu\u1ed3n tr\u00edch d\u1eabn.\nKH\u00d3A H\u1eccC\nAUDIT Browser Quiz\nL\u1eadp Tr\u00ecnh Java C\u0103n B\u1ea3n\nReactJS Chuy\u00ean S\u00e2u\nMySQL & Thi\u1ebft K\u1ebf C\u01a1 S\u1edf D\u1eef Li\u1ec7u\nNguy\u00ean L\u00ed HDH\nHTML & CSS Nh\u1eadp M\u00f4n\nJavaScript T\u1eeb Zero \u0110\u1ebfn Hero\nPython C\u01a1 B\u1ea3n Cho Ng\u01b0\u1eddi M\u1edbi B\u1eaft \u0110\u1ea7u\n+ Cu\u1ed9c tr\u00f2 chuy\u1ec7n m\u1edbi\nCh\u01b0a c\u00f3 ",
+      "overflow": false,
+      "role": "student",
+      "requested": "/student/ai-tutor",
+      "events": []
+    },
+    {
+      "url": "/student/profile",
+      "title": "StudyOnline",
+      "chars": 478,
+      "main": "\ud83d\udc64 H\u1ed3 s\u01a1 c\u00e1 nh\u00e2n\nQu\u1ea3n l\u00fd th\u00f4ng tin t\u00e0i kho\u1ea3n c\u1ee7a b\u1ea1n\nVE\nHo\u00e0ng V\u0103n Em\n\nem.hoang@gmail.com\n\n8\nKh\u00f3a h\u1ecdc\n2026\nTham gia\n\u270f\ufe0f C\u1eadp nh\u1eadt th\u00f4ng tin\nH\u1ecd v\u00e0 t\u00ean\nEmail\nVai tr\u00f2\n\ud83d\udcbe L\u01b0u thay \u0111\u1ed5i\n\ud83d\udd12 \u0110\u1ed5i m\u1eadt kh\u1ea9u\nM\u1eadt kh\u1ea9u hi\u1ec7n t\u1ea1i\nM\u1eadt kh\u1ea9u m\u1edbi\nX\u00e1c nh\u1eadn m\u1eadt kh\u1ea9u m\u1edbi\n\ud83d\udd11 \u0110\u1ed5i m\u1eadt kh\u1ea9u\n\ud83d\uddbc \u1ea2nh \u0111\u1ea1i di\u1ec7n\nVE\n\nCh\u1ecdn \u1ea3nh JPG, PNG ho\u1eb7c GIF. T\u1ed1i \u0111a 2MB",
+      "overflow": false,
+      "role": "student",
+      "requested": "/student/profile",
+      "events": []
+    },
+    {
+      "url": "/student/dashboard",
+      "title": "StudyOnline",
+      "chars": 1882,
+      "main": "\ud83c\udf1f CH\u00c0O M\u1eeaNG TR\u1ede L\u1ea0I\n\nXin ch\u00e0o, Ho\u00e0ng V\u0103n Em! \ud83d\udc4b\n\nH\u00e3y ti\u1ebfp t\u1ee5c h\u00e0nh tr\u00ecnh h\u1ecdc t\u1eadp h\u00f4m nay nh\u00e9.\n\nKh\u00e1m ph\u00e1 kh\u00f3a h\u1ecdc \u2192\n\ud83d\udcda\n9\nT\u1ed5ng kh\u00f3a h\u1ecdc\n\u23f3\n6\n\u0110ang theo h\u1ecdc\n\u2705\n1\n\u0110\u00e3 ho\u00e0n th\u00e0nh\n\ud83c\udfaf G\u1ee3i \u00fd h\u1ecdc t\u1eadp cho b\u1ea1n\nTheo ch\u1ee7 \u0111\u1ec1\n\u21bb C\u1eadp nh\u1eadt\n\n\u01afu ti\u00ean \u00f4n c\u00e1c n\u1ed9i dung c\u1ea7n c\u1ee7ng c\u1ed1\n\nD\u1ef1a tr\u00ean l\u01b0\u1ee3t l\u00e0m g\u1ea7n nh\u1ea5t theo t\u1eebng ch\u1ee7 \u0111\u1ec1. C\u1ea7n \u00edt nh\u1ea5t 5 c\u00e2u ",
+      "overflow": false,
+      "role": "student-mobile",
+      "requested": "/student/dashboard",
+      "events": []
+    },
+    {
+      "url": "/student/courses",
+      "title": "StudyOnline",
+      "chars": 454,
+      "main": "\ud83c\udf10 Kh\u00e1m ph\u00e1 kh\u00f3a h\u1ecdc\n\nT\u00ecm ki\u1ebfm v\u00e0 \u0111\u0103ng k\u00fd h\u00e0ng tr\u0103m kh\u00f3a h\u1ecdc ch\u1ea5t l\u01b0\u1ee3ng cao \u2014 h\u1ecdc b\u1ea5t c\u1ee9 l\u00fac n\u00e0o.\n\n\ud83d\udd0d T\u00ecm ki\u1ebfm\n\ud83d\udcda 0 kh\u00f3a h\u1ecdc ch\u01b0a \u0111\u0103ng k\u00fd\n\ud83d\udc68\u200d\ud83c\udfeb Nhi\u1ec1u gi\u1ea3ng vi\u00ean\n\u2705 9 \u0111\u00e3 \u0111\u0103ng k\u00fd\nHi\u1ec3n th\u1ecb 0 / 0 kh\u00f3a h\u1ecdc\nM\u1edbi nh\u1ea5t\nA \u2192 Z\nZ \u2192 A\nGi\u00e1 th\u1ea5p \u2192 cao\nGi\u00e1 cao \u2192 th\u1ea5p\n\ud83c\udf89\nB\u1ea1n \u0111\u00e3 \u0111\u0103ng k\u00fd t\u1ea5t c\u1ea3 kh\u00f3a h\u1ecdc\n\nTi\u1ebfp t\u1ee5c h\u1ecdc t\u1ea1i Kh\u00f3a h\u1ecdc c\u1ee7a t\u00f4i.",
+      "overflow": false,
+      "role": "student-mobile",
+      "requested": "/student/courses",
+      "events": []
+    },
+    {
+      "url": "/student/progress",
+      "title": "StudyOnline",
+      "chars": 5976,
+      "main": "\ud83d\udcc8 Ti\u1ebfn \u0111\u1ed9 & ph\u00e2n t\u00edch h\u1ecdc t\u1eadp\nTheo d\u00f5i h\u00e0nh tr\u00ecnh h\u1ecdc t\u1eadp v\u00e0 \u0111i\u1ec3m m\u1ea1nh / \u0111i\u1ec3m y\u1ebfu c\u1ee7a b\u1ea1n\n63%\nho\u00e0n th\u00e0nh\n\n41/65 b\u00e0i h\u1ecdc \u0111\u00e3 ho\u00e0n th\u00e0nh\n\nN\u0103ng l\u1ef1c: Kh\u00e1\n\u0110i\u1ec3m quiz trung b\u00ecnh\n81.8%\nL\u01b0\u1ee3t l\u00e0m quiz\n35\nB\u00e0i c\u00f2n l\u1ea1i\n24\n\n\u0110i\u1ec3m quiz: m\u1ed7i b\u00e0i ki\u1ec3m tra l\u1ea5y 1 \u0111i\u1ec3m theo c\u00e1ch t\u00ednh c\u1ee7a quiz; kh\u00f4ng t\u00ednh b\u1ed9 \u00f4n t\u1eadp.\n\n\ud83c\udfaf G\u1ee3i \u00fd h\u1ecdc t\u1eadp cho b\u1ea1",
+      "overflow": false,
+      "role": "student-mobile",
+      "requested": "/student/progress",
+      "events": []
+    }
+  ],
+  "checks": {
+    "login_admin": true,
+    "login_teacher": true,
+    "login_student": true,
+    "quiz_reload_preserves_order": true,
+    "quiz_reload_preserves_answers": true,
+    "quiz_submit_score_100": true,
+    "quiz_result_reload": true,
+    "student_blocked_from_admin": true,
+    "logged_out_redirected": true
+  },
+  "events": [
+    {
+      "type": "http_error",
+      "status": 404,
+      "url": "http://127.0.0.1:5173/favicon.ico"
+    }
+  ],
+  "audit_course_id": 522
+}

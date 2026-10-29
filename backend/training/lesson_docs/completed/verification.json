@@ -1,0 +1,736 @@
+{
+  "lessons": [
+    {
+      "lesson_id": 1,
+      "course_id": 1,
+      "title": "Cài đặt Python & IDE",
+      "pages": 2,
+      "text_chars": 2653,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 2,
+      "course_id": 1,
+      "title": "Biến và kiểu dữ liệu",
+      "pages": 2,
+      "text_chars": 1835,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 3,
+      "course_id": 1,
+      "title": "Toán tử trong Python",
+      "pages": 2,
+      "text_chars": 1554,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 4,
+      "course_id": 1,
+      "title": "Câu lệnh if - else",
+      "pages": 2,
+      "text_chars": 1533,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 5,
+      "course_id": 1,
+      "title": "Vòng lặp for, while",
+      "pages": 2,
+      "text_chars": 1621,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 6,
+      "course_id": 1,
+      "title": "Định nghĩa và sử dụng hàm",
+      "pages": 2,
+      "text_chars": 1549,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 7,
+      "course_id": 1,
+      "title": "Class và Object",
+      "pages": 2,
+      "text_chars": 1782,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 8,
+      "course_id": 1,
+      "title": "Kế thừa (Inheritance)",
+      "pages": 2,
+      "text_chars": 1921,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 9,
+      "course_id": 1,
+      "title": "Dự án nhỏ: Quản lý sinh viên",
+      "pages": 5,
+      "text_chars": 6544,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 10,
+      "course_id": 2,
+      "title": "JavaScript là gì?",
+      "pages": 2,
+      "text_chars": 1535,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 11,
+      "course_id": 2,
+      "title": "Biến, kiểu dữ liệu & toán tử",
+      "pages": 2,
+      "text_chars": 1933,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 12,
+      "course_id": 2,
+      "title": "Hàm trong JavaScript",
+      "pages": 2,
+      "text_chars": 1743,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 13,
+      "course_id": 2,
+      "title": "Tổng quan về DOM",
+      "pages": 2,
+      "text_chars": 1788,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 14,
+      "course_id": 2,
+      "title": "Xử lý sự kiện click, submit",
+      "pages": 2,
+      "text_chars": 1778,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 15,
+      "course_id": 2,
+      "title": "Dự án: To-do List",
+      "pages": 2,
+      "text_chars": 1909,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 16,
+      "course_id": 2,
+      "title": "Arrow function & Destructuring",
+      "pages": 2,
+      "text_chars": 1805,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 17,
+      "course_id": 2,
+      "title": "Promise & Async/Await",
+      "pages": 2,
+      "text_chars": 1933,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 18,
+      "course_id": 2,
+      "title": "Module & Fetch API",
+      "pages": 5,
+      "text_chars": 6518,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 19,
+      "course_id": 3,
+      "title": "Cài đặt JDK & IntelliJ",
+      "pages": 1,
+      "text_chars": 2265,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 20,
+      "course_id": 3,
+      "title": "Biến, kiểu dữ liệu trong Java",
+      "pages": 1,
+      "text_chars": 2737,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 21,
+      "course_id": 3,
+      "title": "Cấu trúc điều khiển",
+      "pages": 1,
+      "text_chars": 2289,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 22,
+      "course_id": 3,
+      "title": "Class, Object, Constructor",
+      "pages": 1,
+      "text_chars": 2430,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 23,
+      "course_id": 3,
+      "title": "Kế thừa & Đa hình",
+      "pages": 1,
+      "text_chars": 2480,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 24,
+      "course_id": 3,
+      "title": "Interface & Abstract Class",
+      "pages": 1,
+      "text_chars": 2354,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 25,
+      "course_id": 3,
+      "title": "Try-catch & Custom Exception",
+      "pages": 1,
+      "text_chars": 2866,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 26,
+      "course_id": 3,
+      "title": "ArrayList & HashMap",
+      "pages": 1,
+      "text_chars": 2407,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 27,
+      "course_id": 3,
+      "title": "Dự án: Quản lý sản phẩm",
+      "pages": 4,
+      "text_chars": 6508,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 28,
+      "course_id": 4,
+      "title": "Cấu trúc tài liệu HTML",
+      "pages": 2,
+      "text_chars": 3795,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 29,
+      "course_id": 4,
+      "title": "Form và bảng biểu",
+      "pages": 2,
+      "text_chars": 3687,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 30,
+      "course_id": 4,
+      "title": "Semantic HTML",
+      "pages": 2,
+      "text_chars": 3192,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 31,
+      "course_id": 4,
+      "title": "Selector & thuộc tính CSS",
+      "pages": 2,
+      "text_chars": 3906,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 32,
+      "course_id": 4,
+      "title": "Box Model & Flexbox",
+      "pages": 2,
+      "text_chars": 3449,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 33,
+      "course_id": 4,
+      "title": "CSS Grid",
+      "pages": 2,
+      "text_chars": 3206,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 34,
+      "course_id": 4,
+      "title": "Media Query",
+      "pages": 2,
+      "text_chars": 3094,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 35,
+      "course_id": 4,
+      "title": "Mobile First Design",
+      "pages": 1,
+      "text_chars": 2930,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 36,
+      "course_id": 4,
+      "title": "Dự án: Landing Page Responsive",
+      "pages": 5,
+      "text_chars": 7334,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 37,
+      "course_id": 5,
+      "title": "Giới thiệu React & JSX",
+      "pages": 1,
+      "text_chars": 2337,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 38,
+      "course_id": 5,
+      "title": "Component & Props",
+      "pages": 1,
+      "text_chars": 2244,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 39,
+      "course_id": 5,
+      "title": "State & useState",
+      "pages": 1,
+      "text_chars": 2501,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 40,
+      "course_id": 5,
+      "title": "useEffect & vòng đời component",
+      "pages": 1,
+      "text_chars": 2754,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 41,
+      "course_id": 5,
+      "title": "useContext & useReducer",
+      "pages": 1,
+      "text_chars": 2517,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 42,
+      "course_id": 5,
+      "title": "Custom Hooks",
+      "pages": 1,
+      "text_chars": 2395,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 43,
+      "course_id": 5,
+      "title": "Kết nối API với Axios",
+      "pages": 1,
+      "text_chars": 2275,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 44,
+      "course_id": 5,
+      "title": "Routing với React Router",
+      "pages": 1,
+      "text_chars": 2317,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 45,
+      "course_id": 5,
+      "title": "Dự án: Trang quản lý khoá học",
+      "pages": 4,
+      "text_chars": 6911,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 46,
+      "course_id": 6,
+      "title": "Khái niệm cơ sở dữ liệu",
+      "pages": 1,
+      "text_chars": 2607,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 47,
+      "course_id": 6,
+      "title": "Cài đặt MySQL & Workbench",
+      "pages": 1,
+      "text_chars": 2293,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 48,
+      "course_id": 6,
+      "title": "Câu lệnh SELECT cơ bản",
+      "pages": 1,
+      "text_chars": 2474,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 49,
+      "course_id": 6,
+      "title": "JOIN nhiều bảng",
+      "pages": 1,
+      "text_chars": 2429,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 50,
+      "course_id": 6,
+      "title": "GROUP BY & Aggregate Function",
+      "pages": 1,
+      "text_chars": 2423,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 51,
+      "course_id": 6,
+      "title": "Subquery & View",
+      "pages": 1,
+      "text_chars": 2721,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 52,
+      "course_id": 6,
+      "title": "Chuẩn hoá dữ liệu (1NF-3NF)",
+      "pages": 1,
+      "text_chars": 2659,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 53,
+      "course_id": 6,
+      "title": "Thiết kế ERD",
+      "pages": 1,
+      "text_chars": 2502,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 54,
+      "course_id": 6,
+      "title": "Dự án: Thiết kế CSDL website học trực tuyến",
+      "pages": 4,
+      "text_chars": 7240,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 55,
+      "course_id": 7,
+      "title": "Bài 1: Khái niệm về hệ điều hành",
+      "pages": 2,
+      "text_chars": 3152,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 56,
+      "course_id": 7,
+      "title": "Bài 2: Phân loại hệ điều hành",
+      "pages": 4,
+      "text_chars": 9190,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 57,
+      "course_id": 7,
+      "title": "Bài 3: Nhu cầu xử lí đồng thời",
+      "pages": 2,
+      "text_chars": 1905,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 58,
+      "course_id": 7,
+      "title": "Bài 4: Khái niệm tiến trình và mô hình đa tiến trình",
+      "pages": 2,
+      "text_chars": 2427,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 59,
+      "course_id": 7,
+      "title": "Bài 5: Khái niệm tiến trình và mô hình tiểu tiến trình",
+      "pages": 3,
+      "text_chars": 4109,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 60,
+      "course_id": 7,
+      "title": "Bài 6: Tổ chức quản lí tiến trình",
+      "pages": 6,
+      "text_chars": 9704,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 61,
+      "course_id": 7,
+      "title": "Bài 7: Lập trình tiến trình",
+      "pages": 12,
+      "text_chars": 17939,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 62,
+      "course_id": 7,
+      "title": "Bài 8: Liên lạc tiến trình",
+      "pages": 2,
+      "text_chars": 2903,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 63,
+      "course_id": 7,
+      "title": "Bài 9: Các cơ chế thông tin liên lạc",
+      "pages": 6,
+      "text_chars": 8497,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 64,
+      "course_id": 7,
+      "title": "Bài 10: Nhu cầu đồng bộ hóa",
+      "pages": 3,
+      "text_chars": 4988,
+      "download_status": 200
+    },
+    {
+      "lesson_id": 65,
+      "course_id": 7,
+      "title": "Bài 11: Các giải pháp đồng bộ hóa",
+      "pages": 12,
+      "text_chars": 19083,
+      "download_status": 200
+    }
+  ],
+  "documents": [
+    {
+      "course_id": 7,
+      "lesson_id": 65,
+      "title": "Bài 11: Các giải pháp đồng bộ hóa",
+      "status": "indexed",
+      "chunk_count": 78
+    },
+    {
+      "course_id": 4,
+      "lesson_id": 36,
+      "title": "Bài 9: Dự án Landing Page Responsive",
+      "status": "indexed",
+      "chunk_count": 32
+    },
+    {
+      "course_id": 3,
+      "lesson_id": 27,
+      "title": "Bài 9: Dự án Quản lý sản phẩm",
+      "status": "indexed",
+      "chunk_count": 30
+    },
+    {
+      "course_id": 5,
+      "lesson_id": 45,
+      "title": "Bài 9: Dự án Trang quản lý khoá học",
+      "status": "indexed",
+      "chunk_count": 29
+    },
+    {
+      "course_id": 6,
+      "lesson_id": 54,
+      "title": "Bài 9: Dự án Thiết kế CSDL website học trực tuyến",
+      "status": "indexed",
+      "chunk_count": 31
+    },
+    {
+      "course_id": 1,
+      "lesson_id": 1,
+      "title": "Cài đặt Python & IDE",
+      "status": "indexed",
+      "chunk_count": 7
+    },
+    {
+      "course_id": 1,
+      "lesson_id": 2,
+      "title": "Biến và kiểu dữ liệu",
+      "status": "indexed",
+      "chunk_count": 7
+    },
+    {
+      "course_id": 1,
+      "lesson_id": 3,
+      "title": "Toán tử trong Python",
+      "status": "indexed",
+      "chunk_count": 6
+    },
+    {
+      "course_id": 1,
+      "lesson_id": 4,
+      "title": "Câu lệnh if - else",
+      "status": "indexed",
+      "chunk_count": 5
+    },
+    {
+      "course_id": 1,
+      "lesson_id": 5,
+      "title": "Vòng lặp for, while",
+      "status": "indexed",
+      "chunk_count": 5
+    },
+    {
+      "course_id": 1,
+      "lesson_id": 6,
+      "title": "Định nghĩa và sử dụng hàm",
+      "status": "indexed",
+      "chunk_count": 6
+    },
+    {
+      "course_id": 1,
+      "lesson_id": 7,
+      "title": "Class và Object",
+      "status": "indexed",
+      "chunk_count": 6
+    },
+    {
+      "course_id": 1,
+      "lesson_id": 8,
+      "title": "Kế thừa (Inheritance)",
+      "status": "indexed",
+      "chunk_count": 7
+    },
+    {
+      "course_id": 2,
+      "lesson_id": 10,
+      "title": "JavaScript là gì?",
+      "status": "indexed",
+      "chunk_count": 5
+    },
+    {
+      "course_id": 2,
+      "lesson_id": 11,
+      "title": "Biến, kiểu dữ liệu & toán tử",
+      "status": "indexed",
+      "chunk_count": 6
+    },
+    {
+      "course_id": 2,
+      "lesson_id": 12,
+      "title": "Hàm trong JavaScript",
+      "status": "indexed",
+      "chunk_count": 6
+    },
+    {
+      "course_id": 2,
+      "lesson_id": 13,
+      "title": "Tổng quan về DOM",
+      "status": "indexed",
+      "chunk_count": 6
+    },
+    {
+      "course_id": 2,
+      "lesson_id": 14,
+      "title": "Xử lý sự kiện click, submit",
+      "status": "indexed",
+      "chunk_count": 6
+    },
+    {
+      "course_id": 2,
+      "lesson_id": 15,
+      "title": "Dự án: To-do List",
+      "status": "indexed",
+      "chunk_count": 7
+    },
+    {
+      "course_id": 2,
+      "lesson_id": 16,
+      "title": "Arrow function & Destructuring",
+      "status": "indexed",
+      "chunk_count": 5
+    },
+    {
+      "course_id": 2,
+      "lesson_id": 17,
+      "title": "Promise & Async/Await",
+      "status": "indexed",
+      "chunk_count": 7
+    },
+    {
+      "course_id": 1,
+      "lesson_id": 9,
+      "title": "Dự án nhỏ: Quản lý sinh viên",
+      "status": "indexed",
+      "chunk_count": 28
+    },
+    {
+      "course_id": 2,
+      "lesson_id": 18,
+      "title": "Module & Fetch API",
+      "status": "indexed",
+      "chunk_count": 26
+    },
+    {
+      "course_id": 1,
+      "lesson_id": null,
+      "title": "Python Cơ Bản Cho Người Mới Bắt Đầu — Học thêm và thực hành tổng hợp",
+      "status": "indexed",
+      "chunk_count": 21
+    },
+    {
+      "course_id": 2,
+      "lesson_id": null,
+      "title": "JavaScript Từ Zero Đến Hero — Học thêm và thực hành tổng hợp",
+      "status": "indexed",
+      "chunk_count": 20
+    },
+    {
+      "course_id": 3,
+      "lesson_id": null,
+      "title": "Lập Trình Java Căn Bản — Học thêm và thực hành tổng hợp",
+      "status": "indexed",
+      "chunk_count": 21
+    },
+    {
+      "course_id": 4,
+      "lesson_id": null,
+      "title": "HTML & CSS Nhập Môn — Học thêm và thực hành tổng hợp",
+      "status": "indexed",
+      "chunk_count": 19
+    },
+    {
+      "course_id": 5,
+      "lesson_id": null,
+      "title": "ReactJS Chuyên Sâu — Học thêm và thực hành tổng hợp",
+      "status": "indexed",
+      "chunk_count": 19
+    },
+    {
+      "course_id": 6,
+      "lesson_id": null,
+      "title": "MySQL & Thiết Kế Cơ Sở Dữ Liệu — Học thêm và thực hành tổng hợp",
+      "status": "indexed",
+      "chunk_count": 20
+    },
+    {
+      "course_id": 7,
+      "lesson_id": null,
+      "title": "Nguyên Lí HDH — Học thêm và thực hành tổng hợp",
+      "status": "indexed",
+      "chunk_count": 19
+    }
+  ]
+}

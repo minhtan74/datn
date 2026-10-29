@@ -1,0 +1,71 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Mạng máy tính cơ bản</div>
+<p class="path">Chương 6: Chẩn đoán và bài thực hành tổng hợp · Bài 1</p>
+<h1>Chẩn đoán lỗi mạng theo từng lớp</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Mạng máy tính cơ bản.</li><li>Chương 6: Chẩn đoán và bài thực hành tổng hợp.</li><li>Các bài trong chương: Chẩn đoán lỗi mạng theo từng lớp; Dự án nhỏ: thiết kế mạng cho phòng học.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Tạo giả thuyết và thu thập bằng chứng thay vì thay đổi cấu hình ngẫu nhiên.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Chẩn đoán bắt đầu bằng phạm vi: chỉ một máy hay nhiều máy, chỉ một dịch vụ hay toàn bộ kết nối, lỗi liên tục hay theo thời điểm. Ghi thông báo lỗi, thời gian và thay đổi gần nhất trước khi thử sửa.</p>
+<p>Kiểm tra lần lượt liên kết, cấu hình địa chỉ và gateway, đường đi IP, phân giải DNS, kết nối cổng và phản hồi ứng dụng. ping dùng ICMP nên thất bại có thể do bị lọc, không đủ để khẳng định host tắt. nslookup giúp khảo sát DNS; curl có thể quan sát phản hồi HTTP. Tên và tùy chọn lệnh phụ thuộc hệ điều hành.</p>
+<p>Chỉ đổi một yếu tố mỗi lần, đo lại rồi ghi kết quả. Nếu truy cập IP được nhưng tên miền không phân giải, DNS là giả thuyết hợp lý, chưa phải kết luận cuối cùng cho mọi lỗi trình duyệt. Không xóa dữ liệu hoặc thay đổi hàng loạt chỉ để thử vận may.</p>
+<h2>1. Quy trình thu thập bằng chứng</h2>
+<p>Tạo hồ sơ sự cố gồm thời điểm, phạm vi, thông báo, trạng thái trước đó và thay đổi gần nhất. Nếu nhiều máy cùng lỗi, so sánh điểm chung; nếu một máy lỗi, so sánh với máy tốt cùng mạng nhưng không tự sao chép IP của máy tốt.</p>
+<h2>2. Checklist có thứ tự</h2>
+<ol><li>Liên kết: cáp, Wi-Fi, interface đang bật và trạng thái kết nối.</li><li>Địa chỉ: IP/mask, gateway, DNS; tìm dấu hiệu tự gán hoặc xung đột.</li><li>Đường đi: route tới đích, gateway và chính sách liên quan.</li><li>Tên miền: resolver, kết quả A/AAAA, cache và TTL.</li><li>Dịch vụ: cổng, TLS, mã HTTP và nội dung phản hồi.</li><li>Ghi lại giả thuyết, thay đổi nhỏ, đo lại và quyết định giữ hay hoàn nguyên.</li></ol>
+<h2>3. Phân biệt ba ca lỗi</h2>
+<pre><code>Hiện tượng                     Giả thuyết cần kiểm tra
+LAN được, ngoài LAN không      Gateway/route/chính sách đường ra
+Kết nối IP được, tên lỗi       DNS hoặc đường truy cập resolver
+DNS đúng, HTTP trả 500         Ứng dụng hoặc phụ thuộc server</code></pre>
+<p>Đây là định hướng, không phải bảng kết luận tuyệt đối. Ví dụ truy cập bằng IP có thể khác virtual host hoặc TLS hostname, nên phải hiểu phép thử thực sự đang so sánh gì.</p>
+<h2>4. Bài tập và đáp án mẫu</h2>
+<p>Một học viên không mở LMS, người khác mở được. Thu IP/mask/gateway/DNS của hai máy, kiểm tra phân giải cùng tên, thử dịch vụ với đúng hostname, thu mã HTTP. Nếu chỉ xóa cache rồi lỗi biến mất, ghi đây là thay đổi tương quan chứ chưa chứng minh mọi sự cố trước đó đều do cache.</p>
+<p>Báo cáo cần giả thuyết ban đầu, bằng chứng phản bác hoặc hỗ trợ, nguyên nhân xác nhận được, cách sửa và kiểm tra sau sửa. Không ghi “đã reset và thấy ổn” như một lời giải đầy đủ.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>Lập checklist cho ba lỗi lab: sai gateway, sai DNS và server HTTP ngừng chạy. Với mỗi lỗi, dự đoán phép thử nào phân biệt được nó với hai lỗi còn lại.</p>
+</div>
+<h2>Hướng giải bài tập bổ sung</h2>
+<p>Sai DNS có thể vẫn kết nối được IP; server dừng có thể DNS vẫn trả lời. ping không thay thế kiểm tra cổng và HTTP.</p>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Bước đầu khi chẩn đoán nên là gì?</li><li>ping thất bại có chắc host đã tắt không?</li><li>Công cụ nào phù hợp khảo sát phân giải tên?</li><li>DNS trả lời đúng nhưng web không mở, cần kiểm tra thêm gì?</li><li>Vì sao chỉ thay một yếu tố mỗi lần?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Xác định phạm vi và ghi nhận hiện tượng. Xác định phạm vi giúp thu hẹp nguyên nhân.</li><li>Không, ICMP có thể bị lọc. Một phép thử ICMP không đủ kết luận trạng thái mọi dịch vụ.</li><li>nslookup. nslookup hỏi dịch vụ DNS.</li><li>Kết nối cổng và phản hồi ứng dụng. DNS chỉ là một bước trong chuỗi truy cập dịch vụ.</li><li>Giúp xác định tác động của thay đổi. Thay đổi có kiểm soát giữ khả năng so sánh trước và sau.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://www.netacad.com/courses/networking-basics</li><li>https://developer.mozilla.org/en-US/docs/Web/HTTP</li></ul></body></html>

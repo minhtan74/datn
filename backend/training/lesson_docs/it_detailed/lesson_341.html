@@ -1,0 +1,72 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Kiểm thử phần mềm nhập môn</div>
+<p class="path">Chương 4: Thiết kế kiểm thử theo hành vi · Bài 1</p>
+<h1>Bảng quyết định và tổ hợp điều kiện</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Kiểm thử phần mềm nhập môn.</li><li>Chương 4: Thiết kế kiểm thử theo hành vi.</li><li>Các bài trong chương: Bảng quyết định và tổ hợp điều kiện; Kiểm thử chuyển trạng thái.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Chuyển quy tắc nghiệp vụ nhiều điều kiện thành các ca kiểm thử rõ ràng.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Bảng quyết định biểu diễn điều kiện và hành động theo từng quy tắc. Hữu ích khi kết quả phụ thuộc nhiều điều kiện kết hợp. Mỗi cột có thể mô tả một tổ hợp cùng hành vi mong đợi; cần phân biệt tổ hợp không thể xảy ra với tổ hợp chưa được kiểm tra.</p>
+<p>Ví dụ quyền học phụ thuộc tài khoản hợp lệ, trạng thái ghi danh và nội dung miễn phí. Đặt giả định rõ trước khi lập bảng. Không mặc định mọi ứng dụng có cùng thứ tự ưu tiên giữa các điều kiện; cần hỏi hoặc xác nhận yêu cầu nếu quy tắc xung đột.</p>
+<p>Khi số điều kiện tăng, số tổ hợp tăng nhanh. Có thể nhóm các quy tắc tương đương hoặc chọn kỹ thuật giảm tổ hợp theo rủi ro, nhưng phải ghi giới hạn. Pairwise không bảo đảm tìm mọi lỗi cần ba điều kiện tương tác. Dữ liệu test phải thực sự tạo được trạng thái đã mô tả.</p>
+<h2>1. Xác định điều kiện độc lập</h2>
+<p>Giả định bài miễn phí được xem không cần ghi danh; bài giới hạn cần ghi danh hợp lệ. Trong phạm vi tài khoản được phép dùng hệ thống, hai điều kiện Free và Enrolled cho bảng dưới. Nếu tài khoản bị khóa có quy tắc riêng, phải thêm hoặc làm rõ trước, không âm thầm áp bảng cho mọi vai trò.</p>
+<pre><code>Quy tắc       Free       Enrolled       Cho xem
+R1            Có         Có             Có
+R2            Có         Không          Có
+R3            Không      Có             Có
+R4            Không      Không          Không</code></pre>
+<p>Có thể gộp R1 và R2 khi Enrolled không ảnh hưởng kết quả trong trường hợp Free; việc rút gọn cần giữ ý nghĩa điều kiện và khả năng truy vết.</p>
+<h2>2. Từ quy tắc sang test</h2>
+<p>Mỗi test tạo đúng trạng thái, gọi thao tác và xác minh quyền thật. Nếu UI ẩn nút, vẫn phải kiểm tra API trong môi trường được phép. Dữ liệu không hợp lệ như khóa đã gỡ không chỉ là một giá trị Free=false thông thường; nó có thể thuộc quy tắc tồn tại tài nguyên riêng.</p>
+<h2>3. Giảm tổ hợp có trách nhiệm</h2>
+<p>Ba điều kiện nhị phân tạo tối đa tám tổ hợp, trước khi loại các trường hợp bất khả thi. Pairwise nhắm tương tác từng cặp, không chứng minh bao phủ lỗi cần ba điều kiện. Tài liệu cần nêu cách chọn và phần bỏ lại.</p>
+<h2>4. Bài tập có đáp án</h2>
+<p>Giảm giá khi mã hợp lệ và tổng tiền ít nhất 500: cả hai đúng mới giảm. Tại biên 499/500/501, bổ sung kiểm tra giá trị biên bên cạnh bảng quyết định. Đừng tự dùng 499,99 nếu hợp đồng đang quy định đơn vị nguyên; xác nhận đơn vị tiền và cách làm tròn trước.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>Lập bảng cho giảm giá chỉ khi có mã hợp lệ và tổng tiền đạt ngưỡng. Viết test cho bốn tổ hợp, thêm tình huống mã hết hạn theo yêu cầu cụ thể.</p>
+</div>
+<h2>Hướng giải bài tập bổ sung</h2>
+<p>Hai điều kiện nhị phân có bốn tổ hợp trước khi rút gọn. Với phép AND, chỉ tổ hợp cả hai đúng được giảm giá.</p>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Bảng quyết định phù hợp khi nào?</li><li>Hai điều kiện đúng/sai độc lập có bao nhiêu tổ hợp?</li><li>Với giảm giá khi A AND B, trường hợp nào được giảm?</li><li>Tổ hợp không thể xảy ra nên được xử lý thế nào?</li><li>Pairwise có bảo đảm tìm mọi lỗi ba điều kiện tương tác không?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Kết quả phụ thuộc tổ hợp nhiều điều kiện. Bảng nối các tổ hợp điều kiện với hành động.</li><li>4. Mỗi điều kiện có hai giá trị nên có 2 nhân 2 tổ hợp.</li><li>A và B đều đúng. AND yêu cầu cả hai điều kiện thỏa.</li><li>Ghi rõ lý do loại trừ theo yêu cầu. Cần minh bạch giả định và giới hạn của bảng.</li><li>Không. Bao phủ cặp không tương đương bao phủ mọi bộ ba.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf</li></ul></body></html>

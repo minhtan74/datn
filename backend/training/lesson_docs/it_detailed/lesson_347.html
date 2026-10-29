@@ -1,0 +1,70 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Mạng máy tính cơ bản</div>
+<p class="path">Chương 3: Ethernet và mạng cục bộ · Bài 1</p>
+<h1>Ethernet, địa chỉ MAC và ARP</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Mạng máy tính cơ bản.</li><li>Chương 3: Ethernet và mạng cục bộ.</li><li>Các bài trong chương: Ethernet, địa chỉ MAC và ARP; VLAN và kết nối Wi-Fi.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Theo dõi việc gửi một gói IPv4 trong LAN; phân biệt địa chỉ IP với MAC.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Ethernet truyền khung giữa các giao diện trong một mạng cục bộ. Khung có địa chỉ MAC nguồn và đích; gói IP nằm trong phần tải của khung. Switch học MAC nguồn và cổng nhận, sau đó dùng bảng MAC để quyết định cổng chuyển tiếp. Không nên nhầm bảng MAC với bảng định tuyến.</p>
+<p>ARP giúp tìm địa chỉ MAC tương ứng một IPv4 trên liên kết cục bộ. Host phát ARP request dạng broadcast, thiết bị sở hữu IPv4 trả lời. Kết quả có thể được lưu tạm trong ARP cache. IPv6 dùng Neighbor Discovery thay cho ARP.</p>
+<p>Nếu đích nằm ngoài mạng con, host tìm MAC của gateway, không ARP trực tiếp địa chỉ máy chủ xa. Khi qua router, khung lớp liên kết được tạo lại cho chặng tiếp theo; địa chỉ MAC không đi xuyên suốt Internet. Chỉ quan sát ARP trong mạng lab hoặc mạng bạn được phép quản lý.</p>
+<h2>1. Khung Ethernet và phạm vi địa chỉ</h2>
+<p>Khung mang MAC nguồn/đích và trường nhận diện giao thức tải. MAC thường là định danh 48 bit của giao diện trong mô hình Ethernet thông dụng, nhưng không được dùng như danh tính xác thực con người. Switch có thể flood broadcast hoặc unknown unicast trong miền VLAN thích hợp.</p>
+<h2>2. Dựng bảng chuyển tiếp bằng ví dụ</h2>
+<p>Ban đầu switch chưa có bảng. Khung từ A vào cổng 1 làm switch học MAC_A→1. Khi B gửi từ cổng 2, switch học MAC_B→2. Sau khi biết đích B ở cổng 2, unicast A→B có thể được chuyển riêng tới cổng đó. Bảng có thời gian lão hóa và thay đổi theo hoạt động thực tế.</p>
+<h2>3. Truy vết ARP cùng mạng và khác mạng</h2>
+<p>Với A=192.168.1.10/24, B=.20 và gateway=.1, gửi tới B cần MAC_B; gửi tới máy chủ ở mạng khác cần MAC_gateway. Máy gửi dùng mask và bảng route để quyết định next hop trước khi cần MAC. ARP cache chưa có không có nghĩa DNS không hoạt động: đây là hai bảng và hai vai trò khác nhau.</p>
+<pre><code>Đích IP         Next hop IP       MAC cần tra
+192.168.1.20    192.168.1.20       MAC của B
+203.0.113.10    192.168.1.1        MAC gateway</code></pre>
+<h2>4. Bài tập kiểm tra hiểu biết</h2>
+<p>Xóa ARP cache có làm thay đổi IP của máy không? Không: đó là xóa ánh xạ tạm, máy có thể phân giải lại. Thay gateway có thể làm thay đổi next hop nên khung đầu tiên dùng MAC khác.</p>
+<p>Trong sơ đồ hai LAN qua router, hãy ghi MAC nguồn/đích từng chặng và IP nguồn/đích. Nếu có NAT, phân tích thêm nơi IP có thể được chuyển đổi; không áp dụng nhận xét giữ IP khi thiết kế đã có NAT. Chỉ quan sát lưu lượng lab được cho phép.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>Vẽ khung và gói khi A gửi tới B, rồi tới máy chủ ngoài LAN. Ghi MAC đích của khung trong từng trường hợp. Quan sát bảng ARP bằng arp -a trong máy lab.</p>
+</div>
+<h2>Hướng giải bài tập bổ sung</h2>
+<p>Cùng mạng: MAC của B. Ngoài mạng: MAC gateway. Không kết luận rằng địa chỉ IP và MAC là hai cách viết của cùng một định danh.</p>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>ARP dùng trong tình huống nào?</li><li>Host gửi gói tới mạng khác thường dùng MAC đích nào trong khung đầu tiên?</li><li>Switch lớp 2 học bảng MAC từ đâu?</li><li>IPv6 sử dụng cơ chế nào thay ARP?</li><li>Khi gói qua router, điều gì thường xảy ra với khung lớp liên kết?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Tìm MAC ứng với IPv4 trên liên kết cục bộ. ARP ánh xạ IPv4 sang MAC trong LAN.</li><li>MAC của gateway. Gateway là chặng tiếp theo trên liên kết cục bộ.</li><li>MAC nguồn và cổng nhận khung. Switch học địa chỉ nguồn tại cổng nhận.</li><li>Neighbor Discovery. IPv6 dùng Neighbor Discovery dựa trên ICMPv6.</li><li>Được tạo lại cho liên kết tiếp theo. Router chuyển tiếp gói trong một khung phù hợp liên kết mới.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://www.netacad.com/courses/networking-basics</li><li>https://developer.mozilla.org/en-US/docs/Web/HTTP</li></ul></body></html>

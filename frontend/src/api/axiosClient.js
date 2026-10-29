@@ -72,6 +72,15 @@ axiosClient.interceptors.response.use(
       // Lỗi khác (400, 403, 404, 409...): trả về để trang tự hiển thị thông báo
       return { ok: false, status, data };
     }
+    if (error.code === 'ERR_CANCELED') {
+      return { ok: false, status: 0, cancelled: true, data: { success: false, message: 'Đã dừng chờ phản hồi.' } };
+    }
+    if (error.code === 'ECONNABORTED' || error.code === 'ETIMEDOUT') {
+      return {
+        ok: false, status: 0, timedOut: true,
+        data: { success: false, message: 'AI phản hồi quá lâu. Hãy giảm số câu hỏi mỗi lần sinh rồi thử lại.' },
+      };
+    }
     // Không nhận được phản hồi (server tắt / mất mạng)
     return {
       ok: false,

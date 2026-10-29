@@ -1,6 +1,9 @@
 import axiosClient from '../api/axiosClient';
 
 export const quizService = {
+  getKnowledgeOutline(courseId) {
+    return axiosClient.get(`/api/quizzes/knowledge-outline?course_id=${courseId}`);
+  },
   // Danh sách quiz (theo khóa, hoặc theo vai trò nếu không truyền khóa)
   getQuizzes(courseId) {
     return courseId ? axiosClient.get(`/api/quizzes?course_id=${courseId}`) : axiosClient.get('/api/quizzes');

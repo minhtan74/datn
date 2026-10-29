@@ -124,12 +124,67 @@ export default function AiQuizGenerator({ embedded = false, onSaved }) {
 
   // Trạng thái xử lý và bản nháp câu hỏi AI trả về (meta: thông tin model, số câu yêu cầu/nhận được...)
   const [generating, setGenerating] = useState(false);
+  const [elapsed, setElapsed] = useState(0);
+  const [generationError, setGenerationError] = useState('');
+  const generationRequest = useRef(null);
   const [saving, setSaving] = useState(false);
   const [meta, setMeta] = useState(null);
   const [questions, setQuestions] = useState([]); // [{question, options:{A..D}, correct_answer, explanation, difficulty, topic}]
   // Đích lưu của bản nháp, chốt lúc bấm Sinh: đổi khóa / phạm vi sau đó không làm câu hỏi bị lưu nhầm chỗ
   // { courseId, chapterId, lessonId, label } — label có giá trị = thêm vào bộ ôn tập, null = tạo quiz mới
   const [draftTarget, setDraftTarget] = useState(null);
+
+  useEffect(() => {
+    if (!generating) return;
+    const started = Date.now();
+    const timer = setInterval(() => setElapsed(Math.floor((Date.now() - started) / 1000)), 1000);
+    return () => clearInterval(timer);
+  }, [generating]);
+
+  useEffect(() => () => generationRequest.current?.abort(), []);
+
+  function reportGenerationError(message) {
+    setGenerationError(message);
+    showToast(message, 'error');
+  }
+
+  async function runGeneration(work) {
+    if (generationRequest.current) return;
+    const controller = new AbortController();
+    generationRequest.current = controller;
+    setElapsed(0);
+    setGenerationError('');
+    setGenerating(true);
+    try {
+      await work(controller.signal);
+      if (controller.signal.aborted) setGenerationError('Đã dừng chờ. Bản nháp đã nhận được giữ lại; hãy kiểm tra đáp án trước khi duyệt.');
+    } catch {
+      if (!controller.signal.aborted) reportGenerationError('Có lỗi khi sinh câu hỏi. Vui lòng thử lại.');
+    } finally {
+      generationRequest.current = null;
+      setProgress(null);
+      setGenerating(false);
+    }
+  }
+
+  function showGenerationProgress(part, previous = []) {
+    const base = [...previous];
+    const preview = [];
+    const seen = new Set(base.map((q) => normText(q.question)));
+    const listener = (event) => {
+      if (event.type === 'status') setProgress(event.message);
+      if (event.type !== 'batch') return;
+      for (const q of event.questions || []) {
+        if (seen.has(normText(q.question))) continue;
+        seen.add(normText(q.question));
+        preview.push({ ...q, plan_key: part.key,
+          ...(part.name ? { chapter_name: part.name, topic: q.topic || part.name } : {}) });
+      }
+      setQuestions([...base, ...preview]);
+    };
+    listener.questions = preview;
+    return listener;
+  }
 
   // Khi mở trang: tải các khóa học của giảng viên đang đăng nhập (admin thấy tất cả)
   useEffect(() => {
@@ -273,110 +328,121 @@ export default function AiQuizGenerator({ embedded = false, onSaved }) {
 
   // Đề cuối khóa: gọi AI lần lượt từng chương (tránh 1 request quá lâu), gom câu hỏi và báo cáo từng chương
   async function generateMulti() {
-    setDraftTarget({ ...currentTarget, label: null });
-    setGenerating(true);
-    setQuestions([]);
-    setMeta(null);
-    const parts = examRows.map((r) => ({
-      key: `ch:${r.ch.id}`, chapterId: r.ch.id, lessonId: null, name: r.ch.chapter_name, requested: r.rowMix, error: null,
-    }));
-    setPlan(parts);
-    const all = [];
-    const seen = new Set();
-    for (const [i, r] of examRows.entries()) {
-      setProgress(`Đang sinh chương ${i + 1}/${examRows.length}: ${r.ch.chapter_name}…`);
-      const res = await aiService.generateQuiz({ courseId, chapterId: r.ch.id, difficultyMix: r.rowMix });
-      const data = res?.ok ? res.data?.data : null;
-      (data?.questions || []).forEach((q) => {
-        if (seen.has(normText(q.question))) return;
-        seen.add(normText(q.question));
-        // Gắn tên chương + phần kế hoạch để hiển thị và tính phần thiếu; chủ đề trống thì lấy tên chương
-        all.push({ ...q, chapter_name: r.ch.chapter_name, plan_key: parts[i].key, topic: q.topic || r.ch.chapter_name });
-      });
-      parts[i].error = data ? null : res?.data?.message || 'Lỗi';
-      setQuestions([...all]);
-      setPlan([...parts]);
-    }
-    setProgress(null);
-    setGenerating(false);
-    if (!all.length) {
-      showToast('Không sinh được câu hỏi nào.', 'error');
-      return;
-    }
-    if (!title) {
-      const c = courses.find((x) => String(x.id) === String(courseId));
-      setTitle(`Kiểm tra cuối khóa - ${c?.title || 'Khóa học'}`);
-      // Gợi ý cho đề cuối khóa: ~1.5 phút / câu, đạt 50%, làm 1 lần (giảng viên sửa được trước khi duyệt)
-      setQuizSettings({ duration: Math.max(15, Math.ceil(all.length * 1.5)), passing_score: 50, max_attempts: 1 });
-    }
+    return runGeneration(async (signal) => {
+      setDraftTarget({ ...currentTarget, label: null });
+      setQuestions([]);
+      setMeta(null);
+      const parts = examRows.map((r) => ({
+        key: `ch:${r.ch.id}`, chapterId: r.ch.id, lessonId: null, name: r.ch.chapter_name, requested: r.rowMix, error: null,
+      }));
+      setPlan(parts);
+      const all = [];
+      const seen = new Set();
+      for (const [i, r] of examRows.entries()) {
+        setProgress(`Đang sinh chương ${i + 1}/${examRows.length}: ${r.ch.chapter_name}…`);
+        const progressListener = showGenerationProgress(parts[i], all);
+        const res = await aiService.generateQuiz({ courseId, chapterId: r.ch.id, difficultyMix: r.rowMix, signal,
+          onProgress: progressListener });
+        if (signal.aborted) return;
+        const data = res?.ok ? res.data?.data : null;
+        (data?.questions || progressListener.questions).forEach((q) => {
+          if (seen.has(normText(q.question))) return;
+          seen.add(normText(q.question));
+          // Gắn tên chương + phần kế hoạch để hiển thị và tính phần thiếu; chủ đề trống thì lấy tên chương
+          all.push({ ...q, chapter_name: r.ch.chapter_name, plan_key: parts[i].key, topic: q.topic || r.ch.chapter_name });
+        });
+        parts[i].error = data ? null : res?.data?.message || 'Lỗi';
+        setQuestions([...all]);
+        setPlan([...parts]);
+      }
+      if (!all.length) {
+        reportGenerationError(parts.find((p) => p.error)?.error || 'Không sinh được câu hỏi nào.');
+        return;
+      }
+      if (!title) {
+        const c = courses.find((x) => String(x.id) === String(courseId));
+        setTitle(`Kiểm tra cuối khóa - ${c?.title || 'Khóa học'}`);
+        // Gợi ý cho đề cuối khóa: ~1.5 phút / câu, đạt 50%, làm 1 lần (giảng viên sửa được trước khi duyệt)
+        setQuizSettings({ duration: Math.max(15, Math.ceil(all.length * 1.5)), passing_score: 50, max_attempts: 1 });
+      }
+    });
   }
 
   // Gọi AI sinh bản nháp; lần đầu thì tự đặt tiêu đề quiz theo tên khóa học
   async function generate() {
     if (!courseId) return;
     if (isMulti) {
-      generateMulti();
-      return;
+      return generateMulti();
     }
-    setDraftTarget(currentTarget);
-    setGenerating(true);
-    setQuestions([]);
-    setMeta(null);
-    const part = {
-      key: 'single', chapterId: currentTarget.chapterId, lessonId: currentTarget.lessonId, name: null, requested: mix, error: null,
-    };
-    setPlan([part]);
-    const res = await aiService.generateQuiz({
-      courseId,
-      chapterId: chapter ? chapter.id : null,
-      lessonId: lesson ? lesson.id : null,
-      difficultyMix: mix,
-    });
-    setGenerating(false);
-    if (res?.ok && res.data?.data) {
-      setQuestions((res.data.data.questions || []).map((q) => ({ ...q, plan_key: 'single' })));
-      setMeta(res.data.data.meta || null);
-      if (!title) {
-        const c = courses.find((x) => String(x.id) === String(courseId));
-        setTitle(`Quiz AI - ${c?.title || 'Khóa học'}`);
+    return runGeneration(async (signal) => {
+      setDraftTarget(currentTarget);
+      setProgress(`Đang sinh và kiểm tra câu hỏi${reviewTarget ? ` cho ${reviewTarget}` : ''}…`);
+      setQuestions([]);
+      setMeta(null);
+      const part = {
+        key: 'single', chapterId: currentTarget.chapterId, lessonId: currentTarget.lessonId, name: null, requested: mix, error: null,
+      };
+      setPlan([part]);
+      const res = await aiService.generateQuiz({
+        courseId,
+        chapterId: chapter ? chapter.id : null,
+        lessonId: lesson ? lesson.id : null,
+        difficultyMix: mix,
+        signal,
+        onProgress: showGenerationProgress(part),
+      });
+      if (signal.aborted) return;
+      if (res?.ok && res.data?.data) {
+        setQuestions((res.data.data.questions || []).map((q) => ({ ...q, plan_key: 'single' })));
+        setMeta(res.data.data.meta || null);
+        if (!title) {
+          const c = courses.find((x) => String(x.id) === String(courseId));
+          setTitle(`Quiz AI - ${c?.title || 'Khóa học'}`);
+        }
+      } else {
+        const message = res?.data?.message || 'Không sinh được câu hỏi.';
+        setPlan([{ ...part, error: message }]);
+        reportGenerationError(message);
       }
-    } else {
-      showToast(res?.data?.message || 'Không sinh được câu hỏi.', 'error');
-    }
+    });
   }
 
   // Sinh bù: gọi AI lại chỉ cho số câu còn thiếu của từng phần, thêm vào cuối bản nháp (loại câu trùng)
   async function fillMissing() {
     const todo = planStatus.filter((p) => sumMix(p.missing) > 0);
     if (!todo.length || !draftTarget) return;
-    setGenerating(true);
-    const all = [...questions];
-    const seen = new Set(all.map((q) => normText(q.question)));
-    const parts = plan.map((p) => ({ ...p }));
-    let added = 0;
-    for (const [i, p] of todo.entries()) {
-      setProgress(`Đang sinh bù ${i + 1}/${todo.length}${p.name ? `: ${p.name}` : ''} (${sumMix(p.missing)} câu)…`);
-      const res = await aiService.generateQuiz({
-        courseId: draftTarget.courseId,
-        chapterId: p.chapterId,
-        lessonId: p.lessonId,
-        difficultyMix: p.missing,
-      });
-      const data = res?.ok ? res.data?.data : null;
-      (data?.questions || []).forEach((q) => {
-        if (seen.has(normText(q.question))) return;
-        seen.add(normText(q.question));
-        added += 1;
-        all.push({ ...q, plan_key: p.key, ...(p.name ? { chapter_name: p.name, topic: q.topic || p.name } : {}) });
-      });
-      const idx = parts.findIndex((x) => x.key === p.key);
-      parts[idx].error = data ? null : res?.data?.message || 'Lỗi';
-      setQuestions([...all]);
-      setPlan([...parts]);
-    }
-    setProgress(null);
-    setGenerating(false);
-    showToast(added ? `Đã sinh bù ${added} câu.` : 'AI chưa sinh bù được câu nào, hãy thử lại.', added ? 'success' : 'error');
+    return runGeneration(async (signal) => {
+      const all = [...questions];
+      const seen = new Set(all.map((q) => normText(q.question)));
+      const parts = plan.map((p) => ({ ...p }));
+      let added = 0;
+      for (const [i, p] of todo.entries()) {
+        setProgress(`Đang sinh bù ${i + 1}/${todo.length}${p.name ? `: ${p.name}` : ''} (${sumMix(p.missing)} câu)…`);
+        const progressListener = showGenerationProgress(p, all);
+        const res = await aiService.generateQuiz({
+          courseId: draftTarget.courseId,
+          chapterId: p.chapterId,
+          lessonId: p.lessonId,
+          difficultyMix: p.missing,
+          signal,
+          onProgress: progressListener,
+        });
+        if (signal.aborted) return;
+        const data = res?.ok ? res.data?.data : null;
+        (data?.questions || progressListener.questions).forEach((q) => {
+          if (seen.has(normText(q.question))) return;
+          seen.add(normText(q.question));
+          added += 1;
+          all.push({ ...q, plan_key: p.key, ...(p.name ? { chapter_name: p.name, topic: q.topic || p.name } : {}) });
+        });
+        const idx = parts.findIndex((x) => x.key === p.key);
+        parts[idx].error = data ? null : res?.data?.message || 'Lỗi';
+        setQuestions([...all]);
+        setPlan([...parts]);
+      }
+      if (added) showToast(`Đã sinh bù ${added} câu.`, 'success');
+      else reportGenerationError(parts.find((p) => p.error)?.error || 'AI chưa sinh bù được câu nào, hãy thử lại.');
+    });
   }
 
   // Giảng viên sửa 1 trường của câu hỏi thứ i trong bản nháp
@@ -652,7 +718,8 @@ export default function AiQuizGenerator({ embedded = false, onSaved }) {
         )}
 
         {/* Nút sinh đặt cuối phần cấu hình: chọn xong khóa, phạm vi, số câu, độ khó (và chương) rồi mới bấm */}
-        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '.75rem', marginTop: '1rem' }}>
+          {generating && <button type="button" className="btn btn-outline" onClick={() => generationRequest.current?.abort()}>Dừng chờ</button>}
           <button
             className="btn btn-primary"
             onClick={generate}
@@ -664,7 +731,13 @@ export default function AiQuizGenerator({ embedded = false, onSaved }) {
         </div>
 
         {/* Tiến độ sinh + kết quả từng chương (yêu cầu -> nhận được) */}
-        {progress && <p style={{ fontSize: '.8rem', marginTop: '.75rem' }}>⏳ {progress}</p>}
+        {generating && (
+          <p role="status" style={{ fontSize: '.8rem', marginTop: '.75rem' }}>
+            ⏳ {progress || 'Đang sinh và kiểm tra câu hỏi…'} Đã chờ {elapsed} giây.
+            {elapsed >= 30 && ' Sinh nhiều câu và kiểm tra đáp án có thể cần thêm thời gian.'}
+          </p>
+        )}
+        {generationError && <p role="alert" style={{ color: 'var(--danger,#DC2626)', marginTop: '.75rem' }}>{generationError}</p>}
         {planStatus.length > 0 && (planStatus.length > 1 || missingTotal > 0 || planStatus.some((p) => p.error)) && (
           <ul style={{ fontSize: '.78rem', marginTop: '.5rem', paddingLeft: '1.1rem', color: 'var(--text-muted,#64748b)' }}>
             {planStatus.map((p) => (
@@ -695,6 +768,11 @@ export default function AiQuizGenerator({ embedded = false, onSaved }) {
               ? `ngữ liệu: toàn bộ tài liệu (${Number(meta.context_chars || 0).toLocaleString('vi-VN')} ký tự)`
               : `${meta.context_chunks} đoạn ngữ cảnh`}
           </p>
+        )}
+        {meta?.warnings?.length > 0 && (
+          <div role="alert" style={{ color: 'var(--warning,#B45309)', fontSize: '.85rem', marginTop: '.5rem' }}>
+            {meta.warnings.map((warning) => <p key={warning}>{warning}</p>)}
+          </div>
         )}
         {/* Độ phủ mục tiêu bài học: số câu hiện có trong bản nháp cho từng mục tiêu (mục tiêu chưa có câu tô đỏ) */}
         {meta?.objectives?.length > 0 && (
@@ -762,7 +840,7 @@ export default function AiQuizGenerator({ embedded = false, onSaved }) {
                 </div>
               </>
             )}
-            <button className="btn btn-primary" onClick={approve} disabled={saving}>
+            <button className="btn btn-primary" onClick={approve} disabled={saving || generating}>
               {saving
                 ? 'Đang lưu…'
                 : draftTarget?.label
@@ -805,6 +883,10 @@ export default function AiQuizGenerator({ embedded = false, onSaved }) {
               key={i}
               q={q}
               index={i}
+              disabled={generating}
+              courseId={draftTarget?.courseId || courseId}
+              lockedChapterId={draftTarget?.chapterId}
+              lockedLessonId={draftTarget?.lessonId}
               meta={[q.chapter_name, q.topic !== q.chapter_name ? q.topic : null].filter(Boolean).join(' · ')}
               onPatch={(field, value) => patch(i, field, value)}
               onPatchOption={(L, value) => patchOption(i, L, value)}

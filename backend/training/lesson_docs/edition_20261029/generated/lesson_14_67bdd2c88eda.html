@@ -1,0 +1,30 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+</style></head><body><div class="tag">JavaScript Từ Zero Đến Hero · Chương 2: DOM &amp; Xử Lý Sự Kiện · Bài 2</div><h1>Xử lý sự kiện click, submit — Thực hành và hỏi đáp</h1><p class="sub">Phần bổ sung cho bài học · biên soạn 29/10/2026</p><h2>Tình huống, ví dụ và tự kiểm tra</h2>
+<p><strong>Tình huống:</strong> bấm nút trong form làm tải lại trang. Nút mặc định trong form có thể submit; với hành động riêng dùng <code>type="button"</code>, với gửi form xử lý sự kiện submit và preventDefault khi ứng dụng tự gửi request.</p>
+<pre><code>const form = document.querySelector("form");
+form.addEventListener("submit", (event) =&gt; {
+  event.preventDefault();
+  const name = new FormData(form).get("name");
+  console.log(String(name ?? "").trim());
+});</code></pre>
+<p><strong>Tự luyện:</strong> nhấn Enter trong input và nhấn nút gửi, mỗi hành động chỉ được xử lý một lần. <strong>Hướng giải:</strong> nghe submit trên form thay vì chỉ click trên nút; tránh gắn lại handler mỗi lần render. Khi gửi bất đồng bộ, khóa nút trong lúc chờ và mở lại ở finally; backend vẫn phải kiểm soát thao tác trùng.</p>
+<h2>Nguồn học tiếp</h2>
+<p>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide</p></body></html>

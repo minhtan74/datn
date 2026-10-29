@@ -1,0 +1,18 @@
+.topic-course { min-width: 0; border: 1px solid var(--s-border); border-radius: 8px; padding: .8rem; container: topics / inline-size; }
+.topic-course-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem; margin: 0 0 .5rem; font-size: .9rem; }
+.topic-course-title small { font-size: .75rem; font-weight: 400; color: var(--s-text-muted); }
+.topic-score { padding: .7rem 0; }
+.topic-score + .topic-score { border-top: 1px solid var(--s-border); }
+.topic-score-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto 48px; align-items: center; gap: .45rem .75rem; margin-bottom: .4rem; }
+.topic-score-name { font-size: .85rem; overflow-wrap: anywhere; }
+.topic-score-count { font-size: .75rem; color: var(--s-text-muted); }
+.topic-score-status { padding: .15rem .4rem; border-radius: 5px; font-size: .72rem; font-weight: 600; }
+.topic-score-percent { text-align: right; font-size: .85rem; font-variant-numeric: tabular-nums; }
+@container topics (max-width: 550px) {
+  .topic-score-row { grid-template-columns: minmax(0, 1fr) auto auto; }
+  .topic-score-name { grid-column: 1 / -1; }
+}
+@container topics (max-width: 300px) {
+  .topic-score-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .topic-score-status { grid-row: 3; justify-self: start; }
+}

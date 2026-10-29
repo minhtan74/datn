@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "partial_before_complete": true,
+    "approve_disabled_during_generation": true,
+    "editing_disabled_during_generation": true,
+    "final_verification_applied": true,
+    "editing_enabled_after_complete": true,
+    "partial_kept_on_error": true,
+    "partial_kept_on_disconnect": true,
+    "cancel_keeps_partial": true
+  },
+  "js_errors": []
+}

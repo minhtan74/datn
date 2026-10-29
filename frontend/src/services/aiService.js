@@ -1,4 +1,36 @@
-import axiosClient from '../api/axiosClient';
+import axiosClient, { apiUrl, getToken, clearAuthStorage } from '../api/axiosClient';
+import { readQuizStream } from './quizStream';
+
+async function streamQuiz(payload, signal, onProgress) {
+  const controller = new AbortController();
+  const abort = () => controller.abort();
+  signal?.addEventListener('abort', abort, { once: true });
+  if (signal?.aborted) controller.abort();
+  let timedOut = false;
+  const timer = setTimeout(() => { timedOut = true; controller.abort(); }, 180000);
+  try {
+    const token = getToken();
+    const response = await fetch(apiUrl('/api/ai/generate-quiz/stream'), {
+      method: 'POST', signal: controller.signal,
+      headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) {
+      if (response.status === 401) { clearAuthStorage(); window.location.href = '/login'; }
+      const data = await response.json().catch(() => ({ success: false, message: 'Không sinh được câu hỏi.' }));
+      return { ok: false, status: response.status, data };
+    }
+    return await readQuizStream(response, onProgress);
+  } catch {
+    const message = timedOut ? 'AI phản hồi quá lâu. Hãy giảm số câu hỏi mỗi lần sinh rồi thử lại.'
+      : signal?.aborted ? 'Đã dừng chờ phản hồi.'
+        : 'Kết nối AI bị gián đoạn. Các câu đã nhận được vẫn giữ trong bản nháp.';
+    return { ok: false, status: 0, timedOut, cancelled: Boolean(signal?.aborted), data: { success: false, message } };
+  } finally {
+    clearTimeout(timer);
+    signal?.removeEventListener('abort', abort);
+  }
+}
 
 /** PHASE 6 — RAG AI Tutor. */
 export const aiService = {
@@ -58,15 +90,17 @@ export const aiService = {
   // Sinh bản nháp câu hỏi trắc nghiệm bằng AI
   // chapterId: sinh câu hỏi ôn tập bao quát cả chương
   // difficultyMix: { easy, medium, hard } = số câu mỗi mức độ khó (thay cho numberOfQuestions + difficulty)
-  generateQuiz({ courseId, lessonId = null, chapterId = null, numberOfQuestions = 5, difficulty = 'medium', difficultyMix = null }) {
-    return axiosClient.post('/api/ai/generate-quiz', {
+  generateQuiz({ courseId, lessonId = null, chapterId = null, numberOfQuestions = 5, difficulty = 'medium', difficultyMix = null, signal, onProgress }) {
+    const payload = {
       difficulty_mix: difficultyMix,
       course_id: courseId,
       lesson_id: lessonId,
       chapter_id: chapterId,
       number_of_questions: numberOfQuestions,
       difficulty,
-    });
+    };
+    if (onProgress) return streamQuiz(payload, signal, onProgress);
+    return axiosClient.post('/api/ai/generate-quiz', payload, { timeout: 180000, signal });
   },
   // Lưu các câu hỏi đã duyệt thành quiz (có chapterId / reviewLessonId -> thêm vào bộ ôn tập của chương / bài)
   // duration / passing_score / max_attempts: cài đặt làm bài khi tạo quiz mới (null = không giới hạn)

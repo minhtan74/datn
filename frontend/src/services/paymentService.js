@@ -9,10 +9,6 @@ export const paymentService = {
   checkPayment(courseId) {
     return axiosClient.get(`/api/payments/check?course_id=${courseId}`);
   },
-  // Thanh toán và ghi danh (khóa miễn phí thì chỉ ghi danh)
-  pay(courseId, method, cardData = {}) {
-    return axiosClient.post('/api/payments', { course_id: courseId, method, ...cardData });
-  },
   // Tạo đơn hàng VNPay -> trả về payment_url để chuyển sang trang thanh toán VNPay
   createVnpay(courseId) {
     return axiosClient.post('/api/payments/vnpay/create', { course_id: courseId });

@@ -1,0 +1,81 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Cấu trúc dữ liệu và giải thuật cơ bản</div>
+<p class="path">Chương 5: Ưu tiên và đồ thị · Bài 2</p>
+<h1>Đồ thị, BFS và DFS</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Cấu trúc dữ liệu và giải thuật cơ bản.</li><li>Chương 5: Ưu tiên và đồ thị.</li><li>Các bài trong chương: Heap và hàng đợi ưu tiên; Đồ thị, BFS và DFS.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Biểu diễn đồ thị và chọn chiến lược duyệt đúng mục tiêu.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Đồ thị gồm đỉnh và cạnh, có thể có hướng hoặc vô hướng. Danh sách kề lưu các láng giềng của mỗi đỉnh; ma trận kề dùng ô biểu diễn quan hệ từng cặp đỉnh. Với đồ thị thưa, danh sách kề thường tiết kiệm bộ nhớ hơn ma trận O(V²).</p>
+<p>BFS dùng queue để duyệt theo lớp. Trong đồ thị không trọng số, BFS tìm số cạnh ít nhất từ đỉnh xuất phát tới các đỉnh đến được. DFS đi sâu theo nhánh, có thể dùng đệ quy hoặc stack. Cả hai cần quản lý đã thăm để tránh lặp với chu trình.</p>
+<p>Với danh sách kề và cách triển khai chuẩn, duyệt toàn phần liên quan có chi phí O(V+E). Một lần duyệt từ s không bảo đảm thăm hết đồ thị không liên thông. Để duyệt toàn bộ, có thể bắt đầu lại ở đỉnh chưa thăm. BFS thông thường không tự giải đường đi ngắn nhất theo trọng số tùy ý.</p>
+<h2>1. Đọc đồ thị từ dữ liệu</h2>
+<p>Đồ thị có hướng cần ghi cạnh theo chiều; vô hướng thường thêm quan hệ hai chiều vào danh sách kề. Số đỉnh V và cạnh E cần nhất quán với cách lưu. Khi có self-loop hoặc cạnh trùng, quy định có giữ hay loại thay vì đếm tùy ý.</p>
+<h2>2. BFS trả khoảng cách ít cạnh nhất</h2>
+<pre><code>from collections import deque
+
+def bfs_distances(graph, start):
+    distance = {start: 0}
+    queue = deque([start])
+    while queue:
+        node = queue.popleft()
+        for nxt in graph.get(node, []):
+            if nxt not in distance:
+                distance[nxt] = distance[node] + 1
+                queue.append(nxt)
+    return distance
+
+g = {'A': ['B', 'C'], 'B': ['D'], 'C': ['D'], 'D': []}
+assert bfs_distances(g, 'A')['D'] == 2</code></pre>
+<p>Đánh dấu khi phát hiện giúp một đỉnh không bị thêm lặp nhiều lần. Hàm chỉ trả các đỉnh đến được từ start.</p>
+<h2>3. DFS và lựa chọn chiến lược</h2>
+<p>DFS có thể ghi thời điểm vào/ra để hỗ trợ nhiều bài toán, nhưng một lần DFS không tự cho đường ít cạnh nhất. Đệ quy có thể vượt độ sâu khi đồ thị lớn; stack tường minh là một lựa chọn. Nếu cần đường theo trọng số, phải dùng thuật toán phù hợp điều kiện trọng số, không áp BFS thường cho mọi trường hợp.</p>
+<h2>4. Bài tập và đáp án</h2>
+<p>Thêm E cô lập: BFS từ A không có E trong kết quả. Thêm D→A tạo chu trình: hàm vẫn kết thúc vì đã có distance. Đổi thứ tự kề có thể đổi thứ tự khám phá nhưng không đổi khoảng cách ít cạnh nhất. Nộp bảng queue qua từng bước và đường đi lấy qua mảng cha được bổ sung.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>Viết danh sách kề, vẽ vết queue BFS và stack DFS. Thêm đỉnh E cô lập rồi kiểm tra một lần BFS từ A có thăm E không.</p>
+</div>
+<h2>Hướng giải bài tập bổ sung</h2>
+<p>Không thăm E nếu không có đường nối. Đánh dấu phát hiện phù hợp để tránh đưa cùng đỉnh vào queue lặp lại nhiều lần.</p>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>BFS thường dùng cấu trúc nào?</li><li>DFS có thể triển khai bằng gì?</li><li>BFS tìm đường ít cạnh nhất trong loại đồ thị nào?</li><li>Vì sao cần tập đã thăm?</li><li>Duyệt bằng danh sách kề thường có chi phí nào?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Queue. Queue tạo thứ tự theo lớp.</li><li>Stack hoặc đệ quy. Ngăn xếp hỗ trợ quay lại sau nhánh sâu.</li><li>Đồ thị không trọng số. Mỗi lớp BFS tương ứng thêm một cạnh.</li><li>Tránh lặp lại do chu trình. Quản lý đã thăm giúp duyệt hữu hạn và hiệu quả.</li><li>O(V+E). Xét đỉnh và cạnh một số lần hữu hạn.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://opendatastructures.org/</li><li>https://docs.python.org/3/tutorial/datastructures.html</li><li>https://docs.python.org/3/library/heapq.html</li></ul></body></html>

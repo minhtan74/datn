@@ -529,7 +529,7 @@ export default function Lesson() {
                       lineHeight: 1.4,
                     }}
                   >
-                    {chapIdx + 1}. {chap.chapter_name}
+                    {/^chương\s+\d+\s*:/i.test(chap.chapter_name || '') ? chap.chapter_name : `${chapIdx + 1}. ${chap.chapter_name}`}
                   </span>
                   <span
                     className="s-badge"

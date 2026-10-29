@@ -16,3 +16,8 @@ Thumbs.db
 # Env
 .env
 .env.local
+
+# Python / Java generated files
+__pycache__/
+*.pyc
+*.class

@@ -1,0 +1,20 @@
+{
+  "checks": {
+    "migration": true,
+    "outline_permissions": true,
+    "batch_scope_validation": true,
+    "manual_scope_and_permissions": true,
+    "final_submission_breakdown": true,
+    "immutable_snapshot_and_reload": true,
+    "knowledge_checkpoint_waits": true,
+    "new_practice_updates_recommendation_and_progress": true,
+    "official_final_kept": true
+  },
+  "database": "studyonline_knowledge_audit_1792674082",
+  "sample": {
+    "result_id": 303,
+    "lesson": "B\u00e0i 1: Kh\u00e1i ni\u1ec7m v\u1ec1 h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+    "before": 16.7,
+    "after": 100.0
+  }
+}

@@ -1,0 +1,9 @@
+Prepared isolated database. Testing configured Gemini model: 
+09:24:51 [RAG] course_id=2 lesson_id=None lesson_only=False query='Promise trong JavaScript c� nh\u1eefng tr\u1ea1ng th�i n�o?'
+F:\studyonline-main\studyonline-main\backend\app\ai\rag\embeddings.py:42: UserWarning: The model sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 now uses mean pooling instead of CLS embedding. In order to preserve the previous behaviour, consider either pinning fastembed version to 0.5.1 or using `add_custom_model` functionality.
+  _model = TextEmbedding(_resolve_model_name())
+09:24:54 [RAG] retrieved_chunks=5 best_similarity=0.7132 best_lexical=0.7791 threshold=0.30
+09:24:58 [RAG] LLM response generated (provider=gemini, sources=2)
+tutor HTTP 200 success True seconds 7.24
+quiz HTTP 200 success True seconds 10.91
+Cleanup complete.

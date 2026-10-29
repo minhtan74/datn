@@ -1,0 +1,143 @@
+{
+  "started_at": "2026-10-29T19:40:08.298946",
+  "accounts": {
+    "admin": "admin@gmail.com",
+    "teacher_an": "an.nguyen@studyonline.vn",
+    "teacher_binh": "binh.tran@studyonline.vn",
+    "student_em": "em.hoang@gmail.com",
+    "student_phuong": "phuong.vu@gmail.com"
+  },
+  "max_parallel_accounts": 2,
+  "conversations": [
+    [
+      "admin",
+      240
+    ],
+    [
+      "teacher_an",
+      241
+    ],
+    [
+      "teacher_an",
+      243
+    ],
+    [
+      "admin",
+      242
+    ],
+    [
+      "teacher_an",
+      244
+    ],
+    [
+      "admin",
+      245
+    ],
+    [
+      "teacher_an",
+      246
+    ],
+    [
+      "teacher_binh",
+      247
+    ],
+    [
+      "student_em",
+      248
+    ],
+    [
+      "teacher_binh",
+      249
+    ],
+    [
+      "teacher_binh",
+      250
+    ],
+    [
+      "teacher_binh",
+      251
+    ],
+    [
+      "teacher_binh",
+      253
+    ],
+    [
+      "student_em",
+      252
+    ],
+    [
+      "student_phuong",
+      254
+    ],
+    [
+      "student_phuong",
+      256
+    ],
+    [
+      "student_em",
+      255
+    ],
+    [
+      "student_em",
+      257
+    ],
+    [
+      "student_em",
+      258
+    ],
+    [
+      "student_phuong",
+      259
+    ],
+    [
+      "student_phuong",
+      260
+    ]
+  ],
+  "before_counts": {
+    "ai_conversations": 4,
+    "ai_messages": 18,
+    "documents": 75,
+    "document_chunks": 1221
+  },
+  "user_ids": {
+    "admin": 1,
+    "teacher_an": 2,
+    "teacher_binh": 3,
+    "student_em": 6,
+    "student_phuong": 7
+  },
+  "baseline_conversations": {
+    "admin": [],
+    "teacher_an": [],
+    "teacher_binh": [],
+    "student_em": [],
+    "student_phuong": [
+      232,
+      165,
+      164,
+      1
+    ]
+  },
+  "engine": {
+    "success": true,
+    "data": {
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite"
+      },
+      "embedding": {
+        "provider": "fastembed",
+        "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+        "dim": 384
+      }
+    }
+  },
+  "after_counts": {
+    "ai_conversations": 4,
+    "ai_messages": 18,
+    "documents": 75,
+    "document_chunks": 1221
+  },
+  "finished_at": "2026-10-29T19:41:45.203806"
+}

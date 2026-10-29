@@ -1,0 +1,241 @@
+{
+  "started_at": "2026-10-29T21:37:06.036216",
+  "accounts": {
+    "admin": "admin@gmail.com",
+    "teacher_an": "an.nguyen@studyonline.vn",
+    "teacher_binh": "binh.tran@studyonline.vn",
+    "student_em": "em.hoang@gmail.com",
+    "student_phuong": "phuong.vu@gmail.com"
+  },
+  "conversations": [
+    [
+      "student_phuong",
+      308
+    ],
+    [
+      "student_em",
+      307
+    ],
+    [
+      "student_phuong",
+      309
+    ],
+    [
+      "student_phuong",
+      311
+    ],
+    [
+      "student_phuong",
+      312
+    ],
+    [
+      "student_em",
+      310
+    ],
+    [
+      "student_em",
+      314
+    ],
+    [
+      "student_em",
+      315
+    ],
+    [
+      "student_em",
+      316
+    ],
+    [
+      "student_em",
+      317
+    ],
+    [
+      "student_phuong",
+      313
+    ],
+    [
+      "student_phuong",
+      319
+    ],
+    [
+      "student_phuong",
+      320
+    ],
+    [
+      "student_phuong",
+      321
+    ],
+    [
+      "student_phuong",
+      322
+    ],
+    [
+      "student_em",
+      318
+    ],
+    [
+      "student_em",
+      324
+    ],
+    [
+      "student_em",
+      325
+    ],
+    [
+      "student_em",
+      326
+    ],
+    [
+      "student_phuong",
+      323
+    ],
+    [
+      "teacher_an",
+      327
+    ],
+    [
+      "teacher_an",
+      329
+    ],
+    [
+      "teacher_an",
+      330
+    ],
+    [
+      "teacher_an",
+      331
+    ],
+    [
+      "teacher_binh",
+      328
+    ],
+    [
+      "teacher_an",
+      332
+    ],
+    [
+      "teacher_binh",
+      333
+    ],
+    [
+      "teacher_an",
+      334
+    ],
+    [
+      "teacher_binh",
+      335
+    ],
+    [
+      "teacher_an",
+      336
+    ],
+    [
+      "teacher_binh",
+      337
+    ],
+    [
+      "teacher_binh",
+      339
+    ],
+    [
+      "teacher_an",
+      338
+    ],
+    [
+      "teacher_binh",
+      340
+    ],
+    [
+      "teacher_an",
+      341
+    ],
+    [
+      "teacher_an",
+      343
+    ],
+    [
+      "teacher_binh",
+      342
+    ],
+    [
+      "admin",
+      344
+    ],
+    [
+      "teacher_binh",
+      345
+    ],
+    [
+      "admin",
+      346
+    ],
+    [
+      "teacher_binh",
+      347
+    ],
+    [
+      "admin",
+      348
+    ],
+    [
+      "teacher_binh",
+      349
+    ],
+    [
+      "admin",
+      350
+    ],
+    [
+      "admin",
+      351
+    ],
+    [
+      "admin",
+      352
+    ],
+    [
+      "admin",
+      353
+    ],
+    [
+      "admin",
+      354
+    ],
+    [
+      "admin",
+      355
+    ],
+    [
+      "admin",
+      356
+    ]
+  ],
+  "max_parallel_accounts": 2,
+  "scope": "40 answerable knowledge cases across 10 courses, 10 boundary cases; course-level chat without lesson filters",
+  "before_counts": {
+    "ai_conversations": 4,
+    "ai_messages": 18,
+    "documents": 176,
+    "document_chunks": 2063
+  },
+  "engine": {
+    "success": true,
+    "data": {
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite"
+      },
+      "embedding": {
+        "provider": "fastembed",
+        "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+        "dim": 384
+      }
+    }
+  },
+  "after_counts": {
+    "ai_conversations": 4,
+    "ai_messages": 18,
+    "documents": 176,
+    "document_chunks": 2063
+  },
+  "finished_at": "2026-10-29T21:42:06.442406"
+}

@@ -198,7 +198,10 @@ export default function WordQuizImport({ onSaved }) {
           </div>
           <div className="form-group">
             <label className="form-label">Lưu vào</label>
-            <select className="form-control" value={target} onChange={(e) => setTarget(e.target.value)}>
+            <select className="form-control" value={target} onChange={(e) => {
+              setTarget(e.target.value);
+              setQuestions((rows) => rows.map(({ knowledge_chapter_id, knowledge_lesson_id, ...q }) => q));
+            }}>
               <option value="new">Quiz mới</option>
               {chapters.map((ch) => (
                 <optgroup key={ch.id} label={ch.chapter_name}>
@@ -337,6 +340,9 @@ export default function WordQuizImport({ onSaved }) {
               key={`${q.number}-${i}`}
               q={q}
               index={i}
+              courseId={courseId}
+              lockedChapterId={kind === 'ch' ? targetId : null}
+              lockedLessonId={kind === 'ls' ? targetId : null}
               meta={[`câu ${q.number} trong file`, q.topic, q.answer_source ? `đáp án theo ${q.answer_source}` : null]
                 .filter(Boolean)
                 .join(' · ')}

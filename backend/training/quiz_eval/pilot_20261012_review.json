@@ -1,0 +1,28 @@
+{
+  "sample_size": 6,
+  "fully_acceptable_content": 4,
+  "correct_key_but_wrong_explanation": 1,
+  "invalid_question": 1,
+  "semantic_duplicate_pairs": [
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      4
+    ]
+  ],
+  "python_checks": {
+    "hard1_count": 4,
+    "hard2_invalid_options": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "option_a_iterations": 51,
+    "option_a_total": 51
+  },
+  "limitations": "Một lần sinh trên một bài Python; không suy rộng thành độ chính xác toàn mô hình."
+}

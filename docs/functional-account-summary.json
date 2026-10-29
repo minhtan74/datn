@@ -1,0 +1,272 @@
+{
+  "date": "2026-10-29",
+  "timezone": "Asia/Saigon",
+  "run": "AUDIT_20261029_191321",
+  "api": {
+    "recorded_http_requests": 219,
+    "unique_scenarios": 178,
+    "latest_failed": 0,
+    "first_expectation_mismatches": 1
+  },
+  "browser": {
+    "recorded_attempts": 49,
+    "unique_scenarios": 35,
+    "latest_failed": 0,
+    "initial_harness_failures": 6
+  },
+  "non_ai_api_latency_ms": {
+    "n": 194,
+    "median": 16.6,
+    "p95_nearest_rank": 118.4,
+    "max": 702.7
+  },
+  "semantic_checks": [
+    {
+      "name": "student_em / điểm qua giao diện",
+      "passed": true,
+      "evidence": [
+        0,
+        50,
+        100
+      ]
+    },
+    {
+      "name": "student_em / tiến độ và điểm chính thức",
+      "passed": true,
+      "evidence": {
+        "avg_quiz_score": 100.0,
+        "level": "Excellent",
+        "completion_pct": 100.0,
+        "completed_lessons": 2,
+        "total_lessons": 2,
+        "total_time_sec": 0,
+        "quiz_attempts": 3
+      }
+    },
+    {
+      "name": "student_em / cải thiện ôn tập",
+      "passed": true,
+      "evidence": {
+        "before": 0.0,
+        "after": 100.0,
+        "difference_pct": 100.0,
+        "same_questions": true
+      }
+    },
+    {
+      "name": "student_phuong / điểm qua giao diện",
+      "passed": true,
+      "evidence": [
+        0,
+        50,
+        100
+      ]
+    },
+    {
+      "name": "student_phuong / tiến độ và điểm chính thức",
+      "passed": true,
+      "evidence": {
+        "avg_quiz_score": 100.0,
+        "level": "Excellent",
+        "completion_pct": 100.0,
+        "completed_lessons": 2,
+        "total_lessons": 2,
+        "total_time_sec": 0,
+        "quiz_attempts": 3
+      }
+    },
+    {
+      "name": "student_phuong / cải thiện ôn tập",
+      "passed": true,
+      "evidence": {
+        "before": 50.0,
+        "after": 100.0,
+        "difference_pct": 50.0,
+        "same_questions": true
+      }
+    },
+    {
+      "name": "Khôi phục số liệu summary",
+      "passed": true,
+      "evidence": {
+        "total_revenue": 11782000.0,
+        "total_orders": 18,
+        "pending_orders": 0,
+        "failed_orders": 12,
+        "refunded_orders": 2,
+        "refunded_amount": 998000.0,
+        "total_students": 10,
+        "new_students_30d": 0,
+        "total_enrollments": 25,
+        "avg_completion_pct": 58.7
+      }
+    },
+    {
+      "name": "Khôi phục số liệu learning",
+      "passed": true,
+      "evidence": {
+        "quiz_attempts": 104,
+        "active_learners": 9,
+        "avg_quiz_score": 78.4,
+        "pass_rate": 0.0,
+        "ai_questions": 9,
+        "ai_no_answer_rate": 11.1
+      }
+    },
+    {
+      "name": "Khôi phục số người dùng",
+      "passed": true,
+      "evidence": 15
+    },
+    {
+      "name": "Khôi phục danh sách khóa",
+      "passed": true,
+      "evidence": 11
+    },
+    {
+      "name": "Câu AI đủ số lượng, phương án, đáp án và bằng chứng",
+      "passed": true,
+      "evidence": {
+        "generated_by": "gemini:gemini-3.1-flash-lite",
+        "requested": 3,
+        "returned": 3,
+        "difficulty": "easy",
+        "distribution_requested": {
+          "easy": 3
+        },
+        "distribution": {
+          "easy": 3
+        },
+        "difficulty_basis": "Mức tư duy dự kiến; giảng viên cần thẩm định trước khi sử dụng.",
+        "warnings": [],
+        "verification": {
+          "unverified": 0,
+          "verified": 3,
+          "flagged": 0,
+          "ungrounded": 0,
+          "difficulty_flagged": 0
+        },
+        "context_mode": "full_document",
+        "context_chars": 895,
+        "context_chunks": 1,
+        "topic": "Biến và kiểu dữ liệu",
+        "objectives": []
+      }
+    }
+  ],
+  "baseline": {
+    "business": {
+      "total_revenue": 11782000.0,
+      "total_orders": 18,
+      "pending_orders": 0,
+      "failed_orders": 12,
+      "refunded_orders": 2,
+      "refunded_amount": 998000.0,
+      "total_students": 10,
+      "new_students_30d": 0,
+      "total_enrollments": 25,
+      "avg_completion_pct": 58.7
+    },
+    "learning": {
+      "quiz_attempts": 104,
+      "active_learners": 9,
+      "avg_quiz_score": 78.4,
+      "pass_rate": 0.0,
+      "ai_questions": 9,
+      "ai_no_answer_rate": 11.1
+    }
+  },
+  "ai_tutor": [
+    {
+      "role": "student_em",
+      "name": "AI Tutor: Biến trong Python dùng để làm gì?",
+      "ms": 45510.8,
+      "fallback": false,
+      "response": {
+        "conversation_id": 236,
+        "answer": "Biến trong Python là tên dùng để lưu trữ giá trị trong bộ nhớ.",
+        "sources": [
+          {
+            "document_id": 89,
+            "document": "AUDIT_20261029_191321 tài liệu Python",
+            "page": null,
+            "score": 0.7236
+          }
+        ],
+        "used_context": true
+      }
+    },
+    {
+      "role": "student_em",
+      "name": "AI Tutor: Ai vô địch World Cup năm 2018?",
+      "ms": 114.3,
+      "fallback": false,
+      "response": {
+        "conversation_id": 237,
+        "answer": "Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.",
+        "sources": [],
+        "used_context": false
+      }
+    },
+    {
+      "role": "student_phuong",
+      "name": "AI Tutor: Biến trong Python dùng để làm gì?",
+      "ms": 61293.7,
+      "fallback": true,
+      "response": {
+        "conversation_id": 238,
+        "answer": "Biến trong Python là tên dùng để lưu trữ giá trị trong bộ nhớ. Python dùng thụt lề để xác định khối lệnh.\n\n(Trợ giảng AI đang tạm gián đoạn — đây là nội dung trích trực tiếp từ tài liệu khóa học.)",
+        "sources": [
+          {
+            "document_id": 89,
+            "document": "AUDIT_20261029_191321 tài liệu Python",
+            "page": null,
+            "score": 0.7236
+          }
+        ],
+        "used_context": true
+      }
+    },
+    {
+      "role": "student_phuong",
+      "name": "AI Tutor: Ai vô địch World Cup năm 2018?",
+      "ms": 115.2,
+      "fallback": false,
+      "response": {
+        "conversation_id": 239,
+        "answer": "Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.",
+        "sources": [],
+        "used_context": false
+      }
+    }
+  ],
+  "ai_quiz": {
+    "ms": 9311.3,
+    "meta": {
+      "generated_by": "gemini:gemini-3.1-flash-lite",
+      "requested": 3,
+      "returned": 3,
+      "difficulty": "easy",
+      "distribution_requested": {
+        "easy": 3
+      },
+      "distribution": {
+        "easy": 3
+      },
+      "difficulty_basis": "Mức tư duy dự kiến; giảng viên cần thẩm định trước khi sử dụng.",
+      "warnings": [],
+      "verification": {
+        "unverified": 0,
+        "verified": 3,
+        "flagged": 0,
+        "ungrounded": 0,
+        "difficulty_flagged": 0
+      },
+      "context_mode": "full_document",
+      "context_chars": 895,
+      "context_chunks": 1,
+      "topic": "Biến và kiểu dữ liệu",
+      "objectives": []
+    }
+  }
+}

@@ -1,0 +1,77 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Cấu trúc dữ liệu và giải thuật cơ bản</div>
+<p class="path">Chương 6: Thiết kế lời giải và thực hành · Bài 2</p>
+<h1>Dự án nhỏ: bộ tra cứu và thống kê dữ liệu</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Cấu trúc dữ liệu và giải thuật cơ bản.</li><li>Chương 6: Thiết kế lời giải và thực hành.</li><li>Các bài trong chương: Chia để trị và quy hoạch động nhập môn; Dự án nhỏ: bộ tra cứu và thống kê dữ liệu.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Kết hợp lựa chọn cấu trúc, kiểm thử và phân tích chi phí trong một chương trình nhỏ.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Thiết kế một bộ tra cứu tên và tần suất xuất hiện. Yêu cầu gồm thêm dữ liệu, đếm, tìm và xuất báo cáo theo thứ tự. Tách quy tắc chuẩn hóa khỏi cấu trúc lưu: chẳng hạn có gộp chữ hoa/thường hay không phải được quyết định trước.</p>
+<p>Map phù hợp cập nhật tần suất, set phù hợp kiểm tra duy nhất, danh sách sắp xếp phù hợp xuất thứ tự và tìm nhị phân trên bản dữ liệu đã sắp. Không tự dùng tìm nhị phân sau khi thêm dữ liệu mà không duy trì thứ tự. Nếu chỉ cần top k liên tục, cân nhắc heap và giải thích chi phí.</p>
+<p>Sản phẩm cần tài liệu đầu vào/đầu ra, test và nhận xét Big-O cho từng chức năng. Tách dữ liệu rỗng, trùng lặp, Unicode và quy mô lớn. Benchmark phải cùng môi trường và cùng dữ liệu; không suy ra thuật toán đúng chỉ vì chạy nhanh.</p>
+<h2>1. Đặc tả sản phẩm</h2>
+<p>Đầu vào là danh sách tên; đầu ra gồm số bản ghi, số tên phân biệt, tần suất và báo cáo có thứ tự. Chọn chính sách bỏ khoảng trắng đầu/cuối và gộp hoa/thường rõ ràng. Nếu giữ nguyên tên để hiển thị, có thể lưu riêng khóa chuẩn hóa và nhãn hiển thị.</p>
+<h2>2. Chương trình mẫu có thể chạy</h2>
+<pre><code>def build_report(names):
+    counts = {}
+    for name in names:
+        key = name.strip().casefold()
+        if not key:
+            continue
+        counts[key] = counts.get(key, 0) + 1
+    return sorted(counts.items(), key=lambda item: (-item[1], item[0]))
+
+assert build_report(['An', ' Bình ', 'an', '']) == [('an', 2), ('bình', 1)]
+assert build_report([]) == []</code></pre>
+<p>Theo hợp đồng mẫu, chuỗi rỗng bị bỏ qua nên tổng tần suất bằng số mục hợp lệ, không phải số mục thô. Nếu đề bài muốn giữ mục rỗng phải thay cả cài đặt và test.</p>
+<h2>3. Phân tích và nâng cấp</h2>
+<p>Với n mục và k khóa khác nhau, đếm thường O(n) kỳ vọng theo mô hình băm; sắp xếp O(k log k), chưa tính độ dài chuỗi. Giữ dữ liệu nguồn nếu cần truy vết lỗi chuẩn hóa. Nếu báo cáo lấy top k liên tục trên luồng lớn, đề xuất heap và so sánh với sắp xếp toàn bộ.</p>
+<h2>4. Hồ sơ nghiệm thu</h2>
+<p>Nộp mã nguồn, cách chạy, hợp đồng chuẩn hóa, tối thiểu sáu test và phân tích Big-O. Test gồm rỗng, tất cả trùng, khoảng trắng, chữ hoa/thường, Unicode và hòa tần suất. Giữ thứ tự thứ hai theo tên để báo cáo xác định. Không chứng minh đúng bằng một ảnh chụp đầu ra; phải có đầu vào và kỳ vọng đối chiếu.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>Viết chương trình nhận một danh sách từ; xuất số từ phân biệt, tần suất và danh sách theo tên. Nộp ít nhất sáu test và phân tích thời gian cập nhật, sắp xếp, tra cứu.</p>
+</div>
+<h2>Hướng giải bài tập bổ sung</h2>
+<p>Kết quả đếm phải khớp tổng số phần tử. Với k khóa, xuất báo cáo sắp xếp thường O(k log k). Giữ lại test hồi quy khi sửa xử lý Unicode.</p>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Cấu trúc nào phù hợp đếm tần suất theo khóa?</li><li>Sau khi thêm phần tử làm mất thứ tự, trước tìm nhị phân cần gì?</li><li>Tổng các tần suất phải bằng gì?</li><li>Báo cáo sắp xếp k khóa thường cần bao nhiêu thời gian với thuật toán O(k log k)?</li><li>Benchmark nhanh có tự chứng minh chương trình đúng không?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Map. Map liên kết mỗi khóa với bộ đếm.</li><li>Khôi phục hoặc duy trì thứ tự. Tìm nhị phân yêu cầu thứ tự phù hợp.</li><li>Tổng số phần tử đầu vào đã tính. Mỗi phần tử đầu vào đóng góp một lần vào một bộ đếm.</li><li>O(k log k). Chi phí sắp xếp áp dụng cho số khóa phân biệt k.</li><li>Không. Đúng đắn cần đối chiếu kết quả và yêu cầu.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://opendatastructures.org/</li><li>https://docs.python.org/3/tutorial/datastructures.html</li><li>https://docs.python.org/3/library/heapq.html</li></ul></body></html>

@@ -1,0 +1,156 @@
+{
+  "provider": "gemini",
+  "model": "gemini-3.1-flash-lite",
+  "checks": [
+    {
+      "kind": "tutor",
+      "path": "/api/ai/chat",
+      "status": 200,
+      "elapsed_sec": 7.24,
+      "body": {
+        "success": true,
+        "data": {
+          "conversation_id": 233,
+          "answer": "Promise c\u00f3 ba tr\u1ea1ng th\u00e1i: pending (\u0111ang ch\u1edd), fulfilled (ho\u00e0n th\u00e0nh th\u00e0nh c\u00f4ng) v\u00e0 rejected (th\u1ea5t b\u1ea1i).",
+          "sources": [
+            {
+              "document_id": 79,
+              "document": "Promise & Async/Await",
+              "page": 1,
+              "score": 0.7132
+            },
+            {
+              "document_id": 13,
+              "document": "JavaScript N\u1ec1n T\u1ea3ng \u2014 T\u00e0i li\u1ec7u t\u1ed5ng h\u1ee3p",
+              "page": null,
+              "score": 0.6876
+            }
+          ],
+          "used_context": true
+        }
+      },
+      "validation": {
+        "three_states": true,
+        "has_sources": true,
+        "no_fallback": true
+      }
+    },
+    {
+      "kind": "quiz",
+      "path": "/api/ai/generate-quiz",
+      "status": 200,
+      "elapsed_sec": 10.91,
+      "body": {
+        "success": true,
+        "data": {
+          "questions": [
+            {
+              "question": "D\u1ef1a tr\u00ean \u0111\u1ecbnh ngh\u0129a v\u1ec1 thao t\u00e1c Down(s) trong c\u01a1 ch\u1ebf Semaphore, \u0111i\u1ec1u g\u00ec s\u1ebd x\u1ea3y ra n\u1ebfu m\u1ed9t ti\u1ebfn tr\u00ecnh th\u1ef1c hi\u1ec7n thao t\u00e1c Down(s) khi gi\u00e1 tr\u1ecb e(s) c\u1ee7a semaphore \u0111ang b\u1eb1ng 0?",
+              "options": {
+                "A": "Gi\u00e1 tr\u1ecb e(s) s\u1ebd tr\u1edf th\u00e0nh -1 v\u00e0 ti\u1ebfn tr\u00ecnh ti\u1ebfp t\u1ee5c th\u1ef1c hi\u1ec7n c\u00f4ng vi\u1ec7c.",
+                "B": "Ti\u1ebfn tr\u00ecnh s\u1ebd b\u1ecb kh\u00f3a v\u00e0 \u0111\u01b0\u1ee3c \u0111\u01b0a v\u00e0o h\u00e0ng \u0111\u1ee3i f(s) c\u1ee7a semaphore.",
+                "C": "Thao t\u00e1c Down(s) s\u1ebd b\u1ecb h\u1ee7y b\u1ecf v\u00e0 ti\u1ebfn tr\u00ecnh s\u1ebd k\u1ebft th\u00fac ngay l\u1eadp t\u1ee9c.",
+                "D": "Gi\u00e1 tr\u1ecb e(s) s\u1ebd \u0111\u01b0\u1ee3c thi\u1ebft l\u1eadp l\u1ea1i th\u00e0nh 1 \u0111\u1ec3 ti\u1ebfn tr\u00ecnh c\u00f3 th\u1ec3 ti\u1ebfp t\u1ee5c."
+              },
+              "correct_answer": "B",
+              "explanation": "Theo ng\u1eef li\u1ec7u, thao t\u00e1c Down(s) ch\u1ec9 gi\u1ea3m gi\u00e1 tr\u1ecb e(s) \u0111i 1 \u0111\u01a1n v\u1ecb n\u1ebfu e(s) > 0. Khi e(s) = 0, \u0111i\u1ec1u ki\u1ec7n n\u00e0y kh\u00f4ng th\u1ecfa m\u00e3n, ti\u1ebfn tr\u00ecnh kh\u00f4ng th\u1ec3 ti\u1ebfp t\u1ee5c x\u1eed l\u00fd v\u00e0 theo \u0111\u1ecbnh ngh\u0129a v\u1ec1 semaphore, c\u00e1c ti\u1ebfn tr\u00ecnh kh\u00f4ng th\u1ec3 x\u1eed l\u00fd s\u1ebd b\u1ecb kh\u00f3a v\u00e0 l\u01b0u v\u00e0o h\u00e0ng \u0111\u1ee3i f(s).",
+              "difficulty": "medium",
+              "topic": "Nguy\u00ean l\u00ed h\u1ec7 \u0111i\u1ec1u h\u00e0nh - \u0110\u1ed3ng b\u1ed9 ti\u1ebfn tr\u00ecnh",
+              "objectives": [],
+              "evidence": "Down(s): gi\u1ea3m gi\u00e1 tr\u1ecb c\u1ee7a semaphore s \u0111i 1 \u0111\u01a1n v\u1ecb n\u1ebfu semaphore c\u00f3 tr\u1ecb e(s) > 0, v\u00e0 ti\u1ebfp t\u1ee5c x\u1eed l\u00fd.",
+              "grounded": true,
+              "difficulty_review": {
+                "assessed": "medium",
+                "matches_requested": true,
+                "reason": "Ng\u01b0\u1eddi h\u1ecdc c\u1ea7n hi\u1ec3u logic c\u1ee7a thu\u1eadt to\u00e1n Semaphore (\u0111i\u1ec1u ki\u1ec7n d\u1eebng v\u00e0 tr\u1ea1ng th\u00e1i ch\u1edd) thay v\u00ec ch\u1ec9 \u0111\u1ecdc thu\u1ed9c l\u00f2ng \u0111\u1ecbnh ngh\u0129a."
+              },
+              "verified": "B"
+            }
+          ],
+          "meta": {
+            "generated_by": "gemini:gemini-3.1-flash-lite",
+            "requested": 1,
+            "returned": 1,
+            "difficulty": "medium",
+            "distribution_requested": {
+              "medium": 1
+            },
+            "distribution": {
+              "medium": 1
+            },
+            "difficulty_basis": "M\u1ee9c t\u01b0 duy d\u1ef1 ki\u1ebfn; gi\u1ea3ng vi\u00ean c\u1ea7n th\u1ea9m \u0111\u1ecbnh tr\u01b0\u1edbc khi s\u1eed d\u1ee5ng.",
+            "warnings": [],
+            "verification": {
+              "verified": 1,
+              "flagged": 0,
+              "ungrounded": 0,
+              "difficulty_flagged": 0
+            },
+            "context_mode": "retrieval",
+            "context_chars": 1804,
+            "context_chunks": 6,
+            "topic": "Nguy\u00ean L\u00ed HDH",
+            "objectives": []
+          }
+        }
+      },
+      "validation": {
+        "one_question": true,
+        "medium": true,
+        "gemini_generated": true,
+        "four_options": true,
+        "saved_and_readable": true
+      },
+      "approval": {
+        "status": 200,
+        "body": {
+          "success": true,
+          "message": "\u0110\u00e3 l\u01b0u quiz do AI sinh (\u0111\u00e3 duy\u1ec7t).",
+          "data": {
+            "quiz_id": 303,
+            "question_count": 1
+          }
+        }
+      },
+      "saved_quiz": {
+        "success": true,
+        "data": {
+          "id": 303,
+          "course_id": 7,
+          "lesson_id": null,
+          "chapter_id": null,
+          "review_lesson_id": null,
+          "title": "AUDIT Gemini live",
+          "description": "",
+          "source": "ai",
+          "duration": null,
+          "passing_score": null,
+          "max_attempts": null,
+          "grading_method": "highest",
+          "created_at": "2026-10-22 09:25:09",
+          "course_title": "Nguy\u00ean L\u00ed HDH",
+          "chapter_name": null,
+          "review_lesson_title": null,
+          "question_count": 1,
+          "my_attempts": 0
+        }
+      }
+    }
+  ],
+  "llm_calls": [
+    {
+      "status": 200,
+      "elapsed_sec": 4.36
+    },
+    {
+      "status": 200,
+      "elapsed_sec": 5.63
+    },
+    {
+      "status": 200,
+      "elapsed_sec": 4.88
+    }
+  ],
+  "audit_database_removed": true,
+  "audit_mysql_stopped": true
+}

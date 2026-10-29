@@ -1,0 +1,70 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Mạng máy tính cơ bản</div>
+<p class="path">Chương 2: Dịch vụ và ứng dụng mạng · Bài 1</p>
+<h1>DNS và phân giải tên miền</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Mạng máy tính cơ bản.</li><li>Chương 2: Dịch vụ và ứng dụng mạng.</li><li>Các bài trong chương: DNS và phân giải tên miền; HTTP và HTTPS.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Giải thích vai trò DNS và đọc các loại bản ghi cơ bản.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>DNS là hệ thống phân giải tên phân tán. Ứng dụng có thể hỏi resolver để tìm địa chỉ gắn với tên miền. Resolver tận dụng bộ nhớ đệm hoặc truy vấn các máy chủ thích hợp; không phải mọi yêu cầu đều đi lại toàn bộ chuỗi truy vấn.</p>
+<p>Bản ghi A ánh xạ tên tới IPv4, AAAA tới IPv6. CNAME khai báo tên bí danh trỏ tới một tên khác. MX mô tả máy chủ nhận thư cho miền. TTL hướng dẫn thời gian lưu bộ nhớ đệm, không phải thời gian tải trang hay thời hạn đăng ký tên miền.</p>
+<p>DNS thường sử dụng cổng 53 với UDP hoặc TCP. Phân giải tên thành công chỉ cho biết có câu trả lời DNS; không chứng minh máy chủ web đang hoạt động. Khi gỡ lỗi, tách kiểm tra DNS khỏi kiểm tra kết nối và HTTP.</p>
+<h2>1. Các thành phần tham gia</h2>
+<p>Stub resolver trên máy người dùng gửi câu hỏi tới recursive resolver đã cấu hình. Khi chưa có đáp án trong cache, resolver có thể lần theo root, máy chủ miền cấp cao và máy chủ có thẩm quyền. Root thường chỉ dẫn bước tiếp theo, không phải nơi lưu mọi địa chỉ website.</p>
+<h2>2. Đọc bản ghi đúng ý nghĩa</h2>
+<ul><li>A: địa chỉ IPv4; AAAA: địa chỉ IPv6.</li><li>CNAME: bí danh tới một tên khác; cần phân giải tiếp tên đích.</li><li>MX: máy chủ nhận thư và giá trị ưu tiên trong miền.</li><li>TXT: văn bản cho các mục đích xác minh hoặc chính sách ứng dụng.</li><li>TTL: thời gian cache theo bản ghi, không phải thời hạn sở hữu miền.</li></ul>
+<p>Một tên có thể có nhiều bản ghi và nhiều địa chỉ. Ứng dụng không nên giả định một tên mãi mãi chỉ có một IP.</p>
+<h2>3. Thực hành đọc kết quả</h2>
+<pre><code>nslookup example.com
+nslookup -type=AAAA example.com
+nslookup -type=MX example.com</code></pre>
+<p>Các lệnh trên chỉ truy vấn DNS thông thường; đầu ra phụ thuộc thời điểm và resolver. Ghi lại tên truy vấn, resolver sử dụng, loại bản ghi và kết quả thay vì chép một IP cố định làm đáp án cho mọi lần học.</p>
+<h2>4. Tình huống chẩn đoán</h2>
+<p>Sau khi đổi A record, máy A thấy IP mới còn máy B thấy IP cũ. Cache và TTL là giả thuyết hợp lý. Cần xác định resolver của hai máy, thời điểm cập nhật và bản ghi có thẩm quyền; không kết luận ngay DNS server bị hỏng. NXDOMAIN khác timeout: một bên là phản hồi tên không tồn tại, bên kia chưa nhận được phản hồi trong thời hạn.</p>
+<h2>5. Bài tập và lời giải</h2>
+<p>Một host phân giải đúng tên nhưng nhận HTTP 500. DNS có chứng minh website tốt không? Không: bước tên miền đã hoàn tất nhưng server ứng dụng còn lỗi. Một CNAME trỏ tới tên không có bản ghi địa chỉ cần kiểm tra chuỗi phân giải. Hãy nộp bảng ba ca: thành công, tên không tồn tại, timeout, với bằng chứng phân biệt từng ca.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>mô tả vì sao đổi bản ghi chưa chắc mọi người dùng thấy ngay. Nêu khác biệt giữa tên miền, địa chỉ IP và URL; URL còn có thể chứa giao thức, đường dẫn và tham số.</p>
+</div>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Vai trò chính của DNS là gì?</li><li>Bản ghi nào ánh xạ tên miền tới IPv4?</li><li>Bản ghi nào chứa địa chỉ IPv6?</li><li>TTL trong DNS liên quan tới điều gì?</li><li>DNS phân giải thành công có bảo đảm website hoạt động không?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Phân giải tên miền thành thông tin như địa chỉ IP. DNS cung cấp bản ghi gắn với tên miền.</li><li>A. Bản ghi A chứa địa chỉ IPv4.</li><li>AAAA. AAAA là loại bản ghi dành cho địa chỉ IPv6.</li><li>Thời gian lưu bản ghi trong bộ nhớ đệm. TTL giúp resolver xác định thời gian có thể tái sử dụng bản ghi.</li><li>Không, dịch vụ web vẫn có thể gặp lỗi. DNS và dịch vụ HTTP là các bước khác nhau.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://www.netacad.com/courses/networking-basics</li><li>https://developer.mozilla.org/en-US/docs/Web/HTTP</li></ul></body></html>

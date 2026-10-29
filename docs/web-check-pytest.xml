@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="134" time="16.372" timestamp="2026-10-29T19:02:49.276864+07:00" hostname="LAPTOP-MINHTAN"><testcase classname="tests.test_api" name="test_health" time="0.004" /><testcase classname="tests.test_api" name="test_login_ok_and_envelope" time="0.027" /><testcase classname="tests.test_api" name="test_login_bad_password" time="0.005" /><testcase classname="tests.test_api" name="test_me_requires_token" time="0.003" /><testcase classname="tests.test_api" name="test_me_ok" time="0.017" /><testcase classname="tests.test_api" name="test_register_and_change_password_and_cleanup" time="1.086" /><testcase classname="tests.test_api" name="test_student_cannot_list_users" time="0.006" /><testcase classname="tests.test_api" name="test_student_cannot_create_course" time="0.006" /><testcase classname="tests.test_api" name="test_course_crud" time="0.044" /><testcase classname="tests.test_api" name="test_full_learning_flow" time="0.165"><failure message="KeyError: 'score'">tokens = {'admin': '[REDACTED_TOKEN]'}
+course = 526
+
+    def test_full_learning_flow(tokens, course):
+        T, S = _h(tokens["teacher"]), _h(tokens["student"])
+        ch = int(client.post("/api/chapters", headers=T,
+                             json={"course_id": course, "chapter_name": "C1"}).json()["id"])
+        ls = int(client.post("/api/lessons", headers=T,
+                             json={"chapter_id": ch, "title": "L1", "description": "",
+                                   "video_url": "", "document_url": ""}).json()["id"])
+        qz = int(client.post("/api/quizzes", headers=T,
+                             json={"course_id": course, "title": "Q1", "description": ""}).json()["id"])
+        client.post("/api/quizzes/questions", headers=T, json={
+            "quiz_id": qz, "content": "2+2=?", "option_a": "3", "option_b": "4",
+            "option_c": "5", "option_d": "6", "correct_answer": "B", "order_index": 0,
+        })
+        # Chưa ghi danh thì không xem được câu hỏi; chủ khóa xem được cả đáp án.
+        assert client.get(f"/api/quizzes/questions?quiz_id={qz}", headers=S).status_code == 403
+        teacher_view = client.get(f"/api/quizzes/questions?quiz_id={qz}", headers=T).json()["data"][0]
+        assert teacher_view["correct_answer"] == "B"
+        qid = teacher_view["id"]
+    
+        assert client.post("/api/enrollments", headers=S, json={"course_id": course}).json()["success"]
+        assert client.post("/api/enrollments", headers=S, json={"course_id": course}).status_code == 409
+        ids = client.get("/api/enrollments?ids_only=1", headers=S).json()["data"]
+        assert course in ids
+    
+        student_view = client.get(f"/api/quizzes/questions?quiz_id={qz}", headers=S).json()["data"][0]
+        assert "correct_answer" not in student_view
+    
+        client.post("/api/progress", headers=S,
+                    json={"lesson_id": ls, "watched_sec": 60, "is_completed": 1})
+        assert ls in client.get(f"/api/progress?course_id={course}", headers=S).json()["data"]
+    
+        sub = client.post("/api/quizzes/submit", headers=S,
+                          json={"quiz_id": qz, "answers": {str(qid): "B"}}).json()
+&gt;       assert sub["score"] == 1 and sub["total"] == 1 and sub["percent"] == 100
+E       KeyError: 'score'
+
+tests\test_api.py:164: KeyError</failure></testcase><testcase classname="tests.test_api" name="test_chapter_review_questions" time="3.131" /><testcase classname="tests.test_api" name="test_lesson_review_and_quiz_settings" time="0.432"><failure message="assert (50 == 100)">tokens = {'admin': '[REDACTED_TOKEN]'}
+course = 528
+
+    def test_lesson_review_and_quiz_settings(tokens, course):
+        T, S = _h(tokens["teacher"]), _h(tokens["student"])
+        ch = int(client.post("/api/chapters", headers=T,
+                             json={"course_id": course, "chapter_name": "C"}).json()["id"])
+        ls = int(client.post("/api/lessons", headers=T,
+                             json={"chapter_id": ch, "title": "Vòng lặp for",
+                                   "description": "Vòng lặp for dùng để lặp qua các phần tử của một dãy.",
+                                   "video_url": "", "document_url": ""}).json()["id"])
+        # Chưa có bộ ôn tập; học viên không được tạo; mở 2 lần ra cùng 1 bộ
+        assert client.get(f"/api/lessons?chapter_id={ch}", headers=T).json()["data"][0]["review_quiz_id"] is None
+        assert client.post("/api/lessons/review", headers=S, json={"lesson_id": ls}).status_code == 403
+        rq = client.post("/api/lessons/review", headers=T, json={"lesson_id": ls}).json()["data"]["quiz_id"]
+        assert client.post("/api/lessons/review", headers=T, json={"lesson_id": ls}).json()["data"]["quiz_id"] == rq
+        quiz = client.get(f"/api/quizzes?id={rq}").json()["data"]
+        assert quiz["review_lesson_id"] == ls and quiz["review_lesson_title"] == "Vòng lặp for"
+    
+        # Câu thủ công + câu AI duyệt vào cùng bộ ôn tập của bài
+        client.post("/api/quizzes/questions", headers=T, json={
+            "quiz_id": rq, "content": "for dùng để?", "option_a": "rẽ nhánh", "option_b": "lặp",
+            "option_c": "", "option_d": "", "correct_answer": "B"})
+        r = client.post("/api/ai/quiz/approve", headers=T, json={
+            "course_id": course, "review_lesson_id": ls, "questions": [{
+                "question": "range(3) sinh mấy số?", "options": {"A": "2", "B": "3", "C": "4", "D": "5"},
+                "correct_answer": "B"}]}).json()
+        assert r["data"]["quiz_id"] == rq
+        assert client.get(f"/api/lessons?id={ls}", headers=T).json()["data"]["review_question_count"] == 2
+        # Duyệt thành quiz mới kèm cài đặt làm bài; cài đặt sai phạm vi bị từ chối
+        one = [{"question": "1+1?", "options": {"A": "1", "B": "2", "C": "3", "D": "4"}, "correct_answer": "B",
+                "verify": {"answer": "B", "reason": "x"}, "plan_key": "single"}]
+        assert client.post("/api/ai/quiz/approve", headers=T, json={
+            "course_id": course, "title": "AI", "questions": one, "passing_score": 101}).status_code == 400
+        nq = client.post("/api/ai/quiz/approve", headers=T, json={
+            "course_id": course, "title": "AI cuối khóa", "questions": one,
+            "duration": 45, "passing_score": 70, "max_attempts": 1}).json()["data"]["quiz_id"]
+        got = client.get(f"/api/quizzes?id={nq}").json()["data"]
+        assert (got["duration"], got["passing_score"], got["max_attempts"], got["source"]) == (45, 70, 1, "ai")
+        # Sinh bằng AI theo bài (offline heuristic dùng mô tả bài học làm ngữ liệu)
+        g = client.post("/api/ai/generate-quiz", headers=T,
+                        json={"course_id": course, "lesson_id": ls, "number_of_questions": 2})
+        assert g.status_code in (200, 422)
+        # Phân bổ độ khó: sai phạm vi bị từ chối; hợp lệ thì mỗi câu gắn đúng mức của lô sinh ra nó
+        bad = {"course_id": course, "lesson_id": ls, "difficulty_mix": {"easy": 25}}
+        assert client.post("/api/ai/generate-quiz", headers=T, json=bad).status_code == 400
+        empty = {"course_id": course, "lesson_id": ls, "difficulty_mix": {"easy": 0, "medium": 0, "hard": 0}}
+        assert client.post("/api/ai/generate-quiz", headers=T, json=empty).status_code == 422
+        g = client.post("/api/ai/generate-quiz", headers=T, json={
+            "course_id": course, "lesson_id": ls, "difficulty_mix": {"easy": 1, "medium": 0, "hard": 1}})
+        if g.status_code == 200:
+            meta = g.json()["data"]["meta"]
+            assert meta["distribution_requested"] == {"easy": 1, "hard": 1}
+            levels = [q["difficulty"] for q in g.json()["data"]["questions"]]
+            assert set(levels) &lt;= {"easy", "hard"} and len(levels) == meta["returned"]
+    
+        # Cài đặt làm bài: sai phạm vi bị từ chối; giới hạn 10 phút, đạt 50%, 1 lượt
+        base = {"id": rq, "course_id": course, "title": "Ôn tập bài"}
+        assert client.put("/api/quizzes", headers=T, json={**base, "passing_score": 150}).status_code == 400
+        client.put("/api/quizzes", headers=T, json={**base, "duration": 10, "passing_score": 50, "max_attempts": 1})
+    
+        client.post("/api/enrollments", headers=S, json={"course_id": course})
+        got = client.get(f"/api/quizzes/questions?quiz_id={rq}", headers=S).json()
+        assert got["time_limit_sec"] == 600 and got["attempt_token"]
+        answers = {str(q["id"]): "B" for q in got["data"]}
+        # Không có / sửa token -&gt; từ chối; token hợp lệ -&gt; chấm, đạt
+        assert client.post("/api/quizzes/submit", headers=S, json={"quiz_id": rq, "answers": answers}).status_code == 400
+        aid, sig = got["attempt_token"].split(".")
+        forged = f"{int(aid) + 1}.{sig}"
+        assert client.post("/api/quizzes/submit", headers=S, json={
+            "quiz_id": rq, "answers": answers, "attempt_token": forged}).status_code == 400
+        sub = client.post("/api/quizzes/submit", headers=S, json={
+            "quiz_id": rq, "answers": answers, "attempt_token": got["attempt_token"]}).json()
+&gt;       assert sub["percent"] == 100 and sub["passed"] is True
+E       assert (50 == 100)
+
+tests\test_api.py:294: AssertionError</failure></testcase><testcase classname="tests.test_api" name="test_answers_hidden_until_last_attempt_and_fair_analytics" time="0.185"><failure message="KeyError: 'answers_revealed'">tokens = {'admin': '[REDACTED_TOKEN]'}
+course = 529
+
+    def test_answers_hidden_until_last_attempt_and_fair_analytics(tokens, course):
+        T, S = _h(tokens["teacher"]), _h(tokens["student"])
+        q = {"option_a": "sai", "option_b": "đúng", "option_c": "x", "option_d": "y", "correct_answer": "B"}
+        # Bài chính thức cho làm 2 lần
+        qz = int(client.post("/api/quizzes", headers=T, json={
+            "course_id": course, "title": "Chính thức", "max_attempts": 2}).json()["id"])
+        client.post("/api/quizzes/questions", headers=T, json={"quiz_id": qz, "content": "Câu CT", "topic": "Chủ đề CT", **q})
+        # Bộ ôn tập của chương (làm lại không giới hạn)
+        ch = int(client.post("/api/chapters", headers=T, json={"course_id": course, "chapter_name": "C"}).json()["id"])
+        rq = client.post("/api/chapters/review", headers=T, json={"chapter_id": ch}).json()["data"]["quiz_id"]
+        client.post("/api/quizzes/questions", headers=T, json={"quiz_id": rq, "content": "Câu ÔT", "topic": "Chủ đề ÔT", **q})
+        client.post("/api/enrollments", headers=S, json={"course_id": course})
+        open1 = client.get(f"/api/quizzes/questions?quiz_id={qz}", headers=S).json()
+        qid = open1["data"][0]["id"]
+        rqid = client.get(f"/api/quizzes/questions?quiz_id={rq}", headers=S).json()["data"][0]["id"]
+    
+        # Lượt 1/2: có đúng/sai nhưng KHÔNG có đáp án đúng; lượt 2/2 (cuối): có đáp án
+        s1 = client.post("/api/quizzes/submit", headers=S, json={
+            "quiz_id": qz, "answers": {str(qid): "A"}, "attempt_token": open1["attempt_token"]}).json()
+        assert s1["answers_revealed"] is False and s1["attempts_left"] == 1
+        assert s1["details"][0]["correct_answer"] is None and s1["details"][0]["is_right"] is False
+        open2 = client.get(f"/api/quizzes/questions?quiz_id={qz}", headers=S).json()
+        s2 = client.post("/api/quizzes/submit", headers=S, json={
+            "quiz_id": qz, "answers": {str(qid): "B"}, "attempt_token": open2["attempt_token"]}).json()
+        assert s2["answers_revealed"] is True and s2["attempts_left"] == 0 and s2["details"][0]["correct_answer"] == "B"
+        # Chủ khóa làm thử luôn thấy đáp án
+        assert client.post("/api/quizzes/submit", headers=T, json={
+            "quiz_id": qz, "answers": {}}).json()["details"][0]["correct_answer"] == "B"
+        # Ôn tập không giới hạn lượt: luôn thấy đáp án. Làm sai 2 lần rồi đúng 1 lần
+        for ans in ("A", "A", "B"):
+            r = client.post("/api/quizzes/submit", headers=S, json={"quiz_id": rq, "answers": {str(rqid): ans}}).json()
+&gt;           assert r["answers_revealed"] is True and r["details"][0]["correct_answer"] == "B"
+E           KeyError: 'answers_revealed'
+
+tests\test_api.py:338: KeyError</failure></testcase><testcase classname="tests.test_api" name="test_paid_course_cannot_be_bypassed" time="0.103" /><testcase classname="tests.test_api" name="test_lesson_media_signed_links" time="0.370" /><testcase classname="tests.test_api" name="test_admin_data_safety_rules" time="0.161" /><testcase classname="tests.test_api" name="test_question_validation_and_topic" time="0.145" /><testcase classname="tests.test_api" name="test_admin_can_reset_password" time="1.700" /><testcase classname="tests.test_api" name="test_upload_and_user_list_restricted" time="0.040" /><testcase classname="tests.test_api" name="test_analytics_shapes" time="0.090" /><testcase classname="tests.test_api" name="test_recommendation_flow" time="0.203"><failure message="AssertionError: assert 'ContentBased' in {'Average', 'Excellent', 'Good', 'Weak'}">tokens = {'admin': '[REDACTED_TOKEN]'}
+
+    def test_recommendation_flow(tokens):
+        S = _h(tokens["student"])
+        cur = client.get("/api/recommendations", headers=S).json()["data"]
+        assert "current" in cur and "history" in cur
+&gt;       assert cur["current"]["level"] in {"Weak", "Average", "Good", "Excellent"}
+E       AssertionError: assert 'ContentBased' in {'Average', 'Excellent', 'Good', 'Weak'}
+
+tests\test_api.py:496: AssertionError</failure></testcase><testcase classname="tests.test_api" name="test_ai_status" time="0.012" /><testcase classname="tests.test_api" name="test_ai_chat_grounded_and_refusal" time="1.754" /><testcase classname="tests.test_api" name="test_ai_chat_requires_login" time="0.004" /><testcase classname="tests.test_api" name="test_ai_chat_blocks_unenrolled_course" time="0.027" /><testcase classname="tests.test_api" name="test_ai_chat_teacher_not_blocked_by_enrollment" time="0.206" /><testcase classname="tests.test_api" name="test_ai_chat_rejects_empty_and_too_long_question" time="0.033" /><testcase classname="tests.test_api" name="test_ai_generate_and_approve_quiz" time="0.383"><failure message="AssertionError: {'message': 'Chế độ offline chỉ tạo câu nhận biết mức dễ. Hãy chọn câu dễ hoặc cấu hình LLM để tạo câu trung bình/khó.', 'success': False}&#10;assert False">tokens = {'admin': '[REDACTED_TOKEN]'}
+
+    def test_ai_generate_and_approve_quiz(tokens):
+        # course_id=7 (Nguyên Lí HDH) — khóa TEACHER (an.nguyen) thực sự sở hữu và có
+        # tài liệu đã lập chỉ mục; generate-quiz/approve giờ đòi hỏi đúng quyền sở hữu.
+        T = _h(tokens["teacher"])
+        gen = client.post("/api/ai/generate-quiz", headers=T,
+                          json={"course_id": 7, "number_of_questions": 3, "difficulty": "medium"}).json()
+&gt;       assert gen["success"], gen
+E       AssertionError: {'message': 'Chế độ offline chỉ tạo câu nhận biết mức dễ. Hãy chọn câu dễ hoặc cấu hình LLM để tạo câu trung bình/khó.', 'success': False}
+E       assert False
+
+tests\test_api.py:571: AssertionError</failure></testcase><testcase classname="tests.test_api" name="test_ai_documents_list" time="0.013" /><testcase classname="tests.test_api" name="test_unknown_route_envelope" time="0.005" /><testcase classname="tests.test_api" name="test_vnpay_payment_flow" time="0.180" /><testcase classname="tests.test_api" name="test_admin_manage_payments" time="0.096" /><testcase classname="tests.test_api" name="test_vnpay_reconcile_pending" time="0.286" /><testcase classname="tests.test_api" name="test_vnpay_refund" time="0.217" /><testcase classname="tests.test_api" name="test_quiz_attempt_rules" time="0.546" /><testcase classname="tests.test_knowledge" name="test_new_lesson_practice_replaces_only_that_lesson_of_exam" time="0.001" /><testcase classname="tests.test_knowledge" name="test_chapter_assessment_and_later_final_exam_replace_older_evidence" time="0.001" /><testcase classname="tests.test_knowledge" name="test_small_sample_is_uncertain_and_not_weak_even_zero_correct" time="0.001" /><testcase classname="tests.test_knowledge" name="test_reclassified_same_question_is_not_counted_in_both_lessons" time="0.001" /><testcase classname="tests.test_knowledge" name="test_same_titles_in_different_courses_are_separate_and_questions_are_distinct" time="0.001" /><testcase classname="tests.test_knowledge" name="test_question_scope_validates_course_chapter_and_review_scope" time="0.062" /><testcase classname="tests.test_knowledge" name="test_only_unambiguous_titles_are_reconstructed" time="0.011" /><testcase classname="tests.test_knowledge" name="test_edited_question_or_renamed_lesson_does_not_rewrite_saved_assessment" time="0.007" /><testcase classname="tests.test_knowledge" name="test_suggestions_merge_exam_chapter_and_lesson_into_one_action" time="0.008" /><testcase classname="tests.test_knowledge" name="test_weak_chapter_is_prioritized_when_each_lesson_has_too_few_questions" time="0.007" /><testcase classname="tests.test_knowledge" name="test_practice_respects_access_exhausted_and_resumable_attempts" time="0.007" /><testcase classname="tests.test_knowledge" name="test_knowledge_checkpoint_deduplicates_clicks_and_rejects_other_users" time="0.009" /><testcase classname="tests.test_quiz_difficulty" name="test_offline_does_not_generate_higher_levels" time="0.000" /><testcase classname="tests.test_quiz_difficulty" name="test_generated_lesson_ids_are_limited_to_the_requested_chapter[55-55]" time="0.001" /><testcase classname="tests.test_quiz_difficulty" name="test_generated_lesson_ids_are_limited_to_the_requested_chapter[999-None]" time="0.002" /><testcase classname="tests.test_quiz_difficulty" name="test_offline_does_not_fill_missing_distractors" time="0.002" /><testcase classname="tests.test_quiz_difficulty" name="test_duplicate_options_are_rejected" time="0.001" /><testcase classname="tests.test_quiz_difficulty" name="test_difficulty_review_flags_mismatch_without_changing_requested_label" time="0.002" /><testcase classname="tests.test_quiz_difficulty" name="test_mixed_quiz_verifies_all_levels_in_one_call[True]" time="0.002" /><testcase classname="tests.test_quiz_difficulty" name="test_mixed_quiz_verifies_all_levels_in_one_call[False]" time="0.001" /><testcase classname="tests.test_quiz_difficulty" name="test_parallel_generation_deduplicates_and_reports_before_verification" time="0.005" /><testcase classname="tests.test_quiz_difficulty" name="test_mixed_batch_keeps_labels_and_enforces_each_requested_count" time="0.001" /><testcase classname="tests.test_quiz_shuffle" name="test_shuffle_is_stable_and_keeps_correct_content" time="0.002" /><testcase classname="tests.test_quiz_shuffle" name="test_new_attempt_changes_order" time="0.002" /><testcase classname="tests.test_quiz_shuffle" name="test_two_options_remain_two" time="0.001" /><testcase classname="tests.test_quiz_stream" name="test_stream_sends_partial_then_verified_result" time="0.015" /><testcase classname="tests.test_quiz_stream" name="test_stream_delivers_generation_error" time="0.016" /><testcase classname="tests.test_quiz_stream" name="test_stream_checks_role_and_course_before_starting_worker" time="0.018" /><testcase classname="tests.test_recommendations" name="test_no_results_is_not_average" time="0.017" /><testcase classname="tests.test_recommendations" name="test_latest_content_is_independent_of_highest_official_grade" time="0.018" /><testcase classname="tests.test_recommendations" name="test_topic_normalization_course_separation_and_distinct_evidence" time="0.002" /><testcase classname="tests.test_recommendations" name="test_retake_uses_grading_policy[latest-40]" time="0.009" /><testcase classname="tests.test_recommendations" name="test_retake_uses_grading_policy[average-65]" time="0.010" /><testcase classname="tests.test_recommendations" name="test_retake_uses_grading_policy[highest-None]" time="0.007" /><testcase classname="tests.test_recommendations" name="test_retake_uses_grading_policy[first-None]" time="0.007" /><testcase classname="tests.test_recommendations" name="test_retake_above_70_but_below_passing_score" time="0.007" /><testcase classname="tests.test_recommendations" name="test_abandoned_attempt_uses_last_slot" time="0.007" /><testcase classname="tests.test_recommendations" name="test_removed_enrollment_does_not_create_retake" time="0.007" /><testcase classname="tests.test_recommendations" name="test_ambiguous_lesson_mapping_does_not_guess" time="0.001" /><testcase classname="tests.test_recommendations" name="test_live_last_attempt_can_be_resumed" time="0.007" /><testcase classname="tests.test_recommendations" name="test_expired_last_attempt_cannot_be_recommended" time="0.008" /><testcase classname="tests.test_recommendations" name="test_unclassified_question_still_counts_in_official_score" time="0.015" /><testcase classname="tests.test_recommendations" name="test_unenrolled_content_is_excluded" time="0.009" /><testcase classname="tests.test_recommendations" name="test_catalog_reuses_names_for_manual_word_and_ai" time="0.014" /><testcase classname="tests.test_recommendations" name="test_saved_classification_is_not_changed_by_question_edit" time="0.010" /><testcase classname="tests.test_recommendations" name="test_snapshot_unclassified_remains_unclassified_after_edit" time="0.009" /><testcase classname="tests.test_recommendations" name="test_confirmed_mapping_overrides_source_lesson" time="0.001" /><testcase classname="tests.test_recommendations" name="test_practice_quiz_requires_matching_topic_and_available_slot" time="0.015" /><testcase classname="tests.test_recommendations" name="test_comparison_exposes_sample_limits_and_no_causal_claim" time="0.001" /><testcase classname="tests.test_recommendations" name="test_progress_uses_only_submissions_after_checkpoint" time="0.017" /><testcase classname="tests.test_recommendations" name="test_teacher_cannot_edit_another_courses_topic" time="0.007" /><testcase classname="tests.test_recommendations" name="test_topic_mapping_rejects_other_course_lesson" time="0.009" /><testcase classname="tests.test_recommendations" name="test_topic_mapping_rejects_practice_without_topic_questions" time="0.008" /><testcase classname="tests.test_recommendations" name="test_checkpoint_denied_after_enrollment_removed" time="0.009" /><testcase classname="tests.test_recommendations" name="test_catalog_rejects_missing_course_before_insert" time="0.005" /><testcase classname="tests.test_recommendations" name="test_new_good_lesson_practice_suppresses_stale_topic_suggestion" time="0.016" /><testcase classname="tests.test_recommendations" name="test_history_filters_both_checkpoint_types_before_limit" time="0.012" /><testcase classname="tests.test_word_import" name="test_answer_line_explanation_difficulty_topic" time="0.098" /><testcase classname="tests.test_word_import" name="test_answer_by_formatting[b]" time="0.069" /><testcase classname="tests.test_word_import" name="test_answer_by_formatting[u]" time="0.064" /><testcase classname="tests.test_word_import" name="test_answer_by_formatting[red]" time="0.099" /><testcase classname="tests.test_word_import" name="test_answer_by_formatting[hl]" time="0.066" /><testcase classname="tests.test_word_import" name="test_answer_by_star_and_inline_options_and_lowercase" time="0.054" /><testcase classname="tests.test_word_import" name="test_answer_key_at_end_and_multiline_question" time="0.089" /><testcase classname="tests.test_word_import" name="test_numbered_questions_and_table_layout" time="0.074" /><testcase classname="tests.test_word_import" name="test_errors_reported_with_reason" time="0.070" /><testcase classname="tests.test_word_import" name="test_invalid_file" time="0.002" /><testcase classname="tests.test_word_import" name="test_template_parses_cleanly" time="0.123" /><testcase classname="tests.test_word_import" name="test_level_tag_and_choose_in_solution" time="0.064" /><testcase classname="tests.test_word_import" name="test_chemistry_physics_sub_superscripts" time="0.079" /><testcase classname="tests.test_word_import" name="test_english_pronunciation_keeps_underline_and_uses_instruction" time="0.088" /><testcase classname="tests.test_word_import" name="test_underlined_option_letter_still_parsed" time="0.058" /><testcase classname="tests.test_word_import" name="test_shared_reading_passage" time="0.070" /><testcase classname="tests.test_word_import" name="test_passage_for_single_question_not_leaking" time="0.093" /><testcase classname="tests.test_word_import" name="test_statements_inside_question_then_options" time="0.065" /><testcase classname="tests.test_word_import" name="test_true_false_multi_statement_split[\u0110\xe1p \xe1n: a) \u0110\xfang, b) Sai, c) \u0110\xfang]" time="0.073" /><testcase classname="tests.test_word_import" name="test_true_false_multi_statement_split[\u0110\xe1p \xe1n: \u0110 S \u0110]" time="0.072" /><testcase classname="tests.test_word_import" name="test_true_false_multi_statement_split[\u0110\xe1p \xe1n: a-\u0110; b-S; c-\u0110]" time="0.070" /><testcase classname="tests.test_word_import" name="test_true_false_without_answers_and_short_answer_reported" time="0.063" /><testcase classname="tests.test_word_import" name="test_data_table_in_question_and_answer_key_table" time="0.086" /><testcase classname="tests.test_word_import" name="test_code_indentation_and_paren_options" time="0.057" /><testcase classname="tests.test_word_import" name="test_instruction_between_questions_not_glued_to_option" time="0.088" /><testcase classname="tests.test_word_import" name="test_import_word_api_flow" time="0.307" /><testcase classname="tests.test_word_import" name="test_omml_to_latex[&lt;m:f&gt;&lt;m:num&gt;&lt;m:r&gt;&lt;m:t&gt;1&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:num&gt;&lt;m:den&gt;&lt;m:r&gt;&lt;m:t&gt;2&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:den&gt;&lt;/m:f&gt;-\\frac{1}{2}]" time="0.001" /><testcase classname="tests.test_word_import" name="test_omml_to_latex[&lt;m:sSup&gt;&lt;m:e&gt;&lt;m:r&gt;&lt;m:t&gt;x&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:e&gt;&lt;m:sup&gt;&lt;m:r&gt;&lt;m:t&gt;2&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:sup&gt;&lt;/m:sSup&gt;&lt;m:r&gt;&lt;m:t&gt;+1&lt;/m:t&gt;&lt;/m:r&gt;-{x}^{2}+1]" time="0.001" /><testcase classname="tests.test_word_import" name="test_omml_to_latex[&lt;m:sSub&gt;&lt;m:e&gt;&lt;m:r&gt;&lt;m:t&gt;a&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:e&gt;&lt;m:sub&gt;&lt;m:r&gt;&lt;m:t&gt;n&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:sub&gt;&lt;/m:sSub&gt;-{a}_{n}]" time="0.001" /><testcase classname="tests.test_word_import" name="test_omml_to_latex[&lt;m:rad&gt;&lt;m:radPr&gt;&lt;m:degHide m:val='1'/&gt;&lt;/m:radPr&gt;&lt;m:deg/&gt;&lt;m:e&gt;&lt;m:r&gt;&lt;m:t&gt;x&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:e&gt;&lt;/m:rad&gt;-\\sqrt{x}]" time="0.001" /><testcase classname="tests.test_word_import" name="test_omml_to_latex[&lt;m:rad&gt;&lt;m:deg&gt;&lt;m:r&gt;&lt;m:t&gt;3&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:deg&gt;&lt;m:e&gt;&lt;m:r&gt;&lt;m:t&gt;8&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:e&gt;&lt;/m:rad&gt;-\\sqrt[3]{8}]" time="0.001" /><testcase classname="tests.test_word_import" name="test_omml_to_latex[&lt;m:nary&gt;&lt;m:naryPr&gt;&lt;m:chr m:val='\u2211'/&gt;&lt;/m:naryPr&gt;&lt;m:sub&gt;&lt;m:r&gt;&lt;m:t&gt;i=1&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:sub&gt;&lt;m:sup&gt;&lt;m:r&gt;&lt;m:t&gt;n&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:sup&gt;&lt;m:e&gt;&lt;m:r&gt;&lt;m:t&gt;i&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:e&gt;&lt;/m:nary&gt;-\\sum_{i=1}^{n} {i}]" time="0.002" /><testcase classname="tests.test_word_import" name="test_omml_to_latex[&lt;m:nary&gt;&lt;m:sub&gt;&lt;m:r&gt;&lt;m:t&gt;0&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:sub&gt;&lt;m:sup&gt;&lt;m:r&gt;&lt;m:t&gt;1&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:sup&gt;&lt;m:e&gt;&lt;m:r&gt;&lt;m:t&gt;x dx&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:e&gt;&lt;/m:nary&gt;-\\int_{0}^{1} {x dx}]" time="0.001" /><testcase classname="tests.test_word_import" name="test_omml_to_latex[&lt;m:d&gt;&lt;m:dPr&gt;&lt;m:begChr m:val='{'/&gt;&lt;m:endChr m:val=''/&gt;&lt;/m:dPr&gt;&lt;m:e&gt;&lt;m:eqArr&gt;&lt;m:e&gt;&lt;m:r&gt;&lt;m:t&gt;x+y=2&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:e&gt;&lt;m:e&gt;&lt;m:r&gt;&lt;m:t&gt;x-y=0&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:e&gt;&lt;/m:eqArr&gt;&lt;/m:e&gt;&lt;/m:d&gt;-\\left\\{ \\begin{array}{l} x+y=2 \\\\ x-y=0 \\end{array} \\right.]" time="0.001" /><testcase classname="tests.test_word_import" name="test_omml_to_latex[&lt;m:func&gt;&lt;m:fName&gt;&lt;m:r&gt;&lt;m:t&gt;sin&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:fName&gt;&lt;m:e&gt;&lt;m:r&gt;&lt;m:t&gt;x&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:e&gt;&lt;/m:func&gt;-\\sin {x}]" time="0.001" /><testcase classname="tests.test_word_import" name="test_omml_to_latex[&lt;m:limLow&gt;&lt;m:e&gt;&lt;m:r&gt;&lt;m:t&gt;lim&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:e&gt;&lt;m:lim&gt;&lt;m:r&gt;&lt;m:t&gt;x\u21920&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:lim&gt;&lt;/m:limLow&gt;-\\lim_{x\\to 0}]" time="0.001" /><testcase classname="tests.test_word_import" name="test_omml_to_latex[&lt;m:acc&gt;&lt;m:accPr&gt;&lt;m:chr m:val='&amp;#x20D7;'/&gt;&lt;/m:accPr&gt;&lt;m:e&gt;&lt;m:r&gt;&lt;m:t&gt;AB&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:e&gt;&lt;/m:acc&gt;-\\vec{AB}]" time="0.001" /><testcase classname="tests.test_word_import" name="test_omml_to_latex[&lt;m:d&gt;&lt;m:e&gt;&lt;m:m&gt;&lt;m:mr&gt;&lt;m:e&gt;&lt;m:r&gt;&lt;m:t&gt;1&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:e&gt;&lt;m:e&gt;&lt;m:r&gt;&lt;m:t&gt;2&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:e&gt;&lt;/m:mr&gt;&lt;m:mr&gt;&lt;m:e&gt;&lt;m:r&gt;&lt;m:t&gt;3&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:e&gt;&lt;m:e&gt;&lt;m:r&gt;&lt;m:t&gt;4&lt;/m:t&gt;&lt;/m:r&gt;&lt;/m:e&gt;&lt;/m:mr&gt;&lt;/m:m&gt;&lt;/m:e&gt;&lt;/m:d&gt;-\\left( \\begin{matrix} 1 &amp; 2 \\\\ 3 &amp; 4 \\end{matrix} \\right)]" time="0.002" /><testcase classname="tests.test_word_import" name="test_omml_to_latex[&lt;m:r&gt;&lt;m:t&gt;a\u2264b, \u03c0\u22603, x\u2208\u211d&lt;/m:t&gt;&lt;/m:r&gt;-a\\le b, \\pi \\ne 3, x\\in \\mathbb{R}]" time="0.001" /><testcase classname="tests.test_word_import" name="test_image_and_equation_in_question_and_options" time="0.065" /><testcase classname="tests.test_word_import" name="test_mathtype_ole_reported_not_dropped" time="0.054" /><testcase classname="tests.test_word_import" name="test_import_word_saves_images_api" time="0.089" /></testsuite></testsuites>

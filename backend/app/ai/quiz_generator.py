@@ -8,6 +8,9 @@ from __future__ import annotations
 import json
 import os
 import re
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from threading import BoundedSemaphore
+from typing import Callable
 
 from sqlalchemy.orm import Session
 
@@ -24,11 +27,19 @@ _SYSTEM = (
     "Bạn là công cụ sinh đề trắc nghiệm của StudyOnline. Trả về DUY NHẤT một đối tượng JSON "
     "hợp lệ theo schema: "
     '{"questions":[{"question","options":{"A","B","C","D"},"correct_answer","explanation","difficulty","topic",'
-    '"objectives","evidence"}]}. '
+    '"objectives","evidence","knowledge_lesson_id"}]}. '
+    "knowledge_lesson_id là mã bài học cung cấp trong NGỮ LIỆU mà câu hỏi kiểm tra; "
+    "chỉ chọn một mã trong danh sách, dùng null nếu chưa xác định rõ hoặc câu tổng hợp nhiều bài. "
     "correct_answer là một trong A/B/C/D; objectives là mảng số thứ tự các mục tiêu bài học mà câu hỏi liên quan "
     "(1 hoặc vài mục tiêu; [] nếu không có danh sách mục tiêu hoặc câu không gắn mục tiêu cụ thể); evidence là câu/cụm trích NGUYÊN VĂN từ NGỮ LIỆU (tối đa 200 ký tự) "
     "làm căn cứ cho đáp án đúng. Không thêm bất kỳ chữ nào ngoài JSON. "
-    "Câu hỏi phải bám sát NGỮ LIỆU được cung cấp, không bịa kiến thức ngoài ngữ liệu."
+    "Câu hỏi phải bám sát NGỮ LIỆU được cung cấp, không bịa kiến thức ngoài ngữ liệu. "
+    "Mỗi câu phải đủ dữ kiện và chỉ có một đáp án đúng rõ ràng. Các phương án nhiễu phải hợp lý, "
+    "xuất phát từ lỗi hiểu hoặc lỗi áp dụng thường gặp, tương đương về cách diễn đạt; "
+    "không gợi đáp án bằng độ dài, từ khóa hay các phương án sai hiển nhiên. "
+    "Không dùng mẹo đánh đố, câu chữ mơ hồ hoặc chi tiết vụn vặt để tăng độ khó. "
+    "Tình huống có thể mới nhưng cách giải phải suy ra được từ ngữ liệu. "
+    "Nếu ngữ liệu không đủ để tạo câu đạt yêu cầu, trả ít câu hơn; không cố tạo cho đủ số lượng."
 )
 
 
@@ -352,6 +363,8 @@ def _clean_questions(data: dict, *, n: int, difficulty: str, topic_hint: str,
         A, B, C, D = (str(opts.get(k) or "").strip() for k in ("A", "B", "C", "D"))
         if not all([A, B, C, D]):
             continue
+        if len({_norm(v) for v in (A, B, C, D)}) != 4:
+            continue
         ca = str(q.get("correct_answer") or "").strip().upper()
         if ca not in {"A", "B", "C", "D"}:
             continue
@@ -375,6 +388,7 @@ def _clean_questions(data: dict, *, n: int, difficulty: str, topic_hint: str,
                 "difficulty": (str(q.get("difficulty") or difficulty).strip().lower()
                                if str(q.get("difficulty") or "").strip().lower() in DIFF_VI else difficulty),
                 "topic": str(q.get("topic") or topic_hint).strip()[:100],
+                "knowledge_lesson_id": q.get('knowledge_lesson_id'),
                 "objectives": related,
                 "evidence": str(q.get("evidence") or "").strip()[:300],
             }
@@ -444,8 +458,9 @@ def _heuristic(context: str, *, n: int, difficulty: str, topic_hint: str,
         distract = [p for p in pool if p.lower() != kt.lower()]
         distract.sort(key=lambda p: abs(len(p) - len(kt)))
         distract = distract[:3]
-        while len(distract) < 3:
-            distract.append(f"(không có trong tài liệu {len(distract)})")
+        # Không tạo phương án giả để bù số lượng khi tài liệu thiếu thuật ngữ.
+        if len(distract) < 3:
+            continue
         opts = distract + [kt]
         pos = i % 4
         opts.insert(pos, opts.pop())  # đưa đáp án đúng về vị trí pos
@@ -456,7 +471,7 @@ def _heuristic(context: str, *, n: int, difficulty: str, topic_hint: str,
                 "options": dict(zip(letters, opts)),
                 "correct_answer": letters[pos],
                 "explanation": f"Theo tài liệu khóa học: {s}",
-                "difficulty": difficulty,
+                "difficulty": "easy",
                 "topic": topic_hint[:100],
             }
         )
@@ -469,12 +484,25 @@ def _heuristic(context: str, *, n: int, difficulty: str, topic_hint: str,
 
 # Mô tả từng mức độ khó cho LLM để câu hỏi thật sự khác nhau về độ khó (không chỉ khác nhãn)
 DIFF_GUIDE = {
-    "easy": "nhận biết/ghi nhớ: hỏi trực tiếp định nghĩa, khái niệm, sự kiện có sẵn trong ngữ liệu",
-    "medium": "thông hiểu/vận dụng: giải thích, so sánh đơn giản, áp dụng kiến thức vào ví dụ quen thuộc",
-    "hard": "phân tích/vận dụng cao: tình huống mới, suy luận nhiều bước, phân biệt các khái niệm dễ nhầm",
+    "easy": (
+        "nhận biết/ghi nhớ MỘT kiến thức: nhận diện định nghĩa, khái niệm hoặc sự kiện "
+        "có trực tiếp trong ngữ liệu; không cần kết hợp điều kiện hay suy luận nhiều bước"
+    ),
+    "medium": (
+        "thông hiểu/vận dụng MỘT quy tắc: giải thích quan hệ, so sánh đơn giản hoặc áp dụng "
+        "kiến thức vào ví dụ quen thuộc; phải xử lý thông tin, không chỉ nhớ lại định nghĩa"
+    ),
+    "hard": (
+        "phân tích/vận dụng cao: kết hợp ít nhất HAI kiến thức hoặc điều kiện có ý nghĩa "
+        "để giải tình huống mới, phát hiện lỗi hoặc chọn giải pháp theo ràng buộc; "
+        "cần nhiều bước suy luận, không chỉ thay số vào một công thức hay hỏi định nghĩa khó nhớ"
+    ),
 }
 # Tổng số câu tối đa cho 1 lần sinh khi phân bổ nhiều mức độ khó
 MAX_TOTAL = 30
+
+# Giới hạn chung cho sinh/kiểm tra quiz để các lượt sinh đồng thời không dồn API.
+_llm_slots = BoundedSemaphore(2)
 
 
 # Chỉ dẫn cho lượt AI tự giải lại đề (không cho biết đáp án đã đánh) để phát hiện câu đánh sai đáp án.
@@ -484,7 +512,11 @@ _VERIFY_SYSTEM = (
     "Bạn là giáo viên chấm đề trắc nghiệm. Với MỖI câu: trước tiên tự suy luận từng bước trong trường \"work\" "
     "(với đoạn code: chạy tay từng dòng, ghi giá trị biến sau mỗi vòng lặp), CHƯA nhìn các phương án; "
     "sau đó mới đối chiếu kết quả với các phương án và chọn đáp án. "
-    'Trả về DUY NHẤT JSON: {"answers":[{"i":<số thứ tự câu>,"work":"<các bước suy luận>","answer":"A|B|C|D","reason":"<kết luận 1 câu>"}]}'
+    "Đánh giá mức tư duy từ cách giải thực tế, không đoán từ độ dài câu hỏi. "
+    + " ".join(f"{level}: {guide}." for level, guide in DIFF_GUIDE.items())
+    + ' Trả về DUY NHẤT JSON: {"answers":[{"i":<số thứ tự câu>,"work":"<các bước suy luận>",'
+    '"answer":"A|B|C|D","reason":"<kết luận 1 câu>","difficulty":"easy|medium|hard",'
+    '"difficulty_reason":"<lý do phân mức theo thao tác tư duy>"}]}'
 )
 
 
@@ -515,6 +547,13 @@ def _verify(context: str, questions: list[dict]) -> None:
         if not 0 <= i < len(questions) or ans not in {"A", "B", "C", "D"}:
             continue
         q = questions[i]
+        assessed = str(a.get("difficulty") or "").strip().lower()
+        if assessed in DIFF_GUIDE:
+            q["difficulty_review"] = {
+                "assessed": assessed,
+                "matches_requested": assessed == q["difficulty"],
+                "reason": str(a.get("difficulty_reason") or "").strip()[:500],
+            }
         if ans == q["correct_answer"]:
             q["verified"] = ans  # lưu đáp án AI giải ra để giao diện so với đáp án hiện tại
         else:
@@ -524,9 +563,12 @@ def _verify(context: str, questions: list[dict]) -> None:
 # Sinh 1 lô n câu ở đúng 1 mức độ khó (LLM hoặc heuristic); seen dùng chung để các lô không trùng nhau
 def _generate_batch(context: str, topic_hint: str, *, n: int, difficulty: str,
                     seen: set[str], provider: str, objectives: list[str] | None = None,
-                    coverage: dict[str, int] | None = None) -> list[dict]:
+                    coverage: dict[str, int] | None = None,
+                    mix: dict[str, int] | None = None) -> list[dict]:
     if provider == "stub":
-        # Heuristic điền chỗ trống: chỉ gắn nhãn độ khó, không điều chỉnh được độ khó thật
+        # Điền chỗ trống chỉ hỗ trợ nhận biết; không giả lập các mức tư duy cao hơn.
+        if difficulty != "easy":
+            return []
         return _heuristic(context, n=n, difficulty=difficulty, topic_hint=topic_hint, seen=seen)
 
     # Có LLM: tạo hướng dẫn (số câu, độ khó + mô tả mức, chủ đề) + ngữ liệu làm prompt
@@ -534,6 +576,14 @@ def _generate_batch(context: str, topic_hint: str, *, n: int, difficulty: str,
         f"Tạo {n} câu hỏi trắc nghiệm mức {DIFF_VI[difficulty]} ({DIFF_GUIDE[difficulty]}) về \"{topic_hint}\", "
         "mỗi câu 4 lựa chọn A-D, một đáp án đúng và một giải thích ngắn. Trả JSON schema StudyOnline."
     )
+    if mix:
+        allocation = "; ".join(f"{count} câu {DIFF_VI[level]} (difficulty={level})" for level, count in mix.items())
+        instr = (
+            f"Tạo tổng cộng {n} câu hỏi trắc nghiệm về \"{topic_hint}\". Phân bổ: {allocation}. "
+            "Mỗi câu có bốn lựa chọn A-D, một đáp án đúng, giải thích ngắn và nhãn difficulty đúng mức yêu cầu. "
+            + " ".join(f"{level}: {DIFF_GUIDE[level]}." for level in mix)
+            + " Trả JSON schema StudyOnline; xen kẽ nội dung để bao quát các mục tiêu bài học."
+        )
     goals = ""
     if objectives:
         # Đề xoay quanh mục tiêu bài học: mỗi câu liên quan 1 hoặc vài mục tiêu (không bắt buộc gắn đúng 1),
@@ -549,26 +599,38 @@ def _generate_batch(context: str, topic_hint: str, *, n: int, difficulty: str,
         )
         goals = "MỤC TIÊU BÀI HỌC:\n" + "\n".join(f"{i}. {o}" for i, o in enumerate(objectives, 1)) + "\n\n"
     user = f"Hướng dẫn: {instr}\n\n{goals}NGỮ LIỆU:\n{context}"
-    # ~300 token/câu (JSON tiếng Việt: question + 4 lựa chọn + explanation + evidence) + đệm.
-    # Cố định 1400 sẽ bị cắt cụt JSON khi n lớn (vd n=20 cần ~6300 token) -> parse lỗi.
-    max_tokens = min(8192, 300 + 300 * n)
+    # Câu tình huống kèm giải thích và căn cứ có thể vượt 300 token/câu.
+    # Chừa đủ chỗ để JSON không bị cắt rồi phải gọi lại toàn bộ lô.
+    max_tokens = min(8192, 600 + 600 * n)
     context_words = set(_words(context))
     # Gọi LLM tối đa 2 lần; lần 2 nhắc thêm "chỉ trả về JSON" nếu lần 1 không parse được
     for extra in ("", "\n\nLƯU Ý: chỉ trả về JSON hợp lệ, không giải thích thêm."):
         text = model_manager.generate(_SYSTEM, user + extra, max_tokens=max_tokens)
         data = _extract_json(text)
+        if mix and isinstance(data, dict) and isinstance(data.get("questions"), list):
+            # Không đoán mức độ khi model bỏ nhãn trong một lô gồm nhiều mức.
+            data = {**data, "questions": [q for q in data["questions"]
+                    if isinstance(q, dict) and str(q.get("difficulty") or "").strip().lower() in mix]}
         questions = (
-            _clean_questions(data, n=n, difficulty=difficulty, topic_hint=topic_hint, seen=seen, objectives=objectives)
+            _clean_questions(data, n=len(data.get("questions", [])) if mix and isinstance(data, dict) else n,
+                             difficulty=difficulty, topic_hint=topic_hint, seen=seen, objectives=objectives)
             if data else []
         )
+        if mix:
+            counts = dict.fromkeys(mix, 0)
+            selected = []
+            for q in questions:
+                if counts[q["difficulty"]] < mix[q["difficulty"]]:
+                    selected.append(q)
+                    counts[q["difficulty"]] += 1
+            questions = selected
         if questions:
             # Lô được yêu cầu ở mức nào thì gắn đúng mức đó (model đôi khi tự gắn nhãn khác)
             for q in questions:
-                q["difficulty"] = difficulty
+                if not mix:
+                    q["difficulty"] = difficulty
                 # Đối chiếu căn cứ AI trích với tài liệu: không khớp -> giảng viên cần kiểm tra câu này
                 q["grounded"] = _grounded(q["evidence"], context_words)
-            # AI tự giải lại để bắt câu đánh sai đáp án (hay gặp ở câu khó / câu đọc code)
-            _verify(context, questions)
             return questions
     return []
 
@@ -577,7 +639,12 @@ def _generate_batch(context: str, topic_hint: str, *, n: int, difficulty: str,
 # mix = {"easy": x, "medium": y, "hard": z} để phân bổ độ khó; không có mix thì sinh n câu cùng 1 mức.
 def generate(db: Session, *, course_id: int, lesson_id: int | None,
              n: int, difficulty: str, chapter_id: int | None = None,
-             mix: dict[str, int] | None = None) -> dict:
+             mix: dict[str, int] | None = None,
+             on_progress: Callable[[dict], None] | None = None) -> dict:
+    def notify(event: dict) -> None:
+        if on_progress:
+            on_progress(event)
+
     if mix:
         plan = [(lvl, max(0, int(mix.get(lvl) or 0))) for lvl in ("easy", "medium", "hard")]
         plan = [(lvl, k) for lvl, k in plan if k > 0]
@@ -589,27 +656,90 @@ def generate(db: Session, *, course_id: int, lesson_id: int | None,
     else:
         plan = [(difficulty if difficulty in DIFF_VI else "medium", max(1, min(int(n), 20)))]
 
+    notify({"type": "status", "message": "Đang đọc tài liệu để sinh câu hỏi…"})
     # Có chapter_id -> sinh câu hỏi ôn tập bao quát cả chương
     if chapter_id:
         context, topic_hint, chunks, objectives = _build_chapter_context(db, course_id, chapter_id)
     else:
         context, topic_hint, chunks, objectives = _build_context(db, course_id, lesson_id)
     seen = _existing_questions(db, course_id)
+    structure = None
+    if db is not None:
+        from app.services.knowledge import outline
+        structure = outline(db, course_id)
+        allowed = [l for l in structure['lessons'] if (not chapter_id or l['chapter_id'] == chapter_id)
+                   and (not lesson_id or l['id'] == lesson_id)]
+        context += '\n\nMÃ BÀI HỌC ĐƯỢC PHÉP (knowledge_lesson_id):\n' + '\n'.join(f"{l['id']}: {l['title']}" for l in allowed)
     provider = model_manager.active_provider()
+    if provider == "stub" and not any(lvl == "easy" for lvl, _ in plan):
+        raise QuizGenError(
+            "Chế độ offline chỉ tạo câu nhận biết mức dễ. Hãy chọn câu dễ hoặc cấu hình LLM "
+            "để tạo câu trung bình/khó."
+        )
 
-    # Sinh lần lượt từng mức; mức nào lỗi thì bỏ qua, vẫn trả các mức sinh được (meta báo thiếu)
     questions: list[dict] = []
     distribution: dict[str, int] = {}
     coverage: dict[str, int] = {o: 0 for o in objectives}  # số câu đã có của mỗi mục tiêu bài học
-    for lvl, k in plan:
-        batch = _generate_batch(context, topic_hint, n=k, difficulty=lvl, seen=seen, provider=provider,
-                                objectives=objectives, coverage=coverage)
-        distribution[lvl] = len(batch)
-        questions += batch
+
+    def accept(lvl: str, k: int, batch: list[dict]) -> None:
+        # Mỗi worker có tập seen riêng; chỉ thread điều phối gộp và loại trùng giữa các mức.
+        accepted = []
         for q in batch:
+            key = _norm(q["question"])
+            if key in seen:
+                continue
+            seen.add(key)
+            if structure is not None:
+                from app.services.knowledge import resolve
+                candidate = q.get('knowledge_lesson_id')
+                if not any(str(l['id']) == str(candidate) for l in allowed):
+                    candidate = None
+                body = {'topic': q.get('topic')}
+                if candidate:
+                    body.update(knowledge_lesson_id=int(candidate), knowledge_chapter_id=chapter_id)
+                q.update(resolve(db, course_id, body, dict(chapter_id=chapter_id, lesson_id=lesson_id), structure))
+            accepted.append(q)
             for o in q.get("objectives") or []:
                 if o in coverage:
                     coverage[o] += 1
+        distribution[lvl] = len(accepted)
+        questions.extend(accepted)
+        notify({"type": "batch", "difficulty": lvl, "requested": k,
+                "questions": [dict(q) for q in accepted]})
+
+    # Tối đa 12 câu vừa ngân sách đầu ra: gửi ngữ liệu một lần cho cả phân bổ.
+    if provider != "stub" and 1 < len(plan) and sum(k for _, k in plan) <= 12:
+        notify({"type": "status", "message": "Đang sinh bản nháp theo phân bổ độ khó…"})
+        with _llm_slots:
+            batch = _generate_batch(context, topic_hint, n=sum(k for _, k in plan), difficulty="medium",
+                                    seen=set(seen), provider=provider, objectives=objectives,
+                                    coverage=coverage, mix=dict(plan))
+        for lvl, k in plan:
+            accept(lvl, k, [q for q in batch if q["difficulty"] == lvl])
+    elif provider != "stub" and len(plan) > 1:
+        notify({"type": "status", "message": "Đang sinh các nhóm độ khó song song…"})
+
+        def work(lvl: str, k: int) -> list[dict]:
+            # Không đưa Session DB vào worker; ngữ liệu đã đọc xong trước khi chạy song song.
+            with _llm_slots:
+                return _generate_batch(context, topic_hint, n=k, difficulty=lvl, seen=set(existing),
+                                       provider=provider, objectives=objectives, coverage=dict(initial_coverage))
+
+        existing = set(seen)
+        initial_coverage = dict(coverage)
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            pending = {pool.submit(work, lvl, k): (lvl, k) for lvl, k in plan}
+            for future in as_completed(pending):
+                lvl, k = pending[future]
+                accept(lvl, k, future.result())
+        order = {lvl: i for i, (lvl, _) in enumerate(plan)}
+        questions.sort(key=lambda q: order[q["difficulty"]])
+    else:
+        for lvl, k in plan:
+            notify({"type": "status", "message": f"Đang sinh câu hỏi mức {DIFF_VI[lvl]}…"})
+            batch = _generate_batch(context, topic_hint, n=k, difficulty=lvl, seen=set(seen), provider=provider,
+                                    objectives=objectives, coverage=coverage)
+            accept(lvl, k, batch)
     gen_by = "heuristic" if provider == "stub" else f"{provider}:{model_manager.info()['model']}"
 
     if not questions:
@@ -617,6 +747,23 @@ def generate(db: Session, *, course_id: int, lesson_id: int | None,
             "Không sinh được câu hỏi từ ngữ liệu hiện có."
             if provider == "stub"
             else "Model không trả về JSON hợp lệ sau 2 lần thử. Vui lòng thử lại hoặc giảm số câu."
+        )
+
+    # Giải lại cả bản nháp một lần, dùng chung ngữ liệu cho các mức độ khó.
+    # Tránh ba lượt kiểm tra riêng khi giảng viên chọn dễ/trung bình/khó.
+    if provider != "stub":
+        notify({"type": "status", "message": f"Đã nhận {len(questions)} câu. Đang kiểm tra đáp án và độ khó…"})
+        with _llm_slots:
+            _verify(context, questions)
+
+    unverified = sum(1 for q in questions if not q.get("verified") and not q.get("verify"))
+    warnings = ([
+        "Chế độ offline chỉ tạo câu dễ; các câu trung bình/khó được yêu cầu chưa được sinh."
+    ] if provider == "stub" and any(lvl != "easy" for lvl, _ in plan) else [])
+    if provider != "stub" and unverified:
+        warnings.append(
+            f"Chưa tự kiểm tra được đáp án của {unverified} câu. "
+            "Vui lòng kiểm tra nội dung và đáp án trước khi duyệt."
         )
 
     return {
@@ -629,12 +776,19 @@ def generate(db: Session, *, course_id: int, lesson_id: int | None,
             # Số câu yêu cầu / nhận được theo từng mức độ khó
             "distribution_requested": dict(plan),
             "distribution": distribution,
+            "difficulty_basis": "Mức tư duy dự kiến; giảng viên cần thẩm định trước khi sử dụng.",
+            "warnings": warnings,
             # Kết quả AI tự giải lại: số câu khớp đáp án / số câu AI giải ra đáp án khác (cần giảng viên xem)
             "verification": {
+                "unverified": unverified,
                 "verified": sum(1 for q in questions if q.get("verified")),
                 "flagged": sum(1 for q in questions if q.get("verify")),
                 # Số câu có căn cứ AI trích KHÔNG tìm thấy trong tài liệu (chế độ offline không có căn cứ -> không tính)
                 "ungrounded": sum(1 for q in questions if q.get("grounded") is False),
+                "difficulty_flagged": sum(
+                    1 for q in questions
+                    if q.get("difficulty_review", {}).get("matches_requested") is False
+                ),
             },
             # Ngữ liệu: nguyên văn tài liệu bài/chương, hoặc các đoạn truy hồi khi tài liệu quá dài
             "context_mode": "full_document" if chunks and chunks[0].get("full_document") else "retrieval",

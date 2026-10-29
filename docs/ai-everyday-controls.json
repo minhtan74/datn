@@ -1,0 +1,512 @@
+[
+  {
+    "id": "formal-primary-key",
+    "kind": "qa",
+    "role": "student_phuong",
+    "question": "Theo tài liệu, khóa chính có được chứa các giá trị trùng nhau hay không?",
+    "course_id": 6,
+    "lesson_id": null,
+    "input_conversation_id": null,
+    "expected_behavior": "answer",
+    "rubric": "Khóa chính phải duy nhất, không trùng.",
+    "status": 200,
+    "transport_ok": true,
+    "ms": 2210.7,
+    "answer": "Theo tài liệu, khóa chính không được chứa các giá trị trùng nhau vì nó phải là giá trị duy nhất.",
+    "sources": [
+      {
+        "document_id": 55,
+        "document": "Bài 1: Khái niệm cơ sở dữ liệu",
+        "page": 1,
+        "score": 0.6589
+      },
+      {
+        "document_id": 55,
+        "document": "Bài 1: Khái niệm cơ sở dữ liệu",
+        "page": 3,
+        "score": 0.6749
+      },
+      {
+        "document_id": 61,
+        "document": "Bài 7: Chuẩn hoá dữ liệu 1NF-3NF",
+        "page": 1,
+        "score": 0.4423
+      }
+    ],
+    "used_context": true,
+    "conversation_id": 303,
+    "fallback": false,
+    "refused": false,
+    "citation_evidence": [
+      {
+        "citation": {
+          "document_id": 55,
+          "document": "Bài 1: Khái niệm cơ sở dữ liệu",
+          "page": 1,
+          "score": 0.6589
+        },
+        "document": {
+          "id": 55,
+          "course_id": 6,
+          "lesson_id": 46,
+          "title": "Bài 1: Khái niệm cơ sở dữ liệu"
+        },
+        "page_exists": true,
+        "chunks": [
+          {
+            "page": 1,
+            "content": "Trang 1StudyOnline · Tài liệu học tập\nCHƯƠNG 1 · BÀI 1\n1.1. Khái niệm cơ sở dữ liệu\nTài liệu học tập MySQL & Thiết Kế Cơ Sở Dữ Liệu · Nội dung biên soạn trong dự án StudyOnline. Mục tiêu bài học\nPhân biệt cơ sở dữ liệu và hệ quản trị cơ sở dữ liệu. Mô tả bảng, hàng, cột, khóa chính và khóa ngoại. Nhận biết quan hệ một-một, một-nhiều và nhiều-nhiều."
+          },
+          {
+            "page": 1,
+            "content": "ngoại. Nhận biết quan hệ một-một, một-nhiều và nhiều-nhiều. Phân biệt các nhóm câu lệnh SQL trong tài liệu."
+          },
+          {
+            "page": 1,
+            "content": "1. Cơ sở dữ liệu là gì\nCơ sở dữ liệu (CSDL, database) là tập hợp dữ liệu có tổ chức, được lưu trữ có cấu trúc để dễ dàng\ntruy xuất, cập nhật và quản\nlý. Hệ quản trị cơ sở dữ liệu (DBMS — Database Management System) là phần mềm trung gian\ncho phép người dùng/ứng\ndụng tương tác với dữ liệu mà không cần thao tác trực tiếp lên file lưu trữ vật lý."
+          },
+          {
+            "page": 1,
+            "content": "2. CSDL quan hệ (Relational Database)\nCSDL quan hệ tổ chức dữ liệu thành các bảng (table) gồm hàng (row/record) và cột\n(column/field), các bảng có thể liên kết\nvới nhau thông qua khóa (key). MySQL, PostgreSQL, SQL Server, Oracle là các hệ quản trị CSDL\nquan hệ phổ biến, đều dùng\nngôn ngữ SQL (Structured Query Language) để thao tác dữ liệu."
+          },
+          {
+            "page": 1,
+            "content": "3. Khóa chính và khóa ngoại\nKhóa chính (Primary Key) là một hoặc nhiều cột có giá trị duy nhất, không được trùng và không\nđược rỗng (NULL), dùng để\nđịnh danh chính xác từng hàng trong bảng — ví dụ cột id tự động tăng."
+          },
+          {
+            "page": 1,
+            "content": "chính xác từng hàng trong bảng — ví dụ cột id tự động tăng. Khóa ngoại (Foreign Key)\nlà cột trong một bảng\ntham chiếu tới khóa chính của bảng khác, dùng để thiết lập mối quan hệ giữa các bảng, đảm bảo\ntính toàn vẹn dữ liệu (ví dụ\nkhông thể thêm một đơn hàng với mã khách hàng không tồn tại)."
+          }
+        ]
+      },
+      {
+        "citation": {
+          "document_id": 55,
+          "document": "Bài 1: Khái niệm cơ sở dữ liệu",
+          "page": 3,
+          "score": 0.6749
+        },
+        "document": {
+          "id": 55,
+          "course_id": 6,
+          "lesson_id": 46,
+          "title": "Bài 1: Khái niệm cơ sở dữ liệu"
+        },
+        "page_exists": true,
+        "chunks": [
+          {
+            "page": 3,
+            "content": "4. Phân loại CREATE, INSERT, GRANT và COMMIT theo chức năng."
+          },
+          {
+            "page": 3,
+            "content": "5. Nêu một trường hợp cần cân nhắc lưu trữ khóa-giá trị thay cho bảng quan hệ."
+          }
+        ]
+      },
+      {
+        "citation": {
+          "document_id": 61,
+          "document": "Bài 7: Chuẩn hoá dữ liệu 1NF-3NF",
+          "page": 1,
+          "score": 0.4423
+        },
+        "document": {
+          "id": 61,
+          "course_id": 6,
+          "lesson_id": 52,
+          "title": "Bài 7: Chuẩn hoá dữ liệu 1NF-3NF"
+        },
+        "page_exists": true,
+        "chunks": [
+          {
+            "page": 1,
+            "content": "Trang 1StudyOnline · Tài liệu học tập\nCHƯƠNG 3 · BÀI 1\n3.1. Chuẩn hoá dữ liệu (1NF-3NF)\nTài liệu học tập MySQL & Thiết Kế Cơ Sở Dữ Liệu · Nội dung biên soạn trong dự án StudyOnline.\nMục tiêu bài học\nHiểu vì sao cần chuẩn hoá dữ liệu\nPhân biệt các dạng chuẩn 1NF, 2NF và 3NF\nÁp dụng chuẩn hoá để tách một bảng thành nhiều bảng"
+          },
+          {
+            "page": 1,
+            "content": "1. Chuẩn hoá là gì\nChuẩn hoá (normalization) là quá trình tổ chức bảng để giảm dư thừa dữ liệu và tránh lỗi cập nhật.\nDư thừa dữ liệu gây ra các dị thường (anomaly) khi thêm, sửa và xoá: ví dụ lưu tên khoá học lặp\nlại ở hàng nghìn dòng thì sửa tên phải sửa từng dòng. Các dạng chuẩn thường dùng là 1NF, 2NF\nvà 3NF."
+          },
+          {
+            "page": 1,
+            "content": "2. Dạng chuẩn 1NF\nBảng đạt dạng chuẩn 1NF khi mọi cột chỉ chứa giá trị nguyên tố, không có nhóm lặp. Ví dụ cột số\nđiện thoại chứa nhiều số cách nhau bởi dấu phẩy là vi phạm 1NF; cần tách thành các dòng hoặc\nbảng riêng."
+          },
+          {
+            "page": 1,
+            "content": "3. Dạng chuẩn 2NF\nBảng đạt dạng chuẩn 2NF khi đạt 1NF và mọi cột không khoá phụ thuộc đầy đủ vào toàn bộ khoá\nchính. 2NF chỉ cần xét khi khoá chính gồm nhiều cột, loại bỏ phụ thuộc vào một phần của khoá.\nVí dụ bảng dang_ky(ma_hv, ma_khoa, ten_khoa, ngay) có khoá chính (ma_hv, ma_khoa): cột\nten_khoa chỉ phụ thuộc ma_khoa nên vi phạm 2NF. Tách ten_khoa ra bảng khoa_hoc."
+          },
+          {
+            "page": 1,
+            "content": "4. Dạng chuẩn 3NF\nBảng đạt dạng chuẩn 3NF khi đạt 2NF và không có phụ thuộc bắc cầu giữa các cột không khoá.\nPhụ thuộc bắc cầu nghĩa là cột C phụ thuộc cột B, còn cột B lại phụ thuộc khoá chính A.\nVí dụ bảng hoc_vien(ma_hv, ten, ma_lop, ten_lop): ten_lop phụ thuộc ma_lop, còn ma_lop phụ\nthuộc ma_hv nên có phụ thuộc bắc cầu. Tách bảng lop(ma_lop, ten_lop)."
+          }
+        ]
+      }
+    ],
+    "citation_scope_ok": true
+  },
+  {
+    "id": "formal-conversion",
+    "kind": "qa",
+    "role": "student_em",
+    "question": "Trong Python, cách dùng int() và str() để chuyển đổi giữa số và chuỗi như thế nào?",
+    "course_id": 1,
+    "lesson_id": null,
+    "input_conversation_id": null,
+    "expected_behavior": "answer",
+    "rubric": "Giải thích đổi kiểu từ tài liệu biến/kiểu dữ liệu.",
+    "status": 200,
+    "transport_ok": true,
+    "ms": 11739.9,
+    "answer": "Trong Python, bạn dùng hàm int() để chuyển đổi giá trị sang kiểu số nguyên và hàm str() để chuyển đổi giá trị sang kiểu chuỗi. Ví dụ, hàm int() thường được dùng để ép kiểu dữ liệu nhập từ bàn phím (vốn luôn trả về chuỗi) sang số để thực hiện tính toán.",
+    "sources": [
+      {
+        "document_id": 12,
+        "document": "Python Cơ Bản — Tài liệu tổng hợp",
+        "page": null,
+        "score": 0.6405
+      },
+      {
+        "document_id": 65,
+        "document": "Biến và kiểu dữ liệu",
+        "page": 1,
+        "score": 0.6537
+      }
+    ],
+    "used_context": true,
+    "conversation_id": 304,
+    "fallback": false,
+    "refused": false,
+    "citation_evidence": [
+      {
+        "citation": {
+          "document_id": 12,
+          "document": "Python Cơ Bản — Tài liệu tổng hợp",
+          "page": null,
+          "score": 0.6405
+        },
+        "document": {
+          "id": 12,
+          "course_id": 1,
+          "lesson_id": null,
+          "title": "Python Cơ Bản — Tài liệu tổng hợp"
+        },
+        "page_exists": true,
+        "chunks": [
+          {
+            "page": null,
+            "content": "1. Giới thiệu\nPython là ngôn ngữ lập trình bậc cao, thông dịch, đa mục đích, chú trọng tính dễ đọc.\nPython được Guido van Rossum tạo ra và phát hành lần đầu năm 1991. Python được dùng\nrộng rãi trong phát triển web, khoa học dữ liệu, tự động hoá và trí tuệ nhân tạo."
+          },
+          {
+            "page": null,
+            "content": "2. Biến và kiểu dữ liệu\nTrong Python không cần khai báo kiểu tường minh; kiểu được xác định lúc chạy. Các kiểu dữ liệu cơ bản gồm: int (số nguyên), float (số thực), str (chuỗi),\nbool (True/False). Kiểu danh sách có thể thay đổi là list, ví dụ: numbers = [1, 2, 3]. Ngoài ra còn có tuple (bất biến), dict (từ điển key-value) và set (tập hợp)."
+          },
+          {
+            "page": null,
+            "content": "(bất biến), dict (từ điển key-value) và set (tập hợp). Hàm type(x) trả về kiểu của giá trị x; ví dụ type(3.14) trả về <class 'float'>."
+          },
+          {
+            "page": null,
+            "content": "3. Toán tử\nToán tử số học: +, -, *, /, // (chia lấy phần nguyên), % (chia lấy dư), ** (luỹ thừa).\nToán tử so sánh bằng là ==; toán tử khác là !=. Không được nhầm == với phép gán =.\nToán tử logic: and, or, not."
+          },
+          {
+            "page": null,
+            "content": "4. Cấu trúc điều khiển\nCâu lệnh rẽ nhánh dùng if / elif / else. Khối lệnh trong Python được xác định bằng\nthụt lề (thường 4 dấu cách), không dùng dấu ngoặc nhọn."
+          },
+          {
+            "page": null,
+            "content": "5. Vòng lặp\nVòng lặp for dùng để lặp qua từng phần tử của một dãy (list, tuple, str, range).\nVí dụ: for item in [10, 20, 30]: print(item). Vòng lặp while lặp trong khi điều kiện\ncòn đúng. Lệnh break thoát khỏi vòng lặp, lệnh continue bỏ qua phần còn lại của vòng lặp\nhiện tại và sang vòng kế tiếp."
+          },
+          {
+            "page": null,
+            "content": "6. Hàm\nTừ khoá def dùng để định nghĩa hàm, ví dụ: def add(a, b): return a + b.\nHàm có thể có tham số mặc định và trả về giá trị bằng return. Nếu không có return,\nhàm trả về None."
+          },
+          {
+            "page": null,
+            "content": "7. Lập trình hướng đối tượng\nTừ khoá class dùng để định nghĩa lớp. Phương thức khởi tạo là __init__. Tham số đầu\ntiên của phương thức thường là self, tham chiếu tới đối tượng hiện tại."
+          }
+        ]
+      },
+      {
+        "citation": {
+          "document_id": 65,
+          "document": "Biến và kiểu dữ liệu",
+          "page": 1,
+          "score": 0.6537
+        },
+        "document": {
+          "id": 65,
+          "course_id": 1,
+          "lesson_id": 2,
+          "title": "Biến và kiểu dữ liệu"
+        },
+        "page_exists": true,
+        "chunks": [
+          {
+            "page": 1,
+            "content": "Trang 1StudyOnline · Tài liệu học tập\nCHƯƠNG 1 · BÀI 2\n1.2. Biến và kiểu dữ liệu\nTài liệu học tập Python Cơ Bản Cho Người Mới Bắt Đầu · Nội dung biên soạn trong dự án StudyOnline.\nMục tiêu bài học\nHiểu biến là gì và cách đặt tên biến đúng quy tắc\nPhân biệt được các kiểu dữ liệu cơ bản: int, float, str, bool\nBiết kiểm tra và chuyển đổi kiểu dữ liệu"
+          },
+          {
+            "page": 1,
+            "content": "1. Biến trong Python\nBiến là một cái tên dùng để lưu giá trị trong bộ nhớ. Trong Python không cần khai báo kiểu tường\nminh; kiểu được xác định lúc chạy, dựa vào giá trị được gán bằng dấu =."
+          },
+          {
+            "page": 1,
+            "content": "xác định lúc chạy, dựa vào giá trị được gán bằng dấu =. ten = \"An\"\ntuoi = 20\ndiem = 8.5\nda_dang_ky = True\nQuy tắc đặt tên: chỉ gồm chữ cái, chữ số và dấu gạch dưới; không bắt đầu bằng chữ số; phân biệt\nchữ hoa, chữ thường (diem khác Diem); không trùng từ khoá như if, for, class. Nên đặt tên viết\nthường, nối bằng dấu gạch dưới, ví dụ so_luong_sinh_vien."
+          },
+          {
+            "page": 1,
+            "content": "2. Các kiểu dữ liệu cơ bản\nint: số nguyên, ví dụ 10, -3. float: số thực, ví dụ 3.14. str: chuỗi ký tự đặt trong dấu nháy đơn hoặc kép, ví dụ \"Xin chào\". bool: chỉ có hai giá trị True và False. Ngoài ra còn có list (danh sách có thể thay đổi), tuple (bất biến), dict (từ điển key-value) và set\n(tập hợp)."
+          },
+          {
+            "page": 1,
+            "content": "(bất biến), dict (từ điển key-value) và set\n(tập hợp). Hàm type(x) trả về kiểu của giá trị x, ví dụ type(3.14) trả về <class 'float'>."
+          },
+          {
+            "page": 1,
+            "content": "3. Chuyển đổi kiểu\nDùng các hàm int(), float(), str(), bool() để đổi kiểu. Hàm input() luôn trả về chuỗi nên cần ép\nkiểu khi tính toán."
+          }
+        ]
+      }
+    ],
+    "citation_scope_ok": true
+  },
+  {
+    "id": "repeat-print-error",
+    "kind": "qa",
+    "role": "student_em",
+    "question": "sao em gõ print(\"2\" + 3) nó báo lỗi vậy, sửa hộ em với",
+    "course_id": 1,
+    "lesson_id": null,
+    "input_conversation_id": null,
+    "expected_behavior": "answer",
+    "rubric": "Thử lại nguyên văn ca daily-05; không thay kết quả ban đầu.",
+    "status": 200,
+    "transport_ok": true,
+    "ms": 2647.1,
+    "answer": "Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học.",
+    "sources": [],
+    "used_context": false,
+    "conversation_id": 305,
+    "fallback": false,
+    "refused": true,
+    "citation_evidence": [],
+    "citation_scope_ok": true
+  },
+  {
+    "id": "formal-indentation",
+    "kind": "qa",
+    "role": "student_em",
+    "question": "Khối lệnh sau if trong Python cần thụt lề như thế nào?",
+    "course_id": 1,
+    "lesson_id": null,
+    "input_conversation_id": null,
+    "expected_behavior": "answer",
+    "rubric": "Quy tắc thụt lề theo tài liệu if/else.",
+    "status": 200,
+    "transport_ok": true,
+    "ms": 63570.6,
+    "answer": "Khối lệnh trong Python được xác định bằng thụt lề (thường 4 dấu cách), không dùng dấu ngoặc nhọn. Mục tiêu bài học Viết được câu lệnh rẽ nhánh if, elif, else Hiểu vai trò của thụt lề trong Python Kết hợp điều kiện bằng toán tử logic\n\n(Trợ giảng AI đang tạm gián đoạn — đây là nội dung trích trực tiếp từ tài liệu khóa học.)",
+    "sources": [
+      {
+        "document_id": 67,
+        "document": "Câu lệnh if - else",
+        "page": 1,
+        "score": 0.7637
+      },
+      {
+        "document_id": 12,
+        "document": "Python Cơ Bản — Tài liệu tổng hợp",
+        "page": null,
+        "score": 0.7459
+      },
+      {
+        "document_id": 82,
+        "document": "Python Cơ Bản Cho Người Mới Bắt Đầu — Học thêm và thực hành tổng hợp",
+        "page": 1,
+        "score": 0.645
+      }
+    ],
+    "used_context": true,
+    "conversation_id": 306,
+    "fallback": true,
+    "refused": false,
+    "citation_evidence": [
+      {
+        "citation": {
+          "document_id": 67,
+          "document": "Câu lệnh if - else",
+          "page": 1,
+          "score": 0.7637
+        },
+        "document": {
+          "id": 67,
+          "course_id": 1,
+          "lesson_id": 4,
+          "title": "Câu lệnh if - else"
+        },
+        "page_exists": true,
+        "chunks": [
+          {
+            "page": 1,
+            "content": "Trang 1StudyOnline · Tài liệu học tập\nCHƯƠNG 2 · BÀI 1\n2.1. Câu lệnh if - else\nTài liệu học tập Python Cơ Bản Cho Người Mới Bắt Đầu · Nội dung biên soạn trong dự án StudyOnline.\nMục tiêu bài học\nViết được câu lệnh rẽ nhánh if, elif, else\nHiểu vai trò của thụt lề trong Python\nKết hợp điều kiện bằng toán tử logic"
+          },
+          {
+            "page": 1,
+            "content": "1. Câu lệnh if\nCâu lệnh if thực hiện một khối lệnh khi điều kiện đúng. Khối lệnh trong Python được xác định\nbằng thụt lề (thường 4 dấu cách), không dùng dấu ngoặc nhọn. Sau điều kiện phải có dấu hai chấm\n:. diem = 7.5\nif diem >= 5:\nprint(\"Đạt\")\n2. if - else và elif\nelse xử lý trường hợp điều kiện sai."
+          },
+          {
+            "page": 1,
+            "content": "if - else và elif\nelse xử lý trường hợp điều kiện sai. Khi có nhiều nhánh, dùng elif; Python kiểm tra lần lượt từ\ntrên xuống và chỉ chạy nhánh đầu tiên đúng. diem = 7.5\nif diem >= 8:\nprint(\"Giỏi\")\nelif diem >= 6.5:\nprint(\"Khá\")\nelif diem >= 5:\nprint(\"Trung bình\")\nelse:\nprint(\"Yếu\")"
+          }
+        ]
+      },
+      {
+        "citation": {
+          "document_id": 12,
+          "document": "Python Cơ Bản — Tài liệu tổng hợp",
+          "page": null,
+          "score": 0.7459
+        },
+        "document": {
+          "id": 12,
+          "course_id": 1,
+          "lesson_id": null,
+          "title": "Python Cơ Bản — Tài liệu tổng hợp"
+        },
+        "page_exists": true,
+        "chunks": [
+          {
+            "page": null,
+            "content": "1. Giới thiệu\nPython là ngôn ngữ lập trình bậc cao, thông dịch, đa mục đích, chú trọng tính dễ đọc.\nPython được Guido van Rossum tạo ra và phát hành lần đầu năm 1991. Python được dùng\nrộng rãi trong phát triển web, khoa học dữ liệu, tự động hoá và trí tuệ nhân tạo."
+          },
+          {
+            "page": null,
+            "content": "2. Biến và kiểu dữ liệu\nTrong Python không cần khai báo kiểu tường minh; kiểu được xác định lúc chạy. Các kiểu dữ liệu cơ bản gồm: int (số nguyên), float (số thực), str (chuỗi),\nbool (True/False). Kiểu danh sách có thể thay đổi là list, ví dụ: numbers = [1, 2, 3]. Ngoài ra còn có tuple (bất biến), dict (từ điển key-value) và set (tập hợp)."
+          },
+          {
+            "page": null,
+            "content": "(bất biến), dict (từ điển key-value) và set (tập hợp). Hàm type(x) trả về kiểu của giá trị x; ví dụ type(3.14) trả về <class 'float'>."
+          },
+          {
+            "page": null,
+            "content": "3. Toán tử\nToán tử số học: +, -, *, /, // (chia lấy phần nguyên), % (chia lấy dư), ** (luỹ thừa).\nToán tử so sánh bằng là ==; toán tử khác là !=. Không được nhầm == với phép gán =.\nToán tử logic: and, or, not."
+          },
+          {
+            "page": null,
+            "content": "4. Cấu trúc điều khiển\nCâu lệnh rẽ nhánh dùng if / elif / else. Khối lệnh trong Python được xác định bằng\nthụt lề (thường 4 dấu cách), không dùng dấu ngoặc nhọn."
+          },
+          {
+            "page": null,
+            "content": "5. Vòng lặp\nVòng lặp for dùng để lặp qua từng phần tử của một dãy (list, tuple, str, range).\nVí dụ: for item in [10, 20, 30]: print(item). Vòng lặp while lặp trong khi điều kiện\ncòn đúng. Lệnh break thoát khỏi vòng lặp, lệnh continue bỏ qua phần còn lại của vòng lặp\nhiện tại và sang vòng kế tiếp."
+          },
+          {
+            "page": null,
+            "content": "6. Hàm\nTừ khoá def dùng để định nghĩa hàm, ví dụ: def add(a, b): return a + b.\nHàm có thể có tham số mặc định và trả về giá trị bằng return. Nếu không có return,\nhàm trả về None."
+          },
+          {
+            "page": null,
+            "content": "7. Lập trình hướng đối tượng\nTừ khoá class dùng để định nghĩa lớp. Phương thức khởi tạo là __init__. Tham số đầu\ntiên của phương thức thường là self, tham chiếu tới đối tượng hiện tại."
+          }
+        ]
+      },
+      {
+        "citation": {
+          "document_id": 82,
+          "document": "Python Cơ Bản Cho Người Mới Bắt Đầu — Học thêm và thực hành tổng hợp",
+          "page": 1,
+          "score": 0.645
+        },
+        "document": {
+          "id": 82,
+          "course_id": 1,
+          "lesson_id": null,
+          "title": "Python Cơ Bản Cho Người Mới Bắt Đầu — Học thêm và thực hành tổng hợp"
+        },
+        "page_exists": true,
+        "chunks": [
+          {
+            "page": 1,
+            "content": "PYTHON CƠ BẢN CHO NGƯỜI MỚI BẮT ĐẦU · CHƯƠNG HỌC THÊM: THỰC HÀNH MỞ RỘNG · BÀI TỔNG HỢP\nHọc thêm, bài tập và hướng dẫn giải\nPython — Sổ tay học thêm và thực hành tổng hợp\nTài liệu tự biên soạn bổ sung cho chín bài Python của khóa. Đọc sau phần chính; không cần học\nthuộc mọi ví dụ. Mục tiêu là giải thích được kết quả và tự kiểm tra chương trình."
+          },
+          {
+            "page": 1,
+            "content": "là giải thích được kết quả và tự kiểm tra chương trình. Mục tiêu học thêm\nPhân biệt phép gán, sao chép và thay đổi đối tượng\nKiểm tra dữ liệu đầu vào và các giá trị biên\nTổ chức chương trình quản lý sinh viên bằng hàm và lớp"
+          },
+          {
+            "page": 1,
+            "content": "1. Biến tham chiếu tới đối tượng\nPhép gán không luôn tạo bản sao. Với danh sách, hai tên có thể cùng trỏ tới một đối tượng:\na = [7, 8]\nb = a\nb.append(9)\nprint(a) # [7, 8, 9]\nc = a.copy()\nc.append(10)\nprint(a) # [7, 8, 9]\ncopy() là sao chép nông: danh sách ngoài mới nhưng đối tượng lồng bên trong vẫn có thể dùng\nchung."
+          },
+          {
+            "page": 1,
+            "content": "mới nhưng đối tượng lồng bên trong vẫn có thể dùng\nchung. Với danh sách số như ví dụ, sao chép nông đủ để append không ảnh hưởng danh sách gốc. Đây là lỗi thường gặp khi tạo nhiều danh sách điểm từ cùng một mẫu."
+          },
+          {
+            "page": 1,
+            "content": "2. Điều kiện, vòng lặp và giá trị biên\nVới xếp loại điểm, kiểm tra đầu vào trước khi phân loại. Đặt điều kiện điểm cao trước khi dùng elif\ntheo ngưỡng giảm dần để không nuốt các trường hợp sau."
+          }
+        ]
+      }
+    ],
+    "citation_scope_ok": true
+  },
+  {
+    "id": "cleanup-303",
+    "kind": "control",
+    "role": "student_phuong",
+    "method": "DELETE",
+    "path": "/api/ai/conversations/303",
+    "status": 200,
+    "expected": 200,
+    "transport_ok": true,
+    "ms": 9.5,
+    "response": {
+      "success": true,
+      "message": "Đã xóa cuộc trò chuyện."
+    }
+  },
+  {
+    "id": "cleanup-304",
+    "kind": "control",
+    "role": "student_em",
+    "method": "DELETE",
+    "path": "/api/ai/conversations/304",
+    "status": 200,
+    "expected": 200,
+    "transport_ok": true,
+    "ms": 7.7,
+    "response": {
+      "success": true,
+      "message": "Đã xóa cuộc trò chuyện."
+    }
+  },
+  {
+    "id": "cleanup-305",
+    "kind": "control",
+    "role": "student_em",
+    "method": "DELETE",
+    "path": "/api/ai/conversations/305",
+    "status": 200,
+    "expected": 200,
+    "transport_ok": true,
+    "ms": 7.7,
+    "response": {
+      "success": true,
+      "message": "Đã xóa cuộc trò chuyện."
+    }
+  },
+  {
+    "id": "cleanup-306",
+    "kind": "control",
+    "role": "student_em",
+    "method": "DELETE",
+    "path": "/api/ai/conversations/306",
+    "status": 200,
+    "expected": 200,
+    "transport_ok": true,
+    "ms": 8.0,
+    "response": {
+      "success": true,
+      "message": "Đã xóa cuộc trò chuyện."
+    }
+  }
+]

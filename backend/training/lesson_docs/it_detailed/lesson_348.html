@@ -1,0 +1,69 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Mạng máy tính cơ bản</div>
+<p class="path">Chương 3: Ethernet và mạng cục bộ · Bài 2</p>
+<h1>VLAN và kết nối Wi-Fi</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Mạng máy tính cơ bản.</li><li>Chương 3: Ethernet và mạng cục bộ.</li><li>Các bài trong chương: Ethernet, địa chỉ MAC và ARP; VLAN và kết nối Wi-Fi.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Giải thích phân đoạn LAN bằng VLAN và lựa chọn cấu hình Wi-Fi cơ bản.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>VLAN chia hạ tầng switch thành các miền broadcast logic. Hai cổng access thuộc hai VLAN khác nhau không tự trao đổi như cùng một LAN chỉ vì nối chung switch. Muốn liên lạc giữa VLAN thường cần định tuyến và chính sách cho phép. Trunk có thể mang nhiều VLAN với cơ chế gắn thẻ như IEEE 802.1Q.</p>
+<p>Wi-Fi là kết nối vô tuyến qua điểm truy cập. SSID là tên mạng được công bố, không phải mật khẩu. Nhiễu, vật cản, số thiết bị và vị trí AP đều ảnh hưởng chất lượng. Băng 5 GHz thường có nhiều lựa chọn kênh hơn 2,4 GHz nhưng không bảo đảm xuyên vật cản tốt hơn.</p>
+<p>Dùng cơ chế bảo vệ được thiết bị hỗ trợ như WPA2 hoặc WPA3, mật khẩu riêng đủ mạnh và firmware được cập nhật. Không coi ẩn SSID là thay thế mã hóa. VLAN là phân đoạn logic, không tự mã hóa nội dung; quyền truy cập giữa các vùng vẫn cần được thiết kế.</p>
+<h2>1. Phân biệt access, trunk và inter-VLAN routing</h2>
+<p>Access port phục vụ thiết bị cuối trong một VLAN theo cấu hình. Trunk mang nhiều VLAN qua liên kết giữa các thiết bị hỗ trợ. Một VLAN ID giống nhau trên hai switch chưa đủ bảo đảm thông nếu trunk không mang VLAN đó hoặc đường nối bị lỗi. Tra cứu cấu hình và trạng thái trước khi thay đổi.</p>
+<p>Định tuyến giữa VLAN có thể dùng router hoặc switch lớp 3. Cần địa chỉ gateway cho từng mạng con và chính sách cho phép các luồng mong muốn. VLAN 10 và VLAN 20 không tự trở thành một mạng chỉ vì đặt cùng subnet IP; cách cấu hình chồng lấn này còn gây khó chẩn đoán.</p>
+<h2>2. Thiết kế Wi-Fi theo nhu cầu</h2>
+<p>Khảo sát vùng phủ, số người đồng thời, vật cản và nhiễu. Dải 2,4 GHz và 5 GHz có đặc điểm truyền khác nhau; tốc độ công bố không phải tốc độ thực của mọi người dùng. Nhiều client chia sẻ môi trường vô tuyến. Kết nối Wi-Fi mạnh không chứng minh đường Internet hoặc DNS tốt.</p>
+<h2>3. Ví dụ tách mạng khách</h2>
+<pre><code>SSID Student -&gt; VLAN 10 -&gt; DHCP pool Student -&gt; Internet, máy chủ học tập
+SSID Guest   -&gt; VLAN 20 -&gt; DHCP pool Guest   -&gt; chỉ Internet theo chính sách</code></pre>
+<p>SSID là nhãn, VLAN là phân đoạn, DHCP là cấu hình, firewall là quyền truy cập. Cần kiểm tra tất cả các thành phần thay vì đồng nhất chúng.</p>
+<h2>4. Bài thực hành có tiêu chí</h2>
+<p>Thiết kế hai SSID cho 20 học viên và nhóm khách. Nộp ánh xạ SSID/VLAN/subnet, vị trí AP dự kiến, luồng được phép và cách kiểm tra. Đáp án chấp nhận phải có dải không chồng lấn, đúng gateway, nhận DHCP và xác nhận Guest không mở được vùng quản trị. Không công bố mật khẩu trong báo cáo. Đổi một tham số mỗi lần và lưu bản cấu hình lab trước khi thử.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>Vẽ sơ đồ hai nhóm người dùng trên hai switch. Chỉ ra cổng access, trunk, thiết bị định tuyến và chính sách cần kiểm tra khi mạng khách không được truy cập máy chủ nội bộ.</p>
+</div>
+<h2>Hướng giải bài tập bổ sung</h2>
+<p>Cùng VLAN có thể trải trên nhiều switch qua trunk. Khác VLAN cần đường định tuyến phù hợp; đặt tên SSID khác nhau chưa tự chứng minh đã cách ly mạng.</p>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>VLAN chủ yếu dùng để làm gì?</li><li>Cổng trunk thường có nhiệm vụ gì?</li><li>SSID là gì?</li><li>Hai VLAN khác nhau thường cần gì để trao đổi IP?</li><li>Ẩn SSID có thay thế mã hóa Wi-Fi không?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Chia miền broadcast logic. VLAN phân đoạn lớp liên kết thành các miền logic.</li><li>Mang lưu lượng nhiều VLAN. Trunk cho phép nhiều VLAN dùng chung liên kết.</li><li>Tên mạng Wi-Fi. SSID nhận diện mạng không dây.</li><li>Định tuyến giữa VLAN và chính sách cho phép. Phân đoạn VLAN cần lớp định tuyến để trao đổi giữa các mạng.</li><li>Không. Ẩn tên mạng không cung cấp bảo đảm mã hóa.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://www.netacad.com/courses/networking-basics</li><li>https://developer.mozilla.org/en-US/docs/Web/HTTP</li></ul></body></html>

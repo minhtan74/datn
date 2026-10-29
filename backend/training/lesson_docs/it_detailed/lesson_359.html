@@ -1,0 +1,74 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Cấu trúc dữ liệu và giải thuật cơ bản</div>
+<p class="path">Chương 5: Ưu tiên và đồ thị · Bài 1</p>
+<h1>Heap và hàng đợi ưu tiên</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Cấu trúc dữ liệu và giải thuật cơ bản.</li><li>Chương 5: Ưu tiên và đồ thị.</li><li>Các bài trong chương: Heap và hàng đợi ưu tiên; Đồ thị, BFS và DFS.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Mô phỏng min-heap và phân biệt ưu tiên với FIFO.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Hàng đợi ưu tiên lấy phần tử theo độ ưu tiên, không nhất thiết theo thứ tự đến. Min-heap nhị phân thường biểu diễn bằng mảng và hình dạng cây nhị phân hoàn chỉnh; mỗi nút cha có khóa không lớn hơn các con. Phần tử nhỏ nhất ở gốc nhưng toàn bộ mảng chưa được sắp xếp.</p>
+<p>Với chỉ số bắt đầu từ 0, con trái của i ở 2*i+1, con phải ở 2*i+2. Chèn phần tử vào cuối rồi đưa lên để khôi phục tính heap; lấy min thay gốc bằng phần tử cuối rồi đưa xuống. Chiều cao O(log n) dẫn tới chi phí chèn/lấy min O(log n); xem min O(1).</p>
+<p>Heap hữu ích khi liên tục cần công việc ưu tiên hoặc k phần tử nổi bật. Nếu nhiều việc bằng ưu tiên và cần giữ thứ tự đến, bổ sung bộ đếm thứ tự. Không dùng heap để thay thế mọi yêu cầu tìm kiếm theo khóa tùy ý.</p>
+<h2>1. Bất biến và chỉ số</h2>
+<p>Min-heap yêu cầu cha không lớn hơn các con, không yêu cầu toàn nhánh trái nhỏ hơn toàn nhánh phải như BST. Hình dạng hoàn chỉnh giúp biểu diễn bằng mảng. Với i&gt;0, cha ở (i-1)//2; con ở 2*i+1 và 2*i+2 nếu các chỉ số còn trong mảng.</p>
+<h2>2. Cài đặt sử dụng thư viện chuẩn</h2>
+<pre><code>import heapq
+
+heap = []
+for value in [5, 2, 8, 1]:
+    heapq.heappush(heap, value)
+output = [heapq.heappop(heap) for _ in range(len(heap))]
+assert output == [1, 2, 5, 8]</code></pre>
+<p>Đây là minh họa API min-heap đã có từ lâu, không phụ thuộc các hàm max-heap mới. Không gọi heappop trên heap rỗng nếu chưa quy định xử lý lỗi.</p>
+<h2>3. Truy vết thao tác và độ phức tạp</h2>
+<p>Thêm 1 vào [2,5,8] đặt ở cuối rồi đổi với cha 5, sau đó với cha 2. Lấy min thay gốc bằng phần tử cuối, đưa xuống qua con nhỏ hơn để khôi phục bất biến. Chiều cao là O(log n). heapify cả mảng có thể O(n); không nhân n với log n nếu đang phân tích thuật toán heapify tuyến tính.</p>
+<h2>4. Ưu tiên bằng nhau và ứng dụng</h2>
+<p>Lưu tuple (priority, sequence, task) để giữ thứ tự đến khi priority bằng nhau và tránh so sánh trực tiếp task không có thứ tự. Cần nêu quy ước số nhỏ là ưu tiên cao hay ngược lại.</p>
+<p>Thực hành: thêm ba việc có ưu tiên 2,1,2; mong đợi việc ưu tiên 1 trước rồi hai việc ưu tiên 2 theo sequence. Giải thích tại sao heap không tối ưu mọi yêu cầu tìm theo mã task tùy ý.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>Mô phỏng thêm 1 vào heap [2,5,8]. Lập lịch ba công việc có ưu tiên khác nhau và giải thích quy ước khi bằng ưu tiên.</p>
+</div>
+<h2>Hướng giải bài tập bổ sung</h2>
+<p>Kết quả lấy lần lượt là 1,2,5,8 nếu không thêm phần tử khác. Nêu rõ số ưu tiên nhỏ hay lớn được phục vụ trước.</p>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Gốc min-heap chứa gì?</li><li>Mảng biểu diễn heap có luôn sắp xếp tăng dần không?</li><li>Con trái của chỉ số i trong heap mảng 0-based ở đâu?</li><li>Chèn vào heap nhị phân thường có chi phí nào?</li><li>Priority queue khác queue FIFO ở điểm nào?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Khóa nhỏ nhất. Quy tắc heap đảm bảo min tại gốc.</li><li>Không. Quy tắc cha–con yếu hơn thứ tự tuyến tính toàn mảng.</li><li>2*i+1. Công thức xuất phát từ biểu diễn cây theo từng mức.</li><li>O(log n). Phần tử có thể đi qua chiều cao heap.</li><li>Lấy theo ưu tiên thay vì bắt buộc thứ tự đến. Tiêu chí lấy phần tử là độ ưu tiên.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://opendatastructures.org/</li><li>https://docs.python.org/3/tutorial/datastructures.html</li><li>https://docs.python.org/3/library/heapq.html</li></ul></body></html>

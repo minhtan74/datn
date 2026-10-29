@@ -1,0 +1,85 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Cấu trúc dữ liệu và giải thuật cơ bản</div>
+<p class="path">Chương 1: Cấu trúc dữ liệu tuyến tính · Bài 2</p>
+<h1>Ngăn xếp và hàng đợi</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Cấu trúc dữ liệu và giải thuật cơ bản.</li><li>Chương 1: Cấu trúc dữ liệu tuyến tính.</li><li>Các bài trong chương: Mảng và danh sách liên kết; Ngăn xếp và hàng đợi.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Mô phỏng LIFO, FIFO và chọn stack hoặc queue đúng tình huống.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Stack là ngăn xếp theo nguyên tắc LIFO: phần tử vào sau được lấy trước. push thêm vào đỉnh, pop lấy khỏi đỉnh, peek xem đỉnh mà không xóa. Với triển khai phù hợp, các thao tác cơ bản có thể O(1). Gọi pop trên stack rỗng cần được xử lý theo quy ước của chương trình.</p>
+<p>Queue là hàng đợi theo nguyên tắc FIFO: phần tử vào trước được lấy trước. enqueue thêm vào cuối, dequeue lấy ở đầu. Có thể dùng danh sách liên kết hoặc bộ đệm vòng để tránh dịch toàn bộ phần tử mỗi lần lấy đầu.</p>
+<p>Stack hữu ích cho kiểm tra dấu ngoặc và quay lui; queue hữu ích cho xử lý công việc theo thứ tự đến và duyệt BFS. Cấu trúc mô tả quy tắc lấy dữ liệu, không đồng nghĩa với một kiểu lưu bộ nhớ duy nhất.</p>
+<h2>1. Giao diện trừu tượng trước triển khai</h2>
+<p>Stack có push, pop, peek, is_empty; queue có enqueue, dequeue, peek. Quy định rõ thao tác trên cấu trúc rỗng: báo lỗi, trả sentinel hoặc một kiểu kết quả riêng. Không dùng None làm dấu lỗi nếu None cũng là dữ liệu hợp lệ mà không có cách phân biệt.</p>
+<p>Queue cài bằng list và pop(0) trong Python thường phải dịch phần tử. deque hỗ trợ thao tác ở hai đầu phù hợp hơn cho queue. Đây là lựa chọn triển khai, không thay đổi quy tắc FIFO.</p>
+<h2>2. Truy vết hai cấu trúc</h2>
+<pre><code>Thao tác        Stack trả      Queue trả
+Thêm A          -              -
+Thêm B          -              -
+Lấy một         B              A
+Thêm C          -              -
+Lấy một         C              B</code></pre>
+<p>Hãy tự ghi phần tử còn lại sau từng dòng. Mô phỏng trên giấy giúp phân biệt quy tắc trước khi viết mã.</p>
+<h2>3. Kiểm tra dấu ngoặc bằng stack</h2>
+<pre><code>def balanced(text):
+    pairs = {')': '(', ']': '[', '}': '{'}
+    stack = []
+    for char in text:
+        if char in '([{':
+            stack.append(char)
+        elif char in pairs:
+            if not stack or stack.pop() != pairs[char]:
+                return False
+    return not stack
+
+assert balanced('([])')
+assert not balanced('([)]')
+assert not balanced('(')</code></pre>
+<p>Đây là ví dụ kiểm tra chuỗi dấu ngoặc, không phải bộ phân tích cú pháp Python: ngoặc trong chuỗi ký tự hoặc comment chưa được xử lý theo ngữ pháp ngôn ngữ.</p>
+<h2>4. Bài tập và lời giải</h2>
+<p>Thêm test chuỗi rỗng, dấu đóng ở đầu, ba loại ngoặc lồng nhau. Với n ký tự, mỗi ký tự xử lý một lần: thời gian O(n), bộ nhớ tối đa O(n). Đối với hàng đợi công việc, nêu cách ứng xử khi đầy và khi rỗng; không suy ra FIFO đồng nghĩa mọi công việc hoàn tất theo thứ tự nếu nhiều worker chạy đồng thời.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>thực hiện push(A), push(B), pop(), push(C), pop() trên stack. Làm chuỗi tương tự với enqueue và dequeue rồi so sánh kết quả.</p>
+</div>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Stack tuân theo nguyên tắc nào?</li><li>Queue tuân theo nguyên tắc nào?</li><li>push(A), push(B), pop() trên stack trả về gì?</li><li>Thao tác peek trên stack thường làm gì?</li><li>Thuật toán BFS thường dùng cấu trúc nào?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>LIFO. LIFO nghĩa là vào sau, ra trước.</li><li>FIFO. FIFO nghĩa là vào trước, ra trước.</li><li>B. B được đưa vào sau nên nằm trên đỉnh.</li><li>Xem đỉnh mà không xóa. peek đọc phần tử trên đỉnh nhưng giữ nguyên stack.</li><li>Queue. Queue giúp xử lý các đỉnh theo thứ tự khám phá từng lớp.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://opendatastructures.org/</li><li>https://docs.python.org/3/tutorial/datastructures.html</li><li>https://docs.python.org/3/library/heapq.html</li></ul></body></html>

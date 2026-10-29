@@ -1,0 +1,72 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Kiểm thử phần mềm nhập môn</div>
+<p class="path">Chương 1: Nền tảng kiểm thử · Bài 2</p>
+<h1>Thiết kế test case</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Kiểm thử phần mềm nhập môn.</li><li>Chương 1: Nền tảng kiểm thử.</li><li>Các bài trong chương: Mục tiêu và các mức kiểm thử; Thiết kế test case.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Viết test case có thể lặp lại và đánh giá được.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Một test case nên có mục tiêu, điều kiện trước, dữ liệu đầu vào, các bước và kết quả mong đợi. Kết quả mong đợi cần cụ thể theo yêu cầu; câu như “hệ thống chạy tốt” không đủ để xác định pass hay fail.</p>
+<p>Phân biệt kết quả mong đợi với kết quả thực tế. Khi chạy test, ghi môi trường và phiên bản để có thể tái hiện. Dữ liệu thử cần kiểm soát, không dùng tài khoản hoặc giao dịch thật nếu có môi trường kiểm thử riêng.</p>
+<p>Bao phủ cả luồng hợp lệ và các tình huống không hợp lệ: thiếu trường bắt buộc, sai kiểu, không đủ quyền hoặc tài nguyên không tồn tại. Không chỉ kiểm tra giao diện báo thành công mà bỏ qua việc dữ liệu thực sự được lưu đúng.</p>
+<h2>1. Mẫu test case có thể thực hiện</h2>
+<pre><code>ID: ENR-001
+Mục tiêu: ghi danh khóa miễn phí một lần
+Điều kiện trước: tài khoản lab hoạt động, khóa published, chưa ghi danh
+Dữ liệu: user U1, course C1, price=0
+Bước 1: mở danh sách khóa, chọn C1
+Bước 2: bấm Đăng ký, chờ request hoàn tất
+Kỳ vọng: một phản hồi thành công, một ghi danh, khóa có trong Khóa học của tôi
+Sau test: chỉ dọn dữ liệu do ca này tạo trong database test</code></pre>
+<p>Kết quả thực tế và bằng chứng chỉ điền sau khi chạy. Không điền “pass” sẵn trong mẫu để minh họa như một kết quả thật.</p>
+<h2>2. Bao phủ tình huống thay vì nhân bản thao tác</h2>
+<p>Test dương kiểm tra đăng ký hợp lệ. Test âm kiểm tra khóa không tồn tại, chưa xác thực, khóa không cho đăng ký hoặc đầu vào sai kiểu theo hợp đồng. Test lặp/đồng thời kiểm tra tính duy nhất. Một bộ test chỉ đổi tên tài khoản nhưng đi cùng đường thành công không bao phủ các rủi ro này.</p>
+<h2>3. Kết quả mong đợi đủ cụ thể</h2>
+<p>“Đăng ký tốt” không kiểm chứng rõ. “API phản hồi thành công theo hợp đồng; bảng ghi danh tăng đúng một bản ghi U1–C1; không phát sinh thanh toán cho khóa miễn phí” là các quan sát cụ thể. Nếu không có quyền xem database, dùng API kiểm tra hoặc cơ chế bằng chứng được nhóm cho phép, không bỏ qua xác minh.</p>
+<h2>4. Bài tập có đáp án định hướng</h2>
+<p>Viết ENR-002 cho bấm lặp và ENR-003 cho không đủ quyền. Phân biệt luồng bấm ở UI với hai request thật: khóa nút chỉ là một lớp chống lặp. Đáp án cần kiểm tra ràng buộc server và không tạo bản ghi thứ hai. Ghi rõ mã lỗi dự kiến theo hợp đồng hiện tại, không đoán mọi dự án đều trả 409.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>viết test case cho học viên chưa ghi danh mở bài có giới hạn. Ghi điều kiện trước, bước truy cập, kết quả về quyền và xác nhận không phát sinh tiến độ học trái phép.</p>
+</div>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Thành phần nào giúp quyết định test pass hay fail?</li><li>Điều kiện trước mô tả điều gì?</li><li>Test đăng nhập chỉ dùng mật khẩu đúng đã đủ chưa?</li><li>Kết quả mong đợi nào kiểm chứng được rõ hơn?</li><li>Vì sao ghi phiên bản và môi trường khi chạy test?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Kết quả mong đợi cụ thể. Cần đối chiếu kết quả thực tế với kết quả mong đợi.</li><li>Trạng thái cần có trước khi thực hiện test. Ví dụ tài khoản đã ghi danh là một điều kiện trước.</li><li>Chưa, cần tình huống sai và dữ liệu không hợp lệ phù hợp. Luồng không hợp lệ có thể bộc lộ lỗi xác thực và xử lý đầu vào.</li><li>API trả 403 và không tạo bản ghi tiến độ. Mã phản hồi và trạng thái dữ liệu là các quan sát cụ thể.</li><li>Giúp tái hiện và phân tích kết quả. Hành vi có thể khác theo cấu hình hoặc phiên bản.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf</li></ul></body></html>

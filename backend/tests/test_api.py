@@ -619,13 +619,14 @@ def test_vnpay_payment_flow(tokens, course, monkeypatch):
 
     monkeypatch.setattr(settings, "vnpay_tmn_code", "TESTCODE")
     monkeypatch.setattr(settings, "vnpay_hash_secret", "TESTSECRET")
-    monkeypatch.setattr(settings, "payment_mock", False)
     T, S = _h(tokens["teacher"]), _h(tokens["student"])
     client.put("/api/courses", headers=T, json={"id": course, "title": "PYTEST VNPay", "description": "d",
                                                   "price": 499000, "status": "published"})
     try:
-        # Không còn thanh toán giả lập cho khóa có phí
-        assert client.post("/api/payments", headers=S, json={"course_id": course, "method": "card"}).status_code == 400
+        # Mọi phương thức gửi vào endpoint cũ đều không thể thanh toán khóa có phí.
+        for method in ("vnpay", "card", "momo", "zalopay", "bank_transfer"):
+            assert client.post("/api/payments", headers=S, json={"course_id": course, "method": method}).status_code == 400
+        assert course not in client.get("/api/enrollments?ids_only=1", headers=S).json()["data"]
 
         # 1) Tạo đơn -> URL VNPay có chữ ký hợp lệ, số tiền x100
         r = client.post("/api/payments/vnpay/create", headers=S, json={"course_id": course}).json()

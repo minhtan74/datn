@@ -1,0 +1,478 @@
+{
+  "events": [
+    {
+      "type": "status",
+      "message": "\u0110ang \u0111\u1ecdc t\u00e0i li\u1ec7u \u0111\u1ec3 sinh c\u00e2u h\u1ecfi\u2026",
+      "elapsed_sec": 0.01
+    },
+    {
+      "type": "status",
+      "message": "\u0110ang sinh b\u1ea3n nh\u00e1p theo ph\u00e2n b\u1ed5 \u0111\u1ed9 kh\u00f3\u2026",
+      "elapsed_sec": 0.13
+    },
+    {
+      "type": "heartbeat",
+      "elapsed_sec": 15.14
+    },
+    {
+      "type": "batch",
+      "difficulty": "easy",
+      "requested": 3,
+      "questions": [
+        {
+          "question": "Th\u00e0nh ph\u1ea7n n\u00e0o sau \u0111\u00e2y KH\u00d4NG n\u1eb1m trong b\u1ed1n th\u00e0nh ph\u1ea7n ch\u00ednh c\u1ee7a m\u1ed9t h\u1ec7 th\u1ed1ng m\u00e1y t\u00ednh?",
+          "options": {
+            "A": "Ph\u1ea7n c\u1ee9ng",
+            "B": "H\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+            "C": "C\u00e1c ch\u01b0\u01a1ng tr\u00ecnh \u1ee9ng d\u1ee5ng",
+            "D": "B\u1ed9 nh\u1edb \u0111\u1ec7m"
+          },
+          "correct_answer": "D",
+          "explanation": "Theo ng\u1eef li\u1ec7u, b\u1ed1n th\u00e0nh ph\u1ea7n ch\u00ednh c\u1ee7a h\u1ec7 th\u1ed1ng m\u00e1y t\u00ednh bao g\u1ed3m: ph\u1ea7n c\u1ee9ng, h\u1ec7 \u0111i\u1ec1u h\u00e0nh, c\u00e1c ch\u01b0\u01a1ng tr\u00ecnh \u1ee9ng d\u1ee5ng v\u00e0 ng\u01b0\u1eddi s\u1eed d\u1ee5ng.",
+          "difficulty": "easy",
+          "topic": "B\u00e0i 1: Kh\u00e1i ni\u1ec7m v\u1ec1 h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+          "objectives": [
+            "B\u00e0i 1: Kh\u00e1i ni\u1ec7m v\u1ec1 h\u1ec7 \u0111i\u1ec1u h\u00e0nh: N\u00eau \u0111\u01b0\u1ee3c b\u1ed1n th\u00e0nh ph\u1ea7n ch\u00ednh c\u1ee7a m\u1ed9t h\u1ec7 th\u1ed1ng m\u00e1y t\u00ednh"
+          ],
+          "evidence": "M\u1ed9t h\u1ec7 th\u1ed1ng m\u00e1y t\u00ednh th\u01b0\u1eddng \u0111\u01b0\u1ee3c chia l\u00e0m b\u1ed1n ph\u1ea7n ch\u00ednh: ph\u1ea7n c\u1ee9ng, h\u1ec7 \u0111i\u1ec1u h\u00e0nh, c\u00e1c ch\u01b0\u01a1ng tr\u00ecnh \u1ee9ng d\u1ee5ng v\u00e0 ng\u01b0\u1eddi s\u1eed d\u1ee5ng.",
+          "grounded": true
+        },
+        {
+          "question": "M\u1ee5c ti\u00eau c\u01a1 b\u1ea3n c\u1ee7a h\u1ec7 \u0111i\u1ec1u h\u00e0nh l\u00e0 g\u00ec?",
+          "options": {
+            "A": "T\u1ed1i \u01b0u h\u00f3a ph\u1ea7n c\u1ee9ng v\u00e0 gi\u1ea3m chi ph\u00ed s\u1ea3n xu\u1ea5t",
+            "B": "Cung c\u1ea5p m\u00f4i tr\u01b0\u1eddng thi h\u00e0nh ch\u01b0\u01a1ng tr\u00ecnh v\u00e0 h\u1ed7 tr\u1ee3 thao t\u00e1c h\u1ec7 th\u1ed1ng hi\u1ec7u qu\u1ea3",
+            "C": "Thay th\u1ebf ho\u00e0n to\u00e0n vai tr\u00f2 c\u1ee7a ng\u01b0\u1eddi l\u1eadp tr\u00ecnh",
+            "D": "T\u0103ng t\u1ed1c \u0111\u1ed9 x\u1eed l\u00fd c\u1ee7a c\u00e1c thi\u1ebft b\u1ecb ngo\u1ea1i vi"
+          },
+          "correct_answer": "B",
+          "explanation": "Ng\u1eef li\u1ec7u n\u00eau r\u00f5 hai m\u1ee5c ti\u00eau c\u01a1 b\u1ea3n: cung c\u1ea5p m\u00f4i tr\u01b0\u1eddng \u0111\u1ec3 thi h\u00e0nh ch\u01b0\u01a1ng tr\u00ecnh v\u00e0 h\u1ed7 tr\u1ee3 c\u00e1c thao t\u00e1c tr\u00ean h\u1ec7 th\u1ed1ng m\u00e1y t\u00ednh hi\u1ec7u qu\u1ea3 h\u01a1n.",
+          "difficulty": "easy",
+          "topic": "B\u00e0i 1: Kh\u00e1i ni\u1ec7m v\u1ec1 h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+          "objectives": [
+            "B\u00e0i 1: Kh\u00e1i ni\u1ec7m v\u1ec1 h\u1ec7 \u0111i\u1ec1u h\u00e0nh: N\u1eafm \u0111\u01b0\u1ee3c hai m\u1ee5c ti\u00eau c\u01a1 b\u1ea3n c\u1ee7a h\u1ec7 \u0111i\u1ec1u h\u00e0nh"
+          ],
+          "evidence": "M\u1ee5c ti\u00eau c\u1ee7a h\u1ec7 \u0111i\u1ec1u h\u00e0nh l\u00e0 cung c\u1ea5p m\u1ed9t m\u00f4i tr\u01b0\u1eddng \u0111\u1ec3 ng\u01b0\u1eddi s\u1eed d\u1ee5ng c\u00f3 th\u1ec3 thi h\u00e0nh c\u00e1c ch\u01b0\u01a1ng tr\u00ecnh. M\u1ee5c ti\u00eau th\u1ee9 hai l\u00e0 h\u1ed7 tr\u1ee3 cho c\u00e1c thao t\u00e1c tr\u00ean h\u1ec7 th\u1ed1ng m\u00e1y t\u00ednh hi\u1ec7u qu\u1ea3 h\u01a1n.",
+          "grounded": true
+        },
+        {
+          "question": "Trong h\u1ec7 th\u1ed1ng x\u1eed l\u00fd theo l\u00f4, b\u1ed9 gi\u00e1m s\u00e1t th\u01b0\u1eddng tr\u1ef1c c\u00f3 vai tr\u00f2 g\u00ec?",
+          "options": {
+            "A": "Gi\u00e1m s\u00e1t vi\u1ec7c th\u1ef1c hi\u1ec7n d\u00e3y c\u00e1c c\u00f4ng vi\u1ec7c m\u1ed9t c\u00e1ch t\u1ef1 \u0111\u1ed9ng",
+            "B": "\u0110i\u1ec1u khi\u1ec3n tr\u1ef1c ti\u1ebfp c\u00e1c thi\u1ebft b\u1ecb nh\u1eadp xu\u1ea5t",
+            "C": "Ph\u00e2n ph\u1ed1i t\u00e0i nguy\u00ean cho nhi\u1ec1u ng\u01b0\u1eddi d\u00f9ng c\u00f9ng l\u00fac",
+            "D": "T\u0103ng t\u1ed1c \u0111\u1ed9 x\u1eed l\u00fd c\u1ee7a CPU l\u00ean g\u1ea5p nhi\u1ec1u l\u1ea7n"
+          },
+          "correct_answer": "A",
+          "explanation": "B\u1ed9 gi\u00e1m s\u00e1t th\u01b0\u1eddng tr\u1ef1c \u0111\u01b0\u1ee3c thi\u1ebft k\u1ebf \u0111\u1ec3 gi\u00e1m s\u00e1t vi\u1ec7c th\u1ef1c hi\u1ec7n d\u00e3y c\u00e1c c\u00f4ng vi\u1ec7c m\u1ed9t c\u00e1ch t\u1ef1 \u0111\u1ed9ng m\u00e0 kh\u00f4ng c\u1ea7n s\u1ef1 can thi\u1ec7p c\u1ee7a ng\u01b0\u1eddi l\u1eadp tr\u00ecnh.",
+          "difficulty": "easy",
+          "topic": "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+          "objectives": [
+            "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh: Hi\u1ec3u c\u00e1c kh\u00e1i ni\u1ec7m: b\u1ed9 gi\u00e1m s\u00e1t th\u01b0\u1eddng tr\u1ef1c, x\u1eed l\u00fd off-line, spooling, \u0111a ch\u01b0\u01a1ng, \u0111a nhi\u1ec7m"
+          ],
+          "evidence": "M\u1ed9t ch\u01b0\u01a1ng tr\u00ecnh, c\u00f2n g\u1ecdi l\u00e0 b\u1ed9 gi\u00e1m s\u00e1t th\u01b0\u1eddng tr\u1ef1c, \u0111\u01b0\u1ee3c thi\u1ebft k\u1ebf \u0111\u1ec3 gi\u00e1m s\u00e1t vi\u1ec7c th\u1ef1c hi\u1ec7n d\u00e3y c\u00e1c c\u00f4ng vi\u1ec7c m\u1ed9t c\u00e1ch t\u1ef1 \u0111\u1ed9ng",
+          "grounded": true
+        }
+      ],
+      "elapsed_sec": 23.4
+    },
+    {
+      "type": "batch",
+      "difficulty": "medium",
+      "requested": 5,
+      "questions": [
+        {
+          "question": "\u0110i\u1ec3m kh\u00e1c bi\u1ec7t ch\u00ednh gi\u1eefa h\u1ec7 th\u1ed1ng chia s\u1ebb th\u1eddi gian v\u00e0 h\u1ec7 \u0111a ch\u01b0\u01a1ng l\u00e0 g\u00ec?",
+          "options": {
+            "A": "H\u1ec7 chia s\u1ebb th\u1eddi gian kh\u00f4ng s\u1eed d\u1ee5ng \u0111a ch\u01b0\u01a1ng",
+            "B": "H\u1ec7 chia s\u1ebb th\u1eddi gian chuy\u1ec3n \u0111\u1ed5i CPU gi\u1eefa c\u00e1c ti\u1ebfn tr\u00ecnh r\u1ea5t nhanh \u0111\u1ec3 t\u1ea1o c\u1ea3m gi\u00e1c \u0111\u1ed3ng th\u1eddi",
+            "C": "H\u1ec7 \u0111a ch\u01b0\u01a1ng kh\u00f4ng cho ph\u00e9p nhi\u1ec1u ng\u01b0\u1eddi d\u00f9ng c\u00f9ng l\u00fac",
+            "D": "H\u1ec7 chia s\u1ebb th\u1eddi gian ch\u1ec9 d\u00e0nh cho c\u00e1c h\u1ec7 th\u1ed1ng \u0111\u01a1n nhi\u1ec7m"
+          },
+          "correct_answer": "B",
+          "explanation": "H\u1ec7 chia s\u1ebb th\u1eddi gian l\u00e0 m\u1edf r\u1ed9ng c\u1ee7a h\u1ec7 \u0111a ch\u01b0\u01a1ng, trong \u0111\u00f3 th\u1eddi gian chuy\u1ec3n \u0111\u1ed5i gi\u1eefa c\u00e1c ti\u1ebfn tr\u00ecnh di\u1ec5n ra r\u1ea5t nhanh \u0111\u1ec3 ng\u01b0\u1eddi d\u00f9ng c\u00f3 c\u1ea3m gi\u00e1c c\u00e1c ti\u1ebfn tr\u00ecnh \u0111ang ch\u1ea1y c\u00f9ng l\u00fac.",
+          "difficulty": "medium",
+          "topic": "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+          "objectives": [
+            "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh: Ph\u00e2n bi\u1ec7t \u0111\u01b0\u1ee3c s\u00e1u lo\u1ea1i h\u1ec7 th\u1ed1ng: x\u1eed l\u00fd theo l\u00f4, l\u00f4 \u0111a ch\u01b0\u01a1ng, chia s\u1ebb th\u1eddi gian, song song, ph\u00e2n t\u00e1n v\u00e0 th\u1eddi gian th\u1ef1c"
+          ],
+          "evidence": "Nhi\u1ec1u c\u00f4ng vi\u1ec7c c\u00f9ng \u0111\u01b0\u1ee3c th\u1ef1c hi\u1ec7n th\u00f4ng qua c\u01a1 ch\u1ebf chuy\u1ec3n \u0111\u1ed5i c\u1ee7a CPU nh\u01b0 h\u1ec7 \u0111a ch\u01b0\u01a1ng nh\u01b0ng th\u1eddi gian m\u1ed7i l\u1ea7n chuy\u1ec3n \u0111\u1ed5i di\u1ec5n ra r\u1ea5t nhanh.",
+          "grounded": true
+        },
+        {
+          "question": "Trong \u0111a x\u1eed l\u00fd b\u1ea5t \u0111\u1ed1i x\u1ee9ng, b\u1ed9 x\u1eed l\u00fd ch\u00ednh c\u00f3 vai tr\u00f2 g\u00ec?",
+          "options": {
+            "A": "M\u1ed7i b\u1ed9 x\u1eed l\u00fd ch\u1ea1y m\u1ed9t b\u1ea3n sao h\u1ec7 \u0111i\u1ec1u h\u00e0nh \u0111\u1ed9c l\u1eadp",
+            "B": "C\u00e1c b\u1ed9 x\u1eed l\u00fd t\u1ef1 th\u1ecfa thu\u1eadn c\u00f4ng vi\u1ec7c v\u1edbi nhau",
+            "C": "Ki\u1ec3m so\u00e1t to\u00e0n b\u1ed9 h\u1ec7 th\u1ed1ng v\u00e0 l\u1eadp l\u1ecbch cho c\u00e1c b\u1ed9 x\u1eed l\u00fd kh\u00e1c",
+            "D": "Ch\u1ec9 th\u1ef1c hi\u1ec7n c\u00e1c c\u00f4ng vi\u1ec7c nh\u1eadp xu\u1ea5t"
+          },
+          "correct_answer": "C",
+          "explanation": "Trong m\u00f4 h\u00ecnh ch\u1ee7 - t\u1edb c\u1ee7a \u0111a x\u1eed l\u00fd b\u1ea5t \u0111\u1ed1i x\u1ee9ng, b\u1ed9 x\u1eed l\u00fd ch\u00ednh ki\u1ec3m so\u00e1t h\u1ec7 th\u1ed1ng v\u00e0 l\u1eadp l\u1ecbch cho c\u00e1c b\u1ed9 x\u1eed l\u00fd kh\u00e1c.",
+          "difficulty": "medium",
+          "topic": "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+          "objectives": [
+            "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh: Ph\u00e2n bi\u1ec7t \u0111a x\u1eed l\u00fd \u0111\u1ed1i x\u1ee9ng v\u00e0 b\u1ea5t \u0111\u1ed1i x\u1ee9ng; th\u1eddi gian th\u1ef1c c\u1ee9ng v\u00e0 m\u1ec1m"
+          ],
+          "evidence": "M\u1ed9t b\u1ed9 x\u1eed l\u00fd ch\u00ednh ki\u1ec3m so\u00e1t to\u00e0n b\u1ed9 h\u1ec7 th\u1ed1ng, c\u00e1c b\u1ed9 x\u1eed l\u00fd kh\u00e1c th\u1ef1c hi\u1ec7n theo l\u1ec7nh c\u1ee7a b\u1ed9 x\u1eed l\u00fd ch\u00ednh... B\u1ed9 x\u1eed l\u00fd ch\u00ednh s\u1ebd l\u1eadp l\u1ecbch cho c\u00e1c b\u1ed9 x\u1eed l\u00fd kh\u00e1c.",
+          "grounded": true
+        },
+        {
+          "question": "\u0110\u1eb7c \u0111i\u1ec3m n\u00e0o sau \u0111\u00e2y ph\u00e2n bi\u1ec7t h\u1ec7 th\u1ed1ng ph\u00e2n t\u00e1n v\u1edbi h\u1ec7 th\u1ed1ng song song?",
+          "options": {
+            "A": "H\u1ec7 th\u1ed1ng ph\u00e2n t\u00e1n c\u00f3 nhi\u1ec1u b\u1ed9 x\u1eed l\u00fd, h\u1ec7 th\u1ed1ng song song ch\u1ec9 c\u00f3 m\u1ed9t",
+            "B": "H\u1ec7 th\u1ed1ng ph\u00e2n t\u00e1n kh\u00f4ng chia s\u1ebb b\u1ed9 nh\u1edb v\u00e0 \u0111\u1ed3ng h\u1ed3 chung",
+            "C": "H\u1ec7 th\u1ed1ng song song kh\u00f4ng th\u1ec3 th\u1ef1c hi\u1ec7n t\u00ednh to\u00e1n song song",
+            "D": "H\u1ec7 th\u1ed1ng ph\u00e2n t\u00e1n kh\u00f4ng cho ph\u00e9p chia s\u1ebb t\u00e0i nguy\u00ean"
+          },
+          "correct_answer": "B",
+          "explanation": "H\u1ec7 th\u1ed1ng ph\u00e2n t\u00e1n kh\u00e1c h\u1ec7 th\u1ed1ng song song \u1edf ch\u1ed7 c\u00e1c b\u1ed9 x\u1eed l\u00fd kh\u00f4ng chia s\u1ebb b\u1ed9 nh\u1edb v\u00e0 \u0111\u1ed3ng h\u1ed3, m\u1ed7i b\u1ed9 x\u1eed l\u00fd c\u00f3 b\u1ed9 nh\u1edb c\u1ee5c b\u1ed9 ri\u00eang.",
+          "difficulty": "medium",
+          "topic": "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+          "objectives": [
+            "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh: Ph\u00e2n bi\u1ec7t \u0111\u01b0\u1ee3c s\u00e1u lo\u1ea1i h\u1ec7 th\u1ed1ng: x\u1eed l\u00fd theo l\u00f4, l\u00f4 \u0111a ch\u01b0\u01a1ng, chia s\u1ebb th\u1eddi gian, song song, ph\u00e2n t\u00e1n v\u00e0 th\u1eddi gian th\u1ef1c"
+          ],
+          "evidence": "H\u1ec7 th\u1ed1ng n\u00e0y c\u0169ng t\u01b0\u01a1ng t\u1ef1 nh\u01b0 h\u1ec7 th\u1ed1ng chia s\u1ebb th\u1eddi gian nh\u01b0ng c\u00e1c b\u1ed9 x\u1eed l\u00fd kh\u00f4ng chia s\u1ebb b\u1ed9 nh\u1edb v\u00e0 \u0111\u1ed3ng h\u1ed3, thay v\u00e0o \u0111\u00f3 m\u1ed7i b\u1ed9 x\u1eed l\u00fd c\u00f3 b\u1ed9 nh\u1edb c\u1ee5c b\u1ed9 ri\u00eang.",
+          "grounded": true
+        },
+        {
+          "question": "T\u1ea1i sao vi\u1ec7c t\u0103ng s\u1ed1 l\u01b0\u1ee3ng b\u1ed9 x\u1eed l\u00fd trong h\u1ec7 th\u1ed1ng song song kh\u00f4ng l\u00e0m t\u0103ng t\u1ed1c \u0111\u1ed9 x\u1eed l\u00fd theo \u0111\u00fang t\u1ec9 l\u1ec7 n l\u1ea7n?",
+          "options": {
+            "A": "Do c\u00e1c b\u1ed9 x\u1eed l\u00fd ph\u1ea3i ti\u00eau t\u1ed1n th\u1eddi gian li\u00ean l\u1ea1c v\u1edbi nhau",
+            "B": "Do h\u1ec7 \u0111i\u1ec1u h\u00e0nh kh\u00f4ng h\u1ed7 tr\u1ee3 \u0111a x\u1eed l\u00fd",
+            "C": "Do c\u00e1c b\u1ed9 x\u1eed l\u00fd kh\u00f4ng th\u1ec3 chia s\u1ebb thi\u1ebft b\u1ecb ngo\u1ea1i vi",
+            "D": "Do b\u1ed9 nh\u1edb b\u1ecb gi\u1edbi h\u1ea1n dung l\u01b0\u1ee3ng"
+          },
+          "correct_answer": "A",
+          "explanation": "Ng\u1eef li\u1ec7u ch\u1ec9 ra r\u1eb1ng c\u00e1c b\u1ed9 x\u1eed l\u00fd trong h\u1ec7 th\u1ed1ng song song li\u00ean l\u1ea1c b\u00ean trong v\u1edbi nhau, d\u1eabn \u0111\u1ebfn vi\u1ec7c t\u0103ng s\u1ed1 l\u01b0\u1ee3ng b\u1ed9 x\u1eed l\u00fd kh\u00f4ng \u0111\u1ed3ng ngh\u0129a v\u1edbi vi\u1ec7c t\u0103ng t\u1ed1c \u0111\u1ed9 theo t\u1ec9 l\u1ec7 n l\u1ea7n.",
+          "difficulty": "medium",
+          "topic": "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+          "objectives": [
+            "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh: Ph\u00e2n bi\u1ec7t \u0111\u01b0\u1ee3c s\u00e1u lo\u1ea1i h\u1ec7 th\u1ed1ng: x\u1eed l\u00fd theo l\u00f4, l\u00f4 \u0111a ch\u01b0\u01a1ng, chia s\u1ebb th\u1eddi gian, song song, ph\u00e2n t\u00e1n v\u00e0 th\u1eddi gian th\u1ef1c"
+          ],
+          "evidence": "C\u00e1c b\u1ed9 x\u1eed l\u00fd n\u00e0y li\u00ean l\u1ea1c b\u00ean trong v\u1edbi nhau... Nh\u01b0ng kh\u00f4ng ph\u1ea3i theo \u0111\u00fang t\u1ec9 l\u1ec7 th\u1eddi gian, ngh\u0129a l\u00e0 c\u00f3 n b\u1ed9 x\u1eed l\u00fd kh\u00f4ng c\u00f3 ngh\u0129a l\u00e0 s\u1ebd th\u1ef1c hi\u1ec7n nhanh h\u01a1n n l\u1ea7n.",
+          "grounded": true
+        }
+      ],
+      "elapsed_sec": 23.4
+    },
+    {
+      "type": "batch",
+      "difficulty": "hard",
+      "requested": 2,
+      "questions": [
+        {
+          "question": "M\u1ed9t h\u1ec7 th\u1ed1ng \u0111i\u1ec1u khi\u1ec3n thi\u1ebft b\u1ecb y t\u1ebf y\u00eau c\u1ea7u k\u1ebft qu\u1ea3 ph\u1ea3i ch\u00ednh x\u00e1c tuy\u1ec7t \u0111\u1ed1i trong kho\u1ea3ng th\u1eddi gian b\u1ecb th\u00fac \u00e9p nghi\u00eam ng\u1eb7t. \u0110\u00e2y l\u00e0 lo\u1ea1i h\u1ec7 th\u1ed1ng n\u00e0o?",
+          "options": {
+            "A": "H\u1ec7 th\u1ed1ng th\u1eddi gian th\u1ef1c m\u1ec1m",
+            "B": "H\u1ec7 th\u1ed1ng th\u1eddi gian th\u1ef1c c\u1ee9ng",
+            "C": "H\u1ec7 th\u1ed1ng chia s\u1ebb th\u1eddi gian",
+            "D": "H\u1ec7 th\u1ed1ng x\u1eed l\u00fd theo l\u00f4"
+          },
+          "correct_answer": "B",
+          "explanation": "H\u1ec7 th\u1ed1ng th\u1eddi gian th\u1ef1c c\u1ee9ng y\u00eau c\u1ea7u c\u00f4ng vi\u1ec7c ph\u1ea3i ho\u00e0n t\u1ea5t \u0111\u00fang l\u00fac, th\u01b0\u1eddng d\u00f9ng trong c\u00e1c \u1ee9ng d\u1ee5ng t\u1eadn hi\u1ebfn v\u1edbi \u0111\u00f2i h\u1ecfi kh\u1eaft khe v\u1ec1 th\u1eddi gian.",
+          "difficulty": "hard",
+          "topic": "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+          "objectives": [
+            "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh: Ph\u00e2n bi\u1ec7t \u0111a x\u1eed l\u00fd \u0111\u1ed1i x\u1ee9ng v\u00e0 b\u1ea5t \u0111\u1ed1i x\u1ee9ng; th\u1eddi gian th\u1ef1c c\u1ee9ng v\u00e0 m\u1ec1m"
+          ],
+          "evidence": "H\u1ec7 th\u1ed1ng th\u1eddi gian th\u1ef1c c\u1ee9ng l\u00e0 c\u00f4ng vi\u1ec7c \u0111\u01b0\u1ee3c ho\u00e0n t\u1ea5t \u0111\u00fang l\u00fac... H\u1ec7 th\u1ed1ng x\u1eed l\u00fd th\u1eddi gian th\u1ef1c \u0111\u01b0\u1ee3c s\u1eed d\u1ee5ng khi c\u00f3 nh\u1eefng \u0111\u00f2i h\u1ecfi kh\u1eaft khe v\u1ec1 th\u1eddi gian",
+          "grounded": true
+        },
+        {
+          "question": "X\u00e9t m\u1ed9t h\u1ec7 th\u1ed1ng m\u00e1y t\u00ednh l\u1edbn \u0111ang ch\u1ea1y nhi\u1ec1u \u1ee9ng d\u1ee5ng c\u00f9ng l\u00fac. N\u1ebfu h\u1ec7 \u0111i\u1ec1u h\u00e0nh \u01b0u ti\u00ean t\u1ed1i \u01b0u h\u00f3a vi\u1ec7c s\u1eed d\u1ee5ng t\u00e0i nguy\u00ean \u0111\u1ec3 \u0111\u1ea1t hi\u1ec7u qu\u1ea3 cao nh\u1ea5t cho nhi\u1ec1u ng\u01b0\u1eddi d\u00f9ng, nh\u01b0ng \u0111i\u1ec1u n\u00e0y l\u00e0m gi\u1ea3m t\u1ed1c \u0111\u1ed9 ph\u1ea3n h\u1ed3i c\u1ee7a t\u1eebng ch\u01b0\u01a1ng tr\u00ecnh \u0111\u01a1n l\u1ebb, th\u00ec \u0111\u00e2y l\u00e0 minh ch\u1ee9ng cho \u0111i\u1ec1u g\u00ec?",
+          "options": {
+            "A": "S\u1ef1 t\u01b0\u01a1ng ph\u1ea3n gi\u1eefa hai m\u1ee5c ti\u00eau c\u01a1 b\u1ea3n c\u1ee7a h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+            "B": "L\u1ed7i trong vi\u1ec7c l\u1eadp l\u1ecbch c\u1ee7a h\u1ec7 \u0111i\u1ec1u h\u00e0nh \u0111a ch\u01b0\u01a1ng",
+            "C": "S\u1ef1 th\u1ea5t b\u1ea1i c\u1ee7a h\u1ec7 th\u1ed1ng chia s\u1ebb th\u1eddi gian",
+            "D": "H\u1ec7 th\u1ed1ng \u0111ang ho\u1ea1t \u0111\u1ed9ng \u1edf ch\u1ebf \u0111\u1ed9 th\u1eddi gian th\u1ef1c c\u1ee9ng"
+          },
+          "correct_answer": "A",
+          "explanation": "Ng\u1eef li\u1ec7u ch\u1ec9 ra hai m\u1ee5c ti\u00eau: thi h\u00e0nh ch\u01b0\u01a1ng tr\u00ecnh d\u1ec5 d\u00e0ng v\u00e0 thao t\u00e1c hi\u1ec7u qu\u1ea3. Hai m\u1ee5c ti\u00eau n\u00e0y c\u00f3 ph\u1ea7n t\u01b0\u01a1ng ph\u1ea3n, \u0111\u1eb7c bi\u1ec7t trong h\u1ec7 th\u1ed1ng l\u1edbn.",
+          "difficulty": "hard",
+          "topic": "B\u00e0i 1: Kh\u00e1i ni\u1ec7m v\u1ec1 h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+          "objectives": [
+            "B\u00e0i 1: Kh\u00e1i ni\u1ec7m v\u1ec1 h\u1ec7 \u0111i\u1ec1u h\u00e0nh: N\u1eafm \u0111\u01b0\u1ee3c hai m\u1ee5c ti\u00eau c\u01a1 b\u1ea3n c\u1ee7a h\u1ec7 \u0111i\u1ec1u h\u00e0nh"
+          ],
+          "evidence": "M\u1ee5c ti\u00eau c\u01a1 b\u1ea3n c\u1ee7a n\u00f3 l\u00e0 gi\u00fap cho vi\u1ec7c thi h\u00e0nh c\u00e1c ch\u01b0\u01a1ng tr\u00ecnh d\u1ec5 d\u00e0ng h\u01a1n. M\u1ee5c ti\u00eau th\u1ee9 hai l\u00e0 h\u1ed7 tr\u1ee3 cho c\u00e1c thao t\u00e1c tr\u00ean h\u1ec7 th\u1ed1ng m\u00e1y t\u00ednh hi\u1ec7u qu\u1ea3 h\u01a1n. Tuy nhi\u00ean hai m\u1ee5c ti\u00eau n\u00e0y c\u0169ng c\u00f3 ph\u1ea7n t\u01b0\u01a1ng ph\u1ea3n",
+          "grounded": true
+        }
+      ],
+      "elapsed_sec": 23.4
+    },
+    {
+      "type": "status",
+      "message": "\u0110\u00e3 nh\u1eadn 9 c\u00e2u. \u0110ang ki\u1ec3m tra \u0111\u00e1p \u00e1n v\u00e0 \u0111\u1ed9 kh\u00f3\u2026",
+      "elapsed_sec": 23.4
+    },
+    {
+      "type": "complete",
+      "data": {
+        "questions": [
+          {
+            "question": "Th\u00e0nh ph\u1ea7n n\u00e0o sau \u0111\u00e2y KH\u00d4NG n\u1eb1m trong b\u1ed1n th\u00e0nh ph\u1ea7n ch\u00ednh c\u1ee7a m\u1ed9t h\u1ec7 th\u1ed1ng m\u00e1y t\u00ednh?",
+            "options": {
+              "A": "Ph\u1ea7n c\u1ee9ng",
+              "B": "H\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+              "C": "C\u00e1c ch\u01b0\u01a1ng tr\u00ecnh \u1ee9ng d\u1ee5ng",
+              "D": "B\u1ed9 nh\u1edb \u0111\u1ec7m"
+            },
+            "correct_answer": "D",
+            "explanation": "Theo ng\u1eef li\u1ec7u, b\u1ed1n th\u00e0nh ph\u1ea7n ch\u00ednh c\u1ee7a h\u1ec7 th\u1ed1ng m\u00e1y t\u00ednh bao g\u1ed3m: ph\u1ea7n c\u1ee9ng, h\u1ec7 \u0111i\u1ec1u h\u00e0nh, c\u00e1c ch\u01b0\u01a1ng tr\u00ecnh \u1ee9ng d\u1ee5ng v\u00e0 ng\u01b0\u1eddi s\u1eed d\u1ee5ng.",
+            "difficulty": "easy",
+            "topic": "B\u00e0i 1: Kh\u00e1i ni\u1ec7m v\u1ec1 h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+            "objectives": [
+              "B\u00e0i 1: Kh\u00e1i ni\u1ec7m v\u1ec1 h\u1ec7 \u0111i\u1ec1u h\u00e0nh: N\u00eau \u0111\u01b0\u1ee3c b\u1ed1n th\u00e0nh ph\u1ea7n ch\u00ednh c\u1ee7a m\u1ed9t h\u1ec7 th\u1ed1ng m\u00e1y t\u00ednh"
+            ],
+            "evidence": "M\u1ed9t h\u1ec7 th\u1ed1ng m\u00e1y t\u00ednh th\u01b0\u1eddng \u0111\u01b0\u1ee3c chia l\u00e0m b\u1ed1n ph\u1ea7n ch\u00ednh: ph\u1ea7n c\u1ee9ng, h\u1ec7 \u0111i\u1ec1u h\u00e0nh, c\u00e1c ch\u01b0\u01a1ng tr\u00ecnh \u1ee9ng d\u1ee5ng v\u00e0 ng\u01b0\u1eddi s\u1eed d\u1ee5ng.",
+            "grounded": true,
+            "difficulty_review": {
+              "assessed": "easy",
+              "matches_requested": true,
+              "reason": "Nh\u1eadn bi\u1ebft th\u00f4ng tin tr\u1ef1c ti\u1ebfp t\u1eeb v\u0103n b\u1ea3n."
+            },
+            "verified": "D"
+          },
+          {
+            "question": "M\u1ee5c ti\u00eau c\u01a1 b\u1ea3n c\u1ee7a h\u1ec7 \u0111i\u1ec1u h\u00e0nh l\u00e0 g\u00ec?",
+            "options": {
+              "A": "T\u1ed1i \u01b0u h\u00f3a ph\u1ea7n c\u1ee9ng v\u00e0 gi\u1ea3m chi ph\u00ed s\u1ea3n xu\u1ea5t",
+              "B": "Cung c\u1ea5p m\u00f4i tr\u01b0\u1eddng thi h\u00e0nh ch\u01b0\u01a1ng tr\u00ecnh v\u00e0 h\u1ed7 tr\u1ee3 thao t\u00e1c h\u1ec7 th\u1ed1ng hi\u1ec7u qu\u1ea3",
+              "C": "Thay th\u1ebf ho\u00e0n to\u00e0n vai tr\u00f2 c\u1ee7a ng\u01b0\u1eddi l\u1eadp tr\u00ecnh",
+              "D": "T\u0103ng t\u1ed1c \u0111\u1ed9 x\u1eed l\u00fd c\u1ee7a c\u00e1c thi\u1ebft b\u1ecb ngo\u1ea1i vi"
+            },
+            "correct_answer": "B",
+            "explanation": "Ng\u1eef li\u1ec7u n\u00eau r\u00f5 hai m\u1ee5c ti\u00eau c\u01a1 b\u1ea3n: cung c\u1ea5p m\u00f4i tr\u01b0\u1eddng \u0111\u1ec3 thi h\u00e0nh ch\u01b0\u01a1ng tr\u00ecnh v\u00e0 h\u1ed7 tr\u1ee3 c\u00e1c thao t\u00e1c tr\u00ean h\u1ec7 th\u1ed1ng m\u00e1y t\u00ednh hi\u1ec7u qu\u1ea3 h\u01a1n.",
+            "difficulty": "easy",
+            "topic": "B\u00e0i 1: Kh\u00e1i ni\u1ec7m v\u1ec1 h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+            "objectives": [
+              "B\u00e0i 1: Kh\u00e1i ni\u1ec7m v\u1ec1 h\u1ec7 \u0111i\u1ec1u h\u00e0nh: N\u1eafm \u0111\u01b0\u1ee3c hai m\u1ee5c ti\u00eau c\u01a1 b\u1ea3n c\u1ee7a h\u1ec7 \u0111i\u1ec1u h\u00e0nh"
+            ],
+            "evidence": "M\u1ee5c ti\u00eau c\u1ee7a h\u1ec7 \u0111i\u1ec1u h\u00e0nh l\u00e0 cung c\u1ea5p m\u1ed9t m\u00f4i tr\u01b0\u1eddng \u0111\u1ec3 ng\u01b0\u1eddi s\u1eed d\u1ee5ng c\u00f3 th\u1ec3 thi h\u00e0nh c\u00e1c ch\u01b0\u01a1ng tr\u00ecnh. M\u1ee5c ti\u00eau th\u1ee9 hai l\u00e0 h\u1ed7 tr\u1ee3 cho c\u00e1c thao t\u00e1c tr\u00ean h\u1ec7 th\u1ed1ng m\u00e1y t\u00ednh hi\u1ec7u qu\u1ea3 h\u01a1n.",
+            "grounded": true,
+            "difficulty_review": {
+              "assessed": "easy",
+              "matches_requested": true,
+              "reason": "Ghi nh\u1edb \u0111\u1ecbnh ngh\u0129a m\u1ee5c ti\u00eau c\u01a1 b\u1ea3n c\u1ee7a h\u1ec7 \u0111i\u1ec1u h\u00e0nh."
+            },
+            "verified": "B"
+          },
+          {
+            "question": "Trong h\u1ec7 th\u1ed1ng x\u1eed l\u00fd theo l\u00f4, b\u1ed9 gi\u00e1m s\u00e1t th\u01b0\u1eddng tr\u1ef1c c\u00f3 vai tr\u00f2 g\u00ec?",
+            "options": {
+              "A": "Gi\u00e1m s\u00e1t vi\u1ec7c th\u1ef1c hi\u1ec7n d\u00e3y c\u00e1c c\u00f4ng vi\u1ec7c m\u1ed9t c\u00e1ch t\u1ef1 \u0111\u1ed9ng",
+              "B": "\u0110i\u1ec1u khi\u1ec3n tr\u1ef1c ti\u1ebfp c\u00e1c thi\u1ebft b\u1ecb nh\u1eadp xu\u1ea5t",
+              "C": "Ph\u00e2n ph\u1ed1i t\u00e0i nguy\u00ean cho nhi\u1ec1u ng\u01b0\u1eddi d\u00f9ng c\u00f9ng l\u00fac",
+              "D": "T\u0103ng t\u1ed1c \u0111\u1ed9 x\u1eed l\u00fd c\u1ee7a CPU l\u00ean g\u1ea5p nhi\u1ec1u l\u1ea7n"
+            },
+            "correct_answer": "A",
+            "explanation": "B\u1ed9 gi\u00e1m s\u00e1t th\u01b0\u1eddng tr\u1ef1c \u0111\u01b0\u1ee3c thi\u1ebft k\u1ebf \u0111\u1ec3 gi\u00e1m s\u00e1t vi\u1ec7c th\u1ef1c hi\u1ec7n d\u00e3y c\u00e1c c\u00f4ng vi\u1ec7c m\u1ed9t c\u00e1ch t\u1ef1 \u0111\u1ed9ng m\u00e0 kh\u00f4ng c\u1ea7n s\u1ef1 can thi\u1ec7p c\u1ee7a ng\u01b0\u1eddi l\u1eadp tr\u00ecnh.",
+            "difficulty": "easy",
+            "topic": "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+            "objectives": [
+              "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh: Hi\u1ec3u c\u00e1c kh\u00e1i ni\u1ec7m: b\u1ed9 gi\u00e1m s\u00e1t th\u01b0\u1eddng tr\u1ef1c, x\u1eed l\u00fd off-line, spooling, \u0111a ch\u01b0\u01a1ng, \u0111a nhi\u1ec7m"
+            ],
+            "evidence": "M\u1ed9t ch\u01b0\u01a1ng tr\u00ecnh, c\u00f2n g\u1ecdi l\u00e0 b\u1ed9 gi\u00e1m s\u00e1t th\u01b0\u1eddng tr\u1ef1c, \u0111\u01b0\u1ee3c thi\u1ebft k\u1ebf \u0111\u1ec3 gi\u00e1m s\u00e1t vi\u1ec7c th\u1ef1c hi\u1ec7n d\u00e3y c\u00e1c c\u00f4ng vi\u1ec7c m\u1ed9t c\u00e1ch t\u1ef1 \u0111\u1ed9ng",
+            "grounded": true,
+            "difficulty_review": {
+              "assessed": "easy",
+              "matches_requested": true,
+              "reason": "Nh\u1eadn di\u1ec7n kh\u00e1i ni\u1ec7m trong b\u00e0i 2."
+            },
+            "verified": "A"
+          },
+          {
+            "question": "\u0110i\u1ec3m kh\u00e1c bi\u1ec7t ch\u00ednh gi\u1eefa h\u1ec7 th\u1ed1ng chia s\u1ebb th\u1eddi gian v\u00e0 h\u1ec7 \u0111a ch\u01b0\u01a1ng l\u00e0 g\u00ec?",
+            "options": {
+              "A": "H\u1ec7 chia s\u1ebb th\u1eddi gian kh\u00f4ng s\u1eed d\u1ee5ng \u0111a ch\u01b0\u01a1ng",
+              "B": "H\u1ec7 chia s\u1ebb th\u1eddi gian chuy\u1ec3n \u0111\u1ed5i CPU gi\u1eefa c\u00e1c ti\u1ebfn tr\u00ecnh r\u1ea5t nhanh \u0111\u1ec3 t\u1ea1o c\u1ea3m gi\u00e1c \u0111\u1ed3ng th\u1eddi",
+              "C": "H\u1ec7 \u0111a ch\u01b0\u01a1ng kh\u00f4ng cho ph\u00e9p nhi\u1ec1u ng\u01b0\u1eddi d\u00f9ng c\u00f9ng l\u00fac",
+              "D": "H\u1ec7 chia s\u1ebb th\u1eddi gian ch\u1ec9 d\u00e0nh cho c\u00e1c h\u1ec7 th\u1ed1ng \u0111\u01a1n nhi\u1ec7m"
+            },
+            "correct_answer": "B",
+            "explanation": "H\u1ec7 chia s\u1ebb th\u1eddi gian l\u00e0 m\u1edf r\u1ed9ng c\u1ee7a h\u1ec7 \u0111a ch\u01b0\u01a1ng, trong \u0111\u00f3 th\u1eddi gian chuy\u1ec3n \u0111\u1ed5i gi\u1eefa c\u00e1c ti\u1ebfn tr\u00ecnh di\u1ec5n ra r\u1ea5t nhanh \u0111\u1ec3 ng\u01b0\u1eddi d\u00f9ng c\u00f3 c\u1ea3m gi\u00e1c c\u00e1c ti\u1ebfn tr\u00ecnh \u0111ang ch\u1ea1y c\u00f9ng l\u00fac.",
+            "difficulty": "medium",
+            "topic": "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+            "objectives": [
+              "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh: Ph\u00e2n bi\u1ec7t \u0111\u01b0\u1ee3c s\u00e1u lo\u1ea1i h\u1ec7 th\u1ed1ng: x\u1eed l\u00fd theo l\u00f4, l\u00f4 \u0111a ch\u01b0\u01a1ng, chia s\u1ebb th\u1eddi gian, song song, ph\u00e2n t\u00e1n v\u00e0 th\u1eddi gian th\u1ef1c"
+            ],
+            "evidence": "Nhi\u1ec1u c\u00f4ng vi\u1ec7c c\u00f9ng \u0111\u01b0\u1ee3c th\u1ef1c hi\u1ec7n th\u00f4ng qua c\u01a1 ch\u1ebf chuy\u1ec3n \u0111\u1ed5i c\u1ee7a CPU nh\u01b0 h\u1ec7 \u0111a ch\u01b0\u01a1ng nh\u01b0ng th\u1eddi gian m\u1ed7i l\u1ea7n chuy\u1ec3n \u0111\u1ed5i di\u1ec5n ra r\u1ea5t nhanh.",
+            "grounded": true,
+            "difficulty_review": {
+              "assessed": "medium",
+              "matches_requested": true,
+              "reason": "Th\u00f4ng hi\u1ec3u s\u1ef1 kh\u00e1c bi\u1ec7t gi\u1eefa hai kh\u00e1i ni\u1ec7m d\u1ef1a tr\u00ean quan h\u1ec7 logic."
+            },
+            "verified": "B"
+          },
+          {
+            "question": "Trong \u0111a x\u1eed l\u00fd b\u1ea5t \u0111\u1ed1i x\u1ee9ng, b\u1ed9 x\u1eed l\u00fd ch\u00ednh c\u00f3 vai tr\u00f2 g\u00ec?",
+            "options": {
+              "A": "M\u1ed7i b\u1ed9 x\u1eed l\u00fd ch\u1ea1y m\u1ed9t b\u1ea3n sao h\u1ec7 \u0111i\u1ec1u h\u00e0nh \u0111\u1ed9c l\u1eadp",
+              "B": "C\u00e1c b\u1ed9 x\u1eed l\u00fd t\u1ef1 th\u1ecfa thu\u1eadn c\u00f4ng vi\u1ec7c v\u1edbi nhau",
+              "C": "Ki\u1ec3m so\u00e1t to\u00e0n b\u1ed9 h\u1ec7 th\u1ed1ng v\u00e0 l\u1eadp l\u1ecbch cho c\u00e1c b\u1ed9 x\u1eed l\u00fd kh\u00e1c",
+              "D": "Ch\u1ec9 th\u1ef1c hi\u1ec7n c\u00e1c c\u00f4ng vi\u1ec7c nh\u1eadp xu\u1ea5t"
+            },
+            "correct_answer": "C",
+            "explanation": "Trong m\u00f4 h\u00ecnh ch\u1ee7 - t\u1edb c\u1ee7a \u0111a x\u1eed l\u00fd b\u1ea5t \u0111\u1ed1i x\u1ee9ng, b\u1ed9 x\u1eed l\u00fd ch\u00ednh ki\u1ec3m so\u00e1t h\u1ec7 th\u1ed1ng v\u00e0 l\u1eadp l\u1ecbch cho c\u00e1c b\u1ed9 x\u1eed l\u00fd kh\u00e1c.",
+            "difficulty": "medium",
+            "topic": "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+            "objectives": [
+              "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh: Ph\u00e2n bi\u1ec7t \u0111a x\u1eed l\u00fd \u0111\u1ed1i x\u1ee9ng v\u00e0 b\u1ea5t \u0111\u1ed1i x\u1ee9ng; th\u1eddi gian th\u1ef1c c\u1ee9ng v\u00e0 m\u1ec1m"
+            ],
+            "evidence": "M\u1ed9t b\u1ed9 x\u1eed l\u00fd ch\u00ednh ki\u1ec3m so\u00e1t to\u00e0n b\u1ed9 h\u1ec7 th\u1ed1ng, c\u00e1c b\u1ed9 x\u1eed l\u00fd kh\u00e1c th\u1ef1c hi\u1ec7n theo l\u1ec7nh c\u1ee7a b\u1ed9 x\u1eed l\u00fd ch\u00ednh... B\u1ed9 x\u1eed l\u00fd ch\u00ednh s\u1ebd l\u1eadp l\u1ecbch cho c\u00e1c b\u1ed9 x\u1eed l\u00fd kh\u00e1c.",
+            "grounded": true,
+            "difficulty_review": {
+              "assessed": "medium",
+              "matches_requested": true,
+              "reason": "Th\u00f4ng hi\u1ec3u quy t\u1eafc v\u1eadn h\u00e0nh c\u1ee7a h\u1ec7 th\u1ed1ng b\u1ea5t \u0111\u1ed1i x\u1ee9ng."
+            },
+            "verified": "C"
+          },
+          {
+            "question": "\u0110\u1eb7c \u0111i\u1ec3m n\u00e0o sau \u0111\u00e2y ph\u00e2n bi\u1ec7t h\u1ec7 th\u1ed1ng ph\u00e2n t\u00e1n v\u1edbi h\u1ec7 th\u1ed1ng song song?",
+            "options": {
+              "A": "H\u1ec7 th\u1ed1ng ph\u00e2n t\u00e1n c\u00f3 nhi\u1ec1u b\u1ed9 x\u1eed l\u00fd, h\u1ec7 th\u1ed1ng song song ch\u1ec9 c\u00f3 m\u1ed9t",
+              "B": "H\u1ec7 th\u1ed1ng ph\u00e2n t\u00e1n kh\u00f4ng chia s\u1ebb b\u1ed9 nh\u1edb v\u00e0 \u0111\u1ed3ng h\u1ed3 chung",
+              "C": "H\u1ec7 th\u1ed1ng song song kh\u00f4ng th\u1ec3 th\u1ef1c hi\u1ec7n t\u00ednh to\u00e1n song song",
+              "D": "H\u1ec7 th\u1ed1ng ph\u00e2n t\u00e1n kh\u00f4ng cho ph\u00e9p chia s\u1ebb t\u00e0i nguy\u00ean"
+            },
+            "correct_answer": "B",
+            "explanation": "H\u1ec7 th\u1ed1ng ph\u00e2n t\u00e1n kh\u00e1c h\u1ec7 th\u1ed1ng song song \u1edf ch\u1ed7 c\u00e1c b\u1ed9 x\u1eed l\u00fd kh\u00f4ng chia s\u1ebb b\u1ed9 nh\u1edb v\u00e0 \u0111\u1ed3ng h\u1ed3, m\u1ed7i b\u1ed9 x\u1eed l\u00fd c\u00f3 b\u1ed9 nh\u1edb c\u1ee5c b\u1ed9 ri\u00eang.",
+            "difficulty": "medium",
+            "topic": "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+            "objectives": [
+              "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh: Ph\u00e2n bi\u1ec7t \u0111\u01b0\u1ee3c s\u00e1u lo\u1ea1i h\u1ec7 th\u1ed1ng: x\u1eed l\u00fd theo l\u00f4, l\u00f4 \u0111a ch\u01b0\u01a1ng, chia s\u1ebb th\u1eddi gian, song song, ph\u00e2n t\u00e1n v\u00e0 th\u1eddi gian th\u1ef1c"
+            ],
+            "evidence": "H\u1ec7 th\u1ed1ng n\u00e0y c\u0169ng t\u01b0\u01a1ng t\u1ef1 nh\u01b0 h\u1ec7 th\u1ed1ng chia s\u1ebb th\u1eddi gian nh\u01b0ng c\u00e1c b\u1ed9 x\u1eed l\u00fd kh\u00f4ng chia s\u1ebb b\u1ed9 nh\u1edb v\u00e0 \u0111\u1ed3ng h\u1ed3, thay v\u00e0o \u0111\u00f3 m\u1ed7i b\u1ed9 x\u1eed l\u00fd c\u00f3 b\u1ed9 nh\u1edb c\u1ee5c b\u1ed9 ri\u00eang.",
+            "grounded": true,
+            "difficulty_review": {
+              "assessed": "medium",
+              "matches_requested": true,
+              "reason": "So s\u00e1nh hai kh\u00e1i ni\u1ec7m d\u1ef1a tr\u00ean \u0111\u1eb7c \u0111i\u1ec3m k\u1ef9 thu\u1eadt."
+            },
+            "verified": "B"
+          },
+          {
+            "question": "T\u1ea1i sao vi\u1ec7c t\u0103ng s\u1ed1 l\u01b0\u1ee3ng b\u1ed9 x\u1eed l\u00fd trong h\u1ec7 th\u1ed1ng song song kh\u00f4ng l\u00e0m t\u0103ng t\u1ed1c \u0111\u1ed9 x\u1eed l\u00fd theo \u0111\u00fang t\u1ec9 l\u1ec7 n l\u1ea7n?",
+            "options": {
+              "A": "Do c\u00e1c b\u1ed9 x\u1eed l\u00fd ph\u1ea3i ti\u00eau t\u1ed1n th\u1eddi gian li\u00ean l\u1ea1c v\u1edbi nhau",
+              "B": "Do h\u1ec7 \u0111i\u1ec1u h\u00e0nh kh\u00f4ng h\u1ed7 tr\u1ee3 \u0111a x\u1eed l\u00fd",
+              "C": "Do c\u00e1c b\u1ed9 x\u1eed l\u00fd kh\u00f4ng th\u1ec3 chia s\u1ebb thi\u1ebft b\u1ecb ngo\u1ea1i vi",
+              "D": "Do b\u1ed9 nh\u1edb b\u1ecb gi\u1edbi h\u1ea1n dung l\u01b0\u1ee3ng"
+            },
+            "correct_answer": "A",
+            "explanation": "Ng\u1eef li\u1ec7u ch\u1ec9 ra r\u1eb1ng c\u00e1c b\u1ed9 x\u1eed l\u00fd trong h\u1ec7 th\u1ed1ng song song li\u00ean l\u1ea1c b\u00ean trong v\u1edbi nhau, d\u1eabn \u0111\u1ebfn vi\u1ec7c t\u0103ng s\u1ed1 l\u01b0\u1ee3ng b\u1ed9 x\u1eed l\u00fd kh\u00f4ng \u0111\u1ed3ng ngh\u0129a v\u1edbi vi\u1ec7c t\u0103ng t\u1ed1c \u0111\u1ed9 theo t\u1ec9 l\u1ec7 n l\u1ea7n.",
+            "difficulty": "medium",
+            "topic": "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+            "objectives": [
+              "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh: Ph\u00e2n bi\u1ec7t \u0111\u01b0\u1ee3c s\u00e1u lo\u1ea1i h\u1ec7 th\u1ed1ng: x\u1eed l\u00fd theo l\u00f4, l\u00f4 \u0111a ch\u01b0\u01a1ng, chia s\u1ebb th\u1eddi gian, song song, ph\u00e2n t\u00e1n v\u00e0 th\u1eddi gian th\u1ef1c"
+            ],
+            "evidence": "C\u00e1c b\u1ed9 x\u1eed l\u00fd n\u00e0y li\u00ean l\u1ea1c b\u00ean trong v\u1edbi nhau... Nh\u01b0ng kh\u00f4ng ph\u1ea3i theo \u0111\u00fang t\u1ec9 l\u1ec7 th\u1eddi gian, ngh\u0129a l\u00e0 c\u00f3 n b\u1ed9 x\u1eed l\u00fd kh\u00f4ng c\u00f3 ngh\u0129a l\u00e0 s\u1ebd th\u1ef1c hi\u1ec7n nhanh h\u01a1n n l\u1ea7n.",
+            "grounded": true,
+            "difficulty_review": {
+              "assessed": "medium",
+              "matches_requested": true,
+              "reason": "V\u1eadn d\u1ee5ng ki\u1ebfn th\u1ee9c v\u1ec1 h\u1ec7 th\u1ed1ng song song \u0111\u1ec3 gi\u1ea3i th\u00edch hi\u1ec7n t\u01b0\u1ee3ng."
+            },
+            "verified": "A"
+          },
+          {
+            "question": "M\u1ed9t h\u1ec7 th\u1ed1ng \u0111i\u1ec1u khi\u1ec3n thi\u1ebft b\u1ecb y t\u1ebf y\u00eau c\u1ea7u k\u1ebft qu\u1ea3 ph\u1ea3i ch\u00ednh x\u00e1c tuy\u1ec7t \u0111\u1ed1i trong kho\u1ea3ng th\u1eddi gian b\u1ecb th\u00fac \u00e9p nghi\u00eam ng\u1eb7t. \u0110\u00e2y l\u00e0 lo\u1ea1i h\u1ec7 th\u1ed1ng n\u00e0o?",
+            "options": {
+              "A": "H\u1ec7 th\u1ed1ng th\u1eddi gian th\u1ef1c m\u1ec1m",
+              "B": "H\u1ec7 th\u1ed1ng th\u1eddi gian th\u1ef1c c\u1ee9ng",
+              "C": "H\u1ec7 th\u1ed1ng chia s\u1ebb th\u1eddi gian",
+              "D": "H\u1ec7 th\u1ed1ng x\u1eed l\u00fd theo l\u00f4"
+            },
+            "correct_answer": "B",
+            "explanation": "H\u1ec7 th\u1ed1ng th\u1eddi gian th\u1ef1c c\u1ee9ng y\u00eau c\u1ea7u c\u00f4ng vi\u1ec7c ph\u1ea3i ho\u00e0n t\u1ea5t \u0111\u00fang l\u00fac, th\u01b0\u1eddng d\u00f9ng trong c\u00e1c \u1ee9ng d\u1ee5ng t\u1eadn hi\u1ebfn v\u1edbi \u0111\u00f2i h\u1ecfi kh\u1eaft khe v\u1ec1 th\u1eddi gian.",
+            "difficulty": "hard",
+            "topic": "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+            "objectives": [
+              "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh: Ph\u00e2n bi\u1ec7t \u0111a x\u1eed l\u00fd \u0111\u1ed1i x\u1ee9ng v\u00e0 b\u1ea5t \u0111\u1ed1i x\u1ee9ng; th\u1eddi gian th\u1ef1c c\u1ee9ng v\u00e0 m\u1ec1m"
+            ],
+            "evidence": "H\u1ec7 th\u1ed1ng th\u1eddi gian th\u1ef1c c\u1ee9ng l\u00e0 c\u00f4ng vi\u1ec7c \u0111\u01b0\u1ee3c ho\u00e0n t\u1ea5t \u0111\u00fang l\u00fac... H\u1ec7 th\u1ed1ng x\u1eed l\u00fd th\u1eddi gian th\u1ef1c \u0111\u01b0\u1ee3c s\u1eed d\u1ee5ng khi c\u00f3 nh\u1eefng \u0111\u00f2i h\u1ecfi kh\u1eaft khe v\u1ec1 th\u1eddi gian",
+            "grounded": true,
+            "difficulty_review": {
+              "assessed": "medium",
+              "matches_requested": false,
+              "reason": "\u00c1p d\u1ee5ng kh\u00e1i ni\u1ec7m v\u00e0o t\u00ecnh hu\u1ed1ng th\u1ef1c t\u1ebf."
+            },
+            "verified": "B"
+          },
+          {
+            "question": "X\u00e9t m\u1ed9t h\u1ec7 th\u1ed1ng m\u00e1y t\u00ednh l\u1edbn \u0111ang ch\u1ea1y nhi\u1ec1u \u1ee9ng d\u1ee5ng c\u00f9ng l\u00fac. N\u1ebfu h\u1ec7 \u0111i\u1ec1u h\u00e0nh \u01b0u ti\u00ean t\u1ed1i \u01b0u h\u00f3a vi\u1ec7c s\u1eed d\u1ee5ng t\u00e0i nguy\u00ean \u0111\u1ec3 \u0111\u1ea1t hi\u1ec7u qu\u1ea3 cao nh\u1ea5t cho nhi\u1ec1u ng\u01b0\u1eddi d\u00f9ng, nh\u01b0ng \u0111i\u1ec1u n\u00e0y l\u00e0m gi\u1ea3m t\u1ed1c \u0111\u1ed9 ph\u1ea3n h\u1ed3i c\u1ee7a t\u1eebng ch\u01b0\u01a1ng tr\u00ecnh \u0111\u01a1n l\u1ebb, th\u00ec \u0111\u00e2y l\u00e0 minh ch\u1ee9ng cho \u0111i\u1ec1u g\u00ec?",
+            "options": {
+              "A": "S\u1ef1 t\u01b0\u01a1ng ph\u1ea3n gi\u1eefa hai m\u1ee5c ti\u00eau c\u01a1 b\u1ea3n c\u1ee7a h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+              "B": "L\u1ed7i trong vi\u1ec7c l\u1eadp l\u1ecbch c\u1ee7a h\u1ec7 \u0111i\u1ec1u h\u00e0nh \u0111a ch\u01b0\u01a1ng",
+              "C": "S\u1ef1 th\u1ea5t b\u1ea1i c\u1ee7a h\u1ec7 th\u1ed1ng chia s\u1ebb th\u1eddi gian",
+              "D": "H\u1ec7 th\u1ed1ng \u0111ang ho\u1ea1t \u0111\u1ed9ng \u1edf ch\u1ebf \u0111\u1ed9 th\u1eddi gian th\u1ef1c c\u1ee9ng"
+            },
+            "correct_answer": "A",
+            "explanation": "Ng\u1eef li\u1ec7u ch\u1ec9 ra hai m\u1ee5c ti\u00eau: thi h\u00e0nh ch\u01b0\u01a1ng tr\u00ecnh d\u1ec5 d\u00e0ng v\u00e0 thao t\u00e1c hi\u1ec7u qu\u1ea3. Hai m\u1ee5c ti\u00eau n\u00e0y c\u00f3 ph\u1ea7n t\u01b0\u01a1ng ph\u1ea3n, \u0111\u1eb7c bi\u1ec7t trong h\u1ec7 th\u1ed1ng l\u1edbn.",
+            "difficulty": "hard",
+            "topic": "B\u00e0i 1: Kh\u00e1i ni\u1ec7m v\u1ec1 h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+            "objectives": [
+              "B\u00e0i 1: Kh\u00e1i ni\u1ec7m v\u1ec1 h\u1ec7 \u0111i\u1ec1u h\u00e0nh: N\u1eafm \u0111\u01b0\u1ee3c hai m\u1ee5c ti\u00eau c\u01a1 b\u1ea3n c\u1ee7a h\u1ec7 \u0111i\u1ec1u h\u00e0nh"
+            ],
+            "evidence": "M\u1ee5c ti\u00eau c\u01a1 b\u1ea3n c\u1ee7a n\u00f3 l\u00e0 gi\u00fap cho vi\u1ec7c thi h\u00e0nh c\u00e1c ch\u01b0\u01a1ng tr\u00ecnh d\u1ec5 d\u00e0ng h\u01a1n. M\u1ee5c ti\u00eau th\u1ee9 hai l\u00e0 h\u1ed7 tr\u1ee3 cho c\u00e1c thao t\u00e1c tr\u00ean h\u1ec7 th\u1ed1ng m\u00e1y t\u00ednh hi\u1ec7u qu\u1ea3 h\u01a1n. Tuy nhi\u00ean hai m\u1ee5c ti\u00eau n\u00e0y c\u0169ng c\u00f3 ph\u1ea7n t\u01b0\u01a1ng ph\u1ea3n",
+            "grounded": true,
+            "difficulty_review": {
+              "assessed": "hard",
+              "matches_requested": true,
+              "reason": "K\u1ebft h\u1ee3p ki\u1ebfn th\u1ee9c v\u1ec1 m\u1ee5c ti\u00eau h\u1ec7 \u0111i\u1ec1u h\u00e0nh \u0111\u1ec3 gi\u1ea3i th\u00edch m\u1ed9t t\u00ecnh hu\u1ed1ng m\u00e2u thu\u1eabn."
+            },
+            "verified": "A"
+          }
+        ],
+        "meta": {
+          "generated_by": "gemini:gemini-3.1-flash-lite",
+          "requested": 10,
+          "returned": 9,
+          "difficulty": "mixed",
+          "distribution_requested": {
+            "easy": 3,
+            "medium": 5,
+            "hard": 2
+          },
+          "distribution": {
+            "easy": 3,
+            "medium": 4,
+            "hard": 2
+          },
+          "difficulty_basis": "M\u1ee9c t\u01b0 duy d\u1ef1 ki\u1ebfn; gi\u1ea3ng vi\u00ean c\u1ea7n th\u1ea9m \u0111\u1ecbnh tr\u01b0\u1edbc khi s\u1eed d\u1ee5ng.",
+          "warnings": [],
+          "verification": {
+            "unverified": 0,
+            "verified": 9,
+            "flagged": 0,
+            "ungrounded": 0,
+            "difficulty_flagged": 1
+          },
+          "context_mode": "full_document",
+          "context_chars": 12062,
+          "context_chunks": 1,
+          "topic": "Ch\u01b0\u01a1ng 1: T\u1ed5ng quan",
+          "objectives": [
+            "B\u00e0i 1: Kh\u00e1i ni\u1ec7m v\u1ec1 h\u1ec7 \u0111i\u1ec1u h\u00e0nh: Hi\u1ec3u h\u1ec7 \u0111i\u1ec1u h\u00e0nh l\u00e0 g\u00ec v\u00e0 v\u1ecb tr\u00ed c\u1ee7a n\u00f3 trong h\u1ec7 th\u1ed1ng m\u00e1y t\u00ednh",
+            "B\u00e0i 1: Kh\u00e1i ni\u1ec7m v\u1ec1 h\u1ec7 \u0111i\u1ec1u h\u00e0nh: N\u00eau \u0111\u01b0\u1ee3c b\u1ed1n th\u00e0nh ph\u1ea7n ch\u00ednh c\u1ee7a m\u1ed9t h\u1ec7 th\u1ed1ng m\u00e1y t\u00ednh",
+            "B\u00e0i 1: Kh\u00e1i ni\u1ec7m v\u1ec1 h\u1ec7 \u0111i\u1ec1u h\u00e0nh: Gi\u1ea3i th\u00edch vai tr\u00f2 qu\u1ea3n l\u00fd v\u00e0 ph\u00e2n ph\u1ed1i t\u00e0i nguy\u00ean c\u1ee7a h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+            "B\u00e0i 1: Kh\u00e1i ni\u1ec7m v\u1ec1 h\u1ec7 \u0111i\u1ec1u h\u00e0nh: N\u1eafm \u0111\u01b0\u1ee3c hai m\u1ee5c ti\u00eau c\u01a1 b\u1ea3n c\u1ee7a h\u1ec7 \u0111i\u1ec1u h\u00e0nh",
+            "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh: Ph\u00e2n bi\u1ec7t \u0111\u01b0\u1ee3c s\u00e1u lo\u1ea1i h\u1ec7 th\u1ed1ng: x\u1eed l\u00fd theo l\u00f4, l\u00f4 \u0111a ch\u01b0\u01a1ng, chia s\u1ebb th\u1eddi gian, song song, ph\u00e2n t\u00e1n v\u00e0 th\u1eddi gian th\u1ef1c",
+            "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh: Hi\u1ec3u c\u00e1c kh\u00e1i ni\u1ec7m: b\u1ed9 gi\u00e1m s\u00e1t th\u01b0\u1eddng tr\u1ef1c, x\u1eed l\u00fd off-line, spooling, \u0111a ch\u01b0\u01a1ng, \u0111a nhi\u1ec7m",
+            "B\u00e0i 2: Ph\u00e2n lo\u1ea1i h\u1ec7 \u0111i\u1ec1u h\u00e0nh: Ph\u00e2n bi\u1ec7t \u0111a x\u1eed l\u00fd \u0111\u1ed1i x\u1ee9ng v\u00e0 b\u1ea5t \u0111\u1ed1i x\u1ee9ng; th\u1eddi gian th\u1ef1c c\u1ee9ng v\u00e0 m\u1ec1m"
+          ]
+        }
+      },
+      "elapsed_sec": 31.98
+    }
+  ],
+  "course_id": 7,
+  "chapter_id": 19,
+  "requested": 10,
+  "http_status": 200,
+  "first_batch_sec": 23.4,
+  "completed_sec": 31.98,
+  "returned": 9
+}

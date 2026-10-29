@@ -26,6 +26,7 @@ from app.routers import (
     progress,
     quizzes,
     recommendations,
+    topics,
     reports,
     uploads,
     users,
@@ -126,6 +127,7 @@ for r in (
     reports.router,
     analytics.router,
     recommendations.router,
+    topics.router,
     ai.router,
 ):
     app.include_router(r)

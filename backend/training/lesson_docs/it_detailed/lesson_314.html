@@ -1,0 +1,72 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Kiểm thử phần mềm nhập môn</div>
+<p class="path">Chương 2: Kỹ thuật kiểm thử và xử lý lỗi · Bài 2</p>
+<h1>Báo cáo lỗi và kiểm thử hồi quy</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Kiểm thử phần mềm nhập môn.</li><li>Chương 2: Kỹ thuật kiểm thử và xử lý lỗi.</li><li>Các bài trong chương: Phân vùng tương đương và giá trị biên; Báo cáo lỗi và kiểm thử hồi quy.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Báo lỗi đủ thông tin và xác nhận bản sửa một cách có căn cứ.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Báo cáo lỗi nên có tiêu đề ngắn, môi trường, điều kiện trước, bước tái hiện, kết quả thực tế, kết quả mong đợi và bằng chứng liên quan. Không đưa mật khẩu hoặc token vào ảnh chụp và nhật ký chia sẻ.</p>
+<p>Severity mô tả mức độ ảnh hưởng của lỗi; priority mô tả thứ tự cần xử lý theo quyết định của nhóm. Hai yếu tố liên quan nhưng không đồng nhất: một lỗi giao diện nhỏ trên trang chiến dịch sắp ra mắt có thể được ưu tiên sớm.</p>
+<p>Sau sửa lỗi, confirmation testing kiểm tra lại lỗi cụ thể đã được sửa. Regression testing kiểm tra các hành vi liên quan để tìm tác động phụ ngoài ý muốn. Test tự động có ích cho tình huống lặp lại nhưng vẫn cần dữ liệu và kết quả mong đợi đúng.</p>
+<h2>1. Mẫu báo lỗi có bằng chứng</h2>
+<pre><code>ID: BUG-LAB-01 (tình huống minh họa)
+Tiêu đề: Hai yêu cầu ghi danh cùng khóa tạo hai bản ghi
+Môi trường: database test, phiên bản được ghi cụ thể
+Điều kiện: U1 chưa ghi danh C1
+Bước tái hiện: gửi hai yêu cầu đồng thời với dữ liệu test hợp lệ
+Thực tế: mô tả quan sát sau khi chạy, không điền trước
+Mong đợi: chỉ một ghi danh theo quy tắc duy nhất
+Bằng chứng: ID request, trạng thái, ảnh/query đã che bí mật</code></pre>
+<p>Một mô tả “bấm thấy sai” thiếu thời điểm, dữ liệu và kết quả nên khó tái hiện. Báo cáo cần đủ chi tiết nhưng không đưa token, mật khẩu hoặc dữ liệu cá nhân không cần thiết.</p>
+<h2>2. Severity và priority</h2>
+<p>Severity đánh giá ảnh hưởng kỹ thuật/nghiệp vụ; priority là mức ưu tiên xử lý trong bối cảnh phát hành. Lỗi giao diện nhỏ có thể được ưu tiên cao do trang sắp ra mắt; không đồng nhất hai trường. Dùng thang và quy ước của nhóm thay vì tự gắn mọi lỗi là nghiêm trọng nhất.</p>
+<h2>3. Kiểm tra sau sửa</h2>
+<p>Confirmation testing thực hiện lại điều kiện gây lỗi để xác nhận bản sửa. Regression testing mở rộng sang các hành vi có nguy cơ bị ảnh hưởng: đăng ký lần đầu, trùng, khóa có phí, quyền mở bài và danh sách khóa. Chọn phạm vi theo thay đổi, không mặc định chạy mọi test vô hạn.</p>
+<h2>4. Bài tập có lời giải định hướng</h2>
+<p>Bản sửa thêm unique constraint nhưng UI báo lỗi thô khi request thứ hai tới. Cần báo vấn đề xử lý phản hồi riêng, không kết luận sửa database thất bại nếu tính duy nhất đã đúng. Nộp một bug report, một ca xác nhận và ít nhất bốn ca hồi quy có lý do lựa chọn; không dùng dữ liệu thật để cố tình gây lỗi.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>báo lỗi “học viên hết lượt vẫn mở được quiz”. Viết bước tái hiện, kiểm tra trạng thái dữ liệu và đề xuất các test hồi quy cho trường hợp còn lượt và tiếp tục lượt đang làm.</p>
+</div>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Báo cáo lỗi cần thông tin nào để tái hiện?</li><li>Severity thường thể hiện điều gì?</li><li>Kiểm tra lại chính lỗi vừa sửa gọi là gì?</li><li>Kiểm thử hồi quy nhằm mục đích gì?</li><li>Thông tin nào nên che khi chia sẻ bằng chứng lỗi?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Điều kiện trước và các bước thực hiện. Các bước và điều kiện trước giúp người khác tái hiện lỗi.</li><li>Mức độ ảnh hưởng của lỗi. Severity đánh giá ảnh hưởng; priority đánh giá mức ưu tiên xử lý.</li><li>Confirmation testing. Confirmation testing xác nhận lỗi cụ thể được khắc phục.</li><li>Phát hiện tác động phụ tới hành vi đã hoạt động. Thay đổi có thể ảnh hưởng chức năng khác nên cần kiểm tra hồi quy phù hợp.</li><li>Mật khẩu và token truy cập. Thông tin xác thực không được đưa vào bằng chứng chia sẻ.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf</li></ul></body></html>

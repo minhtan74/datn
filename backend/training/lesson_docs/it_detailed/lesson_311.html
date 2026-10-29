@@ -1,0 +1,70 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Kiểm thử phần mềm nhập môn</div>
+<p class="path">Chương 1: Nền tảng kiểm thử · Bài 1</p>
+<h1>Mục tiêu và các mức kiểm thử</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Kiểm thử phần mềm nhập môn.</li><li>Chương 1: Nền tảng kiểm thử.</li><li>Các bài trong chương: Mục tiêu và các mức kiểm thử; Thiết kế test case.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Giải thích giá trị kiểm thử và phân biệt các mức kiểm thử phổ biến.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Kiểm thử cung cấp thông tin về chất lượng và rủi ro của phần mềm. Nó có thể phát hiện lỗi nhưng một tập kiểm thử hữu hạn không chứng minh chương trình không còn lỗi. Kiểm thử nên bám yêu cầu, ngữ cảnh sử dụng và mức độ ảnh hưởng của sai sót.</p>
+<p>Unit test tập trung vào đơn vị nhỏ như hàm hoặc lớp; integration test kiểm tra tương tác giữa các thành phần; system test kiểm tra hệ thống hoàn chỉnh; acceptance test đánh giá khả năng đáp ứng nhu cầu chấp nhận đã thống nhất. Ranh giới cụ thể phụ thuộc thiết kế hệ thống.</p>
+<p>Kiểm thử tĩnh xem xét sản phẩm công việc mà không chạy phần mềm, như review yêu cầu hoặc mã nguồn. Kiểm thử động thực thi phần mềm và quan sát kết quả. Hai cách bổ sung cho nhau.</p>
+<h2>1. Chất lượng, lỗi và bằng chứng</h2>
+<p>Một sai sót của con người có thể tạo khuyết tật trong tài liệu hoặc mã; khuyết tật khi được kích hoạt có thể gây thất bại quan sát được. Không phải mọi khuyết tật đều biểu hiện trong mọi lần chạy. Kiểm thử cần mô tả điều kiện kích hoạt và kết quả thay vì chỉ ghi “có lỗi”.</p>
+<p>Verification thường xem sản phẩm công việc có đáp ứng yêu cầu đã chỉ định; validation xem giải pháp có phù hợp nhu cầu sử dụng trong ngữ cảnh. Hai góc nhìn bổ sung nhau. Số lỗi tìm được không trực tiếp đo năng lực tester hoặc chất lượng toàn hệ thống.</p>
+<h2>2. Phân biệt mức và loại</h2>
+<pre><code>Mức kiểm thử        Ví dụ LMS
+Unit                Hàm tính phần trăm và xử lý tổng câu bằng 0
+Integration         Service ghi danh phối hợp database và kiểm tra quyền
+System              Luồng đăng ký -&gt; mở bài -&gt; nộp quiz trên hệ thống
+Acceptance          Đối chiếu tiêu chí học viên bắt đầu học sau ghi danh</code></pre>
+<p>Functional/non-functional là cách phân loại mục tiêu, không phải thay thế các mức trên. Một integration test vẫn có thể đo thuộc tính phi chức năng.</p>
+<h2>3. Thiết kế phép kiểm tra có ý nghĩa</h2>
+<p>Với tỷ lệ đúng, test cần đầu vào và kỳ vọng: 2/5 thành 40%; tổng 0 phải theo hợp đồng. Không tự chọn 0% nếu yêu cầu muốn “chưa có dữ liệu”. Ví dụ này cho thấy test phải bám ý nghĩa sản phẩm, không chỉ biểu thức toán.</p>
+<h2>4. Bài tập và lời giải</h2>
+<p>Viết bốn test ở bốn mức cho nộp quiz. Unit kiểm tra chấm một câu; integration kiểm tra lưu kết quả và câu trả lời cùng giao dịch; system kiểm tra hiển thị sau nộp; acceptance kiểm tra học viên nhận được hướng ôn theo tiêu chí. Nêu cách dùng dữ liệu lab và không tự tạo điểm cho học viên thật.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>với website học trực tuyến, đề xuất một unit test cho hàm tính điểm, một integration test giữa ghi danh và quyền học, một acceptance test cho quy trình học viên nộp quiz.</p>
+</div>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Mục tiêu phù hợp của kiểm thử là gì?</li><li>Kiểm tra riêng một hàm tính điểm thường thuộc mức nào?</li><li>Kiểm tra tương tác giữa API và cơ sở dữ liệu thường là gì?</li><li>Acceptance test tập trung vào điều gì?</li><li>Review mã nguồn mà không chạy chương trình là gì?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Cung cấp thông tin chất lượng và phát hiện vấn đề. Kiểm thử giảm bất định nhưng không chứng minh tuyệt đối phần mềm không có lỗi.</li><li>Unit test. Unit test tập trung vào một đơn vị nhỏ.</li><li>Integration test. Integration test kiểm tra sự phối hợp giữa các thành phần.</li><li>Tiêu chí chấp nhận và nhu cầu đã thống nhất. Acceptance test đánh giá khả năng đáp ứng nhu cầu sử dụng theo tiêu chí chấp nhận.</li><li>Kiểm thử tĩnh. Hoạt động tĩnh không yêu cầu thực thi phần mềm.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf</li></ul></body></html>

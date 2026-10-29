@@ -1,0 +1,215 @@
+﻿Kênh,Vai trò,Kịch bản,Kết quả cuối,HTTP,Thời gian (ms)
+API,admin,Đăng nhập tài khoản mẫu,PASS,200,29.7
+API,admin,Xác minh tài khoản và vai trò,PASS,200,5.0
+API,teacher_an,Đăng nhập tài khoản mẫu,PASS,200,31.4
+API,teacher_an,Xác minh tài khoản và vai trò,PASS,200,6.4
+API,teacher_binh,Đăng nhập tài khoản mẫu,PASS,200,18.8
+API,teacher_binh,Xác minh tài khoản và vai trò,PASS,200,7.3
+API,student_em,Đăng nhập tài khoản mẫu,PASS,200,24.5
+API,student_em,Xác minh tài khoản và vai trò,PASS,200,8.9
+API,student_phuong,Đăng nhập tài khoản mẫu,PASS,200,7.1
+API,student_phuong,Xác minh tài khoản và vai trò,PASS,200,5.2
+API,admin,Số liệu hệ thống before / summary,PASS,200,28.8
+API,admin,Số liệu hệ thống before / learning,PASS,200,118.4
+API,admin,Số liệu hệ thống before / users,PASS,200,14.3
+API,admin,Số liệu hệ thống before / courses,PASS,200,17.4
+API,admin,Số liệu hệ thống before / payments,PASS,200,53.4
+API,admin,Danh sách khóa học,PASS,200,14.3
+API,admin,Danh sách quiz,PASS,200,87.9
+API,admin,Tổng quan học tập,PASS,200,13.7
+API,teacher_an,Danh sách khóa học,PASS,200,27.8
+API,teacher_an,Danh sách quiz,PASS,200,76.6
+API,teacher_an,Tổng quan học tập,PASS,200,13.9
+API,teacher_binh,Danh sách khóa học,PASS,200,42.8
+API,teacher_binh,Danh sách quiz,PASS,200,23.3
+API,teacher_binh,Tổng quan học tập,PASS,200,16.5
+API,student_em,Danh sách khóa học,PASS,200,15.4
+API,student_em,Danh sách quiz,PASS,200,55.1
+API,student_em,Tổng quan học tập,PASS,200,16.7
+API,student_phuong,Danh sách khóa học,PASS,200,15.3
+API,student_phuong,Danh sách quiz,PASS,200,76.9
+API,student_phuong,Tổng quan học tập,PASS,200,16.7
+API,student_em,Chặn xem danh sách người dùng,PASS,403,13.5
+API,student_em,Chặn xem báo cáo admin,PASS,403,10.9
+API,student_phuong,Chặn xem danh sách người dùng,PASS,403,10.8
+API,student_phuong,Chặn xem báo cáo admin,PASS,403,8.8
+API,teacher_an,Chặn xem danh sách người dùng,PASS,403,9.9
+API,teacher_an,Chặn xem báo cáo admin,PASS,403,10.1
+API,teacher_binh,Chặn xem danh sách người dùng,PASS,403,11.3
+API,teacher_binh,Chặn xem báo cáo admin,PASS,403,10.6
+API,student_em,Chặn học viên tạo khóa,PASS,403,11.3
+API,student_em,Chặn học viên sinh đề,PASS,403,11.1
+API,student_em,Chặn học viên quản lý giao dịch,PASS,403,12.8
+API,student_phuong,Chặn học viên tạo khóa,PASS,403,9.6
+API,student_phuong,Chặn học viên sinh đề,PASS,403,8.0
+API,student_phuong,Chặn học viên quản lý giao dịch,PASS,403,10.5
+API,admin,Admin tạo tài khoản,PASS,200,398.0
+API,admin,Tìm tài khoản vừa tạo,PASS,200,9.7
+API,admin,Admin cập nhật tài khoản,PASS,200,432.4
+API,admin,Admin khóa tài khoản,PASS,200,9.3
+API,admin,Tài khoản bị khóa không đăng nhập được,PASS,403,378.9
+API,admin,Admin mở khóa tài khoản,PASS,200,13.9
+API,admin,Tài khoản mở khóa đăng nhập được,PASS,200,415.2
+API,teacher_an,Giảng viên tạo khóa test,PASS,200,14.2
+API,teacher_an,Giảng viên sửa khóa test,PASS,200,15.9
+API,teacher_binh,Chặn sửa khóa của giảng viên khác,PASS,403,12.3
+API,teacher_an,Tạo chương,PASS,200,16.4
+API,teacher_an,Tạo bài học 1,PASS,200,16.7
+API,teacher_an,Tạo bài học 2,PASS,200,17.0
+API,teacher_an,"Tạo đề 6 câu, 3 lượt, đạt 70%",PASS,200,17.6
+API,teacher_an,Tạo câu hỏi 1,PASS,200,25.7
+API,teacher_an,Tạo câu hỏi 2,PASS,200,26.5
+API,teacher_an,Tạo câu hỏi 3,PASS,200,21.8
+API,teacher_an,Tạo câu hỏi 4,PASS,200,22.6
+API,teacher_an,Tạo câu hỏi 5,PASS,200,22.2
+API,teacher_an,Tạo câu hỏi 6,PASS,200,17.3
+API,teacher_an,Đọc đáp án gốc của giảng viên,PASS,200,11.7
+API,student_em,Chặn mở đề khi chưa có quyền,PASS,403,9.4
+API,student_phuong,Chặn mở đề khi chưa có quyền,PASS,403,6.7
+API,teacher_binh,Chặn mở đề khi chưa có quyền,PASS,403,9.2
+API,teacher_binh,Giảng viên tạo khóa test,PASS,200,13.5
+API,teacher_binh,Giảng viên sửa khóa test,PASS,200,11.3
+API,teacher_an,Chặn sửa khóa của giảng viên khác,PASS,403,10.2
+API,admin,Xuất CSV payments,PASS,200,11.3
+API,admin,Xuất CSV enrollments,PASS,200,16.0
+API,admin,Xuất CSV courses,PASS,200,30.6
+API,admin,Xuất CSV learning,PASS,200,39.1
+API,admin,Xuất CSV topics,PASS,200,90.1
+API,admin,Từ chối trạng thái giao dịch sai,PASS,400,8.2
+API,admin,Lọc giao dịch completed,PASS,200,21.2
+API,admin,Lọc giao dịch failed,PASS,200,25.0
+API,admin,Lọc giao dịch refunded,PASS,200,18.1
+API,admin,Lọc giao dịch pending,PASS,200,9.3
+API,student_em,Tiến độ sau khi học,PASS,200,9.1
+API,student_em,Phân tích sau các lượt làm,PASS,200,9.2
+API,student_em,So sánh các lượt quiz,PASS,200,10.0
+API,student_em,Gợi ý học tập sau làm bài,PASS,200,43.9
+API,student_em,Lịch sử kết quả,PASS,200,12.2
+API,student_em,Lưu gợi ý học tập,PASS,200,47.7
+API,student_phuong,Tiến độ sau khi học,PASS,200,7.9
+API,student_phuong,Phân tích sau các lượt làm,PASS,200,10.1
+API,student_phuong,So sánh các lượt quiz,PASS,200,7.4
+API,student_phuong,Gợi ý học tập sau làm bài,PASS,200,42.6
+API,student_phuong,Lịch sử kết quả,PASS,200,8.2
+API,student_phuong,Lưu gợi ý học tập,PASS,200,51.2
+API,student_em,Không mở thêm đề khi hết 3 lượt,PASS,403,18.0
+API,student_phuong,Không mở thêm đề khi hết 3 lượt,PASS,403,20.5
+API,teacher_an,Giảng viên làm thử đúng 6/6,PASS,200,30.8
+API,teacher_binh,Chặn giảng viên khác nộp bài,PASS,403,12.5
+API,teacher_binh,Đặt giá khóa test thanh toán 10000đ,PASS,200,12.0
+API,student_em,Chặn ghi danh miễn phí khóa trả phí,PASS,402,13.2
+API,student_em,Khởi tạo đơn VNPay khóa test,PASS,200,23.1
+API,student_em,Đơn chờ chưa cấp quyền học,PASS,200,9.3
+API,student_em,Đọc nội dung bài đã ghi danh,PASS,200,11.0
+API,teacher_an,Tải tài liệu TXT và lập chỉ mục RAG,PASS,200,3649.2
+API,student_em,AI từ chối câu hỏi rỗng,PASS,400,4.9
+API,student_em,AI Tutor: Biến trong Python dùng để làm gì?,PASS,200,45510.8
+API,student_em,Đọc lịch sử hội thoại,PASS,200,10.8
+API,student_phuong,Chặn đọc hội thoại người khác,PASS,404,10.5
+API,student_em,Xóa hội thoại test,PASS,200,10.3
+API,student_em,AI Tutor: Ai vô địch World Cup năm 2018?,PASS,200,114.3
+API,student_em,Đọc lịch sử hội thoại,PASS,200,7.4
+API,student_phuong,Chặn đọc hội thoại người khác,PASS,404,6.1
+API,student_em,Xóa hội thoại test,PASS,200,8.7
+API,student_phuong,AI từ chối câu hỏi rỗng,PASS,400,6.1
+API,student_phuong,AI Tutor: Biến trong Python dùng để làm gì?,PASS,200,61293.7
+API,student_phuong,Đọc lịch sử hội thoại,PASS,200,8.2
+API,student_em,Chặn đọc hội thoại người khác,PASS,404,8.8
+API,student_phuong,Xóa hội thoại test,PASS,200,8.2
+API,student_phuong,AI Tutor: Ai vô địch World Cup năm 2018?,PASS,200,115.2
+API,student_phuong,Đọc lịch sử hội thoại,PASS,200,7.4
+API,student_em,Chặn đọc hội thoại người khác,PASS,404,6.6
+API,student_phuong,Xóa hội thoại test,PASS,200,11.6
+API,teacher_an,Sinh đề AI live 3 câu dễ,PASS,200,9311.3
+API,teacher_an,Duyệt và lưu đề AI,PASS,200,45.5
+API,admin,Số liệu hệ thống during / summary,PASS,200,52.5
+API,admin,Số liệu hệ thống during / learning,PASS,200,113.0
+API,admin,Số liệu hệ thống during / users,PASS,200,10.8
+API,admin,Số liệu hệ thống during / courses,PASS,200,12.5
+API,admin,Số liệu hệ thống during / payments,PASS,200,38.1
+API,public,Tự đăng ký học viên,PASS,200,297.6
+API,public,Chặn đăng ký trùng email,PASS,409,5.4
+API,public,Đăng nhập tài khoản tự đăng ký,PASS,200,375.9
+API,registered_student,Đổi mật khẩu tài khoản test,PASS,200,702.7
+API,public,Mật khẩu cũ không còn dùng được,PASS,401,379.0
+API,public,Mật khẩu mới đăng nhập được,PASS,200,360.4
+API,registered_student,Cập nhật hồ sơ học viên,PASS,200,8.7
+API,teacher_an,Chặn xóa khóa đã có học viên,PASS,409,16.2
+API,teacher_an,Từ chối định dạng tài liệu không hỗ trợ,PASS,400,8.7
+API,teacher_an,Tạo bộ ôn tập chương,PASS,200,12.8
+API,teacher_an,Tạo câu ôn tập chương 1,PASS,200,19.4
+API,teacher_an,Tạo câu ôn tập chương 2,PASS,200,18.4
+API,teacher_an,Tạo câu ôn tập chương 3,PASS,200,19.2
+API,teacher_an,Tạo câu ôn tập chương 4,PASS,200,19.6
+API,teacher_an,Tạo câu ôn tập chương 5,PASS,200,17.1
+API,teacher_an,Tạo câu ôn tập chương 6,PASS,200,18.2
+API,teacher_an,Đọc đề ôn tập gốc,PASS,200,13.8
+API,student_em,Mở lượt ôn tập chương,PASS,200,22.4
+API,student_em,Ôn tập chương 0/6 câu đúng,PASS,200,71.6
+API,student_em,Từ chối nộp lại lượt đã hoàn tất,PASS,403,14.6
+API,student_em,Gợi ý sau ôn tập 0/6,PASS,200,49.8
+API,student_em,Ghi nhận mốc trước khi ôn lại chương,PASS,200,20.3
+API,student_em,Ôn tập chương 6/6 câu đúng,PASS,200,64.8
+API,student_em,Gợi ý sau ôn tập 6/6,PASS,200,44.8
+API,student_em,So sánh trước/sau ôn tập chương,PASS,200,15.0
+API,student_phuong,Chặn học viên đọc kết quả của người khác,PASS,403,34.0
+API,student_em,Ôn tập không làm thay đổi điểm chính thức,PASS,200,12.4
+API,student_phuong,Mở lượt ôn tập chương,PASS,200,22.8
+API,student_phuong,Ôn tập chương 3/6 câu đúng,PASS,200,68.7
+API,student_phuong,Từ chối nộp lại lượt đã hoàn tất,PASS,403,9.5
+API,student_phuong,Gợi ý sau ôn tập 3/6,PASS,200,63.9
+API,student_phuong,Ghi nhận mốc trước khi ôn lại chương,PASS,200,24.5
+API,student_phuong,Ôn tập chương 6/6 câu đúng,PASS,200,65.3
+API,student_phuong,Gợi ý sau ôn tập 6/6,PASS,200,39.4
+API,student_phuong,So sánh trước/sau ôn tập chương,PASS,200,14.7
+API,student_em,Chặn học viên đọc kết quả của người khác,PASS,403,11.0
+API,student_phuong,Ôn tập không làm thay đổi điểm chính thức,PASS,200,13.3
+API,admin,Số liệu hệ thống during_extended / summary,PASS,200,27.3
+API,admin,Số liệu hệ thống during_extended / learning,PASS,200,101.3
+API,admin,Số liệu hệ thống during_extended / users,PASS,200,14.2
+API,admin,Số liệu hệ thống during_extended / courses,PASS,200,13.0
+API,admin,Số liệu hệ thống during_extended / payments,PASS,200,38.6
+API,teacher_an,Dọn tài liệu test,PASS,200,30.4
+Cleanup,cleanup,"Dọn khóa test, kết quả và dữ liệu phụ thuộc",PASS,,
+API,admin,Dọn tài khoản test,PASS,200,38.1
+API,admin,Dọn tài khoản tự đăng ký,PASS,200,16.8
+API,admin,Số liệu hệ thống after / summary,PASS,200,26.3
+API,admin,Số liệu hệ thống after / learning,PASS,200,113.7
+API,admin,Số liệu hệ thống after / users,PASS,200,11.1
+API,admin,Số liệu hệ thống after / courses,PASS,200,10.5
+API,admin,Số liệu hệ thống after / payments,PASS,200,42.7
+Browser,admin,Đăng nhập bằng form,PASS,,650
+Browser,admin,Tìm người dùng theo email,PASS,,719
+Browser,admin,Xuất CSV từ giao diện báo cáo,PASS,,480
+Browser,admin,Xem giao dịch và số liệu admin,PASS,,984
+Browser,admin,Đăng xuất và chặn quay lại trang riêng,PASS,,376
+Browser,teacher_an,Đăng nhập bằng form,PASS,,407
+Browser,teacher_an,Sửa mô tả khóa test qua giao diện,PASS,,655
+Browser,teacher_an,Lọc khóa học theo tên,PASS,,322
+Browser,teacher_an,Mở báo cáo giảng viên,PASS,,886
+Browser,teacher_an,Đăng xuất và chặn quay lại trang riêng,PASS,,135
+Browser,teacher_binh,Đăng nhập bằng form,PASS,,363
+Browser,teacher_binh,Sửa mô tả khóa test qua giao diện,PASS,,745
+Browser,teacher_binh,Lọc khóa học theo tên,PASS,,339
+Browser,teacher_binh,Mở báo cáo giảng viên,PASS,,1122
+Browser,teacher_binh,Đăng xuất và chặn quay lại trang riêng,PASS,,230
+Browser,student_em,Đăng nhập bằng form,PASS,,2129
+Browser,student_em,Xem chi tiết khóa và đăng ký miễn phí,PASS,,747
+Browser,student_em,Học bài và đánh dấu hoàn thành 1,PASS,,637
+Browser,student_em,Học bài và đánh dấu hoàn thành 2,PASS,,682
+Browser,student_em,Làm quiz và nộp 0/6 câu đúng,PASS,,2605
+Browser,student_em,Làm quiz và nộp 3/6 câu đúng,PASS,,2360
+Browser,student_em,Làm quiz và nộp 6/6 câu đúng,PASS,,2560
+Browser,student_em,Kiểm tra tiến độ và gợi ý sau khi làm bài,PASS,,1873
+Browser,student_em,Trang tiến độ trên điện thoại,PASS,,893
+Browser,student_em,Đăng xuất và chặn quay lại trang riêng,PASS,,266
+Browser,student_phuong,Đăng nhập bằng form,PASS,,379
+Browser,student_phuong,Xem chi tiết khóa và đăng ký miễn phí,PASS,,803
+Browser,student_phuong,Học bài và đánh dấu hoàn thành 1,PASS,,772
+Browser,student_phuong,Học bài và đánh dấu hoàn thành 2,PASS,,618
+Browser,student_phuong,Làm quiz và nộp 0/6 câu đúng,PASS,,2536
+Browser,student_phuong,Làm quiz và nộp 3/6 câu đúng,PASS,,2578
+Browser,student_phuong,Làm quiz và nộp 6/6 câu đúng,PASS,,2435
+Browser,student_phuong,Kiểm tra tiến độ và gợi ý sau khi làm bài,PASS,,1680
+Browser,student_phuong,Trang tiến độ trên điện thoại,PASS,,874
+Browser,student_phuong,Đăng xuất và chặn quay lại trang riêng,PASS,,315

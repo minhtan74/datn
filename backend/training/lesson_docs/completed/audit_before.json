@@ -1,0 +1,587 @@
+[
+  {
+    "lesson_id": 1,
+    "course_id": 1,
+    "title": "Cài đặt Python & IDE",
+    "original_url": "docs/py_01.pdf",
+    "file_exists": false,
+    "text_chars": 0,
+    "missing": true
+  },
+  {
+    "lesson_id": 2,
+    "course_id": 1,
+    "title": "Biến và kiểu dữ liệu",
+    "original_url": "docs/py_02.pdf",
+    "file_exists": false,
+    "text_chars": 0,
+    "missing": true
+  },
+  {
+    "lesson_id": 3,
+    "course_id": 1,
+    "title": "Toán tử trong Python",
+    "original_url": "docs/py_03.pdf",
+    "file_exists": false,
+    "text_chars": 0,
+    "missing": true
+  },
+  {
+    "lesson_id": 4,
+    "course_id": 1,
+    "title": "Câu lệnh if - else",
+    "original_url": "docs/py_04.pdf",
+    "file_exists": false,
+    "text_chars": 0,
+    "missing": true
+  },
+  {
+    "lesson_id": 5,
+    "course_id": 1,
+    "title": "Vòng lặp for, while",
+    "original_url": "docs/py_05.pdf",
+    "file_exists": false,
+    "text_chars": 0,
+    "missing": true
+  },
+  {
+    "lesson_id": 6,
+    "course_id": 1,
+    "title": "Định nghĩa và sử dụng hàm",
+    "original_url": "docs/py_06.pdf",
+    "file_exists": false,
+    "text_chars": 0,
+    "missing": true
+  },
+  {
+    "lesson_id": 7,
+    "course_id": 1,
+    "title": "Class và Object",
+    "original_url": "docs/py_07.pdf",
+    "file_exists": false,
+    "text_chars": 0,
+    "missing": true
+  },
+  {
+    "lesson_id": 8,
+    "course_id": 1,
+    "title": "Kế thừa (Inheritance)",
+    "original_url": "docs/py_08.pdf",
+    "file_exists": false,
+    "text_chars": 0,
+    "missing": true
+  },
+  {
+    "lesson_id": 9,
+    "course_id": 1,
+    "title": "Dự án nhỏ: Quản lý sinh viên",
+    "original_url": "docs/py_09.pdf",
+    "file_exists": false,
+    "text_chars": 0,
+    "missing": true
+  },
+  {
+    "lesson_id": 10,
+    "course_id": 2,
+    "title": "JavaScript là gì?",
+    "original_url": "docs/js_01.pdf",
+    "file_exists": false,
+    "text_chars": 0,
+    "missing": true
+  },
+  {
+    "lesson_id": 11,
+    "course_id": 2,
+    "title": "Biến, kiểu dữ liệu & toán tử",
+    "original_url": "docs/js_02.pdf",
+    "file_exists": false,
+    "text_chars": 0,
+    "missing": true
+  },
+  {
+    "lesson_id": 12,
+    "course_id": 2,
+    "title": "Hàm trong JavaScript",
+    "original_url": "docs/js_03.pdf",
+    "file_exists": false,
+    "text_chars": 0,
+    "missing": true
+  },
+  {
+    "lesson_id": 13,
+    "course_id": 2,
+    "title": "Tổng quan về DOM",
+    "original_url": "docs/js_04.pdf",
+    "file_exists": false,
+    "text_chars": 0,
+    "missing": true
+  },
+  {
+    "lesson_id": 14,
+    "course_id": 2,
+    "title": "Xử lý sự kiện click, submit",
+    "original_url": "docs/js_05.pdf",
+    "file_exists": false,
+    "text_chars": 0,
+    "missing": true
+  },
+  {
+    "lesson_id": 15,
+    "course_id": 2,
+    "title": "Dự án: To-do List",
+    "original_url": "docs/js_06.pdf",
+    "file_exists": false,
+    "text_chars": 0,
+    "missing": true
+  },
+  {
+    "lesson_id": 16,
+    "course_id": 2,
+    "title": "Arrow function & Destructuring",
+    "original_url": "docs/js_07.pdf",
+    "file_exists": false,
+    "text_chars": 0,
+    "missing": true
+  },
+  {
+    "lesson_id": 17,
+    "course_id": 2,
+    "title": "Promise & Async/Await",
+    "original_url": "docs/js_08.pdf",
+    "file_exists": false,
+    "text_chars": 0,
+    "missing": true
+  },
+  {
+    "lesson_id": 18,
+    "course_id": 2,
+    "title": "Module & Fetch API",
+    "original_url": "docs/js_09.pdf",
+    "file_exists": false,
+    "text_chars": 0,
+    "missing": true
+  },
+  {
+    "lesson_id": 19,
+    "course_id": 3,
+    "title": "Cài đặt JDK & IntelliJ",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357140_cc0801d96630.pdf",
+    "file_exists": true,
+    "text_chars": 2265,
+    "missing": false
+  },
+  {
+    "lesson_id": 20,
+    "course_id": 3,
+    "title": "Biến, kiểu dữ liệu trong Java",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357143_9091029f76dc.pdf",
+    "file_exists": true,
+    "text_chars": 2737,
+    "missing": false
+  },
+  {
+    "lesson_id": 21,
+    "course_id": 3,
+    "title": "Cấu trúc điều khiển",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357145_68bb1c35d086.pdf",
+    "file_exists": true,
+    "text_chars": 2289,
+    "missing": false
+  },
+  {
+    "lesson_id": 22,
+    "course_id": 3,
+    "title": "Class, Object, Constructor",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357147_2eebb0cb962a.pdf",
+    "file_exists": true,
+    "text_chars": 2430,
+    "missing": false
+  },
+  {
+    "lesson_id": 23,
+    "course_id": 3,
+    "title": "Kế thừa & Đa hình",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357149_6022389fd521.pdf",
+    "file_exists": true,
+    "text_chars": 2480,
+    "missing": false
+  },
+  {
+    "lesson_id": 24,
+    "course_id": 3,
+    "title": "Interface & Abstract Class",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357151_a978c2a4a7bd.pdf",
+    "file_exists": true,
+    "text_chars": 2354,
+    "missing": false
+  },
+  {
+    "lesson_id": 25,
+    "course_id": 3,
+    "title": "Try-catch & Custom Exception",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357153_340f4446115c.pdf",
+    "file_exists": true,
+    "text_chars": 2866,
+    "missing": false
+  },
+  {
+    "lesson_id": 26,
+    "course_id": 3,
+    "title": "ArrayList & HashMap",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357155_2db92b8ffd1f.pdf",
+    "file_exists": true,
+    "text_chars": 2407,
+    "missing": false
+  },
+  {
+    "lesson_id": 27,
+    "course_id": 3,
+    "title": "Dự án: Quản lý sản phẩm",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357158_d94ff289a048.pdf",
+    "file_exists": true,
+    "text_chars": 2238,
+    "missing": false
+  },
+  {
+    "lesson_id": 28,
+    "course_id": 4,
+    "title": "Cấu trúc tài liệu HTML",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790356699_fc1653cd2e18.pdf",
+    "file_exists": true,
+    "text_chars": 3796,
+    "missing": false
+  },
+  {
+    "lesson_id": 29,
+    "course_id": 4,
+    "title": "Form và bảng biểu",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790356703_dc0e07558068.pdf",
+    "file_exists": true,
+    "text_chars": 3688,
+    "missing": false
+  },
+  {
+    "lesson_id": 30,
+    "course_id": 4,
+    "title": "Semantic HTML",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790356707_fed403225bd6.pdf",
+    "file_exists": true,
+    "text_chars": 3193,
+    "missing": false
+  },
+  {
+    "lesson_id": 31,
+    "course_id": 4,
+    "title": "Selector & thuộc tính CSS",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790356710_2b7ebca0485f.pdf",
+    "file_exists": true,
+    "text_chars": 3907,
+    "missing": false
+  },
+  {
+    "lesson_id": 32,
+    "course_id": 4,
+    "title": "Box Model & Flexbox",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790356713_f90411c46be1.pdf",
+    "file_exists": true,
+    "text_chars": 3450,
+    "missing": false
+  },
+  {
+    "lesson_id": 33,
+    "course_id": 4,
+    "title": "CSS Grid",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790356716_21f53222b382.pdf",
+    "file_exists": true,
+    "text_chars": 3207,
+    "missing": false
+  },
+  {
+    "lesson_id": 34,
+    "course_id": 4,
+    "title": "Media Query",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790356720_52edb97ab51c.pdf",
+    "file_exists": true,
+    "text_chars": 3095,
+    "missing": false
+  },
+  {
+    "lesson_id": 35,
+    "course_id": 4,
+    "title": "Mobile First Design",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790356723_ca62da0dc753.pdf",
+    "file_exists": true,
+    "text_chars": 2930,
+    "missing": false
+  },
+  {
+    "lesson_id": 36,
+    "course_id": 4,
+    "title": "Dự án: Landing Page Responsive",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790356725_4b30c763f5da.pdf",
+    "file_exists": true,
+    "text_chars": 3107,
+    "missing": false
+  },
+  {
+    "lesson_id": 37,
+    "course_id": 5,
+    "title": "Giới thiệu React & JSX",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357382_d77c675a04d6.pdf",
+    "file_exists": true,
+    "text_chars": 2337,
+    "missing": false
+  },
+  {
+    "lesson_id": 38,
+    "course_id": 5,
+    "title": "Component & Props",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357384_b14866b7491d.pdf",
+    "file_exists": true,
+    "text_chars": 2244,
+    "missing": false
+  },
+  {
+    "lesson_id": 39,
+    "course_id": 5,
+    "title": "State & useState",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357386_7054fc246841.pdf",
+    "file_exists": true,
+    "text_chars": 2501,
+    "missing": false
+  },
+  {
+    "lesson_id": 40,
+    "course_id": 5,
+    "title": "useEffect & vòng đời component",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357388_19fe5babfd27.pdf",
+    "file_exists": true,
+    "text_chars": 2754,
+    "missing": false
+  },
+  {
+    "lesson_id": 41,
+    "course_id": 5,
+    "title": "useContext & useReducer",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357391_2c4f362a2382.pdf",
+    "file_exists": true,
+    "text_chars": 2517,
+    "missing": false
+  },
+  {
+    "lesson_id": 42,
+    "course_id": 5,
+    "title": "Custom Hooks",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357393_6240bc95d801.pdf",
+    "file_exists": true,
+    "text_chars": 2395,
+    "missing": false
+  },
+  {
+    "lesson_id": 43,
+    "course_id": 5,
+    "title": "Kết nối API với Axios",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357396_16dd6f2fade9.pdf",
+    "file_exists": true,
+    "text_chars": 2275,
+    "missing": false
+  },
+  {
+    "lesson_id": 44,
+    "course_id": 5,
+    "title": "Routing với React Router",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357398_ef6347ddb0af.pdf",
+    "file_exists": true,
+    "text_chars": 2317,
+    "missing": false
+  },
+  {
+    "lesson_id": 45,
+    "course_id": 5,
+    "title": "Dự án: Trang quản lý khoá học",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357400_1832bb08915c.pdf",
+    "file_exists": true,
+    "text_chars": 2568,
+    "missing": false
+  },
+  {
+    "lesson_id": 46,
+    "course_id": 6,
+    "title": "Khái niệm cơ sở dữ liệu",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357603_515b241672ce.pdf",
+    "file_exists": true,
+    "text_chars": 2607,
+    "missing": false
+  },
+  {
+    "lesson_id": 47,
+    "course_id": 6,
+    "title": "Cài đặt MySQL & Workbench",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357605_3cec9e49245f.pdf",
+    "file_exists": true,
+    "text_chars": 2293,
+    "missing": false
+  },
+  {
+    "lesson_id": 48,
+    "course_id": 6,
+    "title": "Câu lệnh SELECT cơ bản",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357607_c64405573079.pdf",
+    "file_exists": true,
+    "text_chars": 2474,
+    "missing": false
+  },
+  {
+    "lesson_id": 49,
+    "course_id": 6,
+    "title": "JOIN nhiều bảng",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357610_f94edc6a86aa.pdf",
+    "file_exists": true,
+    "text_chars": 2429,
+    "missing": false
+  },
+  {
+    "lesson_id": 50,
+    "course_id": 6,
+    "title": "GROUP BY & Aggregate Function",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357612_9c80a167dd63.pdf",
+    "file_exists": true,
+    "text_chars": 2423,
+    "missing": false
+  },
+  {
+    "lesson_id": 51,
+    "course_id": 6,
+    "title": "Subquery & View",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357615_eb16aae99f50.pdf",
+    "file_exists": true,
+    "text_chars": 2721,
+    "missing": false
+  },
+  {
+    "lesson_id": 52,
+    "course_id": 6,
+    "title": "Chuẩn hoá dữ liệu (1NF-3NF)",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357617_9fb7962d9797.pdf",
+    "file_exists": true,
+    "text_chars": 2659,
+    "missing": false
+  },
+  {
+    "lesson_id": 53,
+    "course_id": 6,
+    "title": "Thiết kế ERD",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357619_53c6ef37f52a.pdf",
+    "file_exists": true,
+    "text_chars": 2502,
+    "missing": false
+  },
+  {
+    "lesson_id": 54,
+    "course_id": 6,
+    "title": "Dự án: Thiết kế CSDL website học trực tuyến",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790357622_193e0cd762a5.pdf",
+    "file_exists": true,
+    "text_chars": 2725,
+    "missing": false
+  },
+  {
+    "lesson_id": 55,
+    "course_id": 7,
+    "title": "Bài 1: Khái niệm về hệ điều hành",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790239493_9a583b48f6d8.pdf",
+    "file_exists": true,
+    "text_chars": 3153,
+    "missing": false
+  },
+  {
+    "lesson_id": 56,
+    "course_id": 7,
+    "title": "Bài 2: Phân loại hệ điều hành",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790239563_d6e24eb0ec20.pdf",
+    "file_exists": true,
+    "text_chars": 9193,
+    "missing": false
+  },
+  {
+    "lesson_id": 57,
+    "course_id": 7,
+    "title": "Bài 3: Nhu cầu xử lí đồng thời",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790318245_602b671318bd.pdf",
+    "file_exists": true,
+    "text_chars": 1906,
+    "missing": false
+  },
+  {
+    "lesson_id": 58,
+    "course_id": 7,
+    "title": "Bài 4: Khái niệm tiến trình và mô hình đa tiến trình",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790318289_bf43cd9e32a4.pdf",
+    "file_exists": true,
+    "text_chars": 2428,
+    "missing": false
+  },
+  {
+    "lesson_id": 59,
+    "course_id": 7,
+    "title": "Bài 5: Khái niệm tiến trình và mô hình tiểu tiến trình",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790318327_ab8151fc894d.pdf",
+    "file_exists": true,
+    "text_chars": 4111,
+    "missing": false
+  },
+  {
+    "lesson_id": 60,
+    "course_id": 7,
+    "title": "Bài 6: Tổ chức quản lí tiến trình",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790318577_52d902a720e9.pdf",
+    "file_exists": true,
+    "text_chars": 9709,
+    "missing": false
+  },
+  {
+    "lesson_id": 61,
+    "course_id": 7,
+    "title": "Bài 7: Lập trình tiến trình",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790318635_3c33650e038d.pdf",
+    "file_exists": true,
+    "text_chars": 17950,
+    "missing": false
+  },
+  {
+    "lesson_id": 62,
+    "course_id": 7,
+    "title": "Bài 8: Liên lạc tiến trình",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790318688_99ebbc6acb1f.pdf",
+    "file_exists": true,
+    "text_chars": 2904,
+    "missing": false
+  },
+  {
+    "lesson_id": 63,
+    "course_id": 7,
+    "title": "Bài 9: Các cơ chế thông tin liên lạc",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790318728_dd8873667197.pdf",
+    "file_exists": true,
+    "text_chars": 8502,
+    "missing": false
+  },
+  {
+    "lesson_id": 64,
+    "course_id": 7,
+    "title": "Bài 10: Nhu cầu đồng bộ hóa",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790318745_8427be92e4b7.pdf",
+    "file_exists": true,
+    "text_chars": 4990,
+    "missing": false
+  },
+  {
+    "lesson_id": 65,
+    "course_id": 7,
+    "title": "Bài 11: Các giải pháp đồng bộ hóa",
+    "original_url": "http://127.0.0.1:8080/uploads/documents/1790318759_2a6dbb28b2e9.pdf",
+    "file_exists": true,
+    "text_chars": 14273,
+    "missing": false
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "course_statuses": [
+    {
+      "status": "published",
+      "count": 11
+    }
+  ],
+  "chapters": 41,
+  "lessons": 102,
+  "lessons_with_video": 66,
+  "lessons_with_document": 101,
+  "quizzes": 34,
+  "questions": 393,
+  "official_quizzes_without_passing_score": 10,
+  "documents_by_status": [
+    {
+      "status": "indexed",
+      "count": 75
+    }
+  ]
+}

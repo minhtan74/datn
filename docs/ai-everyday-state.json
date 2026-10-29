@@ -1,0 +1,213 @@
+{
+  "started_at": "2026-10-29T19:55:09.116130",
+  "accounts": {
+    "admin": "admin@gmail.com",
+    "teacher_an": "an.nguyen@studyonline.vn",
+    "teacher_binh": "binh.tran@studyonline.vn",
+    "student_em": "em.hoang@gmail.com",
+    "student_phuong": "phuong.vu@gmail.com"
+  },
+  "max_parallel_accounts": 2,
+  "conversations": [
+    [
+      "student_em",
+      263
+    ],
+    [
+      "student_phuong",
+      264
+    ],
+    [
+      "student_em",
+      265
+    ],
+    [
+      "student_em",
+      266
+    ],
+    [
+      "student_phuong",
+      268
+    ],
+    [
+      "student_em",
+      267
+    ],
+    [
+      "student_phuong",
+      269
+    ],
+    [
+      "student_phuong",
+      271
+    ],
+    [
+      "student_phuong",
+      272
+    ],
+    [
+      "student_phuong",
+      273
+    ],
+    [
+      "student_phuong",
+      274
+    ],
+    [
+      "student_phuong",
+      275
+    ],
+    [
+      "teacher_an",
+      276
+    ],
+    [
+      "student_em",
+      270
+    ],
+    [
+      "student_em",
+      277
+    ],
+    [
+      "student_em",
+      278
+    ],
+    [
+      "student_em",
+      279
+    ],
+    [
+      "teacher_binh",
+      280
+    ],
+    [
+      "teacher_binh",
+      281
+    ],
+    [
+      "teacher_binh",
+      282
+    ],
+    [
+      "teacher_binh",
+      283
+    ],
+    [
+      "teacher_binh",
+      284
+    ],
+    [
+      "teacher_an",
+      286
+    ],
+    [
+      "teacher_an",
+      287
+    ],
+    [
+      "teacher_an",
+      288
+    ],
+    [
+      "teacher_an",
+      289
+    ],
+    [
+      "teacher_an",
+      290
+    ],
+    [
+      "teacher_an",
+      291
+    ],
+    [
+      "teacher_binh",
+      285
+    ],
+    [
+      "teacher_an",
+      292
+    ],
+    [
+      "teacher_binh",
+      293
+    ],
+    [
+      "teacher_binh",
+      294
+    ],
+    [
+      "admin",
+      295
+    ],
+    [
+      "admin",
+      296
+    ],
+    [
+      "admin",
+      297
+    ],
+    [
+      "admin",
+      298
+    ],
+    [
+      "admin",
+      299
+    ],
+    [
+      "admin",
+      300
+    ],
+    [
+      "admin",
+      301
+    ],
+    [
+      "admin",
+      302
+    ]
+  ],
+  "test_type": "realistic everyday messages",
+  "before_counts": {
+    "ai_conversations": 4,
+    "ai_messages": 18,
+    "documents": 75,
+    "document_chunks": 1221
+  },
+  "baseline_conversations": {
+    "admin": [],
+    "teacher_an": [],
+    "teacher_binh": [],
+    "student_em": [],
+    "student_phuong": [
+      232,
+      165,
+      164,
+      1
+    ]
+  },
+  "engine": {
+    "success": true,
+    "data": {
+      "llm": {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite"
+      },
+      "embedding": {
+        "provider": "fastembed",
+        "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+        "dim": 384
+      }
+    }
+  },
+  "after_counts": {
+    "ai_conversations": 4,
+    "ai_messages": 18,
+    "documents": 75,
+    "document_chunks": 1221
+  },
+  "finished_at": "2026-10-29T20:03:17.694165"
+}

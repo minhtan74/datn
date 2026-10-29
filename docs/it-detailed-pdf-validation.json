@@ -1,0 +1,29 @@
+{
+  "applied": true,
+  "protected_records_unchanged": true,
+  "books": [
+    {
+      "course_id": 513,
+      "title": "Mạng máy tính cơ bản",
+      "pdf": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\it_detailed\\course_513_complete.pdf",
+      "pages": 37
+    },
+    {
+      "course_id": 514,
+      "title": "Cấu trúc dữ liệu và giải thuật cơ bản",
+      "pdf": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\it_detailed\\course_514_complete.pdf",
+      "pages": 37
+    },
+    {
+      "course_id": 515,
+      "title": "Kiểm thử phần mềm nhập môn",
+      "pdf": "F:\\studyonline-main\\studyonline-main\\backend\\training\\lesson_docs\\it_detailed\\course_515_complete.pdf",
+      "pages": 37
+    }
+  ],
+  "lesson_pdfs": 36,
+  "authenticated_downloads_verified": 36,
+  "python_examples_executed": 13,
+  "min_lesson_pages": 3,
+  "max_lesson_pages": 3
+}

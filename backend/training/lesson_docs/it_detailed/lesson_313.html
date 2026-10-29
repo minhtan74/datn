@@ -1,0 +1,71 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Kiểm thử phần mềm nhập môn</div>
+<p class="path">Chương 2: Kỹ thuật kiểm thử và xử lý lỗi · Bài 1</p>
+<h1>Phân vùng tương đương và giá trị biên</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Kiểm thử phần mềm nhập môn.</li><li>Chương 2: Kỹ thuật kiểm thử và xử lý lỗi.</li><li>Các bài trong chương: Phân vùng tương đương và giá trị biên; Báo cáo lỗi và kiểm thử hồi quy.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Chọn dữ liệu đại diện thay vì kiểm tra ngẫu nhiên mọi giá trị.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Phân vùng tương đương chia miền dữ liệu thành các nhóm dự kiến được xử lý tương tự, rồi chọn đại diện cho mỗi nhóm. Phải xét cả nhóm hợp lệ và không hợp lệ theo yêu cầu; đây là kỹ thuật lựa chọn test, không phải chứng minh mọi giá trị trong nhóm chắc chắn có hành vi giống nhau.</p>
+<p>Với trường tuổi chỉ chấp nhận số nguyên từ 18 tới 60, có các vùng nhỏ hơn 18, từ 18 đến 60 và lớn hơn 60. Có thể chọn 17, 30, 61 làm đại diện. Kiểu đầu vào không phải số nguyên cũng cần xem xét theo hợp đồng dữ liệu.</p>
+<p>Phân tích giá trị biên tập trung vào ranh giới vì lỗi so sánh và lệch một đơn vị thường xuất hiện ở đó. Với ví dụ trên, các điểm sát biên như 17,18,19 và 59,60,61 giúp kiểm tra cách xử lý ngưỡng dưới và trên.</p>
+<h2>1. Bắt đầu từ miền đầu vào</h2>
+<p>Giả sử tuổi bắt buộc là số nguyên, hợp lệ 18–60 bao gồm hai đầu. Chia miền số nguyên thành dưới 18, 18–60, trên 60; xét thêm dữ liệu thiếu, chuỗi không chuyển được hoặc số thập phân theo API. Không dùng kỹ thuật biên để né việc làm rõ kiểu dữ liệu.</p>
+<h2>2. Ví dụ dữ liệu và kỳ vọng</h2>
+<pre><code>Giá trị    Phân loại             Kỳ vọng theo giả định
+17         Ngay dưới biên dưới  Từ chối
+18         Tại biên dưới        Chấp nhận
+19         Ngay trên biên dưới  Chấp nhận
+59         Ngay dưới biên trên  Chấp nhận
+60         Tại biên trên        Chấp nhận
+61         Ngay trên biên trên  Từ chối</code></pre>
+<p>Đây là lựa chọn ba điểm quanh mỗi biên cho dữ liệu rời rạc. Tài liệu và tiêu chuẩn có thể định nghĩa các biến thể bao phủ khác; luôn ghi biến thể đang dùng. Với số thực không có “số kế tiếp” giống số nguyên nếu chưa quy định độ chính xác và bước dữ liệu.</p>
+<h2>3. Sai lầm thường gặp</h2>
+<p>Chỉ thử 30 rồi kết luận 18 và 60 đúng; chỉ thử giá trị hợp lệ; tự chấp nhận chuỗi “18” dù hợp đồng yêu cầu JSON number; đưa null và chuỗi rỗng vào cùng vùng dù server xử lý khác. Những quyết định này có thể làm mất ca quan trọng.</p>
+<h2>4. Bài tập và lời giải</h2>
+<p>Điểm quiz là số nguyên 0–100: thử -1,0,1,99,100,101, cùng trường thiếu và sai kiểu theo yêu cầu. Nếu số lượt tối đa là 3, kiểm tra trước lượt 3, sau lượt 3 và trường hợp lượt cuối đang làm: đây còn là bài toán trạng thái, không chỉ biên số. Nêu giới hạn của kỹ thuật thay vì tuyên bố sáu giá trị đã bao phủ mọi lỗi.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>trường điểm nhận số nguyên 0–100. Liệt kê vùng hợp lệ, các vùng không hợp lệ và dữ liệu biên; nêu kết quả mong đợi cho từng giá trị.</p>
+</div>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Phân vùng tương đương giúp làm gì?</li><li>Tuổi hợp lệ là số nguyên 18–60. Giá trị nào thuộc vùng hợp lệ?</li><li>Bộ nào kiểm tra sát biên dưới 18 cho đầu vào nguyên?</li><li>Điểm hợp lệ từ 0 đến 100. Giá trị 101 thuộc vùng nào?</li><li>Vì sao cần kiểm tra giá trị biên?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Chọn đại diện cho các nhóm đầu vào xử lý tương tự. Chọn đại diện giúp giảm số lượng test có chủ đích.</li><li>30. 30 nằm trong khoảng bao gồm cả 18 và 60.</li><li>17, 18, 19. Các điểm ngay dưới, tại và ngay trên biên kiểm tra điều kiện ngưỡng.</li><li>Không hợp lệ phía trên. 101 vượt giới hạn trên; không tự suy đoán hành vi làm tròn.</li><li>Dễ xuất hiện lỗi điều kiện và lệch một đơn vị. Kiểm tra biên nhắm vào một nhóm lỗi phổ biến, không bao phủ mọi lỗi.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf</li></ul></body></html>

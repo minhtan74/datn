@@ -1,0 +1,81 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Cấu trúc dữ liệu và giải thuật cơ bản</div>
+<p class="path">Chương 2: Tìm kiếm và sắp xếp · Bài 2</p>
+<h1>Sắp xếp và độ phức tạp</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Cấu trúc dữ liệu và giải thuật cơ bản.</li><li>Chương 2: Tìm kiếm và sắp xếp.</li><li>Các bài trong chương: Tìm kiếm tuyến tính và nhị phân; Sắp xếp và độ phức tạp.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Đọc Big-O và mô tả hai thuật toán sắp xếp cơ bản.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Big-O mô tả một chặn trên tiệm cận của chi phí theo kích thước đầu vào. O(n) tăng tuyến tính, O(n²) tăng theo bình phương. Khi so sánh cần cùng loại chi phí và trường hợp phân tích; không suy ra thời gian thực tế chỉ từ Big-O.</p>
+<p>Selection sort chọn phần tử nhỏ nhất trong phần chưa sắp xếp rồi đưa về đầu phần đó. Thuật toán thường có O(n²) phép so sánh và có thể thực hiện tại chỗ. Merge sort chia dữ liệu, sắp xếp các nửa rồi trộn hai dãy đã có thứ tự; thời gian thường O(n log n).</p>
+<p>Bản merge sort thông thường trên mảng cần O(n) bộ nhớ phụ. Một thuật toán ổn định giữ thứ tự tương đối của các phần tử có khóa bằng nhau. Ổn định và tại chỗ là hai thuộc tính khác nhau, không phải tên gọi của độ phức tạp thời gian.</p>
+<h2>1. Đặt tiêu chí trước khi chọn thuật toán</h2>
+<p>Đầu ra tăng hay giảm, có giữ phần tử bằng nhau theo thứ tự cũ không, có sửa đầu vào không, giới hạn bộ nhớ bao nhiêu? Một thuật toán tại chỗ và một thuật toán ổn định có thể phù hợp các nhu cầu khác nhau. So sánh chi phí phải cùng mô hình dữ liệu.</p>
+<h2>2. Merge sort đầy đủ cho danh sách số</h2>
+<pre><code>def merge_sort(values):
+    if len(values) &lt;= 1:
+        return values[:]
+    middle = len(values) // 2
+    left = merge_sort(values[:middle])
+    right = merge_sort(values[middle:])
+    output = []
+    i = j = 0
+    while i &lt; len(left) and j &lt; len(right):
+        if left[i] &lt;= right[j]:
+            output.append(left[i]); i += 1
+        else:
+            output.append(right[j]); j += 1
+    return output + left[i:] + right[j:]
+
+assert merge_sort([4, 2, 5, 1]) == [1, 2, 4, 5]
+assert merge_sort([2, 2, -1]) == [-1, 2, 2]</code></pre>
+<p>Chọn bên trái khi khóa bằng giúp giữ ổn định nếu phép so sánh theo khóa nhất quán. Bản ví dụ dùng slicing và danh sách phụ để dễ hiểu, không phải bản tối ưu bộ nhớ.</p>
+<h2>3. Vì sao O(n log n)</h2>
+<p>Chia đôi tạo khoảng log n mức; công việc trộn trên mỗi mức là O(n). Không ghi riêng một lần trộn rồi kết luận toàn thuật toán O(n). Với bản cài thông thường, bộ nhớ phụ cực đại là O(n) cộng ngăn xếp O(log n), vẫn O(n).</p>
+<h2>4. Bài tập và lời giải</h2>
+<p>Trộn [1,4,7] với [2,3,8] thu [1,2,3,4,7,8]; ở mỗi bước chọn đầu nhỏ hơn chưa dùng. Kiểm tra đầu ra vừa có thứ tự vừa giữ số lần xuất hiện từng phần tử. Một chương trình trả [] có thứ tự nhưng đã mất dữ liệu, nên chỉ kiểm tra tăng dần là chưa đủ.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>mô phỏng hai bước selection sort cho [4,2,5,1]. Trộn [1,4,7] với [2,3,8]. Với bản ghi cùng điểm, giải thích vì sao giữ thứ tự ban đầu có thể hữu ích.</p>
+</div>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>O(n²) thường mô tả mức tăng chi phí như thế nào?</li><li>Selection sort thường chọn gì ở mỗi bước?</li><li>Thời gian thông thường của merge sort là gì?</li><li>Sắp xếp ổn định có ý nghĩa gì?</li><li>Merge sort thông thường trên mảng thường cần bộ nhớ phụ bao nhiêu?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Theo bình phương kích thước đầu vào. Big-O biểu diễn quan hệ tăng trưởng, không phải thời gian tuyệt đối.</li><li>Phần tử nhỏ nhất trong phần chưa sắp xếp. Phần tử nhỏ nhất được đưa về đầu phần chưa sắp xếp.</li><li>O(n log n). Có khoảng log n mức chia và O(n) công việc trộn mỗi mức.</li><li>Giữ thứ tự tương đối của phần tử có khóa bằng nhau. Tính ổn định xét các phần tử có khóa so sánh bằng nhau.</li><li>O(n). Bộ đệm trộn thông thường có kích thước tỉ lệ với số phần tử.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://opendatastructures.org/</li><li>https://docs.python.org/3/tutorial/datastructures.html</li><li>https://docs.python.org/3/library/heapq.html</li></ul></body></html>

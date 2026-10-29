@@ -1,0 +1,70 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Kiểm thử phần mềm nhập môn</div>
+<p class="path">Chương 4: Thiết kế kiểm thử theo hành vi · Bài 2</p>
+<h1>Kiểm thử chuyển trạng thái</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Kiểm thử phần mềm nhập môn.</li><li>Chương 4: Thiết kế kiểm thử theo hành vi.</li><li>Các bài trong chương: Bảng quyết định và tổ hợp điều kiện; Kiểm thử chuyển trạng thái.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Mô hình hóa vòng đời nghiệp vụ và kiểm tra chuyển trạng thái hợp lệ, không hợp lệ.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Mô hình trạng thái gồm trạng thái, sự kiện và chuyển tiếp. Kết quả của một hành động có thể phụ thuộc trạng thái trước đó. Ví dụ quiz đang làm, đã nộp hoặc hết thời gian không nên xử lý thao tác nộp giống nhau trong mọi trường hợp.</p>
+<p>Bảng chuyển tiếp mô tả trạng thái đầu, hành động, trạng thái cuối và phản hồi. Ngoài đường hợp lệ, kiểm tra chuyển tiếp bị cấm như sửa câu trả lời sau khi đã nộp. Bao phủ trạng thái không đồng nghĩa bao phủ mọi chuyển tiếp giữa chúng.</p>
+<p>Một lần chạy cần điều kiện khởi tạo rõ ràng và khả năng khôi phục dữ liệu. Với tác vụ bất đồng bộ, trạng thái giao diện và trạng thái server có thể cập nhật ở các thời điểm khác nhau; cần kiểm tra trạng thái có thẩm quyền. Không coi một nút bị ẩn là bằng chứng server đã ngăn hành động trái phép.</p>
+<h2>1. Mô hình hóa một lượt quiz</h2>
+<pre><code>Chưa bắt đầu --mở hợp lệ--&gt; Đang làm --nộp hợp lệ--&gt; Đã nộp
+Đang làm --hết thời gian--&gt; Trạng thái theo quy tắc hệ thống
+Đã nộp --sửa câu trả lời--&gt; Từ chối, không đổi kết quả đã lưu</code></pre>
+<p>Không tự chọn “hết giờ luôn tự nộp” nếu chưa có yêu cầu. Phải xác nhận cách server xử lý và chỉ rõ người có thẩm quyền tính thời gian.</p>
+<h2>2. Trạng thái khác với nhãn giao diện</h2>
+<p>Một nút có chữ “đã nộp” không chứng minh dữ liệu đã commit. Test phải quan sát trạng thái được server xác nhận, kết quả và các tác dụng phụ. Cần xử lý mạng mất phản hồi sau khi server đã lưu: gửi lại có thể không được tạo kết quả thứ hai theo hợp đồng.</p>
+<h2>3. Bao phủ và chuỗi sự kiện</h2>
+<p>Test từng chuyển tiếp hợp lệ, chuyển tiếp bị cấm và chuỗi có ý nghĩa. Bao phủ mọi trạng thái chỉ cho biết đã tới các nút, không bảo đảm đã đi qua mọi cạnh. Thêm điều kiện dữ liệu như hết lượt, lượt đang làm hoặc quá giờ để phân biệt quy tắc.</p>
+<h2>4. Mẫu test và lời giải</h2>
+<p>Tạo attempt lab đang làm, nộp thành công, giữ result_id, gửi sửa câu trả lời sau nộp. Mong đợi từ chối theo API và hash kết quả cũ không đổi. Test khác mô phỏng request nộp lặp, xác nhận số kết quả theo hợp đồng. Không chỉnh đồng hồ hệ thống thật để thử hết giờ; dùng cơ chế thời gian kiểm soát được trong test.</p>
+<p>Nộp bảng trạng thái đầu, sự kiện, guard, trạng thái cuối và dữ liệu cần giữ. Đánh dấu trạng thái chưa thử thay vì ghi pass theo sơ đồ.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>Vẽ trạng thái của đơn hàng pending, paid, cancelled theo hợp đồng hệ thống. Viết ba chuyển tiếp hợp lệ và hai chuyển tiếp bị cấm; không dùng thanh toán thật.</p>
+</div>
+<h2>Hướng giải bài tập bổ sung</h2>
+<p>Nêu rõ sự kiện dẫn tới chuyển trạng thái và kiểm tra cả dữ liệu server. Yêu cầu nộp trùng cần có kết quả mong đợi cụ thể.</p>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Kết quả thao tác trong hệ thống có trạng thái phụ thuộc gì?</li><li>Bao phủ mọi trạng thái có bằng bao phủ mọi chuyển tiếp không?</li><li>Ẩn nút nộp sau hoàn tất đã chứng minh server chặn nộp lại chưa?</li><li>Test chuyển tiếp cần ghi thông tin nào?</li><li>Với chức năng bất đồng bộ nên đối chiếu thêm gì?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Trạng thái trước và sự kiện. Cùng sự kiện có thể được xử lý khác ở mỗi trạng thái.</li><li>Không. Các đường nối trạng thái là mục tiêu bao phủ riêng.</li><li>Chưa. Phải kiểm tra quy tắc tại API hoặc server.</li><li>Trạng thái đầu, sự kiện và kết quả mong đợi. Các thành phần mô tả được luồng cần xác minh.</li><li>Trạng thái server có thẩm quyền. Giao diện có thể cập nhật trước hoặc sau dữ liệu thực.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf</li></ul></body></html>

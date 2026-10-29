@@ -1,4 +1,4 @@
-"""/api/payments — thanh toán khóa học qua VNPay Sandbox (+ chế độ giả lập khi PAYMENT_MOCK=true)."""
+"""/api/payments — thanh toán khóa học qua VNPay Sandbox."""
 import datetime as dt
 import random
 from urllib.parse import urlencode
@@ -92,7 +92,7 @@ def index(user: dict = Depends(get_current_user), db: Session = Depends(get_db))
     return ok(data=data)
 
 
-# POST /api/payments — đăng ký khóa học; khóa có phí thì tạo giao dịch (mock: thành công ngay)
+# POST /api/payments — tương thích ghi danh miễn phí; khóa có phí phải qua VNPay
 @router.post("")
 def create(
     body: dict = Body(default={}),
@@ -113,47 +113,7 @@ def create(
         _enroll(db, user["id"], course_id)
         return ok("Đăng ký thành công!", enrolled=True, payment_required=False)
 
-    # Khóa có phí phải thanh toán qua VNPay (POST /api/payments/vnpay/create);
-    # chỉ cho phép thanh toán giả lập khi bật PAYMENT_MOCK=true (demo offline)
-    if not settings.payment_mock:
-        raise ApiError("Khóa học có phí — vui lòng thanh toán qua VNPay.", 400)
-
-    ref = _new_ref()
-    # Tạo giao dịch ở trạng thái chờ (pending); đơn giả lập không có mã giao dịch VNPay
-    res = execute(
-        db,
-        "INSERT INTO payments (user_id, course_id, amount, method, status, transaction_ref, note) "
-        "VALUES (:u, :c, :amount, :method, 'pending', :ref, 'Thanh toán giả lập (PAYMENT_MOCK)')",
-        u=user["id"],
-        c=course_id,
-        amount=amount,
-        method=METHOD,
-        ref=ref,
-    )
-    payment_id = res.lastrowid
-    if not payment_id:
-        raise ApiError("Không thể tạo giao dịch.")
-
-    # MOCK: chưa tích hợp cổng thanh toán thật -> chuyển ngay sang 'completed' và ghi thời điểm trả tiền
-    execute(
-        db,
-        "UPDATE payments SET status='completed', transaction_ref=:ref, paid_at=NOW() "
-        "WHERE id=:id AND status='pending'",
-        ref=ref,
-        id=payment_id,
-    )
-    # Thanh toán xong thì ghi danh học viên vào khóa học
-    _enroll(db, user["id"], course_id)
-
-    return ok(
-        "Thanh toán thành công! Bạn đã được đăng ký vào khóa học.",
-        payment_id=int(payment_id),
-        transaction_ref=ref,
-        amount=amount,
-        method=METHOD,
-        enrolled=True,
-        payment_required=True,
-    )
+    raise ApiError("Khóa học có phí — vui lòng thanh toán qua VNPay.", 400)
 
 
 # GET /api/payments/check?course_id=X — cho frontend biết user đã trả tiền / đã ghi danh khóa này chưa

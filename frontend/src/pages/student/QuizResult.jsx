@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { quizService } from '../../services/quizService';
 import RichText from '../../components/common/RichText.jsx';
+import KnowledgeAssessment from '../../components/common/KnowledgeAssessment.jsx';
+import RecommendationCard from '../../components/common/RecommendationCard.jsx';
 
 const OPTION_KEYS = ['A', 'B', 'C', 'D'];
 
@@ -164,6 +166,13 @@ export default function QuizResult() {
       </aside>
 
       <div className="qr-content">
+      {data.knowledge && <div className="s-card"><div className="s-card-body">
+        <KnowledgeAssessment data={data.knowledge} title="Bạn nên ôn phần nào?" showReview answers={details} />
+      </div></div>}
+      {data.result_id && data.own_result !== false && <details className="s-card">
+        <summary style={{ cursor: 'pointer', padding: '1rem', fontWeight: 600 }}>Xem gợi ý hiện tại từ tất cả quiz trong khóa</summary>
+        <RecommendationCard courseId={quiz.course_id} compact title="Gợi ý hiện tại từ các quiz đã làm trong khóa" />
+      </details>}
       {/* Đề giới hạn lượt làm: chưa phải lượt cuối thì chỉ báo đúng/sai, đáp án đúng để dành tới lượt cuối */}
       {revealed === false && (
         <div className="alert alert-warning" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
@@ -188,7 +197,7 @@ export default function QuizResult() {
       {/* Detail Question List */}
       <div id="detailList">
         {details.map((d, i) => (
-          <div key={i} className="question-card">
+          <div key={d.question_id || i} id={`quiz-question-${d.question_id}`} className="question-card" tabIndex={-1} style={{ scrollMarginTop: '5rem' }}>
             <div className="question-num">
               <span>Câu {i + 1}</span>
               <span

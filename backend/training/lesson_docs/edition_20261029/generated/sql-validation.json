@@ -1,0 +1,61 @@
+[
+  {
+    "query": "SELECT id, name\nFROM students\nWHERE name IS NOT NULL\nORDER BY name, id\nLIMIT 20;",
+    "result": [
+      [
+        1,
+        "A"
+      ],
+      [
+        2,
+        "B"
+      ],
+      [
+        3,
+        "C"
+      ]
+    ],
+    "passed": true
+  },
+  {
+    "query": "SELECT s.id, s.name\nFROM students AS s\nLEFT JOIN enrollments AS e ON e.student_id = s.id\nWHERE e.student_id IS NULL;",
+    "result": [
+      [
+        1,
+        "A"
+      ]
+    ],
+    "passed": true
+  },
+  {
+    "query": "SELECT c.id, c.title, COUNT(e.id) AS student_count\nFROM courses AS c\nLEFT JOIN enrollments AS e ON e.course_id = c.id\nGROUP BY c.id, c.title;",
+    "result": [
+      [
+        1,
+        "Python",
+        2
+      ],
+      [
+        2,
+        "SQL",
+        1
+      ],
+      [
+        3,
+        "Empty",
+        0
+      ]
+    ],
+    "passed": true
+  },
+  {
+    "query": "SELECT s.id, s.name\nFROM students AS s\nWHERE NOT EXISTS (\n    SELECT 1 FROM enrollments AS e WHERE e.student_id = s.id\n);",
+    "result": [
+      [
+        1,
+        "A"
+      ]
+    ],
+    "passed": true
+  }
+]

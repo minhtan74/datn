@@ -1,0 +1,29 @@
+{"stage": "_build_chapter_context", "state": "start", "difficulty": null, "n": null}
+{"stage": "_build_chapter_context", "state": "done", "elapsed": 0.39, "context_chars": 12062, "chunks": 1}
+{"stage": "_generate_batch", "state": "start", "difficulty": "easy", "n": 3}
+{"stage": "gemini", "state": "start", "max_tokens": 1200}
+{"stage": "gemini", "state": "done", "elapsed": 9.82, "http": 200, "finish_reason": "STOP", "usage": {"promptTokenCount": 4140, "candidatesTokenCount": 866, "totalTokenCount": 5006, "promptTokensDetails": [{"modality": "TEXT", "tokenCount": 4140}], "serviceTier": "standard"}}
+{"stage": "_verify", "state": "start", "difficulty": null, "n": null}
+{"stage": "gemini", "state": "start", "max_tokens": 1200}
+{"stage": "gemini", "state": "done", "elapsed": 24.5, "http": 200, "finish_reason": "STOP", "usage": {"promptTokenCount": 3940, "candidatesTokenCount": 368, "totalTokenCount": 4308, "promptTokensDetails": [{"modality": "TEXT", "tokenCount": 3940}], "serviceTier": "standard"}}
+{"stage": "_verify", "state": "done", "elapsed": 24.5}
+{"stage": "_generate_batch", "state": "done", "elapsed": 34.33, "questions": 2}
+{"stage": "_generate_batch", "state": "start", "difficulty": "medium", "n": 5}
+{"stage": "gemini", "state": "start", "max_tokens": 1800}
+{"stage": "gemini", "state": "done", "elapsed": 12.62, "http": 200, "finish_reason": "STOP", "usage": {"promptTokenCount": 4140, "candidatesTokenCount": 1376, "totalTokenCount": 5516, "promptTokensDetails": [{"modality": "TEXT", "tokenCount": 4140}], "serviceTier": "standard"}}
+{"stage": "_verify", "state": "start", "difficulty": null, "n": null}
+{"stage": "gemini", "state": "start", "max_tokens": 2100}
+{"stage": "gemini", "state": "done", "elapsed": 24.76, "http": 200, "finish_reason": "STOP", "usage": {"promptTokenCount": 4181, "candidatesTokenCount": 502, "totalTokenCount": 4683, "promptTokensDetails": [{"modality": "TEXT", "tokenCount": 4181}], "serviceTier": "standard"}}
+{"stage": "_verify", "state": "done", "elapsed": 24.76}
+{"stage": "_generate_batch", "state": "done", "elapsed": 37.39, "questions": 4}
+{"stage": "_generate_batch", "state": "start", "difficulty": "hard", "n": 2}
+{"stage": "gemini", "state": "start", "max_tokens": 900}
+{"stage": "gemini", "state": "done", "elapsed": 9.31, "http": 200, "finish_reason": "MAX_TOKENS", "usage": {"promptTokenCount": 4147, "candidatesTokenCount": 896, "totalTokenCount": 5043, "promptTokensDetails": [{"modality": "TEXT", "tokenCount": 4147}], "serviceTier": "standard"}}
+{"stage": "gemini", "state": "start", "max_tokens": 900}
+{"stage": "gemini", "state": "done", "elapsed": 7.58, "http": 200, "finish_reason": "STOP", "usage": {"promptTokenCount": 4165, "candidatesTokenCount": 830, "totalTokenCount": 4995, "promptTokensDetails": [{"modality": "TEXT", "tokenCount": 4165}], "serviceTier": "standard"}}
+{"stage": "_verify", "state": "start", "difficulty": null, "n": null}
+{"stage": "gemini", "state": "start", "max_tokens": 1200}
+{"stage": "gemini", "state": "done", "elapsed": 12.77, "http": 200, "finish_reason": "STOP", "usage": {"promptTokenCount": 4084, "candidatesTokenCount": 572, "totalTokenCount": 4656, "promptTokensDetails": [{"modality": "TEXT", "tokenCount": 4084}], "serviceTier": "standard"}}
+{"stage": "_verify", "state": "done", "elapsed": 12.77}
+{"stage": "_generate_batch", "state": "done", "elapsed": 29.67, "questions": 2}
+{"stage": "complete", "state": "done"}

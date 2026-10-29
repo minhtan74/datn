@@ -1,0 +1,538 @@
+[
+  {
+    "role": "admin",
+    "name": "Đăng nhập bằng form",
+    "passed": true,
+    "ms": 650,
+    "data": {
+      "url": "http://127.0.0.1:5173/admin"
+    },
+    "events": []
+  },
+  {
+    "role": "admin",
+    "name": "Tìm người dùng theo email",
+    "passed": true,
+    "ms": 719,
+    "data": {
+      "text": "EM\nHoàng Văn Em\n\tem.hoang@gmail.com\tSTUDENT\tHOẠT ĐỘNG\t2026-05-25\tSửaKhóaXóa"
+    },
+    "events": []
+  },
+  {
+    "role": "admin",
+    "name": "Xuất CSV từ giao diện báo cáo",
+    "passed": true,
+    "ms": 480,
+    "data": {
+      "filename": "bao-cao-giao-dich-2026-10-29.csv"
+    },
+    "events": []
+  },
+  {
+    "role": "admin",
+    "name": "Xem giao dịch và số liệu admin",
+    "passed": true,
+    "ms": 984,
+    "data": {
+      "text": "🎓\nStudyOnline\nHỆ THỐNG QUẢN LÝ\nBẢNG ĐIỀU KHIỂN\n📊\nDashboard\nQUẢN TRỊ HỆ THỐNG\n👥\nQuản lý User\n▸\n📚\nQuản lý Khóa học\n💳\nQuản lý Giao dịch\nBÁO CÁO & CẤU HÌNH\n📄\nBáo cáo\nA\nAdministrator\nSuper Admin\n🚪 Đăng xuất\nHệ thống Quản trị\nXin chào, Administrator!\nAdmin / Quản lý Giao dịch\nA\nAdmin / Quản lý Giao dịch\n💳 Quản lý Giao dịch\n\nTra cứu toàn bộ đơn thanh toán khóa học, lọc theo trạng thái và xem chi tiết kết quả từ VNPay.\n\nTất cả\n32\nThành công\n18\nĐang chờ\n0\nThất bại\n12\nĐã hoàn tiền\n2\n🔄 Đối soát 0 đơn đang chờ\nTìm kiếm\nKhóa học\nTất cả khóa học\nAUDIT_20261029_191321 teacher_binh\nAUDIT_20261029_191321 teacher_an\nPYTEST Course\nKiểm thử phần mềm nhập môn\nCấu trúc dữ liệu và giải thuật cơ bản\nMạng máy tính cơ bản\nNguyên Lí HDH\nMySQL & Thiết Kế Cơ Sở Dữ Liệu\nReactJS Chuyên Sâu\nHTML & CSS Nhập Môn\nLập Trình Java Căn Bản\nJavaScript Từ Zero Đến Hero\nPython Cơ Bản Cho Người Mới Bắt Đầu\nTừ ngày\nĐến ngày\nTìm thấy 32 giao dịch\nDoanh thu (đơn thành công trong kết quả lọc): 11.782.000đ\nMÃ ĐƠN / NGÀY TẠO\tHỌC VIÊN\tKHÓA HỌC\tSỐ TIỀN\tPHƯƠNG THỨC\tTRẠNG THÁI\n\nSO2610081854054525\n18:54:05 8/10/2026\t\nVũ Thị Phương\nphuong.vu@gmail.com\t\nPython Cơ Bản Cho Người Mới Bắt Đầu\n\t599.000đ\t🔴 VNPay\tTHÀNH CÔNG\n\nSO2610081852177948\n18:52:17 8/10/2026\t\nVũ Thị Phương\nphuong.vu@gmail.com\t\nPython Cơ Bản Cho Người Mới Bắt Đầu\n\t599.000đ\t🔴 VNPay\tTHẤT BẠI\n\nSO2610081849001440\n18:49:00 8/10/2026\t\nVũ Thị Phương\nphuong.vu@gmail.com\t\nPython Cơ Bản Cho Người Mới Bắt Đầu\n\t599.000đ\t🔴 VNPay\tTHẤT BẠI\n\nSO2610081848309236\n18:48:30 8/10/2026\t\nVũ Thị Phương\nphuong.vu@gmail.com\t\nPython Cơ Bản Cho Người Mới Bắt Đầu\n\t599.000đ\t🔴 VNPay\tT"
+    },
+    "events": []
+  },
+  {
+    "role": "admin",
+    "name": "Đăng xuất và chặn quay lại trang riêng",
+    "passed": true,
+    "ms": 376,
+    "data": {
+      "url": "http://127.0.0.1:5173/login"
+    },
+    "events": []
+  },
+  {
+    "role": "teacher_an",
+    "name": "Đăng nhập bằng form",
+    "passed": true,
+    "ms": 433,
+    "data": {
+      "url": "http://127.0.0.1:5173/teacher"
+    },
+    "events": []
+  },
+  {
+    "role": "teacher_an",
+    "name": "Sửa mô tả khóa test qua giao diện",
+    "passed": false,
+    "ms": 12199,
+    "error": "locator.waitFor: Timeout 12000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('tr').filter({ hasText: 'AUDIT_20261029_191321 teacher_an' }) to be visible\u001b[22m\n",
+    "events": []
+  },
+  {
+    "role": "teacher_an",
+    "name": "Lọc khóa học theo tên",
+    "passed": false,
+    "ms": 337,
+    "error": "Không tìm thấy khóa test",
+    "events": []
+  },
+  {
+    "role": "teacher_an",
+    "name": "Mở báo cáo giảng viên",
+    "passed": true,
+    "ms": 1196,
+    "data": {
+      "overflow": false
+    },
+    "events": []
+  },
+  {
+    "role": "teacher_an",
+    "name": "Đăng xuất và chặn quay lại trang riêng",
+    "passed": true,
+    "ms": 410,
+    "data": {
+      "url": "http://127.0.0.1:5173/login"
+    },
+    "events": []
+  },
+  {
+    "role": "teacher_binh",
+    "name": "Đăng nhập bằng form",
+    "passed": true,
+    "ms": 447,
+    "data": {
+      "url": "http://127.0.0.1:5173/teacher"
+    },
+    "events": []
+  },
+  {
+    "role": "teacher_binh",
+    "name": "Sửa mô tả khóa test qua giao diện",
+    "passed": false,
+    "ms": 12213,
+    "error": "locator.waitFor: Timeout 12000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('tr').filter({ hasText: 'AUDIT_20261029_191321 teacher_binh' }) to be visible\u001b[22m\n",
+    "events": []
+  },
+  {
+    "role": "teacher_binh",
+    "name": "Lọc khóa học theo tên",
+    "passed": false,
+    "ms": 329,
+    "error": "Không tìm thấy khóa test",
+    "events": []
+  },
+  {
+    "role": "teacher_binh",
+    "name": "Mở báo cáo giảng viên",
+    "passed": true,
+    "ms": 1151,
+    "data": {
+      "overflow": false
+    },
+    "events": []
+  },
+  {
+    "role": "teacher_binh",
+    "name": "Đăng xuất và chặn quay lại trang riêng",
+    "passed": true,
+    "ms": 368,
+    "data": {
+      "url": "http://127.0.0.1:5173/login"
+    },
+    "events": []
+  },
+  {
+    "role": "student_em",
+    "name": "Đăng nhập bằng form",
+    "passed": true,
+    "ms": 473,
+    "data": {
+      "url": "http://127.0.0.1:5173/student/dashboard"
+    },
+    "events": []
+  },
+  {
+    "role": "student_em",
+    "name": "Xem chi tiết khóa và đăng ký miễn phí",
+    "passed": true,
+    "ms": 747,
+    "data": {
+      "course_id": 540,
+      "status": 200
+    },
+    "events": []
+  },
+  {
+    "role": "student_em",
+    "name": "Học bài và đánh dấu hoàn thành 1",
+    "passed": true,
+    "ms": 637,
+    "data": {
+      "lesson_id": 374,
+      "persisted_after_reload": true
+    },
+    "events": []
+  },
+  {
+    "role": "student_em",
+    "name": "Học bài và đánh dấu hoàn thành 2",
+    "passed": true,
+    "ms": 682,
+    "data": {
+      "lesson_id": 375,
+      "persisted_after_reload": true
+    },
+    "events": []
+  },
+  {
+    "role": "student_em",
+    "name": "Làm quiz và nộp 0/6 câu đúng",
+    "passed": true,
+    "ms": 2605,
+    "data": {
+      "score": 0,
+      "total": 6,
+      "percent": 0,
+      "passed": false,
+      "result_id": 312,
+      "attempts_left": 2,
+      "answers_revealed": false,
+      "reload_same_attempt": true,
+      "displayed_result": "🎓\nStudyOnline\n📊\nDashboard\n📚\nKhóa học của tôi\n🌐\nKhám phá\n📈\nTiến độ học tập\n📝\nQuiz\n🤖\nAI Tutor\n👤\nHồ sơ cá nhân\n🚪\nĐăng xuất\n☰\nVE\nEm\nDashboard\n›\nDanh sách Quiz\n›\nKết quả bài làm\nKẾT QUẢ\n0/6\n✓ 0 Đúng\n|\n✗ 6 Sai\nĐạt 0%\nAUDIT_20261029_191321 kiểm tra cuối khóa\n\nAUDIT_20261029_191321 teacher_an\n\n📜 Lịch sử làm bài quiz này\nChưa đạt — cần tối thiểu 70%\nBạn nên ôn phần nào?\n\nRiêng lượt quiz này: 1 chương và 0 bài cần củng cố. Ưu tiên ôn các bài bên dưới.\n\nKiến thức Python kiểm thử\nĐúng 0/6 câu · 0%\nCần củng cố\n\nBài nên ôn (2)\n\nBiến và kiểu dữ liệu\nĐúng 0/3 câu · 0%\nChưa đủ dữ liệu\nÔn bài học\nXem 3 câu sai\nVòng lặp và điều kiện\nĐúng 0/3 câu · 0%\nChưa đủ dữ liệu\nÔn bài học\nXem 3 câu sai\n\nCác mục “Chưa đủ dữ liệu” cần thêm câu hỏi để đánh giá; có câu sai thì bạn vẫn có thể ôn lại.\n\nXem bảng kết quả chi tiết theo chương/bài\n\nCần ít nhất 5 câu khác nhau để phân loại; dưới 70% thì ưu tiên ôn. Đây là ngưỡng hỗ trợ học tập ban đầu.\n\nXem gợi ý hiện tại từ tất cả quiz trong khóa\n🔒 Đáp án đúng sẽ đ"
+    },
+    "events": []
+  },
+  {
+    "role": "student_em",
+    "name": "Làm quiz và nộp 3/6 câu đúng",
+    "passed": true,
+    "ms": 2360,
+    "data": {
+      "score": 3,
+      "total": 6,
+      "percent": 50,
+      "passed": false,
+      "result_id": 313,
+      "attempts_left": 1,
+      "answers_revealed": false,
+      "reload_same_attempt": false,
+      "displayed_result": "🎓\nStudyOnline\n📊\nDashboard\n📚\nKhóa học của tôi\n🌐\nKhám phá\n📈\nTiến độ học tập\n📝\nQuiz\n🤖\nAI Tutor\n👤\nHồ sơ cá nhân\n🚪\nĐăng xuất\n☰\nVE\nEm\nDashboard\n›\nDanh sách Quiz\n›\nKết quả bài làm\nKẾT QUẢ\n3/6\n✓ 3 Đúng\n|\n✗ 3 Sai\nĐạt 50%\nAUDIT_20261029_191321 kiểm tra cuối khóa\n\nAUDIT_20261029_191321 teacher_an\n\n📜 Lịch sử làm bài quiz này\nChưa đạt — cần tối thiểu 70%\nBạn nên ôn phần nào?\n\nRiêng lượt quiz này: 1 chương và 0 bài cần củng cố. Ưu tiên ôn các bài bên dưới.\n\nKiến thức Python kiểm thử\nĐúng 3/6 câu · 50%\nCần củng cố\n\nBài nên ôn (1)\n\nBiến và kiểu dữ liệu\nĐúng 0/3 câu · 0%\nChưa đủ dữ liệu\nÔn bài học\nXem 3 câu sai\nBài đạt ngưỡng hoặc chưa ghi nhận câu sai (1)\n\nCác mục “Chưa đủ dữ liệu” cần thêm câu hỏi để đánh giá; có câu sai thì bạn vẫn có thể ôn lại.\n\nXem bảng kết quả chi tiết theo chương/bài\n\nCần ít nhất 5 câu khác nhau để phân loại; dưới 70% thì ưu tiên ôn. Đây là ngưỡng hỗ trợ học tập ban đầu.\n\nXem gợi ý hiện tại từ tất cả quiz trong khóa\n🔒 Đáp án đúng sẽ được hiển thị sau lượt làm cuối cù"
+    },
+    "events": []
+  },
+  {
+    "role": "student_em",
+    "name": "Làm quiz và nộp 6/6 câu đúng",
+    "passed": true,
+    "ms": 2560,
+    "data": {
+      "score": 6,
+      "total": 6,
+      "percent": 100,
+      "passed": true,
+      "result_id": 314,
+      "attempts_left": 0,
+      "answers_revealed": true,
+      "reload_same_attempt": false,
+      "displayed_result": "🎓\nStudyOnline\n📊\nDashboard\n📚\nKhóa học của tôi\n🌐\nKhám phá\n📈\nTiến độ học tập\n📝\nQuiz\n🤖\nAI Tutor\n👤\nHồ sơ cá nhân\n🚪\nĐăng xuất\n☰\nVE\nEm\nDashboard\n›\nDanh sách Quiz\n›\nKết quả bài làm\nKẾT QUẢ\n6/6\n✓ 6 Đúng\n|\n✗ 0 Sai\nĐạt 100%\nAUDIT_20261029_191321 kiểm tra cuối khóa\n\nAUDIT_20261029_191321 teacher_an\n\n📜 Lịch sử làm bài quiz này\n🎉 Đạt yêu cầu (≥ 70%)\nBạn nên ôn phần nào?\n\nRiêng lượt quiz này: 0 chương và 0 bài cần củng cố. Ưu tiên ôn các bài bên dưới.\n\nChưa ghi nhận phần cần ôn từ các câu đã kiểm tra trong lượt này.\n\nCác chương còn lại (1)\n\nCác mục “Chưa đủ dữ liệu” cần thêm câu hỏi để đánh giá; có câu sai thì bạn vẫn có thể ôn lại.\n\nXem bảng kết quả chi tiết theo chương/bài\n\nCần ít nhất 5 câu khác nhau để phân loại; dưới 70% thì ưu tiên ôn. Đây là ngưỡng hỗ trợ học tập ban đầu.\n\nXem gợi ý hiện tại từ tất cả quiz trong khóa\nĐây là lượt làm cuối cùng — đáp án đúng đã được hiển thị bên dưới.\nChi tiết câu trả lời\nXem lại các lỗi sai của bạn\nCÂU 1\n✓ Đúng\nCâu kiểm thử 4: 4 + 1 bằng bao nhiêu?\nA"
+    },
+    "events": []
+  },
+  {
+    "role": "student_em",
+    "name": "Kiểm tra tiến độ và gợi ý sau khi làm bài",
+    "passed": true,
+    "ms": 1873,
+    "data": {
+      "text": "ủ dữ liệu\n0%\nBài 1: Khái niệm về hệ điều hành\nĐúng 0/1 câu\nChưa đủ dữ liệu\n0%\nBài 2: Phân loại hệ điều hành\nĐúng 0/1 câu\nChưa đủ dữ liệu\n0%\nKhái niệm và vai trò của hệ điều hành\nĐúng 0/1 câu\nChưa đủ dữ liệu\n0%\nTài nguyên máy tính\nĐúng 0/1 câu\nChưa đủ dữ liệu\n0%\nChương 3: Lập trình và tiến trình\nĐúng 1/4 câu\nChưa đủ dữ liệu\n25%\nCác giải pháp đồng bộ hóa\nĐúng 1/4 câu\nChưa đủ dữ liệu\n25%\nMục tiêu của hệ điều hành\nĐúng 1/3 câu\nChưa đủ dữ liệu\n33,3%\nCác cơ chế thông tin liên lạc\nĐúng 1/2 câu\nChưa đủ dữ liệu\n50%\nKhái niệm tiến trình và mô hình tiểu tiến trình\nĐúng 1/2 câu\nChưa đủ dữ liệu\n50%\nVai trò của hệ điều hành\nĐúng 1/2 câu\nChưa đủ dữ liệu\n50%\nKhái niệm hệ điều hành\nĐúng 1/1 câu\nChưa đủ dữ liệu\n100%\nLiên lạc tiến trình\nĐúng 1/1 câu\nChưa đủ dữ liệu\n100%\nNhu cầu xử lí đồng thời\nĐúng 1/1 câu\nChưa đủ dữ liệu\n100%\nNhu cầu đồng bộ hóa\nĐúng 1/1 câu\nChưa đủ dữ liệu\n100%\nThành phần và vai trò của hệ điều hành\nĐúng 1/1 câu\nChưa đủ dữ liệu\n100%\nVị trí và chức năng của hệ điều hành\nĐúng 1/1 câu\nChưa đủ dữ liệu\n100%\nPython Cơ Bản Cho Người Mới Bắt Đầu\n7 chủ đề\nKiểu dữ liệu (Data Types)\nĐúng 3/5 câu\nCần củng cố\n60%\nVòng lặp (Loops)\nĐúng 3/5 câu\nCần củng cố\n60%\nGiới thiệu\nĐúng 0/1 câu\nChưa đủ dữ liệu\n0%\nCâu lệnh điều kiện (If-Else)\nĐúng 3/4 câu\nChưa đủ dữ liệu\n75%\nHàm (Functions)\nĐúng 3/4 câu\nChưa đủ dữ liệu\n75%\nLập trình hướng đối tượng (OOP)\nĐúng 4/4 câu\nChưa đủ dữ liệu\n100%\nToán tử (Operators)\nĐúng 5/5 câu\nĐạt ngưỡng\n100%\nJavaScript Từ Zero Đến Hero\n6 chủ đề\nDOM\nĐúng 3/4 câu\nChưa đủ dữ liệu\n75%\nBiến & ES6\nĐúng 4/4 câu\nChưa đủ dữ liệu\n100%\nHàm (Functions)\nĐúng 4/4 câu\nChưa đủ dữ liệu\n100%\nKiểu dữ liệu (Data Types)\nĐúng 4/4 câu\nChưa đủ dữ liệu\n100%\nSự kiện (Events)\nĐúng 4/4 câu\nChưa đủ dữ liệu\n100%\nBất đồng bộ (Async)\nĐúng 6/6 câu\nĐạt ngưỡng\n100%\nMySQL & Thiết Kế Cơ Sở Dữ Liệu\n5 chủ đề\nJOIN\nĐúng 1/3 câu\nChưa đủ dữ liệu\n33,3%\nChuẩn hoá (Normalization)\nĐúng 3/3 câu\nChưa đủ dữ liệu\n100%\nHàm tổng hợp (Aggregate)\nĐúng 3/3 câu\nChưa đủ dữ liệu\n100%\nThiết kế CSDL (DB Design)\nĐúng 3/3 câu\nChưa đủ dữ liệu\n100%\nTruy vấn SQL (SQL Queries)\nĐúng 3/3 câu\nChưa đủ dữ liệu\n100%\nReactJS Chuyên Sâu\n4 chủ đề\nHooks\nĐúng 2/4 câu\nChưa đủ dữ liệu\n50%\nProps & State\nĐúng 4/4 câu\nChưa đủ dữ liệu\n100%\nJSX\nĐúng 3/3 câu\nChưa đủ dữ liệu\n100%\nRouting\nĐúng 3/3 câu\nChưa đủ dữ liệu\n100%\nHTML & CSS Nhập Môn\n5 chủ đề\nCSS cơ bản\nĐúng 2/3 câu\nChưa đủ dữ liệu\n66,7%\nHTML cơ bản\nĐúng 2/3 câu\nChưa đủ dữ liệu\n66,7%\nHTML ngữ nghĩa (Semantic)\nĐúng 2/3 câu\nChưa đủ dữ liệu\n66,7%\nResponsive Design\nĐúng 2/3 câu\nChưa đủ dữ liệu\n66,7%\nFlexbox & Layout\nĐúng 3/3 câu\nChưa đủ dữ liệu\n100%\nLập Trình Java Căn Bản\n4 chủ đề\nCollection Framework\nĐúng 3/4 câu\nChưa đủ dữ liệu\n75%\nOOP cơ bản\nĐúng 3/4 câu\nChưa đủ dữ liệu\n75%\nKế thừa (Inheritance)\nĐúng 4/4 câu\nChưa đủ dữ liệu\n100%\nXử lý ngoại lệ (Exceptions)\nĐúng 4/4 câu\nChưa đủ dữ liệu\n100%\n\nDùng lượt gần nhất của mỗi bài kiểm tra và bộ ôn tập. Cần ít nhất 5 câu khác nhau theo chủ đề để phân loại; dưới 70% câu đúng thì cần củng cố. Mục chưa đủ dữ liệu chỉ hiển thị kết quả quan sát, chưa kết luận mức kiến thức. Các ngưỡng là quy tắc ban đầu của hệ thống.\n\n📊 Bài học hoàn thành theo tuần\n📚 Tiến độ từng khóa học\nLập Trình Java Căn Bản\n100%\n9/9 bài\n🏆 Hoàn thành\nXem\nHTML & CSS Nhập Môn\n89%\n8/9 bài\nXem\nMySQL & Thiết Kế Cơ Sở Dữ Liệu\n67%\n6/9 bài\nXem\nPython Cơ Bản Cho Người Mới Bắt Đầu\n56%\n5/9 bài\nXem\nNguyên Lí HDH\n45%\n5/11 bài\nXem\nJavaScript Từ Zero Đến Hero\n44%\n4/9 bài\nXem\nReactJS Chuyên Sâu\n44%\n4/9 bài\nXem\nAUDIT_20261029_191321 teacher_an\n100%\n2/2 bài\n🏆 Hoàn thành\nXem"
+    },
+    "events": []
+  },
+  {
+    "role": "student_em",
+    "name": "Trang tiến độ trên điện thoại",
+    "passed": true,
+    "ms": 893,
+    "data": {
+      "width": 390,
+      "overflow": false
+    },
+    "events": []
+  },
+  {
+    "role": "student_em",
+    "name": "Đăng xuất và chặn quay lại trang riêng",
+    "passed": false,
+    "ms": 12020,
+    "error": "locator.click: Timeout 12000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /Đăng xuất/ }).first()\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"s-nav-item s-logout\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - element is outside of the viewport\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - element is outside of the viewport\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    23 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - element is outside of the viewport\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+    "events": []
+  },
+  {
+    "role": "student_phuong",
+    "name": "Đăng nhập bằng form",
+    "passed": true,
+    "ms": 442,
+    "data": {
+      "url": "http://127.0.0.1:5173/student/dashboard"
+    },
+    "events": []
+  },
+  {
+    "role": "student_phuong",
+    "name": "Xem chi tiết khóa và đăng ký miễn phí",
+    "passed": true,
+    "ms": 803,
+    "data": {
+      "course_id": 540,
+      "status": 200
+    },
+    "events": []
+  },
+  {
+    "role": "student_phuong",
+    "name": "Học bài và đánh dấu hoàn thành 1",
+    "passed": true,
+    "ms": 772,
+    "data": {
+      "lesson_id": 374,
+      "persisted_after_reload": true
+    },
+    "events": []
+  },
+  {
+    "role": "student_phuong",
+    "name": "Học bài và đánh dấu hoàn thành 2",
+    "passed": true,
+    "ms": 618,
+    "data": {
+      "lesson_id": 375,
+      "persisted_after_reload": true
+    },
+    "events": []
+  },
+  {
+    "role": "student_phuong",
+    "name": "Làm quiz và nộp 0/6 câu đúng",
+    "passed": true,
+    "ms": 2536,
+    "data": {
+      "score": 0,
+      "total": 6,
+      "percent": 0,
+      "passed": false,
+      "result_id": 315,
+      "attempts_left": 2,
+      "answers_revealed": false,
+      "reload_same_attempt": true,
+      "displayed_result": "🎓\nStudyOnline\n📊\nDashboard\n📚\nKhóa học của tôi\n🌐\nKhám phá\n📈\nTiến độ học tập\n📝\nQuiz\n🤖\nAI Tutor\n👤\nHồ sơ cá nhân\n🚪\nĐăng xuất\n☰\nTP\nPhương\nDashboard\n›\nDanh sách Quiz\n›\nKết quả bài làm\nKẾT QUẢ\n0/6\n✓ 0 Đúng\n|\n✗ 6 Sai\nĐạt 0%\nAUDIT_20261029_191321 kiểm tra cuối khóa\n\nAUDIT_20261029_191321 teacher_an\n\n📜 Lịch sử làm bài quiz này\nChưa đạt — cần tối thiểu 70%\nBạn nên ôn phần nào?\n\nRiêng lượt quiz này: 1 chương và 0 bài cần củng cố. Ưu tiên ôn các bài bên dưới.\n\nKiến thức Python kiểm thử\nĐúng 0/6 câu · 0%\nCần củng cố\n\nBài nên ôn (2)\n\nBiến và kiểu dữ liệu\nĐúng 0/3 câu · 0%\nChưa đủ dữ liệu\nÔn bài học\nXem 3 câu sai\nVòng lặp và điều kiện\nĐúng 0/3 câu · 0%\nChưa đủ dữ liệu\nÔn bài học\nXem 3 câu sai\n\nCác mục “Chưa đủ dữ liệu” cần thêm câu hỏi để đánh giá; có câu sai thì bạn vẫn có thể ôn lại.\n\nXem bảng kết quả chi tiết theo chương/bài\n\nCần ít nhất 5 câu khác nhau để phân loại; dưới 70% thì ưu tiên ôn. Đây là ngưỡng hỗ trợ học tập ban đầu.\n\nXem gợi ý hiện tại từ tất cả quiz trong khóa\n🔒 Đáp án đúng "
+    },
+    "events": []
+  },
+  {
+    "role": "student_phuong",
+    "name": "Làm quiz và nộp 3/6 câu đúng",
+    "passed": true,
+    "ms": 2578,
+    "data": {
+      "score": 3,
+      "total": 6,
+      "percent": 50,
+      "passed": false,
+      "result_id": 316,
+      "attempts_left": 1,
+      "answers_revealed": false,
+      "reload_same_attempt": false,
+      "displayed_result": "🎓\nStudyOnline\n📊\nDashboard\n📚\nKhóa học của tôi\n🌐\nKhám phá\n📈\nTiến độ học tập\n📝\nQuiz\n🤖\nAI Tutor\n👤\nHồ sơ cá nhân\n🚪\nĐăng xuất\n☰\nTP\nPhương\nDashboard\n›\nDanh sách Quiz\n›\nKết quả bài làm\nKẾT QUẢ\n3/6\n✓ 3 Đúng\n|\n✗ 3 Sai\nĐạt 50%\nAUDIT_20261029_191321 kiểm tra cuối khóa\n\nAUDIT_20261029_191321 teacher_an\n\n📜 Lịch sử làm bài quiz này\nChưa đạt — cần tối thiểu 70%\nBạn nên ôn phần nào?\n\nRiêng lượt quiz này: 1 chương và 0 bài cần củng cố. Ưu tiên ôn các bài bên dưới.\n\nKiến thức Python kiểm thử\nĐúng 3/6 câu · 50%\nCần củng cố\n\nBài nên ôn (2)\n\nVòng lặp và điều kiện\nĐúng 1/3 câu · 33.3%\nChưa đủ dữ liệu\nÔn bài học\nXem 2 câu sai\nBiến và kiểu dữ liệu\nĐúng 2/3 câu · 66.7%\nChưa đủ dữ liệu\nÔn bài học\nXem 1 câu sai\n\nCác mục “Chưa đủ dữ liệu” cần thêm câu hỏi để đánh giá; có câu sai thì bạn vẫn có thể ôn lại.\n\nXem bảng kết quả chi tiết theo chương/bài\n\nCần ít nhất 5 câu khác nhau để phân loại; dưới 70% thì ưu tiên ôn. Đây là ngưỡng hỗ trợ học tập ban đầu.\n\nXem gợi ý hiện tại từ tất cả quiz trong khóa\n🔒 Đáp "
+    },
+    "events": []
+  },
+  {
+    "role": "student_phuong",
+    "name": "Làm quiz và nộp 6/6 câu đúng",
+    "passed": true,
+    "ms": 2435,
+    "data": {
+      "score": 6,
+      "total": 6,
+      "percent": 100,
+      "passed": true,
+      "result_id": 317,
+      "attempts_left": 0,
+      "answers_revealed": true,
+      "reload_same_attempt": false,
+      "displayed_result": "🎓\nStudyOnline\n📊\nDashboard\n📚\nKhóa học của tôi\n🌐\nKhám phá\n📈\nTiến độ học tập\n📝\nQuiz\n🤖\nAI Tutor\n👤\nHồ sơ cá nhân\n🚪\nĐăng xuất\n☰\nTP\nPhương\nDashboard\n›\nDanh sách Quiz\n›\nKết quả bài làm\nKẾT QUẢ\n6/6\n✓ 6 Đúng\n|\n✗ 0 Sai\nĐạt 100%\nAUDIT_20261029_191321 kiểm tra cuối khóa\n\nAUDIT_20261029_191321 teacher_an\n\n📜 Lịch sử làm bài quiz này\n🎉 Đạt yêu cầu (≥ 70%)\nBạn nên ôn phần nào?\n\nRiêng lượt quiz này: 0 chương và 0 bài cần củng cố. Ưu tiên ôn các bài bên dưới.\n\nChưa ghi nhận phần cần ôn từ các câu đã kiểm tra trong lượt này.\n\nCác chương còn lại (1)\n\nCác mục “Chưa đủ dữ liệu” cần thêm câu hỏi để đánh giá; có câu sai thì bạn vẫn có thể ôn lại.\n\nXem bảng kết quả chi tiết theo chương/bài\n\nCần ít nhất 5 câu khác nhau để phân loại; dưới 70% thì ưu tiên ôn. Đây là ngưỡng hỗ trợ học tập ban đầu.\n\nXem gợi ý hiện tại từ tất cả quiz trong khóa\nĐây là lượt làm cuối cùng — đáp án đúng đã được hiển thị bên dưới.\nChi tiết câu trả lời\nXem lại các lỗi sai của bạn\nCÂU 1\n✓ Đúng\nCâu kiểm thử 3: 3 + 1 bằng bao nhiê"
+    },
+    "events": []
+  },
+  {
+    "role": "student_phuong",
+    "name": "Kiểm tra tiến độ và gợi ý sau khi làm bài",
+    "passed": true,
+    "ms": 1680,
+    "data": {
+      "text": "\"Bài 7: Lập trình tiến trình\" (khóa Nguyên Lí HDH).\nVì sao có gợi ý này?\nHọc tiếp\nXem kết quả kiến thức hiện tại theo chương/bài\nKết quả trước/sau khi mở gợi ý ôn (1)\n🧠 Kết quả trả lời theo chủ đề\nĐạt ngưỡng: 0\nCần củng cố: 2\nChưa đủ dữ liệu: 38\n\nThống kê theo nhãn chủ đề của câu hỏi, khác với phân nhóm chương/bài ở phần gợi ý ôn phía trên. Tỷ lệ đúng không phải phần trăm hoàn thành bài học.\n\nJavaScript Từ Zero Đến Hero\n6 chủ đề\nBất đồng bộ (Async)\nĐúng 2/6 câu\nCần củng cố\n33,3%\nBiến & ES6\nĐúng 2/4 câu\nChưa đủ dữ liệu\n50%\nDOM\nĐúng 3/4 câu\nChưa đủ dữ liệu\n75%\nHàm (Functions)\nĐúng 3/4 câu\nChưa đủ dữ liệu\n75%\nKiểu dữ liệu (Data Types)\nĐúng 4/4 câu\nChưa đủ dữ liệu\n100%\nSự kiện (Events)\nĐúng 4/4 câu\nChưa đủ dữ liệu\n100%\nNguyên Lí HDH\n18 chủ đề\nPhân loại hệ điều hành\nĐúng 3/5 câu\nCần củng cố\n60%\nChương 1: Tổng quan\nĐúng 0/4 câu\nChưa đủ dữ liệu\n0%\nKhái niệm tiến trình\nĐúng 0/3 câu\nChưa đủ dữ liệu\n0%\nKhái niệm tiểu trình\nĐúng 0/3 câu\nChưa đủ dữ liệu\n0%\nChương 4: Truyền thông và đồng bộ tiến trình\nĐúng 0/2 câu\nChưa đủ dữ liệu\n0%\nCác cơ chế thông tin liên lạc\nĐúng 0/2 câu\nChưa đủ dữ liệu\n0%\nKhái niệm tiến trình và mô hình tiểu tiến trình\nĐúng 0/2 câu\nChưa đủ dữ liệu\n0%\nNhu cầu xử lý đồng thời\nĐúng 0/2 câu\nChưa đủ dữ liệu\n0%\nBài 1: Khái niệm về hệ điều hành\nĐúng 0/1 câu\nChưa đủ dữ liệu\n0%\nBài 2: Phân loại hệ điều hành\nĐúng 0/1 câu\nChưa đủ dữ liệu\n0%\nLiên lạc tiến trình\nĐúng 0/1 câu\nChưa đủ dữ liệu\n0%\nNhu cầu xử lí đồng thời\nĐúng 0/1 câu\nChưa đủ dữ liệu\n0%\nNhu cầu đồng bộ hóa\nĐúng 0/1 câu\nChưa đủ dữ liệu\n0%\nBài 6: Tổ chức quản lí tiến trình\nĐúng 1/4 câu\nChưa đủ dữ liệu\n25%\nBài 7: Lập trình tiến trình\nĐúng 1/4 câu\nChưa đủ dữ liệu\n25%\nChương 3: Lập trình và tiến trình\nĐúng 1/4 câu\nChưa đủ dữ liệu\n25%\nCác giải pháp đồng bộ hóa\nĐúng 2/4 câu\nChưa đủ dữ liệu\n50%\nKhái niệm tiến trình và mô hình đa tiến trình\nĐúng 1/2 câu\nChưa đủ dữ liệu\n50%\nPython Cơ Bản Cho Người Mới Bắt Đầu\n6 chủ đề\nBiến và kiểu dữ liệu\nĐúng 0/3 câu\nChưa đủ dữ liệu\n0%\nChương 1: Làm Quen Với Python\nĐúng 0/3 câu\nChưa đủ dữ liệu\n0%\nCấu trúc điều khiển\nĐúng 0/1 câu\nChưa đủ dữ liệu\n0%\nToán tử trong Python\nĐúng 0/1 câu\nChưa đủ dữ liệu\n0%\nToán tử và Cấu trúc điều khiển\nĐúng 0/1 câu\nChưa đủ dữ liệu\n0%\nVòng lặp\nĐúng 0/1 câu\nChưa đủ dữ liệu\n0%\nMySQL & Thiết Kế Cơ Sở Dữ Liệu\n5 chủ đề\nTruy vấn SQL (SQL Queries)\nĐúng 0/3 câu\nChưa đủ dữ liệu\n0%\nChuẩn hoá (Normalization)\nĐúng 1/3 câu\nChưa đủ dữ liệu\n33,3%\nJOIN\nĐúng 1/3 câu\nChưa đủ dữ liệu\n33,3%\nThiết kế CSDL (DB Design)\nĐúng 1/3 câu\nChưa đủ dữ liệu\n33,3%\nHàm tổng hợp (Aggregate)\nĐúng 3/3 câu\nChưa đủ dữ liệu\n100%\nHTML & CSS Nhập Môn\n5 chủ đề\nHTML ngữ nghĩa (Semantic)\nĐúng 1/3 câu\nChưa đủ dữ liệu\n33,3%\nResponsive Design\nĐúng 1/3 câu\nChưa đủ dữ liệu\n33,3%\nCSS cơ bản\nĐúng 3/3 câu\nChưa đủ dữ liệu\n100%\nFlexbox & Layout\nĐúng 3/3 câu\nChưa đủ dữ liệu\n100%\nHTML cơ bản\nĐúng 3/3 câu\nChưa đủ dữ liệu\n100%\n\nDùng lượt gần nhất của mỗi bài kiểm tra và bộ ôn tập. Cần ít nhất 5 câu khác nhau theo chủ đề để phân loại; dưới 70% câu đúng thì cần củng cố. Mục chưa đủ dữ liệu chỉ hiển thị kết quả quan sát, chưa kết luận mức kiến thức. Các ngưỡng là quy tắc ban đầu của hệ thống.\n\n📊 Bài học hoàn thành theo tuần\n📚 Tiến độ từng khóa học\nJavaScript Từ Zero Đến Hero\n100%\n9/9 bài\n🏆 Hoàn thành\nXem\nHTML & CSS Nhập Môn\n100%\n9/9 bài\n🏆 Hoàn thành\nXem\nMySQL & Thiết Kế Cơ Sở Dữ Liệu\n67%\n6/9 bài\nXem\nNguyên Lí HDH\n55%\n6/11 bài\nXem\nAUDIT_20261029_191321 teacher_an\n100%\n2/2 bài\n🏆 Hoàn thành\nXem\nPython Cơ Bản Cho Người Mới Bắt Đầu\n0%\n0/9 bài\nXem\nKiểm thử phần mềm nhập môn\n0%\n0/12 bài\nXem"
+    },
+    "events": []
+  },
+  {
+    "role": "student_phuong",
+    "name": "Trang tiến độ trên điện thoại",
+    "passed": true,
+    "ms": 874,
+    "data": {
+      "width": 390,
+      "overflow": false
+    },
+    "events": []
+  },
+  {
+    "role": "student_phuong",
+    "name": "Đăng xuất và chặn quay lại trang riêng",
+    "passed": false,
+    "ms": 12018,
+    "error": "locator.click: Timeout 12000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /Đăng xuất/ }).first()\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"s-nav-item s-logout\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - element is outside of the viewport\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - element is outside of the viewport\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    23 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - element is outside of the viewport\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+    "events": []
+  },
+  {
+    "role": "teacher_an",
+    "name": "Đăng nhập bằng form",
+    "passed": true,
+    "ms": 407,
+    "data": {
+      "url": "http://127.0.0.1:5173/teacher"
+    },
+    "events": []
+  },
+  {
+    "role": "teacher_an",
+    "name": "Sửa mô tả khóa test qua giao diện",
+    "passed": true,
+    "ms": 655,
+    "data": {
+      "status": 200,
+      "course_id": 540
+    },
+    "events": []
+  },
+  {
+    "role": "teacher_an",
+    "name": "Lọc khóa học theo tên",
+    "passed": true,
+    "ms": 322,
+    "data": {
+      "visible_rows": 1
+    },
+    "events": []
+  },
+  {
+    "role": "teacher_an",
+    "name": "Mở báo cáo giảng viên",
+    "passed": true,
+    "ms": 886,
+    "data": {
+      "overflow": false
+    },
+    "events": []
+  },
+  {
+    "role": "teacher_an",
+    "name": "Đăng xuất và chặn quay lại trang riêng",
+    "passed": true,
+    "ms": 135,
+    "data": {
+      "url": "http://127.0.0.1:5173/login"
+    },
+    "events": []
+  },
+  {
+    "role": "teacher_binh",
+    "name": "Đăng nhập bằng form",
+    "passed": true,
+    "ms": 363,
+    "data": {
+      "url": "http://127.0.0.1:5173/teacher"
+    },
+    "events": []
+  },
+  {
+    "role": "teacher_binh",
+    "name": "Sửa mô tả khóa test qua giao diện",
+    "passed": true,
+    "ms": 745,
+    "data": {
+      "status": 200,
+      "course_id": 541
+    },
+    "events": []
+  },
+  {
+    "role": "teacher_binh",
+    "name": "Lọc khóa học theo tên",
+    "passed": true,
+    "ms": 339,
+    "data": {
+      "visible_rows": 1
+    },
+    "events": []
+  },
+  {
+    "role": "teacher_binh",
+    "name": "Mở báo cáo giảng viên",
+    "passed": true,
+    "ms": 1122,
+    "data": {
+      "overflow": false
+    },
+    "events": []
+  },
+  {
+    "role": "teacher_binh",
+    "name": "Đăng xuất và chặn quay lại trang riêng",
+    "passed": true,
+    "ms": 230,
+    "data": {
+      "url": "http://127.0.0.1:5173/login"
+    },
+    "events": []
+  },
+  {
+    "role": "student_em",
+    "name": "Đăng nhập bằng form",
+    "passed": true,
+    "ms": 2129,
+    "data": {
+      "url": "http://127.0.0.1:5173/student/dashboard"
+    },
+    "events": []
+  },
+  {
+    "role": "student_em",
+    "name": "Đăng xuất và chặn quay lại trang riêng",
+    "passed": true,
+    "ms": 266,
+    "data": {
+      "url": "http://127.0.0.1:5173/login"
+    },
+    "events": []
+  },
+  {
+    "role": "student_phuong",
+    "name": "Đăng nhập bằng form",
+    "passed": true,
+    "ms": 379,
+    "data": {
+      "url": "http://127.0.0.1:5173/student/dashboard"
+    },
+    "events": []
+  },
+  {
+    "role": "student_phuong",
+    "name": "Đăng xuất và chặn quay lại trang riêng",
+    "passed": true,
+    "ms": 315,
+    "data": {
+      "url": "http://127.0.0.1:5173/login"
+    },
+    "events": []
+  }
+]

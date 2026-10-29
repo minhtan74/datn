@@ -1,0 +1,71 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Kiểm thử phần mềm nhập môn</div>
+<p class="path">Chương 3: Kiểm thử trong vòng đời phát triển · Bài 1</p>
+<h1>SDLC, Agile và chiến lược kiểm thử</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Kiểm thử phần mềm nhập môn.</li><li>Chương 3: Kiểm thử trong vòng đời phát triển.</li><li>Các bài trong chương: SDLC, Agile và chiến lược kiểm thử; Review yêu cầu và truy vết kiểm thử.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Chọn hoạt động kiểm thử phù hợp giai đoạn phát triển và rủi ro sản phẩm.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>SDLC mô tả hoạt động phát triển từ hiểu nhu cầu tới vận hành. Kiểm thử nên tham gia sớm qua review yêu cầu và tiêu chí chấp nhận, không chờ mã nguồn hoàn thành mới bắt đầu. Phát hiện yêu cầu mơ hồ sớm có thể tránh xây sai chức năng.</p>
+<p>Trong phát triển lặp, kiểm thử được thực hiện xuyên suốt từng vòng. Definition of Done là thỏa thuận về điều kiện hoàn tất, khác tiêu chí chấp nhận cụ thể cho từng câu chuyện. Chất lượng là trách nhiệm chung; có tester không có nghĩa lập trình viên không cần kiểm tra.</p>
+<p>Chiến lược chọn phạm vi, mức kiểm thử và mức tự động hóa theo rủi ro. Luồng thanh toán hoặc phân quyền có tác động lớn nên cần được ưu tiên hợp lý. Không thể kiểm thử mọi kết hợp vô hạn; cần ghi giả định, phần đã kiểm tra và rủi ro còn lại. Mô hình phát triển ảnh hưởng cách tổ chức nhưng không xóa nhu cầu có kết quả mong đợi.</p>
+<h2>1. Từ yêu cầu tới vận hành</h2>
+<p>Các hoạt động hiểu nhu cầu, thiết kế, triển khai, kiểm thử và vận hành không nhất thiết diễn ra một lần theo đường thẳng. Trong vòng lặp, thông tin phản hồi cập nhật sản phẩm và bộ test. Kiểm thử sớm có thể là review mô tả nghiệp vụ trước khi có giao diện.</p>
+<h2>2. Ví dụ kế hoạch cho một vòng phát triển</h2>
+<pre><code>Yêu cầu: khóa miễn phí chỉ ghi danh một lần
+Trước code: review quyền, trạng thái khóa và thông báo lỗi
+Trong code: unit cho quy tắc; integration cho lưu và chống trùng
+Sau tích hợp: UI cho trạng thái chờ, lỗi, thành công và màn hình hẹp
+Trước phát hành: hồi quy theo tác động, báo cáo giới hạn và rủi ro</code></pre>
+<p>Acceptance criteria mô tả điều kiện riêng của yêu cầu. Definition of Done là thỏa thuận chung về mức hoàn tất. Một câu chuyện có tiêu chí đạt nhưng chưa hoàn tất các yêu cầu chất lượng chung vẫn có thể chưa “done”.</p>
+<h2>3. Chọn phạm vi theo rủi ro</h2>
+<p>Ước lượng khả năng sai và tác động, xác định vùng ưu tiên, liên kết từng vùng tới test. Điểm số rủi ro chỉ là công cụ thảo luận; không tạo cảm giác chính xác tuyệt đối nếu đầu vào chỉ là đánh giá sơ bộ. Dành thời gian cho lỗi đã thấy và các ràng buộc quyền/dữ liệu quan trọng.</p>
+<h2>4. Bài tập và đáp án</h2>
+<p>Trong hai ngày, nhóm sửa luồng nộp quiz và đổi màu tiêu đề. Ưu tiên tính điểm, lưu kết quả và lượt làm trước phần màu vì ảnh hưởng cao hơn; vẫn kiểm tra hiển thị cơ bản. Nộp kế hoạch ai làm gì, dữ liệu nào, tiêu chí vào/ra và phần chưa thể kiểm tra. Không gọi kế hoạch là bằng chứng đã chạy test.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>Viết tiêu chí chấp nhận cho đăng ký khóa, đề xuất hoạt động review, unit, integration và system trong một vòng phát triển. Nêu ba rủi ro cần ưu tiên.</p>
+</div>
+<h2>Hướng giải bài tập bổ sung</h2>
+<p>Phân biệt điều kiện hoàn tất chung với tiêu chí riêng của chức năng. Bao phủ tính đúng dữ liệu và quyền, không chỉ màu thông báo.</p>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Kiểm thử nên bắt đầu khi nào?</li><li>Trong Agile, trách nhiệm chất lượng thuộc về ai?</li><li>Tiêu chí chấp nhận mô tả điều gì?</li><li>Khi thời gian có hạn, nên ưu tiên test theo gì?</li><li>Có thể kiểm tra hết mọi kết hợp đầu vào của mọi hệ thống không?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Từ sớm, gồm review yêu cầu. Review sớm giúp phát hiện vấn đề trước khi viết mã.</li><li>Cả nhóm theo vai trò phối hợp. Chất lượng không được giao hoàn toàn cho một vai trò.</li><li>Điều kiện cụ thể chức năng cần đáp ứng. Tiêu chí giúp đánh giá hành vi theo nhu cầu.</li><li>Rủi ro và tác động nghiệp vụ. Ưu tiên dựa trên xác suất và ảnh hưởng sai sót.</li><li>Thường không, cần chọn phạm vi có căn cứ. Kiểm thử toàn bộ thường không khả thi với hệ thống thực tế.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf</li></ul></body></html>

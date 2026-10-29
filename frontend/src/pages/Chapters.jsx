@@ -10,6 +10,7 @@ export default function Chapters() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const courseId = searchParams.get('course_id');
+  const focusChapterId = Number(searchParams.get('chapter_id')) || null;
 
   const [course, setCourse] = useState(null);
   const [chapters, setChapters] = useState(null); // null = đang tải
@@ -47,14 +48,16 @@ export default function Chapters() {
 
       setChapters(chaptersWithLessons);
       if (chaptersWithLessons.length > 0) {
-        setOpenChapters(new Set([chaptersWithLessons[0].id])); // mở chương đầu tiên mặc định
+        const focus = chaptersWithLessons.find((ch) => ch.id === focusChapterId);
+        setOpenChapters(new Set([focus?.id || chaptersWithLessons[0].id]));
+        if (focus) requestAnimationFrame(() => document.getElementById(`chapter-${focus.id}`)?.scrollIntoView({ block: 'start' }));
       }
     })();
 
     return () => {
       cancelled = true;
     };
-  }, [courseId, navigate]);
+  }, [courseId, focusChapterId, navigate]);
 
   useEffect(() => {
     if (course?.title) document.title = `${course.title} — StudyOnline`;
@@ -117,7 +120,7 @@ export default function Chapters() {
             {chapters.map((ch, idx) => {
               const isOpen = openChapters.has(ch.id);
               return (
-                <div key={ch.id} className={`chapter-item${isOpen ? ' open' : ''}`}>
+                <div id={`chapter-${ch.id}`} key={ch.id} className={`chapter-item${isOpen ? ' open' : ''}`}>
                   <div className="chapter-header" onClick={() => toggleChapter(ch.id)}>
                     <div className="chapter-num">{idx + 1}</div>
                     <div className="chapter-info">

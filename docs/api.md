@@ -69,7 +69,8 @@ Base URL (dev): `http://127.0.0.1:8080` · Swagger tự sinh: `/docs`
 | Method | Path | Auth | Ghi chú |
 |---|---|---|---|
 | GET | `/api/payments` | ✔ | theo vai trò (admin all / teacher theo khóa dạy / student của mình) |
-| POST | `/api/payments` | ✔ | `{course_id, method}` (`card\|bank_transfer\|momo\|zalopay`); khóa 0đ → enroll thẳng; có phí → tạo giao dịch `completed` (giả lập) + enroll |
+| POST | `/api/payments` | ✔ | `{course_id}`; khóa 0đ → ghi danh; khóa có phí → 400, yêu cầu thanh toán qua VNPay |
+| POST | `/api/payments/vnpay/create` | ✔ | `{course_id}`; tạo đơn `pending`, trả `payment_url` để chuyển sang VNPay; chỉ ghi danh sau khi xác nhận thanh toán |
 | GET | `/api/payments/check?course_id=` | ✔ | `{has_paid, enrolled}` |
 
 ## 7. Progress — `/api/progress`
@@ -105,6 +106,14 @@ Base URL (dev): `http://127.0.0.1:8080` · Swagger tự sinh: `/docs`
 |---|---|---|---|
 | GET | `/api/recommendations?course_id=` | ✔ | `{current, history[]}` (current tính realtime) |
 | POST | `/api/recommendations/refresh` | ✔ | tính lại + **lưu** + snapshot `learning_analytics` |
+| POST | `/api/recommendations/study` | ✔ | `{topic_id}` hoặc `{course_id, knowledge_kind: "chapter"\|"lesson", unit_id}` → ghi mốc trước ôn, không tạo mốc trùng khi chưa có kết quả mới |
+| GET | `/api/recommendations/progress` | ✔ | tối đa 10 mốc ôn chủ đề/chương/bài của chính học viên: `checkpoint_kind`, `before`, `after`, `difference_pct`, `same_questions`, `sufficient_data` |
+
+Gợi ý chương/bài có `type: "review_knowledge"`, `knowledge_evidence` (mã, loại, tên, khóa, số đúng/tổng, tỷ lệ, nguồn kết quả), `action_url`, `action_label` và `practice_url`, `practice_label` khi còn bộ luyện hợp lệ. `current.based_on.knowledge` trả `{units[], unmapped_answers}`; căn cứ chương/bài dùng lượt mới nhất của từng bài qua các loại đề, độc lập cách tính điểm chính thức.
+
+`GET /api/quizzes/knowledge-outline?course_id=` dành cho chủ khóa/admin, trả `{chapters[], lessons[]}`. POST/PUT `/api/quizzes/questions` và từng phần tử `questions[]` của `/api/ai/quiz/approve` nhận `knowledge_chapter_id`, `knowledge_lesson_id` (nullable); API kiểm tra khóa, chương và phạm vi bộ ôn. Sinh AI giữ chương của mỗi lô và giới hạn mã bài đề xuất trong phạm vi tài liệu đã chọn. Câu không rõ bài có thể chỉ gắn chương.
+
+Nộp bài và đọc kết quả trả thêm `knowledge: {units[], unmapped_answers, min_questions, review_threshold}` của riêng lượt nộp; không làm lộ đáp án đang bị ẩn. Mã và tên chương/bài được lưu ở `result_answers` với `knowledge_version=2`; chỉnh câu hỏi không thay đổi kết quả cũ. Migration `0021_knowledge_scope` bổ sung các cột phân loại và bảng `knowledge_study_checkpoints`; dữ liệu cũ khôi phục được ghi version 1, phần không xác định vẫn để trống.
 
 ## 12. AI — `/api/ai` *(mới)*
 
@@ -119,6 +128,7 @@ Base URL (dev): `http://127.0.0.1:8080` · Swagger tự sinh: `/docs`
 | GET | `/api/ai/conversations/{id}` | ✔ | các tin nhắn |
 | DELETE | `/api/ai/conversations/{id}` | ✔ | xoá hội thoại |
 | POST | `/api/ai/generate-quiz` | teacher/admin | `{course_id, lesson_id?, chapter_id?, number_of_questions, difficulty}` hoặc thay 2 trường cuối bằng `difficulty_mix: {easy, medium, hard}` (mỗi mức 0–20, tổng ≤ 30; `meta.distribution` = số câu sinh được mỗi mức). Mỗi câu kèm kết quả AI tự giải lại: `verified` = đáp án khớp, hoặc `verify: {answer, reason}` khi AI ra đáp án khác (`meta.verification` = số câu khớp / bị gắn cờ) → `{questions[], meta}` — **preview, KHÔNG lưu** |
+| POST | `/api/ai/generate-quiz/stream` | teacher/admin | Cùng body với endpoint trên. Trả `application/x-ndjson`, mỗi dòng một sự kiện: `status` (thông báo), `batch` (`difficulty`, `questions[]` chưa kiểm tra), `heartbeat`, `complete` (`data: {questions[], meta}` đã qua bước kiểm tra), hoặc `error` (`status`, `message`). Quyền truy cập được kiểm tra trước khi mở luồng. Lỗi sau khi mở luồng nằm trong sự kiện `error`; client cần nhận `complete` mới coi là hoàn tất. Không tự lưu quiz. |
 | POST | `/api/ai/quiz/approve` | teacher/admin | `{course_id, lesson_id?, chapter_id?, review_lesson_id?, title, questions[], duration?, passing_score?, max_attempts?}` → tạo `quizzes` (`source='ai'`) + `questions`; có `chapter_id` / `review_lesson_id` thì thêm vào bộ ôn tập của chương / bài học (không cần `title`) |
 
 ---

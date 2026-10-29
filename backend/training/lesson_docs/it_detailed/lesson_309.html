@@ -1,0 +1,79 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Cấu trúc dữ liệu và giải thuật cơ bản</div>
+<p class="path">Chương 2: Tìm kiếm và sắp xếp · Bài 1</p>
+<h1>Tìm kiếm tuyến tính và nhị phân</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Cấu trúc dữ liệu và giải thuật cơ bản.</li><li>Chương 2: Tìm kiếm và sắp xếp.</li><li>Các bài trong chương: Tìm kiếm tuyến tính và nhị phân; Sắp xếp và độ phức tạp.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Xác định điều kiện áp dụng và so sánh chi phí tìm kiếm.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Tìm kiếm tuyến tính kiểm tra lần lượt các phần tử; dùng được với dữ liệu chưa sắp xếp. Trường hợp xấu nhất phải xét n phần tử nên là O(n). Kết quả tìm kiếm nên quy ước rõ vị trí tìm thấy hoặc dấu hiệu không có dữ liệu.</p>
+<p>Tìm kiếm nhị phân trên mảng đã sắp xếp so sánh mục tiêu với phần tử giữa rồi bỏ một nửa khoảng tìm kiếm. Số bước so sánh trong trường hợp xấu nhất là O(log n). Điều kiện sắp xếp phải phù hợp phép so sánh; không được áp dụng trực tiếp lên một mảng tùy ý chưa sắp xếp.</p>
+<p>Trong biến thể dùng hai biên đóng, nếu mục tiêu nhỏ hơn phần tử giữa thì cập nhật biên phải thành mid-1; nếu lớn hơn thì biên trái thành mid+1. Cần bảo đảm khoảng tìm kiếm giảm sau mỗi bước để tránh vòng lặp vô hạn.</p>
+<h2>1. Hợp đồng hàm tìm kiếm</h2>
+<p>Quy định trả chỉ số hay giá trị, và trả gì khi không tìm thấy. Nếu dữ liệu có phần tử trùng, yêu cầu có thể là một vị trí bất kỳ, vị trí đầu hoặc cuối; đó là ba hợp đồng khác nhau. Tìm nhị phân cần mảng đã sắp theo cùng phép so sánh đang dùng.</p>
+<h2>2. Cài đặt có biên rõ ràng</h2>
+<pre><code>def binary_search(values, target):
+    left, right = 0, len(values) - 1
+    while left &lt;= right:
+        mid = left + (right - left) // 2
+        if values[mid] == target:
+            return mid
+        if values[mid] &lt; target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+
+assert binary_search([], 3) == -1
+assert binary_search([2, 5, 8, 13, 21], 13) == 3
+assert binary_search([2, 5, 8, 13, 21], 7) == -1</code></pre>
+<p>Bất biến: nếu target tồn tại ở phần chưa loại thì nó nằm trong khoảng đóng left..right. mid±1 bảo đảm khoảng giảm. Không trộn công thức biên đóng này với thuật toán khoảng nửa mở mà không sửa điều kiện tương ứng.</p>
+<h2>3. Truy vết và phân tích</h2>
+<p>Trong [2,5,8,13,21], tìm 13: mid=2 có 8 nên left=3; mid=3 có 13 nên trả 3. Khoảng giảm một nửa nên O(log n) lần so sánh trên mảng truy cập O(1). Nếu phải sắp xếp đầu vào cho chỉ một lần tìm, cần tính thêm chi phí sắp xếp.</p>
+<h2>4. Bài tập mở rộng có đáp án định hướng</h2>
+<p>Sửa hàm để trả vị trí đầu của 5 trong [1,5,5,5,9]. Khi gặp bằng, lưu ứng viên và tiếp tục tìm bên trái; không trả ngay. Kiểm thử đầu, cuối, rỗng, một phần tử và tất cả bằng nhau. Giải thích vì sao đổi left=mid có thể làm lặp vô hạn khi left sát right.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>tìm 13 trong [2,5,8,13,21,34,55]. Ghi hai biên và phần tử giữa ở từng bước. Thử tiếp một giá trị không có trong mảng.</p>
+</div>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Tìm kiếm nhị phân trực tiếp trên mảng cần điều kiện nào?</li><li>Trường hợp xấu nhất của tìm kiếm tuyến tính là gì?</li><li>Trường hợp xấu nhất của tìm kiếm nhị phân trên mảng là gì?</li><li>Nếu mục tiêu nhỏ hơn phần tử giữa của mảng tăng dần, nên xét đâu?</li><li>Vì sao phải cập nhật biên sau mỗi bước tìm kiếm nhị phân?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Mảng đã sắp xếp theo phép so sánh sử dụng. Thứ tự cho phép loại bỏ một nửa không gian tìm kiếm.</li><li>O(n). Có thể phải đọc hết mảng trước khi kết luận.</li><li>O(log n). Mỗi bước giảm khoảng tìm kiếm xuống khoảng một nửa.</li><li>Nửa bên trái. Mọi phần tử bên phải giữa đều không nhỏ hơn phần tử giữa.</li><li>Để khoảng tìm kiếm giảm và thuật toán kết thúc. Nếu biên không tiến triển, thuật toán có thể lặp vô hạn.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://opendatastructures.org/</li><li>https://docs.python.org/3/tutorial/datastructures.html</li><li>https://docs.python.org/3/library/heapq.html</li></ul></body></html>

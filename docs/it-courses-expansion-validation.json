@@ -1,0 +1,60 @@
+{
+  "inserted": [
+    {
+      "course_id": 515,
+      "slug": "kiem-thu-phan-mem-nhap-mon",
+      "added_lessons": 8,
+      "added_questions": 40
+    },
+    {
+      "course_id": 513,
+      "slug": "mang-may-tinh-co-ban",
+      "added_lessons": 8,
+      "added_questions": 40
+    },
+    {
+      "course_id": 514,
+      "slug": "cau-truc-du-lieu-giai-thuat-co-ban",
+      "added_lessons": 8,
+      "added_questions": 40
+    }
+  ],
+  "protected_records_unchanged": true,
+  "courses": [
+    {
+      "id": 515,
+      "chapters": 6,
+      "lessons": 12,
+      "pdfs": 12,
+      "videos": 4,
+      "quizzes": 5,
+      "questions": 60,
+      "pdf_downloads_verified": 12,
+      "questions_per_lesson": 5
+    },
+    {
+      "id": 513,
+      "chapters": 6,
+      "lessons": 12,
+      "pdfs": 12,
+      "videos": 4,
+      "quizzes": 5,
+      "questions": 60,
+      "pdf_downloads_verified": 12,
+      "questions_per_lesson": 5
+    },
+    {
+      "id": 514,
+      "chapters": 6,
+      "lessons": 12,
+      "pdfs": 12,
+      "videos": 4,
+      "quizzes": 5,
+      "questions": 60,
+      "pdf_downloads_verified": 12,
+      "questions_per_lesson": 5
+    }
+  ],
+  "backend_tests_passed": 41,
+  "frontend_build": "passed"
+}

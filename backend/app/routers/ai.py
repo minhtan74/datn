@@ -4,8 +4,13 @@ from __future__ import annotations
 import os
 import secrets
 import time
+import asyncio
+import json
+import logging
+import threading
 
 from fastapi import APIRouter, Body, Depends, File, Form, Query, UploadFile
+from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 
 from app.ai import model_manager, quiz_generator, tutor
@@ -13,7 +18,7 @@ from app.ai.quiz_generator import QuizGenError
 from app.ai.rag import embeddings as emb
 from app.ai.rag import ingest
 from app.core.config import settings
-from app.core.database import execute, get_db, q_all, q_one, q_scalar
+from app.core.database import SessionLocal, execute, get_db, q_all, q_one, q_scalar
 from app.core.dependencies import get_current_user, require_roles
 from app.core.responses import ApiError, ok
 from app.routers.chapters import ensure_review_quiz
@@ -239,6 +244,10 @@ def generate_quiz(
     user: dict = Depends(require_roles("teacher", "admin")),
     db: Session = Depends(get_db),
 ):
+    return ok(data=_generate_quiz_data(body, user, db))
+
+
+def _generate_quiz_data(body: dict, user: dict, db: Session, on_progress=None):
     # Kiểm tra khóa học + quyền sở hữu, đọc tham số: bài học (tùy chọn), số câu (mặc định 5), độ khó
     course_id = iv(body, "course_id")
     if not course_id:
@@ -266,11 +275,70 @@ def generate_quiz(
             difficulty=difficulty,
             chapter_id=chapter_id or None,
             mix=mix,
+            on_progress=on_progress,
         )
     except QuizGenError as e:
         raise ApiError(str(e), 422)
     # AI KHÔNG tự lưu — chỉ trả preview để giảng viên duyệt.
-    return ok(data=result)
+    return result
+
+
+@router.post("/generate-quiz/stream")
+def generate_quiz_stream(
+    body: dict = Body(default={}),
+    user: dict = Depends(require_roles("teacher", "admin")),
+    db: Session = Depends(get_db),
+):
+    course_id = iv(body, "course_id")
+    if not course_id:
+        raise ApiError("Thiếu course_id.")
+    assert_owns_course(db, user, course_id)
+
+    async def events():
+        loop = asyncio.get_running_loop()
+        queue = asyncio.Queue()
+        stopped = threading.Event()
+
+        def publish(event):
+            if stopped.is_set():
+                raise RuntimeError("Quiz stream closed")
+            loop.call_soon_threadsafe(queue.put_nowait, event)
+
+        def run():
+            try:
+                # Session riêng trong thread xử lý, không giữ dependency đã kết thúc của request.
+                with SessionLocal() as session:
+                    result = _generate_quiz_data(body, user, session, on_progress=publish)
+                publish({"type": "complete", "data": result})
+            except ApiError as exc:
+                if not stopped.is_set():
+                    publish({"type": "error", "status": exc.status, "message": exc.message})
+            except Exception as exc:
+                if not stopped.is_set():
+                    logging.getLogger(__name__).warning("Quiz generation failed: %s", type(exc).__name__)
+                    publish({"type": "error", "status": 500, "message": "Có lỗi khi sinh câu hỏi. Vui lòng thử lại."})
+            finally:
+                if not stopped.is_set():
+                    loop.call_soon_threadsafe(queue.put_nowait, None)
+
+        worker = asyncio.create_task(asyncio.to_thread(run))
+        try:
+            while True:
+                try:
+                    event = await asyncio.wait_for(queue.get(), timeout=15)
+                except asyncio.TimeoutError:
+                    event = {"type": "heartbeat"}
+                if event is None:
+                    break
+                yield json.dumps(event, ensure_ascii=False) + "\n"
+        finally:
+            stopped.set()
+            # HTTP đang gửi tới LLM có thể phải kết thúc trước khi worker thoát.
+            # publish chặn việc chạy bước kiểm tra tiếp theo khi client đã ngắt.
+            worker.add_done_callback(lambda task: task.exception() if not task.cancelled() else None)
+
+    return StreamingResponse(events(), media_type="application/x-ndjson",
+                             headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
 
 
 # POST /api/ai/quiz/approve — giảng viên duyệt bản nháp: kiểm tra lại từng câu rồi lưu thành quiz thật
@@ -325,6 +393,15 @@ def approve_quiz(
             }
         )
 
+    from app.services.topic_catalog import resolve_topic
+    from app.services.knowledge import outline, resolve
+    structure = outline(db, course_id)
+    scope = dict(chapter_id=chapter_id, review_lesson_id=review_lesson_id, lesson_id=lesson_id)
+    for draft, cleaned in zip(questions,clean):
+        topic=resolve_topic(db,course_id,draft.get('topic_id'),cleaned['topic'])
+        cleaned.update(topic_id=topic['id'] if topic else None,topic=topic['name'] if topic else None)
+        cleaned.update(resolve(db, course_id, draft, scope, structure))
+
     if chapter_id or review_lesson_id:
         # Chương / bài học phải thuộc đúng khóa học đã kiểm tra quyền ở trên
         if review_lesson_id:
@@ -366,11 +443,12 @@ def approve_quiz(
         execute(
             db,
             "INSERT INTO questions (quiz_id, content, option_a, option_b, option_c, option_d, "
-            "correct_answer, order_index, topic, difficulty, explanation) "
-            "VALUES (:q, :c, :a, :b, :cc, :d, :ans, :oi, :tp, :df, :ex)",
+            "correct_answer, order_index, topic, difficulty, explanation, topic_id,knowledge_chapter_id,knowledge_lesson_id) "
+            "VALUES (:q, :c, :a, :b, :cc, :d, :ans, :oi, :tp, :df, :ex, :tid,:kch,:kls)",
             q=quiz_id, c=q["content"], a=q["A"], b=q["B"], cc=q["C"], d=q["D"],
             ans=q["ca"], oi=i, tp=q["topic"],
             df=q["difficulty"] if q["difficulty"] in ("easy", "medium", "hard") else None,
-            ex=q["explanation"],
+            ex=q["explanation"], tid=q["topic_id"],
+            kch=q['knowledge_chapter_id'], kls=q['knowledge_lesson_id'],
         )
     return ok(msg, data={"quiz_id": int(quiz_id), "question_count": len(clean)})

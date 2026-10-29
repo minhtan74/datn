@@ -1,0 +1,166 @@
+{
+  "model": {
+    "provider": "gemini",
+    "model": "gemini-3.1-flash-lite"
+  },
+  "elapsed_seconds": 210.31,
+  "scope": "Python - Vòng lặp for, while",
+  "result": {
+    "questions": [
+      {
+        "question": "Trong Python, vòng lặp nào được khuyến khích sử dụng khi chưa biết trước số lần lặp cụ thể?",
+        "options": {
+          "A": "Vòng lặp for",
+          "B": "Vòng lặp while",
+          "C": "Vòng lặp range",
+          "D": "Vòng lặp list"
+        },
+        "correct_answer": "B",
+        "explanation": "Theo ngữ liệu, vòng lặp while được sử dụng khi lặp theo điều kiện và thường dùng khi chưa biết trước số lần lặp.",
+        "difficulty": "easy",
+        "topic": "Vòng lặp while",
+        "objectives": [
+          "Sử dụng vòng lặp while khi chưa biết trước số lần lặp"
+        ],
+        "evidence": "while khi lặp theo điều kiện.",
+        "grounded": true
+      },
+      {
+        "question": "Lệnh nào trong Python có tác dụng bỏ qua phần còn lại của vòng lặp hiện tại và chuyển sang vòng kế tiếp?",
+        "options": {
+          "A": "break",
+          "B": "range",
+          "C": "continue",
+          "D": "for"
+        },
+        "correct_answer": "C",
+        "explanation": "Ngữ liệu nêu rõ lệnh continue dùng để bỏ qua phần còn lại của vòng lặp hiện tại và sang vòng kế tiếp.",
+        "difficulty": "easy",
+        "topic": "Điều khiển vòng lặp",
+        "objectives": [
+          "Điều khiển vòng lặp bằng break và continue"
+        ],
+        "evidence": "Lệnh continue bỏ qua phần còn lại của vòng lặp hiện tại và sang vòng kế tiếp.",
+        "grounded": true
+      },
+      {
+        "question": "Khi nào bạn nên ưu tiên sử dụng vòng lặp while thay vì vòng lặp for trong Python?",
+        "options": {
+          "A": "Khi cần lặp qua tất cả các phần tử của một danh sách có độ dài cố định.",
+          "B": "Khi cần thực hiện một công việc với số lần lặp đã được xác định trước.",
+          "C": "Khi cần lặp lại một hành động dựa trên một điều kiện kiểm tra mà không biết trước số lần lặp.",
+          "D": "Khi cần sử dụng hàm range để tạo ra một dãy số cụ thể."
+        },
+        "correct_answer": "C",
+        "explanation": "Vòng lặp for thường dùng khi biết trước dãy cần lặp, trong khi vòng lặp while được sử dụng khi lặp theo điều kiện và không biết trước số lần lặp.",
+        "difficulty": "medium",
+        "topic": "Vòng lặp while",
+        "objectives": [
+          "Sử dụng vòng lặp while khi chưa biết trước số lần lặp"
+        ],
+        "evidence": "for khi biết trước dãy cần lặp; while khi lặp theo điều kiện.",
+        "grounded": true,
+        "difficulty_review": {
+          "assessed": "medium",
+          "matches_requested": true,
+          "reason": "Cần so sánh đặc điểm của hai loại vòng lặp để chọn phương án đúng nhất thay vì chỉ nhớ định nghĩa đơn thuần."
+        },
+        "verified": "C"
+      },
+      {
+        "question": "Trong một vòng lặp, lệnh 'continue' có tác dụng gì đối với quá trình thực thi?",
+        "options": {
+          "A": "Dừng toàn bộ vòng lặp ngay lập tức và thoát ra ngoài.",
+          "B": "Bỏ qua các câu lệnh còn lại trong lần lặp hiện tại và chuyển sang lần lặp kế tiếp.",
+          "C": "Tạm dừng chương trình trong một khoảng thời gian ngắn rồi tiếp tục.",
+          "D": "Kiểm tra lại điều kiện của vòng lặp và kết thúc nếu điều kiện sai."
+        },
+        "correct_answer": "B",
+        "explanation": "Theo ngữ liệu, lệnh continue bỏ qua phần còn lại của vòng lặp hiện tại và sang vòng kế tiếp, khác với break là thoát hẳn vòng lặp.",
+        "difficulty": "medium",
+        "topic": "Điều khiển vòng lặp",
+        "objectives": [
+          "Điều khiển vòng lặp bằng break và continue"
+        ],
+        "evidence": "Lệnh continue bỏ qua phần còn lại của vòng lặp hiện tại và sang vòng kế tiếp.",
+        "grounded": true,
+        "difficulty_review": {
+          "assessed": "easy",
+          "matches_requested": false,
+          "reason": "Đây là câu hỏi nhận biết trực tiếp định nghĩa về lệnh điều khiển vòng lặp đã được nêu trong ngữ liệu."
+        },
+        "verified": "B"
+      },
+      {
+        "question": "Cho đoạn mã sau: \ncount = 0\nfor i in range(1, 10):\n    if i % 3 == 0:\n        continue\n    if i > 5:\n        break\n    count += 1\nGiá trị của count sau khi thực hiện đoạn mã trên là bao nhiêu?",
+        "options": {
+          "A": "3",
+          "B": "4",
+          "C": "5",
+          "D": "6"
+        },
+        "correct_answer": "B",
+        "explanation": "Vòng lặp chạy i từ 1 đến 9. i=1 (count=1), i=2 (count=2), i=3 (continue), i=4 (count=3), i=5 (count=4), i=6 (i>5 nên break). Vậy count dừng ở 4.",
+        "difficulty": "hard",
+        "topic": "Vòng lặp for, while",
+        "objectives": [
+          "Sử dụng vòng lặp for với range và với danh sách",
+          "Điều khiển vòng lặp bằng break và continue"
+        ],
+        "evidence": "Lệnh break thoát khỏi vòng lặp ngay lập tức. Lệnh continue bỏ qua phần còn lại của vòng lặp hiện tại và sang vòng kế tiếp.",
+        "grounded": true
+      },
+      {
+        "question": "Bạn muốn tính tổng các số nguyên dương n sao cho tổng này vượt quá 50, bắt đầu từ n=1. Đoạn mã nào sau đây thực hiện đúng yêu cầu và tránh được vòng lặp vô hạn?",
+        "options": {
+          "A": "n = 1; tong = 0; while tong <= 50: tong += n",
+          "B": "n = 1; tong = 0; while tong <= 50: tong += n; n += 1",
+          "C": "for n in range(1, 100): tong += n; if tong > 50: break",
+          "D": "n = 1; tong = 0; while True: tong += n; if tong > 50: break; n += 1"
+        },
+        "correct_answer": "B",
+        "explanation": "Phương án A thiếu cập nhật n dẫn đến lặp vô hạn. Phương án C dùng for nhưng không khởi tạo tong. Phương án B sử dụng while với điều kiện dừng rõ ràng và cập nhật biến đếm, đảm bảo thoát vòng lặp.",
+        "difficulty": "hard",
+        "topic": "Vòng lặp for, while",
+        "objectives": [
+          "Sử dụng vòng lặp while khi chưa biết trước số lần lặp"
+        ],
+        "evidence": "Vòng lặp while lặp trong khi điều kiện còn đúng. Cần đảm bảo điều kiện sẽ trở thành sai ở một thời điểm, nếu không chương trình chạy vô hạn.",
+        "grounded": true
+      }
+    ],
+    "meta": {
+      "generated_by": "gemini:gemini-3.1-flash-lite",
+      "requested": 6,
+      "returned": 6,
+      "difficulty": "mixed",
+      "distribution_requested": {
+        "easy": 2,
+        "medium": 2,
+        "hard": 2
+      },
+      "distribution": {
+        "easy": 2,
+        "medium": 2,
+        "hard": 2
+      },
+      "difficulty_basis": "Mức tư duy dự kiến; giảng viên cần thẩm định trước khi sử dụng.",
+      "warnings": [],
+      "verification": {
+        "verified": 2,
+        "flagged": 0,
+        "ungrounded": 0,
+        "difficulty_flagged": 1
+      },
+      "context_mode": "full_document",
+      "context_chars": 1622,
+      "context_chunks": 1,
+      "topic": "Vòng lặp for, while",
+      "objectives": [
+        "Sử dụng vòng lặp for với range và với danh sách",
+        "Sử dụng vòng lặp while khi chưa biết trước số lần lặp",
+        "Điều khiển vòng lặp bằng break và continue"
+      ]
+    }
+  }
+}

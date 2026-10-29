@@ -1,3 +1,5 @@
+import TopicPicker from '../../components/teacher/TopicPicker.jsx';
+import KnowledgePicker from '../../components/teacher/KnowledgePicker.jsx';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useToast } from '../../hooks/useToast';
@@ -16,6 +18,9 @@ const emptyForm = {
   correct_answer: 'A',
   order_index: 0,
   topic: '',
+  topic_id: null,
+  knowledge_chapter_id: null,
+  knowledge_lesson_id: null,
   difficulty: '',
   explanation: '',
 };
@@ -74,7 +79,8 @@ export default function TeacherQuizQuestions() {
   // Mở form thêm câu hỏi
   function openCreateModal() {
     setEditingId(null);
-    setForm(emptyForm);
+    setForm({ ...emptyForm, knowledge_chapter_id: quiz?.chapter_id || null,
+      knowledge_lesson_id: quiz?.review_lesson_id || quiz?.lesson_id || null });
     setModalOpen(true);
   }
 
@@ -93,6 +99,9 @@ export default function TeacherQuizQuestions() {
       correct_answer: q.correct_answer || 'A',
       order_index: q.order_index ?? 0,
       topic: q.topic || '',
+      topic_id: q.topic_id || null,
+      knowledge_chapter_id: q.knowledge_chapter_id || quiz?.chapter_id || null,
+      knowledge_lesson_id: q.knowledge_lesson_id || quiz?.review_lesson_id || quiz?.lesson_id || null,
       difficulty: q.difficulty || '',
       explanation: q.explanation || '',
     });
@@ -113,6 +122,9 @@ export default function TeacherQuizQuestions() {
       correct_answer: form.correct_answer,
       order_index: Number(form.order_index || 0),
       topic: form.topic.trim(),
+      topic_id: form.topic_id,
+      knowledge_chapter_id: form.knowledge_chapter_id,
+      knowledge_lesson_id: form.knowledge_lesson_id,
       difficulty: form.difficulty,
       explanation: form.explanation.trim(),
     };
@@ -371,17 +383,14 @@ export default function TeacherQuizQuestions() {
               </div>
             </div>
 
+            <KnowledgePicker courseId={quiz?.course_id} chapterId={form.knowledge_chapter_id} lessonId={form.knowledge_lesson_id}
+              lockedChapterId={quiz?.chapter_id} lockedLessonId={quiz?.review_lesson_id || quiz?.lesson_id}
+              onChange={(scope) => setForm((f) => ({ ...f, ...scope }))} />
             <div className="form-grid">
               <div className="form-group">
                 <label className="form-label">Chủ đề</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  maxLength={100}
-                  placeholder="VD: Hàm (Functions), DOM..."
-                  value={form.topic}
-                  onChange={(e) => setForm({ ...form, topic: e.target.value })}
-                />
+                <TopicPicker courseId={quiz?.course_id} topicId={form.topic_id} topicName={form.topic}
+                  onSelect={(id, name) => setForm((f) => ({ ...f, topic_id: id, topic: name }))} />
               </div>
               <div className="form-group">
                 <label className="form-label">Độ khó</label>

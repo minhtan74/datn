@@ -1,0 +1,77 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Cấu trúc dữ liệu và giải thuật cơ bản</div>
+<p class="path">Chương 6: Thiết kế lời giải và thực hành · Bài 1</p>
+<h1>Chia để trị và quy hoạch động nhập môn</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Cấu trúc dữ liệu và giải thuật cơ bản.</li><li>Chương 6: Thiết kế lời giải và thực hành.</li><li>Các bài trong chương: Chia để trị và quy hoạch động nhập môn; Dự án nhỏ: bộ tra cứu và thống kê dữ liệu.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Phân biệt chia để trị với lưu trạng thái bài toán con.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Chia để trị chia bài toán thành các phần nhỏ, giải rồi kết hợp; merge sort là ví dụ. Quy hoạch động thường phù hợp khi có các bài toán con chồng lặp và cấu trúc tối ưu thích hợp. Không phải cứ có đệ quy là cần quy hoạch động.</p>
+<p>Một lời giải quy hoạch động cần định nghĩa trạng thái, chuyển trạng thái, trường hợp cơ sở và thứ tự tính. Với số cách bước lên n bậc, mỗi bước 1 hoặc 2 bậc, có thể đặt ways[0]=1, ways[1]=1 và ways[n]=ways[n-1]+ways[n-2]. Bộ nhớ có thể giảm nếu chỉ cần hai trạng thái trước.</p>
+<p>Tham lam chọn quyết định cục bộ, nhưng cần chứng minh cho bài toán cụ thể. Chẳng hạn đổi tiền với mệnh giá tùy ý không bảo đảm thuật toán luôn lấy đồng lớn nhất sẽ dùng ít đồng nhất. Bắt đầu từ mô hình bài toán và ví dụ phản chứng, không chọn kỹ thuật theo tên gọi hấp dẫn.</p>
+<h2>1. Từ lời giải trực tiếp tới trạng thái</h2>
+<p>Xác định thông tin tối thiểu để mô tả bài toán con. Với số cách lên cầu thang, trạng thái chỉ cần số bậc còn lại khi bước cho phép luôn là 1 hoặc 2. Nếu luật thay đổi theo bước trước, trạng thái phải chứa thêm thông tin; không tái sử dụng công thức cũ một cách máy móc.</p>
+<h2>2. Cài đặt bottom-up có kiểm tra biên</h2>
+<pre><code>def stair_ways(n):
+    if not isinstance(n, int) or isinstance(n, bool) or n &lt; 0:
+        raise ValueError('invalid n')
+    previous, current = 1, 1
+    for _ in range(n):
+        previous, current = current, previous + current
+    return previous
+
+assert stair_ways(0) == 1
+assert stair_ways(4) == 5
+assert stair_ways(6) == 13</code></pre>
+<p>Theo mô hình phép toán số học hằng số: O(n) thời gian, O(1) số biến phụ. Với số nguyên rất lớn, chi phí bit và bộ nhớ số nguyên tăng theo kích thước giá trị, nên mô hình này là một giả định phân tích.</p>
+<h2>3. Phân biệt kỹ thuật</h2>
+<p>Chia để trị nhấn mạnh chia, giải và kết hợp; quy hoạch động lưu lời giải bài toán con hữu ích để tránh tính lại. Tham lam cần tính chất bảo đảm quyết định cục bộ dẫn tới tối ưu. Với mệnh giá 1,3,4 và tiền 6, lấy 4 trước cho ba đồng, còn 3+3 chỉ hai đồng.</p>
+<h2>4. Bài tập có lời giải định hướng</h2>
+<p>Lập bảng số đồng ít nhất cho tiền từ 0 tới 6 với các mệnh giá trên. Đặt dp[0]=0; trạng thái chưa đạt dùng vô cực; xét mọi đồng không vượt số tiền và lấy min(dp[s-coin]+1). Kết quả cho 6 là 2. Kiểm tra riêng trường hợp không tạo được số tiền nếu bỏ mệnh giá 1.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>Lập bảng ways từ 0 tới 6 và viết phiên bản dùng hai biến. Tự kiểm tra giả định mỗi bước chỉ là 1 hoặc 2, không áp công thức cho yêu cầu khác.</p>
+</div>
+<h2>Hướng giải bài tập bổ sung</h2>
+<p>ways[5]=8, ways[6]=13. Nêu rõ trạng thái 0 biểu diễn một cách không thực hiện bước nào, giúp công thức nhất quán.</p>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Thành phần nào cần định nghĩa trong quy hoạch động?</li><li>Merge sort minh họa kỹ thuật nào?</li><li>Với ways[0]=1, ways[1]=1 và bước 1 hoặc 2, ways[4] là gì?</li><li>Tham lam lấy đồng lớn nhất có tối ưu cho mọi hệ mệnh giá không?</li><li>Nếu chỉ cần hai trạng thái trước, có thể tối ưu gì?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Trạng thái và công thức chuyển. Trạng thái, cơ sở và thứ tự tính quyết định lời giải.</li><li>Chia để trị. Thuật toán chia, giải các nửa và trộn.</li><li>5. Dãy tiếp theo là 2,3,5.</li><li>Không. Hệ 1,3,4 với số tiền 6 là một phản ví dụ.</li><li>Bộ nhớ lưu bảng. Có thể lưu hai giá trị thay cho toàn bảng.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://opendatastructures.org/</li><li>https://docs.python.org/3/tutorial/datastructures.html</li><li>https://docs.python.org/3/library/heapq.html</li></ul></body></html>

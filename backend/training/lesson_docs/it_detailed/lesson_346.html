@@ -1,0 +1,77 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Noto Sans', Arial, sans-serif; color: #0f172a; font-size: 11pt; line-height: 1.55; }
+.tag { font-size: 8.5pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #2563eb; }
+h1 { font-size: 20pt; margin: 4pt 0 2pt; line-height: 1.25; }
+.sub { color: #64748b; margin: 0 0 12pt; font-size: 10pt; }
+h2 { font-size: 13pt; margin: 16pt 0 5pt; padding-bottom: 3pt; border-bottom: 1.5px solid #e2e8f0; color: #1e3a8a; page-break-after: avoid; }
+p { margin: 5pt 0; }
+ul, ol { margin: 4pt 0 6pt; padding-left: 20pt; }
+li { margin: 2pt 0; }
+code { font-family: Consolas, 'Courier New', monospace; font-size: 9.5pt; background: #eef2ff; padding: 0 3pt; border-radius: 3px; }
+pre { background: #0f172a; color: #e2e8f0; padding: 9pt 11pt; border-radius: 7px; font-size: 9pt; line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap; page-break-inside: avoid; }
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+.box { border-radius: 8px; padding: 6pt 12pt 8pt; margin: 8pt 0; page-break-inside: avoid; }
+.obj { background: #eff6ff; border-left: 4px solid #2563eb; }
+.sum { background: #f0fdf4; border-left: 4px solid #16a34a; }
+.ex { background: #fffbeb; border-left: 4px solid #d97706; }
+.box h2 { border: none; margin: 4pt 0 2pt; padding: 0; color: inherit; }
+
+@page { @bottom-right { content: "Trang " counter(page); font-size: 8pt; color: #64748b; } }
+h1,h2 { break-after: avoid; }
+p,li { orphans: 3; widows: 3; }
+pre { font-size: 8.5pt; break-inside: auto; }
+.path { font-size: 9pt; color: #475569; }
+.scope { background: #f8fafc; padding: 10pt; border: 1px solid #e2e8f0; }
+.toc { padding-left: 18pt; }
+.toc li { margin-bottom: 5pt; }
+</style></head><body>
+<div class="tag">Kiểm thử phần mềm nhập môn</div>
+<p class="path">Chương 6: Chất lượng và thực hành tổng hợp · Bài 2</p>
+<h1>Dự án nhỏ: kế hoạch kiểm thử và tự động hóa</h1>
+<p class="sub">Tài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải</p>
+<h2>Vị trí bài học trong khóa</h2>
+<ul><li>Khóa học: Kiểm thử phần mềm nhập môn.</li><li>Chương 6: Chất lượng và thực hành tổng hợp.</li><li>Các bài trong chương: Hiệu năng, khả dụng và tương thích; Dự án nhỏ: kế hoạch kiểm thử và tự động hóa.</li><li>Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp cuối khóa dùng để kết nối kiến thức giữa các chương.</li></ul>
+<div class="box obj">
+<h2>Mục tiêu bài học</h2>
+<p>Tạo gói kiểm thử có thể chạy lại cho một chức năng học trực tuyến.</p>
+</div>
+<h2>Kiến thức nền</h2>
+<p>Tự động hóa phù hợp với ca lặp lại, kết quả mong đợi ổn định và giá trị phát hiện lỗi đủ lớn so với chi phí bảo trì. Không tự động hóa mọi thao tác chỉ vì có công cụ. Tách unit test nhanh, API/integration và một số luồng giao diện quan trọng theo nhu cầu sản phẩm.</p>
+<p>Một test tốt có chuẩn bị, hành động và kiểm tra kết quả cụ thể. Các test nên độc lập, dữ liệu có thể tái tạo và dọn trong phạm vi đã tạo. Khi test chập chờn, tìm nguyên nhân như chờ bất đồng bộ hoặc phụ thuộc thứ tự, không đơn giản chạy lại tới khi xanh rồi bỏ qua.</p>
+<p>Dự án chọn chức năng ghi danh hoặc nộp quiz: lập phạm vi, rủi ro, test case, dữ liệu, báo cáo lỗi và kết quả hồi quy. Phân biệt chức năng chưa kiểm tra với test đã qua. Tài liệu kết thúc phải nêu rủi ro còn lại; quiz không tự xác nhận bộ test thực tế đã được triển khai.</p>
+<h2>1. Phạm vi gói bàn giao</h2>
+<p>Chọn đăng ký khóa miễn phí làm tính năng mục tiêu. Tài liệu cần mục tiêu, phạm vi không làm, rủi ro, môi trường, dữ liệu, trách nhiệm, điều kiện bắt đầu/kết thúc và cách báo cáo. Chỉ tự động hóa các kiểm tra có kỳ vọng rõ, không tạo assertion theo dữ liệu đang trả về để test luôn xanh.</p>
+<h2>2. Ví dụ test độc lập không gọi hệ thống thật</h2>
+<pre><code>def can_open_lesson(is_free, enrolled):
+    return is_free or enrolled
+
+def test_guest_cannot_open_restricted_lesson():
+    assert can_open_lesson(False, False) is False
+
+def test_enrolled_can_open_restricted_lesson():
+    assert can_open_lesson(False, True) is True
+
+def test_free_lesson_is_open():
+    assert can_open_lesson(True, False) is True</code></pre>
+<p>Đây là mô hình luật đơn giản phục vụ học cách viết test, không phải toàn bộ hàm phân quyền của LMS. Trong dự án thật còn trạng thái khóa, tài khoản và vai trò; cần test implementation thật qua interface phù hợp.</p>
+<h2>3. Từ ví dụ tới kiểm tra tích hợp</h2>
+<p>Tạo user/course lab trong fixture, gọi API thực ở môi trường test, xác nhận phản hồi và dữ liệu. Mỗi test phải tự có điều kiện trước và dọn dữ liệu của nó. Test UI chờ điều kiện quan sát được thay vì sleep cố định dài. Khi flaky, thu trace và sửa nguyên nhân, không chỉ tăng timeout vô hạn.</p>
+<h2>4. Rubric tự đánh giá</h2>
+<p>Chấm yêu cầu có truy vết, bao phủ rủi ro, dữ liệu cô lập, assertions đúng, khả năng chạy lại và báo cáo trung thực. Nộp 12 test thiết kế, ba test tự động, kết quả thực chạy và hai báo cáo lỗi nếu tìm thấy; nếu dùng lỗi giả định phải gắn nhãn giả định. Không bịa lỗi hay kết quả chỉ để đủ số lượng bài nộp.</p>
+<div class="box ex">
+<h2>Bài tập vận dụng bổ sung</h2>
+<p>Nộp kế hoạch một trang, 12 test gồm quyền/biên/trạng thái/dữ liệu, hai báo cáo lỗi mẫu ghi rõ là tình huống giả định và ba test tự động có thể chạy lại trên lab. Không tạo lỗi hoặc kết quả giả vào hệ thống thật.</p>
+</div>
+<h2>Hướng giải bài tập bổ sung</h2>
+<p>Đánh giá theo tiêu chí: truy vết yêu cầu, kết quả mong đợi rõ, dữ liệu độc lập, kiểm tra có ý nghĩa, bằng chứng chạy và giới hạn. Không tính số lượng test là thước đo duy nhất.</p>
+<h2>Câu hỏi tự kiểm tra</h2>
+<ol><li>Ca nào thường phù hợp tự động hóa?</li><li>Ba phần cơ bản của test thường là gì?</li><li>Test độc lập có lợi ích gì?</li><li>Test chập chờn nên được xử lý thế nào?</li><li>Báo cáo kết thúc kiểm thử cần nêu gì?</li></ol>
+<h2>Gợi ý đáp án và điểm cần nhớ</h2>
+<ul><li>Ca lặp lại có kỳ vọng ổn định và giá trị rõ. Cần cân nhắc giá trị và bảo trì.</li><li>Chuẩn bị, hành động, kiểm tra. Test cần thiết lập trạng thái, thực hiện và xác minh.</li><li>Giảm phụ thuộc thứ tự chạy. Có thể chạy lại riêng và theo thứ tự khác.</li><li>Tìm nguyên nhân dữ liệu, thời gian hoặc phụ thuộc. Flaky test làm giảm độ tin cậy của phản hồi.</li><li>Phạm vi, kết quả và rủi ro còn lại. Người đọc cần hiểu cả bằng chứng lẫn giới hạn.</li></ul>
+<h2>Cách tự đánh giá sau bài</h2>
+<ul><li>Giải thích được thuật ngữ mà không đọc lại định nghĩa.</li><li>Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng.</li><li>Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải.</li><li>Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài.</li></ul>
+<p>Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành thạo; cần thêm bài vận dụng và minh chứng thực hành.</p>
+<h2>Tài liệu đọc thêm</h2>
+<ul><li>https://istqb.org/wp-content/uploads/2024/11/ISTQB_CTFL_Syllabus_v4.0.1.pdf</li></ul></body></html>

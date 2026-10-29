@@ -1,0 +1,9 @@
+status  0.01 questions 0
+status  0.13 questions 0
+heartbeat  15.14 questions 0
+batch easy 23.4 questions 3
+batch medium 23.4 questions 4
+batch hard 23.4 questions 2
+status  23.4 questions 0
+complete  31.98 questions 0
+SUMMARY {"course_id": 7, "chapter_id": 19, "requested": 10, "http_status": 200, "first_batch_sec": 23.4, "completed_sec": 31.98, "returned": 9}

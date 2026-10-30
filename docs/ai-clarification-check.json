@@ -1,0 +1,134 @@
+{
+  "passed": 28,
+  "checks": [
+    "Tài khoản 1: hỏi lại đúng nhóm topic",
+    "Tài khoản 1: có gợi ý bổ sung cho topic",
+    "Tài khoản 1: hỏi lại đúng nhóm debug",
+    "Tài khoản 1: có gợi ý bổ sung cho debug",
+    "Tài khoản 1: chỉ tên ngôn ngữ vẫn hỏi code/lỗi",
+    "Tài khoản 1: hỏi lại đúng nhóm exercise",
+    "Tài khoản 1: có gợi ý bổ sung cho exercise",
+    "Tài khoản 1: hỏi lại đúng nhóm comparison",
+    "Tài khoản 1: có gợi ý bổ sung cho comparison",
+    "Tài khoản 1: tải lại giữ lời hỏi lại",
+    "Tài khoản 1: điện thoại không tràn ngang",
+    "Tài khoản 1: khung AI bài học cũng hỏi lại",
+    "Tài khoản 1: mở hội thoại bài học giữ đúng phạm vi",
+    "Tài khoản 2: hỏi lại đúng nhóm topic",
+    "Tài khoản 2: có gợi ý bổ sung cho topic",
+    "Tài khoản 2: hỏi lại đúng nhóm debug",
+    "Tài khoản 2: có gợi ý bổ sung cho debug",
+    "Tài khoản 2: chỉ tên ngôn ngữ vẫn hỏi code/lỗi",
+    "Tài khoản 2: hỏi lại đúng nhóm exercise",
+    "Tài khoản 2: có gợi ý bổ sung cho exercise",
+    "Tài khoản 2: hỏi lại đúng nhóm comparison",
+    "Tài khoản 2: có gợi ý bổ sung cho comparison",
+    "Tài khoản 2: tải lại giữ lời hỏi lại",
+    "Tài khoản 2: điện thoại không tràn ngang",
+    "Tài khoản 2: khung AI bài học cũng hỏi lại",
+    "Tài khoản 2: mở hội thoại bài học giữ đúng phạm vi",
+    "Tài khoản khác không đọc được hội thoại",
+    "Không có lỗi JavaScript"
+  ],
+  "cases": [
+    {
+      "account": 1,
+      "question": "giai thich giup em",
+      "answer": "Bạn muốn mình giải thích chủ đề hoặc khái niệm nào? Bạn gửi tên nội dung hoặc đoạn đang chưa hiểu nhé.",
+      "kind": "topic",
+      "sources": []
+    },
+    {
+      "account": 1,
+      "question": "code em bị lỗi",
+      "answer": "Bạn gửi đoạn code liên quan và thông báo lỗi đầy đủ nhé. Bạn đang dùng ngôn ngữ/công cụ nào và mong đợi kết quả gì?",
+      "kind": "debug",
+      "sources": []
+    },
+    {
+      "account": 1,
+      "question": "Python",
+      "answer": "Bạn gửi đoạn code liên quan và thông báo lỗi đầy đủ nhé. Bạn đang dùng ngôn ngữ/công cụ nào và mong đợi kết quả gì?",
+      "kind": "debug",
+      "sources": []
+    },
+    {
+      "account": 1,
+      "question": "Giải câu 2",
+      "answer": "Bạn gửi nguyên đề bài hoặc nội dung câu hỏi cần giải nhé; chỉ số câu/tên bài chưa đủ để xác định yêu cầu.",
+      "kind": "exercise",
+      "sources": []
+    },
+    {
+      "account": 1,
+      "question": "Nên chọn cái nào?",
+      "answer": "Bạn muốn so sánh những khái niệm hoặc lựa chọn nào? Bạn cho biết mục đích sử dụng để mình giải thích đúng trọng tâm nhé.",
+      "kind": "comparison",
+      "sources": []
+    },
+    {
+      "account": 1,
+      "question": "Giải bài này",
+      "answer": "Bạn gửi nguyên đề bài hoặc nội dung câu hỏi cần giải nhé; chỉ số câu/tên bài chưa đủ để xác định yêu cầu.",
+      "kind": "exercise",
+      "sources": []
+    },
+    {
+      "account": 1,
+      "question": "Giải câu 2",
+      "answer": "Bạn gửi nguyên đề bài hoặc nội dung câu hỏi cần giải nhé; chỉ số câu/tên bài chưa đủ để xác định yêu cầu.",
+      "kind": "exercise",
+      "sources": []
+    },
+    {
+      "account": 2,
+      "question": "giai thich giup em",
+      "answer": "Bạn muốn mình giải thích chủ đề hoặc khái niệm nào? Bạn gửi tên nội dung hoặc đoạn đang chưa hiểu nhé.",
+      "kind": "topic",
+      "sources": []
+    },
+    {
+      "account": 2,
+      "question": "code em bị lỗi",
+      "answer": "Bạn gửi đoạn code liên quan và thông báo lỗi đầy đủ nhé. Bạn đang dùng ngôn ngữ/công cụ nào và mong đợi kết quả gì?",
+      "kind": "debug",
+      "sources": []
+    },
+    {
+      "account": 2,
+      "question": "Python",
+      "answer": "Bạn gửi đoạn code liên quan và thông báo lỗi đầy đủ nhé. Bạn đang dùng ngôn ngữ/công cụ nào và mong đợi kết quả gì?",
+      "kind": "debug",
+      "sources": []
+    },
+    {
+      "account": 2,
+      "question": "Giải câu 2",
+      "answer": "Bạn gửi nguyên đề bài hoặc nội dung câu hỏi cần giải nhé; chỉ số câu/tên bài chưa đủ để xác định yêu cầu.",
+      "kind": "exercise",
+      "sources": []
+    },
+    {
+      "account": 2,
+      "question": "Nên chọn cái nào?",
+      "answer": "Bạn muốn so sánh những khái niệm hoặc lựa chọn nào? Bạn cho biết mục đích sử dụng để mình giải thích đúng trọng tâm nhé.",
+      "kind": "comparison",
+      "sources": []
+    },
+    {
+      "account": 2,
+      "question": "Giải bài này",
+      "answer": "Bạn gửi nguyên đề bài hoặc nội dung câu hỏi cần giải nhé; chỉ số câu/tên bài chưa đủ để xác định yêu cầu.",
+      "kind": "exercise",
+      "sources": []
+    },
+    {
+      "account": 2,
+      "question": "Giải câu 2",
+      "answer": "Bạn gửi nguyên đề bài hoặc nội dung câu hỏi cần giải nhé; chỉ số câu/tên bài chưa đủ để xác định yêu cầu.",
+      "kind": "exercise",
+      "sources": []
+    }
+  ],
+  "jsErrors": []
+}

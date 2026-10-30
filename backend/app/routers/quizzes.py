@@ -129,9 +129,11 @@ def _attempt_sig(user_id: int, quiz_id: int, attempt_id: int) -> str:
 
 
 # Mở đề: tiếp tục lượt đang dở, chưa có thì tạo lượt mới (nếu còn lượt) -> trả thông tin cho client
-def _start_or_resume(db: Session, user: dict, quiz: dict) -> dict:
+def _start_or_resume(db: Session, user: dict, quiz: dict, *, resume_only: bool = False) -> dict:
     attempt = _open_attempt(db, user["id"], quiz)
     if not attempt:
+        if resume_only:
+            raise ApiError("Lượt làm trước đã kết thúc hoặc hết thời gian. Vui lòng xem lại thông tin quiz.", 403)
         _assert_attempts_left(db, user, quiz)
         now = int(time.time())
         res = execute(
@@ -249,22 +251,23 @@ def _my_results(db: Session, user_id: int, quiz_id: int) -> list[dict]:
 def _my_status(db: Session, user: dict, quiz: dict) -> dict:
     rows = _my_results(db, user["id"], quiz["id"])
     percent, passed, _ = _graded(quiz["grading_method"], rows)
+    used = _attempts_used(db, user["id"], quiz["id"])
     status = {
         "submitted": len(rows),
+        "attempts_used": used,
         "graded_percent": percent,
         "passed": passed,
         "in_progress": False,
         "remaining_sec": None,
         "attempts_left": None,
     }
-    if _is_tracked(quiz):
-        attempt = _open_attempt(db, user["id"], quiz)
-        if attempt:
-            status["in_progress"] = True
-            if quiz["duration"]:
-                status["remaining_sec"] = max(0, attempt["started_ts"] + quiz["duration"] * 60 - int(time.time()))
-        if quiz["max_attempts"]:
-            status["attempts_left"] = max(0, quiz["max_attempts"] - _attempts_used(db, user["id"], quiz["id"]))
+    attempt = _open_attempt(db, user["id"], quiz)
+    if attempt:
+        status["in_progress"] = True
+        if quiz["duration"]:
+            status["remaining_sec"] = max(0, attempt["started_ts"] + quiz["duration"] * 60 - int(time.time()))
+    if quiz["max_attempts"]:
+        status["attempts_left"] = max(0, quiz["max_attempts"] - used)
     return status
 
 
@@ -293,6 +296,12 @@ def index(
         quiz["question_count"] = _count_questions(db, id)
         if user:
             quiz["my_attempts"] = _attempts_used(db, user["id"], id)
+            quiz["is_preview"] = owns_course(db, user, quiz["course_id"])
+            quiz["can_attempt"] = quiz["is_preview"] or (
+                user["role"] == "student" and can_access_course(db, user, quiz["course_id"])
+            )
+            if user["role"] == "student":
+                quiz["my_status"] = _my_status(db, user, quiz)
         return ok(data=quiz)
 
     # Danh sách quiz của 1 khóa học cụ thể
@@ -515,6 +524,7 @@ def knowledge_outline(course_id: int, user=Depends(require_roles('teacher', 'adm
 def index_questions(
     id: int | None = Query(default=None),
     quiz_id: int | None = Query(default=None),
+    resume_only: bool = Query(default=False),
     user: dict | None = Depends(get_viewer),
     db: Session = Depends(get_db),
 ):
@@ -538,9 +548,9 @@ def index_questions(
         )
         if with_answers:
             return ok(data=rows)
-        # Học viên: đề có giới hạn thời gian / số lượt -> mở đề là bắt đầu (hoặc tiếp tục) 1 lượt làm;
-        # đề ôn tập không giới hạn thì làm tự do, không cần token
-        extra = _start_or_resume(db, user, quiz) if rows else {}
+        # Chỉ gọi khi học viên bấm Bắt đầu / Tiếp tục. Mọi đề đều có token để giữ thứ tự đảo.
+        # Tiếp tục lượt đã hết hạn không được tự ý tạo thêm lượt mới.
+        extra = _start_or_resume(db, user, quiz, resume_only=resume_only) if rows else {}
         if extra.get("shuffle_version") == 1:
             rows = _shuffle_rows(rows, int(extra["attempt_token"].split(".")[0]))
         return ok(data=[_strip_answers(r) for r in rows], **extra)

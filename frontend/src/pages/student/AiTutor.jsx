@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { aiService } from '../../services/aiService';
 import { enrollmentService } from '../../services/enrollmentService';
+import { useAiChat } from '../../hooks/useAiChat';
+import AiChatFeedback, { AiReplyLabel } from '../../components/ai/AiChatFeedback.jsx';
 
 /** PHASE 6 — AI Tutor (RAG): hỏi đáp dựa trên tài liệu khóa học, có trích dẫn nguồn. */
 export default function AiTutor() {
@@ -8,12 +11,15 @@ export default function AiTutor() {
   const [courseId, setCourseId] = useState('');
   const [conversations, setConversations] = useState([]);
   const [activeConv, setActiveConv] = useState(null); // id | null (mới)
+  const [activeLessonId, setActiveLessonId] = useState(null);
+  const [openingConversation, setOpeningConversation] = useState(false);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
-  const [sending, setSending] = useState(false);
   // engine: thông tin LLM / embedding đang dùng (hiển thị cho người học biết AI chạy online hay offline)
   const [engine, setEngine] = useState(null);
   const threadRef = useRef(null);
+  const chat = useAiChat({ scopeKey: `course-${courseId}`, setMessages, onConversationId: setActiveConv });
+  const { sending } = chat;
 
   // Tải khóa học đã đăng ký + trạng thái engine
   useEffect(() => {
@@ -33,54 +39,55 @@ export default function AiTutor() {
   useEffect(() => {
     if (!courseId) return;
     setActiveConv(null);
+    setActiveLessonId(null);
     setMessages([]);
+    setInput('');
+  }, [courseId]);
+
+  useEffect(() => {
+    if (!courseId) return;
+    let cancelled = false;
     (async () => {
       const res = await aiService.getConversations(courseId);
-      setConversations(res?.data?.data || []);
+      if (!cancelled) setConversations(res?.data?.data || []);
     })();
-  }, [courseId]);
+    return () => { cancelled = true; };
+  }, [courseId, activeConv]);
 
   // Tự cuộn khung chat xuống tin nhắn mới nhất
   useEffect(() => {
     threadRef.current?.scrollTo({ top: threadRef.current.scrollHeight, behavior: 'smooth' });
-  }, [messages, sending]);
+  }, [messages, sending, chat.feedback]);
 
   // Mở lại 1 cuộc trò chuyện cũ: tải toàn bộ tin nhắn
   async function openConversation(id) {
-    setActiveConv(id);
+    if (sending || openingConversation) return;
+    setOpeningConversation(true);
     const res = await aiService.getConversation(id);
-    setMessages(res?.data?.data?.messages || []);
+    setOpeningConversation(false);
+    if (!res?.ok) return;
+    setActiveConv(id);
+    const lessonId = res.data?.data?.conversation?.lesson_id ?? null;
+    setActiveLessonId(lessonId);
+    chat.loadHistory(res?.data?.data?.messages || [], { courseId, lessonId, conversationId: id });
+    setInput('');
   }
 
   // Bắt đầu cuộc trò chuyện mới (xóa khung chat)
   function newConversation() {
+    chat.reset();
     setActiveConv(null);
+    setActiveLessonId(null);
     setMessages([]);
     setInput('');
   }
 
-  // Gửi câu hỏi: hiện câu hỏi ngay, chờ AI trả lời kèm nguồn; lỗi thì hiện thông báo thành tin nhắn của AI
-  async function send(e) {
+  // Lỗi/chờ có vùng phản hồi riêng, không đưa lỗi dịch vụ vào câu trả lời kiến thức.
+  function send(e) {
     e?.preventDefault();
     const text = input.trim();
-    if (!text || !courseId || sending) return;
-    setInput('');
-    setMessages((m) => [...m, { role: 'user', content: text, _local: true }]);
-    setSending(true);
-    const res = await aiService.chat({ courseId, conversationId: activeConv, message: text });
-    setSending(false);
-    const data = res?.data?.data;
-    if (!res?.ok || !data) {
-      setMessages((m) => [...m, { role: 'assistant', content: res?.data?.message || 'Có lỗi xảy ra, thử lại sau.' }]);
-      return;
-    }
-    setMessages((m) => [...m, { role: 'assistant', content: data.answer, sources: data.sources }]);
-    // Cuộc trò chuyện mới vừa được tạo -> nhớ id và tải lại danh sách hội thoại bên trái
-    if (!activeConv && data.conversation_id) {
-      setActiveConv(data.conversation_id);
-      const conv = await aiService.getConversations(courseId);
-      setConversations(conv?.data?.data || []);
-    }
+    if (!text || !courseId || sending || openingConversation) return;
+    if (chat.sendMessage({ courseId, lessonId: activeLessonId, conversationId: activeConv, message: text })) setInput('');
   }
 
   // Xóa 1 cuộc trò chuyện (stopPropagation để không đồng thời mở nó ra)
@@ -96,17 +103,19 @@ export default function AiTutor() {
     <main className="s-main">
       <div className="s-page-title">🤖 AI Tutor</div>
       <div className="s-page-subtitle">
-        Hỏi đáp dựa trên tài liệu của khóa học — câu trả lời luôn kèm nguồn trích dẫn.
+        Hỏi đáp dựa trên tài liệu của khóa học, có nguồn trích dẫn. AI sẽ hỏi thêm khi cần làm rõ câu hỏi.
       </div>
 
       <div className="ai-tutor-grid">
         {/* Cột trái: chọn khóa + danh sách hội thoại */}
         <div className="s-card" style={{ position: 'sticky', top: '1rem' }}>
           <div className="s-card-body" style={{ display: 'flex', flexDirection: 'column', gap: '.75rem' }}>
-            <label style={{ fontSize: '.78rem', fontWeight: 700, color: 'var(--s-text-muted)' }}>KHÓA HỌC</label>
+            <label htmlFor="ai-tutor-course" style={{ fontSize: '.78rem', fontWeight: 700, color: 'var(--s-text-muted)' }}>KHÓA HỌC</label>
             <select
+              id="ai-tutor-course"
               className="s-input"
               value={courseId}
+              disabled={sending || openingConversation}
               onChange={(e) => setCourseId(e.target.value)}
               style={{ padding: '.5rem', borderRadius: 8, border: '1px solid var(--s-border)' }}
             >
@@ -116,7 +125,7 @@ export default function AiTutor() {
               ))}
             </select>
 
-            <button className="s-btn s-btn-primary s-btn-sm" onClick={newConversation}>
+            <button className="s-btn s-btn-primary s-btn-sm" onClick={newConversation} disabled={sending || openingConversation}>
               + Cuộc trò chuyện mới
             </button>
 
@@ -124,7 +133,7 @@ export default function AiTutor() {
               {conversations.map((c) => (
                 <div
                   key={c.id}
-                  onClick={() => openConversation(c.id)}
+                  onClick={() => { if (!sending && !openingConversation) openConversation(c.id); }}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -143,7 +152,7 @@ export default function AiTutor() {
                     💬 {c.title}
                   </span>
                   <span
-                    onClick={(e) => removeConversation(c.id, e)}
+                    onClick={(e) => { if (!sending && !openingConversation) removeConversation(c.id, e); }}
                     title="Xóa"
                     style={{ flexShrink: 0, opacity: 0.7 }}
                   >
@@ -167,6 +176,12 @@ export default function AiTutor() {
 
         {/* Cột phải: khung chat */}
         <div className="s-card ai-tutor-chat" style={{ display: 'flex', flexDirection: 'column', height: '70vh' }}>
+          {activeLessonId && (
+            <div className="ai-scope-note">
+              Hội thoại này hỏi trong phạm vi tài liệu của bài học.{' '}
+              <Link to={`/lesson?id=${activeLessonId}`}>Mở bài học</Link>
+            </div>
+          )}
           <div
             ref={threadRef}
             style={{ flex: 1, overflowY: 'auto', padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}
@@ -202,6 +217,7 @@ export default function AiTutor() {
                     border: m.role === 'user' ? 'none' : '1px solid var(--s-border)',
                   }}
                 >
+                  <AiReplyLabel message={m} />
                   {m.content}
                 </div>
                 {m.role === 'assistant' && Array.isArray(m.sources) && m.sources.length > 0 && (
@@ -226,11 +242,8 @@ export default function AiTutor() {
               </div>
             ))}
 
-            {sending && (
-              <div style={{ alignSelf: 'flex-start', color: 'var(--s-text-muted)', fontSize: '.85rem' }}>
-                🤖 Đang tìm trong tài liệu…
-              </div>
-            )}
+            <AiChatFeedback sending={sending} elapsedSeconds={chat.elapsedSeconds} feedback={chat.feedback}
+              onStop={chat.stop} onRetry={chat.retry} onEdit={setInput} />
           </div>
 
           <form
@@ -240,11 +253,12 @@ export default function AiTutor() {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder={courseId ? 'Nhập câu hỏi về khóa học…' : 'Hãy chọn/đăng ký một khóa học trước'}
-              disabled={!courseId || sending}
-              style={{ flex: 1, padding: '.6rem .8rem', borderRadius: 8, border: '1px solid var(--s-border)' }}
+              aria-label="Câu hỏi cho AI Tutor"
+              placeholder={courseId ? messages.at(-1)?.needs_clarification ? 'Bổ sung thông tin AI đang hỏi…' : 'Nhập câu hỏi về khóa học…' : 'Hãy chọn/đăng ký một khóa học trước'}
+              disabled={!courseId || sending || openingConversation}
+              style={{ flex: 1, minWidth: 0, padding: '.6rem .8rem', borderRadius: 8, border: '1px solid var(--s-border)' }}
             />
-            <button className="s-btn s-btn-primary" type="submit" disabled={!courseId || sending || !input.trim()}>
+            <button className="s-btn s-btn-primary" type="submit" disabled={!courseId || sending || openingConversation || !input.trim()}>
               Gửi
             </button>
           </form>

@@ -2,6 +2,7 @@
 import re
 
 from fastapi import APIRouter, Body, Depends, Query
+from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from app.core.database import execute, get_db, q_one
@@ -134,9 +135,11 @@ def update(
         raise ApiError("Vai trò không hợp lệ.")
 
     # Lấy vai trò hiện tại của người được sửa
-    target = q_one(db, "SELECT role FROM users WHERE id = :id", id=uid)
+    target = q_one(db, "SELECT role FROM users WHERE id = :id FOR UPDATE", id=uid)
     if not target:
         raise ApiError("Không tìm thấy người dùng.", 404)
+    if new_password and (target["role"] == "admin" or role == "admin"):
+        raise ApiError("Admin phải dùng Đổi mật khẩu với mật khẩu hiện tại hoặc quy trình khôi phục riêng trên máy chủ.", 403)
 
     # Hạ quyền một admin: không được tự hạ mình và hệ thống phải còn ít nhất 1 admin hoạt động
     if target["role"] == "admin" and role != "admin":
@@ -172,13 +175,15 @@ def update(
     if "bio" in body:
         fields["bio"] = sv(body, "bio")[:2000] or None
     sets = ", ".join(f"{k} = :{k}" for k in fields)
-    execute(db, f"UPDATE users SET {sets} WHERE id = :id", id=uid, **fields)
+    db.execute(text(f"UPDATE users SET {sets} WHERE id = :id"), {"id": uid, **fields})
     # Admin đặt lại mật khẩu cho user
     if new_password:
-        from app.core.security import hash_password
-
-        execute(db, "UPDATE users SET password = :pw WHERE id = :id", pw=hash_password(new_password), id=uid)
+        from app.core.password_recovery import check_password, replace_password
+        check_password(new_password, new_password)
+        replace_password(db, uid, new_password)
+        db.commit()
         return ok("Cập nhật người dùng và đặt lại mật khẩu thành công")
+    db.commit()
     return ok("Cập nhật người dùng thành công")
 
 

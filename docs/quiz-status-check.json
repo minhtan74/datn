@@ -1,0 +1,30 @@
+{
+  "passed": 24,
+  "checks": [
+    "Bài chưa mở đều thuộc Chưa làm",
+    "Bộ lọc rỗng có lời giải thích và nút xem tất cả",
+    "Số lượng bốn nhóm không trùng nhau",
+    "Bài chưa làm có nút Làm bài",
+    "Lượt cuối đang dở vẫn cho tiếp tục",
+    "Bài đạt có điểm và nút Làm lại",
+    "Đã nộp không đồng nghĩa đạt",
+    "Hết lượt vẫn xem được lịch sử",
+    "Bài đang làm lại giữ điểm cũ và lịch sử",
+    "Bài hết hạn chưa nộp không ghi Chưa làm",
+    "Lọc đúng nhóm not_started",
+    "Lọc đúng nhóm in_progress",
+    "Lọc đúng nhóm submitted",
+    "Lọc đúng nhóm unfinished",
+    "Tải lại giữ bộ lọc và khóa học trên URL",
+    "Nút Back khôi phục bộ lọc trước đó",
+    "Chọn bộ lọc bằng bàn phím",
+    "Lịch sử mở ngay trong thẻ quiz",
+    "Không tràn ngang ở 900px",
+    "Không tràn ngang ở 390px",
+    "Không tràn ngang ở 320px",
+    "Giảng viên vẫn thấy đủ quiz và các nút quản lý",
+    "Lọc và xem lịch sử không mở lượt làm mới",
+    "Không có lỗi JavaScript"
+  ],
+  "jsErrors": []
+}

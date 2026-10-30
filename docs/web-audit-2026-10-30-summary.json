@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-30",
+  "browser": {
+    "pageChecks": 100,
+    "controls": 12,
+    "failedControls": 0,
+    "javascriptErrors": 0,
+    "overflows": 0,
+    "brokenImagePages": 0,
+    "pageExceptions": 0,
+    "httpErrorPages": 0
+  },
+  "desktop": 78,
+  "mobile": 22,
+  "backend": {
+    "selected": 189,
+    "passed": 184,
+    "failed": 5,
+    "deselected": 2
+  },
+  "frontend_stream_tests_passed": 3,
+  "ai_wait_feedback_browser_passed": 25,
+  "build_passed": true,
+  "confirmed_findings": [
+    "forgot-password",
+    "payment-pending",
+    "payment-network",
+    "ai-format-and-sources"
+  ],
+  "live_payment_performed": false,
+  "ai_online_accuracy_rerun": false
+}

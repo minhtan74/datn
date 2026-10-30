@@ -1,0 +1,24 @@
+{
+  "passed": 18,
+  "checks": [
+    "Mở giới thiệu không gọi câu hỏi hoặc tạo lượt",
+    "Có thời gian, điểm đạt và cách tính điểm",
+    "Tải lại giới thiệu không tốn lượt",
+    "Không tràn ngang ở 320px",
+    "Không tràn ngang ở 390px",
+    "Lỗi mạng cho phép thử lại, chưa mất lượt",
+    "Bấm liên tiếp chỉ tạo một lượt",
+    "Tải lại bài dở không tạo lượt mới",
+    "Tiếp tục giữ đáp án và thời gian cũ",
+    "Xem giới thiệu sau nộp không tự tạo lượt hai",
+    "Hết lượt khóa nút bắt đầu",
+    "Quiz tự do nhận diện bài đang dở",
+    "Quiz rỗng khóa bắt đầu, không tốn lượt",
+    "Bài vừa hết hạn báo lỗi, không ngầm tạo lượt mới",
+    "Xác nhận bắt đầu lại mới mở lượt mới",
+    "Hết giờ trong ân hạn tự nộp cả bài chưa trả lời",
+    "Giảng viên làm thử không tạo lượt",
+    "Không có lỗi JavaScript"
+  ],
+  "jsErrors": []
+}

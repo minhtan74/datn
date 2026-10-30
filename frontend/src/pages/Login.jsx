@@ -81,9 +81,9 @@ export default function Login() {
                 <label htmlFor="password" className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
                   Mật khẩu
                 </label>
-                <a href="#" className="inline-block py-1 text-xs font-semibold text-blue-600 hover:underline">
+                <Link to="/forgot-password" className="inline-block py-1 text-xs font-semibold text-blue-600 hover:underline">
                   Quên mật khẩu?
-                </a>
+                </Link>
               </div>
               <input
                 className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition-all duration-200"

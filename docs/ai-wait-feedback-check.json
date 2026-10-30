@@ -1,0 +1,32 @@
+{
+  "passed": 25,
+  "checks": [
+    "API thật vẫn trả lời làm rõ và giữ hội thoại",
+    "Có trạng thái đang xử lý và khóa gửi trong lúc chờ",
+    "Sau 15 giây có giải thích tiếp tục chờ",
+    "Sau 45 giây có thông báo chờ lâu",
+    "Dừng chờ mở lại ô nhập và giữ nguyên câu hỏi",
+    "Giải thích đúng việc AI có thể tiếp tục lưu kết quả",
+    "Không hiện phản hồi cũ sau khi dừng",
+    "Sửa câu hỏi đưa nguyên văn về ô nhập",
+    "HTTP503 hiện ở vùng lỗi riêng, có thể thử lại",
+    "Lỗi không bị hiển thị như nội dung trả lời AI",
+    "Thử lại giữ câu hỏi và đúng conversation_id",
+    "Thử lại không nhân đôi bong bóng câu hỏi trong khung chat",
+    "Mất mạng có hướng dẫn kiểm tra kết nối và thử lại",
+    "Request chat được đặt timeout hai phút",
+    "Hết thời gian giữ câu hỏi và không dùng thông báo sinh quiz",
+    "Lỗi nhập liệu cho sửa, không lặp lại request bị từ chối",
+    "Tương thích lỗi HTTP200 cũ, không lộ chuỗi lỗi kỹ thuật",
+    "Nội dung dự phòng có nhãn riêng và vẫn có nguồn",
+    "Mở lịch sử lỗi khôi phục câu hỏi để thử lại",
+    "Thử lại từ lịch sử gửi đúng nội dung, không trùng bong bóng",
+    "Khung AI bài học cũng dừng và giữ câu hỏi",
+    "Thử lại ở bài học giữ đúng lesson_id",
+    "Đổi bài hủy chờ, không chèn phản hồi hoặc lỗi của bài cũ",
+    "Thông báo lỗi trong bài học không tràn trên điện thoại",
+    "Không có lỗi JavaScript"
+  ],
+  "jsErrors": [],
+  "simulation": "Các ca chậm/lỗi/timeout/dự phòng dùng route mạng giả lập; ca đầu gọi API thật. Timeout trình duyệt được rút ngắn có kiểm soát, đồng thời xác minh cấu hình thực là120000ms."
+}

@@ -1,0 +1,102 @@
+[
+  {
+    "id": "new-01",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Nêu đúng a=[7,8,9], b và a cùng trỏ một danh sách, còn copy tạo danh sách ngoài mới nên append qua c không đổi a. Nguồn 82 trang 1 có đúng ví dụ; nguồn 80 trang 3 chỉ là phần giới thiệu nên ít hỗ trợ hơn.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [1177, 1178, 1191],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_new_review"
+  },
+  {
+    "id": "new-02",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Bác bỏ parse rồi render không kiểm tra; yêu cầu bắt lỗi parse và xác thực đúng mảng công việc. Đây là đủ hai hành động cốt lõi được hỏi, không bắt buộc viết cú pháp try/catch hoặc tự xóa dữ liệu lưu. Hai trang nguồn về dự án mở rộng hỗ trợ trực tiếp.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [1213, 1527, 1528],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_new_review"
+  },
+  {
+    "id": "new-03",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Nêu đúng nguy cơ vượt giới hạn và sửa điều kiện thành i < values.length do chỉ số 0..n-1. Không bắt buộc tên ngoại lệ. Nguồn bổ sung Java có đúng quy tắc và ví dụ.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2089, 2090],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_new_review"
+  },
+  {
+    "id": "new-04",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Phân biệt đúng alt mô tả cho ảnh mang thông tin và alt rỗng cho ảnh thuần trang trí, không khuyên bỏ alt chung cho mọi ảnh. Nguồn Semantic HTML hỗ trợ trực tiếp.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2119, 2120],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_new_review"
+  },
+  {
+    "id": "new-05",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Giải thích đúng index key có thể gắn state nhầm hàng khi thêm/xóa/sắp xếp và chọn id ổn định. Các trang nguồn React đều hỗ trợ ý chính.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [1261, 1869, 1776],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_new_review"
+  },
+  {
+    "id": "new-06",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Chọn đúng HAVING cho COUNT(*)>=2; phân biệt đúng WHERE lọc dòng trước nhóm và HAVING lọc nhóm sau GROUP BY. Nguồn GROUP BY hỗ trợ trực tiếp; nguồn JOIN phụ không chứng minh riêng quy tắc HAVING.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [1936, 1937, 2183],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_new_review"
+  },
+  {
+    "id": "new-07",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Trả đúng paging ra đĩa không làm RAM vật lý nhanh hơn và bộ nhớ ảo mở rộng mô hình không gian địa chỉ. Nguồn 154 trang 13 có trực tiếp hai ý này; các nguồn còn lại ít trực tiếp.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2229],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_new_review"
+  },
+  {
+    "id": "new-08",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Bác bỏ đúng TTL là thời gian tải trang hoặc thời hạn đăng ký tên miền; giải thích đúng thời gian lưu bản ghi trong cache và vai trò với resolver. Không nhắc lại cụ thể 300 giây nhưng vẫn đáp ứng câu hỏi cốt lõi về ý nghĩa TTL, không phải bài tính số. Các nguồn DNS hỗ trợ nội dung chính.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2274, 2276, 2281],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_new_review"
+  },
+  {
+    "id": "new-09",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Trả đúng queue lấy A trước, stack lấy B trước, và giải thích FIFO/LIFO đúng chiều. Các trang được trích nêu đúng quy tắc cùng đáp án minh họa nên hỗ trợ phép áp dụng cho hai phần tử.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2463, 2464, 2473],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_new_review"
+  },
+  {
+    "id": "new-10",
+    "score": 0,
+    "verdict": "unnecessary_clarification",
+    "review": "Câu hỏi đã rõ, yêu cầu phân biệt confirmation testing và regression testing sau sửa lỗi; AI lại yêu cầu code, thông báo lỗi, ngôn ngữ/công cụ như một yêu cầu chẩn đoán bug chưa đủ dữ liệu. Không trả lời nội dung được hỏi. Đây là hỏi lại nhầm, không phải khẳng định bịa.",
+    "citation_core_support": "no_sources",
+    "supporting_chunk_ids": [],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_new_review"
+  }
+]

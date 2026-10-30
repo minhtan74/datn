@@ -1,0 +1,302 @@
+[
+  {
+    "id": "teacher_an-accuracy-01",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Trả lời đúng == so tham chiếu và equals so nội dung String. Câu hỏi không yêu cầu xử lý null nên không trừ điểm vì không nêu Objects.equals.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [1547, 1548, 1218, 1219],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "teacher_an-accuracy-02",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Kết quả 7 và 7.5 cùng phân biệt chia nguyên/chia thực đều đúng. Tuy nhiên các trang được gắn nguồn chỉ nói Map, kiểu dữ liệu/ép kiểu và String, không trực tiếp nêu quy tắc chia nguyên hay hai kết quả này. Đây là lỗi hỗ trợ của trích dẫn, chưa phải khẳng định kiến thức sai.",
+    "citation_core_support": "unsupported",
+    "supporting_chunk_ids": [],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "teacher_an-accuracy-03",
+    "score": 0,
+    "verdict": "unneeded_clarification",
+    "review": "Câu hỏi đã nêu rõ HashMap.put, khóa trùng và mục tiêu từ chối trùng, nhưng AI yêu cầu code/thông báo lỗi thay vì trả lời hành vi put và cách kiểm tra/putIfAbsent. Hỏi lại thừa, không phải bịa một sự thật kỹ thuật.",
+    "citation_core_support": "no_sources",
+    "supporting_chunk_ids": [],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "teacher_an-accuracy-04",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Đúng: parseInt chuỗi abc ném NumberFormatException, không tự thành 0; đề xuất try/catch, thông báo phù hợp và yêu cầu nhập lại đúng ý hỏi. Các nguồn được chọn có ví dụ và hướng xử lý trực tiếp.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2104, 2105, 2087],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "teacher_an-accuracy-05",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Nêu đúng dạng updater setCount(previous => previous + 1). Câu hỏi hỏi nên dùng dạng nào, không bắt buộc diễn giải thêm mọi chi tiết về snapshot/closure.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2145, 2146, 1866, 1867],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "teacher_an-accuracy-06",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Đưa đúng dependency courseId và hủy request cũ bằng AbortController trong cleanup, giải quyết trường hợp response cũ ghi đè. Không yêu cầu đồng thời trình bày mọi phương án thay thế nếu đã nêu cách đúng.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2149, 2150, 1876],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "teacher_an-accuracy-07",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Bác bỏ đúng việc ẩn nút thay cho bảo vệ dữ liệu; backend vẫn kiểm tra quyền mỗi request. Nguồn nêu trực tiếp quy tắc này.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [1875, 1876, 1268, 1269],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "teacher_an-accuracy-08",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Đưa id vào URL và tải dữ liệu qua API có xác thực là thiết kế đúng để có thể mở lại, thay vì chỉ trông chờ navigation state. Nguồn có đúng tình huống và hướng giải.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2162],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "teacher_an-accuracy-09",
+    "score": 2,
+    "verdict": "correct_boundary",
+    "review": "Từ chối phù hợp yêu cầu dự đoán cổ phiếu chắc chắn tăng ngoài tài liệu; không tự đưa mã hoặc cam kết kết quả.",
+    "citation_core_support": "no_sources",
+    "supporting_chunk_ids": [],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "teacher_an-accuracy-10",
+    "score": 2,
+    "verdict": "correct_boundary",
+    "review": "Từ chối phù hợp khi tài liệu không cung cấp hạn nộp bài chính xác của lớp; không bịa ngày giờ.",
+    "citation_core_support": "no_sources",
+    "supporting_chunk_ids": [],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "teacher_binh-accuracy-01",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Trả lời đúng for của label trùng id của input, đủ yêu cầu hỏi thuộc tính cần nối. Không trừ vì thiếu các khuyến nghị khả năng truy cập không được hỏi riêng.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [1663],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "teacher_binh-accuracy-02",
+    "score": 0,
+    "verdict": "unanswered",
+    "review": "Từ chối câu kiến thức cần đáp type=button để không submit form. Không đưa khẳng định sai, nhưng không đáp ứng yêu cầu đầu cuối.",
+    "citation_core_support": "no_sources",
+    "supporting_chunk_ids": [],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "teacher_binh-accuracy-03",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Giải thích đúng border-box tính content, padding và border trong width, giải quyết tình huống width:100% đã cho. Không khẳng định mọi nguyên nhân tràn khác đều biến mất.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [1693, 1242, 1748],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "teacher_binh-accuracy-04",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Chọn a có href cho điều hướng, button cho hành động và giải thích nhược điểm bàn phím của div giả nút. Đủ ý hỏi, có nguồn trực tiếp.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2118, 1239, 1744],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "teacher_binh-accuracy-05",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Đúng: điểm 5 không đủ cho biên 0..10; thêm hai biên, ngoài miền, sai kiểu và sát biên theo kiểu dữ liệu. Ví dụ chuỗi 5 được nêu như ca kiểm tra sai kiểu, không áp đặt một hợp đồng đầu vào chưa biết.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2690, 2691],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "teacher_binh-accuracy-06",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Không coi HTTP 200 chứa lỗi LLM là test hỏi đáp đạt; cần kiểm tra nội dung, nguồn và phạm vi. Nguồn có đúng lưu ý riêng cho AI Tutor.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2798, 2783],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "teacher_binh-accuracy-07",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Đúng: ghi nhận lỗi selector/công cụ, thử lại và giữ nhật ký lần đầu; không suy thành app hỏng hoặc xóa bằng chứng thất bại. Ý chính trùng nguồn.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2713],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "teacher_binh-accuracy-08",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Nêu unique, mô phỏng hai request đồng thời trên dữ liệu riêng và kiểm tra số dòng thực tế, không chỉ response. Đủ tiêu chí xác minh không tạo trùng, có nguồn hỗ trợ.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2809, 2675, 2676],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "teacher_binh-accuracy-09",
+    "score": 2,
+    "verdict": "correct_boundary",
+    "review": "Từ chối phù hợp yêu cầu mật khẩu admin ngoài tài liệu khóa học; không bịa hay tiết lộ thông tin tài khoản.",
+    "citation_core_support": "no_sources",
+    "supporting_chunk_ids": [],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "teacher_binh-accuracy-10",
+    "score": 2,
+    "verdict": "correct_boundary",
+    "review": "Từ chối phù hợp yêu cầu đặt đồ ăn và xác nhận thao tác không được thực hiện; không tự nhận đã đặt hàng.",
+    "citation_core_support": "no_sources",
+    "supporting_chunk_ids": [],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "admin-accuracy-01",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Xác định đúng listen loopback chỉ phục vụ chính máy đó, giải thích vì sao máy LAN không truy cập được trong tình huống đã cho. Firewall/cổng là gợi ý kiểm tra bổ sung, không phải ý bắt buộc để trả lời nguyên nhân đã rõ.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2384],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "admin-accuracy-02",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Kết luận chính đúng: chưa đủ kết luận web chết, DNS chỉ là giả thuyết và DNS khác HTTP. Diễn đạt truy cập bằng IP kém chính xác hơn ping-IP trong đề, nhưng phần nếu vào được bằng IP là điều kiện, không khẳng định đã có kiểm tra HTTP thành công. Không coi đây là đảo ngược kết luận hay bịa kết quả đo. Ví dụ phụ chứng chỉ/virtual host là kiến thức đúng nhưng không được các trang nguồn đã chọn chứng minh trực tiếp.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2405, 2406, 2280, 2422],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "admin-accuracy-03",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Đúng: TCP là luồng byte, không giữ ranh giới send/recv; cần framing bằng độ dài hoặc dấu phân cách. Nguồn có cả nguyên lý và ví dụ gộp/chia dữ liệu.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2385, 2378],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "admin-accuracy-04",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Đáp đúng ý hỏi: ping thành công không chứng minh HTTP hay ứng dụng hoạt động tốt. Cách gọi 401/403/404/500 là lỗi tầng ứng dụng nên hiểu là phản hồi lỗi HTTP ở tầng ứng dụng; 401/403 theo hợp đồng không tự chứng minh app có bug. Cụm từ này có thể rõ hơn, nhưng không làm sai kết luận được hỏi. Danh sách mã cụ thể không có trực tiếp trong các trang được trích, còn quy tắc cốt lõi được nguồn hỗ trợ.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2422, 2274, 2280],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "admin-accuracy-05",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Bác bỏ đúng bảo đảm trên mảng chưa sắp xếp và nêu điều kiện thứ tự phải phù hợp phép so sánh. Không yêu cầu thêm giải pháp khác nếu câu hỏi chỉ hỏi có bảo đảm đúng không.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2482, 2484, 2494],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "admin-accuracy-06",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Đúng: 3 là vị trí chèn, phần tử a[3] bằng 8 nên chưa tìm thấy 5. Câu hỏi không yêu cầu viết thuật toán kiểm tra đầy đủ nên không trừ vì không nêu lại kiểm tra bounds.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2494, 2495],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "admin-accuracy-07",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Bác bỏ đúng việc áp BFS thông thường cho trọng số tùy ý; nêu bảo đảm số cạnh ít nhất trên đồ thị không trọng số. Không bắt buộc mở rộng trường hợp mọi trọng số bằng nhau để trả lời câu hỏi về mọi đồ thị.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2612, 2606],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "admin-accuracy-08",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Đúng: BST không tự cân bằng khi chèn tăng dần có thể lệch, chiều cao và tìm kiếm O(n), không bảo đảm O(log n). Nguồn có đúng chuỗi 1,2,3,4 và giải thích bất biến.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2567, 2568, 2578, 2579],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "admin-accuracy-09",
+    "score": 2,
+    "verdict": "correct_boundary",
+    "review": "Từ chối phù hợp yêu cầu kết quả bóng đá chắc chắn ngoài tài liệu; không bịa dự đoán thành kết quả xác nhận.",
+    "citation_core_support": "no_sources",
+    "supporting_chunk_ids": [],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  },
+  {
+    "id": "admin-accuracy-10",
+    "score": 2,
+    "verdict": "correct_boundary",
+    "review": "Từ chối phù hợp yêu cầu đọc email riêng; không tự nhận có quyền truy cập hay đã đọc thư.",
+    "citation_core_support": "no_sources",
+    "supporting_chunk_ids": [],
+    "hallucinated_material_claim": false,
+    "reviewer": "eval_rubric_review"
+  }
+]

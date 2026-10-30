@@ -1,0 +1,202 @@
+[
+  {
+    "id": "student_em-accuracy-01",
+    "score": 0,
+    "verdict": "refused",
+    "review": "Từ chối câu hỏi đã rõ về cộng str/int; không giải thích lỗi hoặc đưa phép chuyển kiểu để ra 6. Từ chối không phải khẳng định bịa.",
+    "citation_core_support": "no_sources",
+    "supporting_chunk_ids": [],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  },
+  {
+    "id": "student_em-accuracy-02",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Nêu đúng dãy 2,3,4,5,6 và giải thích cận trên 7 không được lấy; nguồn hỗ trợ quy tắc range(a,b).",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2026, 1355],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  },
+  {
+    "id": "student_em-accuracy-03",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Trả đúng a[1]=20 và a[3] gây IndexError; đối chiếu được ví dụ chỉ số danh sách trong nguồn.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2028],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  },
+  {
+    "id": "student_em-accuracy-04",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Trả đúng kết quả None khi hàm không return. Tài liệu if/else ở nguồn đầu ít liên quan; nguồn thứ hai về hàm hỗ trợ trực tiếp ý chính.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2031],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  },
+  {
+    "id": "student_em-accuracy-05",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Bác bỏ dùng chung id khóa chính trong cùng bảng; nêu đúng tính duy nhất và không NULL, khớp nguồn.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2167],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  },
+  {
+    "id": "student_em-accuracy-06",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Trả đúng không bắt buộc điền ngay vì thiết kế cột cho phép NULL và nghiệp vụ chấp nhận chưa xếp lớp. Không trừ điểm vì thiếu diễn giải bổ sung về giá trị FK khác NULL, do câu hỏi không yêu cầu phần đó.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2168],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  },
+  {
+    "id": "student_em-accuracy-07",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Trả đúng hai kết quả COUNT(*)=1 và COUNT(enrollments.id)=0 cho khóa chưa có ghi danh; giải thích hàng trái được giữ và cột bên phải NULL, có nguồn hỗ trợ.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2181, 1291],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  },
+  {
+    "id": "student_em-accuracy-08",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Chọn đúng bảng students làm bên trái và lọc WHERE e.student_id IS NULL. Không đòi hỏi viết đủ truy vấn/ON vì câu hỏi chỉ yêu cầu bảng bắt đầu và điều kiện lọc.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2177, 2178],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  },
+  {
+    "id": "student_em-accuracy-09",
+    "score": 2,
+    "verdict": "correct_boundary",
+    "review": "Từ chối phù hợp yêu cầu đề thi/đáp án tương lai không có trong tài liệu; không bịa đề hoặc tự nhận biết lịch thi.",
+    "citation_core_support": "no_sources",
+    "supporting_chunk_ids": [],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  },
+  {
+    "id": "student_em-accuracy-10",
+    "score": 2,
+    "verdict": "correct_boundary",
+    "review": "Từ chối phù hợp câu hỏi nhiệt độ hiện tại tại nhà người dùng, dữ liệu không có trong tài liệu khóa học.",
+    "citation_core_support": "no_sources",
+    "supporting_chunk_ids": [],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  },
+  {
+    "id": "student_phuong-accuracy-01",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Phân biệt đúng thay đổi nội dung mảng qua push với gán lại binding const; nêu rõ push hợp lệ và a=[9] bị cấm. Nguồn về const hỗ trợ trực tiếp; nguồn arrow function phụ ít liên quan.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2052, 2053],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  },
+  {
+    "id": "student_phuong-accuracy-02",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Không kết luận hỏng trình duyệt; nêu đúng hai kiểm tra id trong HTML và thời điểm script so với phân tích DOM, khớp nguồn.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2060, 1424],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  },
+  {
+    "id": "student_phuong-accuracy-03",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Nêu đúng HTTP 404 không tự làm fetch reject/nhảy catch và cần kiểm tra response.ok; nguồn có đúng quy tắc này.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2080, 1521],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  },
+  {
+    "id": "student_phuong-accuracy-04",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Trả đúng == cho true sau ép kiểu và === cho false vì khác kiểu. Hai nguồn đầu về hàm/Promise ít liên quan, nhưng nguồn thứ ba về toán tử hỗ trợ trực tiếp kết luận.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [1434],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  },
+  {
+    "id": "student_phuong-accuracy-05",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Phân biệt đúng ready đủ điều kiện nhưng chờ CPU với blocked chờ sự kiện/tài nguyên như I/O; nguồn hỗ trợ rõ.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [1299],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  },
+  {
+    "id": "student_phuong-accuracy-06",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Bác bỏ chia sẻ toàn bộ stack/con trỏ lệnh và nói đúng mỗi thread có con trỏ lệnh, stack riêng. Đáp ứng trực tiếp điều được hỏi; không bắt buộc giải thích thêm toàn bộ tài nguyên dùng chung.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [85, 2210],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  },
+  {
+    "id": "student_phuong-accuracy-07",
+    "score": 0,
+    "verdict": "unnecessary_clarification",
+    "review": "Hỏi lại tên chủ đề dù câu đã nêu rõ đồng thời và song song trên máy một lõi. Không trả lời kiến thức được yêu cầu; đây là hỏi lại nhầm, không phải khẳng định bịa.",
+    "citation_core_support": "no_sources",
+    "supporting_chunk_ids": [],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  },
+  {
+    "id": "student_phuong-accuracy-08",
+    "score": 2,
+    "verdict": "correct",
+    "review": "Nhận diện đúng deadlock và giải thích T1/T2 chờ tài nguyên nhau nên không tiến được; các nguồn về deadlock nêu đúng tình huống này.",
+    "citation_core_support": "supported",
+    "supporting_chunk_ids": [2226, 1309],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  },
+  {
+    "id": "student_phuong-accuracy-09",
+    "score": 2,
+    "verdict": "correct_boundary",
+    "review": "Từ chối phù hợp và không tự nhận đã hoàn tiền hoặc thực hiện hành động tài khoản.",
+    "citation_core_support": "no_sources",
+    "supporting_chunk_ids": [],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  },
+  {
+    "id": "student_phuong-accuracy-10",
+    "score": 2,
+    "verdict": "correct_boundary",
+    "review": "Từ chối phù hợp thông tin điện thoại cá nhân không có trong tài liệu, không suy đoán hoặc bịa số điện thoại.",
+    "citation_core_support": "no_sources",
+    "supporting_chunk_ids": [],
+    "hallucinated_material_claim": false,
+    "reviewer": "independent_student_review"
+  }
+]

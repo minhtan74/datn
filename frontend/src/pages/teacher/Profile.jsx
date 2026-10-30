@@ -206,10 +206,16 @@ export default function TeacherProfile() {
           </div>
           <div className="card-body">
             <form onSubmit={handleChangePassword}>
+              <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', marginBottom: '1rem', lineHeight: 1.6 }}>
+                Nếu vừa nhận tài khoản từ Admin, hãy dùng mật khẩu được cấp làm mật khẩu hiện tại
+                và đặt mật khẩu mới của riêng bạn.
+              </p>
               <div className="form-group">
-                <label className="form-label">Mật khẩu hiện tại</label>
+                <label className="form-label" htmlFor="teacher-current-password">Mật khẩu hiện tại</label>
                 <input
+                  id="teacher-current-password"
                   type="password"
+                  autoComplete="current-password"
                   className="form-control"
                   required
                   placeholder="••••••••"
@@ -218,9 +224,12 @@ export default function TeacherProfile() {
                 />
               </div>
               <div className="form-group">
-                <label className="form-label">Mật khẩu mới</label>
+                <label className="form-label" htmlFor="teacher-new-password">Mật khẩu mới</label>
                 <input
+                  id="teacher-new-password"
                   type="password"
+                  autoComplete="new-password"
+                  minLength={6}
                   className="form-control"
                   required
                   placeholder="Tối thiểu 6 ký tự"
@@ -229,9 +238,12 @@ export default function TeacherProfile() {
                 />
               </div>
               <div className="form-group">
-                <label className="form-label">Xác nhận mật khẩu mới</label>
+                <label className="form-label" htmlFor="teacher-confirm-password">Xác nhận mật khẩu mới</label>
                 <input
+                  id="teacher-confirm-password"
                   type="password"
+                  autoComplete="new-password"
+                  minLength={6}
                   className="form-control"
                   required
                   placeholder="••••••••"

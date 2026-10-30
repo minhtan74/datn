@@ -7,7 +7,9 @@ các model này phục vụ Alembic (baseline + migration bảng AI ở phase sa
 import datetime as dt
 
 from sqlalchemy import (
+    BigInteger,
     DECIMAL,
+    DateTime,
     JSON,
     TIMESTAMP,
     Enum,
@@ -46,10 +48,29 @@ class User(Base):
     avatar: Mapped[str | None] = mapped_column(String(255))
     bio: Mapped[str | None] = mapped_column(Text)
     is_active: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    token_version: Mapped[int] = mapped_column(Integer, nullable=False, server_default="0")
     created_at: Mapped[dt.datetime] = mapped_column(TIMESTAMP, server_default=func.now())
     updated_at: Mapped[dt.datetime] = mapped_column(
         TIMESTAMP, server_default=func.now(), onupdate=func.now()
     )
+
+
+class PasswordResetToken(Base):
+    __tablename__ = "password_reset_tokens"
+    token_hash: Mapped[str] = mapped_column(String(64), primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    fingerprint: Mapped[str] = mapped_column(String(64))
+    created_at: Mapped[int] = mapped_column(BigInteger)
+    expires_at: Mapped[int] = mapped_column(BigInteger)
+    used_at: Mapped[int | None] = mapped_column(BigInteger, nullable=True)
+
+
+class PasswordResetLimit(Base):
+    __tablename__ = "password_reset_limits"
+    key_hash: Mapped[str] = mapped_column(String(64), primary_key=True)
+    window_start: Mapped[int] = mapped_column(BigInteger)
+    request_count: Mapped[int] = mapped_column(Integer)
+    last_request: Mapped[int] = mapped_column(BigInteger)
 
 
 # Khóa học do 1 giảng viên phụ trách; price = 0 là miễn phí
@@ -323,10 +344,39 @@ class Payment(Base):
     response_code: Mapped[str | None] = mapped_column(String(10))
     note: Mapped[str | None] = mapped_column(Text)
     paid_at: Mapped[dt.datetime | None] = mapped_column(TIMESTAMP)
+    refunded_at: Mapped[dt.datetime | None] = mapped_column(TIMESTAMP)
+    refunded_by: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"))
+    refund_reason: Mapped[str | None] = mapped_column(String(255))
+    refund_txn_no: Mapped[str | None] = mapped_column(String(50))
     created_at: Mapped[dt.datetime] = mapped_column(TIMESTAMP, server_default=func.now())
     updated_at: Mapped[dt.datetime] = mapped_column(
         TIMESTAMP, server_default=func.now(), onupdate=func.now()
     )
+
+
+class PaymentRefundOperation(Base):
+    __tablename__ = "payment_refund_operations"
+    payment_id: Mapped[int] = mapped_column(ForeignKey("payments.id", ondelete="CASCADE"), primary_key=True)
+    request_id: Mapped[str] = mapped_column(String(64))
+    state: Mapped[str] = mapped_column(String(30))
+    reason: Mapped[str] = mapped_column(String(255))
+    admin_id: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"))
+    revoke_access: Mapped[bool] = mapped_column(TINYINT)
+    gateway_txn_no: Mapped[str | None] = mapped_column(String(50))
+    gateway_code: Mapped[str | None] = mapped_column(String(10))
+    message: Mapped[str] = mapped_column(String(255))
+    created_at: Mapped[dt.datetime] = mapped_column(DateTime, server_default=func.now())
+    updated_at: Mapped[dt.datetime] = mapped_column(DateTime, server_default=func.now())
+
+
+class PaymentRefundOperationEvent(Base):
+    __tablename__ = "payment_refund_operation_events"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    payment_id: Mapped[int] = mapped_column(ForeignKey("payment_refund_operations.payment_id", ondelete="CASCADE"))
+    actor_id: Mapped[int | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"))
+    state: Mapped[str] = mapped_column(String(30))
+    message: Mapped[str] = mapped_column(String(255))
+    created_at: Mapped[dt.datetime] = mapped_column(DateTime, server_default=func.now())
 
 
 __all__ = [

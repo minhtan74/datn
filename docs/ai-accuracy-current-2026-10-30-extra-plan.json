@@ -1,0 +1,182 @@
+[
+  {
+    "id": "new-01",
+    "role": "student_em",
+    "course_id": 1,
+    "reference_lesson": 9,
+    "question": "Python: a = [7, 8]; b = a; b.append(9); c = a.copy(); c.append(10). Cuối cùng a có những phần tử nào? Vì sao append qua b và c khác nhau?",
+    "gold": "a là [7,8,9]. b=a cùng tham chiếu danh sách nên append(9) đổi a; a.copy() tạo danh sách ngoài mới nên c.append(10) không đổi a. Không yêu cầu bàn sâu cấu trúc lồng.",
+    "evidence": [
+      {
+        "chunk_id": 1403,
+        "document_id": 80,
+        "page": 3,
+        "text": "a = [7, 8]\nb = a\nb.append(9)\nprint(a) # [7, 8, 9]\nc = a.copy()\nc.append(10)\nprint(a) # [7, 8, 9]\ncopy() là sao chép nông: danh sách ngoài mới nhưng đối tượng lồng bên trong vẫn có thể dùng chung."
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new"
+  },
+  {
+    "id": "new-02",
+    "role": "student_phuong",
+    "course_id": 2,
+    "reference_lesson": 15,
+    "question": "To-do List đọc localStorage gặp chuỗi JSON hỏng. Chỉ gọi JSON.parse rồi render ngay có đủ an toàn không? Nên xử lý đọc và kiểm tra dữ liệu thế nào?",
+    "gold": "Không. Bao đọc/parse bằng try/catch để xử lý JSON hỏng, xác thực cấu trúc mảng trước khi dùng/render; có thể khôi phục trạng thái hợp lệ/rỗng và thông báo phù hợp. Không bắt buộc tự xóa dữ liệu lưu.",
+    "evidence": [
+      {
+        "chunk_id": 2070,
+        "document_id": 104,
+        "page": 3,
+        "text": "Tự luyện: lưu localStorage, tải lại và xử lý JSON hỏng. Hướng giải: dùng try/catch khi đọc, xác thực cấu trúc mảng; lưu trạng thái thay vì HTML sinh ra."
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new"
+  },
+  {
+    "id": "new-03",
+    "role": "teacher_an",
+    "course_id": 3,
+    "reference_lesson": 21,
+    "question": "Java: mảng values có n phần tử, vòng lặp truy cập values[i] chạy từ i=0 với điều kiện i <= values.length có an toàn không? Nên sửa điều kiện thành gì?",
+    "gold": "Không; lần i=length vượt chỉ số hợp lệ 0..n-1. Sửa i < values.length. Có thể nêu ArrayIndexOutOfBoundsException nhưng tên ngoại lệ không bắt buộc.",
+    "evidence": [
+      {
+        "chunk_id": 2089,
+        "document_id": 110,
+        "page": 3,
+        "text": "Với mảng n phần tử, chỉ số từ 0 tới n-1; điều kiện thường là i < values.length."
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new"
+  },
+  {
+    "id": "new-04",
+    "role": "teacher_binh",
+    "course_id": 4,
+    "reference_lesson": 30,
+    "question": "Một ảnh HTML chỉ để trang trí và một ảnh cung cấp thông tin cho bài học nên viết alt giống nhau không? Trường hợp nào dùng alt rỗng?",
+    "gold": "Không. Ảnh mang thông tin cần alt mô tả phù hợp; ảnh thuần trang trí dùng alt=\"\". Không được khuyến nghị bỏ alt cho mọi ảnh.",
+    "evidence": [
+      {
+        "chunk_id": 2119,
+        "document_id": 119,
+        "page": 3,
+        "text": "Ảnh mang thông tin cần alt mô tả; ảnh thuần trang trí dùng alt rỗng. Không thêm ARIA thừa để thay thế semantic sẵn có."
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new"
+  },
+  {
+    "id": "new-05",
+    "role": "teacher_an",
+    "course_id": 5,
+    "reference_lesson": 45,
+    "question": "Danh sách React có thể thêm, xóa, sắp xếp và từng hàng có state riêng. Dùng key={index} có bảo đảm state luôn theo đúng hàng không? Nên chọn key nào?",
+    "gold": "Không bảo đảm; chỉ số thay đổi theo vị trí có thể gắn state nhầm hàng. Dùng mã/id ổn định của dữ liệu. Không nói key là index luôn an toàn chỉ vì hết cảnh báo.",
+    "evidence": [
+      {
+        "chunk_id": 1869,
+        "document_id": 54,
+        "page": 4,
+        "text": "key khi render danh sách nên là mã ổn định. Dùng chỉ số khi thêm/xóa/sắp xếp có thể làm state của một hàng gắn nhầm sang hàng khác."
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new"
+  },
+  {
+    "id": "new-06",
+    "role": "student_em",
+    "course_id": 6,
+    "reference_lesson": 50,
+    "question": "SQL: sau GROUP BY muốn chỉ giữ những nhóm có COUNT(*) >= 2 thì đặt điều kiện đó ở WHERE hay HAVING? Hai mệnh đề lọc ở giai đoạn nào?",
+    "gold": "Dùng HAVING COUNT(*) >= 2; WHERE lọc từng hàng trước khi nhóm, HAVING lọc kết quả nhóm. Không dùng WHERE COUNT(*)>=2 ở cùng cấp SELECT.",
+    "evidence": [
+      {
+        "chunk_id": 2183,
+        "document_id": 139,
+        "page": 3,
+        "text": "WHERE lọc hàng trước nhóm; HAVING lọc kết quả nhóm."
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new"
+  },
+  {
+    "id": "new-07",
+    "role": "student_phuong",
+    "course_id": 7,
+    "reference_lesson": 65,
+    "question": "Bật thêm bộ nhớ ảo và paging ra đĩa có làm RAM vật lý chạy nhanh hơn không? Vai trò của bộ nhớ ảo nên hiểu thế nào?",
+    "gold": "Không làm RAM vật lý nhanh hơn. Bộ nhớ ảo mở rộng/ảo hóa mô hình không gian địa chỉ; paging ra đĩa không đồng nghĩa tăng tốc độ RAM. Không bắt buộc khẳng định máy luôn nhanh/chậm hơn trong mọi tình huống.",
+    "evidence": [
+      {
+        "chunk_id": 2229,
+        "document_id": 154,
+        "page": 13,
+        "text": "Bộ nhớ ảo mở rộng mô hình không gian địa chỉ nhưng paging ra đĩa không làm RAM vật lý nhanh hơn."
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new"
+  },
+  {
+    "id": "new-08",
+    "role": "admin",
+    "course_id": 513,
+    "reference_lesson": 305,
+    "question": "Một bản ghi DNS có TTL=300 nghĩa là trang web phải tải trong 300 giây hoặc tên miền chỉ được đăng ký 300 giây phải không? TTL chỉ điều gì?",
+    "gold": "Không phải hai nghĩa đó. TTL hướng dẫn thời gian lưu bản ghi DNS trong bộ nhớ đệm, ở đây 300 giây. Không được đồng nhất TTL với tốc độ tải trang hay thời hạn đăng ký tên miền.",
+    "evidence": [
+      {
+        "chunk_id": 2274,
+        "document_id": 157,
+        "page": 1,
+        "text": "TTL hướng dẫn thời gian lưu bộ nhớ đệm, không phải thời gian tải trang hay thời hạn đăng ký tên miền."
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new"
+  },
+  {
+    "id": "new-09",
+    "role": "admin",
+    "course_id": 514,
+    "reference_lesson": 308,
+    "question": "Cho vào lần lượt A rồi B. Lấy phần tử đầu tiên ra từ queue và từ stack sẽ lần lượt là gì? Giải thích FIFO và LIFO.",
+    "gold": "Queue lấy A trước (FIFO: vào trước ra trước); stack lấy B trước (LIFO: vào sau ra trước). Không chấp nhận đảo hai cấu trúc.",
+    "evidence": [
+      {
+        "chunk_id": 2477,
+        "document_id": 168,
+        "page": 4,
+        "text": "queue = deque([\"A\", \"B\"])\nassert queue.popleft() == \"A\"\nstack = [\"A\", \"B\"]\nassert stack.pop() == \"B\""
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new"
+  },
+  {
+    "id": "new-10",
+    "role": "teacher_binh",
+    "course_id": 515,
+    "reference_lesson": 314,
+    "question": "Sau khi sửa lỗi ghi danh trùng, chạy lại đúng ca từng gây lỗi đã thay thế được kiểm thử hồi quy chưa? Phân biệt confirmation testing với regression testing.",
+    "gold": "Chưa. Confirmation thực hiện lại điều kiện/ca gây lỗi để xác nhận bản sửa. Regression kiểm tra các hành vi liên quan có nguy cơ bị ảnh hưởng, chọn phạm vi theo thay đổi; không bắt buộc chạy mọi test vô hạn.",
+    "evidence": [
+      {
+        "chunk_id": 2707,
+        "document_id": 182,
+        "page": 2,
+        "text": "Confirmation testing thực hiện lại điều kiện gây lỗi để xác nhận bản sửa. Regression testing mở rộng sang các hành vi có nguy cơ bị ảnh hưởng: đăng ký lần đầu, trùng, khóa có phí, quyền mở bài và danh sách khóa. Chọn phạm vi theo thay đổi, không mặc định chạy mọi test vô hạn."
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new"
+  }
+]

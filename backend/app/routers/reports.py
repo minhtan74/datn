@@ -33,6 +33,7 @@ def _payments(db: Session, limit: int | None = None) -> list[dict]:
         "SELECT p.id, p.amount, p.method, p.status, p.created_at, p.paid_at, "
         "u.fullname AS user_name, u.email, c.title AS course_title FROM payments p "
         "JOIN users u ON u.id = p.user_id JOIN courses c ON c.id = p.course_id "
+        "WHERE p.method = 'vnpay' "
         "ORDER BY COALESCE(p.paid_at, p.created_at) DESC, p.id DESC" + _limit(limit),
     )
 
@@ -46,7 +47,7 @@ def _top_courses(db: Session, limit: int | None = None) -> list[dict]:
             (SELECT COUNT(DISTINCT e.user_id) FROM enrollments e
              WHERE e.course_id = c.id) AS student_count,
             (SELECT COALESCE(SUM(p.amount), 0) FROM payments p
-             WHERE p.course_id = c.id AND p.status = 'completed') AS revenue
+             WHERE p.course_id = c.id AND p.status = 'completed' AND p.method = 'vnpay') AS revenue
         FROM courses c
         LEFT JOIN users u ON u.id = c.teacher_id
         ORDER BY revenue DESC, student_count DESC
@@ -279,7 +280,7 @@ def summary(
             COUNT(CASE WHEN status='failed'    THEN 1 END) AS failed_orders,
             COUNT(CASE WHEN status='refunded'  THEN 1 END) AS refunded_orders,
             COALESCE(SUM(CASE WHEN status='refunded' THEN amount ELSE 0 END), 0) AS refunded_amount
-        FROM payments
+        FROM payments WHERE method = 'vnpay'
         """,
     ) or {}
 
@@ -287,7 +288,7 @@ def summary(
     by_method = q_all(
         db,
         "SELECT method, SUM(amount) AS revenue, COUNT(*) AS cnt FROM payments "
-        "WHERE status='completed' GROUP BY method ORDER BY revenue DESC",
+        "WHERE status='completed' AND method='vnpay' GROUP BY method ORDER BY revenue DESC",
     )
 
     # 20 giao dịch gần nhất
@@ -366,7 +367,7 @@ def _revenue_series(db: Session, rng: str) -> list[dict]:
         rows = q_all(
             db,
             "SELECT HOUR(paid_at) AS slot, SUM(amount) AS revenue, COUNT(*) AS orders "
-            "FROM payments WHERE status='completed' AND DATE(paid_at) = CURDATE() "
+            "FROM payments WHERE method='vnpay' AND status='completed' AND DATE(paid_at) = CURDATE() "
             "GROUP BY HOUR(paid_at) ORDER BY slot ASC",
         )
         m = {int(r["slot"]): r for r in rows}
@@ -384,7 +385,7 @@ def _revenue_series(db: Session, rng: str) -> list[dict]:
         rows = q_all(
             db,
             "SELECT DATE(paid_at) AS day, SUM(amount) AS revenue, COUNT(*) AS orders "
-            "FROM payments WHERE status='completed' "
+            "FROM payments WHERE method='vnpay' AND status='completed' "
             "AND paid_at >= DATE_SUB(CURDATE(), INTERVAL 29 DAY) "
             "GROUP BY DATE(paid_at) ORDER BY day ASC",
         )
@@ -408,7 +409,7 @@ def _revenue_series(db: Session, rng: str) -> list[dict]:
         rows = q_all(
             db,
             "SELECT DATE_FORMAT(paid_at, '%Y-%m') AS slot, SUM(amount) AS revenue, COUNT(*) AS orders "
-            "FROM payments WHERE status='completed' "
+            "FROM payments WHERE method='vnpay' AND status='completed' "
             # Mốc bắt đầu là NGÀY 1 của tháng cách đây 11 tháng (lùi từ hôm nay sẽ cắt mất nửa đầu tháng đầu tiên)
             "AND paid_at >= DATE_SUB(DATE_FORMAT(CURDATE(), '%Y-%m-01'), INTERVAL 11 MONTH) "
             "GROUP BY slot ORDER BY slot ASC",
@@ -438,7 +439,7 @@ def _revenue_series(db: Session, rng: str) -> list[dict]:
     rows = q_all(
         db,
         "SELECT DATE(paid_at) AS day, SUM(amount) AS revenue, COUNT(*) AS orders "
-        "FROM payments WHERE status='completed' "
+        "FROM payments WHERE method='vnpay' AND status='completed' "
         "AND paid_at >= DATE_SUB(CURDATE(), INTERVAL 6 DAY) "
         "GROUP BY DATE(paid_at) ORDER BY day ASC",
     )

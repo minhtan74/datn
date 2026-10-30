@@ -22,15 +22,17 @@ export const paymentService = {
   reconcile(id) {
     return axiosClient.post('/api/payments/reconcile', { id });
   },
-  reconcileAll() {
-    return axiosClient.post('/api/payments/reconcile-pending');
+  reconcileAll(filters = {}) {
+    return axiosClient.post('/api/payments/reconcile-pending', filters);
   },
+  detail(id) { return axiosClient.get(`/api/payments/detail?id=${id}`); },
+  reconcileRefund(id) { return axiosClient.post('/api/payments/refund-reconcile', { id }); },
   // Admin: hoàn tiền toàn phần 1 đơn (revokeAccess: thu hồi quyền học)
   refund(id, reason, revokeAccess) {
     return axiosClient.post('/api/payments/refund', { id, reason, revoke_access: revokeAccess });
   },
   // Trạng thái 1 đơn hàng theo mã giao dịch (dùng ở trang kết quả thanh toán)
-  getStatus(ref) {
-    return axiosClient.get(`/api/payments/status?ref=${encodeURIComponent(ref)}`);
+  getStatus(ref, config = {}) {
+    return axiosClient.get(`/api/payments/status?ref=${encodeURIComponent(ref)}`, config);
   },
 };

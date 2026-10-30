@@ -76,9 +76,10 @@ axiosClient.interceptors.response.use(
       return { ok: false, status: 0, cancelled: true, data: { success: false, message: 'Đã dừng chờ phản hồi.' } };
     }
     if (error.code === 'ECONNABORTED' || error.code === 'ETIMEDOUT') {
+      const isChat = (error.config?.url || '').startsWith('/api/ai/chat');
       return {
         ok: false, status: 0, timedOut: true,
-        data: { success: false, message: 'AI phản hồi quá lâu. Hãy giảm số câu hỏi mỗi lần sinh rồi thử lại.' },
+        data: { success: false, message: isChat ? 'Đã hết thời gian chờ AI (2 phút). Câu hỏi vẫn được giữ để bạn thử lại.' : 'AI phản hồi quá lâu. Hãy giảm số câu hỏi mỗi lần sinh rồi thử lại.' },
       };
     }
     // Không nhận được phản hồi (server tắt / mất mạng)

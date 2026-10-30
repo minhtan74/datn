@@ -1,0 +1,27 @@
+{
+  "passed": 19,
+  "checks": [
+    "Live list loads",
+    "No student refund workflow added",
+    "Bulk request includes current search and dates",
+    "Refund history fields appear",
+    "Late detail A does not overwrite B",
+    "Late reconcile A does not overwrite B",
+    "Gateway acceptance does not claim final refund",
+    "No repeat send while pending",
+    "Final confirmation updates receipt",
+    "Mobile modal fits and scrolls",
+    "Mobile close is not obscured by header",
+    "Error does not display old total or revenue",
+    "Error offers explicit retry",
+    "List recovers after retry",
+    "Forgot password explains Admin-assisted recovery",
+    "No email submission form",
+    "Old emailed link points to Admin help and clears fragment",
+    "Recovery mobile does not overflow",
+    "No JavaScript exceptions"
+  ],
+  "errors": [],
+  "realPaymentWrites": 0,
+  "gateway": "simulated"
+}

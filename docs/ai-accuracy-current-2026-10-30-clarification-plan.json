@@ -1,0 +1,82 @@
+[
+  {
+    "id": "clarification-01",
+    "role": "student_em",
+    "course_id": 1,
+    "reference_lesson": null,
+    "question": "Giải thích giúp em",
+    "gold": "topic",
+    "group": "clarification",
+    "sample": "control"
+  },
+  {
+    "id": "clarification-02",
+    "role": "student_phuong",
+    "course_id": 1,
+    "reference_lesson": null,
+    "question": "giai thich giup em",
+    "gold": "topic",
+    "group": "clarification",
+    "sample": "control"
+  },
+  {
+    "id": "clarification-03",
+    "role": "teacher_an",
+    "course_id": 1,
+    "reference_lesson": null,
+    "question": "code em bị lỗi",
+    "gold": "debug",
+    "group": "clarification",
+    "sample": "control"
+  },
+  {
+    "id": "clarification-04",
+    "role": "teacher_binh",
+    "course_id": 1,
+    "reference_lesson": null,
+    "question": "Giải câu 2",
+    "gold": "exercise",
+    "group": "clarification",
+    "sample": "control"
+  },
+  {
+    "id": "clarification-05",
+    "role": "admin",
+    "course_id": 1,
+    "reference_lesson": null,
+    "question": "Nên chọn cái nào?",
+    "gold": "comparison",
+    "group": "clarification",
+    "sample": "control"
+  },
+  {
+    "id": "clarification-06",
+    "role": "student_em",
+    "course_id": 1,
+    "reference_lesson": null,
+    "question": "Nó hoạt động thế nào?",
+    "gold": "topic",
+    "group": "clarification",
+    "sample": "control"
+  },
+  {
+    "id": "clarification-07",
+    "role": "student_phuong",
+    "course_id": 1,
+    "reference_lesson": null,
+    "question": "Cho ví dụ đi",
+    "gold": "topic",
+    "group": "clarification",
+    "sample": "control"
+  },
+  {
+    "id": "clarification-08",
+    "role": "teacher_an",
+    "course_id": 1,
+    "reference_lesson": null,
+    "question": "Hướng dẫn làm bài này",
+    "gold": "exercise",
+    "group": "clarification",
+    "sample": "control"
+  }
+]

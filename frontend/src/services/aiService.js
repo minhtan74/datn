@@ -41,13 +41,13 @@ export const aiService = {
 
   // ── Hội thoại (học viên) ──────────────────────────────
   // Gửi câu hỏi cho AI Tutor (có conversationId thì hỏi tiếp cuộc trò chuyện cũ)
-  chat({ courseId, lessonId = null, conversationId = null, message }) {
+  chat({ courseId, lessonId = null, conversationId = null, message, signal }) {
     return axiosClient.post('/api/ai/chat', {
       course_id: courseId,
       lesson_id: lessonId,
       conversation_id: conversationId,
       message,
-    });
+    }, { timeout: 120000, signal });
   },
   // Danh sách cuộc trò chuyện (lọc theo khóa nếu có)
   getConversations(courseId) {

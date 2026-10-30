@@ -144,23 +144,28 @@ function RevenueLineChart({ data }) {
   return <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />;
 }
 
-/* ─── Biểu đồ Doughnut phương thức ──────────────────────────────── */
-// Biểu đồ tròn doanh thu theo phương thức thanh toán
-function MethodDoughnut({ data }) {
+/* ─── Phân bố số giao dịch VNPay theo trạng thái ─────────────────── */
+const PAYMENT_STATES = [
+  { key: 'total_orders', label: 'Thành công', color: '#16a34a' },
+  { key: 'pending_orders', label: 'Đang chờ', color: '#f59e0b' },
+  { key: 'failed_orders', label: 'Thất bại', color: '#ef4444' },
+  { key: 'refunded_orders', label: 'Đã hoàn tiền', color: '#6366f1' },
+];
+function PaymentStatusChart({ overview }) {
   const canvasRef = useRef(null);
   const chartRef  = useRef(null);
-  const COLORS = ['#2563eb', '#8b5cf6', '#ec4899', '#06b6d4', '#f59e0b'];
+  const values = PAYMENT_STATES.map((s) => Number(overview[s.key] || 0));
+  const total = values.reduce((sum, count) => sum + count, 0);
 
   useEffect(() => {
-    if (!data?.length || !canvasRef.current) return;
-    if (chartRef.current) chartRef.current.destroy();
+    if (!total || !canvasRef.current) return;
     chartRef.current = new Chart(canvasRef.current, {
       type: 'doughnut',
       data: {
-        labels: data.map((d) => METHOD_NAMES[d.method] || d.method),
+        labels: PAYMENT_STATES.map((s) => s.label),
         datasets: [{
-          data:            data.map((d) => d.revenue),
-          backgroundColor: COLORS.slice(0, data.length),
+          data:            PAYMENT_STATES.map((s) => Number(overview[s.key] || 0)),
+          backgroundColor: PAYMENT_STATES.map((s) => s.color),
           borderWidth:     2,
           borderColor:     '#fff',
           hoverOffset:     8,
@@ -171,15 +176,27 @@ function MethodDoughnut({ data }) {
         maintainAspectRatio: false,
         cutout: '68%',
         plugins: {
-          legend: { position: 'bottom', labels: { padding: 16, font: { size: 12 } } },
-          tooltip: { callbacks: { label: (ctx) => ' ' + fmt(ctx.parsed) + ' ₫' } },
+          legend: { display: false },
+          tooltip: { callbacks: { label: (ctx) => ` ${ctx.label}: ${fmt(ctx.parsed)} giao dịch` } },
         },
       },
     });
     return () => { chartRef.current?.destroy(); };
-  }, [data]);
+  }, [overview, total]);
 
-  return <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />;
+  if (!total) return <p style={{ textAlign: 'center', padding: '3rem 0', color: 'var(--text-muted)' }}>Chưa có giao dịch VNPay.</p>;
+  return (
+    <div>
+      <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '0.75rem' }}>Toàn bộ thời gian · {fmt(total)} giao dịch</p>
+      <div style={{ height: 135 }}><canvas ref={canvasRef} role="img" aria-label="Phân bố số giao dịch VNPay theo trạng thái; số liệu chi tiết ở danh sách bên dưới." /></div>
+      <ul style={{ listStyle: 'none', padding: 0, margin: '1rem 0 0', display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '0.65rem' }}>
+        {PAYMENT_STATES.map((s, index) => <li key={s.key} style={{ fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: 6 }}>
+          <span aria-hidden="true" style={{ background: s.color, width: 10, height: 10, borderRadius: '50%', flexShrink: 0 }} />
+          <span>{s.label}: <strong>{fmt(values[index])}</strong></span>
+        </li>)}
+      </ul>
+    </div>
+  );
 }
 
 /* ─── Nút xuất CSV (tải toàn bộ dữ liệu, không giới hạn 20 dòng) ─── */
@@ -439,7 +456,7 @@ export default function AdminReports() {
   const kpis = [
     {
       icon: '💰', label: 'Tổng doanh thu', value: fmtMoney(ov.total_revenue),
-      sub: `${fmt(ov.total_orders)} đơn thành công`, color: 'rgba(16,185,129,.12)', iconColor: 'var(--success)',
+      sub: `${fmt(ov.total_orders)} đơn VNPay thành công · toàn bộ thời gian`, color: 'rgba(16,185,129,.12)', iconColor: 'var(--success)',
     },
     {
       icon: '🎒', label: 'Tổng học viên', value: fmt(ov.total_students),
@@ -497,10 +514,10 @@ export default function AdminReports() {
           </div>
 
           {/* ── Biểu đồ doanh thu 7 ngày ── */}
-          <div className="grid grid-2" style={{ marginBottom: '2rem', alignItems: 'start' }}>
+          <div className="grid grid-2" style={{ marginBottom: '2rem', alignItems: 'stretch', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 420px), 1fr))' }}>
             {/* Bar chart doanh thu */}
-            <div className="card">
-              <div className="card-header" style={{ flexWrap: 'wrap', gap: '0.5rem' }}>
+            <div className="card" style={{ minWidth: 0, display: 'flex', flexDirection: 'column' }}>
+              <div className="card-header" style={{ minHeight: 90, flexWrap: 'wrap', gap: '0.5rem' }}>
                 {/* Biểu đồ doanh thu + nút chọn khoảng thời gian */}
                 <h3 style={{ fontSize: '1rem', flex: 1, minWidth: 160 }}>📈 {RANGE_TITLES[chartRange]}</h3>
                 {/* Bộ lọc khoảng thời gian */}
@@ -528,7 +545,7 @@ export default function AdminReports() {
                   ))}
                 </div>
               </div>
-              <div className="card-body" style={{ height: 220, position: 'relative' }}>
+              <div className="card-body" style={{ height: 268, flex: '0 0 268px', position: 'relative' }}>
                 {chartLoading && (
                   <div style={{
                     position: 'absolute', inset: 0, display: 'flex', alignItems: 'center',
@@ -541,21 +558,13 @@ export default function AdminReports() {
               </div>
             </div>
 
-            {/* Doughnut phương thức */}
-            <div className="card">
-              <div className="card-header">
-                {/* Biểu đồ doanh thu theo phương thức thanh toán */}
-                <h3 style={{ fontSize: '1rem' }}>💳 Doanh thu theo phương thức</h3>
+            {/* Số giao dịch theo trạng thái, toàn bộ thời gian */}
+            <div className="card" style={{ minWidth: 0, display: 'flex', flexDirection: 'column' }}>
+              <div className="card-header" style={{ minHeight: 90 }}>
+                <h3 style={{ fontSize: '1rem' }}>💳 Tình trạng giao dịch VNPay</h3>
               </div>
-              <div className="card-body" style={{ height: 220 }}>
-                {report.revenue_by_method?.length > 0 ? (
-                  <MethodDoughnut data={report.revenue_by_method} />
-                ) : (
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', gap: '0.5rem' }}>
-                    <span style={{ fontSize: '2.5rem' }}>💳</span>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Chưa có giao dịch hoàn thành</p>
-                  </div>
-                )}
+              <div className="card-body" style={{ minHeight: 268, flex: 1 }}>
+                <PaymentStatusChart overview={ov} />
               </div>
             </div>
           </div>

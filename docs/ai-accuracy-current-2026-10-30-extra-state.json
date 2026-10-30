@@ -1,0 +1,58 @@
+{
+  "run_id": "79a88a959351",
+  "phase": "extra",
+  "started_at": "2026-10-30T13:02:09.175395+07:00",
+  "max_parallel": 2,
+  "first_response_only": true,
+  "counts_before": {
+    "ai_conversations": 4,
+    "ai_messages": 18,
+    "documents": 176,
+    "document_chunks": 2063
+  },
+  "code_before": {
+    "ai/rag/clarification.py": "639961ec2a33a7049156db838f7a756887869942b9576a0dc75d9f0943b94d38",
+    "ai/rag/rag_pipeline.py": "413920ddeade13a1509138fb139d9c1e52cf835981d203a4aa3fa424a0a94ecb",
+    "ai/tutor.py": "b6afd9e08a32496893830de672a1364f34a0994baa8ed1aa264d627bc60c98b8",
+    "routers/ai.py": "7595eedcfcc351f34717f8732544cc119c4aebe2ecc453c796850d43a1d262f1"
+  },
+  "thresholds": {
+    "offline": 0.55,
+    "llm_similarity": 0.3,
+    "llm_lexical": 0.5
+  },
+  "accounts": {
+    "student_em": "em.hoang@gmail.com",
+    "student_phuong": "phuong.vu@gmail.com",
+    "teacher_an": "an.nguyen@studyonline.vn",
+    "teacher_binh": "binh.tran@studyonline.vn",
+    "admin": "admin@gmail.com"
+  },
+  "engine": {
+    "llm": {
+      "provider": "gemini",
+      "model": "gemini-3.1-flash-lite"
+    },
+    "embedding": {
+      "provider": "fastembed",
+      "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "dim": 384
+    }
+  },
+  "finished_at": "2026-10-30T13:02:25.182279+07:00",
+  "counts_after": {
+    "ai_conversations": 4,
+    "ai_messages": 18,
+    "documents": 176,
+    "document_chunks": 2063
+  },
+  "code_after": {
+    "ai/rag/clarification.py": "639961ec2a33a7049156db838f7a756887869942b9576a0dc75d9f0943b94d38",
+    "ai/rag/rag_pipeline.py": "413920ddeade13a1509138fb139d9c1e52cf835981d203a4aa3fa424a0a94ecb",
+    "ai/tutor.py": "b6afd9e08a32496893830de672a1364f34a0994baa8ed1aa264d627bc60c98b8",
+    "routers/ai.py": "7595eedcfcc351f34717f8732544cc119c4aebe2ecc453c796850d43a1d262f1"
+  },
+  "recorded": 10,
+  "code_unchanged": true,
+  "counts_restored": true
+}

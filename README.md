@@ -36,7 +36,7 @@ studyonline/
 │   │   ├── services/     analytics_service
 │   │   └── ai/           rag/ (loader·splitter·embeddings·vector_store·retriever·pipeline)
 │   │                     model_manager · recommendation · quiz_generator
-│   ├── alembic/          migration CSDL (0001 baseline → 0021)
+│   ├── alembic/          migration CSDL (0001 baseline → 0023)
 │   ├── training/         dataset/ · prepare_dataset.py · train_lora.py · evaluate.py
 │   │                     sample_docs/ · seed_documents.py · seed_result_answers.py
 │   └── tests/            smoke_writes.py · test_api.py (pytest)
@@ -48,6 +48,9 @@ studyonline/
 ---
 
 ## Cách chạy
+
+Khôi phục mật khẩu: **Giảng viên/Học viên liên hệ Admin quản lý**, **Admin qua quy trình riêng trên máy chủ**;
+không dùng email SMTP. Xem [hướng dẫn cấp lại mật khẩu](docs/password-recovery.md).
 
 Có 2 cách. **Docker** để chạy thử nhanh trên máy bất kỳ (dữ liệu mẫu). **Windows local** là cách dùng
 hằng ngày khi phát triển và khi demo với dữ liệu thật.
@@ -218,6 +221,16 @@ powershell -ExecutionPolicy Bypass -File .\stop-dev.ps1
 
 ---
 
+## Cấp tài khoản Giảng viên
+
+Trang Đăng ký công khai chỉ tạo tài khoản **Học viên**. Tài khoản **Giảng viên** do Admin tạo:
+
+1. Admin mở **Quản lý người dùng → Giảng viên → Thêm Giảng viên**, nhập họ tên, email và mật khẩu ban đầu.
+2. Admin cấp thông tin đăng nhập cho giảng viên qua kênh riêng.
+3. Giảng viên đăng nhập, mở **Hồ sơ cá nhân → Đổi mật khẩu**, nhập mật khẩu ban đầu và mật khẩu mới.
+
+API công khai không nhận quyền Giảng viên/Admin từ dữ liệu đăng ký; người dùng cũng không thể tự nâng vai trò của mình.
+
 ## Tài liệu khóa học
 
 Đã bổ sung phần thực hành, lỗi thường gặp, hỏi đáp và hướng giải cho **101 bài thuộc 10 khóa nội dung**.
@@ -227,8 +240,29 @@ và [nguồn Markdown, quy trình dựng/hoàn tác](backend/training/lesson_doc
 
 ## Kiểm thử
 
-Học viên mở quiz sẽ được cấp một lượt làm. Mỗi lượt mới đảo thứ tự câu hỏi và phương án;
-tải lại trang hoặc mở lại lượt chưa nộp giữ nguyên thứ tự và đáp án đã chọn trong cùng phiên trình duyệt.
+AI Tutor hỏi thêm khi câu hỏi thiếu chủ đề, đoạn code/thông báo lỗi, đề bài hoặc đối tượng so sánh.
+Lời hỏi lại không gắn nguồn; khi bổ sung thông tin, AI tiếp tục cùng hội thoại.
+Câu hỏi rõ vẫn được xử lý trực tiếp; câu không có trong tài liệu giữ quy tắc từ chối.
+Áp dụng cho cả trang AI Tutor và khung Hỏi AI trong bài học; xem [quy tắc hỏi lại](docs/rag.md).
+Khung chat có bộ đếm chờ tối đa 2 phút, dừng chờ, thử lại/sửa câu hỏi; lỗi dịch vụ và trích xuất dự phòng
+được hiển thị riêng. Xem [các ca kiểm tra chờ/lỗi AI](docs/ai-wait-feedback-check.json).
+Lần đo ngày 30/10/2026: **45/50 câu kiến thức đúng và đủ (90%)**; **44/50 (88%)** nếu yêu cầu
+ý chính cũng được trang nguồn được trích hỗ trợ. Xem [bảng điểm, các ca chưa đạt và giới hạn phép đo](docs/ai-accuracy-current-2026-10-30.md).
+Sau lần đo đó, đã sửa ba ca hỏi lại thừa; xem [kết quả hồi quy riêng](docs/ai-clarification-specificity.md).
+Không nội suy tỷ lệ chính xác mới từ các ca sửa riêng này.
+
+Danh sách quiz của học viên có bộ lọc và số lượng theo bốn trạng thái: **Chưa làm**, **Đang làm dở**,
+**Đã nộp**, **Chưa nộp** (đã bắt đầu nhưng lượt đã kết thúc, chưa có bài nộp).
+Quiz đang làm lại được xếp vào Đang làm dở và vẫn hiển thị điểm, lịch sử các lượt đã nộp.
+Bộ lọc lưu trên URL qua `status`, dùng cùng `course_id` để xem riêng một khóa.
+
+Mở trang quiz chỉ hiển thị thông tin: số câu, thời gian, điểm đạt, cách tính điểm và lượt còn lại.
+Học viên bấm **Bắt đầu làm bài** mới được cấp lượt và bắt đầu đếm giờ (nếu có giới hạn).
+Bài đang dở có nút **Tiếp tục làm bài**, không tốn thêm lượt và không đặt lại đồng hồ;
+lượt cũ vừa hết hạn sẽ báo lỗi, không tự mở lượt mới. Rời trang sau khi bắt đầu vẫn tính lượt đã dùng
+và thời gian vẫn chạy; tự nộp khi hết giờ cần giữ trang làm bài mở.
+Mỗi lượt mới đảo thứ tự câu hỏi và phương án; tải lại trang rồi tiếp tục lượt chưa nộp
+giữ nguyên thứ tự và đáp án đã chọn trong cùng phiên trình duyệt.
 Nội dung câu hỏi vẫn là bộ đề đã lưu, không sinh thêm bằng AI. Lịch sử hiển thị theo thứ tự của lượt đó.
 Các lượt cũ trước migration `0018` giữ thứ tự ban đầu; giảng viên/admin xem và làm thử giữ thứ tự biên soạn.
 Phép đảo ngẫu nhiên có thể tình cờ tạo thứ tự giống nhau, nhất là đề có ít câu.

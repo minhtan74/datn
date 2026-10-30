@@ -12,13 +12,15 @@ import re
 from sqlalchemy.orm import Session
 
 from app.ai import model_manager
-from app.ai.rag import extractive, retriever
+from app.ai.rag import clarification, extractive, retriever
 from app.core.config import settings
 
 logger = logging.getLogger("rag")
 
 # Câu trả lời cố định khi tài liệu không có thông tin phù hợp (chống AI bịa)
 NO_ANSWER = "Tôi không tìm thấy thông tin phù hợp trong tài liệu khóa học."
+AI_UNAVAILABLE = "AI hiện chưa thể trả lời. Bạn có thể thử lại sau; câu hỏi của bạn vẫn được giữ."
+CLARIFICATION_PREFIX = "[CẦN LÀM RÕ]"
 
 # Chỉ dẫn hệ thống cho LLM: chỉ trả lời dựa trên ngữ cảnh, không bịa, trả lời tiếng Việt
 _SYSTEM = (
@@ -28,6 +30,13 @@ _SYSTEM = (
     f"\"{NO_ANSWER}\". Ngữ cảnh chỉ nói về chủ đề gần giống (ví dụ hỏi MongoDB nhưng ngữ cảnh nói về MySQL) "
     "mà không trả lời trực tiếp câu hỏi thì cũng trả lời câu đó. Tuyệt đối không bịa thông tin, không bịa nguồn, "
     "không dùng kiến thức ngoài ngữ cảnh. Trả lời ngắn gọn, rõ ràng, bằng tiếng Việt."
+    " Nếu câu hỏi thiếu đối tượng, đề bài hoặc dữ liệu cần thiết và lịch sử cũng không làm rõ, "
+    "không tự đoán: hỏi lại tối đa 2 câu ngắn, nêu đúng thông tin còn thiếu. "
+    f"Khi hỏi lại, bắt đầu bằng {CLARIFICATION_PREFIX} và không gắn trích dẫn. "
+    "Câu hỏi ngắn nhưng rõ chủ đề (như 'HTTP là gì?') vẫn trả lời trực tiếp. "
+    "Câu hỏi về hành vi API, phân biệt khái niệm hoặc tình huống giả định đã đủ dữ kiện thì trả lời quy tắc trong tài liệu; "
+    "không yêu cầu gửi code chỉ vì câu hỏi có từ 'lỗi' hay 'sửa lỗi'. Chỉ hỏi thông tin chẩn đoán khi người học thực sự nhờ sửa một sự cố chưa đủ dữ liệu. "
+    "Nếu chỉ thiếu tài liệu để trả lời một câu hỏi đã rõ, dùng câu từ chối quy định ở trên, không hỏi vòng vo."
 )
 
 # Chỉ dẫn viết lại câu hỏi nối tiếp ("cho ví dụ đi", "còn cái kia?") thành câu hỏi đầy đủ để tìm tài liệu
@@ -36,7 +45,7 @@ _REWRITE_SYSTEM = (
     "(thay các từ như 'nó', 'cái đó', 'ví dụ đi' bằng chủ đề cụ thể trong hội thoại). "
     "Nếu câu hỏi viết tiếng Việt không dấu thì viết lại bằng tiếng Việt có dấu đầy đủ, giữ nguyên thuật ngữ "
     "tiếng Anh, tên riêng, ký hiệu và đoạn code. "
-    "Nếu câu hỏi đã đầy đủ thì giữ nguyên. Chỉ trả về câu hỏi, không giải thích."
+    "Nếu câu hỏi đã đầy đủ thì giữ nguyên, không mang chủ đề cũ vào câu hỏi mới. Chỉ trả về câu hỏi, không giải thích."
 )
 
 # Chữ có dấu tiếng Việt; từ không dấu rất hay gặp trong câu hỏi gõ không dấu ("la gi", "the nao", "cach"...)
@@ -65,20 +74,28 @@ def _is_refusal(text: str) -> bool:
 #   và từ chối nhầm;
 # - câu hỏi gõ không dấu ("Python do ai tao ra?") phải thêm dấu, vì tài liệu viết có dấu nên tìm kiếm không dấu
 #   chỉ đúng ~72% so với ~96% khi có dấu.
-# Có LLM thì nhờ LLM viết lại (1 lượt gọi, chỉ khi cần); offline thì ghép câu hỏi trước nếu câu hiện tại ngắn.
+# Có LLM thì viết lại khi cần; offline/lỗi viết lại thì ghép chủ đề đã xác định của hội thoại.
 def _search_query(question: str, history: list[dict] | None, use_llm: bool) -> str:
+    supplemented = clarification.supplemented_query(question, history)
+    if supplemented:
+        return supplemented
+    follow_up = clarification.is_follow_up(question, history)
     prev_user = [m["content"] for m in (history or []) if m.get("role") == "user"]
-    if not prev_user and not (use_llm and _no_diacritics(question)):
+    if not follow_up and not (use_llm and _no_diacritics(question)):
         return question
     if use_llm:
         convo = "\n".join(
             f"{'Học viên' if m['role'] == 'user' else 'Trợ giảng'}: {m['content'][:400]}" for m in (history or [])[-4:]
         )
-        prompt = (f"HỘI THOẠI:\n{convo}\n\n" if prev_user else "") + f"CÂU HỎI CUỐI: {question}"
+        anchor = clarification.anchor_question(history) if follow_up else None
+        prompt = (f"CHỦ ĐỀ ĐÃ XÁC ĐỊNH: {anchor}\n\n" if anchor else "")
+        prompt += (f"HỘI THOẠI:\n{convo}\n\n" if prev_user else "") + f"CÂU HỎI CUỐI: {question}"
         out = model_manager.generate(_REWRITE_SYSTEM, prompt, max_tokens=120)
         out = out.strip().strip('"').strip()
-        return question if (not out or out.startswith("[Lỗi gọi LLM") or len(out) > 400) else out
-    return f"{prev_user[-1]} {question}" if len(question.split()) <= 6 else question
+        if not out or out.startswith("[Lỗi gọi LLM") or len(out) > 400:
+            return f"{anchor} {question}" if anchor else question
+        return out
+    return f"{clarification.anchor_question(history)} {question}" if follow_up else question
 
 
 # Trả lời 1 câu hỏi theo quy trình RAG: truy hồi -> kiểm tra ngưỡng -> sinh câu trả lời -> gắn nguồn
@@ -94,6 +111,11 @@ def answer(
     question = (question or "").strip()
     if not question:
         return {"answer": NO_ANSWER, "sources": [], "used_context": False}
+
+    kind = clarification.request_kind(question, history)
+    if kind:
+        return {"answer": clarification.PROMPTS[kind], "sources": [], "used_context": False,
+                "needs_clarification": True, "clarification_kind": kind}
 
     logger.info(
         "[RAG] course_id=%s lesson_id=%s lesson_only=%s query=%r",
@@ -137,9 +159,10 @@ def answer(
         ctx_parts.append(f"[Nguồn {i}] {c['document_title']}{loc}\n{c['content']}")
     context = "\n\n".join(ctx_parts)
 
+    response_status = "ok"
     if not use_llm:
         # Không có LLM -> trả lời trích xuất từ chính ngữ cảnh (chạy offline khi bảo vệ)
-        text = extractive.answer(question, relevant)
+        text = extractive.answer(query, relevant)
         if not text:
             return {"answer": NO_ANSWER, "sources": [], "used_context": False}
     else:
@@ -152,17 +175,25 @@ def answer(
             (f"LỊCH SỬ HỘI THOẠI:\n{hist_txt}\n" if hist_txt else "")
             + f"NGỮ CẢNH:\n{context}\n\n"
             + f"CÂU HỎI: {question}\n\n"
+            + (f"CÂU HỎI ĐÃ BỔ SUNG NGỮ CẢNH HỘI THOẠI: {query}\n\n" if query != question else "")
             + "Hãy trả lời câu hỏi chỉ dựa trên NGỮ CẢNH ở trên."
         )
         text = model_manager.generate(_SYSTEM, user_prompt)
 
+        if text.strip().startswith(CLARIFICATION_PREFIX):
+            prompt = text.strip()[len(CLARIFICATION_PREFIX):].strip() or clarification.PROMPTS["topic"]
+            return {"answer": prompt, "sources": [], "used_context": False,
+                    "needs_clarification": True, "clarification_kind": "context"}
+
         if text.startswith("[Lỗi gọi LLM"):
             # LLM lỗi (hết hạn mức, mất mạng...): dự phòng bằng trích xuất offline từ chính các đoạn tìm được,
             # chỉ khi tài liệu đủ liên quan theo ngưỡng chặt của chế độ offline (tránh trả lời câu lạc đề)
-            fallback = extractive.answer(question, chunks) if best_cosine >= settings.rag_similarity_threshold else ""
+            fallback = extractive.answer(query, chunks) if best_cosine >= settings.rag_similarity_threshold else ""
             if not fallback:
-                return {"answer": text.strip(), "sources": [], "used_context": False}
+                return {"answer": AI_UNAVAILABLE, "sources": [], "used_context": False,
+                        "response_status": "error", "error_code": "ai_unavailable", "retryable": True}
             logger.warning("[RAG] LLM lỗi -> trả lời trích xuất dự phòng")
+            response_status = "fallback"
             text = f"{fallback}\n\n(Trợ giảng AI đang tạm gián đoạn — đây là nội dung trích trực tiếp từ tài liệu khóa học.)"
         if _is_refusal(text):
             return {"answer": NO_ANSWER, "sources": [], "used_context": False}
@@ -191,4 +222,4 @@ def answer(
             break
 
     logger.info("[RAG] LLM response generated (provider=%s, sources=%d)", model_manager.active_provider(), len(sources))
-    return {"answer": text, "sources": sources, "used_context": True}
+    return {"answer": text, "sources": sources, "used_context": True, "response_status": response_status}

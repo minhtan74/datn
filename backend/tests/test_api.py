@@ -9,6 +9,7 @@ quả tất định — không cần LLM_API_KEY.
 import os
 import sys
 import time
+import uuid
 
 import pytest
 from fastapi.testclient import TestClient
@@ -90,6 +91,62 @@ def test_register_and_change_password_and_cleanup(tokens):
 
 
 # ── RBAC ───────────────────────────────────────────────────────────────────
+
+
+@pytest.mark.parametrize("requested_role", ["teacher", "admin"])
+def test_public_register_cannot_create_privileged_account(tokens, requested_role):
+    email = f"provision_student_{uuid.uuid4().hex}@test.local"
+    A = _h(tokens["admin"])
+    uid = None
+    try:
+        r = client.post("/api/auth/register", json={
+            "fullname": "Provision Student", "email": email,
+            "password": "Initial123", "confirm_password": "Initial123",
+            "role": requested_role,
+        })
+        assert r.status_code == 200
+        tok = _token(email, "Initial123")
+        me = client.get("/api/auth/me", headers=_h(tok)).json()["user"]
+        uid = me["id"]
+        assert me["role"] == "student"
+        assert client.put("/api/users", headers=_h(tok), json={
+            "id": uid, "fullname": me["fullname"], "email": email,
+            "role": requested_role,
+        }).status_code == 403
+        assert client.get("/api/auth/me", headers=_h(tok)).json()["user"]["role"] == "student"
+    finally:
+        if uid is not None:
+            assert client.delete(f"/api/users?id={uid}", headers=A).status_code == 200
+
+
+def test_admin_provisions_teacher_who_can_change_initial_password(tokens):
+    email = f"provision_teacher_{uuid.uuid4().hex}@test.local"
+    body = {"fullname": "Provision Teacher", "email": email,
+            "password": "Initial123", "role": "teacher"}
+    A = _h(tokens["admin"])
+    try:
+        assert client.post("/api/users", json=body).status_code == 401
+        for role in ("student", "teacher"):
+            assert client.post("/api/users", headers=_h(tokens[role]), json=body).status_code == 403
+        assert client.post("/api/users", headers=A, json=body).status_code == 200
+        tok = _token(email, "Initial123")
+        T = _h(tok)
+        assert client.get("/api/auth/me", headers=T).json()["user"]["role"] == "teacher"
+        assert client.post("/api/auth/change-password", headers=T, json={
+            "old_password": "wrong-password", "new_password": "Personal456",
+        }).status_code == 400
+        assert client.post("/api/auth/change-password", headers=T, json={
+            "old_password": "Initial123", "new_password": "Personal456",
+        }).status_code == 200
+        assert client.post("/api/auth/login", json={"email": email, "password": "Initial123"}).status_code == 401
+        tok = _token(email, "Personal456")
+        assert client.get("/api/auth/me", headers=_h(tok)).json()["user"]["role"] == "teacher"
+    finally:
+        # Account is intentionally empty; use its unique test email to clean even on an intermediate failure.
+        users = client.get("/api/users", headers=A).json()["data"]
+        for user in users:
+            if user["email"] == email:
+                assert client.delete(f"/api/users?id={user['id']}", headers=A).status_code == 200
 
 def test_student_cannot_list_users(tokens):
     assert client.get("/api/users", headers=_h(tokens["student"])).status_code == 403
@@ -528,6 +585,127 @@ def test_ai_chat_grounded_and_refusal(tokens):
     db.close()
 
 
+def test_ai_clarification_persists_and_continues(tokens, course, monkeypatch):
+    from app.ai.rag import rag_pipeline
+    from app.core.database import SessionLocal, execute
+
+    T, S = _h(tokens["teacher"]), _h(tokens["student"])
+    client.post("/api/enrollments", headers=S, json={"course_id": course})
+    monkeypatch.setattr(rag_pipeline.model_manager, "active_provider", lambda: "stub")
+    retrieved = []
+    chunk = {"document_id": 1, "document_title": "PYTEST Python", "page": 1, "score": .95,
+             "cosine": .95, "content": "Python dùng print để hiển thị kết quả."}
+
+    def retrieve(db, query, **scope):
+        retrieved.append((query, scope))
+        return [chunk]
+
+    monkeypatch.setattr(rag_pipeline.retriever, "retrieve", retrieve)
+    monkeypatch.setattr(rag_pipeline.extractive, "answer", lambda *a: "Ví dụ Python: print(1 + 1).")
+    cid = None
+    try:
+        first = client.post("/api/ai/chat", headers=S, json={
+            "course_id": course, "message": "Cho ví dụ đi"}).json()["data"]
+        cid = first["conversation_id"]
+        assert first["needs_clarification"] and first["sources"] == [] and retrieved == []
+        saved = client.get(f"/api/ai/conversations/{cid}", headers=S).json()["data"]["messages"]
+        assert len(saved) == 2 and saved[-1]["needs_clarification"]
+        assert saved[-1]["clarification_kind"] == "topic" and saved[-1]["sources"] == []
+        second = client.post("/api/ai/chat", headers=S, json={
+            "course_id": course, "conversation_id": cid, "message": "Python"}).json()["data"]
+        assert second["conversation_id"] == cid and not second["needs_clarification"]
+        assert "Python" in second["answer"] and second["sources"][0]["document"] == "PYTEST Python"
+        assert "Cho ví dụ" in retrieved[0][0] and "Python" in retrieved[0][0]
+        assert retrieved[0][1]["course_id"] == course
+        restored = client.get(f"/api/ai/conversations/{cid}", headers=S).json()["data"]["messages"]
+        assert restored[1]["needs_clarification"] and not restored[-1]["needs_clarification"]
+        assert restored[-1]["sources"] == second["sources"]
+        # Đổi sang một câu mới rõ chủ đề không bị ép về câu hỏi trước.
+        client.post("/api/ai/chat", headers=S, json={
+            "course_id": course, "conversation_id": cid, "message": "HTTP là gì?"})
+        assert retrieved[-1][0] == "HTTP là gì?"
+    finally:
+        if cid:
+            with SessionLocal() as db:
+                execute(db, "DELETE FROM ai_conversations WHERE id=:id AND course_id=:c", id=cid, c=course)
+
+
+def test_ai_clarification_does_not_mix_course_or_lesson_context(tokens, course, monkeypatch):
+    from app.ai.rag import rag_pipeline
+    from app.ai.rag import ingest
+    from app.core.database import SessionLocal, execute
+
+    T, S = _h(tokens["teacher"]), _h(tokens["student"])
+    client.post("/api/enrollments", headers=S, json={"course_id": course})
+    ch = int(client.post("/api/chapters", headers=T, json={"course_id": course, "chapter_name": "PYTEST"}).json()["id"])
+    lesson = int(client.post("/api/lessons", headers=T, json={"chapter_id": ch, "title": "PYTEST bài"}).json()["id"])
+    def unexpected_ingest(*args):
+        pytest.fail("Lời hỏi lại chưa cần nạp tài liệu bài học")
+    monkeypatch.setattr(ingest, "ensure_lesson_document", unexpected_ingest)
+    cid = None
+    try:
+        initial = client.post("/api/ai/chat", headers=S, json={
+            "course_id": course, "lesson_id": lesson, "message": "Giải câu 2"}).json()["data"]
+        cid = initial["conversation_id"]
+        assert initial["needs_clarification"] and initial["clarification_kind"] == "exercise"
+        wrong = client.post("/api/ai/chat", headers=S, json={
+            "course_id": course, "conversation_id": cid, "message": "Nó là gì?"})
+        assert wrong.status_code == 400
+        wrong_lesson = client.post("/api/ai/chat", headers=S, json={
+            "course_id": course, "lesson_id": 2147483647, "message": "Nó là gì?"})
+        assert wrong_lesson.status_code == 400
+        saved = client.get(f"/api/ai/conversations/{cid}", headers=S).json()["data"]["messages"]
+        assert len(saved) == 2
+        # Cùng ngữ cảnh bài học: lời hỏi lại vẫn dùng được và không lấy bài/câu khác để đoán.
+        followup = client.post("/api/ai/chat", headers=S, json={
+            "course_id": course, "lesson_id": lesson, "conversation_id": cid, "message": "Giải bài này"})
+        assert followup.status_code == 200 and followup.json()["data"]["needs_clarification"]
+    finally:
+        if cid:
+            with SessionLocal() as db:
+                execute(db, "DELETE FROM ai_conversations WHERE id=:id AND course_id=:c", id=cid, c=course)
+
+
+def test_ai_chat_service_error_can_be_retried_in_same_conversation(tokens, course, monkeypatch):
+    from app.ai.rag import rag_pipeline
+    from app.core.database import SessionLocal, execute
+
+    S = _h(tokens["student"])
+    client.post("/api/enrollments", headers=S, json={"course_id": course})
+    chunk = {"document_id": 1, "document_title": "PYTEST HTTP", "page": 1, "score": .35,
+             "cosine": .35, "content": "HTTP là giao thức trao đổi dữ liệu."}
+    monkeypatch.setattr(rag_pipeline.model_manager, "active_provider", lambda: "gemini")
+    monkeypatch.setattr(rag_pipeline.retriever, "retrieve", lambda *a, **kw: [chunk])
+    monkeypatch.setattr(rag_pipeline.retriever, "expand_neighbors", lambda db, rows: rows)
+    monkeypatch.setattr(rag_pipeline.model_manager, "generate", lambda *a, **kw: "[Lỗi gọi LLM: HTTP 429]")
+    cid = None
+    try:
+        first = client.post("/api/ai/chat", headers=S, json={"course_id": course, "message": "HTTP là gì?"})
+        assert first.status_code == 503 and first.json()["success"] is False
+        failed = first.json()["data"]
+        cid = failed["conversation_id"]
+        assert failed["response_status"] == "error" and failed["retryable"]
+        assert "429" not in failed["answer"] and failed["sources"] == []
+        restored = client.get(f"/api/ai/conversations/{cid}", headers=S).json()["data"]["messages"]
+        assert restored[-1]["response_status"] == "error" and restored[-1]["retryable"]
+        assert restored[-1]["sources"] == []
+        monkeypatch.setattr(rag_pipeline.model_manager, "generate", lambda *a, **kw: chunk["content"])
+        retry = client.post("/api/ai/chat", headers=S, json={
+            "course_id": course, "conversation_id": cid, "message": "HTTP là gì?"})
+        assert retry.status_code == 200 and retry.json()["data"]["conversation_id"] == cid
+        assert retry.json()["data"]["response_status"] == "ok" and retry.json()["data"]["sources"]
+        # Lỗi cũ được nhận diện an toàn cả khi lịch sử chưa có metadata kiểu mới.
+        with SessionLocal() as db:
+            execute(db, "INSERT INTO ai_messages(conversation_id,role,content) VALUES(:c,'assistant',:m)",
+                    c=cid, m="[Lỗi gọi LLM: ReadTimeout]")
+        old = client.get(f"/api/ai/conversations/{cid}", headers=S).json()["data"]["messages"][-1]
+        assert old["response_status"] == "error" and old["content"] == rag_pipeline.AI_UNAVAILABLE
+    finally:
+        if cid:
+            with SessionLocal() as db:
+                execute(db, "DELETE FROM ai_conversations WHERE id=:id AND course_id=:c", id=cid, c=course)
+
+
 def test_ai_chat_requires_login():
     r = client.post("/api/ai/chat", json={"course_id": 2, "message": "map() là gì?"})
     assert r.status_code == 401
@@ -693,6 +871,91 @@ def test_admin_manage_payments(tokens):
     assert client.get("/api/payments/manage?date_from=2026-13-01", headers=A).status_code == 400
 
 
+def test_admin_manage_only_vnpay_including_totals(tokens, course):
+    """Legacy payment rows must not affect VNPay rows, counts or revenue."""
+    from app.core.database import SessionLocal, execute, q_one
+    A = _h(tokens["admin"])
+    prefix = "VN-ONLY-" + uuid.uuid4().hex
+    with SessionLocal() as db:
+        sid = q_one(db, "SELECT id FROM users WHERE email=:email", email=STUDENT[0])["id"]
+        try:
+            for index, (method, status, amount) in enumerate([
+                ("vnpay", "completed", 100000), ("vnpay", "pending", 200000),
+                ("card", "completed", 300000), ("bank_transfer", "completed", 400000),
+                ("momo", "completed", 500000), ("zalopay", "completed", 600000),
+            ]):
+                execute(db, "INSERT INTO payments (user_id,course_id,amount,method,status,transaction_ref) "
+                        "VALUES (:u,:c,:amount,:method,:status,:ref)", u=sid, c=course,
+                        amount=amount, method=method, status=status, ref=f"{prefix}-{index}")
+            for extra in ({}, {"method": ""}, {"method": "vnpay"}):
+                response = client.get("/api/payments/manage", headers=A, params={"course_id": course, **extra})
+                assert response.status_code == 200
+                data = response.json()
+                assert data["pagination"]["total"] == 2
+                assert len(data["data"]) == 2 and all(row["method"] == "vnpay" for row in data["data"])
+                assert data["counts"] == {"completed": 1, "pending": 1, "failed": 0, "refunded": 0}
+                assert data["revenue"] == 100000
+            completed = client.get("/api/payments/manage", headers=A, params={"course_id": course, "status": "completed"}).json()
+            assert completed["pagination"]["total"] == 1 and completed["revenue"] == 100000
+            legacy_search = client.get("/api/payments/manage", headers=A, params={"course_id": course, "q": prefix + "-2"}).json()
+            assert legacy_search["data"] == [] and legacy_search["pagination"]["total"] == 0
+            assert sum(legacy_search["counts"].values()) == 0 and legacy_search["revenue"] == 0
+        finally:
+            execute(db, "DELETE FROM payments WHERE course_id=:c", c=course)
+
+
+def test_admin_reports_only_vnpay_across_summary_series_and_csv(tokens, course):
+    import csv
+    import io
+    from app.core.database import SessionLocal, execute, q_one
+    A = _h(tokens["admin"])
+    assert client.get("/api/reports/summary", headers=_h(tokens["student"])).status_code == 403
+    ranges = ("today", "7d", "30d", "1y")
+    baseline = {r: client.get("/api/reports/summary", headers=A, params={"range": r}).json()["data"] for r in ranges}
+    prefix = "REPORT-VNPAY-" + uuid.uuid4().hex
+    ids = {"legacy": [], "vnpay": []}
+    with SessionLocal() as db:
+        sid = q_one(db, "SELECT id FROM users WHERE email=:email", email=STUDENT[0])["id"]
+        def insert(method, status, amount, index):
+            result = execute(db, "INSERT INTO payments (user_id,course_id,amount,method,status,transaction_ref,paid_at) "
+                             "VALUES (:u,:c,:amount,:method,:status,:ref,NOW())", u=sid, c=course,
+                             amount=amount, method=method, status=status, ref=f"{prefix}-{index}")
+            ids["vnpay" if method == "vnpay" else "legacy"].append(int(result.lastrowid))
+        try:
+            for index, method in enumerate(("card", "bank_transfer", "momo", "zalopay")):
+                insert(method, "completed", 900000, index)
+            for r in ranges:
+                data = client.get("/api/reports/summary", headers=A, params={"range": r}).json()["data"]
+                for key in ("total_revenue", "total_orders", "pending_orders", "failed_orders", "refunded_orders", "refunded_amount"):
+                    assert data["overview"][key] == baseline[r]["overview"][key]
+                assert data["revenue_weekly"] == baseline[r]["revenue_weekly"]
+                assert all(row["method"] == "vnpay" for row in data["recent_payments"])
+                fixture_courses = [row for row in data["top_courses"] if row["id"] == course]
+                assert all(row["revenue"] == 0 for row in fixture_courses)
+            for index, (status, amount) in enumerate((("completed", 111000), ("pending", 222000), ("failed", 333000), ("refunded", 444000)), 4):
+                insert("vnpay", status, amount, index)
+            increments = {"total_revenue": 111000, "total_orders": 1, "pending_orders": 1, "failed_orders": 1, "refunded_orders": 1, "refunded_amount": 444000}
+            for r in ranges:
+                data = client.get("/api/reports/summary", headers=A, params={"range": r}).json()["data"]
+                for key, amount in increments.items():
+                    assert data["overview"][key] == baseline[r]["overview"][key] + amount
+                assert sum(row["revenue"] for row in data["revenue_weekly"]) == sum(row["revenue"] for row in baseline[r]["revenue_weekly"]) + 111000
+                assert all(row["method"] == "vnpay" for row in data["recent_payments"])
+                assert all(row["method"] == "vnpay" for row in data["revenue_by_method"])
+            response = client.get("/api/reports/export", headers=A, params={"type": "payments"})
+            assert response.status_code == 200
+            rows = list(csv.reader(io.StringIO(response.content.decode("utf-8-sig"))))[1:]
+            exported_ids = {int(row[0]) for row in rows}
+            assert not (exported_ids & set(ids["legacy"]))
+            assert set(ids["vnpay"]) <= exported_ids
+            assert all(row[4] == "vnpay" for row in rows)
+            courses_csv = client.get("/api/reports/export", headers=A, params={"type": "courses"})
+            course_rows = list(csv.reader(io.StringIO(courses_csv.content.decode("utf-8-sig"))))[1:]
+            assert float(next(row for row in course_rows if int(row[0]) == course)[-1]) == 111000
+        finally:
+            execute(db, "DELETE FROM payments WHERE course_id=:c", c=course)
+
+
 def test_vnpay_reconcile_pending(tokens, course, monkeypatch):
     """Đối soát đơn 'đang chờ': VNPay (giả lập) báo đã trả tiền / chưa trả / lỗi kết nối."""
     from app.core.config import settings
@@ -793,7 +1056,8 @@ def test_vnpay_refund(tokens, course, monkeypatch):
 
     def fake_refund(**kw):
         sent.append(kw)
-        return {"vnp_ResponseCode": reply["code"], "vnp_Message": "x", "vnp_TransactionNo": "777"}
+        return {"vnp_ResponseCode": reply["code"], "vnp_Message": "x", "vnp_TransactionNo": "777",
+                "vnp_TransactionType": "02", "vnp_TransactionStatus": "00", "vnp_TxnRef": kw["txn_ref"], "vnp_Amount": str(int(kw["amount"] * 100))}
 
     monkeypatch.setattr(vnpay, "refund_transaction", fake_refund)
     db = SessionLocal()
@@ -831,20 +1095,78 @@ def test_vnpay_refund(tokens, course, monkeypatch):
         # Không hoàn tiền 2 lần
         assert client.post("/api/payments/refund", headers=A, json=body).status_code == 409
 
-        # Đơn giả lập cũ + giữ quyền học: không gọi VNPay
+        # Đơn cũ thiếu giao dịch VNPay hợp lệ: không ghi nhận giả là đã hoàn tiền.
         n_calls = len(sent)
         pid2 = paid_order("PYT-RF2", method="card")
         r = client.post("/api/payments/refund", headers=A,
-                        json={"id": pid2, "reason": "Hoàn tiền thủ công", "revoke_access": False}).json()
-        assert r["success"] and not r["revoked"] and len(sent) == n_calls and enrolled()
+                        json={"id": pid2, "reason": "Hoàn tiền thủ công", "revoke_access": False})
+        assert r.status_code == 409 and len(sent) == n_calls and enrolled()
     finally:
         execute(db, "DELETE FROM payments WHERE course_id = :c", c=course)
         execute(db, "DELETE FROM enrollments WHERE course_id = :c", c=course)
         db.close()
 
 
+@pytest.mark.parametrize("duration,max_attempts", [(None, None), (5, 2)])
+def test_quiz_intro_does_not_start_attempt(tokens, course, duration, max_attempts):
+    """Xem giới thiệu không tốn lượt; tiếp tục lượt hết hạn/đã nộp không tạo lượt mới."""
+    from app.core.database import SessionLocal, execute, q_scalar
+
+    T, S = _h(tokens["teacher"]), _h(tokens["student"])
+    qz = int(client.post("/api/quizzes", headers=T, json={
+        "course_id": course, "title": "PYTEST Giới thiệu", "duration": duration,
+        "max_attempts": max_attempts, "passing_score": 70}).json()["id"])
+    assert client.get(f"/api/quizzes?id={qz}", headers=S).json()["data"]["can_attempt"] is False
+    own = client.get(f"/api/quizzes?id={qz}", headers=T).json()["data"]
+    assert own["can_attempt"] is True and own["is_preview"] is True
+    client.post("/api/enrollments", headers=S, json={"course_id": course})
+    # Đề rỗng không tạo lượt ngay cả khi gọi lấy câu hỏi.
+    empty = client.get(f"/api/quizzes/questions?quiz_id={qz}", headers=S).json()
+    assert empty["data"] == [] and "attempt_token" not in empty
+    client.post("/api/quizzes/questions", headers=T, json={
+        "quiz_id": qz, "content": "1+1?", "option_a": "2", "option_b": "3", "correct_answer": "A"})
+    for _ in range(2):
+        intro = client.get(f"/api/quizzes?id={qz}", headers=S).json()["data"]
+        assert intro["question_count"] == 1 and intro["my_attempts"] == 0
+        assert intro["can_attempt"] is True and intro["is_preview"] is False
+        assert intro["my_status"]["in_progress"] is False
+        assert intro["my_status"]["attempts_used"] == 0
+        assert intro["my_status"]["attempts_left"] == max_attempts
+        assert "attempt_token" not in intro and "questions" not in intro
+    assert client.get(f"/api/quizzes/questions?quiz_id={qz}&resume_only=1", headers=S).status_code == 403
+    start = client.get(f"/api/quizzes/questions?quiz_id={qz}", headers=S).json()
+    info = client.get(f"/api/quizzes?id={qz}", headers=S).json()["data"]
+    assert info["my_attempts"] == 1 and info["my_status"]["in_progress"] is True
+    assert info["my_status"]["attempts_used"] == 1
+    resumed = client.get(f"/api/quizzes/questions?quiz_id={qz}&resume_only=1", headers=S).json()
+    assert resumed["attempt_token"] == start["attempt_token"] and resumed["attempts_used"] == 1
+    aid = int(start["attempt_token"].split(".")[0])
+    if duration:
+        with SessionLocal() as db:
+            execute(db, "UPDATE quiz_attempts SET started_ts=:t WHERE id=:id",
+                    t=int(time.time()) - duration * 60 - 61, id=aid)
+    else:
+        submitted = client.post("/api/quizzes/submit", headers=S, json={
+            "quiz_id": qz, "answers": {str(start["data"][0]["id"]): "A"},
+            "attempt_token": start["attempt_token"]})
+        assert submitted.status_code == 200
+    # Nút Tiếp tục giữ nguyên ý định, không ngầm mở lượt kế tiếp.
+    assert client.get(f"/api/quizzes/questions?quiz_id={qz}&resume_only=1", headers=S).status_code == 403
+    ended = client.get(f"/api/quizzes?id={qz}", headers=S).json()["data"]
+    assert ended["my_attempts"] == 1 and ended["my_status"]["in_progress"] is False
+    assert ended["my_status"]["attempts_used"] == 1
+    assert ended["my_status"]["submitted"] == (0 if duration else 1)
+    listed = client.get(f"/api/quizzes?course_id={course}", headers=S).json()["data"]
+    listed_status = next(q["my_status"] for q in listed if q["id"] == qz)
+    assert listed_status == ended["my_status"]
+    with SessionLocal() as db:
+        assert q_scalar(db, "SELECT COUNT(*) FROM quiz_attempts WHERE quiz_id=:q", q=qz) == 1
+    fresh = client.get(f"/api/quizzes/questions?quiz_id={qz}", headers=S).json()
+    assert fresh["attempts_used"] == 2 and fresh["attempt_token"] != start["attempt_token"]
+
+
 def test_quiz_attempt_rules(tokens, course):
-    """Lượt làm bắt đầu từ lúc mở đề; chủ khóa làm thử không lưu; giảng viên khác không làm được."""
+    """Chỉ lấy đề sau xác nhận mới bắt đầu lượt; chủ khóa làm thử không lưu."""
     T, S = _h(tokens["teacher"]), _h(tokens["student"])
     other = _h(_token("binh.tran@studyonline.vn", "123456"))
     qz = int(client.post("/api/quizzes", headers=T, json={

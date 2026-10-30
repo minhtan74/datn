@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { paymentService } from '../../services/paymentService';
 import { courseService } from '../../services/courseService';
@@ -33,7 +33,8 @@ const METHODS = {
 };
 
 // Đơn có mã giao dịch VNPay mới hoàn tiền qua VNPay được; không có (giả lập, dữ liệu mẫu) -> ghi nhận thủ công
-const viaGateway = (p) => p.method === 'vnpay' && !!p.gateway_txn_no;
+const viaGateway = (p) => p.method === 'vnpay' && !!p.gateway_txn_no && p.gateway_txn_no !== '0';
+const REFUND_STATE = { sending: 'Đang gửi yêu cầu', pending: 'VNPay đang xử lý', unknown: 'Cần đối soát hoàn tiền', confirmed: 'Cần hoàn tất cập nhật quyền học', completed: 'Đã hoàn tiền', failed: 'VNPay từ chối yêu cầu' };
 
 // Tab lọc theo trạng thái (kèm số lượng)
 const STATUS_TABS = [
@@ -64,6 +65,8 @@ export default function AdminPayments() {
   const [query, setQuery] = useState(''); // từ khóa đã "chốt" sau khi ngừng gõ
   const [page, setPage] = useState(1);
   const [detail, setDetail] = useState(null);
+  const detailSequence = useRef(0);
+  useEffect(() => () => { detailSequence.current++; }, []);
   // Tăng lên để tải lại danh sách sau khi đối soát; cờ đang đối soát (tất cả / 1 đơn)
   const [reloadKey, setReloadKey] = useState(0);
   const [syncingAll, setSyncingAll] = useState(false);
@@ -98,7 +101,7 @@ export default function AdminPayments() {
     (async () => {
       setRows(null);
       setError(null);
-      const res = await paymentService.manage({ page, page_size: PAGE_SIZE, status, q: query, ...filters });
+      const res = await paymentService.manage({ page, page_size: PAGE_SIZE, status, q: query, ...filters, method: 'vnpay' });
       if (cancelled) return;
       if (res?.data?.success) {
         setRows(res.data.data || []);
@@ -107,6 +110,8 @@ export default function AdminPayments() {
         setRevenue(res.data.revenue || 0);
       } else {
         setRows([]);
+        setPagination({ page: 1, total: 0, total_pages: 1 });
+        setCounts({}); setRevenue(0);
         setError(res?.data?.message || 'Không thể tải danh sách giao dịch.');
       }
     })();
@@ -129,9 +134,10 @@ export default function AdminPayments() {
 
   // Đối soát tất cả đơn đang chờ với VNPay
   async function handleReconcileAll() {
+    if (!window.confirm(`Đối soát ${counts.pending || 0} đơn đang chờ khớp bộ lọc tìm kiếm, khóa học và ngày hiện tại?`)) return;
     setSyncingAll(true);
     try {
-      const res = await paymentService.reconcileAll();
+      const res = await paymentService.reconcileAll({ ...filters, q: query });
       showToast(res?.data?.message || 'Không thể đối soát.', res?.data?.success ? 'success' : 'error');
       setReloadKey((k) => k + 1);
     } finally {
@@ -141,14 +147,16 @@ export default function AdminPayments() {
 
   // Đối soát 1 đơn (trong hộp thoại chi tiết): hiển thị kết quả và cập nhật lại đơn
   async function handleReconcileOne() {
+    const seq = detailSequence.current;
     setSyncingOne(true);
     setSyncResult(null);
     try {
       const res = await paymentService.reconcile(detail.id);
+      setReloadKey(k => k + 1);
+      if (seq !== detailSequence.current) return;
       if (res?.data?.success) {
         setDetail(res.data.data);
         setSyncResult({ outcome: res.data.outcome, message: res.data.message, detail: res.data.detail });
-        setReloadKey((k) => k + 1);
       } else {
         setSyncResult({ outcome: 'error', message: res?.data?.message || 'Không thể đối soát.' });
       }
@@ -157,43 +165,67 @@ export default function AdminPayments() {
     }
   }
 
-  function openDetail(p) {
+  async function openDetail(p) {
+    const seq = ++detailSequence.current;
     setDetail(p);
     setSyncResult(null);
     setRefundOpen(false);
     setRefundReason('');
     setRevokeAccess(true);
+    const res = await paymentService.detail(p.id);
+    if (seq !== detailSequence.current) return;
+    if (res.ok) setDetail(res.data.data);
+    else setSyncResult({ outcome: 'error', message: res.data?.message || 'Không thể tải chi tiết giao dịch.' });
   }
+  function closeDetail() { detailSequence.current++; setDetail(null); }
 
   // Hoàn tiền toàn phần: hỏi xác nhận, gửi yêu cầu (đơn VNPay -> VNPay xử lý), cập nhật lại đơn
   async function handleRefund() {
+    const seq = detailSequence.current;
     const reason = refundReason.trim();
     if (reason.length < 5) {
       setSyncResult({ outcome: 'error', message: 'Vui lòng nhập lý do hoàn tiền (ít nhất 5 ký tự).' });
       return;
     }
-    const via = viaGateway(detail) ? 'qua VNPay' : '(ghi nhận thủ công)';
+    const via = 'qua VNPay';
     const revokeText = revokeAccess ? ' và THU HỒI quyền học của học viên' : '';
     if (!window.confirm(`Hoàn ${fmtMoney(detail.amount)} ${via} cho ${detail.user_name}${revokeText}? Thao tác không thể hoàn tác.`)) return;
     setRefunding(true);
     setSyncResult(null);
     try {
       const res = await paymentService.refund(detail.id, reason, revokeAccess);
+      setReloadKey(k => k + 1);
+      if (seq !== detailSequence.current) return;
       if (res?.data?.success) {
         setDetail(res.data.data);
         setRefundOpen(false);
-        setSyncResult({ outcome: 'paid', message: res.data.message });
-        setReloadKey((k) => k + 1);
+        setSyncResult({ outcome: res.data.data.refund_operation?.state === 'completed' ? 'paid' : 'waiting', message: res.data.message });
       } else {
         setSyncResult({ outcome: 'error', message: res?.data?.message || 'Không thể hoàn tiền.' });
+        const latest = await paymentService.detail(detail.id);
+        if (seq === detailSequence.current && latest.ok) setDetail(latest.data.data);
       }
     } finally {
       setRefunding(false);
     }
   }
 
+  async function handleRefundReconcile() {
+    const seq = detailSequence.current;
+    setRefunding(true); setSyncResult(null);
+    try {
+      const res = await paymentService.reconcileRefund(detail.id);
+      setReloadKey(k => k + 1);
+      if (seq !== detailSequence.current) return;
+      if (res.data?.data) setDetail(res.data.data);
+      setSyncResult({ outcome: !res.ok ? 'error' : res.data.data.refund_operation?.state === 'completed' ? 'paid' : 'waiting', message: res.data?.message || 'Không thể đối soát hoàn tiền.' });
+    } finally { setRefunding(false); }
+  }
+
   const allCount = Object.values(counts).reduce((a, b) => a + b, 0);
   const hasFilter = search || status || Object.values(filters).some(Boolean);
+  const refundOperation = detail?.refund_operation;
+  const canRefund = detail?.status === 'completed' && viaGateway(detail) && (!refundOperation || refundOperation.state === 'failed');
 
   return (
     <>
@@ -202,7 +234,7 @@ export default function AdminPayments() {
           <Link to="/admin">Admin</Link> / <span>Quản lý Giao dịch</span>
         </div>
         <h1 className="page-title">💳 Quản lý Giao dịch</h1>
-        <p className="page-subtitle">Tra cứu toàn bộ đơn thanh toán khóa học, lọc theo trạng thái và xem chi tiết kết quả từ VNPay.</p>
+        <p className="page-subtitle">Tra cứu các giao dịch VNPay, lọc theo trạng thái và xem chi tiết thanh toán khóa học.</p>
       </div>
 
       {/* Tab trạng thái kèm số lượng + nút đối soát */}
@@ -218,18 +250,18 @@ export default function AdminPayments() {
             }}
           >
             {t.label}
-            <span className="user-tab-count">{t.key ? counts[t.key] || 0 : allCount}</span>
+            <span className="user-tab-count">{error ? '—' : rows === null ? '…' : t.key ? counts[t.key] || 0 : allCount}</span>
           </button>
         ))}
         <button
           type="button"
           className="btn btn-outline btn-sm"
           style={{ marginLeft: 'auto' }}
-          disabled={syncingAll || !counts.pending}
-          title="Hỏi VNPay trạng thái thật của các đơn đang chờ: đã trả tiền -> hoàn tất + ghi danh; quá hạn chưa trả -> thất bại"
+          disabled={syncingAll || rows === null || !!error || !counts.pending}
+          title="Chỉ đối soát đơn đang chờ khớp tìm kiếm, khóa học và khoảng ngày đang chọn, không phụ thuộc tab trạng thái"
           onClick={handleReconcileAll}
         >
-          {syncingAll ? '⏳ Đang đối soát...' : `🔄 Đối soát ${counts.pending || 0} đơn đang chờ`}
+          {syncingAll ? '⏳ Đang đối soát...' : `🔄 Đối soát ${rows === null || error ? '—' : counts.pending || 0} đơn chờ trong bộ lọc`}
         </button>
       </div>
 
@@ -274,14 +306,14 @@ export default function AdminPayments() {
           {/* Tóm tắt kết quả lọc */}
           <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
             <span>
-              Tìm thấy <strong style={{ color: 'var(--secondary)' }}>{pagination.total}</strong> giao dịch
+              Tìm thấy <strong style={{ color: 'var(--secondary)' }}>{error || rows === null ? '—' : pagination.total}</strong> giao dịch
             </span>
             <span>
-              Doanh thu (đơn thành công trong kết quả lọc): <strong style={{ color: 'var(--success)' }}>{fmtMoney(revenue)}</strong>
+              Doanh thu (đơn thành công trong kết quả lọc): <strong style={{ color: 'var(--success)' }}>{error || rows === null ? '—' : fmtMoney(revenue)}</strong>
             </span>
           </div>
 
-          {error && <div className="alert alert-danger">{error}</div>}
+          {error && <div role="alert" className="alert alert-danger">{error} <button className="btn btn-outline btn-sm" onClick={() => setReloadKey(k => k + 1)}>Thử tải lại</button></div>}
 
           <div className="table-wrapper">
             <table>
@@ -342,16 +374,16 @@ export default function AdminPayments() {
       </div>
 
       {/* Chi tiết đơn hàng */}
-      <Modal open={!!detail} onClose={() => setDetail(null)}>
+      <Modal open={!!detail} onClose={closeDetail} overlayClassName="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[2000] overflow-y-auto p-4 md:p-10">
         {detail && (
           <div
             className="card modal-panel"
-            style={{ width: '100%', maxWidth: 520, margin: '1.5rem', animation: 'modalFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)' }}
+            style={{ width: '100%', maxWidth: 520, maxHeight: 'calc(100dvh - 5rem)', overflowY: 'auto', margin: '0 auto', animation: 'modalFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)' }}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="card-header">
               <h3>Chi tiết giao dịch</h3>
-              <button className="btn-icon" onClick={() => setDetail(null)}>✕</button>
+              <button className="btn-icon" aria-label="Đóng chi tiết" onClick={closeDetail}>✕</button>
             </div>
             <div className="card-body" style={{ fontSize: '0.88rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
@@ -385,6 +417,12 @@ export default function AdminPayments() {
                   <strong style={{ textAlign: 'right', wordBreak: 'break-word' }}>{v}</strong>
                 </div>
               ))}
+              {refundOperation && <div role="status" style={{ marginTop: 16, padding: 12, background: 'var(--surface-2)', borderRadius: 8 }}>
+                <strong>{REFUND_STATE[refundOperation.state] || refundOperation.state}</strong><p>{refundOperation.message}</p>
+                {['sending', 'pending', 'unknown', 'confirmed'].includes(refundOperation.state) && <button className="btn btn-primary btn-sm" disabled={refunding} onClick={handleRefundReconcile}>
+                  {refunding ? 'Đang kiểm tra…' : 'Đối soát hoàn tiền'}
+                </button>}
+              </div>}
               {/* Kết quả đối soát vừa chạy */}
               {syncResult && (
                 <div
@@ -396,15 +434,15 @@ export default function AdminPayments() {
                 </div>
               )}
               {/* Hoàn tiền: chỉ đơn đã thanh toán thành công */}
-              {detail.status === 'completed' && !refundOpen && (
+              {canRefund && !refundOpen && (
                 <button className="btn btn-outline btn-sm" style={{ width: '100%', marginTop: '1rem', color: 'var(--danger)', borderColor: 'var(--danger)' }} onClick={() => setRefundOpen(true)}>
                   ↩️ Hoàn tiền
                 </button>
               )}
-              {detail.status === 'completed' && refundOpen && (
+              {canRefund && refundOpen && (
                 <div style={{ marginTop: '1rem', padding: '0.9rem', border: '1px solid var(--border)', borderRadius: 8 }}>
                   <div style={{ fontWeight: 700, marginBottom: '0.5rem' }}>
-                    ↩️ Hoàn tiền toàn phần {fmtMoney(detail.amount)} {viaGateway(detail) ? 'qua VNPay' : '(ghi nhận thủ công)'}
+                    ↩️ Hoàn tiền toàn phần {fmtMoney(detail.amount)} qua VNPay
                   </div>
                   <textarea
                     className="form-control"

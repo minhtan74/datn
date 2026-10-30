@@ -1,0 +1,1021 @@
+{
+  "pages": [
+    {
+      "role": "public",
+      "viewport": "desktop",
+      "requested": "/",
+      "actual": "/",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "public",
+      "viewport": "desktop",
+      "requested": "/login",
+      "actual": "/login",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "public",
+      "viewport": "desktop",
+      "requested": "/register",
+      "actual": "/register",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "public",
+      "viewport": "desktop",
+      "requested": "/forgot-password",
+      "actual": "/forgot-password",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "public",
+      "viewport": "desktop",
+      "requested": "/reset-password",
+      "actual": "/reset-password",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "public",
+      "viewport": "mobile",
+      "requested": "/",
+      "actual": "/",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "public",
+      "viewport": "mobile",
+      "requested": "/login",
+      "actual": "/login",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "public",
+      "viewport": "mobile",
+      "requested": "/register",
+      "actual": "/register",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "public",
+      "viewport": "mobile",
+      "requested": "/forgot-password",
+      "actual": "/forgot-password",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "public",
+      "viewport": "mobile",
+      "requested": "/reset-password",
+      "actual": "/reset-password",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "viewport": "desktop",
+      "requested": "/admin",
+      "actual": "/admin",
+      "breadcrumbs": [
+        {
+          "text": "Admin / Dashboard",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "viewport": "desktop",
+      "requested": "/admin/users",
+      "actual": "/admin/users",
+      "breadcrumbs": [
+        {
+          "text": "Admin / Quản lý User",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "viewport": "desktop",
+      "requested": "/admin/users/teachers",
+      "actual": "/admin/users/teachers",
+      "breadcrumbs": [
+        {
+          "text": "Admin / Quản lý User / Giảng viên",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "viewport": "desktop",
+      "requested": "/admin/users/students",
+      "actual": "/admin/users/students",
+      "breadcrumbs": [
+        {
+          "text": "Admin / Quản lý User / Học viên",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "viewport": "desktop",
+      "requested": "/admin/courses",
+      "actual": "/admin/courses",
+      "breadcrumbs": [
+        {
+          "text": "Admin / Quản lý Khóa học",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "viewport": "desktop",
+      "requested": "/admin/payments",
+      "actual": "/admin/payments",
+      "breadcrumbs": [
+        {
+          "text": "Admin / Quản lý Giao dịch",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "viewport": "desktop",
+      "requested": "/admin/reports",
+      "actual": "/admin/reports",
+      "breadcrumbs": [
+        {
+          "text": "Admin / Báo cáo",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "viewport": "desktop",
+      "requested": "/admin/teachers",
+      "actual": "/admin/users/teachers",
+      "breadcrumbs": [
+        {
+          "text": "Admin / Quản lý User / Giảng viên",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "viewport": "desktop",
+      "requested": "/admin/students",
+      "actual": "/admin/users/students",
+      "breadcrumbs": [
+        {
+          "text": "Admin / Quản lý User / Học viên",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "viewport": "mobile",
+      "requested": "/admin",
+      "actual": "/admin",
+      "breadcrumbs": [
+        {
+          "text": "Admin / Dashboard",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "viewport": "mobile",
+      "requested": "/admin/users",
+      "actual": "/admin/users",
+      "breadcrumbs": [
+        {
+          "text": "Admin / Quản lý User",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "viewport": "mobile",
+      "requested": "/admin/users/teachers",
+      "actual": "/admin/users/teachers",
+      "breadcrumbs": [
+        {
+          "text": "Admin / Quản lý User / Giảng viên",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "viewport": "mobile",
+      "requested": "/admin/users/students",
+      "actual": "/admin/users/students",
+      "breadcrumbs": [
+        {
+          "text": "Admin / Quản lý User / Học viên",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "viewport": "mobile",
+      "requested": "/admin/courses",
+      "actual": "/admin/courses",
+      "breadcrumbs": [
+        {
+          "text": "Admin / Quản lý Khóa học",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "viewport": "mobile",
+      "requested": "/admin/payments",
+      "actual": "/admin/payments",
+      "breadcrumbs": [
+        {
+          "text": "Admin / Quản lý Giao dịch",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "viewport": "mobile",
+      "requested": "/admin/reports",
+      "actual": "/admin/reports",
+      "breadcrumbs": [
+        {
+          "text": "Admin / Báo cáo",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "viewport": "mobile",
+      "requested": "/admin/teachers",
+      "actual": "/admin/users/teachers",
+      "breadcrumbs": [
+        {
+          "text": "Admin / Quản lý User / Giảng viên",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "admin",
+      "viewport": "mobile",
+      "requested": "/admin/students",
+      "actual": "/admin/users/students",
+      "breadcrumbs": [
+        {
+          "text": "Admin / Quản lý User / Học viên",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "desktop",
+      "requested": "/teacher",
+      "actual": "/teacher",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "desktop",
+      "requested": "/teacher/courses",
+      "actual": "/teacher/courses",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "desktop",
+      "requested": "/teacher/chapters",
+      "actual": "/teacher/chapters",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "desktop",
+      "requested": "/teacher/lessons",
+      "actual": "/teacher/lessons",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "desktop",
+      "requested": "/teacher/quizzes",
+      "actual": "/teacher/quizzes",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "desktop",
+      "requested": "/teacher/quizzes?tab=ai",
+      "actual": "/teacher/quizzes?tab=ai",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "desktop",
+      "requested": "/teacher/reports",
+      "actual": "/teacher/reports",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "desktop",
+      "requested": "/teacher/documents",
+      "actual": "/teacher/documents",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "desktop",
+      "requested": "/teacher/profile",
+      "actual": "/teacher/profile",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "desktop",
+      "requested": "/teacher/students",
+      "actual": "/teacher/reports",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "desktop",
+      "requested": "/teacher/stats",
+      "actual": "/teacher/reports",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "desktop",
+      "requested": "/teacher/topics",
+      "actual": "/teacher/quizzes",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "desktop",
+      "requested": "/teacher/ai-quiz",
+      "actual": "/teacher/quizzes?tab=ai",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "desktop",
+      "requested": "/teacher/quizzes/343/questions",
+      "actual": "/teacher/quizzes/343/questions",
+      "breadcrumbs": [
+        {
+          "text": "← 📖 Quản lý Chương › Ôn tập bài: Vòng lặp for",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "mobile",
+      "requested": "/teacher",
+      "actual": "/teacher",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "mobile",
+      "requested": "/teacher/courses",
+      "actual": "/teacher/courses",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "mobile",
+      "requested": "/teacher/chapters",
+      "actual": "/teacher/chapters",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "mobile",
+      "requested": "/teacher/lessons",
+      "actual": "/teacher/lessons",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "mobile",
+      "requested": "/teacher/quizzes",
+      "actual": "/teacher/quizzes",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "mobile",
+      "requested": "/teacher/quizzes?tab=ai",
+      "actual": "/teacher/quizzes?tab=ai",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "mobile",
+      "requested": "/teacher/reports",
+      "actual": "/teacher/reports",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "mobile",
+      "requested": "/teacher/documents",
+      "actual": "/teacher/documents",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "mobile",
+      "requested": "/teacher/profile",
+      "actual": "/teacher/profile",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "mobile",
+      "requested": "/teacher/students",
+      "actual": "/teacher/reports",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "mobile",
+      "requested": "/teacher/stats",
+      "actual": "/teacher/reports",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "mobile",
+      "requested": "/teacher/topics",
+      "actual": "/teacher/quizzes",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "mobile",
+      "requested": "/teacher/ai-quiz",
+      "actual": "/teacher/quizzes?tab=ai",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "teacher",
+      "viewport": "mobile",
+      "requested": "/teacher/quizzes/343/questions",
+      "actual": "/teacher/quizzes/343/questions",
+      "breadcrumbs": [
+        {
+          "text": "← 📖 Quản lý Chương › Ôn tập bài: Vòng lặp for",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "desktop",
+      "requested": "/student/dashboard",
+      "actual": "/student/dashboard",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "desktop",
+      "requested": "/student/courses",
+      "actual": "/student/courses",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "desktop",
+      "requested": "/student/my-courses",
+      "actual": "/student/my-courses",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "desktop",
+      "requested": "/student/profile",
+      "actual": "/student/profile",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "desktop",
+      "requested": "/student/progress",
+      "actual": "/student/progress",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "desktop",
+      "requested": "/quiz",
+      "actual": "/quiz",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "desktop",
+      "requested": "/student/ai-tutor",
+      "actual": "/student/ai-tutor",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "desktop",
+      "requested": "/student/payment-result",
+      "actual": "/student/payment-result",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "desktop",
+      "requested": "/student/quiz-history",
+      "actual": "/quiz",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "desktop",
+      "requested": "/courses",
+      "actual": "/student/courses",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "desktop",
+      "requested": "/chapters?course_id=1",
+      "actual": "/chapters?course_id=1",
+      "breadcrumbs": [
+        {
+          "text": "Dashboard › Khóa học của tôi › Python Cơ Bản Cho Người Mới Bắt Đầu",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "desktop",
+      "requested": "/lesson?id=1",
+      "actual": "/lesson?id=1",
+      "breadcrumbs": [
+        {
+          "text": "Dashboard › Khóa học của tôi › Python Cơ Bản Cho Người Mới Bắt Đầu › Chương 1: Làm Quen Với Python › Cài đặt Python & IDE",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "desktop",
+      "requested": "/quiz-show?id=292",
+      "actual": "/quiz-show?id=292",
+      "breadcrumbs": [
+        {
+          "text": "Dashboard › Python Cơ Bản Cho Người Mới Bắt Đầu › Ôn tập: Chương 1: Làm Quen Với Python",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "desktop",
+      "requested": "/student/quiz-result?result_id=302",
+      "actual": "/student/quiz-result?result_id=302",
+      "breadcrumbs": [
+        {
+          "text": "Dashboard › Danh sách Quiz › Kết quả bài làm",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "mobile",
+      "requested": "/student/dashboard",
+      "actual": "/student/dashboard",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "mobile",
+      "requested": "/student/courses",
+      "actual": "/student/courses",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "mobile",
+      "requested": "/student/my-courses",
+      "actual": "/student/my-courses",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "mobile",
+      "requested": "/student/profile",
+      "actual": "/student/profile",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "mobile",
+      "requested": "/student/progress",
+      "actual": "/student/progress",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "mobile",
+      "requested": "/quiz",
+      "actual": "/quiz",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "mobile",
+      "requested": "/student/ai-tutor",
+      "actual": "/student/ai-tutor",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "mobile",
+      "requested": "/student/payment-result",
+      "actual": "/student/payment-result",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "mobile",
+      "requested": "/student/quiz-history",
+      "actual": "/quiz",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "mobile",
+      "requested": "/courses",
+      "actual": "/student/courses",
+      "breadcrumbs": [],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "mobile",
+      "requested": "/chapters?course_id=1",
+      "actual": "/chapters?course_id=1",
+      "breadcrumbs": [
+        {
+          "text": "Dashboard › Khóa học của tôi › Python Cơ Bản Cho Người Mới Bắt Đầu",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "mobile",
+      "requested": "/lesson?id=1",
+      "actual": "/lesson?id=1",
+      "breadcrumbs": [
+        {
+          "text": "Dashboard › Khóa học của tôi › Python Cơ Bản Cho Người Mới Bắt Đầu › Chương 1: Làm Quen Với Python › Cài đặt Python & IDE",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "mobile",
+      "requested": "/quiz-show?id=292",
+      "actual": "/quiz-show?id=292",
+      "breadcrumbs": [
+        {
+          "text": "Dashboard › Python Cơ Bản Cho Người Mới Bắt Đầu › Ôn tập: Chương 1: Làm Quen Với Python",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "role": "student",
+      "viewport": "mobile",
+      "requested": "/student/quiz-result?result_id=302",
+      "actual": "/student/quiz-result?result_id=302",
+      "breadcrumbs": [
+        {
+          "text": "Dashboard › Danh sách Quiz › Kết quả bài làm",
+          "insideMain": true,
+          "insideHeader": false
+        }
+      ],
+      "hasContent": true,
+      "overflow": false,
+      "errors": []
+    }
+  ],
+  "preventedWrites": [],
+  "errors": [],
+  "scope": "Breadcrumb duplication and layout across canonical pages/redirects; not a full functional retest.",
+  "summary": {
+    "pageViews": 84,
+    "duplicateBreadcrumbs": 0,
+    "javascriptErrorPages": 0,
+    "overflowPages": []
+  }
+}

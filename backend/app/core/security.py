@@ -1,7 +1,7 @@
 """JWT HS256 + mật khẩu (tương đương app/Services/JwtService.php + User model của PHP).
 
-- Giữ nguyên payload {id, fullname, email, role, iat, exp} và JWT_SECRET để
-  token do bản PHP phát hành vẫn dùng được.
+- Giữ tương thích token cũ khi token_version của tài khoản còn bằng 0;
+  sau khôi phục mật khẩu, tăng token_version để thu hồi các phiên trước đó.
 - verify_password chấp nhận cả plaintext (dữ liệu seed) lẫn bcrypt.
 """
 import time
@@ -40,6 +40,7 @@ def create_token(user: dict) -> str:
         "fullname": user["fullname"],
         "email": user["email"],
         "role": user["role"],
+        "token_version": int(user.get("token_version", 0)),
         "iat": now,
         "exp": now + int(settings.jwt_expire),
     }

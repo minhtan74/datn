@@ -12,11 +12,12 @@ function fmtDateTime(str) {
   return Number.isNaN(d.getTime()) ? '—' : d.toLocaleString('vi-VN');
 }
 
-// Lý do thất bại do backend phát hiện (không phải do ngân hàng)
-const REASON_TEXT = {
-  invalid_signature: 'Dữ liệu trả về không hợp lệ (sai chữ ký). Giao dịch không được ghi nhận.',
-  not_found: 'Không tìm thấy đơn hàng tương ứng.',
-  invalid_amount: 'Số tiền thanh toán không khớp với đơn hàng.',
+const RESULTS = {
+  completed: { icon: '✅', title: 'Thanh toán thành công', message: 'Hệ thống đã ghi nhận thanh toán thành công.' },
+  pending: { icon: '⏳', title: 'Thanh toán đang chờ xác nhận', message: 'Hệ thống chưa có kết quả cuối cùng. Bạn có thể kiểm tra lại trạng thái sau ít phút.' },
+  failed: { icon: '❌', title: 'Thanh toán không thành công', message: 'Hệ thống ghi nhận giao dịch không thành công.' },
+  refunded: { icon: '↩️', title: 'Đã hoàn tiền', message: 'Hệ thống ghi nhận đơn hàng đã được hoàn tiền. Thời điểm tiền về tài khoản phụ thuộc ngân hàng.' },
+  unknown: { icon: '🔎', title: 'Chưa xác minh được thanh toán', message: 'Hiện chưa đủ thông tin để xác nhận kết quả thanh toán.' },
 };
 
 /**
@@ -27,37 +28,55 @@ const REASON_TEXT = {
 export default function PaymentResult() {
   const [params] = useSearchParams();
   const ref = params.get('ref') || '';
-  const reason = params.get('reason') || '';
-  const [payment, setPayment] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [refresh, setRefresh] = useState(0);
+  const [result, setResult] = useState({ ref: '', payment: null, error: '', loading: true });
 
   useEffect(() => {
+    let active = true;
+    const controller = new AbortController();
     if (!ref) {
-      setLoading(false);
+      setResult({ ref, payment: null, error: 'Liên kết thiếu mã đơn hàng. Vui lòng kiểm tra lại liên kết hoặc liên hệ Admin.', loading: false });
       return;
     }
+    setResult({ ref, payment: null, error: '', loading: true });
     (async () => {
-      const res = await paymentService.getStatus(ref);
-      if (res?.data?.success) setPayment(res.data.data);
-      setLoading(false);
+      let payment = null;
+      let error = '';
+      try {
+        const res = await paymentService.getStatus(ref, { signal: controller.signal, timeout: 15000 });
+        const data = res?.data?.data;
+        if (res?.ok && res.data?.success && data && !Array.isArray(data) && data.transaction_ref === ref) {
+          payment = data;
+        } else {
+          error = res?.status === 404
+            ? 'Không tìm thấy đơn hàng trong tài khoản của bạn. Vui lòng kiểm tra mã đơn hoặc liên hệ Admin.'
+            : 'Không thể lấy trạng thái thanh toán lúc này. Vui lòng kiểm tra kết nối và thử kiểm tra lại.';
+        }
+      } catch {
+        error = 'Không thể lấy trạng thái thanh toán lúc này. Vui lòng kiểm tra kết nối và thử kiểm tra lại.';
+      }
+      if (active) setResult({ ref, payment, error, loading: false });
     })();
-  }, [ref]);
+    return () => { active = false; controller.abort(); };
+  }, [ref, refresh]);
 
+  // A new URL must never briefly display the previous order's outcome.
+  const loading = result.loading || result.ref !== ref;
   if (loading) {
     return (
       <main className="s-main" style={{ textAlign: 'center', padding: '5rem 1rem', color: 'var(--s-text-muted)' }}>
-        ⏳ Đang kiểm tra kết quả thanh toán...
+        <p role="status">⏳ Đang kiểm tra kết quả thanh toán...</p>
       </main>
     );
   }
 
-  const success = payment?.status === 'completed';
-  const refunded = payment?.status === 'refunded';
-  const message = success
-    ? 'Khóa học đã được mở. Chúc bạn học tốt!'
-    : refunded
-    ? 'Đơn hàng này đã được hoàn tiền.'
-    : REASON_TEXT[reason] || payment?.message || 'Giao dịch không thành công. Bạn chưa bị trừ tiền cho khóa học này.';
+  const { payment, error } = result;
+  const state = Object.hasOwn(RESULTS, payment?.status) ? payment.status : 'unknown';
+  const display = RESULTS[state];
+  const canLearn = state === 'completed' && payment.enrolled === true && payment.course_id;
+  const canCheck = ref && (state === 'pending' || state === 'unknown' || (state === 'completed' && !canLearn));
+  const needsBankCheck = state === 'pending' || state === 'unknown' || state === 'failed';
+  const message = error || display.message;
 
   return (
     <main className="s-main">
@@ -73,11 +92,17 @@ export default function PaymentResult() {
         }}
       >
         {/* Biểu tượng + tiêu đề kết quả */}
-        <div style={{ fontSize: '3rem', lineHeight: 1 }}>{success ? '✅' : refunded ? '↩️' : '❌'}</div>
+        <div aria-hidden="true" style={{ fontSize: '3rem', lineHeight: 1 }}>{display.icon}</div>
         <h1 style={{ fontSize: '1.4rem', fontWeight: 800, margin: '0.75rem 0 0.35rem' }}>
-          {success ? 'Thanh toán thành công' : refunded ? 'Đã hoàn tiền' : 'Thanh toán thất bại'}
+          {display.title}
         </h1>
         <p style={{ color: 'var(--s-text-muted)', fontSize: '0.9rem' }}>{message}</p>
+        {state === 'completed' && <p style={{ fontSize: '0.9rem', marginTop: '0.75rem' }}>
+          {canLearn ? 'Khóa học đã được mở. Chúc bạn học tốt!' : 'Quyền truy cập khóa học chưa được xác nhận. Hãy kiểm tra lại hoặc liên hệ Admin kèm mã đơn hàng.'}
+        </p>}
+        {needsBankCheck && <p style={{ fontSize: '0.86rem', marginTop: '1rem', lineHeight: 1.6 }}>
+          Vui lòng kiểm tra lịch sử giao dịch ngân hàng trước khi thanh toán lại. Nếu đã bị trừ tiền, hãy liên hệ Admin kèm mã đơn hàng để được hỗ trợ đối soát.
+        </p>}
 
         {/* Thông tin đơn hàng */}
         {payment ? (
@@ -98,22 +123,25 @@ export default function PaymentResult() {
             ))}
           </div>
         ) : (
-          <p style={{ margin: '1.25rem 0', fontSize: '0.86rem', color: 'var(--s-text-muted)' }}>
-            Không tìm thấy thông tin đơn hàng{ref ? ` ${ref}` : ''}.
+          ref && <p style={{ margin: '1.25rem 0', fontSize: '0.86rem', color: 'var(--s-text-muted)', overflowWrap: 'anywhere' }}>
+            Mã đơn hàng: <strong>{ref}</strong>
           </p>
         )}
 
         {/* Hành động tiếp theo */}
         <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          {success ? (
+          {canCheck && <button type="button" className="s-btn s-btn-primary" onClick={() => setRefresh((value) => value + 1)}>
+            Kiểm tra lại trạng thái
+          </button>}
+          {canLearn ? (
             <Link className="s-btn s-btn-primary" to={`/chapters?course_id=${payment.course_id}`}>
               🚀 Vào học ngay
             </Link>
-          ) : (
-            <Link className="s-btn s-btn-primary" to="/student/courses">
-              🔁 Thử thanh toán lại
+          ) : (state === 'failed' || state === 'refunded') ? (
+            <Link className="s-btn s-btn-ghost" to="/student/courses">
+              Xem khóa học
             </Link>
-          )}
+          ) : null}
           <Link className="s-btn s-btn-ghost" to="/student/my-courses">
             Khóa học của tôi
           </Link>

@@ -143,10 +143,14 @@ def query_transaction(*, txn_ref: str, transaction_date: str, ip_addr: str = "12
     except (httpx.HTTPError, ValueError) as e:
         raise VnpayQueryError(f"Không kết nối được VNPay: {e}") from e
 
-    # Phản hồi có chữ ký thì phải khớp (phản hồi lỗi định dạng đôi khi không kèm chữ ký)
+    if not isinstance(rsp, dict):
+        raise VnpayQueryError("Phản hồi VNPay không đúng định dạng.")
+    # Chỉ dùng phản hồi đã xác minh để cập nhật giao dịch.
     got = (rsp.get("vnp_SecureHash") or "").lower()
-    if got and not hmac.compare_digest(got, _pipe_sign(rsp, _QUERY_RSP_FIELDS).lower()):
+    if not got or not hmac.compare_digest(got, _pipe_sign(rsp, _QUERY_RSP_FIELDS).lower()):
         raise VnpayQueryError("Chữ ký phản hồi từ VNPay không hợp lệ.")
+    if rsp.get("vnp_Command") != "querydr" or rsp.get("vnp_TmnCode") != settings.vnpay_tmn_code.strip() or rsp.get("vnp_TxnRef") != txn_ref:
+        raise VnpayQueryError("Phản hồi không khớp yêu cầu truy vấn VNPay.")
     return rsp
 
 
@@ -179,7 +183,7 @@ REFUND_MESSAGES = {
 # Gửi yêu cầu hoàn tiền TOÀN PHẦN (vnp_TransactionType=02) cho 1 giao dịch đã thanh toán.
 # transaction_date = vnp_CreateDate của đơn gốc; created_by = người thực hiện (email admin).
 def refund_transaction(*, txn_ref: str, amount: float, transaction_no: str | None, transaction_date: str,
-                       created_by: str, reason: str, ip_addr: str = "127.0.0.1") -> dict:
+                       created_by: str, reason: str, ip_addr: str = "127.0.0.1", request_id: str | None = None) -> dict:
     import secrets
 
     import httpx
@@ -187,7 +191,7 @@ def refund_transaction(*, txn_ref: str, amount: float, transaction_no: str | Non
     if not is_configured():
         raise VnpayQueryError("Chưa cấu hình VNPay.")
     req = {
-        "vnp_RequestId": secrets.token_hex(16),
+        "vnp_RequestId": request_id or secrets.token_hex(16),
         "vnp_Version": "2.1.0",
         "vnp_Command": "refund",
         "vnp_TmnCode": settings.vnpay_tmn_code.strip(),
@@ -208,7 +212,11 @@ def refund_transaction(*, txn_ref: str, amount: float, transaction_no: str | Non
         rsp = r.json()
     except (httpx.HTTPError, ValueError) as e:
         raise VnpayQueryError(f"Không kết nối được VNPay: {e}") from e
+    if not isinstance(rsp, dict):
+        raise VnpayQueryError("Phản hồi VNPay không đúng định dạng.")
     got = (rsp.get("vnp_SecureHash") or "").lower()
-    if got and not hmac.compare_digest(got, _pipe_sign(rsp, _REFUND_RSP_FIELDS).lower()):
+    if not got or not hmac.compare_digest(got, _pipe_sign(rsp, _REFUND_RSP_FIELDS).lower()):
         raise VnpayQueryError("Chữ ký phản hồi từ VNPay không hợp lệ.")
+    if rsp.get("vnp_Command") != "refund" or rsp.get("vnp_TmnCode") != settings.vnpay_tmn_code.strip() or rsp.get("vnp_TxnRef") != txn_ref:
+        raise VnpayQueryError("Phản hồi không khớp yêu cầu hoàn tiền VNPay.")
     return rsp

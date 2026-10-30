@@ -1,0 +1,17 @@
+[
+  {
+    "question": "Máy một lõi có làm đồng thời nhiều việc được không, điều đó có phải song song thật trên lõi đó không?",
+    "expected_clarification": false,
+    "actual_kind": "topic"
+  },
+  {
+    "question": "HashMap.put cùng một khóa hai lần có tự báo lỗi trùng không? Nếu cần từ chối trùng nên làm gì?",
+    "expected_clarification": false,
+    "actual_kind": "debug"
+  },
+  {
+    "question": "Sau khi sửa lỗi ghi danh trùng, chạy lại đúng ca từng gây lỗi đã thay thế được kiểm thử hồi quy chưa? Phân biệt confirmation testing với regression testing.",
+    "expected_clarification": false,
+    "actual_kind": "debug"
+  }
+]

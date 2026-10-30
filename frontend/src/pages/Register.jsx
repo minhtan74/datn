@@ -6,7 +6,6 @@ export default function Register() {
   const navigate = useNavigate();
   const [fullname, setFullname] = useState('');
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('student');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -48,7 +47,7 @@ export default function Register() {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-600 to-violet-600 rounded-2xl text-3xl shadow-md shadow-blue-200 mb-4 select-none">
               🎓
             </div>
-            <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Tạo tài khoản mới</h1>
+            <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Tạo tài khoản học viên</h1>
             <p className="text-sm text-slate-500 mt-1">Đăng ký tham gia học tập miễn phí hôm nay</p>
           </div>
 
@@ -88,29 +87,6 @@ export default function Register() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-            </div>
-
-            <div>
-              <label htmlFor="role" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                Vai trò tài khoản
-              </label>
-              <div className="relative">
-                {/* Lưu ý: vai trò chọn ở đây KHÔNG được gửi lên server — backend luôn tạo tài khoản học viên */}
-                <select
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 transition-all duration-200 cursor-pointer appearance-none"
-                  id="role"
-                  name="role"
-                  required
-                  value={role}
-                  onChange={(e) => setRole(e.target.value)}
-                >
-                  <option value="student">Học viên</option>
-                  <option value="teacher">Giảng viên</option>
-                </select>
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
-                  ▾
-                </div>
-              </div>
             </div>
 
             <div>
@@ -166,6 +142,10 @@ export default function Register() {
               )}
             </button>
           </form>
+
+          <p className="text-sm text-slate-500 leading-relaxed">
+            Tài khoản Giảng viên do Admin cấp. Nếu bạn là giảng viên, hãy liên hệ Admin để nhận tài khoản đăng nhập.
+          </p>
 
           <p className="text-center text-sm text-slate-500">
             Đã có tài khoản?{' '}

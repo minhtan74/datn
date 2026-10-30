@@ -1,0 +1,84 @@
+{
+  "cases": [
+    {
+      "role": "admin",
+      "view": "desktop",
+      "url": "/admin/users",
+      "closeBlocked": false,
+      "escapeCloses": false,
+      "hit": {
+        "blockedByHeader": false,
+        "targetClass": "btn-icon",
+        "x": 885,
+        "y": 241.09375
+      }
+    },
+    {
+      "role": "admin",
+      "view": "mobile",
+      "url": "/admin/users",
+      "closeBlocked": false,
+      "escapeCloses": false,
+      "hit": {
+        "blockedByHeader": false,
+        "targetClass": "btn-icon",
+        "x": 285,
+        "y": 61
+      }
+    },
+    {
+      "role": "admin",
+      "view": "desktop",
+      "url": "/admin/courses",
+      "closeBlocked": false,
+      "escapeCloses": false,
+      "hit": {
+        "blockedByHeader": false,
+        "targetClass": "btn-icon",
+        "x": 885,
+        "y": 157.984375
+      }
+    },
+    {
+      "role": "admin",
+      "view": "mobile",
+      "url": "/admin/courses",
+      "closeBlocked": false,
+      "escapeCloses": false,
+      "hit": {
+        "blockedByHeader": false,
+        "targetClass": "btn-icon",
+        "x": 285,
+        "y": 61
+      }
+    },
+    {
+      "role": "teacher",
+      "view": "desktop",
+      "url": "/teacher/courses",
+      "closeBlocked": false,
+      "escapeCloses": false,
+      "hit": {
+        "blockedByHeader": false,
+        "targetClass": "btn-icon",
+        "x": 895,
+        "y": 189.09375
+      }
+    },
+    {
+      "role": "teacher",
+      "view": "mobile",
+      "url": "/teacher/courses",
+      "closeBlocked": false,
+      "escapeCloses": false,
+      "hit": {
+        "blockedByHeader": false,
+        "targetClass": "btn-icon",
+        "x": 285,
+        "y": 61
+      }
+    }
+  ],
+  "blockedCloseCases": 0,
+  "realWrites": 0
+}

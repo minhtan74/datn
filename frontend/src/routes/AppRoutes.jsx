@@ -15,6 +15,7 @@ import CoursesRedirect from './CoursesRedirect.jsx';
 import Home from '../pages/Home.jsx';
 import Login from '../pages/Login.jsx';
 import Register from '../pages/Register.jsx';
+import PasswordRecovery from '../pages/PasswordRecovery.jsx';
 import Chapters from '../pages/Chapters.jsx';
 import Lesson from '../pages/Lesson.jsx';
 import Quiz from '../pages/Quiz.jsx';
@@ -63,6 +64,8 @@ export default function AppRoutes() {
       {/* Khu vực công khai: trang chủ; /login và /register chỉ dành cho người chưa đăng nhập */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
+        <Route path="/forgot-password" element={<PasswordRecovery />} />
+        <Route path="/reset-password" element={<PasswordRecovery reset />} />
         <Route
           path="/login"
           element={

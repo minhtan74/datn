@@ -4,7 +4,8 @@ import { courseService } from '../services/courseService';
 import { chapterService } from '../services/chapterService';
 import { lessonService } from '../services/lessonService';
 import { progressService } from '../services/progressService';
-import { aiService } from '../services/aiService';
+import { useAiChat } from '../hooks/useAiChat';
+import AiChatFeedback, { AiReplyLabel } from '../components/ai/AiChatFeedback.jsx';
 import { isYoutubeUrl, getEmbedUrl, isUsableMediaUrl } from '../utils/videoUrl';
 
 /** Tương đương _legacy/pages/lesson.html (logic inline trong file đó, lessons.js là dead code) */
@@ -31,8 +32,9 @@ export default function Lesson() {
   const [aiOpen, setAiOpen] = useState(false);
   const [aiMessages, setAiMessages] = useState([]);
   const [aiInput, setAiInput] = useState('');
-  const [aiSending, setAiSending] = useState(false);
   const [aiConvId, setAiConvId] = useState(null);
+  const aiChat = useAiChat({ scopeKey: `lesson-${lessonId}`, setMessages: setAiMessages, onConversationId: setAiConvId });
+  const aiSending = aiChat.sending;
 
   // Đang xem video hay tài liệu PDF (khi bài có cả hai)
   const [playerTab, setPlayerTab] = useState('video');
@@ -193,31 +195,20 @@ export default function Lesson() {
   // Tự cuộn khung chat AI xuống tin nhắn mới nhất
   useEffect(() => {
     aiThreadRef.current?.scrollTo({ top: aiThreadRef.current.scrollHeight, behavior: 'smooth' });
-  }, [aiMessages, aiSending]);
+  }, [aiMessages, aiSending, aiChat.feedback]);
 
   // Gửi câu hỏi cho AI (chỉ tìm trong tài liệu của bài học này); hiện câu hỏi ngay, chờ câu trả lời + nguồn
-  async function sendAiMessage(e) {
+  function sendAiMessage(e) {
     e?.preventDefault();
     const text = aiInput.trim();
     if (!text || aiSending) return;
-    setAiInput('');
-    setAiMessages((m) => [...m, { role: 'user', content: text }]);
-    setAiSending(true);
-    const res = await aiService.chat({
+    const accepted = aiChat.sendMessage({
       courseId: course.id,
       lessonId: lesson.id,
       conversationId: aiConvId,
       message: text,
     });
-    setAiSending(false);
-    const data = res?.data?.data;
-    if (!res?.ok || !data) {
-      setAiMessages((m) => [...m, { role: 'assistant', content: res?.data?.message || 'Có lỗi xảy ra, thử lại sau.' }]);
-      return;
-    }
-    setAiMessages((m) => [...m, { role: 'assistant', content: data.answer, sources: data.sources }]);
-    // Lần hỏi đầu tiên: nhớ id cuộc trò chuyện để các câu sau hỏi tiếp cùng ngữ cảnh
-    if (!aiConvId && data.conversation_id) setAiConvId(data.conversation_id);
+    if (accepted) setAiInput('');
   }
 
   // Đang tải -> hiện vòng xoay; có lỗi (vd chưa ghi danh) -> hiện thông báo
@@ -691,6 +682,7 @@ export default function Lesson() {
                     border: m.role === 'user' ? 'none' : '1px solid var(--s-border)',
                   }}
                 >
+                  <AiReplyLabel message={m} />
                   {m.content}
                 </div>
                 {m.role === 'assistant' && Array.isArray(m.sources) && m.sources.length > 0 && (
@@ -715,11 +707,8 @@ export default function Lesson() {
               </div>
             ))}
 
-            {aiSending && (
-              <div style={{ alignSelf: 'flex-start', color: 'var(--s-text-muted)', fontSize: '0.78rem' }}>
-                🤖 Đang tìm trong tài liệu…
-              </div>
-            )}
+            <AiChatFeedback sending={aiSending} elapsedSeconds={aiChat.elapsedSeconds} feedback={aiChat.feedback}
+              onStop={aiChat.stop} onRetry={aiChat.retry} onEdit={setAiInput} />
           </div>
 
           <form
@@ -735,7 +724,8 @@ export default function Lesson() {
             <input
               value={aiInput}
               onChange={(e) => setAiInput(e.target.value)}
-              placeholder="Nhập câu hỏi…"
+              aria-label="Câu hỏi cho AI về bài học"
+              placeholder={aiMessages.at(-1)?.needs_clarification ? 'Bổ sung thông tin AI đang hỏi…' : 'Nhập câu hỏi…'}
               disabled={aiSending}
               style={{ flex: 1, padding: '0.5rem 0.65rem', borderRadius: 8, border: '1px solid var(--s-border)', minWidth: 0 }}
             />

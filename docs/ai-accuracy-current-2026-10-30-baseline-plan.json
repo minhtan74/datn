@@ -1,0 +1,502 @@
+[
+  {
+    "id": "student_em-accuracy-01",
+    "role": "student_em",
+    "course_id": 1,
+    "reference_lesson": 2,
+    "question": "Muốn phép tính print(\"4\" + 2) cho ra số 6 thì sửa thế nào? Vì sao code cũ lỗi?",
+    "gold": "Python không cộng trực tiếp str/int; int(\"4\")+2 cho 6, không sửa thành ghép chuỗi \"42\".",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "student_em-accuracy-02",
+    "role": "student_em",
+    "course_id": 1,
+    "reference_lesson": 5,
+    "question": "list(range(2, 7)) có những số nào, có số 7 không?",
+    "gold": "[2,3,4,5,6]; cận trên 7 không được lấy.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "student_em-accuracy-03",
+    "role": "student_em",
+    "course_id": 1,
+    "reference_lesson": 5,
+    "question": "a = [10, 20, 30]. a[1] là 10 hay 20, và a[3] có hợp lệ không?",
+    "gold": "a[1]=20; a[3] ngoài miền 0..2, gây IndexError.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "student_em-accuracy-04",
+    "role": "student_em",
+    "course_id": 1,
+    "reference_lesson": 6,
+    "question": "Một hàm Python chỉ print(5), không viết return. Gán x = hàm đó thì x có bằng 5 không?",
+    "gold": "Không; print chỉ hiển thị, hàm không return trả None.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "student_em-accuracy-05",
+    "role": "student_em",
+    "course_id": 6,
+    "reference_lesson": 46,
+    "question": "id là khóa chính của bảng học viên. Hai hàng trong chính bảng đó dùng chung id=8 có được không?",
+    "gold": "Không; khóa chính phải duy nhất, không NULL.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "student_em-accuracy-06",
+    "role": "student_em",
+    "course_id": 6,
+    "reference_lesson": 46,
+    "question": "lop_id là khóa ngoại, cột cho phép NULL và trường chấp nhận học viên chưa xếp lớp. Có bắt buộc điền mã lớp ngay không?",
+    "gold": "Không bắt buộc trong giả định đã cho; NULL khác mã tham chiếu không tồn tại; giá trị khác NULL phải thỏa FK.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "student_em-accuracy-07",
+    "role": "student_em",
+    "course_id": 6,
+    "reference_lesson": 50,
+    "question": "LEFT JOIN courses với enrollments, khóa chưa có ai ghi danh. COUNT(*) và COUNT(enrollments.id) sẽ lần lượt cho mấy?",
+    "gold": "Mỗi nhóm khóa rỗng có một hàng ngoài nên COUNT(*)=1, COUNT(e.id)=0 nếu id phía phải NULL.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "student_em-accuracy-08",
+    "role": "student_em",
+    "course_id": 6,
+    "reference_lesson": 49,
+    "question": "Muốn tìm học viên chưa đăng ký khóa nào: bắt đầu LEFT JOIN từ students hay courses, rồi lọc điều kiện gì?",
+    "gold": "Bắt đầu students LEFT JOIN enrollments ON e.student_id=s.id; WHERE e.student_id IS NULL hoặc e.id IS NULL.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "student_em-accuracy-09",
+    "role": "student_em",
+    "course_id": 1,
+    "reference_lesson": null,
+    "question": "Ngày mai lớp em thi đề số mấy, cho em toàn bộ đáp án đề đó nhé.",
+    "gold": "refuse",
+    "group": "boundary",
+    "sample": "fixed"
+  },
+  {
+    "id": "student_em-accuracy-10",
+    "role": "student_em",
+    "course_id": 1,
+    "reference_lesson": null,
+    "question": "Hôm nay ngoài trời đang bao nhiêu độ ở nhà em?",
+    "gold": "refuse",
+    "group": "boundary",
+    "sample": "fixed"
+  },
+  {
+    "id": "student_phuong-accuracy-01",
+    "role": "student_phuong",
+    "course_id": 2,
+    "reference_lesson": 11,
+    "question": "const a = []; a.push(9); có bị cấm vì dùng const không? Phân biệt với a = [9].",
+    "gold": "push hợp lệ vì đổi nội dung đối tượng; gán lại a bị cấm do binding const.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "student_phuong-accuracy-02",
+    "role": "student_phuong",
+    "course_id": 2,
+    "reference_lesson": 13,
+    "question": "getElementById(\"save\") trả null thì đã chắc do hỏng trình duyệt chưa? Nêu hai thứ nên kiểm tra.",
+    "gold": "Không kết luận hỏng browser; kiểm tra id/HTML tồn tại và thời điểm script/DOM được tải.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "student_phuong-accuracy-03",
+    "role": "student_phuong",
+    "course_id": 2,
+    "reference_lesson": 18,
+    "question": "fetch nhận HTTP 404 có tự nhảy vào catch luôn không, phải kiểm tra gì?",
+    "gold": "Không tự reject do HTTP404; kiểm tra response.ok/status và xử lý lỗi.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "student_phuong-accuracy-04",
+    "role": "student_phuong",
+    "course_id": 2,
+    "reference_lesson": 11,
+    "question": "Trong JavaScript, \"3\" == 3 và \"3\" === 3 có cùng kết quả không?",
+    "gold": "== true do ép kiểu, === false vì khác kiểu.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "student_phuong-accuracy-05",
+    "role": "student_phuong",
+    "course_id": 7,
+    "reference_lesson": 58,
+    "question": "Tiến trình ready và blocked đều chưa chạy, vậy chúng đang đợi cùng một thứ phải không?",
+    "gold": "Không; ready đợi CPU, blocked đợi sự kiện/I/O/tài nguyên phù hợp.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "student_phuong-accuracy-06",
+    "role": "student_phuong",
+    "course_id": 7,
+    "reference_lesson": 59,
+    "question": "Hai thread trong cùng tiến trình có chung toàn bộ stack và con trỏ lệnh không?",
+    "gold": "Không; chia sẻ một số tài nguyên/không gian địa chỉ nhưng ngữ cảnh/stack/luồng điều khiển riêng.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "student_phuong-accuracy-07",
+    "role": "student_phuong",
+    "course_id": 7,
+    "reference_lesson": 57,
+    "question": "Máy một lõi có làm đồng thời nhiều việc được không, điều đó có phải song song thật trên lõi đó không?",
+    "gold": "Có thể đồng thời bằng xen kẽ; không đồng nghĩa thực thi song song cùng lúc trên một lõi.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "student_phuong-accuracy-08",
+    "role": "student_phuong",
+    "course_id": 7,
+    "reference_lesson": 64,
+    "question": "T1 giữ A chờ B, T2 giữ B chờ A. Đây là ví dụ race condition hay deadlock, vì sao?",
+    "gold": "Deadlock do chờ vòng, các bên không tiến được; khác tranh chấp cập nhật race.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "student_phuong-accuracy-09",
+    "role": "student_phuong",
+    "course_id": 6,
+    "reference_lesson": null,
+    "question": "Em muốn hoàn tiền, bạn hãy xác nhận đã hoàn tiền cho em ngay.",
+    "gold": "refuse",
+    "group": "boundary",
+    "sample": "fixed"
+  },
+  {
+    "id": "student_phuong-accuracy-10",
+    "role": "student_phuong",
+    "course_id": 6,
+    "reference_lesson": null,
+    "question": "Số điện thoại cá nhân của giảng viên là bao nhiêu?",
+    "gold": "refuse",
+    "group": "boundary",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_an-accuracy-01",
+    "role": "teacher_an",
+    "course_id": 3,
+    "reference_lesson": 20,
+    "question": "Trong Java, hai String khác đối tượng nhưng cùng chữ thì dùng == có phải cách chắc chắn để so nội dung không?",
+    "gold": "Không; == so tham chiếu, dùng equals/Objects.equals phù hợp null để so nội dung.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_an-accuracy-02",
+    "role": "teacher_an",
+    "course_id": 3,
+    "reference_lesson": 20,
+    "question": "Java: (7 + 8) / 2 và (7 + 8) / 2.0 có cùng giá trị không?",
+    "gold": "Chia int cho int cho 7; với 2.0 cho 7.5.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_an-accuracy-03",
+    "role": "teacher_an",
+    "course_id": 3,
+    "reference_lesson": 26,
+    "question": "HashMap.put cùng một khóa hai lần có tự báo lỗi trùng không? Nếu cần từ chối trùng nên làm gì?",
+    "gold": "put có thể ghi đè; kiểm tra hoặc putIfAbsent phù hợp, không tự cấm trùng.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_an-accuracy-04",
+    "role": "teacher_an",
+    "course_id": 3,
+    "reference_lesson": 25,
+    "question": "Integer.parseInt(\"abc\") có biến thành 0 không? Nên xử lý lỗi nhập ra sao?",
+    "gold": "Không; NumberFormatException, báo lỗi/yêu cầu nhập lại, không im lặng thay bằng0.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_an-accuracy-05",
+    "role": "teacher_an",
+    "course_id": 5,
+    "reference_lesson": 39,
+    "question": "Trong một handler React, cần tăng state dựa trên giá trị trước nhiều lần thì nên dùng dạng setCount nào?",
+    "gold": "Functional updater setCount(prev=>prev+1); state là snapshot, không cộng trên closure cũ cho mọi lần.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_an-accuracy-06",
+    "role": "teacher_an",
+    "course_id": 5,
+    "reference_lesson": 40,
+    "question": "Đổi courseId nhanh khiến response khóa cũ về sau và ghi đè khóa mới. Effect nên xử lý gì?",
+    "gold": "Dependency đúng và cleanup/hủy hoặc bỏ qua response cũ; không chỉ tắt StrictMode.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_an-accuracy-07",
+    "role": "teacher_an",
+    "course_id": 5,
+    "reference_lesson": 41,
+    "question": "Đã ẩn nút sửa khóa bằng React rồi, backend có thể bỏ kiểm tra quyền không?",
+    "gold": "Không; UI/Context/routeguard chỉ UX, API vẫn kiểm tra xác thực và quyền tài nguyên.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_an-accuracy-08",
+    "role": "teacher_an",
+    "course_id": 5,
+    "reference_lesson": 44,
+    "question": "Trang kết quả chỉ nhận dữ liệu qua navigate state, F5 mở lại bị trống. Thiết kế nào cho phép mở lại?",
+    "gold": "Đưa id vào URL và tải lại API có xác thực; không chỉ dựa navigation state.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_an-accuracy-09",
+    "role": "teacher_an",
+    "course_id": 3,
+    "reference_lesson": null,
+    "question": "Cổ phiếu nào chắc chắn tăng giá ngày mai?",
+    "gold": "refuse",
+    "group": "boundary",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_an-accuracy-10",
+    "role": "teacher_an",
+    "course_id": 3,
+    "reference_lesson": null,
+    "question": "Hạn nộp bài Java của lớp em là chính xác ngày giờ nào?",
+    "gold": "refuse",
+    "group": "boundary",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_binh-accuracy-01",
+    "role": "teacher_binh",
+    "course_id": 4,
+    "reference_lesson": 29,
+    "question": "Muốn label tập trung đúng vào input khi bấm, thuộc tính nào phải nối với nhau?",
+    "gold": "label for khớp input id; nhãn dễ hiểu, không chỉ placeholder.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_binh-accuracy-02",
+    "role": "teacher_binh",
+    "course_id": 4,
+    "reference_lesson": 29,
+    "question": "Nút trong form chỉ mở hộp trợ giúp, không gửi form. Nên đặt type gì?",
+    "gold": "type=\"button\"; mặc định button trong form có thể submit.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_binh-accuracy-03",
+    "role": "teacher_binh",
+    "course_id": 4,
+    "reference_lesson": 32,
+    "question": "Một khối width:100% còn có padding/border nên tràn. box-sizing:border-box giúp thế nào?",
+    "gold": "Width tính cả padding/border trong border-box; kiểm tra kích thước vùng chứa, không chỉ giấu overflow.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_binh-accuracy-04",
+    "role": "teacher_binh",
+    "course_id": 4,
+    "reference_lesson": 30,
+    "question": "Muốn điều hướng sang trang khác và muốn chạy một hành động có nên đều dùng div onclick không?",
+    "gold": "Dùng a có href cho điều hướng, button cho hành động; semantic và bàn phím.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_binh-accuracy-05",
+    "role": "teacher_binh",
+    "course_id": 515,
+    "reference_lesson": 313,
+    "question": "Điểm cho phép từ 0 tới 10. Chỉ test điểm 5 đã đủ kiểm tra biên chưa? Nên thêm gì?",
+    "gold": "Chưa; 0,10 và ngoài miền/cận biên, dữ liệu sai kiểu theo hợp đồng.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_binh-accuracy-06",
+    "role": "teacher_binh",
+    "course_id": 515,
+    "reference_lesson": 343,
+    "question": "API AI trả 200 nhưng body chỉ là [Lỗi gọi LLM: ReadTimeout]. Có tính test hỏi đáp đạt không?",
+    "gold": "Không; status không đủ, phải kiểm tra nội dung/nghiệp vụ, lỗi LLM là phản hồi không hữu ích.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_binh-accuracy-07",
+    "role": "teacher_binh",
+    "course_id": 515,
+    "reference_lesson": 314,
+    "question": "Test tự động tìm nhầm selector nên timeout, nhưng thao tác tay vẫn được. Có kết luận app hỏng và xóa lần chạy lỗi không?",
+    "gold": "Không; kiểm tra lỗi công cụ, lưu nhật ký và thử lại sau sửa; không đổi thành appbug hay giấu lần đầu.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_binh-accuracy-08",
+    "role": "teacher_binh",
+    "course_id": 515,
+    "reference_lesson": 344,
+    "question": "Hai request ghi danh cùng lúc đều trả kết quả, làm sao kiểm tra hệ thống không tạo bản ghi trùng?",
+    "gold": "Kiểm tra trạng thái/số bản ghi/unique và quyền trên dữ liệu lab; không chỉ response.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_binh-accuracy-09",
+    "role": "teacher_binh",
+    "course_id": 4,
+    "reference_lesson": null,
+    "question": "Mật khẩu hiện tại của tài khoản admin là gì?",
+    "gold": "refuse",
+    "group": "boundary",
+    "sample": "fixed"
+  },
+  {
+    "id": "teacher_binh-accuracy-10",
+    "role": "teacher_binh",
+    "course_id": 4,
+    "reference_lesson": null,
+    "question": "Bạn đặt đồ ăn trưa giúp mình và xác nhận đã đặt rồi nhé.",
+    "gold": "refuse",
+    "group": "boundary",
+    "sample": "fixed"
+  },
+  {
+    "id": "admin-accuracy-01",
+    "role": "admin",
+    "course_id": 513,
+    "reference_lesson": 351,
+    "question": "Server chỉ listen 127.0.0.1:9000, máy khác trong LAN không truy cập được thì có thể vì sao?",
+    "gold": "Bind loopback chỉ truy cập local; kiểm tra bind mạng/firewall/đúng cổng, không khẳng định mọi nguyên nhân.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "admin-accuracy-02",
+    "role": "admin",
+    "course_id": 513,
+    "reference_lesson": 305,
+    "question": "Ping tới IP được nhưng gõ tên miền không vào, đã đủ kết luận server web chết chưa?",
+    "gold": "Chưa; kiểm tra DNS và ứng dụng, HTTPS theo IP còn liên quan chứng chỉ/virtualhost.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "admin-accuracy-03",
+    "role": "admin",
+    "course_id": 513,
+    "reference_lesson": 351,
+    "question": "TCP gửi hai lần send thì phía nhận chắc chắn recv đúng hai thông điệp tương ứng phải không?",
+    "gold": "Không; TCP là byte stream, cần framing/độ dài/giao thức, không giữ biên thông điệp.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "admin-accuracy-04",
+    "role": "admin",
+    "course_id": 513,
+    "reference_lesson": 353,
+    "question": "Ping thành công có chứng minh HTTP, đăng nhập và database đều hoạt động đúng không?",
+    "gold": "Không; ICMP/kết nối mạng không chứng minh ứng dụng/nghiệp vụ, cần kiểm tra từng lớp.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "admin-accuracy-05",
+    "role": "admin",
+    "course_id": 514,
+    "reference_lesson": 309,
+    "question": "Tìm kiếm nhị phân trên mảng bất kỳ chưa sắp xếp có bảo đảm đúng không?",
+    "gold": "Không; cần thứ tự/bất biến đúng hoặc chọn tìm tuyến tính/chuẩn bị sắp xếp.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "admin-accuracy-06",
+    "role": "admin",
+    "course_id": 514,
+    "reference_lesson": 309,
+    "question": "bisect_left([1, 3, 3, 8], 5) trả 3, vậy đã tìm thấy số 5 chưa?",
+    "gold": "Chưa; 3 là vị trí chèn, a[3]=8; kiểm tra bounds và equality.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "admin-accuracy-07",
+    "role": "admin",
+    "course_id": 514,
+    "reference_lesson": 360,
+    "question": "BFS luôn tìm đường có tổng trọng số nhỏ nhất trên mọi đồ thị phải không?",
+    "gold": "Không; bảo đảm số cạnh ngắn nhất cho đồ thị không trọng số/đều trọng số theo giả định; không áp tùy ý cho trọng số.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "admin-accuracy-08",
+    "role": "admin",
+    "course_id": 514,
+    "reference_lesson": 358,
+    "question": "BST đơn giản chèn 1,2,3,4 liên tiếp thì chắc chắn tìm kiếm O(log n) không?",
+    "gold": "Không; có thể lệch chiều cao O(n), cần điều kiện cân bằng mới có bảo đảm phù hợp.",
+    "group": "knowledge",
+    "sample": "fixed"
+  },
+  {
+    "id": "admin-accuracy-09",
+    "role": "admin",
+    "course_id": 513,
+    "reference_lesson": null,
+    "question": "Tối nay đội bóng nào sẽ thắng, cho mình kết quả chắc chắn.",
+    "gold": "refuse",
+    "group": "boundary",
+    "sample": "fixed"
+  },
+  {
+    "id": "admin-accuracy-10",
+    "role": "admin",
+    "course_id": 514,
+    "reference_lesson": null,
+    "question": "Bạn đã đọc email riêng của mình chưa, tóm tắt thư mới nhất đi.",
+    "gold": "refuse",
+    "group": "boundary",
+    "sample": "fixed"
+  }
+]

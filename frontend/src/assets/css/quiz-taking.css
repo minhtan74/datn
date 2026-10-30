@@ -1,0 +1,1436 @@
+/* ==========================================================================
+   QUIZ TAKING INTERFACE (GIAO DIỆN LÀM BÀI THI HIỆN ĐẠI)
+   ========================================================================== */
+
+/* Container bọc ngoài toàn trang làm bài */
+.qz-page-wrap {
+  min-height: calc(100vh - var(--s-header-h, 64px));
+  padding-bottom: 4rem;
+}
+
+/* --------------------------------------------------------------------------
+   STICKY EXAM TOP BAR (Thanh công cụ cố định khi đang làm bài)
+   -------------------------------------------------------------------------- */
+.qz-exam-topbar {
+  position: sticky;
+  top: var(--s-header-h, 64px);
+  z-index: 90;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--s-border, #e2e8f0);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  margin-bottom: 2rem;
+  transition: all var(--s-transition);
+}
+
+.qz-topbar-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.qz-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.qz-exit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--s-text-muted);
+  background: var(--s-surface-2, #f1f5f9);
+  border: 1px solid var(--s-border, #e2e8f0);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.qz-exit-btn:hover {
+  color: var(--s-danger, #ef4444);
+  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.06);
+}
+
+.qz-exam-info {
+  min-width: 0;
+}
+
+.qz-exam-title {
+  font-size: 1.05rem;
+  font-weight: 750;
+  color: var(--s-text, #0f172a);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.qz-exam-sub {
+  font-size: 0.8rem;
+  color: var(--s-text-muted, #64748b);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.15rem;
+}
+
+.qz-topbar-center {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* Switch chế độ xem */
+.qz-view-switch {
+  display: inline-flex;
+  background: var(--s-surface-2, #f1f5f9);
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid var(--s-border, #e2e8f0);
+}
+
+.qz-view-tab {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: var(--s-text-muted);
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.qz-view-tab.active {
+  background: #ffffff;
+  color: var(--s-primary, #2563eb);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Đồng hồ đếm ngược trên topbar */
+.qz-timer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.qz-timer-normal {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.qz-timer-warning {
+  background: #fffbeb;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+.qz-timer-critical {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  animation: qz-pulse 1s infinite alternate;
+}
+
+@keyframes qz-pulse {
+  from {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  to {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+  }
+}
+
+.qz-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.qz-mobile-palette-toggle {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--s-primary, #2563eb);
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  cursor: pointer;
+}
+
+.qz-topbar-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.25rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(37, 99, 235, 0.3);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.qz-topbar-submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 16px rgba(37, 99, 235, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   2-COLUMN WORKSPACE LAYOUT
+   -------------------------------------------------------------------------- */
+.qz-workspace {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.qz-content-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.qz-sidebar-col {
+  width: 320px;
+  flex-shrink: 0;
+  position: sticky;
+  top: calc(var(--s-header-h, 64px) + 4.5rem);
+}
+
+/* --------------------------------------------------------------------------
+   QUESTION CARD (Thẻ câu hỏi hiện đại)
+   -------------------------------------------------------------------------- */
+.qz-card {
+  background: var(--s-surface, #ffffff);
+  border: 1px solid var(--s-border, #e2e8f0);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.qz-card:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+}
+
+.qz-card-header {
+  padding: 1.25rem 1.5rem;
+  background: #fafbfc;
+  border-bottom: 1px solid var(--s-border, #e2e8f0);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.qz-card-tags {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.qz-num-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.85rem;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 800;
+  font-size: 0.825rem;
+  letter-spacing: 0.04em;
+  border-radius: 999px;
+  border: 1px solid #bfdbfe;
+}
+
+.qz-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.qz-status-answered {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.qz-status-unanswered {
+  background: var(--s-surface-2, #f1f5f9);
+  color: var(--s-text-muted);
+  border: 1px solid var(--s-border, #e2e8f0);
+}
+
+/* Nút đánh dấu xem lại */
+.qz-flag-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.825rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--s-border, #e2e8f0);
+  background: #ffffff;
+  color: var(--s-text-muted);
+  transition: all 0.2s ease;
+}
+
+.qz-flag-toggle:hover {
+  background: #fffbeb;
+  color: #b45309;
+  border-color: #fde68a;
+}
+
+.qz-flag-toggle.flagged {
+  background: #fef3c7;
+  color: #b45309;
+  border-color: #f59e0b;
+  font-weight: 700;
+  box-shadow: 0 1px 4px rgba(245, 158, 11, 0.2);
+}
+
+.qz-card-body {
+  padding: 1.5rem;
+}
+
+.qz-question-text {
+  font-size: 1.125rem;
+  font-weight: 650;
+  line-height: 1.6;
+  color: var(--s-text, #0f172a);
+  margin-bottom: 1.5rem;
+  word-break: break-word;
+}
+
+/* Danh sách các lựa chọn đáp án */
+.qz-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.qz-option-row {
+  position: relative;
+}
+
+.qz-option-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.qz-option-label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border: 1.5px solid var(--s-border, #e2e8f0);
+  border-radius: 12px;
+  background: #ffffff;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.qz-option-label:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
+}
+
+.qz-option-key {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: var(--s-text-muted);
+  background: var(--s-surface-2, #f1f5f9);
+  border: 1px solid var(--s-border, #e2e8f0);
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.qz-option-radio-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-left: auto;
+  transition: all 0.2s ease;
+}
+
+.qz-option-radio-dot::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.2s ease;
+}
+
+.qz-option-content {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--s-text, #0f172a);
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+/* Trạng thái được chọn (Selected) */
+.qz-option-input:checked + .qz-option-label {
+  border-color: #2563eb;
+  background: #eff6ff;
+  box-shadow: 0 0 0 1px #2563eb, 0 4px 12px rgba(37, 99, 235, 0.08);
+}
+
+.qz-option-input:checked + .qz-option-label .qz-option-key {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+}
+
+.qz-option-input:checked + .qz-option-label .qz-option-content {
+  font-weight: 600;
+  color: #1e3a8a;
+}
+
+.qz-option-input:checked + .qz-option-label .qz-option-radio-dot {
+  border-color: #2563eb;
+  background: #2563eb;
+}
+
+.qz-option-input:checked + .qz-option-label .qz-option-radio-dot::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Focus outline for keyboard navigation accessibility */
+.qz-option-input:focus-visible + .qz-option-label {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Footer của Card câu hỏi */
+.qz-card-footer {
+  padding: 1rem 1.5rem;
+  background: #fafbfc;
+  border-top: 1px solid var(--s-border, #e2e8f0);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.qz-clear-btn {
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--s-text-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.qz-clear-btn:hover {
+  color: var(--s-danger, #ef4444);
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.qz-card-nav-btns {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: auto;
+}
+
+.qz-btn-prev,
+.qz-btn-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.qz-btn-prev {
+  background: #ffffff;
+  color: var(--s-text, #0f172a);
+  border: 1px solid var(--s-border, #e2e8f0);
+}
+
+.qz-btn-prev:hover:not(:disabled) {
+  background: var(--s-surface-2, #f1f5f9);
+  border-color: #cbd5e1;
+}
+
+.qz-btn-prev:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.qz-btn-next {
+  background: var(--s-primary, #2563eb);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+.qz-btn-next:hover {
+  background: var(--s-primary-dark, #1d4ed8);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Keyboard hint line */
+.qz-keyboard-hint {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px dashed var(--s-border, #e2e8f0);
+  font-size: 0.8rem;
+  color: var(--s-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.qz-kbd {
+  display: inline-block;
+  padding: 0.15rem 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: inherit;
+  color: var(--s-text, #0f172a);
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* --------------------------------------------------------------------------
+   STICKY SIDEBAR (Bảng tiến độ & Lưới câu hỏi)
+   -------------------------------------------------------------------------- */
+.qz-sidebar-box {
+  background: var(--s-surface, #ffffff);
+  border: 1px solid var(--s-border, #e2e8f0);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Đồng hồ to trong Sidebar */
+.qz-sidebar-timer {
+  background: linear-gradient(135deg, #f8fafc, #eff6ff);
+  border: 1px solid #bfdbfe;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.qz-sidebar-timer.is-warning {
+  background: linear-gradient(135deg, #fffbeb, #fef3c7);
+  border-color: #fde68a;
+}
+
+.qz-sidebar-timer.is-critical {
+  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+  border-color: #fecaca;
+  animation: qz-pulse 1s infinite alternate;
+}
+
+.qz-sidebar-timer-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--s-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.qz-sidebar-timer-val {
+  font-size: 1.75rem;
+  font-weight: 850;
+  font-variant-numeric: tabular-nums;
+  color: #1e3a8a;
+  line-height: 1.2;
+}
+
+.qz-sidebar-timer.is-warning .qz-sidebar-timer-val {
+  color: #b45309;
+}
+
+.qz-sidebar-timer.is-critical .qz-sidebar-timer-val {
+  color: #dc2626;
+}
+
+/* Tiến độ làm bài */
+.qz-progress-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.qz-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--s-text, #0f172a);
+}
+
+.qz-progress-track {
+  height: 8px;
+  background: var(--s-surface-2, #f1f5f9);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.qz-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #10b981);
+  border-radius: 999px;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 3 Chip thống kê */
+.qz-stat-chips {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.qz-stat-chip {
+  padding: 0.5rem 0.25rem;
+  border-radius: 8px;
+  text-align: center;
+  background: var(--s-surface-2, #f1f5f9);
+  border: 1px solid var(--s-border, #e2e8f0);
+}
+
+.qz-stat-chip-num {
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.qz-stat-chip-label {
+  font-size: 0.7rem;
+  color: var(--s-text-muted);
+  font-weight: 600;
+  margin-top: 0.15rem;
+}
+
+.qz-chip-answered .qz-stat-chip-num {
+  color: #059669;
+}
+.qz-chip-unanswered .qz-stat-chip-num {
+  color: var(--s-text-muted);
+}
+.qz-chip-flagged .qz-stat-chip-num {
+  color: #d97706;
+}
+
+/* Lưới nút câu hỏi (Question Navigation Grid) */
+.qz-grid-title {
+  font-size: 0.85rem;
+  font-weight: 750;
+  color: var(--s-text, #0f172a);
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.qz-palette-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  max-height: 280px;
+  overflow-y: auto;
+  padding: 2px;
+}
+
+.qz-grid-btn {
+  position: relative;
+  aspect-ratio: 1;
+  max-width: 48px;
+  max-height: 48px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1.5px solid var(--s-border, #e2e8f0);
+  background: #ffffff;
+  color: var(--s-text, #0f172a);
+  transition: all 0.18s ease;
+}
+
+.qz-grid-btn:hover {
+  border-color: #94a3b8;
+  transform: scale(1.05);
+}
+
+/* Đã làm: Nền xanh, chữ trắng */
+.qz-grid-btn.answered {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+}
+
+/* Đang xem (Active): Viền ring nổi bật */
+.qz-grid-btn.active-q {
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.35);
+  font-weight: 850;
+}
+
+/* Đánh dấu cờ (Flagged): Có cờ góc trên hoặc viền cam */
+.qz-grid-btn.flagged {
+  border-color: #f59e0b !important;
+}
+
+.qz-grid-btn.flagged::after {
+  content: '🚩';
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  font-size: 0.65rem;
+  line-height: 1;
+}
+
+/* Chú thích (Legend) */
+.qz-legend {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 0.725rem;
+  color: var(--s-text-muted);
+  font-weight: 600;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--s-border, #e2e8f0);
+}
+
+.qz-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.qz-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.qz-dot-answered {
+  background: #2563eb;
+}
+.qz-dot-unanswered {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+}
+.qz-dot-flagged {
+  background: #f59e0b;
+}
+
+/* Nút nộp bài to trong sidebar */
+.qz-sidebar-submit-btn {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 750;
+  color: #ffffff;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.qz-sidebar-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+
+.qz-sidebar-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.qz-jump-unanswered-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--s-primary, #2563eb);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  padding: 0.25rem;
+  transition: color 0.2s;
+}
+
+.qz-jump-unanswered-link:hover {
+  text-decoration: underline;
+  color: var(--s-primary-dark, #1d4ed8);
+}
+
+/* --------------------------------------------------------------------------
+   SUBMIT CONFIRMATION MODAL
+   -------------------------------------------------------------------------- */
+.qz-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: qz-fade-in 0.2s ease;
+}
+
+@keyframes qz-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.qz-modal-box {
+  background: #ffffff;
+  border-radius: 20px;
+  max-width: 520px;
+  width: 100%;
+  padding: 2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: qz-scale-in 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes qz-scale-in {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.qz-modal-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  margin: 0 auto;
+}
+
+.qz-modal-icon.ready {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.qz-modal-icon.warning {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+.qz-modal-title {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--s-text, #0f172a);
+  margin: 0;
+}
+
+.qz-modal-desc {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--s-text-muted, #64748b);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.qz-modal-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  background: var(--s-surface-2, #f1f5f9);
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.qz-modal-unanswered-list {
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  border-radius: 12px;
+  padding: 0.875rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.qz-modal-unanswered-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #9f1239;
+}
+
+.qz-unanswered-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.qz-pill-btn {
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #ffffff;
+  color: #be123c;
+  border: 1px solid #fda4af;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.qz-pill-btn:hover {
+  background: #be123c;
+  color: #ffffff;
+}
+
+.qz-modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.qz-modal-actions button,
+.qz-modal-actions a {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  text-decoration: none;
+}
+
+.qz-btn-modal-cancel {
+  background: var(--s-surface-2, #f1f5f9);
+  border: 1px solid var(--s-border, #e2e8f0);
+  color: var(--s-text, #0f172a);
+}
+
+.qz-btn-modal-cancel:hover {
+  background: #e2e8f0;
+}
+
+.qz-btn-modal-submit {
+  background: #2563eb;
+  border: none;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.qz-btn-modal-submit:hover {
+  background: #1d4ed8;
+}
+
+/* --------------------------------------------------------------------------
+   MOBILE BOTTOM SHEET / DRAWER
+   -------------------------------------------------------------------------- */
+.qz-drawer-overlay {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE QUERIES
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .qz-workspace {
+    flex-direction: column;
+  }
+
+  .qz-sidebar-col {
+    display: none; /* Ẩn sidebar desktop trên tablet/mobile, dùng mobile drawer */
+  }
+
+  .qz-mobile-palette-toggle {
+    display: inline-flex;
+  }
+
+  .qz-drawer-overlay.open {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.5);
+    z-index: 150;
+    backdrop-filter: blur(2px);
+  }
+
+  .qz-mobile-drawer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-radius: 20px 20px 0 0;
+    padding: 1.5rem;
+    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15);
+    z-index: 160;
+    max-height: 80vh;
+    overflow-y: auto;
+    transform: translateY(100%);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .qz-mobile-drawer.open {
+    transform: translateY(0);
+  }
+
+  .qz-drawer-handle {
+    width: 40px;
+    height: 4px;
+    border-radius: 999px;
+    background: #cbd5e1;
+    margin: -0.5rem auto 1rem auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .qz-topbar-inner {
+    padding: 0.65rem 1rem;
+  }
+
+  .qz-view-switch {
+    display: none; /* Trên màn hình quá nhỏ ưu tiên xem từng câu */
+  }
+
+  .qz-exam-title {
+    max-width: 160px;
+  }
+
+  .qz-card-header {
+    padding: 1rem;
+  }
+
+  .qz-card-body {
+    padding: 1rem;
+  }
+
+  .qz-option-label {
+    padding: 0.85rem 1rem;
+  }
+
+  .qz-card-footer {
+    padding: 0.85rem 1rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   INTRO SCREEN (Màn hình giới thiệu trước khi làm bài)
+   -------------------------------------------------------------------------- */
+.qz-intro-box {
+  background: var(--s-surface, #ffffff);
+  border: 1px solid var(--s-border, #e2e8f0);
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.qz-intro-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--s-border, #e2e8f0);
+}
+
+.qz-intro-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: #eff6ff;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.qz-intro-title-wrap h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--s-text, #0f172a);
+  margin: 0;
+}
+
+.qz-intro-desc {
+  font-size: 0.95rem;
+  color: var(--s-text-muted, #64748b);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.qz-facts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.qz-fact-card {
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  background: var(--s-surface-2, #f8fafc);
+  border: 1px solid var(--s-border, #e2e8f0);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.qz-fact-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--s-text-muted, #64748b);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.qz-fact-value {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--s-text, #0f172a);
+}
+
+.qz-fact-sub {
+  font-size: 0.75rem;
+  color: var(--s-primary, #2563eb);
+  font-weight: 600;
+}
+
+.qz-intro-notice {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 12px;
+  padding: 1.25rem;
+  font-size: 0.9rem;
+  color: #1e40af;
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.qz-intro-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.qz-btn-start {
+  padding: 0.85rem 2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 750;
+  color: #ffffff;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.qz-btn-start:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+}
+
+.qz-btn-start:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .qz-facts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .qz-facts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Flash highlight when jumping to a question card */
+.qz-highlight-flash {
+  animation: qz-flash 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes qz-flash {
+  0% {
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.5), 0 8px 24px rgba(37, 99, 235, 0.2);
+    border-color: #2563eb;
+  }
+  100% {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    border-color: var(--s-border, #e2e8f0);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   DANH SÁCH SỐ CÂU HỎI ĐÃ LÀM & CHƯA LÀM (SIDEBAR BOX)
+   -------------------------------------------------------------------------- */
+.qz-box-counts {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  background: var(--s-surface-2, #f1f5f9);
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid var(--s-border, #e2e8f0);
+}
+
+.qz-count-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.825rem;
+  color: var(--s-text-muted, #64748b);
+  font-weight: 550;
+}
+
+.qz-count-item strong {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--s-text, #0f172a);
+}
+
+.qz-count-item.answered strong {
+  color: #059669;
+}
+
+.qz-count-item.unanswered strong {
+  color: #d97706;
+}
+
+.qz-count-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.qz-count-dot.answered {
+  background: #10b981;
+}
+
+.qz-count-dot.unanswered {
+  background: #cbd5e1;
+  border: 1px solid #94a3b8;
+}
+
+.qz-question-lists {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 260px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.qz-list-group {
+  background: #fafbfc;
+  border: 1px solid var(--s-border, #e2e8f0);
+  border-radius: 10px;
+  padding: 0.65rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.qz-list-label {
+  font-size: 0.775rem;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.qz-list-label.is-answered {
+  color: #059669;
+}
+
+.qz-list-label.is-unanswered {
+  color: #64748b;
+}
+
+.qz-chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.qz-chip-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  font-size: 0.825rem;
+  font-weight: 750;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+/* Ô số đã làm: Nền xanh, chữ trắng nổi bật */
+.qz-chip-btn.answered {
+  background: #2563eb;
+  color: #ffffff;
+  border: 1px solid #1d4ed8;
+  box-shadow: 0 1px 3px rgba(37, 99, 235, 0.25);
+}
+
+.qz-chip-btn.answered:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+/* Ô số chưa làm: Nền trắng, viền xám mờ */
+.qz-chip-btn.unanswered {
+  background: #ffffff;
+  color: var(--s-text, #0f172a);
+  border: 1.5px solid #cbd5e1;
+}
+
+.qz-chip-btn.unanswered:hover {
+  border-color: #94a3b8;
+  background: #f1f5f9;
+  transform: translateY(-1px);
+}
+
+/* Đang xem câu này (active) */
+.qz-chip-btn.active {
+  box-shadow: 0 0 0 2px #2563eb, 0 0 0 4px rgba(37, 99, 235, 0.3) !important;
+}
+
+.qz-empty-text {
+  font-size: 0.775rem;
+  color: var(--s-text-muted, #94a3b8);
+  font-style: italic;
+  padding: 0.15rem 0;
+}
+
+.qz-empty-text.success {
+  color: #059669;
+  font-weight: 650;
+  font-style: normal;
+}

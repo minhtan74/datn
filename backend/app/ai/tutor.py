@@ -5,8 +5,9 @@ import json
 
 from sqlalchemy.orm import Session
 
-from app.ai.rag import rag_pipeline
+from app.ai.rag import clarification, ingest, rag_pipeline
 from app.core.database import execute, q_all, q_one
+from app.core.responses import ApiError
 
 
 # Danh sách cuộc trò chuyện của user (kèm số tin nhắn), mới cập nhật lên đầu
@@ -50,6 +51,24 @@ def get_messages(db: Session, conversation_id: int, user_id: int) -> list[dict]:
                 r["sources"] = json.loads(r["sources"])
             except ValueError:
                 r["sources"] = None
+        # Giữ tương thích danh sách nguồn của tin nhắn cũ; metadata hỏi lại nằm trong JSON hiện có.
+        payload = r.get("sources")
+        r["response_status"] = "ok"
+        r["needs_clarification"] = isinstance(payload, dict) and payload.get("response_type") == "clarification"
+        if r["needs_clarification"]:
+            r["clarification_kind"] = payload.get("clarification_kind", "context")
+            r["sources"] = []
+        elif isinstance(payload, dict) and payload.get("response_type") in ("error", "fallback"):
+            r["response_status"] = payload["response_type"]
+            r["sources"] = payload.get("sources", [])
+            r["error_code"] = payload.get("error_code")
+            r["retryable"] = payload.get("retryable", False)
+        # Lịch sử cũ cũng hiển thị lỗi dịch vụ như thông báo, không giả làm câu trả lời kiến thức.
+        if r["role"] == "assistant" and r["content"].startswith("[Lỗi gọi LLM"):
+            r.update(content=rag_pipeline.AI_UNAVAILABLE, response_status="error", sources=[],
+                     error_code="ai_unavailable", retryable=True)
+        elif r["role"] == "assistant" and "đây là nội dung trích trực tiếp từ tài liệu khóa học" in r["content"]:
+            r["response_status"] = "fallback"
     return rows
 
 
@@ -90,6 +109,8 @@ def chat(
     # Có conversation_id hợp lệ thì hỏi tiếp, không thì tạo cuộc trò chuyện mới
     conv = get_conversation(db, conversation_id, user_id) if conversation_id else None
     if conv:
+        if conv["course_id"] != course_id or conv.get("lesson_id") != lesson_id:
+            raise ApiError("Cuộc trò chuyện không thuộc khóa học hoặc bài học đang chọn.", 400)
         conversation_id = conv["id"]
     else:
         conversation_id = _create_conversation(
@@ -98,6 +119,10 @@ def chat(
 
     # Lấy lịch sử trước đó để LLM hiểu ngữ cảnh câu hỏi nối tiếp
     history = get_messages(db, conversation_id, user_id)
+
+    # Chờ đủ thông tin mới nạp tài liệu bài học, tránh chạy embedding cho một lời hỏi lại.
+    if lesson_id and not clarification.request_kind(message, history):
+        ingest.ensure_lesson_document(db, lesson_id)
 
     # lưu tin nhắn người dùng
     execute(
@@ -111,6 +136,11 @@ def chat(
     result = rag_pipeline.answer(
         db, message, course_id=course_id, lesson_id=lesson_id, lesson_only=lesson_only, history=history
     )
+    sources_payload = ({"response_type": "clarification", "clarification_kind": result["clarification_kind"]}
+                       if result.get("needs_clarification") else result["sources"])
+    if result.get("response_status") in ("error", "fallback"):
+        sources_payload = {"response_type": result["response_status"], "sources": result["sources"],
+                           "error_code": result.get("error_code"), "retryable": result.get("retryable", False)}
 
     # Lưu câu trả lời của AI kèm nguồn trích dẫn, rồi cập nhật thời điểm của cuộc trò chuyện
     execute(
@@ -119,7 +149,7 @@ def chat(
         "VALUES (:c, 'assistant', :m, :s)",
         c=conversation_id,
         m=result["answer"],
-        s=json.dumps(result["sources"], ensure_ascii=False) if result["sources"] else None,
+        s=json.dumps(sources_payload, ensure_ascii=False) if sources_payload else None,
     )
     execute(
         db,
@@ -132,4 +162,9 @@ def chat(
         "answer": result["answer"],
         "sources": result["sources"],
         "used_context": result["used_context"],
+        "needs_clarification": result.get("needs_clarification", False),
+        "clarification_kind": result.get("clarification_kind"),
+        "response_status": result.get("response_status", "ok"),
+        "error_code": result.get("error_code"),
+        "retryable": result.get("retryable", False),
     }

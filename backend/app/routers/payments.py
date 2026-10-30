@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 from app.core.config import settings
 from app.core.database import execute, get_db, q_all, q_one
 from app.core.dependencies import get_current_user
-from app.core.responses import ApiError, ok
+from app.core.responses import ApiError, ApiJSONResponse, ok
 from app.routers.enrollments import _enroll, _is_enrolled
 from app.services import vnpay
 
@@ -325,6 +325,40 @@ _STATUSES = ("pending", "completed", "failed", "refunded")
 # GET /api/payments/manage — danh sách toàn bộ giao dịch cho admin: phân trang, lọc, tìm kiếm.
 #   status, method, course_id: lọc; date_from / date_to (YYYY-MM-DD): theo ngày tạo đơn;
 #   q: tìm theo mã đơn, mã GD VNPay, tên hoặc email học viên
+def _manage_filters(method="", course_id=0, date_from="", date_to="", q=""):
+    # Danh sách, số tab và doanh thu chỉ tính VNPay; dữ liệu phương thức cũ
+    # vẫn giữ nguyên trong DB để bảo toàn lịch sử, không đổi nhãn thành VNPay.
+    if method and method != METHOD:
+        raise ApiError("Phương thức không hợp lệ.")
+    conds, params = ["p.method = :method"], {"method": METHOD}
+    if course_id:
+        conds.append("p.course_id = :cid")
+        params["cid"] = course_id
+    for key, op, val in (("df", ">=", date_from), ("dt", "<", date_to)):
+        if not val:
+            continue
+        try:
+            d = dt.date.fromisoformat(val)
+        except ValueError:
+            raise ApiError("Ngày không hợp lệ (định dạng YYYY-MM-DD).")
+        # date_to tính trọn ngày -> so sánh với 0h ngày hôm sau
+        try:
+            params[key] = d + dt.timedelta(days=1) if key == "dt" else d
+        except OverflowError:
+            raise ApiError("Ngày kết thúc nằm ngoài phạm vi hỗ trợ.")
+        conds.append(f"p.created_at {op} :{key}")
+    if q.strip():
+        conds.append(
+            "(p.transaction_ref LIKE :q OR p.gateway_txn_no LIKE :q "
+            "OR u.fullname LIKE :q OR u.email LIKE :q)"
+        )
+        params["q"] = f"%{q.strip()}%"
+
+    if date_from and date_to and dt.date.fromisoformat(date_from) > dt.date.fromisoformat(date_to):
+        raise ApiError("Ngày bắt đầu không được sau ngày kết thúc.")
+    return conds, params
+
+
 @router.get("/manage")
 def manage(
     page: int = Query(default=1, ge=1),
@@ -341,32 +375,7 @@ def manage(
     if user["role"] != "admin":
         raise ApiError("Chỉ Admin mới quản lý giao dịch.", 403)
 
-    # Ghép điều kiện lọc (luôn dùng tham số, không nối chuỗi giá trị người dùng)
-    conds, params = [], {}
-    if method:
-        if method != METHOD:
-            raise ApiError("Phương thức không hợp lệ.")
-        conds.append("p.method = :method")
-        params["method"] = method
-    if course_id:
-        conds.append("p.course_id = :cid")
-        params["cid"] = course_id
-    for key, op, val in (("df", ">=", date_from), ("dt", "<", date_to)):
-        if not val:
-            continue
-        try:
-            d = dt.date.fromisoformat(val)
-        except ValueError:
-            raise ApiError("Ngày không hợp lệ (định dạng YYYY-MM-DD).")
-        # date_to tính trọn ngày -> so sánh với 0h ngày hôm sau
-        params[key] = d + dt.timedelta(days=1) if key == "dt" else d
-        conds.append(f"p.created_at {op} :{key}")
-    if q.strip():
-        conds.append(
-            "(p.transaction_ref LIKE :q OR p.gateway_txn_no LIKE :q "
-            "OR u.fullname LIKE :q OR u.email LIKE :q)"
-        )
-        params["q"] = f"%{q.strip()}%"
+    conds, params = _manage_filters(method, course_id, date_from, date_to, q)
 
     base = (
         "FROM payments p JOIN users u ON u.id = p.user_id "
@@ -398,6 +407,7 @@ def manage(
         db,
         "SELECT p.id, p.amount, p.method, p.status, p.transaction_ref, p.gateway_txn_no, p.bank_code, "
         "p.response_code, p.note, p.created_at, p.paid_at, p.updated_at, p.user_id, p.course_id, "
+        "p.refunded_at, p.refunded_by, p.refund_reason, p.refund_txn_no, "
         "u.fullname AS user_name, u.email, c.title AS course_title "
         f"{base}{where} ORDER BY p.created_at DESC, p.id DESC LIMIT :lim OFFSET :off",
         **params,
@@ -506,6 +516,7 @@ def reconcile_pending(db: Session, *, only_expired: bool = False) -> dict:
 def _decorate(db: Session, row: dict) -> dict:
     row["response_message"] = vnpay.response_message(row["response_code"]) if row.get("response_code") else None
     row["enrolled"] = _is_enrolled(db, row["user_id"], row["course_id"])
+    row["refund_operation"] = q_one(db, "SELECT state,message,reason,updated_at,gateway_code FROM payment_refund_operations WHERE payment_id=:id", id=row["id"])
     return row
 
 
@@ -533,98 +544,59 @@ def reconcile_one(
 
 # POST /api/payments/reconcile-pending — admin đối soát tất cả đơn đang chờ
 @router.post("/reconcile-pending")
-def reconcile_all(user: dict = Depends(get_current_user), db: Session = Depends(get_db)):
+def reconcile_all(body: dict = Body(default={}), user: dict = Depends(get_current_user), db: Session = Depends(get_db)):
     if user["role"] != "admin":
         raise ApiError("Chỉ Admin mới đối soát giao dịch.", 403)
-    s = reconcile_pending(db)
-    parts = [f"{s['paid']} đã thanh toán", f"{s['expired'] + s['cancelled'] + s['failed']} chuyển thất bại",
-             f"{s['waiting']} còn chờ"] + ([f"{s['error']} lỗi kết nối"] if s["error"] else [])
-    return ok("Đối soát xong: " + ", ".join(parts) + ".", summary=s)
+    conds, params = _manage_filters("vnpay", iv(body, "course_id"), sv(body, "date_from"), sv(body, "date_to"), sv(body, "q"))
+    rows = q_all(db, "SELECT p.* FROM payments p JOIN users u ON u.id=p.user_id WHERE " + " AND ".join(conds) + " AND p.status='pending' ORDER BY p.id", **params)
+    summary = {k: 0 for k in RECONCILE_MESSAGES}
+    for row in rows:
+        outcome, _ = reconcile_payment(db, row)
+        summary[outcome] += 1
+    parts = [f"{summary['paid']} đã thanh toán", f"{summary['expired']+summary['cancelled']+summary['failed']} thất bại", f"{summary['waiting']} còn chờ", f"{summary['error']} chưa kiểm tra được"]
+    return ok(f"Đã đối soát {len(rows)} đơn đang chờ trong bộ lọc: " + ", ".join(parts) + ".", summary=summary, processed=len(rows))
 
 
 # ── Hoàn tiền (admin) ──────────────────────────────────────────────────────
 
-# POST /api/payments/refund {id, reason, revoke_access} — hoàn tiền toàn phần 1 đơn đã thanh toán.
-#   Đơn có mã giao dịch VNPay: gửi yêu cầu hoàn tiền sang VNPay, VNPay đồng ý (mã 00) mới cập nhật đơn.
-#   Đơn không có mã giao dịch VNPay (giả lập, dữ liệu mẫu): chỉ ghi nhận hoàn tiền thủ công.
-#   revoke_access=true: xóa ghi danh (thu hồi quyền học); điểm quiz / tiến độ vẫn được giữ lại.
+def _admin_payment(db, pid):
+    row = q_one(db, "SELECT p.*,u.fullname AS user_name,u.email,c.title AS course_title FROM payments p "
+                "JOIN users u ON u.id=p.user_id JOIN courses c ON c.id=p.course_id WHERE p.id=:id", id=pid)
+    if not row:
+        raise ApiError("Không tìm thấy giao dịch.", 404)
+    return _decorate(db, row)
+
+
+@router.get("/detail")
+def payment_detail(id: int = Query(...), user: dict = Depends(get_current_user), db: Session = Depends(get_db)):
+    if user["role"] != "admin":
+        raise ApiError("Chỉ Admin xem chi tiết giao dịch.", 403)
+    return ok(data=_admin_payment(db, id))
+
+
+def _refund_response(db, pid, revoked):
+    row = _admin_payment(db, pid)
+    op = row["refund_operation"]
+    if op["state"] == "failed":
+        return ApiJSONResponse({"success": False, "message": op["message"], "data": row}, status_code=409)
+    return ok(op["message"], data=row, revoked=revoked)
+
+
 @router.post("/refund")
-def refund(
-    request: Request,
-    body: dict = Body(default={}),
-    user: dict = Depends(get_current_user),
-    db: Session = Depends(get_db),
-):
+def refund(request: Request, body: dict = Body(default={}), user: dict = Depends(get_current_user), db: Session = Depends(get_db)):
+    from app.services import refund_operations
     if user["role"] != "admin":
         raise ApiError("Chỉ Admin mới hoàn tiền giao dịch.", 403)
-    reason = sv(body, "reason", "").strip()
-    if len(reason) < 5:
-        raise ApiError("Vui lòng nhập lý do hoàn tiền (ít nhất 5 ký tự).")
-    revoke = bool(body.get("revoke_access", True))
+    pid = iv(body, "id")
+    revoked = refund_operations.send(db, pid, user, body.get("reason"), body.get("revoke_access", True), request.client.host if request.client else "127.0.0.1")
+    return _refund_response(db, pid, revoked)
 
-    payment = q_one(db, "SELECT * FROM payments WHERE id = :id", id=iv(body, "id"))
-    if not payment:
-        raise ApiError("Không tìm thấy giao dịch.", 404)
-    if payment["status"] != "completed":
-        raise ApiError("Chỉ hoàn tiền được đơn đã thanh toán thành công.", 409)
 
-    refund_txn = None
-    gateway = _via_gateway(payment)
-    if gateway:
-        tdate = payment.get("vnp_create_date") or payment["created_at"].strftime("%Y%m%d%H%M%S")
-        ip = (request.headers.get("x-forwarded-for") or "").split(",")[0].strip() or (
-            request.client.host if request.client else "127.0.0.1"
-        )
-        try:
-            rsp = vnpay.refund_transaction(
-                txn_ref=payment["transaction_ref"],
-                amount=float(payment["amount"]),
-                transaction_no=payment.get("gateway_txn_no"),
-                transaction_date=tdate,
-                created_by=user.get("email") or f"admin{user['id']}",
-                reason=reason,
-                ip_addr=ip,
-            )
-        except vnpay.VnpayQueryError as e:
-            raise ApiError(f"Không gửi được yêu cầu hoàn tiền: {e}", 502)
-        code = rsp.get("vnp_ResponseCode")
-        if code != "00":
-            msg = vnpay.REFUND_MESSAGES.get(code) or rsp.get("vnp_Message") or "Lỗi không xác định."
-            raise ApiError(f"VNPay từ chối hoàn tiền (mã {code}): {msg}", 409)
-        refund_txn = rsp.get("vnp_TransactionNo")
-
-    # Cập nhật đơn (điều kiện status='completed' chống bấm 2 lần)
-    res = execute(
-        db,
-        "UPDATE payments SET status='refunded', refunded_at=NOW(), refunded_by=:by, refund_reason=:reason, "
-        "refund_txn_no=:rtxn, note=:note WHERE id=:id AND status='completed'",
-        id=payment["id"],
-        by=user["id"],
-        reason=reason[:255],
-        rtxn=refund_txn,
-        note="Đã hoàn tiền qua VNPay." if gateway else "Đã ghi nhận hoàn tiền thủ công.",
-    )
-    if not res.rowcount:
-        raise ApiError("Đơn đã được xử lý bởi thao tác khác.", 409)
-
-    # Thu hồi quyền học (trừ khi học viên còn đơn thanh toán thành công khác cho cùng khóa)
-    revoked = False
-    if revoke and not _has_paid(db, payment["user_id"], payment["course_id"]):
-        revoked = bool(
-            execute(
-                db,
-                "DELETE FROM enrollments WHERE user_id = :u AND course_id = :c",
-                u=payment["user_id"],
-                c=payment["course_id"],
-            ).rowcount
-        )
-
-    row = q_one(
-        db,
-        "SELECT p.*, u.fullname AS user_name, u.email, c.title AS course_title FROM payments p "
-        "JOIN users u ON u.id = p.user_id JOIN courses c ON c.id = p.course_id WHERE p.id = :id",
-        id=payment["id"],
-    )
-    msg = "Đã hoàn tiền" + (" qua VNPay" if gateway else " (ghi nhận thủ công)")
-    msg += " và thu hồi quyền học." if revoked else "; học viên vẫn giữ quyền học." if not revoke else "."
-    return ok(msg, revoked=revoked, data=_decorate(db, row))
+@router.post("/refund-reconcile")
+def reconcile_refund(body: dict = Body(default={}), user: dict = Depends(get_current_user), db: Session = Depends(get_db)):
+    from app.services import refund_operations
+    if user["role"] != "admin":
+        raise ApiError("Chỉ Admin đối soát hoàn tiền.", 403)
+    pid = iv(body, "id")
+    revoked = refund_operations.reconcile(db, pid, user)
+    return _refund_response(db, pid, revoked)

@@ -24,10 +24,10 @@ const DEFAULT_TITLE = '👥 Quản lý Thành viên';
 // Các nhánh con của Quản lý User (hiển thị dạng tab ở đầu trang)
 const USER_TABS = [
   { to: '/admin/users', label: '👥 Tất cả', role: null },
-  { to: '/admin/users/teachers', label: '👨‍🏫 Teacher', role: 'teacher' },
-  { to: '/admin/users/students', label: '🎒 Student', role: 'student' },
+  { to: '/admin/users/teachers', label: '👨‍🏫 Giảng viên', role: 'teacher' },
+  { to: '/admin/users/students', label: '🎒 Học viên', role: 'student' },
 ];
-const CRUMB_BY_FILTER = { teacher: 'Teacher', student: 'Student' };
+const CRUMB_BY_FILTER = { teacher: 'Giảng viên', student: 'Học viên' };
 
 // Giá trị rỗng của form thêm/sửa người dùng
 const emptyForm = { id: '', fullname: '', email: '', password: '', role: 'student' };
@@ -178,7 +178,11 @@ export default function AdminUsers({ roleFilter }) {
           )}
         </div>
         <h1 className="page-title">{pageTitle}</h1>
-        <p className="page-subtitle">Xem danh sách, phân quyền và chỉnh sửa thông tin thành viên.</p>
+        <p className="page-subtitle">
+          {roleFilter === 'teacher'
+            ? 'Admin tạo tài khoản Giảng viên và cấp thông tin đăng nhập. Giảng viên đổi mật khẩu tại Hồ sơ cá nhân.'
+            : 'Xem danh sách, phân quyền và chỉnh sửa thông tin thành viên.'}
+        </p>
       </div>
 
       {/* Tab chuyển nhanh giữa Tất cả / Teacher / Student */}
@@ -195,7 +199,7 @@ export default function AdminUsers({ roleFilter }) {
         <div className="card-header">
           <h3 style={{ fontSize: '1.1rem', fontWeight: 700 }}>👥 Quản lý Thành viên</h3>
           <button className="btn btn-primary btn-sm" onClick={openCreateModal}>
-            + Thêm Thành viên
+            {roleFilter === 'teacher' ? '+ Thêm Giảng viên' : '+ Thêm Thành viên'}
           </button>
         </div>
         <div className="card-body">
@@ -315,7 +319,7 @@ export default function AdminUsers({ roleFilter }) {
           onClick={(e) => e.stopPropagation()}
         >
           <div className="card-header">
-            <h3>{isEditing ? 'Cập nhật người dùng' : 'Thêm người dùng mới'}</h3>
+            <h3>{isEditing ? 'Cập nhật người dùng' : form.role === 'teacher' ? 'Tạo tài khoản Giảng viên' : 'Thêm người dùng mới'}</h3>
             <button className="btn-icon" onClick={() => setModalOpen(false)}>
               ✕
             </button>
@@ -323,8 +327,9 @@ export default function AdminUsers({ roleFilter }) {
           <div className="card-body">
             <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <label className="form-label">Họ và tên</label>
+                <label className="form-label" htmlFor="admin-user-fullname">Họ và tên</label>
                 <input
+                  id="admin-user-fullname"
                   type="text"
                   className="form-control"
                   required
@@ -334,8 +339,9 @@ export default function AdminUsers({ roleFilter }) {
                 />
               </div>
               <div className="form-group">
-                <label className="form-label">Email</label>
+                <label className="form-label" htmlFor="admin-user-email">Email</label>
                 <input
+                  id="admin-user-email"
                   type="email"
                   className="form-control"
                   required
@@ -344,9 +350,14 @@ export default function AdminUsers({ roleFilter }) {
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                 />
               </div>
-              <div className="form-group">
-                <label className="form-label">{isEditing ? 'Đặt lại mật khẩu' : 'Mật khẩu'}</label>
+              {isEditing && form.role === 'admin' ? (
+                <p className="text-sm text-slate-500">Admin đổi mật khẩu bằng mật khẩu hiện tại; nếu quên, dùng quy trình khôi phục riêng trên máy chủ.</p>
+              ) : <div className="form-group">
+                <label className="form-label" htmlFor="admin-user-password">
+                  {isEditing ? 'Đặt lại mật khẩu' : form.role === 'teacher' ? 'Mật khẩu ban đầu' : 'Mật khẩu'}
+                </label>
                 <input
+                  id="admin-user-password"
                   type="password"
                   className="form-control"
                   required={!isEditing}
@@ -356,10 +367,11 @@ export default function AdminUsers({ roleFilter }) {
                   value={form.password}
                   onChange={(e) => setForm({ ...form, password: e.target.value })}
                 />
-              </div>
+              </div>}
               <div className="form-group">
-                <label className="form-label">Vai trò</label>
+                <label className="form-label" htmlFor="admin-user-role">Vai trò</label>
                 <select
+                  id="admin-user-role"
                   className="form-control"
                   value={form.role}
                   onChange={(e) => setForm({ ...form, role: e.target.value })}
@@ -369,6 +381,12 @@ export default function AdminUsers({ roleFilter }) {
                   <option value="admin">Admin (Quản trị)</option>
                 </select>
               </div>
+              {!isEditing && form.role === 'teacher' && (
+                <p style={{ fontSize: '.85rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                  Cấp email và mật khẩu ban đầu cho giảng viên qua kênh riêng. Sau khi đăng nhập,
+                  giảng viên vào Hồ sơ cá nhân → Đổi mật khẩu để đặt mật khẩu của mình.
+                </p>
+              )}
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', marginTop: '1.75rem' }}>
                 <button type="button" className="btn btn-ghost btn-sm" onClick={() => setModalOpen(false)}>
                   Hủy

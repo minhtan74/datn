@@ -1,0 +1,41 @@
+{
+  "checks": [
+    "Live admin list loads without API error",
+    "Live table has six columns",
+    "Live order detail opens",
+    "Status tab sends completed filter",
+    "Live no-match search shows empty state",
+    "Reset filters clears search and status",
+    "Date filter sent to API",
+    "Pagination requests second page",
+    "Pagination returns to first page",
+    "Confirmed filtered bulk action sends no filter",
+    "Controlled single reconciliation started",
+    "Second order selected before old response",
+    "Confirmed stale reconciliation replaces another open order",
+    "Confirmed load error retains stale totals",
+    "Mobile page does not overflow horizontally",
+    "Mobile refund detail opens",
+    "Mobile refund detail fits viewport",
+    "No JavaScript exceptions"
+  ],
+  "findings": {
+    "bulkScope": {
+      "displayedPending": 1,
+      "requestBody": null,
+      "queryUsedForList": "AUDIT-A"
+    },
+    "staleDetail": {
+      "selectedOrder": "AUDIT-B",
+      "displayedAfterOldResponse": "AUDIT-A"
+    },
+    "staleTotalsOnError": {
+      "visibleTotal": 40,
+      "listRequestFailed": true
+    }
+  },
+  "realPaymentWrites": 0,
+  "mockedPaymentWrites": 2,
+  "errors": [],
+  "liveRowsOnPage": 13
+}

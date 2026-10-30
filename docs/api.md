@@ -24,6 +24,10 @@ Base URL (dev): `http://127.0.0.1:8080` · Swagger tự sinh: `/docs`
 | GET | `/me` | ✔ | – | `{user:{id,fullname,email,role}}` |
 | POST | `/change-password` | ✔ | `{old_password, new_password}` | mật khẩu mới ≥ 6 ký tự |
 
+Đăng ký công khai chỉ dành cho học viên, kể cả khi client tự gửi thêm `role`.
+Admin cấp tài khoản Giảng viên qua `POST /api/users` với `role="teacher"` và mật khẩu ban đầu;
+giảng viên đăng nhập rồi đổi mật khẩu qua `/api/auth/change-password`.
+
 ## 2. Users — `/api/users`
 
 | Method | Path | Auth | Ghi chú |
@@ -50,9 +54,9 @@ Base URL (dev): `http://127.0.0.1:8080` · Swagger tự sinh: `/docs`
 
 | Method | Path | Auth | Ghi chú |
 |---|---|---|---|
-| GET | `/api/quizzes` | – | `?id=` / `?course_id=` / tất cả; mỗi quiz kèm `question_count`, `source` manual/ai, `chapter_id` + `chapter_name` (ôn tập chương), `review_lesson_id` (+ `review_lesson_title` khi `?id=`) (ôn tập bài), `duration`/`passing_score`/`max_attempts` (NULL = không giới hạn); `?id=` kèm `my_attempts` khi đăng nhập |
+| GET | `/api/quizzes` | – | `?id=` / `?course_id=` / tất cả; mỗi quiz kèm `question_count`, `source` manual/ai, `chapter_id` + `chapter_name` (ôn tập chương), `review_lesson_id` (+ `review_lesson_title` khi `?id=`) (ôn tập bài), `duration`/`passing_score`/`max_attempts` (NULL = không giới hạn). `?id=` chỉ đọc thông tin, không tạo lượt: khi đăng nhập kèm `my_attempts`, `can_attempt`, `is_preview`. Danh sách và chi tiết của học viên kèm `my_status`: `in_progress`, `remaining_sec`, `attempts_used` (gồm cả lượt hết hạn/chưa nộp), `attempts_left`, `submitted`, `graded_percent`, `passed`. Frontend dùng số lượt đã dùng để phân biệt Chưa làm với Chưa nộp; bộ lọc `status` trên trang `/quiz` được xử lý ở frontend |
 | POST/PUT/DELETE | `/api/quizzes` | admin/teacher | POST `{course_id,title,description,duration?,passing_score?,max_attempts?}` (phút / % / số lần; trống hoặc 0 = không giới hạn) |
-| GET | `/api/quizzes/questions` | – | **bắt buộc** `?quiz_id=` hoặc `?id=`; học viên: 403 khi hết lượt, đề có giờ trả thêm `attempt_token` + `time_limit_sec` |
+| GET | `/api/quizzes/questions` | – | **bắt buộc** `?quiz_id=` hoặc `?id=`. Với `quiz_id`, frontend chỉ gọi khi bấm Bắt đầu/Tiếp tục; học viên tạo hoặc tiếp tục lượt, nhận `attempt_token`, `attempts_used`; đề có giờ thêm `time_limit_sec`, `remaining_sec`. `resume_only=1` chỉ tiếp tục lượt còn hiệu lực, 403 nếu đã kết thúc (không tạo lượt mới). 403 khi hết lượt hoặc không có quyền; giảng viên chủ khóa/admin xem thử không tạo lượt |
 | POST/PUT/DELETE | `/api/quizzes/questions` | admin/teacher | `{quiz_id,content,option_a..d,correct_answer,order_index}` |
 | POST | `/api/quizzes/submit` | ✔ | `{quiz_id, answers:{"<question_id>":"A".."D"}}` → chấm điểm + `details[]` + `passed` (null nếu không đặt điểm đạt) + `answers_revealed`, `attempts_used`, `attempts_left`. Đề có `max_attempts`: chưa tới lượt cuối thì `details[].correct_answer = null` (chỉ báo đúng/sai); ghi `results` + `result_answers`. Đề có giờ cần `attempt_token` (HMAC, hạn = thời gian + 60s); hết lượt → 403 |
 
@@ -123,7 +127,7 @@ Nộp bài và đọc kết quả trả thêm `knowledge: {units[], unmapped_ans
 | POST | `/api/ai/documents` | teacher/admin | multipart `file`+`course_id`+`lesson_id?`+`title?` → tải + ingest |
 | GET | `/api/ai/documents?course_id=` | teacher/admin | danh sách tài liệu + trạng thái |
 | DELETE | `/api/ai/documents?id=` | teacher/admin | xoá tài liệu + chunk + file |
-| POST | `/api/ai/chat` | ✔ | `{course_id, lesson_id?, conversation_id?, message}` → `{answer, sources[], conversation_id}` |
+| POST | `/api/ai/chat` | ✔ | `{course_id, lesson_id?, conversation_id?, message}` → `{answer, sources[], conversation_id, used_context, needs_clarification, clarification_kind, response_status, error_code, retryable}`. `response_status`: ok/error/fallback. Lỗi LLM không có dự phòng: HTTP503, `success=false`, vẫn kèm `data.conversation_id` để gửi lại đúng hội thoại; dự phòng: HTTP200 có nguồn và nhãn fallback. Câu thiếu thông tin được hỏi lại, không gắn nguồn. Lịch sử giữ metadata khi tải lại. `conversation_id` phải cùng khóa/phạm vi bài học; `lesson_id` phải thuộc khóa được chọn |
 | GET | `/api/ai/conversations?course_id=` | ✔ | hội thoại của người dùng |
 | GET | `/api/ai/conversations/{id}` | ✔ | các tin nhắn |
 | DELETE | `/api/ai/conversations/{id}` | ✔ | xoá hội thoại |
@@ -152,3 +156,15 @@ Nộp bài và đọc kết quả trả thêm `knowledge: {units[], unmapped_ans
 
 **Cột thêm cho bảng cũ:** `questions.topic` / `questions.difficulty` / `questions.explanation`;
 `quizzes.lesson_id` / `quizzes.source` (`manual`/`ai`).
+
+## Khôi phục mật khẩu
+
+Giảng viên/Học viên liên hệ Admin quản lý để xác minh và cấp lại; Admin duy nhất dùng công cụ riêng trên máy chủ.
+Không còn API công khai đặt lại mật khẩu bằng token/email. Xem [quy trình](password-recovery.md).
+
+## An toàn giao dịch Admin
+
+`POST /api/payments/reconcile-pending` nhận `{q, course_id, date_from, date_to}` và chỉ xử lý
+đơn VNPay đang chờ khớp bộ lọc. `GET /api/payments/detail?id=...` chỉ dành cho Admin.
+`POST /api/payments/refund-reconcile` nhận `{id}` để truy vấn kết quả hoàn tiền hoặc phục hồi phần cập nhật DB,
+không gửi lại yêu cầu hoàn tiền. Xem [bản sửa mục 1–4](admin-fixes-1-4.md).

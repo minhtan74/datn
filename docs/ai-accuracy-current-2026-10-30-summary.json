@@ -1,0 +1,138 @@
+{
+  "date": "2026-10-30",
+  "engine": {
+    "llm": {
+      "provider": "gemini",
+      "model": "gemini-3.1-flash-lite"
+    },
+    "embedding": {
+      "provider": "fastembed",
+      "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "dim": 384
+    }
+  },
+  "total_cases": 68,
+  "knowledge_total": 50,
+  "correct_complete": 45,
+  "strict_knowledge_accuracy_percent": 90.0,
+  "partial": 0,
+  "refused_knowledge": 2,
+  "unnecessary_clarifications": 3,
+  "factual_errors": 0,
+  "correct_and_cited_core_supported": 44,
+  "grounded_end_to_end_percent": 88.0,
+  "citation_core_supported_among_correct": 97.78,
+  "substantive_answers": 45,
+  "correct_among_substantive_percent": 100.0,
+  "fixed_knowledge_correct": 36,
+  "fixed_knowledge_total": 40,
+  "new_knowledge_correct": 9,
+  "new_knowledge_total": 10,
+  "boundary_correct": 10,
+  "boundary_total": 10,
+  "clarification_correct": 8,
+  "clarification_total": 8,
+  "citation_metadata_valid": true,
+  "citations_total": 130,
+  "fallback_answers": 0,
+  "transport_or_llm_errors": 0,
+  "per_course": [
+    {
+      "course_id": 1,
+      "title": "Python cơ bản",
+      "correct": 4,
+      "total": 5,
+      "percent": 80.0
+    },
+    {
+      "course_id": 2,
+      "title": "JavaScript",
+      "correct": 5,
+      "total": 5,
+      "percent": 100.0
+    },
+    {
+      "course_id": 3,
+      "title": "Java",
+      "correct": 4,
+      "total": 5,
+      "percent": 80.0
+    },
+    {
+      "course_id": 4,
+      "title": "HTML & CSS",
+      "correct": 4,
+      "total": 5,
+      "percent": 80.0
+    },
+    {
+      "course_id": 5,
+      "title": "ReactJS",
+      "correct": 5,
+      "total": 5,
+      "percent": 100.0
+    },
+    {
+      "course_id": 6,
+      "title": "MySQL",
+      "correct": 5,
+      "total": 5,
+      "percent": 100.0
+    },
+    {
+      "course_id": 7,
+      "title": "Nguyên lí hệ điều hành",
+      "correct": 4,
+      "total": 5,
+      "percent": 80.0
+    },
+    {
+      "course_id": 513,
+      "title": "Mạng máy tính",
+      "correct": 5,
+      "total": 5,
+      "percent": 100.0
+    },
+    {
+      "course_id": 514,
+      "title": "Cấu trúc dữ liệu và giải thuật",
+      "correct": 5,
+      "total": 5,
+      "percent": 100.0
+    },
+    {
+      "course_id": 515,
+      "title": "Kiểm thử phần mềm",
+      "correct": 4,
+      "total": 5,
+      "percent": 80.0
+    }
+  ],
+  "latency_seconds": {
+    "median": 2.083,
+    "mean": 4.673441176470588,
+    "p95_nearest_rank": 33.557,
+    "max": 60.983
+  },
+  "code_unchanged_across_phases": true,
+  "counts_before": {
+    "ai_conversations": 4,
+    "ai_messages": 18,
+    "documents": 176,
+    "document_chunks": 2063
+  },
+  "counts_after": {
+    "ai_conversations": 4,
+    "ai_messages": 18,
+    "documents": 176,
+    "document_chunks": 2063
+  },
+  "all_test_conversations_cleaned": true,
+  "method_limitations": [
+    "Bộ câu hỏi chọn có chủ đích, không phải mẫu ngẫu nhiên của toàn bộ câu hỏi người dùng.",
+    "Chấm bởi trợ lý AI theo rubric và tài liệu nguồn, chưa có giảng viên kiểm định độc lập.",
+    "Một lượt trả lời đầu tiên/câu, không chọn câu trả lời đẹp sau nhiều lần thử.",
+    "Số đúng là khả năng đáp ứng đầu cuối, gồm cả lỗi không trả lời và hỏi lại thừa trong mẫu.",
+    "Không phát hiện khẳng định sai trong mẫu không chứng minh AI sẽ không bịa ở câu khác."
+  ]
+}

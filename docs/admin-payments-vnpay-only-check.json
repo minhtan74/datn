@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "displayedRows": 13,
+  "onlyVnpay": true,
+  "explicitFilter": true,
+  "defaultApiOnlyVnpay": true,
+  "javascriptErrors": 0,
+  "scope": "Read-only live list; no payment mutations."
+}

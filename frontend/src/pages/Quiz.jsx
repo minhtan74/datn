@@ -5,44 +5,65 @@ import { quizService } from '../services/quizService';
 import { formatClock, gradingShort } from '../utils/quizGrading';
 import QuizHistoryPanel from '../components/quiz/QuizHistoryPanel.jsx';
 
-/** Tình trạng làm bài của học viên với 1 quiz: chưa làm / đang làm dở / điểm được tính + đạt, số lượt còn lại */
+const QUIZ_STATES = [
+  { key: 'not_started', label: 'Chưa làm', icon: '○' },
+  { key: 'in_progress', label: 'Đang làm dở', icon: '◷' },
+  { key: 'submitted', label: 'Đã nộp', icon: '✓' },
+  { key: 'unfinished', label: 'Chưa nộp', icon: '!' },
+];
+
+// Mỗi quiz thuộc một nhóm. Lượt đang làm lại được ưu tiên, điểm các lượt đã nộp vẫn giữ.
+function stateOf(quiz) {
+  const s = quiz.my_status;
+  if (!s) return null;
+  if (s.in_progress) return 'in_progress';
+  if (s.submitted > 0) return 'submitted';
+  if (s.attempts_used > 0) return 'unfinished';
+  return 'not_started';
+}
+
+/** Tách trạng thái nộp bài khỏi điểm đạt; không ẩn kết quả cũ khi đang làm lại. */
 function QuizStatus({ quiz }) {
   const s = quiz.my_status;
   if (!s) return null;
-  if (s.in_progress) {
-    return (
-      <span className="s-badge s-badge-warn">
-        ⏳ Đang làm dở{s.remaining_sec != null ? ` · còn ${formatClock(s.remaining_sec)}` : ''}
-      </span>
-    );
-  }
-  if (!s.submitted) return <span className="s-badge s-badge-gray">Chưa làm</span>;
+  const state = stateOf(quiz);
+  const label = QUIZ_STATES.find((item) => item.key === state).label;
   return (
     <>
-      <span className="s-badge s-badge-blue" title={`Điểm tính theo ${gradingShort(quiz.grading_method)}`}>
-        Điểm: {s.graded_percent}% ({gradingShort(quiz.grading_method)})
+      <span className="s-badge ql-state-label">
+        {label}{s.in_progress && s.remaining_sec != null ? ` · còn ${formatClock(s.remaining_sec)}` : ''}
       </span>
-      {s.passed === true && <span className="s-badge s-badge-green">✓ Đạt</span>}
-      {s.passed === false && <span className="s-badge s-badge-warn">Chưa đạt</span>}
-      <span style={{ fontSize: '0.8rem', color: 'var(--s-text-muted)' }}>
-        Đã làm {s.submitted} lần{s.attempts_left != null ? ` · còn ${s.attempts_left} lượt` : ''}
-      </span>
+      {s.submitted > 0 && (
+        <>
+          <span className="s-badge s-badge-blue" title={`Điểm các lượt đã nộp, tính theo ${gradingShort(quiz.grading_method)}`}>
+            Điểm: {s.graded_percent}% ({gradingShort(quiz.grading_method)})
+          </span>
+          {s.passed === true && <span className="s-badge s-badge-green">✓ Đạt</span>}
+          {s.passed === false && <span className="s-badge s-badge-warn">Chưa đạt</span>}
+          <span className="ql-status-note">Đã nộp {s.submitted} lượt</span>
+        </>
+      )}
+      {state === 'unfinished' && <span className="ql-status-note">Lượt trước đã kết thúc, chưa có bài nộp.</span>}
+      {s.attempts_left != null && (
+        <span className="ql-status-note">{s.attempts_left === 0 ? 'Đã dùng hết lượt mới' : `Còn ${s.attempts_left} lượt mới`}</span>
+      )}
     </>
   );
 }
 
 // Nút chính theo tình trạng: tiếp tục lượt dở / làm lại / làm bài; hết lượt thì khóa
-function actionOf(quiz) {
+function actionOf(quiz, isManager) {
+  if (isManager) return { label: 'Làm thử', disabled: false };
   const s = quiz.my_status;
   if (!s) return { label: 'Làm bài', disabled: false };
   if (s.in_progress) return { label: 'Tiếp tục làm', disabled: false };
   if (s.attempts_left === 0) return { label: 'Hết lượt', disabled: true };
-  return { label: s.submitted ? 'Làm lại' : 'Làm bài', disabled: false };
+  return { label: s.submitted || s.attempts_used ? 'Làm lại' : 'Làm bài', disabled: false };
 }
 
 /** Tương đương initQuizList() trong _legacy/js/quiz.js + _legacy/pages/quiz.html */
 export default function Quiz() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const courseId = searchParams.get('course_id');
   // Quiz đang mở lịch sử làm bài (mở sẵn nếu URL có ?history=<id>, vd từ trang kết quả)
   const [historyId, setHistoryId] = useState(Number(searchParams.get('history')) || null);
@@ -52,6 +73,23 @@ export default function Quiz() {
 
   const [quizzes, setQuizzes] = useState(null); // null = đang tải
   const [loadError, setLoadError] = useState(null);
+  const selectedStatus = searchParams.get('status');
+  const statusFilter = QUIZ_STATES.some((s) => s.key === selectedStatus) ? selectedStatus : 'all';
+  const counts = Object.fromEntries(QUIZ_STATES.map((s) => [s.key, 0]));
+  for (const q of quizzes || []) {
+    const state = stateOf(q);
+    if (state) counts[state] += 1;
+  }
+  const visibleQuizzes = (quizzes || []).filter((q) => isManager || statusFilter === 'all' || stateOf(q) === statusFilter);
+
+  function filterByStatus(status) {
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      if (status === 'all') next.delete('status');
+      else next.set('status', status);
+      return next;
+    });
+  }
 
   // Tải danh sách quiz (theo khóa nếu URL có course_id)
   async function loadQuizzes() {
@@ -81,6 +119,33 @@ export default function Quiz() {
         <p className="q-subtitle">Chọn một bài tập trắc nghiệm dưới đây để kiểm tra và củng cố kiến thức học tập.</p>
       </div>
 
+      {!isManager && quizzes !== null && !loadError && quizzes.length > 0 && (
+        <section className="ql-overview" aria-labelledby="quiz-status-title">
+          <div className="ql-overview-heading">
+            <h2 id="quiz-status-title">Theo dõi bài làm</h2>
+            <button type="button" className={`qh-chip${statusFilter === 'all' ? ' active' : ''}`}
+              aria-pressed={statusFilter === 'all'} aria-controls="quizList" onClick={() => filterByStatus('all')}>
+              Tất cả ({quizzes.length})
+            </button>
+          </div>
+          <div className="ql-status-filters" role="group" aria-label="Lọc quiz theo trạng thái">
+            {QUIZ_STATES.map((s) => (
+              <button key={s.key} type="button" aria-pressed={statusFilter === s.key} aria-controls="quizList"
+                className={`ql-status-filter ql-state-${s.key}${statusFilter === s.key ? ' active' : ''}`}
+                onClick={() => filterByStatus(s.key)}>
+                <span className="ql-filter-label"><span aria-hidden="true">{s.icon}</span> {s.label}</span>
+                <strong className="ql-filter-count">{counts[s.key]}</strong>
+                <span className="ql-filter-unit">quiz</span>
+              </button>
+            ))}
+          </div>
+          <p className="ql-filter-help">Chọn trạng thái để lọc bài. “Chưa nộp” là bài đã bắt đầu nhưng lượt làm đã kết thúc mà chưa nộp bài.</p>
+          <p className="ql-result-count" role="status" aria-live="polite">
+            Hiển thị {visibleQuizzes.length} / {quizzes.length} quiz{statusFilter !== 'all' ? ` · ${QUIZ_STATES.find((s) => s.key === statusFilter).label}` : ''}
+          </p>
+        </section>
+      )}
+
       <div id="quizList" className="q-card-list">
         {quizzes === null && (
           <div style={{ textAlign: 'center', padding: '5rem 0' }}>
@@ -104,15 +169,20 @@ export default function Quiz() {
           </div>
         )}
 
+        {!isManager && quizzes?.length > 0 && visibleQuizzes.length === 0 && (
+          <div className="s-empty">
+            <div className="icon" aria-hidden="true">📝</div>
+            <h3>Không có quiz ở trạng thái này</h3>
+            <p>Chọn trạng thái khác hoặc xem lại tất cả quiz.</p>
+            <button type="button" className="s-btn s-btn-outline" onClick={() => filterByStatus('all')}>Xem tất cả quiz</button>
+          </div>
+        )}
+
         {quizzes !== null &&
-          quizzes.length > 0 &&
-          quizzes.map((q) => (
-            <div key={q.id} className="s-card" style={{ marginBottom: '1rem' }}>
-              <div
-                className="s-card-body"
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}
-              >
-                <div>
+          visibleQuizzes.map((q) => (
+            <div key={q.id} className={`s-card ql-card${!isManager && stateOf(q) ? ` ql-state-${stateOf(q)}` : ''}`}>
+              <div className="s-card-body ql-card-body">
+                <div className="ql-card-content">
                   <h3 style={{ fontSize: '1.05rem', marginBottom: '.25rem', fontWeight: 700 }}>{q.title}</h3>
                   <span className="s-badge s-badge-blue">{q.question_count} câu hỏi</span>
                   {q.course_title && (
@@ -140,19 +210,19 @@ export default function Quiz() {
                   </p>
                   {/* Học viên: tình trạng làm bài của mình */}
                   {q.my_status && (
-                    <div style={{ display: 'flex', gap: '.4rem', flexWrap: 'wrap', alignItems: 'center', marginTop: '.5rem' }}>
+                    <div className="ql-card-status">
                       <QuizStatus quiz={q} />
                     </div>
                   )}
                 </div>
-                <div style={{ display: 'flex', gap: '.5rem', flexWrap: 'wrap' }}>
-                  {actionOf(q).disabled ? (
-                    <span className="s-btn s-btn-outline s-btn-sm" aria-disabled="true" style={{ opacity: 0.6, cursor: 'not-allowed' }}>
-                      {actionOf(q).label}
-                    </span>
+                <div className="ql-card-actions">
+                  {actionOf(q, isManager).disabled ? (
+                    <button type="button" className="s-btn s-btn-outline s-btn-sm" disabled>
+                      {actionOf(q, isManager).label}
+                    </button>
                   ) : (
                     <Link className="s-btn s-btn-primary s-btn-sm" to={`/quiz-show?id=${q.id}`}>
-                      {actionOf(q).label}
+                      {actionOf(q, isManager).label}
                     </Link>
                   )}
                   {q.my_status?.submitted > 0 && (

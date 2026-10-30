@@ -20,7 +20,7 @@ from app.ai.rag import ingest
 from app.core.config import settings
 from app.core.database import SessionLocal, execute, get_db, q_all, q_one, q_scalar
 from app.core.dependencies import get_current_user, require_roles
-from app.core.responses import ApiError, ok
+from app.core.responses import ApiError, ApiJSONResponse, ok
 from app.routers.chapters import ensure_review_quiz
 from app.routers.enrollments import _is_enrolled
 from app.routers.lessons import ensure_lesson_review_quiz
@@ -184,8 +184,9 @@ def chat(
     conversation_id = body.get("conversation_id")
 
     if lesson_id:
-        # Bài học có PDF đính kèm nhưng chưa từng được nạp vào RAG -> tự nạp ngay lần hỏi đầu tiên.
-        ingest.ensure_lesson_document(db, lesson_id)
+        if not q_one(db, "SELECT l.id FROM lessons l JOIN chapters ch ON ch.id=l.chapter_id "
+                     "WHERE l.id=:l AND ch.course_id=:c", l=lesson_id, c=course_id):
+            raise ApiError("Bài học không thuộc khóa học đang chọn.", 400)
 
     # Chạy RAG + lưu câu hỏi/câu trả lời vào lịch sử hội thoại
     res = tutor.chat(
@@ -197,6 +198,8 @@ def chat(
         lesson_only=bool(lesson_id),
         conversation_id=int(conversation_id) if conversation_id else None,
     )
+    if res.get("response_status") == "error":
+        return ApiJSONResponse(status_code=503, content={"success": False, "message": res["answer"], "data": res})
     return ok(data=res)
 
 

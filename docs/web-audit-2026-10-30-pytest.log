@@ -1,0 +1,196 @@
+............F.FF.......F.......F........................................ [ 38%]
+........................................................................ [ 76%]
+.............................................                            [100%]
+================================== FAILURES ===================================
+___________________________ test_full_learning_flow ___________________________
+
+tokens = {'admin': '[TOKEN_REDACTED]'}
+course = 577
+
+    def test_full_learning_flow(tokens, course):
+        T, S = _h(tokens["teacher"]), _h(tokens["student"])
+        ch = int(client.post("/api/chapters", headers=T,
+                             json={"course_id": course, "chapter_name": "C1"}).json()["id"])
+        ls = int(client.post("/api/lessons", headers=T,
+                             json={"chapter_id": ch, "title": "L1", "description": "",
+                                   "video_url": "", "document_url": ""}).json()["id"])
+        qz = int(client.post("/api/quizzes", headers=T,
+                             json={"course_id": course, "title": "Q1", "description": ""}).json()["id"])
+        client.post("/api/quizzes/questions", headers=T, json={
+            "quiz_id": qz, "content": "2+2=?", "option_a": "3", "option_b": "4",
+            "option_c": "5", "option_d": "6", "correct_answer": "B", "order_index": 0,
+        })
+        # Ch\u01b0a ghi danh th\xec kh\xf4ng xem \u0111\u01b0\u1ee3c c\xe2u h\u1ecfi; ch\u1ee7 kh\xf3a xem \u0111\u01b0\u1ee3c c\u1ea3 \u0111\xe1p \xe1n.
+        assert client.get(f"/api/quizzes/questions?quiz_id={qz}", headers=S).status_code == 403
+        teacher_view = client.get(f"/api/quizzes/questions?quiz_id={qz}", headers=T).json()["data"][0]
+        assert teacher_view["correct_answer"] == "B"
+        qid = teacher_view["id"]
+
+        assert client.post("/api/enrollments", headers=S, json={"course_id": course}).json()["success"]
+        assert client.post("/api/enrollments", headers=S, json={"course_id": course}).status_code == 409
+        ids = client.get("/api/enrollments?ids_only=1", headers=S).json()["data"]
+        assert course in ids
+
+        student_view = client.get(f"/api/quizzes/questions?quiz_id={qz}", headers=S).json()["data"][0]
+        assert "correct_answer" not in student_view
+
+        client.post("/api/progress", headers=S,
+                    json={"lesson_id": ls, "watched_sec": 60, "is_completed": 1})
+        assert ls in client.get(f"/api/progress?course_id={course}", headers=S).json()["data"]
+
+        sub = client.post("/api/quizzes/submit", headers=S,
+                          json={"quiz_id": qz, "answers": {str(qid): "B"}}).json()
+>       assert sub["score"] == 1 and sub["total"] == 1 and sub["percent"] == 100
+E       KeyError: 'score'
+
+tests\test_api.py:221: KeyError
+____________________ test_lesson_review_and_quiz_settings _____________________
+
+tokens = {'admin': '[TOKEN_REDACTED]'}
+course = 579
+
+    def test_lesson_review_and_quiz_settings(tokens, course):
+        T, S = _h(tokens["teacher"]), _h(tokens["student"])
+        ch = int(client.post("/api/chapters", headers=T,
+                             json={"course_id": course, "chapter_name": "C"}).json()["id"])
+        ls = int(client.post("/api/lessons", headers=T,
+                             json={"chapter_id": ch, "title": "V\xf2ng l\u1eb7p for",
+                                   "description": "V\xf2ng l\u1eb7p for d\xf9ng \u0111\u1ec3 l\u1eb7p qua c\xe1c ph\u1ea7n t\u1eed c\u1ee7a m\u1ed9t d\xe3y.",
+                                   "video_url": "", "document_url": ""}).json()["id"])
+        # Ch\u01b0a c\xf3 b\u1ed9 \xf4n t\u1eadp; h\u1ecdc vi\xean kh\xf4ng \u0111\u01b0\u1ee3c t\u1ea1o; m\u1edf 2 l\u1ea7n ra c\xf9ng 1 b\u1ed9
+        assert client.get(f"/api/lessons?chapter_id={ch}", headers=T).json()["data"][0]["review_quiz_id"] is None
+        assert client.post("/api/lessons/review", headers=S, json={"lesson_id": ls}).status_code == 403
+        rq = client.post("/api/lessons/review", headers=T, json={"lesson_id": ls}).json()["data"]["quiz_id"]
+        assert client.post("/api/lessons/review", headers=T, json={"lesson_id": ls}).json()["data"]["quiz_id"] == rq
+        quiz = client.get(f"/api/quizzes?id={rq}").json()["data"]
+        assert quiz["review_lesson_id"] == ls and quiz["review_lesson_title"] == "V\xf2ng l\u1eb7p for"
+
+        # C\xe2u th\u1ee7 c\xf4ng + c\xe2u AI duy\u1ec7t v\xe0o c\xf9ng b\u1ed9 \xf4n t\u1eadp c\u1ee7a b\xe0i
+        client.post("/api/quizzes/questions", headers=T, json={
+            "quiz_id": rq, "content": "for d\xf9ng \u0111\u1ec3?", "option_a": "r\u1ebd nh\xe1nh", "option_b": "l\u1eb7p",
+            "option_c": "", "option_d": "", "correct_answer": "B"})
+        r = client.post("/api/ai/quiz/approve", headers=T, json={
+            "course_id": course, "review_lesson_id": ls, "questions": [{
+                "question": "range(3) sinh m\u1ea5y s\u1ed1?", "options": {"A": "2", "B": "3", "C": "4", "D": "5"},
+                "correct_answer": "B"}]}).json()
+        assert r["data"]["quiz_id"] == rq
+        assert client.get(f"/api/lessons?id={ls}", headers=T).json()["data"]["review_question_count"] == 2
+        # Duy\u1ec7t th\xe0nh quiz m\u1edbi k\xe8m c\xe0i \u0111\u1eb7t l\xe0m b\xe0i; c\xe0i \u0111\u1eb7t sai ph\u1ea1m vi b\u1ecb t\u1eeb ch\u1ed1i
+        one = [{"question": "1+1?", "options": {"A": "1", "B": "2", "C": "3", "D": "4"}, "correct_answer": "B",
+                "verify": {"answer": "B", "reason": "x"}, "plan_key": "single"}]
+        assert client.post("/api/ai/quiz/approve", headers=T, json={
+            "course_id": course, "title": "AI", "questions": one, "passing_score": 101}).status_code == 400
+        nq = client.post("/api/ai/quiz/approve", headers=T, json={
+            "course_id": course, "title": "AI cu\u1ed1i kh\xf3a", "questions": one,
+            "duration": 45, "passing_score": 70, "max_attempts": 1}).json()["data"]["quiz_id"]
+        got = client.get(f"/api/quizzes?id={nq}").json()["data"]
+        assert (got["duration"], got["passing_score"], got["max_attempts"], got["source"]) == (45, 70, 1, "ai")
+        # Sinh b\u1eb1ng AI theo b\xe0i (offline heuristic d\xf9ng m\xf4 t\u1ea3 b\xe0i h\u1ecdc l\xe0m ng\u1eef li\u1ec7u)
+        g = client.post("/api/ai/generate-quiz", headers=T,
+                        json={"course_id": course, "lesson_id": ls, "number_of_questions": 2})
+        assert g.status_code in (200, 422)
+        # Ph\xe2n b\u1ed5 \u0111\u1ed9 kh\xf3: sai ph\u1ea1m vi b\u1ecb t\u1eeb ch\u1ed1i; h\u1ee3p l\u1ec7 th\xec m\u1ed7i c\xe2u g\u1eafn \u0111\xfang m\u1ee9c c\u1ee7a l\xf4 sinh ra n\xf3
+        bad = {"course_id": course, "lesson_id": ls, "difficulty_mix": {"easy": 25}}
+        assert client.post("/api/ai/generate-quiz", headers=T, json=bad).status_code == 400
+        empty = {"course_id": course, "lesson_id": ls, "difficulty_mix": {"easy": 0, "medium": 0, "hard": 0}}
+        assert client.post("/api/ai/generate-quiz", headers=T, json=empty).status_code == 422
+        g = client.post("/api/ai/generate-quiz", headers=T, json={
+            "course_id": course, "lesson_id": ls, "difficulty_mix": {"easy": 1, "medium": 0, "hard": 1}})
+        if g.status_code == 200:
+            meta = g.json()["data"]["meta"]
+            assert meta["distribution_requested"] == {"easy": 1, "hard": 1}
+            levels = [q["difficulty"] for q in g.json()["data"]["questions"]]
+            assert set(levels) <= {"easy", "hard"} and len(levels) == meta["returned"]
+
+        # C\xe0i \u0111\u1eb7t l\xe0m b\xe0i: sai ph\u1ea1m vi b\u1ecb t\u1eeb ch\u1ed1i; gi\u1edbi h\u1ea1n 10 ph\xfat, \u0111\u1ea1t 50%, 1 l\u01b0\u1ee3t
+        base = {"id": rq, "course_id": course, "title": "\xd4n t\u1eadp b\xe0i"}
+        assert client.put("/api/quizzes", headers=T, json={**base, "passing_score": 150}).status_code == 400
+        client.put("/api/quizzes", headers=T, json={**base, "duration": 10, "passing_score": 50, "max_attempts": 1})
+
+        client.post("/api/enrollments", headers=S, json={"course_id": course})
+        got = client.get(f"/api/quizzes/questions?quiz_id={rq}", headers=S).json()
+        assert got["time_limit_sec"] == 600 and got["attempt_token"]
+        answers = {str(q["id"]): "B" for q in got["data"]}
+        # Kh\xf4ng c\xf3 / s\u1eeda token -> t\u1eeb ch\u1ed1i; token h\u1ee3p l\u1ec7 -> ch\u1ea5m, \u0111\u1ea1t
+        assert client.post("/api/quizzes/submit", headers=S, json={"quiz_id": rq, "answers": answers}).status_code == 400
+        aid, sig = got["attempt_token"].split(".")
+        forged = f"{int(aid) + 1}.{sig}"
+        assert client.post("/api/quizzes/submit", headers=S, json={
+            "quiz_id": rq, "answers": answers, "attempt_token": forged}).status_code == 400
+        sub = client.post("/api/quizzes/submit", headers=S, json={
+            "quiz_id": rq, "answers": answers, "attempt_token": got["attempt_token"]}).json()
+>       assert sub["percent"] == 100 and sub["passed"] is True
+E       assert (50 == 100)
+
+tests\test_api.py:351: AssertionError
+__________ test_answers_hidden_until_last_attempt_and_fair_analytics __________
+
+tokens = {'admin': '[TOKEN_REDACTED]'}
+course = 580
+
+    def test_answers_hidden_until_last_attempt_and_fair_analytics(tokens, course):
+        T, S = _h(tokens["teacher"]), _h(tokens["student"])
+        q = {"option_a": "sai", "option_b": "��ng", "option_c": "x", "option_d": "y", "correct_answer": "B"}
+        # B\xe0i ch\xednh th\u1ee9c cho l\xe0m 2 l\u1ea7n
+        qz = int(client.post("/api/quizzes", headers=T, json={
+            "course_id": course, "title": "Ch\xednh th\u1ee9c", "max_attempts": 2}).json()["id"])
+        client.post("/api/quizzes/questions", headers=T, json={"quiz_id": qz, "content": "C\xe2u CT", "topic": "Ch\u1ee7 \u0111\u1ec1 CT", **q})
+        # B\u1ed9 \xf4n t\u1eadp c\u1ee7a ch\u01b0\u01a1ng (l\xe0m l\u1ea1i kh\xf4ng gi\u1edbi h\u1ea1n)
+        ch = int(client.post("/api/chapters", headers=T, json={"course_id": course, "chapter_name": "C"}).json()["id"])
+        rq = client.post("/api/chapters/review", headers=T, json={"chapter_id": ch}).json()["data"]["quiz_id"]
+        client.post("/api/quizzes/questions", headers=T, json={"quiz_id": rq, "content": "C\xe2u \xd4T", "topic": "Ch\u1ee7 \u0111\u1ec1 \xd4T", **q})
+        client.post("/api/enrollments", headers=S, json={"course_id": course})
+        open1 = client.get(f"/api/quizzes/questions?quiz_id={qz}", headers=S).json()
+        qid = open1["data"][0]["id"]
+        rqid = client.get(f"/api/quizzes/questions?quiz_id={rq}", headers=S).json()["data"][0]["id"]
+
+        # L\u01b0\u1ee3t 1/2: c\xf3 \u0111\xfang/sai nh\u01b0ng KH\xd4NG c\xf3 \u0111\xe1p \xe1n \u0111\xfang; l\u01b0\u1ee3t 2/2 (cu\u1ed1i): c\xf3 \u0111\xe1p \xe1n
+        s1 = client.post("/api/quizzes/submit", headers=S, json={
+            "quiz_id": qz, "answers": {str(qid): "A"}, "attempt_token": open1["attempt_token"]}).json()
+        assert s1["answers_revealed"] is False and s1["attempts_left"] == 1
+        assert s1["details"][0]["correct_answer"] is None and s1["details"][0]["is_right"] is False
+        open2 = client.get(f"/api/quizzes/questions?quiz_id={qz}", headers=S).json()
+        s2 = client.post("/api/quizzes/submit", headers=S, json={
+            "quiz_id": qz, "answers": {str(qid): "B"}, "attempt_token": open2["attempt_token"]}).json()
+>       assert s2["answers_revealed"] is True and s2["attempts_left"] == 0 and s2["details"][0]["correct_answer"] == "B"
+E       AssertionError: assert (True is True and 0 == 0 and 'A' == 'B'
+E
+E         - B
+E         + A)
+
+tests\test_api.py:388: AssertionError
+__________________________ test_recommendation_flow ___________________________
+
+tokens = {'admin': '[TOKEN_REDACTED]'}
+
+    def test_recommendation_flow(tokens):
+        S = _h(tokens["student"])
+        cur = client.get("/api/recommendations", headers=S).json()["data"]
+        assert "current" in cur and "history" in cur
+>       assert cur["current"]["level"] in {"Weak", "Average", "Good", "Excellent"}
+E       AssertionError: assert 'ContentBased' in {'Average', 'Excellent', 'Good', 'Weak'}
+
+tests\test_api.py:553: AssertionError
+______________________ test_ai_generate_and_approve_quiz ______________________
+
+tokens = {'admin': '[TOKEN_REDACTED]'}
+
+    def test_ai_generate_and_approve_quiz(tokens):
+        # course_id=7 (Nguy\xean L\xed HDH) \u2014 kh\xf3a TEACHER (an.nguyen) th\u1ef1c s\u1ef1 s\u1edf h\u1eefu v\xe0 c\xf3
+        # t\xe0i li\u1ec7u \u0111\xe3 l\u1eadp ch\u1ec9 m\u1ee5c; generate-quiz/approve gi\u1edd \u0111\xf2i h\u1ecfi \u0111\xfang quy\u1ec1n s\u1edf h\u1eefu.
+        T = _h(tokens["teacher"])
+        gen = client.post("/api/ai/generate-quiz", headers=T,
+                          json={"course_id": 7, "number_of_questions": 3, "difficulty": "medium"}).json()
+>       assert gen["success"], gen
+E       AssertionError: {'message': 'Ch\u1ebf \u0111\u1ed9 offline ch\u1ec9 t\u1ea1o c\xe2u nh\u1eadn bi\u1ebft m\u1ee9c d\u1ec5. H\xe3y ch\u1ecdn c\xe2u d\u1ec5 ho\u1eb7c c\u1ea5u h\xecnh LLM \u0111\u1ec3 t\u1ea1o c\xe2u trung b\xecnh/kh\xf3.', 'success': False}
+E       assert False
+
+tests\test_api.py:749: AssertionError
+- generated xml file: F:\studyonline-main\studyonline-main\docs\web-audit-2026-10-30-pytest.xml -
+=========================== short test summary info ===========================
+FAILED tests/test_api.py::test_full_learning_flow - KeyError: 'score'
+FAILED tests/test_api.py::test_lesson_review_and_quiz_settings - assert (50 =...
+FAILED tests/test_api.py::test_answers_hidden_until_last_attempt_and_fair_analytics
+FAILED tests/test_api.py::test_recommendation_flow - AssertionError: assert '...
+FAILED tests/test_api.py::test_ai_generate_and_approve_quiz - AssertionError:...
+5 failed, 184 passed, 2 deselected in 21.59s

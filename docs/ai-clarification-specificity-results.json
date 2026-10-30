@@ -1,0 +1,989 @@
+{
+  "started_at": "2026-10-30T17:48:33.866401+07:00",
+  "before": {
+    "ai_conversations": 4,
+    "ai_messages": 18,
+    "documents": 176,
+    "document_chunks": 2063
+  },
+  "cases": [
+    {
+      "id": "regression-os",
+      "role": "student_phuong",
+      "course_id": 7,
+      "question": "Máy một lõi có làm đồng thời nhiều việc được không, điều đó có phải song song thật trên lõi đó không?",
+      "expected_kind": null,
+      "http_status": 200,
+      "elapsed_seconds": 15.364,
+      "data": {
+        "conversation_id": 454,
+        "answer": "Máy một lõi có thể thực hiện đồng thời nhiều việc bằng cách hệ điều hành xen kẽ các công việc đó trong các khoảng thời gian chồng lấn. Tuy nhiên, đây không phải là song song thật sự, vì song song là việc thực thi tại cùng một thời điểm trên nhiều đơn vị xử lý.",
+        "sources": [
+          {
+            "document_id": 88,
+            "document": "Nguyên Lí HDH — Học thêm và thực hành tổng hợp",
+            "page": 1,
+            "score": 0.7385
+          },
+          {
+            "document_id": 11,
+            "document": "Bài 11: Các giải pháp đồng bộ hóa",
+            "page": 10,
+            "score": 0.7385
+          },
+          {
+            "document_id": 3,
+            "document": "Bài 4: Khái niệm tiến trình và mô hình đa tiến trình",
+            "page": 1,
+            "score": 0.6134
+          }
+        ],
+        "used_context": true,
+        "needs_clarification": false,
+        "clarification_kind": null,
+        "response_status": "ok",
+        "error_code": null,
+        "retryable": false
+      },
+      "intent_passed": true,
+      "citation_evidence": [
+        {
+          "source": {
+            "document_id": 88,
+            "document": "Nguyên Lí HDH — Học thêm và thực hành tổng hợp",
+            "page": 1,
+            "score": 0.7385
+          },
+          "chunks": [
+            {
+              "id": 1295,
+              "course_id": 7,
+              "document_id": 88,
+              "page": 1,
+              "content": "NGUYÊN LÍ HDH · CHƯƠNG HỌC THÊM: THỰC HÀNH MỞ RỘNG · BÀI TỔNG HỢP\nHọc thêm, bài tập và hướng dẫn giải\nNguyên lí hệ điều hành — Bài tập mở rộng về tiến trình và đồng bộ\nTài liệu tự biên soạn bổ sung cho 11 bài hiện có, không thay thế bài giảng gốc. Phân biệt mã giả với\nAPI cụ thể; ví dụ về đồng bộ dùng mô hình lý thuyết."
+            },
+            {
+              "id": 1296,
+              "course_id": 7,
+              "document_id": 88,
+              "page": 1,
+              "content": "với\nAPI cụ thể; ví dụ về đồng bộ dùng mô hình lý thuyết. Mục tiêu học thêm\nPhân biệt đồng thời, song song, tiến trình và tiểu trình\nPhân tích trạng thái tiến trình và lựa chọn cơ chế liên lạc\nTìm race condition, deadlock và lỗi thứ tự lấy khóa"
+            },
+            {
+              "id": 1297,
+              "course_id": 7,
+              "document_id": 88,
+              "page": 1,
+              "content": "1. Đồng thời và song song\nĐồng thời nghĩa là nhiều công việc có tiến triển trong các khoảng thời gian chồng lấn; trên một lõi,\nhệ điều hành có thể xen kẽ chúng. Song song là thực thi tại cùng thời điểm trên nhiều đơn vị xử lý. Có nhiều thread không bảo đảm chương trình nhanh hơn: còn phụ thuộc khối lượng công việc, chờ\nI/O, tranh chấp khóa và chi phí chuyển ngữ cảnh."
+            },
+            {
+              "id": 1298,
+              "course_id": 7,
+              "document_id": 88,
+              "page": 1,
+              "content": "việc, chờ\nI/O, tranh chấp khóa và chi phí chuyển ngữ cảnh. Tiến trình có không gian địa chỉ và tài nguyên riêng theo mô hình hệ điều hành. Các thread cùng tiến\ntrình thường chia sẻ không gian địa chỉ nhưng mỗi thread có stack và trạng thái thực thi riêng. Chia\nsẻ dữ liệu thuận tiện hơn, đồng thời cũng dễ phát sinh tranh chấp."
+            },
+            {
+              "id": 1299,
+              "course_id": 7,
+              "document_id": 88,
+              "page": 1,
+              "content": "2. Trạng thái và lập lịch\nMột mô hình đơn giản có ready, running và blocked. Ready là đủ điều kiện chạy nhưng chờ CPU;\nblocked là đang chờ sự kiện như I/O. Khi hết quantum, tiến trình running có thể quay về ready. Hoàn\ntất I/O thường đưa blocked về ready, không nhất thiết được chạy ngay."
+            },
+            {
+              "id": 1300,
+              "course_id": 7,
+              "document_id": 88,
+              "page": 1,
+              "content": "đưa blocked về ready, không nhất thiết được chạy ngay. Ví dụ Round Robin: A cần 5 đơn vị CPU, B cần 3, cùng tới thời điểm 0, quantum=2, hàng đợi ban đầu\nA rồi B, không có I/O và bỏ qua chi phí chuyển ngữ cảnh. A chạy 0–2, còn 3. B chạy 2–4, còn 1. A chạy 4–6, còn 1. B chạy 6–7, hoàn tất. A chạy 7–8, hoàn tất. Turnaround của A là 8, B là 7."
+            },
+            {
+              "id": 1301,
+              "course_id": 7,
+              "document_id": 88,
+              "page": 1,
+              "content": "tất. A chạy 7–8, hoàn tất. Turnaround của A là 8, B là 7. Waiting time bằng turnaround trừ tổng CPU trong mô hình này: A=3,\nB=4. Nếu có I/O thì không áp dụng máy móc công thức trừ CPU mà bỏ qua thời gian bị blocked."
+            }
+          ]
+        },
+        {
+          "source": {
+            "document_id": 11,
+            "document": "Bài 11: Các giải pháp đồng bộ hóa",
+            "page": 10,
+            "score": 0.7385
+          },
+          "chunks": [
+            {
+              "id": 1156,
+              "course_id": 7,
+              "document_id": 11,
+              "page": 10,
+              "content": "NGUYÊN LÍ HDH · CHƯƠNG HỌC THÊM: THỰC HÀNH MỞ RỘNG · BÀI TỔNG HỢP\nHọc thêm, bài tập và hướng dẫn giải\nNguyên lí hệ điều hành — Bài tập mở rộng về tiến trình và đồng bộ\nTài liệu tự biên soạn bổ sung cho 11 bài hiện có, không thay thế bài giảng gốc. Phân biệt mã giả với\nAPI cụ thể; ví dụ về đồng bộ dùng mô hình lý thuyết."
+            },
+            {
+              "id": 1157,
+              "course_id": 7,
+              "document_id": 11,
+              "page": 10,
+              "content": "với\nAPI cụ thể; ví dụ về đồng bộ dùng mô hình lý thuyết. Mục tiêu học thêm\nPhân biệt đồng thời, song song, tiến trình và tiểu trình\nPhân tích trạng thái tiến trình và lựa chọn cơ chế liên lạc\nTìm race condition, deadlock và lỗi thứ tự lấy khóa"
+            },
+            {
+              "id": 1158,
+              "course_id": 7,
+              "document_id": 11,
+              "page": 10,
+              "content": "1. Đồng thời và song song\nĐồng thời nghĩa là nhiều công việc có tiến triển trong các khoảng thời gian chồng lấn; trên một lõi,\nhệ điều hành có thể xen kẽ chúng. Song song là thực thi tại cùng thời điểm trên nhiều đơn vị xử lý. Có nhiều thread không bảo đảm chương trình nhanh hơn: còn phụ thuộc khối lượng công việc, chờ\nI/O, tranh chấp khóa và chi phí chuyển ngữ cảnh."
+            },
+            {
+              "id": 1159,
+              "course_id": 7,
+              "document_id": 11,
+              "page": 10,
+              "content": "việc, chờ\nI/O, tranh chấp khóa và chi phí chuyển ngữ cảnh. Tiến trình có không gian địa chỉ và tài nguyên riêng theo mô hình hệ điều hành. Các thread cùng tiến\ntrình thường chia sẻ không gian địa chỉ nhưng mỗi thread có stack và trạng thái thực thi riêng. Chia\nsẻ dữ liệu thuận tiện hơn, đồng thời cũng dễ phát sinh tranh chấp."
+            },
+            {
+              "id": 1160,
+              "course_id": 7,
+              "document_id": 11,
+              "page": 10,
+              "content": "2. Trạng thái và lập lịch\nMột mô hình đơn giản có ready, running và blocked. Ready là đủ điều kiện chạy nhưng chờ CPU;\nblocked là đang chờ sự kiện như I/O. Khi hết quantum, tiến trình running có thể quay về ready. Hoàn\ntất I/O thường đưa blocked về ready, không nhất thiết được chạy ngay."
+            },
+            {
+              "id": 1161,
+              "course_id": 7,
+              "document_id": 11,
+              "page": 10,
+              "content": "đưa blocked về ready, không nhất thiết được chạy ngay. Ví dụ Round Robin: A cần 5 đơn vị CPU, B cần 3, cùng tới thời điểm 0, quantum=2, hàng đợi ban đầu\nA rồi B, không có I/O và bỏ qua chi phí chuyển ngữ cảnh. A chạy 0–2, còn 3. B chạy 2–4, còn 1. A chạy 4–6, còn 1. B chạy 6–7, hoàn tất. A chạy 7–8, hoàn tất. Turnaround của A là 8, B là 7."
+            },
+            {
+              "id": 1162,
+              "course_id": 7,
+              "document_id": 11,
+              "page": 10,
+              "content": "tất. A chạy 7–8, hoàn tất. Turnaround của A là 8, B là 7. Waiting time bằng turnaround trừ tổng CPU trong mô hình này: A=3,\nB=4. Nếu có I/O thì không áp dụng máy móc công thức trừ CPU mà bỏ qua thời gian bị blocked."
+            }
+          ]
+        },
+        {
+          "source": {
+            "document_id": 3,
+            "document": "Bài 4: Khái niệm tiến trình và mô hình đa tiến trình",
+            "page": 1,
+            "score": 0.6134
+          },
+          "chunks": [
+            {
+              "id": 58,
+              "course_id": 7,
+              "document_id": 3,
+              "page": 1,
+              "content": "Bài giảng Hệ điều hành\nChương 2 · Bài 2\nBộ môn CNPM – Khoa CNTT\nTrang 1\nCHƯƠNG 2 · BÀI 2\n2.2. Khái niệm tiến trình và mô hình đa tiến\ntrình\nNội dung trích từ Bài giảng Hệ điều hành – Nguyễn Thị Hữu Phương, Bộ môn CNPM, Khoa CNTT. Mục tiêu bài học\n Nắm được khái niệm tiến trình và mô hình đa tiến trình."
+            },
+            {
+              "id": 59,
+              "course_id": 7,
+              "document_id": 3,
+              "page": 1,
+              "content": "Nắm được khái niệm tiến trình và mô hình đa tiến trình. Phân biệt chương trình (thực thể thụ động) và tiến trình (thực thể hoạt động). Hiểu vai trò của bộ điều phối (scheduler). Để hỗ trợ sự đa chương, máy tính phải có khả năng thực hiện nhiều tác vụ đồng thời. Nhưng việc điều khiển nhiều hoạt động song song ở cấp độ phần cứng là rất khó khăn."
+            },
+            {
+              "id": 60,
+              "course_id": 7,
+              "document_id": 3,
+              "page": 1,
+              "content": "hoạt động song song ở cấp độ phần cứng là rất khó khăn. Vì\nthế các nhà thiết kế hệ điều hành đề xuất một mô hình song song gỉa lặp bằng cách chuyển\nđổi bộ xử lý qua lại giữa các chương trình để duy trì hoạt động của nhiều chương trình\ncùng lúc, điều này tạo cảm giác có nhiều hoạt động được thực hiện đồng thời."
+            },
+            {
+              "id": 61,
+              "course_id": 7,
+              "document_id": 3,
+              "page": 1,
+              "content": "tạo cảm giác có nhiều hoạt động được thực hiện đồng thời. Trong mô hình này, tất cả các phần mềm trong hệ thống được tổ chức thành một số\nnhững tiến trình (process). Tiến trình là một chương trình đang xử lý, sỡ hữu một con trỏ\nlệnh, tập các thanh ghi và các biến."
+            },
+            {
+              "id": 62,
+              "course_id": 7,
+              "document_id": 3,
+              "page": 1,
+              "content": "lý, sỡ hữu một con trỏ\nlệnh, tập các thanh ghi và các biến. Để hoàn thành tác vụ của mình, một tiến trình có thể\ncần đến một số tài nguyên – như CPU, bộ nhớ chính, các tập tin và thiết bị nhập/xuất. Cần\nphân biệt hai khái niệm chương trình và tiến trình."
+            },
+            {
+              "id": 63,
+              "course_id": 7,
+              "document_id": 3,
+              "page": 1,
+              "content": "Cần\nphân biệt hai khái niệm chương trình và tiến trình. Một chương trình là một thực thể thụ\nđộng, chứa đựng các chỉ thị điều khiển máy tính để tiến hành một tác vụ nào đó ; khi cho\nthực hiện các chỉ thị này, chương trình chuyển thành tiến trình, tiến trình là một thực thể\nhoạt động, với con trỏ lệnh xác định chỉ thị kế tiếp sẽ thi hành, kèm theo tập các tài nguyên\nphục vụ cho hoạt động của tiến trình."
+            },
+            {
+              "id": 64,
+              "course_id": 7,
+              "document_id": 3,
+              "page": 1,
+              "content": "tập các tài nguyên\nphục vụ cho hoạt động của tiến trình. Về mặt ý niệm, có thể xem như mỗi tiến trình sỡ hữu\nmột bộ xử lý ảo cho riêng nó, nhưng trong thực tế, chỉ có một bộ xử lý thật sự được chuyển\nđổi qua lại giữa các tiến trình. Sự chuyển đổi nhanh chóng này được gọi là sự đa chương\n(multiprogramming) ."
+            },
+            {
+              "id": 65,
+              "course_id": 7,
+              "document_id": 3,
+              "page": 1,
+              "content": "chóng này được gọi là sự đa chương\n(multiprogramming) . Hệ điều hành chịu trách nhiệm sử dụng một thuật toán điều phối để quyết định thời\nđiểm cần dừng hoạt động của tiến trình đang xử lý để phục vụ một tiến trình khác, và lựa\nchọn tiến trình tiếp theo sẽ được phục vụ. Bộ phận thực hiện chức năng này của hệ điều\nhành được gọi là bộ điều phối (scheduler)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "regression-map",
+      "role": "teacher_an",
+      "course_id": 3,
+      "question": "HashMap.put cùng một khóa hai lần có tự báo lỗi trùng không? Nếu cần từ chối trùng nên làm gì?",
+      "expected_kind": null,
+      "http_status": 200,
+      "elapsed_seconds": 4.06,
+      "data": {
+        "conversation_id": 455,
+        "answer": "HashMap không tự báo lỗi khi bạn thêm cùng một khóa hai lần; phương thức `put` sẽ ghi đè giá trị cũ bằng giá trị mới.\n\nĐể từ chối việc trùng lặp khóa, bạn nên sử dụng phương thức `putIfAbsent` để kiểm tra hoặc thực hiện kiểm tra khóa trước khi thêm. Ví dụ:\n```java\nif (products.putIfAbsent(\"P01\", \"Vở\") != null) {\n    System.out.println(\"Mã đã tồn tại\");\n}\n```",
+        "sources": [
+          {
+            "document_id": 115,
+            "document": "ArrayList & HashMap — Thực hành bổ sung 29/10/2026",
+            "page": 3,
+            "score": 0.5516
+          },
+          {
+            "document_id": 45,
+            "document": "Bài 9: Dự án Quản lý sản phẩm",
+            "page": 3,
+            "score": 0.6276
+          },
+          {
+            "document_id": 84,
+            "document": "Lập Trình Java Căn Bản — Học thêm và thực hành tổng hợp",
+            "page": 1,
+            "score": 0.6276
+          }
+        ],
+        "used_context": true,
+        "needs_clarification": false,
+        "clarification_kind": null,
+        "response_status": "ok",
+        "error_code": null,
+        "retryable": false
+      },
+      "intent_passed": true,
+      "citation_evidence": [
+        {
+          "source": {
+            "document_id": 115,
+            "document": "ArrayList & HashMap — Thực hành bổ sung 29/10/2026",
+            "page": 3,
+            "score": 0.5516
+          },
+          "chunks": [
+            {
+              "id": 2106,
+              "course_id": 3,
+              "document_id": 115,
+              "page": 3,
+              "content": "LẬP TRÌNH JAVA CĂN BẢN · CHƯƠNG 3: XỬ LÝ NGOẠI LỆ & COLLECTION · BÀI 2\nArrayList & HashMap — Thực hành và hỏi đáp\nPhần bổ sung cho bài học · biên soạn 29/10/2026\nTình huống, ví dụ và tự kiểm tra\nTình huống: hai sản phẩm cùng mã làm dữ liệu cũ bị ghi đè. Map.put có thể thay giá trị hiện có;\nmuốn từ chối trùng cần kiểm tra hoặc dùng thao tác phù hợp."
+            },
+            {
+              "id": 2107,
+              "course_id": 3,
+              "document_id": 115,
+              "page": 3,
+              "content": "từ chối trùng cần kiểm tra hoặc dùng thao tác phù hợp. java.util.Map<String, String> products = new java.util.HashMap<>();\nproducts.put(\"P01\", \"Bút\");\nif (products.putIfAbsent(\"P01\", \"Vở\") != null) {\n    System.out.println(\"Mã đã tồn tại\");\n}\nTự luyện: thêm, tìm mã không tồn tại và xóa khi duyệt danh sách."
+            },
+            {
+              "id": 2108,
+              "course_id": 3,
+              "document_id": 115,
+              "page": 3,
+              "content": "thêm, tìm mã không tồn tại và xóa khi duyệt danh sách. Hướng giải: không mặc định thứ\ntự HashMap; dùng iterator hoặc tạo danh sách mới khi cần lọc. Nhắc rõ ví dụ Map đơn luồng không\ntự giải quyết cạnh tranh ghi từ nhiều luồng. Nguồn học tiếp\nhttps://dev.java/learn/"
+            }
+          ]
+        },
+        {
+          "source": {
+            "document_id": 45,
+            "document": "Bài 9: Dự án Quản lý sản phẩm",
+            "page": 3,
+            "score": 0.6276
+          },
+          "chunks": [
+            {
+              "id": 1626,
+              "course_id": 3,
+              "document_id": 45,
+              "page": 3,
+              "content": "Trang 1StudyOnline · Tài liệu học tập\nCHƯƠNG HỌC THÊM · BÀI TỔNG HỢP\nHọc thêm.Tổng hợp. Học thêm, bài tập và hướng\ndẫn giải\nTài liệu học tập Lập Trình Java Căn Bản · Nội dung biên soạn trong dự án StudyOnline. Java — Học thêm về thiết kế đối tượng và quản lý sản phẩm\nTài liệu nối tiếp các bài cú pháp, lớp, đa hình, ngoại lệ và collection."
+            },
+            {
+              "id": 1627,
+              "course_id": 3,
+              "document_id": 45,
+              "page": 3,
+              "content": "tiếp các bài cú pháp, lớp, đa hình, ngoại lệ và collection. Ví dụ dùng cú pháp Java phổ\nbiến, không yêu cầu preview feature. Mục tiêu học thêm\nPhân biệt so sánh tham chiếu và so sánh nội dung\nChọn collection theo thao tác cần thực hiện\nKiểm tra dữ liệu trước khi cập nhật đối tượng và xử lý ngoại lệ có ý nghĩa"
+            },
+            {
+              "id": 1628,
+              "course_id": 3,
+              "document_id": 45,
+              "page": 3,
+              "content": "1. Tham chiếu và giá trị\nVới đối tượng, == so sánh tham chiếu, còn equals thường dùng để so sánh nội dung theo cách lớp\nđịnh nghĩa. Với String, dùng equals thay vì dựa vào việc các chuỗi có thể dùng chung vùng nhớ."
+            },
+            {
+              "id": 1629,
+              "course_id": 3,
+              "document_id": 45,
+              "page": 3,
+              "content": "thay vì dựa vào việc các chuỗi có thể dùng chung vùng nhớ. String a = new String(\"SV01\");\nString b = new String(\"SV01\");\nSystem.out.println(a == b); // false\nSystem.out.println(a.equals(b)); // true\nNếu biến có thể null, dùng Objects.equals(a, b) hoặc gọi equals từ chuỗi hằng."
+            },
+            {
+              "id": 1630,
+              "course_id": 3,
+              "document_id": 45,
+              "page": 3,
+              "content": "dùng Objects.equals(a, b) hoặc gọi equals từ chuỗi hằng. Với lớp tự viết dùng\nlàm khóa HashMap, equals và hashCode phải nhất quán: hai đối tượng bằng nhau phải có cùng\nhashCode. Không thay đổi trường dùng làm khóa khi đối tượng đang nằm trong map."
+            },
+            {
+              "id": 1631,
+              "course_id": 3,
+              "document_id": 45,
+              "page": 3,
+              "content": "2. Đóng gói và điều kiện hợp lệ\nĐóng gói không chỉ là chuyển trường sang private rồi tạo setter. Setter phải bảo vệ điều kiện hợp\nlệ của đối tượng; nếu cập nhật lỗi, giá trị cũ phải còn nguyên.\nclass Product {\nprivate final String id;\nprivate int stock;"
+            }
+          ]
+        },
+        {
+          "source": {
+            "document_id": 84,
+            "document": "Lập Trình Java Căn Bản — Học thêm và thực hành tổng hợp",
+            "page": 1,
+            "score": 0.6276
+          },
+          "chunks": [
+            {
+              "id": 1216,
+              "course_id": 3,
+              "document_id": 84,
+              "page": 1,
+              "content": "LẬP TRÌNH JAVA CĂN BẢN · CHƯƠNG HỌC THÊM: THỰC HÀNH MỞ RỘNG · BÀI TỔNG HỢP\nHọc thêm, bài tập và hướng dẫn giải\nJava — Học thêm về thiết kế đối tượng và quản lý sản phẩm\nTài liệu nối tiếp các bài cú pháp, lớp, đa hình, ngoại lệ và collection. Ví dụ dùng cú pháp Java phổ\nbiến, không yêu cầu preview feature."
+            },
+            {
+              "id": 1217,
+              "course_id": 3,
+              "document_id": 84,
+              "page": 1,
+              "content": "dùng cú pháp Java phổ\nbiến, không yêu cầu preview feature. Mục tiêu học thêm\nPhân biệt so sánh tham chiếu và so sánh nội dung\nChọn collection theo thao tác cần thực hiện\nKiểm tra dữ liệu trước khi cập nhật đối tượng và xử lý ngoại lệ có ý nghĩa"
+            },
+            {
+              "id": 1218,
+              "course_id": 3,
+              "document_id": 84,
+              "page": 1,
+              "content": "1. Tham chiếu và giá trị\nVới đối tượng, == so sánh tham chiếu, còn equals thường dùng để so sánh nội dung theo cách lớp\nđịnh nghĩa. Với String, dùng equals thay vì dựa vào việc các chuỗi có thể dùng chung vùng nhớ."
+            },
+            {
+              "id": 1219,
+              "course_id": 3,
+              "document_id": 84,
+              "page": 1,
+              "content": "thay vì dựa vào việc các chuỗi có thể dùng chung vùng nhớ. String a = new String(\"SV01\");\nString b = new String(\"SV01\");\nSystem.out.println(a == b); // false\nSystem.out.println(a.equals(b)); // true\nNếu biến có thể null, dùng Objects.equals(a, b) hoặc gọi equals từ chuỗi hằng."
+            },
+            {
+              "id": 1220,
+              "course_id": 3,
+              "document_id": 84,
+              "page": 1,
+              "content": "dùng Objects.equals(a, b) hoặc gọi equals từ chuỗi hằng. Với lớp tự viết dùng\nlàm khóa HashMap, equals và hashCode phải nhất quán: hai đối tượng bằng nhau phải có cùng\nhashCode. Không thay đổi trường dùng làm khóa khi đối tượng đang nằm trong map."
+            },
+            {
+              "id": 1221,
+              "course_id": 3,
+              "document_id": 84,
+              "page": 1,
+              "content": "2. Đóng gói và điều kiện hợp lệ\nĐóng gói không chỉ là chuyển trường sang private rồi tạo setter. Setter phải bảo vệ điều kiện hợp lệ\ncủa đối tượng; nếu cập nhật lỗi, giá trị cũ phải còn nguyên."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "regression-testing",
+      "role": "teacher_binh",
+      "course_id": 515,
+      "question": "Sau khi sửa lỗi ghi danh trùng, chạy lại đúng ca từng gây lỗi đã thay thế được kiểm thử hồi quy chưa? Phân biệt confirmation testing với regression testing.",
+      "expected_kind": null,
+      "http_status": 200,
+      "elapsed_seconds": 4.169,
+      "data": {
+        "conversation_id": 456,
+        "answer": "Chưa thay thế được. Việc chạy lại ca từng gây lỗi chỉ là confirmation testing (kiểm tra sau sửa), trong khi regression testing (kiểm thử hồi quy) cần mở rộng sang các hành vi có nguy cơ bị ảnh hưởng bởi bản sửa (như đăng ký lần đầu, trùng, khóa có phí, quyền mở bài và danh sách khóa).\n\nSự khác biệt:\n- **Confirmation testing:** Thực hiện lại điều kiện gây lỗi để xác nhận bản sửa đã hoạt động đúng.\n- **Regression testing:** Mở rộng kiểm tra sang các khu vực liên quan có nguy cơ bị ảnh hưởng bởi thay đổi, phạm vi được chọn dựa trên thay đổi thực tế thay vì chạy mọi test vô hạn.",
+        "sources": [
+          {
+            "document_id": 182,
+            "document": "Báo cáo lỗi và kiểm thử hồi quy — Thực hành bổ sung 29/10/2026",
+            "page": 2,
+            "score": 0.853
+          },
+          {
+            "document_id": 190,
+            "document": "Dự án nhỏ: kế hoạch kiểm thử và tự động hóa — Thực hành bổ sung 29/10/2026",
+            "page": 1,
+            "score": 0.662
+          },
+          {
+            "document_id": 182,
+            "document": "Báo cáo lỗi và kiểm thử hồi quy — Thực hành bổ sung 29/10/2026",
+            "page": 4,
+            "score": 0.7144
+          }
+        ],
+        "used_context": true,
+        "needs_clarification": false,
+        "clarification_kind": null,
+        "response_status": "ok",
+        "error_code": null,
+        "retryable": false
+      },
+      "intent_passed": true,
+      "citation_evidence": [
+        {
+          "source": {
+            "document_id": 182,
+            "document": "Báo cáo lỗi và kiểm thử hồi quy — Thực hành bổ sung 29/10/2026",
+            "page": 2,
+            "score": 0.853
+          },
+          "chunks": [
+            {
+              "id": 2706,
+              "course_id": 515,
+              "document_id": 182,
+              "page": 2,
+              "content": "2. Severity và priority\nSeverity đánh giá ảnh hưởng kỹ thuật/nghiệp vụ; priority là mức ưu tiên xử lý trong bối cảnh phát\nhành. Lỗi giao diện nhỏ có thể được ưu tiên cao do trang sắp ra mắt; không đồng nhất hai trường.\nDùng thang và quy ước của nhóm thay vì tự gắn mọi lỗi là nghiêm trọng nhất."
+            },
+            {
+              "id": 2707,
+              "course_id": 515,
+              "document_id": 182,
+              "page": 2,
+              "content": "3. Kiểm tra sau sửa\nConfirmation testing thực hiện lại điều kiện gây lỗi để xác nhận bản sửa. Regression testing mở rộng\nsang các hành vi có nguy cơ bị ảnh hưởng: đăng ký lần đầu, trùng, khóa có phí, quyền mở bài và\ndanh sách khóa. Chọn phạm vi theo thay đổi, không mặc định chạy mọi test vô hạn."
+            },
+            {
+              "id": 2708,
+              "course_id": 515,
+              "document_id": 182,
+              "page": 2,
+              "content": "4. Bài tập có lời giải định hướng\nBản sửa thêm unique constraint nhưng UI báo lỗi thô khi request thứ hai tới. Cần báo vấn đề xử lý\nphản hồi riêng, không kết luận sửa database thất bại nếu tính duy nhất đã đúng. Nộp một bug\nreport, một ca xác nhận và ít nhất bốn ca hồi quy có lý do lựa chọn; không dùng dữ liệu thật để cố\ntình gây lỗi."
+            }
+          ]
+        },
+        {
+          "source": {
+            "document_id": 190,
+            "document": "Dự án nhỏ: kế hoạch kiểm thử và tự động hóa — Thực hành bổ sung 29/10/2026",
+            "page": 1,
+            "score": 0.662
+          },
+          "chunks": [
+            {
+              "id": 2833,
+              "course_id": 515,
+              "document_id": 190,
+              "page": 1,
+              "content": "Trang 1\nKIỂM THỬ PHẦN MỀM NHẬP MÔN\nChương 6: Chất lượng và thực hành tổng hợp · Bài 2\nDự án nhỏ: kế hoạch kiểm thử và tự động hóa\nTài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải\nVị trí bài học trong khóa\nKhóa học: Kiểm thử phần mềm nhập môn. Chương 6: Chất lượng và thực hành tổng hợp."
+            },
+            {
+              "id": 2834,
+              "course_id": 515,
+              "document_id": 190,
+              "page": 1,
+              "content": "mềm nhập môn. Chương 6: Chất lượng và thực hành tổng hợp. Các bài trong chương: Hiệu năng, khả dụng và tương thích; Dự án nhỏ: kế hoạch kiểm thử và tự\nđộng hóa. Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp\ncuối khóa dùng để kết nối kiến thức giữa các chương."
+            },
+            {
+              "id": 2835,
+              "course_id": 515,
+              "document_id": 190,
+              "page": 1,
+              "content": "hợp\ncuối khóa dùng để kết nối kiến thức giữa các chương. Mục tiêu bài học\nTạo gói kiểm thử có thể chạy lại cho một chức năng học trực tuyến. Kiến thức nền\nTự động hóa phù hợp với ca lặp lại, kết quả mong đợi ổn định và giá trị phát hiện lỗi đủ lớn so với chi\nphí bảo trì. Không tự động hóa mọi thao tác chỉ vì có công cụ."
+            },
+            {
+              "id": 2836,
+              "course_id": 515,
+              "document_id": 190,
+              "page": 1,
+              "content": "bảo trì. Không tự động hóa mọi thao tác chỉ vì có công cụ. Tách unit test nhanh, API/integration\nvà một số luồng giao diện quan trọng theo nhu cầu sản phẩm. Một test tốt có chuẩn bị, hành động và kiểm tra kết quả cụ thể. Các test nên độc lập, dữ liệu có thể\ntái tạo và dọn trong phạm vi đã tạo."
+            },
+            {
+              "id": 2837,
+              "course_id": 515,
+              "document_id": 190,
+              "page": 1,
+              "content": "lập, dữ liệu có thể\ntái tạo và dọn trong phạm vi đã tạo. Khi test chập chờn, tìm nguyên nhân như chờ bất đồng bộ hoặc\nphụ thuộc thứ tự, không đơn giản chạy lại tới khi xanh rồi bỏ qua. Dự án chọn chức năng ghi danh hoặc nộp quiz: lập phạm vi, rủi ro, test case, dữ liệu, báo cáo lỗi và\nkết quả hồi quy. Phân biệt chức năng chưa kiểm tra với test đã qua."
+            },
+            {
+              "id": 2838,
+              "course_id": 515,
+              "document_id": 190,
+              "page": 1,
+              "content": "hồi quy. Phân biệt chức năng chưa kiểm tra với test đã qua. Tài liệu kết thúc phải nêu rủi ro\ncòn lại; quiz không tự xác nhận bộ test thực tế đã được triển khai."
+            },
+            {
+              "id": 2839,
+              "course_id": 515,
+              "document_id": 190,
+              "page": 1,
+              "content": "1. Phạm vi gói bàn giao\nChọn đăng ký khóa miễn phí làm tính năng mục tiêu. Tài liệu cần mục tiêu, phạm vi không làm, rủi ro,\nmôi trường, dữ liệu, trách nhiệm, điều kiện bắt đầu/kết thúc và cách báo cáo. Chỉ tự động hóa các\nkiểm tra có kỳ vọng rõ, không tạo assertion theo dữ liệu đang trả về để test luôn xanh."
+            },
+            {
+              "id": 2840,
+              "course_id": 515,
+              "document_id": 190,
+              "page": 1,
+              "content": "2. Ví dụ test độc lập không gọi hệ thống thật\ndef can_open_lesson(is_free, enrolled):\n    return is_free or enrolled\ndef test_guest_cannot_open_restricted_lesson():\n    assert can_open_lesson(False, False) is False"
+            }
+          ]
+        },
+        {
+          "source": {
+            "document_id": 182,
+            "document": "Báo cáo lỗi và kiểm thử hồi quy — Thực hành bổ sung 29/10/2026",
+            "page": 4,
+            "score": 0.7144
+          },
+          "chunks": [
+            {
+              "id": 2711,
+              "course_id": 515,
+              "document_id": 182,
+              "page": 4,
+              "content": "KIỂM THỬ PHẦN MỀM NHẬP MÔN · CHƯƠNG 2: CHƯƠNG 2: KỸ THUẬT KIỂM THỬ VÀ XỬ LÝ LỖI · BÀI 2\nBáo cáo lỗi và kiểm thử hồi quy — Thực hành và hỏi\nđáp\nPhần bổ sung cho bài học · biên soạn 29/10/2026\nTình huống, ví dụ và tự kiểm tra\nTình huống: lỗi “thỉnh thoảng” không có môi trường tái hiện."
+            },
+            {
+              "id": 2712,
+              "course_id": 515,
+              "document_id": 182,
+              "page": 4,
+              "content": "huống: lỗi “thỉnh thoảng” không có môi trường tái hiện. Báo cáo cần bước tối thiểu, dữ liệu giả\nlập, mong đợi/thực tế, phiên bản và bằng chứng đã loại thông tin nhạy cảm. Tự luyện: mô tả một lỗi giả định rõ nhãn giả định, sau đó viết ca hồi quy. Hướng giải: phân biệt\nretest lỗi vừa sửa với hồi quy khu vực liên quan."
+            },
+            {
+              "id": 2713,
+              "course_id": 515,
+              "document_id": 182,
+              "page": 4,
+              "content": "phân biệt\nretest lỗi vừa sửa với hồi quy khu vực liên quan. Nếu script kiểm thử sai selector, ghi lỗi công cụ và\nthử lại; không báo thành lỗi ứng dụng, không xóa nhật ký lần đầu để làm báo cáo đẹp. Nguồn học tiếp\nhttps://docs.pytest.org/en/stable/how-to/assert.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "missing-topic",
+      "role": "student_em",
+      "course_id": 1,
+      "question": "Giải thích giúp em",
+      "expected_kind": "topic",
+      "http_status": 200,
+      "elapsed_seconds": 0.045,
+      "data": {
+        "conversation_id": 457,
+        "answer": "Bạn muốn mình giải thích chủ đề hoặc khái niệm nào? Bạn gửi tên nội dung hoặc đoạn đang chưa hiểu nhé.",
+        "sources": [],
+        "used_context": false,
+        "needs_clarification": true,
+        "clarification_kind": "topic",
+        "response_status": "ok",
+        "error_code": null,
+        "retryable": false
+      },
+      "intent_passed": true,
+      "citation_evidence": []
+    },
+    {
+      "id": "missing-code",
+      "role": "student_em",
+      "course_id": 1,
+      "question": "Code Python của em bị lỗi",
+      "expected_kind": "debug",
+      "http_status": 200,
+      "elapsed_seconds": 0.03,
+      "data": {
+        "conversation_id": 458,
+        "answer": "Bạn gửi đoạn code liên quan và thông báo lỗi đầy đủ nhé. Bạn đang dùng ngôn ngữ/công cụ nào và mong đợi kết quả gì?",
+        "sources": [],
+        "used_context": false,
+        "needs_clarification": true,
+        "clarification_kind": "debug",
+        "response_status": "ok",
+        "error_code": null,
+        "retryable": false
+      },
+      "intent_passed": true,
+      "citation_evidence": []
+    },
+    {
+      "id": "missing-exercise",
+      "role": "student_em",
+      "course_id": 1,
+      "question": "Giải câu 2 giúp em",
+      "expected_kind": "exercise",
+      "http_status": 200,
+      "elapsed_seconds": 0.035,
+      "data": {
+        "conversation_id": 459,
+        "answer": "Bạn gửi nguyên đề bài hoặc nội dung câu hỏi cần giải nhé; chỉ số câu/tên bài chưa đủ để xác định yêu cầu.",
+        "sources": [],
+        "used_context": false,
+        "needs_clarification": true,
+        "clarification_kind": "exercise",
+        "response_status": "ok",
+        "error_code": null,
+        "retryable": false
+      },
+      "intent_passed": true,
+      "citation_evidence": []
+    },
+    {
+      "id": "missing-comparison",
+      "role": "student_em",
+      "course_id": 1,
+      "question": "Nên chọn cái nào?",
+      "expected_kind": "comparison",
+      "http_status": 200,
+      "elapsed_seconds": 0.023,
+      "data": {
+        "conversation_id": 460,
+        "answer": "Bạn muốn so sánh những khái niệm hoặc lựa chọn nào? Bạn cho biết mục đích sử dụng để mình giải thích đúng trọng tâm nhé.",
+        "sources": [],
+        "used_context": false,
+        "needs_clarification": true,
+        "clarification_kind": "comparison",
+        "response_status": "ok",
+        "error_code": null,
+        "retryable": false
+      },
+      "intent_passed": true,
+      "citation_evidence": []
+    },
+    {
+      "id": "missing-reference",
+      "role": "student_em",
+      "course_id": 1,
+      "question": "Trong Python, nó là gì?",
+      "expected_kind": "topic",
+      "http_status": 200,
+      "elapsed_seconds": 0.027,
+      "data": {
+        "conversation_id": 461,
+        "answer": "Bạn muốn mình giải thích chủ đề hoặc khái niệm nào? Bạn gửi tên nội dung hoặc đoạn đang chưa hiểu nhé.",
+        "sources": [],
+        "used_context": false,
+        "needs_clarification": true,
+        "clarification_kind": "topic",
+        "response_status": "ok",
+        "error_code": null,
+        "retryable": false
+      },
+      "intent_passed": true,
+      "citation_evidence": []
+    },
+    {
+      "id": "missing-function",
+      "role": "student_em",
+      "course_id": 1,
+      "question": "Hàm này hoạt động thế nào?",
+      "expected_kind": "topic",
+      "http_status": 200,
+      "elapsed_seconds": 0.03,
+      "data": {
+        "conversation_id": 462,
+        "answer": "Bạn muốn mình giải thích chủ đề hoặc khái niệm nào? Bạn gửi tên nội dung hoặc đoạn đang chưa hiểu nhé.",
+        "sources": [],
+        "used_context": false,
+        "needs_clarification": true,
+        "clarification_kind": "topic",
+        "response_status": "ok",
+        "error_code": null,
+        "retryable": false
+      },
+      "intent_passed": true,
+      "citation_evidence": []
+    }
+  ],
+  "knowledge_gate": [
+    {
+      "id": "student_em-accuracy-01",
+      "question": "Muốn phép tính print(\"4\" + 2) cho ra số 6 thì sửa thế nào? Vì sao code cũ lỗi?",
+      "clarification_kind": null
+    },
+    {
+      "id": "student_em-accuracy-02",
+      "question": "list(range(2, 7)) có những số nào, có số 7 không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "student_em-accuracy-03",
+      "question": "a = [10, 20, 30]. a[1] là 10 hay 20, và a[3] có hợp lệ không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "student_em-accuracy-04",
+      "question": "Một hàm Python chỉ print(5), không viết return. Gán x = hàm đó thì x có bằng 5 không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "student_em-accuracy-05",
+      "question": "id là khóa chính của bảng học viên. Hai hàng trong chính bảng đó dùng chung id=8 có được không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "student_em-accuracy-06",
+      "question": "lop_id là khóa ngoại, cột cho phép NULL và trường chấp nhận học viên chưa xếp lớp. Có bắt buộc điền mã lớp ngay không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "student_em-accuracy-07",
+      "question": "LEFT JOIN courses với enrollments, khóa chưa có ai ghi danh. COUNT(*) và COUNT(enrollments.id) sẽ lần lượt cho mấy?",
+      "clarification_kind": null
+    },
+    {
+      "id": "student_em-accuracy-08",
+      "question": "Muốn tìm học viên chưa đăng ký khóa nào: bắt đầu LEFT JOIN từ students hay courses, rồi lọc điều kiện gì?",
+      "clarification_kind": null
+    },
+    {
+      "id": "student_phuong-accuracy-01",
+      "question": "const a = []; a.push(9); có bị cấm vì dùng const không? Phân biệt với a = [9].",
+      "clarification_kind": null
+    },
+    {
+      "id": "student_phuong-accuracy-02",
+      "question": "getElementById(\"save\") trả null thì đã chắc do hỏng trình duyệt chưa? Nêu hai thứ nên kiểm tra.",
+      "clarification_kind": null
+    },
+    {
+      "id": "student_phuong-accuracy-03",
+      "question": "fetch nhận HTTP 404 có tự nhảy vào catch luôn không, phải kiểm tra gì?",
+      "clarification_kind": null
+    },
+    {
+      "id": "student_phuong-accuracy-04",
+      "question": "Trong JavaScript, \"3\" == 3 và \"3\" === 3 có cùng kết quả không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "student_phuong-accuracy-05",
+      "question": "Tiến trình ready và blocked đều chưa chạy, vậy chúng đang đợi cùng một thứ phải không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "student_phuong-accuracy-06",
+      "question": "Hai thread trong cùng tiến trình có chung toàn bộ stack và con trỏ lệnh không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "student_phuong-accuracy-07",
+      "question": "Máy một lõi có làm đồng thời nhiều việc được không, điều đó có phải song song thật trên lõi đó không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "student_phuong-accuracy-08",
+      "question": "T1 giữ A chờ B, T2 giữ B chờ A. Đây là ví dụ race condition hay deadlock, vì sao?",
+      "clarification_kind": null
+    },
+    {
+      "id": "teacher_an-accuracy-01",
+      "question": "Trong Java, hai String khác đối tượng nhưng cùng chữ thì dùng == có phải cách chắc chắn để so nội dung không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "teacher_an-accuracy-02",
+      "question": "Java: (7 + 8) / 2 và (7 + 8) / 2.0 có cùng giá trị không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "teacher_an-accuracy-03",
+      "question": "HashMap.put cùng một khóa hai lần có tự báo lỗi trùng không? Nếu cần từ chối trùng nên làm gì?",
+      "clarification_kind": null
+    },
+    {
+      "id": "teacher_an-accuracy-04",
+      "question": "Integer.parseInt(\"abc\") có biến thành 0 không? Nên xử lý lỗi nhập ra sao?",
+      "clarification_kind": null
+    },
+    {
+      "id": "teacher_an-accuracy-05",
+      "question": "Trong một handler React, cần tăng state dựa trên giá trị trước nhiều lần thì nên dùng dạng setCount nào?",
+      "clarification_kind": null
+    },
+    {
+      "id": "teacher_an-accuracy-06",
+      "question": "Đổi courseId nhanh khiến response khóa cũ về sau và ghi đè khóa mới. Effect nên xử lý gì?",
+      "clarification_kind": null
+    },
+    {
+      "id": "teacher_an-accuracy-07",
+      "question": "Đã ẩn nút sửa khóa bằng React rồi, backend có thể bỏ kiểm tra quyền không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "teacher_an-accuracy-08",
+      "question": "Trang kết quả chỉ nhận dữ liệu qua navigate state, F5 mở lại bị trống. Thiết kế nào cho phép mở lại?",
+      "clarification_kind": null
+    },
+    {
+      "id": "teacher_binh-accuracy-01",
+      "question": "Muốn label tập trung đúng vào input khi bấm, thuộc tính nào phải nối với nhau?",
+      "clarification_kind": null
+    },
+    {
+      "id": "teacher_binh-accuracy-02",
+      "question": "Nút trong form chỉ mở hộp trợ giúp, không gửi form. Nên đặt type gì?",
+      "clarification_kind": null
+    },
+    {
+      "id": "teacher_binh-accuracy-03",
+      "question": "Một khối width:100% còn có padding/border nên tràn. box-sizing:border-box giúp thế nào?",
+      "clarification_kind": null
+    },
+    {
+      "id": "teacher_binh-accuracy-04",
+      "question": "Muốn điều hướng sang trang khác và muốn chạy một hành động có nên đều dùng div onclick không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "teacher_binh-accuracy-05",
+      "question": "Điểm cho phép từ 0 tới 10. Chỉ test điểm 5 đã đủ kiểm tra biên chưa? Nên thêm gì?",
+      "clarification_kind": null
+    },
+    {
+      "id": "teacher_binh-accuracy-06",
+      "question": "API AI trả 200 nhưng body chỉ là [Lỗi gọi LLM: ReadTimeout]. Có tính test hỏi đáp đạt không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "teacher_binh-accuracy-07",
+      "question": "Test tự động tìm nhầm selector nên timeout, nhưng thao tác tay vẫn được. Có kết luận app hỏng và xóa lần chạy lỗi không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "teacher_binh-accuracy-08",
+      "question": "Hai request ghi danh cùng lúc đều trả kết quả, làm sao kiểm tra hệ thống không tạo bản ghi trùng?",
+      "clarification_kind": null
+    },
+    {
+      "id": "admin-accuracy-01",
+      "question": "Server chỉ listen 127.0.0.1:9000, máy khác trong LAN không truy cập được thì có thể vì sao?",
+      "clarification_kind": null
+    },
+    {
+      "id": "admin-accuracy-02",
+      "question": "Ping tới IP được nhưng gõ tên miền không vào, đã đủ kết luận server web chết chưa?",
+      "clarification_kind": null
+    },
+    {
+      "id": "admin-accuracy-03",
+      "question": "TCP gửi hai lần send thì phía nhận chắc chắn recv đúng hai thông điệp tương ứng phải không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "admin-accuracy-04",
+      "question": "Ping thành công có chứng minh HTTP, đăng nhập và database đều hoạt động đúng không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "admin-accuracy-05",
+      "question": "Tìm kiếm nhị phân trên mảng bất kỳ chưa sắp xếp có bảo đảm đúng không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "admin-accuracy-06",
+      "question": "bisect_left([1, 3, 3, 8], 5) trả 3, vậy đã tìm thấy số 5 chưa?",
+      "clarification_kind": null
+    },
+    {
+      "id": "admin-accuracy-07",
+      "question": "BFS luôn tìm đường có tổng trọng số nhỏ nhất trên mọi đồ thị phải không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "admin-accuracy-08",
+      "question": "BST đơn giản chèn 1,2,3,4 liên tiếp thì chắc chắn tìm kiếm O(log n) không?",
+      "clarification_kind": null
+    },
+    {
+      "id": "new-01",
+      "question": "Python: a = [7, 8]; b = a; b.append(9); c = a.copy(); c.append(10). Cuối cùng a có những phần tử nào? Vì sao append qua b và c khác nhau?",
+      "clarification_kind": null
+    },
+    {
+      "id": "new-02",
+      "question": "To-do List đọc localStorage gặp chuỗi JSON hỏng. Chỉ gọi JSON.parse rồi render ngay có đủ an toàn không? Nên xử lý đọc và kiểm tra dữ liệu thế nào?",
+      "clarification_kind": null
+    },
+    {
+      "id": "new-03",
+      "question": "Java: mảng values có n phần tử, vòng lặp truy cập values[i] chạy từ i=0 với điều kiện i <= values.length có an toàn không? Nên sửa điều kiện thành gì?",
+      "clarification_kind": null
+    },
+    {
+      "id": "new-04",
+      "question": "Một ảnh HTML chỉ để trang trí và một ảnh cung cấp thông tin cho bài học nên viết alt giống nhau không? Trường hợp nào dùng alt rỗng?",
+      "clarification_kind": null
+    },
+    {
+      "id": "new-05",
+      "question": "Danh sách React có thể thêm, xóa, sắp xếp và từng hàng có state riêng. Dùng key={index} có bảo đảm state luôn theo đúng hàng không? Nên chọn key nào?",
+      "clarification_kind": null
+    },
+    {
+      "id": "new-06",
+      "question": "SQL: sau GROUP BY muốn chỉ giữ những nhóm có COUNT(*) >= 2 thì đặt điều kiện đó ở WHERE hay HAVING? Hai mệnh đề lọc ở giai đoạn nào?",
+      "clarification_kind": null
+    },
+    {
+      "id": "new-07",
+      "question": "Bật thêm bộ nhớ ảo và paging ra đĩa có làm RAM vật lý chạy nhanh hơn không? Vai trò của bộ nhớ ảo nên hiểu thế nào?",
+      "clarification_kind": null
+    },
+    {
+      "id": "new-08",
+      "question": "Một bản ghi DNS có TTL=300 nghĩa là trang web phải tải trong 300 giây hoặc tên miền chỉ được đăng ký 300 giây phải không? TTL chỉ điều gì?",
+      "clarification_kind": null
+    },
+    {
+      "id": "new-09",
+      "question": "Cho vào lần lượt A rồi B. Lấy phần tử đầu tiên ra từ queue và từ stack sẽ lần lượt là gì? Giải thích FIFO và LIFO.",
+      "clarification_kind": null
+    },
+    {
+      "id": "new-10",
+      "question": "Sau khi sửa lỗi ghi danh trùng, chạy lại đúng ca từng gây lỗi đã thay thế được kiểm thử hồi quy chưa? Phân biệt confirmation testing với regression testing.",
+      "clarification_kind": null
+    }
+  ],
+  "code_sha256": "8bfec3a13b41ce90f7bb0b32772cef3f0480236c393417782bf2d974820a033d",
+  "engine": {
+    "llm": {
+      "provider": "gemini",
+      "model": "gemini-3.1-flash-lite"
+    },
+    "embedding": {
+      "provider": "fastembed",
+      "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "dim": 384
+    }
+  },
+  "after": {
+    "ai_conversations": 4,
+    "ai_messages": 18,
+    "documents": 176,
+    "document_chunks": 2063
+  },
+  "finished_at": "2026-10-30T17:49:18.663893+07:00",
+  "data_restored": true,
+  "knowledge_gate_passed": 50
+}

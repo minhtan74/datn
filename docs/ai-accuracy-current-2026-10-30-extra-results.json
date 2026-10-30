@@ -1,0 +1,1600 @@
+[
+  {
+    "id": "new-01",
+    "role": "student_em",
+    "course_id": 1,
+    "reference_lesson": 9,
+    "question": "Python: a = [7, 8]; b = a; b.append(9); c = a.copy(); c.append(10). Cuối cùng a có những phần tử nào? Vì sao append qua b và c khác nhau?",
+    "gold": "a là [7,8,9]. b=a cùng tham chiếu danh sách nên append(9) đổi a; a.copy() tạo danh sách ngoài mới nên c.append(10) không đổi a. Không yêu cầu bàn sâu cấu trúc lồng.",
+    "evidence": [
+      {
+        "chunk_id": 1403,
+        "document_id": 80,
+        "page": 3,
+        "text": "a = [7, 8]\nb = a\nb.append(9)\nprint(a) # [7, 8, 9]\nc = a.copy()\nc.append(10)\nprint(a) # [7, 8, 9]\ncopy() là sao chép nông: danh sách ngoài mới nhưng đối tượng lồng bên trong vẫn có thể dùng chung."
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new",
+    "conversation_id": 425,
+    "http_status": 200,
+    "answer": "Cuối cùng, danh sách `a` có các phần tử là `[7, 8, 9]`.\n\nGiải thích:\n- Khi thực hiện `b = a`, `b` và `a` cùng trỏ tới một đối tượng danh sách, nên khi `b.append(9)` thì `a` cũng bị thay đổi theo.\n- Khi thực hiện `c = a.copy()`, `c` là một bản sao nông của `a`. Do đó, khi `c.append(10)` chỉ làm thay đổi danh sách `c`, không ảnh hưởng đến danh sách `a` gốc.",
+    "sources": [
+      {
+        "document_id": 82,
+        "document": "Python Cơ Bản Cho Người Mới Bắt Đầu — Học thêm và thực hành tổng hợp",
+        "page": 1,
+        "score": 0.7298
+      },
+      {
+        "document_id": 80,
+        "document": "Dự án nhỏ: Quản lý sinh viên",
+        "page": 3,
+        "score": 0.7298
+      },
+      {
+        "document_id": 82,
+        "document": "Python Cơ Bản Cho Người Mới Bắt Đầu — Học thêm và thực hành tổng hợp",
+        "page": 3,
+        "score": 0.5775
+      }
+    ],
+    "used_context": true,
+    "needs_clarification": false,
+    "clarification_kind": null,
+    "elapsed_seconds": 2.794,
+    "refused": false,
+    "fallback": false,
+    "llm_error": false,
+    "citation_evidence": [
+      {
+        "citation": {
+          "document_id": 82,
+          "document": "Python Cơ Bản Cho Người Mới Bắt Đầu — Học thêm và thực hành tổng hợp",
+          "page": 1,
+          "score": 0.7298
+        },
+        "document": {
+          "id": 82,
+          "course_id": 1,
+          "lesson_id": null,
+          "title": "Python Cơ Bản Cho Người Mới Bắt Đầu — Học thêm và thực hành tổng hợp"
+        },
+        "chunks": [
+          {
+            "id": 1175,
+            "page": 1,
+            "content": "PYTHON CƠ BẢN CHO NGƯỜI MỚI BẮT ĐẦU · CHƯƠNG HỌC THÊM: THỰC HÀNH MỞ RỘNG · BÀI TỔNG HỢP\nHọc thêm, bài tập và hướng dẫn giải\nPython — Sổ tay học thêm và thực hành tổng hợp\nTài liệu tự biên soạn bổ sung cho chín bài Python của khóa. Đọc sau phần chính; không cần học\nthuộc mọi ví dụ. Mục tiêu là giải thích được kết quả và tự kiểm tra chương trình."
+          },
+          {
+            "id": 1176,
+            "page": 1,
+            "content": "là giải thích được kết quả và tự kiểm tra chương trình. Mục tiêu học thêm\nPhân biệt phép gán, sao chép và thay đổi đối tượng\nKiểm tra dữ liệu đầu vào và các giá trị biên\nTổ chức chương trình quản lý sinh viên bằng hàm và lớp"
+          },
+          {
+            "id": 1177,
+            "page": 1,
+            "content": "1. Biến tham chiếu tới đối tượng\nPhép gán không luôn tạo bản sao. Với danh sách, hai tên có thể cùng trỏ tới một đối tượng:\na = [7, 8]\nb = a\nb.append(9)\nprint(a) # [7, 8, 9]\nc = a.copy()\nc.append(10)\nprint(a) # [7, 8, 9]\ncopy() là sao chép nông: danh sách ngoài mới nhưng đối tượng lồng bên trong vẫn có thể dùng\nchung."
+          },
+          {
+            "id": 1178,
+            "page": 1,
+            "content": "mới nhưng đối tượng lồng bên trong vẫn có thể dùng\nchung. Với danh sách số như ví dụ, sao chép nông đủ để append không ảnh hưởng danh sách gốc. Đây là lỗi thường gặp khi tạo nhiều danh sách điểm từ cùng một mẫu."
+          },
+          {
+            "id": 1179,
+            "page": 1,
+            "content": "2. Điều kiện, vòng lặp và giá trị biên\nVới xếp loại điểm, kiểm tra đầu vào trước khi phân loại. Đặt điều kiện điểm cao trước khi dùng elif\ntheo ngưỡng giảm dần để không nuốt các trường hợp sau."
+          }
+        ],
+        "metadata_valid": true
+      },
+      {
+        "citation": {
+          "document_id": 80,
+          "document": "Dự án nhỏ: Quản lý sinh viên",
+          "page": 3,
+          "score": 0.7298
+        },
+        "document": {
+          "id": 80,
+          "course_id": 1,
+          "lesson_id": 9,
+          "title": "Dự án nhỏ: Quản lý sinh viên"
+        },
+        "chunks": [
+          {
+            "id": 1401,
+            "page": 3,
+            "content": "Trang 1StudyOnline · Tài liệu học tập\nCHƯƠNG HỌC THÊM · BÀI TỔNG HỢP\nHọc thêm.Tổng hợp. Học thêm, bài tập và hướng\ndẫn giải\nTài liệu học tập Python Cơ Bản Cho Người Mới Bắt Đầu · Nội dung biên soạn trong dự án StudyOnline. Python — Sổ tay học thêm và thực hành tổng hợp\nTài liệu tự biên soạn bổ sung cho chín bài Python của khóa. Đọc sau phần chính; không cần học\nthuộc mọi ví dụ."
+          },
+          {
+            "id": 1402,
+            "page": 3,
+            "content": "khóa. Đọc sau phần chính; không cần học\nthuộc mọi ví dụ. Mục tiêu là giải thích được kết quả và tự kiểm tra chương trình. Mục tiêu học thêm\nPhân biệt phép gán, sao chép và thay đổi đối tượng\nKiểm tra dữ liệu đầu vào và các giá trị biên\nTổ chức chương trình quản lý sinh viên bằng hàm và lớp"
+          },
+          {
+            "id": 1403,
+            "page": 3,
+            "content": "1. Biến tham chiếu tới đối tượng\nPhép gán không luôn tạo bản sao. Với danh sách, hai tên có thể cùng trỏ tới một đối tượng:\na = [7, 8]\nb = a\nb.append(9)\nprint(a) # [7, 8, 9]\nc = a.copy()\nc.append(10)\nprint(a) # [7, 8, 9]\ncopy() là sao chép nông: danh sách ngoài mới nhưng đối tượng lồng bên trong vẫn có thể dùng\nchung."
+          },
+          {
+            "id": 1404,
+            "page": 3,
+            "content": "mới nhưng đối tượng lồng bên trong vẫn có thể dùng\nchung. Với danh sách số như ví dụ, sao chép nông đủ để append không ảnh hưởng danh sách gốc. Đây là lỗi thường gặp khi tạo nhiều danh sách điểm từ cùng một mẫu."
+          },
+          {
+            "id": 1405,
+            "page": 3,
+            "content": "2. Điều kiện, vòng lặp và giá trị biên\nVới xếp loại điểm, kiểm tra đầu vào trước khi phân loại. Đặt điều kiện điểm cao trước khi dùng\nelif theo ngưỡng giảm dần để không nuốt các trường hợp sau.\ndef classify(score):\nif not 0 <= score <= 10:"
+          }
+        ],
+        "metadata_valid": true
+      },
+      {
+        "citation": {
+          "document_id": 82,
+          "document": "Python Cơ Bản Cho Người Mới Bắt Đầu — Học thêm và thực hành tổng hợp",
+          "page": 3,
+          "score": 0.5775
+        },
+        "document": {
+          "id": 82,
+          "course_id": 1,
+          "lesson_id": null,
+          "title": "Python Cơ Bản Cho Người Mới Bắt Đầu — Học thêm và thực hành tổng hợp"
+        },
+        "chunks": [
+          {
+            "id": 1186,
+            "page": 3,
+            "content": "class Student:\ndef __init__(self, student_id, name, scores):\nif not scores or any(not 0 <= s <= 10 for s in scores):\nraise ValueError(\"Cần điểm hợp lệ\")\nself.student_id = student_id\nself.name = name.strip()\nself.scores = list(scores)\ndef average(self):\nreturn sum(self.scores) / len(self.scores)\ns = Student(\"SV01\", \"An\", [8, 6])\nassert s.average() == 7\nDanh sách điểm được sao ch"
+          },
+          {
+            "id": 1187,
+            "page": 3,
+            "content": ", [8, 6])\nassert s.average() == 7\nDanh sách điểm được sao chép để append vào danh sách bên ngoài không tự thay đổi điểm sinh\nviên."
+          },
+          {
+            "id": 1188,
+            "page": 3,
+            "content": "Trong ứng dụng hoàn chỉnh còn cần kiểm tra tên rỗng và mã trùng khi thêm vào hệ thống. Bài tập theo ba mức"
+          },
+          {
+            "id": 1189,
+            "page": 3,
+            "content": "1. Dễ: dự đoán a sau khi b = a rồi b.append(5); giải thích khác biệt với b = a.copy()."
+          },
+          {
+            "id": 1190,
+            "page": 3,
+            "content": "2. Trung bình: viết hàm nhận danh sách điểm, trả trung bình hoặc None nếu rỗng; không làm\ntròn trong quá trình cộng."
+          },
+          {
+            "id": 1191,
+            "page": 3,
+            "content": "3. Khó: thiết kế quản lý sinh viên với thêm, cập nhật, tìm theo mã và xếp loại. Khi mã trùng\nhoặc điểm ngoài khoảng, không được thay đổi dữ liệu cũ.\nGợi ý lời giải và tiêu chí đánh giá\n1. a và b dùng chung danh sách nên cùng nhìn thấy phần tử mới. Với copy, append chỉ thay danh\nsách b."
+          },
+          {
+            "id": 1192,
+            "page": 3,
+            "content": "2. Kiểm tra if not scores trước khi chia; dùng sum(scores) / len(scores). Thử [], [0], [10], [6, 8]."
+          },
+          {
+            "id": 1193,
+            "page": 3,
+            "content": "3. Lưu sinh viên trong dict theo mã để phát hiện trùng. Kiểm tra dữ liệu trước khi ghi; tách validate,\nadd và update. Kiểm thử mã không tồn tại, tên trắng, điểm -1, điểm 11 và sửa sinh viên đang có. Bài đạt khi có thể giải thích cấu trúc dữ liệu và chứng minh cập nhật lỗi không làm mất bản ghi."
+          },
+          {
+            "id": 1194,
+            "page": 3,
+            "content": "dữ liệu và chứng minh cập nhật lỗi không làm mất bản ghi. Học tiếp và tự đánh giá\nTự viết thêm chức năng lưu JSON, xử lý lỗi file và đọc lại dữ liệu. So sánh dữ liệu trước và sau một\nvòng lưu/đọc. Không dùng eval để đọc dữ liệu người dùng. Trước khi chuyển sang framework, cần\nchạy được chương trình bằng terminal và có các kiểm tra giá trị biên."
+          },
+          {
+            "id": 1195,
+            "page": 3,
+            "content": "chương trình bằng terminal và có các kiểm tra giá trị biên. Nguồn đối chiếu: https://docs.python.org/3/tutorial/datastructures.html ;\nhttps://docs.python.org/3/tutorial/controlflow.html ; https://docs.python.org/3/tutorial/classes.html"
+          }
+        ],
+        "metadata_valid": true
+      }
+    ],
+    "citation_metadata_valid": true,
+    "cleaned": true
+  },
+  {
+    "id": "new-02",
+    "role": "student_phuong",
+    "course_id": 2,
+    "reference_lesson": 15,
+    "question": "To-do List đọc localStorage gặp chuỗi JSON hỏng. Chỉ gọi JSON.parse rồi render ngay có đủ an toàn không? Nên xử lý đọc và kiểm tra dữ liệu thế nào?",
+    "gold": "Không. Bao đọc/parse bằng try/catch để xử lý JSON hỏng, xác thực cấu trúc mảng trước khi dùng/render; có thể khôi phục trạng thái hợp lệ/rỗng và thông báo phù hợp. Không bắt buộc tự xóa dữ liệu lưu.",
+    "evidence": [
+      {
+        "chunk_id": 2070,
+        "document_id": 104,
+        "page": 3,
+        "text": "Tự luyện: lưu localStorage, tải lại và xử lý JSON hỏng. Hướng giải: dùng try/catch khi đọc, xác thực cấu trúc mảng; lưu trạng thái thay vì HTML sinh ra."
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new",
+    "conversation_id": 426,
+    "http_status": 200,
+    "answer": "Không đủ an toàn. Khi đọc JSON từ localStorage, bạn cần bắt lỗi parse và kiểm tra xem dữ liệu có đúng là mảng công việc hay không. Điều này giúp đảm bảo lỗi lưu trữ không khiến trang bị trắng.",
+    "sources": [
+      {
+        "document_id": 83,
+        "document": "JavaScript Từ Zero Đến Hero — Học thêm và thực hành tổng hợp",
+        "page": 3,
+        "score": 0.6477
+      },
+      {
+        "document_id": 81,
+        "document": "Module & Fetch API",
+        "page": 5,
+        "score": 0.6477
+      },
+      {
+        "document_id": 77,
+        "document": "Dự án: To-do List",
+        "page": 1,
+        "score": 0.6507
+      }
+    ],
+    "used_context": true,
+    "needs_clarification": false,
+    "clarification_kind": null,
+    "elapsed_seconds": 2.298,
+    "refused": false,
+    "fallback": false,
+    "llm_error": false,
+    "citation_evidence": [
+      {
+        "citation": {
+          "document_id": 83,
+          "document": "JavaScript Từ Zero Đến Hero — Học thêm và thực hành tổng hợp",
+          "page": 3,
+          "score": 0.6477
+        },
+        "document": {
+          "id": 83,
+          "course_id": 2,
+          "lesson_id": null,
+          "title": "JavaScript Từ Zero Đến Hero — Học thêm và thực hành tổng hợp"
+        },
+        "chunks": [
+          {
+            "id": 1210,
+            "page": 3,
+            "content": "Đường dẫn API là ví dụ, cần thay theo backend đang dùng. Hủy request cũ giúp kết quả tìm kiếm\ntrước không ghi đè kết quả sau. Ứng dụng thực tế nên hiện trạng thái tải, rỗng và lỗi thay vì chỉ\nconsole.log.\nBài tập và gợi ý lời giải"
+          },
+          {
+            "id": 1211,
+            "page": 3,
+            "content": "1. Dễ: dự đoán typeof của dữ liệu lấy từ input; giải thích vì sao '2' + '3' là '23'. Đáp án: dữ liệu\nlà chuỗi, toán tử cộng nối chuỗi khi các toán hạng là chuỗi."
+          },
+          {
+            "id": 1212,
+            "page": 3,
+            "content": "2. Trung bình: thêm lọc việc đã hoàn thành vào To-do List nhưng không mất dữ liệu gốc. Giữ\ntoàn bộ tasks, tạo visibleTasks bằng filter theo trạng thái; không thay tasks bằng danh sách\nđã lọc."
+          },
+          {
+            "id": 1213,
+            "page": 3,
+            "content": "3. Khó: tìm kiếm khi người dùng nhập liên tiếp ba từ khóa, phản hồi lần đầu về cuối. Dùng\nAbortController hoặc số phiên request để chỉ nhận kết quả mới nhất; thử mạng chậm và lỗi\n500. Dự án mở rộng và tiêu chí hoàn thành\nThêm lưu localStorage cho To-do List. Khi đọc JSON, bắt lỗi parse và kiểm tra dữ liệu có đúng mảng\ncông việc không."
+          },
+          {
+            "id": 1214,
+            "page": 3,
+            "content": "lỗi parse và kiểm tra dữ liệu có đúng mảng\ncông việc không. Thử tiêu đề rỗng, chuỗi chứa thẻ HTML, mã trùng và tải lại trang. Bài đạt khi thao\ntác thêm/xóa/lọc nhất quán, nội dung người dùng được hiển thị như văn bản và lỗi lưu trữ không\nkhiến trang trắng."
+          },
+          {
+            "id": 1215,
+            "page": 3,
+            "content": "thị như văn bản và lỗi lưu trữ không\nkhiến trang trắng. Nguồn học tiếp\nhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises\nhttps://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch\nhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects"
+          }
+        ],
+        "metadata_valid": true
+      },
+      {
+        "citation": {
+          "document_id": 81,
+          "document": "Module & Fetch API",
+          "page": 5,
+          "score": 0.6477
+        },
+        "document": {
+          "id": 81,
+          "course_id": 2,
+          "lesson_id": 18,
+          "title": "Module & Fetch API"
+        },
+        "chunks": [
+          {
+            "id": 1522,
+            "page": 5,
+            "content": "Trang 3StudyOnline · Tài liệu học tập\nlet controller;\nasync function searchCourses(term) {\ncontroller?.abort();\ncontroller = new AbortController();\nconst signal = controller.signal;\ntry {\nconst response = await fetch('/api/courses?q=' + encodeURIComponent(term), { signal\n});\nif (!response.ok) throw new Error('HTTP ' + response.status);\nconst data = await response.json();\nif (!s"
+          },
+          {
+            "id": 1523,
+            "page": 5,
+            "content": "response.status);\nconst data = await response.json();\nif (!signal.aborted) console.log(data);\n} catch (error) {\nif (error.name !== 'AbortError') console.error(error.message);\n}\n}\nĐường dẫn API là ví dụ, cần thay theo backend đang dùng."
+          },
+          {
+            "id": 1524,
+            "page": 5,
+            "content": "Hủy request cũ giúp kết quả tìm kiếm\ntrước không ghi đè kết quả sau. Ứng dụng thực tế nên hiện trạng thái tải, rỗng và lỗi thay vì chỉ\nconsole.log. Câu hỏi ôn tập và bài tập vận dụng"
+          },
+          {
+            "id": 1525,
+            "page": 5,
+            "content": "1. Dễ: dự đoán typeof của dữ liệu lấy từ input; giải thích vì sao '2' + '3' là '23'. Đáp án: dữ liệu là\nchuỗi, toán tử cộng nối chuỗi khi các toán hạng là chuỗi."
+          },
+          {
+            "id": 1526,
+            "page": 5,
+            "content": "2. Trung bình: thêm lọc việc đã hoàn thành vào To-do List nhưng không mất dữ liệu gốc. Giữ\ntoàn bộ tasks, tạo visibleTasks bằng filter theo trạng thái; không thay tasks bằng danh sách đã\nlọc."
+          },
+          {
+            "id": 1527,
+            "page": 5,
+            "content": "3. Khó: tìm kiếm khi người dùng nhập liên tiếp ba từ khóa, phản hồi lần đầu về cuối. Dùng\nAbortController hoặc số phiên request để chỉ nhận kết quả mới nhất; thử mạng chậm và lỗi\n500. Dự án mở rộng và tiêu chí hoàn thành\nThêm lưu localStorage cho To-do List. Khi đọc JSON, bắt lỗi parse và kiểm tra dữ liệu có đúng\nmảng công việc không."
+          },
+          {
+            "id": 1528,
+            "page": 5,
+            "content": "lỗi parse và kiểm tra dữ liệu có đúng\nmảng công việc không. Thử tiêu đề rỗng, chuỗi chứa thẻ HTML, mã trùng và tải lại trang. Bài đạt\nkhi thao tác thêm/xóa/lọc nhất quán, nội dung người dùng được hiển thị như văn bản và lỗi lưu trữ\nkhông khiến trang trắng. Nguồn học tiếp\nhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises"
+          }
+        ],
+        "metadata_valid": true
+      },
+      {
+        "citation": {
+          "document_id": 77,
+          "document": "Dự án: To-do List",
+          "page": 1,
+          "score": 0.6507
+        },
+        "document": {
+          "id": 77,
+          "course_id": 2,
+          "lesson_id": 15,
+          "title": "Dự án: To-do List"
+        },
+        "chunks": [
+          {
+            "id": 1467,
+            "page": 1,
+            "content": "Trang 1StudyOnline · Tài liệu học tập\nCHƯƠNG 2 · BÀI 3\n2.3. Dự án: To-do List\nTài liệu học tập JavaScript Từ Zero Đến Hero · Nội dung biên soạn trong dự án StudyOnline.\nMục tiêu bài học\nKết hợp DOM, sự kiện và mảng để xây dựng ứng dụng To-do List\nThêm, đánh dấu hoàn thành và xoá công việc\nLưu dữ liệu bằng localStorage"
+          },
+          {
+            "id": 1468,
+            "page": 1,
+            "content": "1. Yêu cầu\nỨng dụng cho phép nhập công việc, thêm vào danh sách, bấm vào công việc để đánh dấu hoàn\nthành, xoá công việc và giữ lại danh sách khi tải lại trang."
+          },
+          {
+            "id": 1469,
+            "page": 1,
+            "content": "2. Cấu trúc HTML\nMột ô nhập input, một nút thêm và một danh sách ul. Mỗi công việc là một thẻ li chứa nội dung\nvà nút xoá."
+          },
+          {
+            "id": 1470,
+            "page": 1,
+            "content": "3. Cài đặt mẫu\nTách dữ liệu (mảng todos) khỏi giao diện: mỗi khi dữ liệu thay đổi thì gọi hàm render() để vẽ lại\ndanh sách."
+          },
+          {
+            "id": 1471,
+            "page": 1,
+            "content": "dữ liệu thay đổi thì gọi hàm render() để vẽ lại\ndanh sách. let todos = JSON.parse(localStorage.getItem(\"todos\") || \"[]\");\nfunction luu() {\nlocalStorage.setItem(\"todos\", JSON.stringify(todos));\n}\nfunction render() {\nconst ul = document.querySelector(\"#ds\");\nul.innerHTML = \"\";\ntodos.forEach((t, i) => {\nconst li = document.createElement(\"li\");\nli.textContent = t.ten;\nli.className = t.xong ?"
+          },
+          {
+            "id": 1472,
+            "page": 1,
+            "content": "= t.ten;\nli.className = t.xong ? \"xong\" : \"\";\nli.addEventListener(\"click\", () => { t.xong = !t.xong; luu(); render(); });"
+          }
+        ],
+        "metadata_valid": true
+      }
+    ],
+    "citation_metadata_valid": true,
+    "cleaned": true
+  },
+  {
+    "id": "new-03",
+    "role": "teacher_an",
+    "course_id": 3,
+    "reference_lesson": 21,
+    "question": "Java: mảng values có n phần tử, vòng lặp truy cập values[i] chạy từ i=0 với điều kiện i <= values.length có an toàn không? Nên sửa điều kiện thành gì?",
+    "gold": "Không; lần i=length vượt chỉ số hợp lệ 0..n-1. Sửa i < values.length. Có thể nêu ArrayIndexOutOfBoundsException nhưng tên ngoại lệ không bắt buộc.",
+    "evidence": [
+      {
+        "chunk_id": 2089,
+        "document_id": 110,
+        "page": 3,
+        "text": "Với mảng n phần tử, chỉ số từ 0 tới n-1; điều kiện thường là i < values.length."
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new",
+    "conversation_id": 427,
+    "http_status": 200,
+    "answer": "Không an toàn vì sẽ dẫn đến lỗi vượt giới hạn mảng. Bạn nên sửa điều kiện thành `i < values.length` vì chỉ số mảng bắt đầu từ 0 tới n-1.",
+    "sources": [
+      {
+        "document_id": 110,
+        "document": "Cấu trúc điều khiển — Thực hành bổ sung 29/10/2026",
+        "page": 3,
+        "score": 0.7136
+      },
+      {
+        "document_id": 39,
+        "document": "Bài 3: Cấu trúc điều khiển",
+        "page": 2,
+        "score": 0.4706
+      },
+      {
+        "document_id": 38,
+        "document": "Bài 2: Biến, kiểu dữ liệu trong Java",
+        "page": 2,
+        "score": 0.5996
+      }
+    ],
+    "used_context": true,
+    "needs_clarification": false,
+    "clarification_kind": null,
+    "elapsed_seconds": 2.193,
+    "refused": false,
+    "fallback": false,
+    "llm_error": false,
+    "citation_evidence": [
+      {
+        "citation": {
+          "document_id": 110,
+          "document": "Cấu trúc điều khiển — Thực hành bổ sung 29/10/2026",
+          "page": 3,
+          "score": 0.7136
+        },
+        "document": {
+          "id": 110,
+          "course_id": 3,
+          "lesson_id": 21,
+          "title": "Cấu trúc điều khiển — Thực hành bổ sung 29/10/2026"
+        },
+        "chunks": [
+          {
+            "id": 2089,
+            "page": 3,
+            "content": "LẬP TRÌNH JAVA CĂN BẢN · CHƯƠNG 1: CÚ PHÁP CƠ BẢN JAVA · BÀI 3\nCấu trúc điều khiển — Thực hành và hỏi đáp\nPhần bổ sung cho bài học · biên soạn 29/10/2026\nTình huống, ví dụ và tự kiểm tra\nTình huống: vòng lặp vượt giới hạn mảng. Với mảng n phần tử, chỉ số từ 0 tới n-1; điều kiện thường\nlà i < values.length."
+          },
+          {
+            "id": 2090,
+            "page": 3,
+            "content": "chỉ số từ 0 tới n-1; điều kiện thường\nlà i < values.length. int[] values = {2, 4, 6};\nint sum = 0;\nfor (int value : values) {\n    sum += value;\n}\nSystem.out.println(sum); // 12\nTự luyện: mảng rỗng, một phần tử và ba phần tử. Hướng giải: tổng bắt đầu 0, không truy cập phần\ntử đầu khi chưa kiểm tra rỗng."
+          },
+          {
+            "id": 2091,
+            "page": 3,
+            "content": "đầu 0, không truy cập phần\ntử đầu khi chưa kiểm tra rỗng. Với while, chỉ ra biến làm điều kiện thay đổi; tránh nhầm phép gán và\nso sánh hoặc bỏ quên nhánh kết thúc. Nguồn học tiếp\nhttps://dev.java/learn/"
+          }
+        ],
+        "metadata_valid": true
+      },
+      {
+        "citation": {
+          "document_id": 39,
+          "document": "Bài 3: Cấu trúc điều khiển",
+          "page": 2,
+          "score": 0.4706
+        },
+        "document": {
+          "id": 39,
+          "course_id": 3,
+          "lesson_id": 21,
+          "title": "Bài 3: Cấu trúc điều khiển"
+        },
+        "chunks": [
+          {
+            "id": 1557,
+            "page": 2,
+            "content": "Trang 2StudyOnline · Tài liệu học tập\nfor (int i = 1; i <= 5; i++) {\nSystem.out.println(i);\n}\nint n = 10;\ndo {\nn--;\n} while (n > 5);\n4. break, continue và mảng\nLệnh break thoát khỏi vòng lặp, lệnh continue bỏ qua phần còn lại của lần lặp hiện tại."
+          },
+          {
+            "id": 1558,
+            "page": 2,
+            "content": "lệnh continue bỏ qua phần còn lại của lần lặp hiện tại. Mảng là\ncấu trúc lưu nhiều phần tử cùng kiểu với kích thước cố định, chỉ số bắt đầu từ 0; duyệt mảng bằng\nfor hoặc for-each: for (int x : mang) {...}. Tóm tắt\nif/else/switch để rẽ nhánh; nhớ break trong switch. for, while, do-while cho vòng lặp; do-while chạy ít nhất một lần."
+          },
+          {
+            "id": 1559,
+            "page": 2,
+            "content": "do-while cho vòng lặp; do-while chạy ít nhất một lần. Mảng có kích thước cố định, chỉ số bắt đầu từ 0. Câu hỏi ôn tập và bài tập vận dụng"
+          },
+          {
+            "id": 1560,
+            "page": 2,
+            "content": "1. Nhập điểm và in xếp loại bằng if-else."
+          },
+          {
+            "id": 1561,
+            "page": 2,
+            "content": "2. In bảng cửu chương của một số nhập vào bằng vòng lặp for."
+          },
+          {
+            "id": 1562,
+            "page": 2,
+            "content": "3. Tìm giá trị lớn nhất trong một mảng số nguyên."
+          }
+        ],
+        "metadata_valid": true
+      },
+      {
+        "citation": {
+          "document_id": 38,
+          "document": "Bài 2: Biến, kiểu dữ liệu trong Java",
+          "page": 2,
+          "score": 0.5996
+        },
+        "document": {
+          "id": 38,
+          "course_id": 3,
+          "lesson_id": 20,
+          "title": "Bài 2: Biến, kiểu dữ liệu trong Java"
+        },
+        "chunks": [
+          {
+            "id": 1547,
+            "page": 2,
+            "content": "4. Kiểu tham chiếu và String\nString là kiểu tham chiếu dùng để lưu chuỗi ký tự và là đối tượng bất biến (immutable). Để so\nsánh nội dung hai chuỗi phải dùng phương thức equals, không dùng toán tử ==, vì == chỉ so sánh\nhai biến có cùng trỏ tới một đối tượng hay không."
+          },
+          {
+            "id": 1548,
+            "page": 2,
+            "content": "so sánh\nhai biến có cùng trỏ tới một đối tượng hay không. String a = new String(\"java\");\nString b = new String(\"java\");\nSystem.out.println(a == b); // false\nSystem.out.println(a.equals(b)); // true\nTóm tắt\nTám kiểu nguyên thuỷ; double là số thực mặc định. final tạo hằng số; ép kiểu từ lớn xuống nhỏ phải viết tường minh. So sánh chuỗi bằng equals, không dùng ==."
+          },
+          {
+            "id": 1549,
+            "page": 2,
+            "content": "viết tường minh. So sánh chuỗi bằng equals, không dùng ==. Câu hỏi ôn tập và bài tập vận dụng"
+          },
+          {
+            "id": 1550,
+            "page": 2,
+            "content": "1. Khai báo biến cho các thông tin của một sinh viên với kiểu dữ liệu phù hợp."
+          },
+          {
+            "id": 1551,
+            "page": 2,
+            "content": "2. Nhập hai số nguyên và in ra thương dưới dạng số thực."
+          },
+          {
+            "id": 1552,
+            "page": 2,
+            "content": "3. Giải thích kết quả của \"abc\" == \"abc\" và new String(\"abc\") == new String(\"abc\")."
+          }
+        ],
+        "metadata_valid": true
+      }
+    ],
+    "citation_metadata_valid": true,
+    "cleaned": true
+  },
+  {
+    "id": "new-04",
+    "role": "teacher_binh",
+    "course_id": 4,
+    "reference_lesson": 30,
+    "question": "Một ảnh HTML chỉ để trang trí và một ảnh cung cấp thông tin cho bài học nên viết alt giống nhau không? Trường hợp nào dùng alt rỗng?",
+    "gold": "Không. Ảnh mang thông tin cần alt mô tả phù hợp; ảnh thuần trang trí dùng alt=\"\". Không được khuyến nghị bỏ alt cho mọi ảnh.",
+    "evidence": [
+      {
+        "chunk_id": 2119,
+        "document_id": 119,
+        "page": 3,
+        "text": "Ảnh mang thông tin cần alt mô tả; ảnh thuần trang trí dùng alt rỗng. Không thêm ARIA thừa để thay thế semantic sẵn có."
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new",
+    "conversation_id": 428,
+    "http_status": 200,
+    "answer": "Không, không nên viết alt giống nhau. Ảnh mang thông tin cần có alt mô tả, trong khi ảnh thuần trang trí dùng alt rỗng.",
+    "sources": [
+      {
+        "document_id": 119,
+        "document": "Semantic HTML — Thực hành bổ sung 29/10/2026",
+        "page": 3,
+        "score": 0.5712
+      },
+      {
+        "document_id": 28,
+        "document": "Bài 1: Cấu trúc tài liệu HTML",
+        "page": 2,
+        "score": 0.587
+      },
+      {
+        "document_id": 36,
+        "document": "Bài 9: Dự án Landing Page Responsive",
+        "page": 4,
+        "score": 0.5138
+      }
+    ],
+    "used_context": true,
+    "needs_clarification": false,
+    "clarification_kind": null,
+    "elapsed_seconds": 1.89,
+    "refused": false,
+    "fallback": false,
+    "llm_error": false,
+    "citation_evidence": [
+      {
+        "citation": {
+          "document_id": 119,
+          "document": "Semantic HTML — Thực hành bổ sung 29/10/2026",
+          "page": 3,
+          "score": 0.5712
+        },
+        "document": {
+          "id": 119,
+          "course_id": 4,
+          "lesson_id": 30,
+          "title": "Semantic HTML — Thực hành bổ sung 29/10/2026"
+        },
+        "chunks": [
+          {
+            "id": 2118,
+            "page": 3,
+            "content": "HTML & CSS NHẬP MÔN · CHƯƠNG 1: HTML CƠ BẢN · BÀI 3\nSemantic HTML — Thực hành và hỏi đáp\nPhần bổ sung cho bài học · biên soạn 29/10/2026\nTình huống, ví dụ và tự kiểm tra\nTình huống: div có onclick nhưng không dùng được bằng bàn phím. Dùng button cho hành động và\na có href cho điều hướng; không thay tất cả bằng div vì thuận CSS."
+          },
+          {
+            "id": 2119,
+            "page": 3,
+            "content": "cho điều hướng; không thay tất cả bằng div vì thuận CSS. Tự luyện: trang gồm header, nav, main, section và footer; tạo liên kết bỏ qua điều hướng để tới\nmain. Hướng giải: heading phản ánh cấu trúc; mỗi control có tên dễ hiểu. Ảnh mang thông tin cần\nalt mô tả; ảnh thuần trang trí dùng alt rỗng. Không thêm ARIA thừa để thay thế semantic sẵn có."
+          },
+          {
+            "id": 2120,
+            "page": 3,
+            "content": "alt rỗng. Không thêm ARIA thừa để thay thế semantic sẵn có. Nguồn học tiếp\nhttps://developer.mozilla.org/en-US/docs/Learn_web_development"
+          }
+        ],
+        "metadata_valid": true
+      },
+      {
+        "citation": {
+          "document_id": 28,
+          "document": "Bài 1: Cấu trúc tài liệu HTML",
+          "page": 2,
+          "score": 0.587
+        },
+        "document": {
+          "id": 28,
+          "course_id": 4,
+          "lesson_id": 28,
+          "title": "Bài 1: Cấu trúc tài liệu HTML"
+        },
+        "chunks": [
+          {
+            "id": 1652,
+            "page": 2,
+            "content": "Trang 2StudyOnline · Tài liệu học tập\ninput không có nội dung và không cần thẻ đóng."
+          },
+          {
+            "id": 1653,
+            "page": 2,
+            "content": "4. Các thẻ thường dùng\nCác thẻ tiêu đề từ h1 đến h6, trong đó h1 là tiêu đề quan trọng nhất của trang. Liên kết được tạo\nbằng thẻ a, địa chỉ đích nằm trong thuộc tính href; thuộc tính target=\"_blank\" mở liên kết trong\ntab mới. Hình ảnh chèn bằng thẻ img, đường dẫn ảnh nằm trong src và mô tả thay thế nằm trong\nalt."
+          },
+          {
+            "id": 1654,
+            "page": 2,
+            "content": "dẫn ảnh nằm trong src và mô tả thay thế nằm trong\nalt. Danh sách không thứ tự dùng ul, có thứ tự dùng ol, mỗi mục là một thẻ li. <a href=\"https://example.com\" target=\"_blank\">Trang chủ</a>\n<img src=\"logo.png\" alt=\"Logo StudyOnline\">\n<ul>\n<li>HTML</li>\n<li>CSS</li>\n</ul>\nTóm tắt\nHTML mô tả cấu trúc trang; head chứa thông tin, body chứa nội dung."
+          },
+          {
+            "id": 1655,
+            "page": 2,
+            "content": "tả cấu trúc trang; head chứa thông tin, body chứa nội dung. Thuộc tính đặt trong thẻ mở; a dùng href, img dùng src và alt. ul/ol với li tạo danh sách. Câu hỏi ôn tập và bài tập vận dụng"
+          },
+          {
+            "id": 1656,
+            "page": 2,
+            "content": "1. Tạo trang giới thiệu bản thân gồm tiêu đề, đoạn văn, một ảnh và một danh sách sở thích."
+          },
+          {
+            "id": 1657,
+            "page": 2,
+            "content": "2. Thêm liên kết tới một trang web và cho mở trong tab mới."
+          },
+          {
+            "id": 1658,
+            "page": 2,
+            "content": "3. Giải thích vì sao thuộc tính alt của ảnh quan trọng."
+          }
+        ],
+        "metadata_valid": true
+      },
+      {
+        "citation": {
+          "document_id": 36,
+          "document": "Bài 9: Dự án Landing Page Responsive",
+          "page": 4,
+          "score": 0.5138
+        },
+        "document": {
+          "id": 36,
+          "course_id": 4,
+          "lesson_id": 36,
+          "title": "Bài 9: Dự án Landing Page Responsive"
+        },
+        "chunks": [
+          {
+            "id": 1748,
+            "page": 4,
+            "content": "Trang 2StudyOnline · Tài liệu học tập\n*, *::before, *::after { box-sizing: border-box; }\n.card {\nwidth: 300px;\npadding: 20px;\nborder: 2px solid #ddd;\n}\nNếu dùng content-box, chiều rộng ngoài của thẻ trên là 344px, chưa tính margin. Với border-box\nlà 300px. Margin tạo khoảng cách bên ngoài và không nằm trong width."
+          },
+          {
+            "id": 1749,
+            "page": 4,
+            "content": "Margin tạo khoảng cách bên ngoài và không nằm trong width. Khi bố cục tràn, dùng\nDevTools xem hộp thật thay vì thêm overflow:hidden để che lỗi."
+          },
+          {
+            "id": 1750,
+            "page": 4,
+            "content": "3. Grid, Flexbox và mobile first\nFlexbox thường phù hợp sắp xếp một hàng hoặc cột. Grid thuận tiện cho bố cục có hàng và cột. Không có quy tắc buộc luôn dùng một loại; chọn theo cấu trúc cần kiểm soát."
+          },
+          {
+            "id": 1751,
+            "page": 4,
+            "content": ".courses {\ndisplay: grid;\ngrid-template-columns: 1fr;\ngap: 1rem;\n}\n.course { min-width: 0; overflow-wrap: anywhere; }\nimg { max-width: 100%; height: auto; }\n@media (min-width: 48rem) {\n.courses { grid-template-columns: repeat(2, minmax(0, 1fr)); }\n}\n@media (min-width: 72rem) {\n.courses { grid-template-columns: repeat(3, minmax(0, 1fr)); }\n}\nMobile first bắt đầu từ bố cục đơn gi"
+          },
+          {
+            "id": 1752,
+            "page": 4,
+            "content": ", minmax(0, 1fr)); }\n}\nMobile first bắt đầu từ bố cục đơn giản cho không gian hẹp rồi mở rộng khi đủ chỗ."
+          },
+          {
+            "id": 1753,
+            "page": 4,
+            "content": "Breakpoint\nnên phản ánh lúc nội dung cần thay bố cục, không phải một danh sách thiết bị cố định. Giữ thứ tự\nHTML hợp lý; đổi thứ tự bằng CSS có thể khiến thứ tự nhìn thấy khác thứ tự đi bằng phím Tab."
+          },
+          {
+            "id": 1754,
+            "page": 4,
+            "content": "4. Form, focus và nội dung dài\nKhông xóa outline mà không cung cấp dấu hiệu focus thay thế. Thông báo lỗi cần nói trường nào\nsai và cách sửa, không chỉ đổi màu đỏ. Trạng thái cũng cần chữ hoặc biểu tượng kèm mô tả để\nkhông phụ thuộc duy nhất vào màu."
+          }
+        ],
+        "metadata_valid": true
+      }
+    ],
+    "citation_metadata_valid": true,
+    "cleaned": true
+  },
+  {
+    "id": "new-05",
+    "role": "teacher_an",
+    "course_id": 5,
+    "reference_lesson": 45,
+    "question": "Danh sách React có thể thêm, xóa, sắp xếp và từng hàng có state riêng. Dùng key={index} có bảo đảm state luôn theo đúng hàng không? Nên chọn key nào?",
+    "gold": "Không bảo đảm; chỉ số thay đổi theo vị trí có thể gắn state nhầm hàng. Dùng mã/id ổn định của dữ liệu. Không nói key là index luôn an toàn chỉ vì hết cảnh báo.",
+    "evidence": [
+      {
+        "chunk_id": 1869,
+        "document_id": 54,
+        "page": 4,
+        "text": "key khi render danh sách nên là mã ổn định. Dùng chỉ số khi thêm/xóa/sắp xếp có thể làm state của một hàng gắn nhầm sang hàng khác."
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new",
+    "conversation_id": 429,
+    "http_status": 200,
+    "answer": "Không, dùng chỉ số (index) làm key khi danh sách có thể thêm, xóa hoặc sắp xếp không đảm bảo state luôn theo đúng hàng, vì nó có thể làm state của một hàng gắn nhầm sang hàng khác. Bạn nên chọn mã (id) ổn định làm key.",
+    "sources": [
+      {
+        "document_id": 86,
+        "document": "ReactJS Chuyên Sâu — Học thêm và thực hành tổng hợp",
+        "page": 1,
+        "score": 0.6553
+      },
+      {
+        "document_id": 54,
+        "document": "Bài 9: Dự án Trang quản lý khoá học",
+        "page": 4,
+        "score": 0.4756
+      },
+      {
+        "document_id": 47,
+        "document": "Bài 2: Component và Props",
+        "page": 2,
+        "score": 0.5442
+      }
+    ],
+    "used_context": true,
+    "needs_clarification": false,
+    "clarification_kind": null,
+    "elapsed_seconds": 2.166,
+    "refused": false,
+    "fallback": false,
+    "llm_error": false,
+    "citation_evidence": [
+      {
+        "citation": {
+          "document_id": 86,
+          "document": "ReactJS Chuyên Sâu — Học thêm và thực hành tổng hợp",
+          "page": 1,
+          "score": 0.6553
+        },
+        "document": {
+          "id": 86,
+          "course_id": 5,
+          "lesson_id": null,
+          "title": "ReactJS Chuyên Sâu — Học thêm và thực hành tổng hợp"
+        },
+        "chunks": [
+          {
+            "id": 1256,
+            "page": 1,
+            "content": "REACTJS CHUYÊN SÂU · CHƯƠNG HỌC THÊM: THỰC HÀNH MỞ RỘNG · BÀI TỔNG HỢP\nHọc thêm, bài tập và hướng dẫn giải\nReact — Học thêm về state, effect và ứng dụng quản lý khóa học\nVí dụ hướng đến React 18 đang dùng trong StudyOnline. Tài liệu bổ sung cho JSX, props, state,\nhooks, API và routing."
+          },
+          {
+            "id": 1257,
+            "page": 1,
+            "content": "liệu bổ sung cho JSX, props, state,\nhooks, API và routing. Mục tiêu học thêm\nCập nhật state đúng khi phụ thuộc trạng thái trước\nPhân biệt dữ liệu suy ra, sự kiện và effect\nXử lý request cũ và thiết kế trạng thái tải/lỗi/rỗng"
+          },
+          {
+            "id": 1258,
+            "page": 1,
+            "content": "1. State là ảnh chụp của lần render\nGọi setter yêu cầu lần render mới; biến state trong hàm xử lý hiện tại không lập tức biến thành giá trị\nmới. Khi cập nhật phụ thuộc giá trị trước, dùng updater function."
+          },
+          {
+            "id": 1259,
+            "page": 1,
+            "content": "cập nhật phụ thuộc giá trị trước, dùng updater function. function Counter() {\nconst [count, setCount] = useState(0);\nfunction addTwo() {\nsetCount(c => c + 1);\nsetCount(c => c + 1);\n}\nreturn <button onClick={addTwo}>{count}</button>;\n}\nVí dụ cần import useState từ react. Hai updater được áp dụng liên tiếp nên tăng 2."
+          },
+          {
+            "id": 1260,
+            "page": 1,
+            "content": "từ react. Hai updater được áp dụng liên tiếp nên tăng 2. Tránh thay đổi trực\ntiếp mảng/đối tượng trong state; tạo giá trị mới để React và các component con nhận ra thay đổi. setCourses(previous => previous.map(course =>\ncourse.id === editedId ? { ...course, title: newTitle } : course\n));\nkey khi render danh sách nên là mã ổn định."
+          },
+          {
+            "id": 1261,
+            "page": 1,
+            "content": "} : course\n));\nkey khi render danh sách nên là mã ổn định. Dùng chỉ số khi thêm/xóa/sắp xếp có thể làm state của\nmột hàng gắn nhầm sang hàng khác."
+          },
+          {
+            "id": 1262,
+            "page": 1,
+            "content": "2. Khi nào cần effect?\nEffect dùng đồng bộ với hệ thống bên ngoài như kết nối, timer hay request. Nếu chỉ lọc danh sách từ\nstate hiện có, tính trong render thay vì lưu thêm state rồi cập nhật bằng effect."
+          }
+        ],
+        "metadata_valid": true
+      },
+      {
+        "citation": {
+          "document_id": 54,
+          "document": "Bài 9: Dự án Trang quản lý khoá học",
+          "page": 4,
+          "score": 0.4756
+        },
+        "document": {
+          "id": 54,
+          "course_id": 5,
+          "lesson_id": 45,
+          "title": "Bài 9: Dự án Trang quản lý khoá học"
+        },
+        "chunks": [
+          {
+            "id": 1869,
+            "page": 4,
+            "content": "Trang 2StudyOnline · Tài liệu học tập\nkey khi render danh sách nên là mã ổn định. Dùng chỉ số khi thêm/xóa/sắp xếp có thể làm state của\nmột hàng gắn nhầm sang hàng khác."
+          },
+          {
+            "id": 1870,
+            "page": 4,
+            "content": "2. Khi nào cần effect? Effect dùng đồng bộ với hệ thống bên ngoài như kết nối, timer hay request. Nếu chỉ lọc danh sách\ntừ state hiện có, tính trong render thay vì lưu thêm state rồi cập nhật bằng effect. const visibleCourses = courses.filter(course =>\ncourse.title.toLowerCase().includes(search.toLowerCase())\n);\nThao tác lưu do người dùng bấm nút thường thuộc event handler."
+          },
+          {
+            "id": 1871,
+            "page": 4,
+            "content": "tác lưu do người dùng bấm nút thường thuộc event handler. Effect không nên được dùng để\nsuy đoán rằng người dùng vừa bấm nút chỉ vì state thay đổi. Với dependency, liệt kê các giá trị\nreactive thật sự được effect đọc; bỏ dependency tùy tiện dễ làm effect dùng dữ liệu cũ."
+          },
+          {
+            "id": 1872,
+            "page": 4,
+            "content": "Request và cleanup\nuseEffect(() => {\nconst controller = new AbortController();\nlet active = true;\nsetLoading(true);\nsetError(null);\nfetch('/api/courses', { signal: controller.signal })\n.then(response => {\nif (!response.ok) throw new Error('Không tải được khóa học');\nreturn response.json();\n})\n.then(payload => { if (active) setCourses(payload.data || []); })\n.catch(error => {\nif"
+          },
+          {
+            "id": 1873,
+            "page": 4,
+            "content": "ive) setCourses(payload.data || []); })\n.catch(error => {\nif (active && error.name !== 'AbortError') setError(error.message);\n})\n.finally(() => { if (active) setLoading(false); });\nreturn () => { active = false; controller.abort(); };\n}, []);\nĐây là phần đặt trong component có các state tương ứng; schema payload phải đối chiếu API thật."
+          },
+          {
+            "id": 1874,
+            "page": 4,
+            "content": "Cleanup ngăn request cũ cập nhật component không còn cần dữ liệu. Trong Strict Mode phát triển,\neffect có thể được chạy setup/cleanup thêm để phát hiện lỗi; cần cleanup đúng thay vì tắt Strict\nMode để che lỗi."
+          }
+        ],
+        "metadata_valid": true
+      },
+      {
+        "citation": {
+          "document_id": 47,
+          "document": "Bài 2: Component và Props",
+          "page": 2,
+          "score": 0.5442
+        },
+        "document": {
+          "id": 47,
+          "course_id": 5,
+          "lesson_id": 38,
+          "title": "Bài 2: Component và Props"
+        },
+        "chunks": [
+          {
+            "id": 1775,
+            "page": 2,
+            "content": "Trang 2StudyOnline · Tài liệu học tập\nfunction Khung({ children }) {\nreturn <div className=\"khung\">{children}</div>;\n}"
+          },
+          {
+            "id": 1776,
+            "page": 2,
+            "content": "4. Render danh sách\nDanh sách được render bằng phương thức map của mảng, trả về một phần tử JSX cho mỗi mục. Mỗi phần tử trong danh sách cần thuộc tính key duy nhất và ổn định, thường là id. Không nên\ndùng chỉ số mảng làm key khi danh sách có thể thêm, xoá hoặc đổi thứ tự."
+          },
+          {
+            "id": 1777,
+            "page": 2,
+            "content": "làm key khi danh sách có thể thêm, xoá hoặc đổi thứ tự. {khoaHoc.map((k) => <KhoaHocCard key={k.id} ten={k.ten} gia={k.gia} />)}\nTóm tắt\nComponent là hàm trả về JSX, tên viết hoa chữ cái đầu. Props truyền từ cha xuống con và chỉ đọc; children là nội dung bên trong thẻ. Render danh sách bằng map kèm key ổn định. Câu hỏi ôn tập và bài tập vận dụng"
+          },
+          {
+            "id": 1778,
+            "page": 2,
+            "content": "1. Viết component SinhVienCard nhận props tên và điểm."
+          },
+          {
+            "id": 1779,
+            "page": 2,
+            "content": "2. Render danh sách 5 khoá học từ một mảng bằng map và key."
+          },
+          {
+            "id": 1780,
+            "page": 2,
+            "content": "3. Giải thích vì sao không nên dùng chỉ số mảng làm key."
+          }
+        ],
+        "metadata_valid": true
+      }
+    ],
+    "citation_metadata_valid": true,
+    "cleaned": true
+  },
+  {
+    "id": "new-06",
+    "role": "student_em",
+    "course_id": 6,
+    "reference_lesson": 50,
+    "question": "SQL: sau GROUP BY muốn chỉ giữ những nhóm có COUNT(*) >= 2 thì đặt điều kiện đó ở WHERE hay HAVING? Hai mệnh đề lọc ở giai đoạn nào?",
+    "gold": "Dùng HAVING COUNT(*) >= 2; WHERE lọc từng hàng trước khi nhóm, HAVING lọc kết quả nhóm. Không dùng WHERE COUNT(*)>=2 ở cùng cấp SELECT.",
+    "evidence": [
+      {
+        "chunk_id": 2183,
+        "document_id": 139,
+        "page": 3,
+        "text": "WHERE lọc hàng trước nhóm; HAVING lọc kết quả nhóm."
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new",
+    "conversation_id": 430,
+    "http_status": 200,
+    "answer": "Sau khi GROUP BY, bạn cần đặt điều kiện `COUNT(*) >= 2` ở mệnh đề **HAVING**.\n\nVề giai đoạn lọc:\n- **WHERE**: Lọc từng dòng trước khi gom nhóm.\n- **HAVING**: Lọc các nhóm sau khi đã thực hiện GROUP BY.",
+    "sources": [
+      {
+        "document_id": 59,
+        "document": "Bài 5: GROUP BY và Aggregate Function",
+        "page": 2,
+        "score": 0.6848
+      },
+      {
+        "document_id": 139,
+        "document": "GROUP BY & Aggregate Function — Thực hành bổ sung 29/10/2026",
+        "page": 3,
+        "score": 0.7079
+      },
+      {
+        "document_id": 138,
+        "document": "JOIN nhiều bảng — Thực hành bổ sung 29/10/2026",
+        "page": 3,
+        "score": 0.6256
+      }
+    ],
+    "used_context": true,
+    "needs_clarification": false,
+    "clarification_kind": null,
+    "elapsed_seconds": 2.442,
+    "refused": false,
+    "fallback": false,
+    "llm_error": false,
+    "citation_evidence": [
+      {
+        "citation": {
+          "document_id": 59,
+          "document": "Bài 5: GROUP BY và Aggregate Function",
+          "page": 2,
+          "score": 0.6848
+        },
+        "document": {
+          "id": 59,
+          "course_id": 6,
+          "lesson_id": 50,
+          "title": "Bài 5: GROUP BY và Aggregate Function"
+        },
+        "chunks": [
+          {
+            "id": 1936,
+            "page": 2,
+            "content": "Trang 2StudyOnline · Tài liệu học tập\nđược hàm tổng hợp, ví dụ HAVING COUNT(*) > 5. SELECT course_id, COUNT(*) AS so_hoc_vien\nFROM enrollments\nWHERE enroll_date >= '2026-01-01'\nGROUP BY course_id\nHAVING COUNT(*) >= 5\nORDER BY so_hoc_vien DESC;\nThứ tự viết các mệnh đề: SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY, LIMIT."
+          },
+          {
+            "id": 1937,
+            "page": 2,
+            "content": "đề: SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY, LIMIT. Tóm tắt\nCOUNT, SUM, AVG, MIN, MAX tính toán trên nhóm dòng; COUNT(*) đếm cả dòng NULL. GROUP BY gom nhóm; HAVING lọc nhóm, WHERE lọc dòng. Giữ đúng thứ tự các mệnh đề khi viết truy vấn. Câu hỏi ôn tập và bài tập vận dụng"
+          },
+          {
+            "id": 1938,
+            "page": 2,
+            "content": "2. Tính điểm trung bình quiz của từng học viên và chỉ giữ người có trung bình từ 5 trở lên."
+          },
+          {
+            "id": 1939,
+            "page": 2,
+            "content": "3. Giải thích khác biệt giữa WHERE và HAVING kèm ví dụ."
+          }
+        ],
+        "metadata_valid": true
+      },
+      {
+        "citation": {
+          "document_id": 139,
+          "document": "GROUP BY & Aggregate Function — Thực hành bổ sung 29/10/2026",
+          "page": 3,
+          "score": 0.7079
+        },
+        "document": {
+          "id": 139,
+          "course_id": 6,
+          "lesson_id": 50,
+          "title": "GROUP BY & Aggregate Function — Thực hành bổ sung 29/10/2026"
+        },
+        "chunks": [
+          {
+            "id": 2181,
+            "page": 3,
+            "content": "MYSQL & THIẾT KẾ CƠ SỞ DỮ LIỆU · CHƯƠNG 2: TRUY VẤN SQL NÂNG CAO · BÀI 2\nGROUP BY & Aggregate Function — Thực hành và\nhỏi đáp\nPhần bổ sung cho bài học · biên soạn 29/10/2026\nTình huống, ví dụ và tự kiểm tra\nTình huống: đếm học viên theo khóa nhưng khóa rỗng vẫn có số 1. Sau LEFT JOIN, COUNT(*) đếm\ncả hàng bên trái chưa khớp; COUNT(e.id) chỉ đếm id phía ghi danh không NULL."
+          },
+          {
+            "id": 2182,
+            "page": 3,
+            "content": "chưa khớp; COUNT(e.id) chỉ đếm id phía ghi danh không NULL. SELECT c.id, c.title, COUNT(e.id) AS student_count\nFROM courses AS c\nLEFT JOIN enrollments AS e ON e.course_id = c.id\nGROUP BY c.id, c.title;\nTự luyện: khóa có 0, 1, 3 ghi danh và dữ liệu bị nhân dòng bởi JOIN khác."
+          },
+          {
+            "id": 2183,
+            "page": 3,
+            "content": "có 0, 1, 3 ghi danh và dữ liệu bị nhân dòng bởi JOIN khác. Hướng giải: đếm ở đúng\nmức dữ liệu hoặc dùng subquery tổng hợp trước; không thêm DISTINCT vô điều kiện chỉ để che JOIN\nsai. WHERE lọc hàng trước nhóm; HAVING lọc kết quả nhóm. AVG bỏ NULL nên phải nêu rõ cách xử\nlý người chưa có điểm. Nguồn học tiếp\nhttps://dev.mysql.com/doc/refman/8.4/en/tutorial.html"
+          }
+        ],
+        "metadata_valid": true
+      },
+      {
+        "citation": {
+          "document_id": 138,
+          "document": "JOIN nhiều bảng — Thực hành bổ sung 29/10/2026",
+          "page": 3,
+          "score": 0.6256
+        },
+        "document": {
+          "id": 138,
+          "course_id": 6,
+          "lesson_id": 49,
+          "title": "JOIN nhiều bảng — Thực hành bổ sung 29/10/2026"
+        },
+        "chunks": [
+          {
+            "id": 2177,
+            "page": 3,
+            "content": "MYSQL & THIẾT KẾ CƠ SỞ DỮ LIỆU · CHƯƠNG 2: TRUY VẤN SQL NÂNG CAO · BÀI 1\nJOIN nhiều bảng — Thực hành và hỏi đáp\nPhần bổ sung cho bài học · biên soạn 29/10/2026\nTình huống, ví dụ và tự kiểm tra\nHỏi thực tế: “Tìm học viên chưa ghi danh khóa nào bằng LEFT JOIN?” Bắt đầu từ học viên, giữ tất cả\nhọc viên rồi lọc phía ghi danh không khớp."
+          },
+          {
+            "id": 2178,
+            "page": 3,
+            "content": "viên, giữ tất cả\nhọc viên rồi lọc phía ghi danh không khớp. Đừng đổi thành tìm khóa chưa có học viên: đó là bài toán\nngược. SELECT s.id, s.name\nFROM students AS s\nLEFT JOIN enrollments AS e ON e.student_id = s.id\nWHERE e.student_id IS NULL;\nTự luyện: tạo học viên A chưa ghi danh, B có hai ghi danh, C có một ghi danh."
+          },
+          {
+            "id": 2179,
+            "page": 3,
+            "content": "viên A chưa ghi danh, B có hai ghi danh, C có một ghi danh. Hướng giải: truy vấn\ntrên chỉ trả A; INNER JOIN không thể giữ A. LEFT JOIN giữ bảng trái, cột bên phải NULL khi không\nkhớp. Khi lọc trạng thái ghi danh, điều kiện trong ON và trong WHERE có thể tạo kết quả khác nhau;\nkiểm tra bằng dữ liệu không có dòng khớp."
+          },
+          {
+            "id": 2180,
+            "page": 3,
+            "content": "quả khác nhau;\nkiểm tra bằng dữ liệu không có dòng khớp. Nguồn học tiếp\nhttps://dev.mysql.com/doc/refman/8.4/en/tutorial.html"
+          }
+        ],
+        "metadata_valid": true
+      }
+    ],
+    "citation_metadata_valid": true,
+    "cleaned": true
+  },
+  {
+    "id": "new-07",
+    "role": "student_phuong",
+    "course_id": 7,
+    "reference_lesson": 65,
+    "question": "Bật thêm bộ nhớ ảo và paging ra đĩa có làm RAM vật lý chạy nhanh hơn không? Vai trò của bộ nhớ ảo nên hiểu thế nào?",
+    "gold": "Không làm RAM vật lý nhanh hơn. Bộ nhớ ảo mở rộng/ảo hóa mô hình không gian địa chỉ; paging ra đĩa không đồng nghĩa tăng tốc độ RAM. Không bắt buộc khẳng định máy luôn nhanh/chậm hơn trong mọi tình huống.",
+    "evidence": [
+      {
+        "chunk_id": 2229,
+        "document_id": 154,
+        "page": 13,
+        "text": "Bộ nhớ ảo mở rộng mô hình không gian địa chỉ nhưng paging ra đĩa không làm RAM vật lý nhanh hơn."
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new",
+    "conversation_id": 431,
+    "http_status": 200,
+    "answer": "Việc paging ra đĩa không làm RAM vật lý nhanh hơn. Bộ nhớ ảo có vai trò mở rộng mô hình không gian địa chỉ.",
+    "sources": [
+      {
+        "document_id": 154,
+        "document": "Bài 11: Các giải pháp đồng bộ hóa — Thực hành bổ sung 29/10/2026",
+        "page": 13,
+        "score": 0.6824
+      },
+      {
+        "document_id": 2,
+        "document": "Bài 2: Phân loại hệ điều hành",
+        "page": 2,
+        "score": 0.6415
+      },
+      {
+        "document_id": 144,
+        "document": "Bài 1: Khái niệm về hệ điều hành — Thực hành bổ sung 29/10/2026",
+        "page": 3,
+        "score": 0.6129
+      }
+    ],
+    "used_context": true,
+    "needs_clarification": false,
+    "clarification_kind": null,
+    "elapsed_seconds": 2.044,
+    "refused": false,
+    "fallback": false,
+    "llm_error": false,
+    "citation_evidence": [
+      {
+        "citation": {
+          "document_id": 154,
+          "document": "Bài 11: Các giải pháp đồng bộ hóa — Thực hành bổ sung 29/10/2026",
+          "page": 13,
+          "score": 0.6824
+        },
+        "document": {
+          "id": 154,
+          "course_id": 7,
+          "lesson_id": 65,
+          "title": "Bài 11: Các giải pháp đồng bộ hóa — Thực hành bổ sung 29/10/2026"
+        },
+        "chunks": [
+          {
+            "id": 2227,
+            "page": 13,
+            "content": "NGUYÊN LÍ HDH · CHƯƠNG 0: CHƯƠNG 4: TRUYỀN THÔNG VÀ ĐỒNG BỘ TIẾN TRÌNH · BÀI 0\nBài 11: Các giải pháp đồng bộ hóa — Thực hành và\nhỏi đáp\nPhần bổ sung cho bài học · biên soạn 29/10/2026\nTình huống, ví dụ và tự kiểm tra\nTình huống: dùng lock nhưng vẫn treo vì thứ tự lấy nhiều khóa không nhất quán. Quy định cùng\nmột thứ tự lấy khóa và giải phóng ở mọi đường thoát."
+          },
+          {
+            "id": 2228,
+            "page": 13,
+            "content": "cùng\nmột thứ tự lấy khóa và giải phóng ở mọi đường thoát. Semaphore đếm tài nguyên; mutex bảo vệ\nvùng truy cập theo hợp đồng API, không dùng hai khái niệm như đồng nghĩa tuyệt đối. Tự luyện: mô hình hàng đợi hữu hạn producer/consumer: giới hạn sức chứa, số phần tử và chỗ\ntrống. Hướng giải: kiểm tra bất biến 0 ≤ size ≤ capacity, không giữ khóa lâu trong I/O nếu không\ncần."
+          },
+          {
+            "id": 2229,
+            "page": 13,
+            "content": "≤ capacity, không giữ khóa lâu trong I/O nếu không\ncần. Với condition variable, kiểm tra lại điều kiện sau khi thức dậy. Muốn tìm ứng dụng nên đóng trên\nmáy lag phải có dữ liệu thực; không đoán tên chương trình từ tài liệu. Bộ nhớ ảo mở rộng mô hình\nkhông gian địa chỉ nhưng paging ra đĩa không làm RAM vật lý nhanh hơn. Nguồn học tiếp\nhttps://pages.cs.wisc.edu/~remzi/OSTEP/"
+          }
+        ],
+        "metadata_valid": true
+      },
+      {
+        "citation": {
+          "document_id": 2,
+          "document": "Bài 2: Phân loại hệ điều hành",
+          "page": 2,
+          "score": 0.6415
+        },
+        "document": {
+          "id": 2,
+          "course_id": 7,
+          "lesson_id": 56,
+          "title": "Bài 2: Phân loại hệ điều hành"
+        },
+        "chunks": [
+          {
+            "id": 25,
+            "page": 2,
+            "content": "Bài giảng Hệ điều hành\nChương 1 · Bài 2\nBộ môn CNPM – Khoa CNTT\nTrang 2\n Ý tưởng: hệ điều hành lưu giữ một phần của các công việc ở nơi lưu trữ trong bộ nhớ. CPU sẽ lần lượt thực hiện các phần công việc này. Khi đang thực hiện, nếu có yêu cầu truy\nxuất thiết bị thì CPU không nghỉ mà thực hiện tiếp công việc thứ hai…"
+          },
+          {
+            "id": 26,
+            "page": 2,
+            "content": "bị thì CPU không nghỉ mà thực hiện tiếp công việc thứ hai… Với hệ đa chương,\nhệ điều hành ra quyết định cho người sử dụng, vì vậy hệ điều hành đa chương rất tinh vi. Hệ phải xử lý các vấn đề lập lịch cho công việc, lập lịch cho bộ nhớ và cho cả CPU nữa. 1.2.3 Hệ thống chia sẻ thời gian\n Hệ thống chia sẻ thời gian là một mở rộng logic của hệ đa chương."
+          },
+          {
+            "id": 27,
+            "page": 2,
+            "content": "chia sẻ thời gian là một mở rộng logic của hệ đa chương. Hệ thống này còn\nđược gọi là hệ thống đa nhiệm (multitasking). Nhiều công việc cùng được thực hiện thông\nqua cơ chế chuyển đổi của CPU như hệ đa chương nhưng thời gian mỗi lần chuyển đổi\ndiễn ra rất nhanh. Hệ thống chia sẻ được phát triển để cung cấp việc sử dụng bên trong của\nmột máy tính có giá trị hơn."
+          },
+          {
+            "id": 28,
+            "page": 2,
+            "content": "cấp việc sử dụng bên trong của\nmột máy tính có giá trị hơn. Hệ điều hành chia sẻ thời gian dùng lập lịch CPU và đa\nchương để cung cấp cho mỗi người sử dụng một phần nhỏ trong máy tính chia sẻ. Một\nchương trình khi thi hành được gọi là một tiến trình."
+          },
+          {
+            "id": 29,
+            "page": 2,
+            "content": "Một\nchương trình khi thi hành được gọi là một tiến trình. Trong quá trình thi hành của một tiến\ntrình, nó phải thực hiện các thao tác nhập xuất và trong khoảng thời gian đó CPU sẽ thi\nhành một tiến trình khác."
+          },
+          {
+            "id": 30,
+            "page": 2,
+            "content": "khoảng thời gian đó CPU sẽ thi\nhành một tiến trình khác. Hệ điều hành chia sẻ cho phép nhiều người sử dụng chia sẻ máy\ntính một cách đồng bộ; do thời gian chuyển đổi nhanh nên họ có cảm giác là các tiến trình\nđang được thi hành cùng lúc. Hệ điều hành chia sẻ phức tạp hơn hệ điều hành đa chương. Nó phải có các chức\nnăng: quản trị và bảo vệ bộ nhớ, sử dụng bộ nhớ ảo."
+          },
+          {
+            "id": 31,
+            "page": 2,
+            "content": "chức\nnăng: quản trị và bảo vệ bộ nhớ, sử dụng bộ nhớ ảo. Nó cũng cung cấp hệ thống tập tin truy\nxuất on-line… Hệ điều hành chia sẻ là kiểu của các hệ điều hành hiện đại ngày nay. 1.2.4 Hệ thống song song\n Ngoài các hệ thống chỉ có một bộ xử lý còn có các hệ thống có nhiều bộ xử lý cùng\nchia sẻ hệ thống đường truyền dữ liệu, đồng hồ, bộ nhớ và các thiết bị ngoại vi."
+          },
+          {
+            "id": 32,
+            "page": 2,
+            "content": "truyền dữ liệu, đồng hồ, bộ nhớ và các thiết bị ngoại vi. Các bộ xử\nlý này liên lạc bên trong với nhau. Có nhiều nguyên nhân xây dựng dạng hệ thống này. Với\nsự gia tăng số lượng bộ xử lý, công việc được thực hiện nhanh chóng hơn. Nhưng không\nphải theo đúng tỉ lệ thời gian, nghĩa là có n bộ xử lý không có nghĩa là sẽ thực hiện nhanh\nhơn n lần."
+          },
+          {
+            "id": 33,
+            "page": 2,
+            "content": "n bộ xử lý không có nghĩa là sẽ thực hiện nhanh\nhơn n lần. Hệ thống với máy nhiều bộ xử lý sẽ tối ưu hơn hệ thống có nhiều máy có một bộ xử lý\nvì các bộ xử lý chia sẻ các thiết bị ngoại vi, hệ thống lưu trữ, nguồn… và rất thuận tiện cho\nnhiều chương trình cùng làm việc trên cùng một tập hợp dữ liệu. Một lý do nữa là độ tin cậy."
+          },
+          {
+            "id": 34,
+            "page": 2,
+            "content": "trên cùng một tập hợp dữ liệu. Một lý do nữa là độ tin cậy. Các chức năng được xử lý trên nhiều bộ xử lý và sự hỏng\nhóc của một bộ xử lý sẽ không ảnh hưởng đến toàn bộ hệ thống. Hệ thống đa xử lý thông thường sử dụng cách đa xử lý đối xứng, trong cách này mỗi\nbộ xử lý chạy với một bản sao của hệ điều hành, những bản sao này liên lạc với nhau khi\ncần thiết."
+          },
+          {
+            "id": 35,
+            "page": 2,
+            "content": "hành, những bản sao này liên lạc với nhau khi\ncần thiết. Một số hệ thống sử dụng đa xử lý bất đối xứng, trong đó mỗi bộ xử lý được giao"
+          }
+        ],
+        "metadata_valid": true
+      },
+      {
+        "citation": {
+          "document_id": 144,
+          "document": "Bài 1: Khái niệm về hệ điều hành — Thực hành bổ sung 29/10/2026",
+          "page": 3,
+          "score": 0.6129
+        },
+        "document": {
+          "id": 144,
+          "course_id": 7,
+          "lesson_id": 55,
+          "title": "Bài 1: Khái niệm về hệ điều hành — Thực hành bổ sung 29/10/2026"
+        },
+        "chunks": [
+          {
+            "id": 2196,
+            "page": 3,
+            "content": "NGUYÊN LÍ HDH · CHƯƠNG 0: CHƯƠNG 1: TỔNG QUAN · BÀI 0\nBài 1: Khái niệm về hệ điều hành — Thực hành và\nhỏi đáp\nPhần bổ sung cho bài học · biên soạn 29/10/2026\nTình huống, ví dụ và tự kiểm tra\nHỏi thực tế: “Máy mở nhiều app thì lag, liên quan gì hệ điều hành?” Ứng dụng cần CPU, bộ nhớ và\nthiết bị I/O."
+          },
+          {
+            "id": 2197,
+            "page": 3,
+            "content": "gì hệ điều hành?” Ứng dụng cần CPU, bộ nhớ và\nthiết bị I/O. Hệ điều hành quản lý và phân phối các tài nguyên đó; nhiều công việc có thể cạnh tranh\ntài nguyên hoặc chờ I/O. Chỉ từ chữ “lag” chưa thể kết luận thiếu RAM hay ứng dụng nào lỗi. Tự luyện: ghi nhận lúc lag, số ứng dụng, CPU, RAM và hoạt động đĩa từ công cụ hệ thống."
+          },
+          {
+            "id": 2198,
+            "page": 3,
+            "content": "số ứng dụng, CPU, RAM và hoạt động đĩa từ công cụ hệ thống. Hướng\ngiải: đối chiếu thời điểm thay vì nhìn một ảnh chụp bất kỳ. Không coi CPU thấp là chắc chắn máy\nkhông có vấn đề: công việc có thể đang chờ tài nguyên khác. Nguồn học tiếp\nhttps://pages.cs.wisc.edu/~remzi/OSTEP/"
+          }
+        ],
+        "metadata_valid": true
+      }
+    ],
+    "citation_metadata_valid": true,
+    "cleaned": true
+  },
+  {
+    "id": "new-08",
+    "role": "admin",
+    "course_id": 513,
+    "reference_lesson": 305,
+    "question": "Một bản ghi DNS có TTL=300 nghĩa là trang web phải tải trong 300 giây hoặc tên miền chỉ được đăng ký 300 giây phải không? TTL chỉ điều gì?",
+    "gold": "Không phải hai nghĩa đó. TTL hướng dẫn thời gian lưu bản ghi DNS trong bộ nhớ đệm, ở đây 300 giây. Không được đồng nhất TTL với tốc độ tải trang hay thời hạn đăng ký tên miền.",
+    "evidence": [
+      {
+        "chunk_id": 2274,
+        "document_id": 157,
+        "page": 1,
+        "text": "TTL hướng dẫn thời gian lưu bộ nhớ đệm, không phải thời gian tải trang hay thời hạn đăng ký tên miền."
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new",
+    "conversation_id": 432,
+    "http_status": 200,
+    "answer": "Không phải. TTL không phải là thời gian tải trang hay thời hạn đăng ký tên miền.\n\nTTL (Time To Live) là thời gian lưu bản ghi trong bộ nhớ đệm (cache), giúp resolver xác định thời gian có thể tái sử dụng bản ghi đó.",
+    "sources": [
+      {
+        "document_id": 157,
+        "document": "DNS và phân giải tên miền — Thực hành bổ sung 29/10/2026",
+        "page": 1,
+        "score": 0.6423
+      },
+      {
+        "document_id": 157,
+        "document": "DNS và phân giải tên miền — Thực hành bổ sung 29/10/2026",
+        "page": 3,
+        "score": 0.6062
+      }
+    ],
+    "used_context": true,
+    "needs_clarification": false,
+    "clarification_kind": null,
+    "elapsed_seconds": 1.982,
+    "refused": false,
+    "fallback": false,
+    "llm_error": false,
+    "citation_evidence": [
+      {
+        "citation": {
+          "document_id": 157,
+          "document": "DNS và phân giải tên miền — Thực hành bổ sung 29/10/2026",
+          "page": 1,
+          "score": 0.6423
+        },
+        "document": {
+          "id": 157,
+          "course_id": 513,
+          "lesson_id": 305,
+          "title": "DNS và phân giải tên miền — Thực hành bổ sung 29/10/2026"
+        },
+        "chunks": [
+          {
+            "id": 2271,
+            "page": 1,
+            "content": "Trang 1\nMẠNG MÁY TÍNH CƠ BẢN\nChương 2: Dịch vụ và ứng dụng mạng · Bài 1\nDNS và phân giải tên miền\nTài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải\nVị trí bài học trong khóa\nKhóa học: Mạng máy tính cơ bản. Chương 2: Dịch vụ và ứng dụng mạng. Các bài trong chương: DNS và phân giải tên miền; HTTP và HTTPS."
+          },
+          {
+            "id": 2272,
+            "page": 1,
+            "content": "bài trong chương: DNS và phân giải tên miền; HTTP và HTTPS. Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp\ncuối khóa dùng để kết nối kiến thức giữa các chương. Mục tiêu bài học\nGiải thích vai trò DNS và đọc các loại bản ghi cơ bản. Kiến thức nền\nDNS là hệ thống phân giải tên phân tán."
+          },
+          {
+            "id": 2273,
+            "page": 1,
+            "content": "bản. Kiến thức nền\nDNS là hệ thống phân giải tên phân tán. Ứng dụng có thể hỏi resolver để tìm địa chỉ gắn với tên\nmiền. Resolver tận dụng bộ nhớ đệm hoặc truy vấn các máy chủ thích hợp; không phải mọi yêu cầu\nđều đi lại toàn bộ chuỗi truy vấn. Bản ghi A ánh xạ tên tới IPv4, AAAA tới IPv6. CNAME khai báo tên bí danh trỏ tới một tên khác. MX\nmô tả máy chủ nhận thư cho miền."
+          },
+          {
+            "id": 2274,
+            "page": 1,
+            "content": "trỏ tới một tên khác. MX\nmô tả máy chủ nhận thư cho miền. TTL hướng dẫn thời gian lưu bộ nhớ đệm, không phải thời gian\ntải trang hay thời hạn đăng ký tên miền. DNS thường sử dụng cổng 53 với UDP hoặc TCP. Phân giải tên thành công chỉ cho biết có câu trả lời\nDNS; không chứng minh máy chủ web đang hoạt động. Khi gỡ lỗi, tách kiểm tra DNS khỏi kiểm tra\nkết nối và HTTP."
+          },
+          {
+            "id": 2275,
+            "page": 1,
+            "content": "1. Các thành phần tham gia\nStub resolver trên máy người dùng gửi câu hỏi tới recursive resolver đã cấu hình. Khi chưa có đáp án\ntrong cache, resolver có thể lần theo root, máy chủ miền cấp cao và máy chủ có thẩm quyền. Root\nthường chỉ dẫn bước tiếp theo, không phải nơi lưu mọi địa chỉ website."
+          },
+          {
+            "id": 2276,
+            "page": 1,
+            "content": "2. Đọc bản ghi đúng ý nghĩa\nA: địa chỉ IPv4; AAAA: địa chỉ IPv6.\nCNAME: bí danh tới một tên khác; cần phân giải tiếp tên đích.\nMX: máy chủ nhận thư và giá trị ưu tiên trong miền.\nTXT: văn bản cho các mục đích xác minh hoặc chính sách ứng dụng.\nTTL: thời gian cache theo bản ghi, không phải thời hạn sở hữu miền."
+          }
+        ],
+        "metadata_valid": true
+      },
+      {
+        "citation": {
+          "document_id": 157,
+          "document": "DNS và phân giải tên miền — Thực hành bổ sung 29/10/2026",
+          "page": 3,
+          "score": 0.6062
+        },
+        "document": {
+          "id": 157,
+          "course_id": 513,
+          "lesson_id": 305,
+          "title": "DNS và phân giải tên miền — Thực hành bổ sung 29/10/2026"
+        },
+        "chunks": [
+          {
+            "id": 2281,
+            "page": 3,
+            "content": "Trang 3\nAAAA. AAAA là loại bản ghi dành cho địa chỉ IPv6. Thời gian lưu bản ghi trong bộ nhớ đệm. TTL giúp resolver xác định thời gian có thể tái sử dụng\nbản ghi. Không, dịch vụ web vẫn có thể gặp lỗi. DNS và dịch vụ HTTP là các bước khác nhau. Cách tự đánh giá sau bài\nGiải thích được thuật ngữ mà không đọc lại định nghĩa."
+          },
+          {
+            "id": 2282,
+            "page": 3,
+            "content": "bài\nGiải thích được thuật ngữ mà không đọc lại định nghĩa. Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng. Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải. Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài. Các câu tự kiểm tra có thể trùng trọng tâm quiz."
+          },
+          {
+            "id": 2283,
+            "page": 3,
+            "content": "cảnh bài. Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành\nthạo; cần thêm bài vận dụng và minh chứng thực hành. Tài liệu đọc thêm\nhttps://www.netacad.com/courses/networking-basics\nhttps://developer.mozilla.org/en-US/docs/Web/HTTP"
+          }
+        ],
+        "metadata_valid": true
+      }
+    ],
+    "citation_metadata_valid": true,
+    "cleaned": true
+  },
+  {
+    "id": "new-09",
+    "role": "admin",
+    "course_id": 514,
+    "reference_lesson": 308,
+    "question": "Cho vào lần lượt A rồi B. Lấy phần tử đầu tiên ra từ queue và từ stack sẽ lần lượt là gì? Giải thích FIFO và LIFO.",
+    "gold": "Queue lấy A trước (FIFO: vào trước ra trước); stack lấy B trước (LIFO: vào sau ra trước). Không chấp nhận đảo hai cấu trúc.",
+    "evidence": [
+      {
+        "chunk_id": 2477,
+        "document_id": 168,
+        "page": 4,
+        "text": "queue = deque([\"A\", \"B\"])\nassert queue.popleft() == \"A\"\nstack = [\"A\", \"B\"]\nassert stack.pop() == \"B\""
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new",
+    "conversation_id": 433,
+    "http_status": 200,
+    "answer": "Khi cho vào lần lượt A rồi B:\n- Với **queue** (hàng đợi): Phần tử lấy ra đầu tiên là **A**.\n- Với **stack** (ngăn xếp): Phần tử lấy ra đầu tiên là **B**.\n\nGiải thích:\n- **FIFO** (First-In, First-Out): Nguyên tắc vào trước, ra trước.\n- **LIFO** (Last-In, First-Out): Nguyên tắc vào sau, ra trước.",
+    "sources": [
+      {
+        "document_id": 168,
+        "document": "Ngăn xếp và hàng đợi — Thực hành bổ sung 29/10/2026",
+        "page": 1,
+        "score": 0.7594
+      },
+      {
+        "document_id": 168,
+        "document": "Ngăn xếp và hàng đợi — Thực hành bổ sung 29/10/2026",
+        "page": 3,
+        "score": 0.7335
+      }
+    ],
+    "used_context": true,
+    "needs_clarification": false,
+    "clarification_kind": null,
+    "elapsed_seconds": 1.974,
+    "refused": false,
+    "fallback": false,
+    "llm_error": false,
+    "citation_evidence": [
+      {
+        "citation": {
+          "document_id": 168,
+          "document": "Ngăn xếp và hàng đợi — Thực hành bổ sung 29/10/2026",
+          "page": 1,
+          "score": 0.7594
+        },
+        "document": {
+          "id": 168,
+          "course_id": 514,
+          "lesson_id": 308,
+          "title": "Ngăn xếp và hàng đợi — Thực hành bổ sung 29/10/2026"
+        },
+        "chunks": [
+          {
+            "id": 2462,
+            "page": 1,
+            "content": "Trang 1\nCẤU TRÚC DỮ LIỆU VÀ GIẢI THUẬT CƠ BẢN\nChương 1: Cấu trúc dữ liệu tuyến tính · Bài 2\nNgăn xếp và hàng đợi\nTài liệu học tập chi tiết · Lý thuyết, ví dụ, thực hành và hướng giải\nVị trí bài học trong khóa\nKhóa học: Cấu trúc dữ liệu và giải thuật cơ bản. Chương 1: Cấu trúc dữ liệu tuyến tính. Các bài trong chương: Mảng và danh sách liên kết; Ngăn xếp và hàng đợi."
+          },
+          {
+            "id": 2463,
+            "page": 1,
+            "content": "chương: Mảng và danh sách liên kết; Ngăn xếp và hàng đợi. Đọc lý thuyết, tự làm ví dụ rồi đối chiếu hướng giải; sau đó mới làm quiz. Bài thực hành tổng hợp\ncuối khóa dùng để kết nối kiến thức giữa các chương. Mục tiêu bài học\nMô phỏng LIFO, FIFO và chọn stack hoặc queue đúng tình huống. Kiến thức nền\nStack là ngăn xếp theo nguyên tắc LIFO: phần tử vào sau được lấy trước."
+          },
+          {
+            "id": 2464,
+            "page": 1,
+            "content": "xếp theo nguyên tắc LIFO: phần tử vào sau được lấy trước. push thêm vào đỉnh, pop lấy\nkhỏi đỉnh, peek xem đỉnh mà không xóa. Với triển khai phù hợp, các thao tác cơ bản có thể O(1). Gọi\npop trên stack rỗng cần được xử lý theo quy ước của chương trình. Queue là hàng đợi theo nguyên tắc FIFO: phần tử vào trước được lấy trước. enqueue thêm vào cuối,\ndequeue lấy ở đầu."
+          },
+          {
+            "id": 2465,
+            "page": 1,
+            "content": "được lấy trước. enqueue thêm vào cuối,\ndequeue lấy ở đầu. Có thể dùng danh sách liên kết hoặc bộ đệm vòng để tránh dịch toàn bộ phần tử\nmỗi lần lấy đầu. Stack hữu ích cho kiểm tra dấu ngoặc và quay lui; queue hữu ích cho xử lý công việc theo thứ tự đến\nvà duyệt BFS. Cấu trúc mô tả quy tắc lấy dữ liệu, không đồng nghĩa với một kiểu lưu bộ nhớ duy\nnhất."
+          },
+          {
+            "id": 2466,
+            "page": 1,
+            "content": "1. Giao diện trừu tượng trước triển khai\nStack có push, pop, peek, is_empty; queue có enqueue, dequeue, peek. Quy định rõ thao tác trên cấu\ntrúc rỗng: báo lỗi, trả sentinel hoặc một kiểu kết quả riêng. Không dùng None làm dấu lỗi nếu None\ncũng là dữ liệu hợp lệ mà không có cách phân biệt. Queue cài bằng list và pop(0) trong Python thường phải dịch phần tử."
+          },
+          {
+            "id": 2467,
+            "page": 1,
+            "content": "bằng list và pop(0) trong Python thường phải dịch phần tử. deque hỗ trợ thao tác ở hai\nđầu phù hợp hơn cho queue. Đây là lựa chọn triển khai, không thay đổi quy tắc FIFO."
+          },
+          {
+            "id": 2468,
+            "page": 1,
+            "content": "2. Truy vết hai cấu trúc\nThao tác        Stack trả      Queue trả\nThêm A          -              -\nThêm B          -              -"
+          }
+        ],
+        "metadata_valid": true
+      },
+      {
+        "citation": {
+          "document_id": 168,
+          "document": "Ngăn xếp và hàng đợi — Thực hành bổ sung 29/10/2026",
+          "page": 3,
+          "score": 0.7335
+        },
+        "document": {
+          "id": 168,
+          "course_id": 514,
+          "lesson_id": 308,
+          "title": "Ngăn xếp và hàng đợi — Thực hành bổ sung 29/10/2026"
+        },
+        "chunks": [
+          {
+            "id": 2473,
+            "page": 3,
+            "content": "Trang 3\nGợi ý đáp án và điểm cần nhớ\nLIFO. LIFO nghĩa là vào sau, ra trước. FIFO. FIFO nghĩa là vào trước, ra trước. B. B được đưa vào sau nên nằm trên đỉnh. Xem đỉnh mà không xóa. peek đọc phần tử trên đỉnh nhưng giữ nguyên stack. Queue. Queue giúp xử lý các đỉnh theo thứ tự khám phá từng lớp. Cách tự đánh giá sau bài\nGiải thích được thuật ngữ mà không đọc lại định nghĩa."
+          },
+          {
+            "id": 2474,
+            "page": 3,
+            "content": "bài\nGiải thích được thuật ngữ mà không đọc lại định nghĩa. Thực hiện lại ví dụ với dữ liệu khác và nêu được giới hạn áp dụng. Hoàn thành bài tập, đối chiếu bằng chứng hoặc đầu ra với hướng giải. Nếu còn nhầm, ghi câu hỏi cụ thể để hỏi giảng viên hoặc AI Tutor cùng ngữ cảnh bài. Các câu tự kiểm tra có thể trùng trọng tâm quiz."
+          },
+          {
+            "id": 2475,
+            "page": 3,
+            "content": "cảnh bài. Các câu tự kiểm tra có thể trùng trọng tâm quiz. Làm đúng câu đã đọc không tự chứng nhận thành\nthạo; cần thêm bài vận dụng và minh chứng thực hành. Tài liệu đọc thêm\nhttps://opendatastructures.org/\nhttps://docs.python.org/3/tutorial/datastructures.html\nhttps://docs.python.org/3/library/heapq.html"
+          }
+        ],
+        "metadata_valid": true
+      }
+    ],
+    "citation_metadata_valid": true,
+    "cleaned": true
+  },
+  {
+    "id": "new-10",
+    "role": "teacher_binh",
+    "course_id": 515,
+    "reference_lesson": 314,
+    "question": "Sau khi sửa lỗi ghi danh trùng, chạy lại đúng ca từng gây lỗi đã thay thế được kiểm thử hồi quy chưa? Phân biệt confirmation testing với regression testing.",
+    "gold": "Chưa. Confirmation thực hiện lại điều kiện/ca gây lỗi để xác nhận bản sửa. Regression kiểm tra các hành vi liên quan có nguy cơ bị ảnh hưởng, chọn phạm vi theo thay đổi; không bắt buộc chạy mọi test vô hạn.",
+    "evidence": [
+      {
+        "chunk_id": 2707,
+        "document_id": 182,
+        "page": 2,
+        "text": "Confirmation testing thực hiện lại điều kiện gây lỗi để xác nhận bản sửa. Regression testing mở rộng sang các hành vi có nguy cơ bị ảnh hưởng: đăng ký lần đầu, trùng, khóa có phí, quyền mở bài và danh sách khóa. Chọn phạm vi theo thay đổi, không mặc định chạy mọi test vô hạn."
+      }
+    ],
+    "group": "knowledge",
+    "sample": "new",
+    "conversation_id": 434,
+    "http_status": 200,
+    "answer": "Bạn gửi đoạn code liên quan và thông báo lỗi đầy đủ nhé. Bạn đang dùng ngôn ngữ/công cụ nào và mong đợi kết quả gì?",
+    "sources": [],
+    "used_context": false,
+    "needs_clarification": true,
+    "clarification_kind": "debug",
+    "elapsed_seconds": 0.012,
+    "refused": false,
+    "fallback": false,
+    "llm_error": false,
+    "citation_evidence": [],
+    "citation_metadata_valid": true,
+    "cleaned": true
+  }
+]

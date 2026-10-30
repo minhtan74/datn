@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "question": "Cho ví dụ đi",
+      "conversation_id": 374,
+      "answer": "Bạn muốn mình giải thích chủ đề hoặc khái niệm nào? Bạn gửi tên nội dung hoặc đoạn đang chưa hiểu nhé.",
+      "sources": [],
+      "used_context": false,
+      "needs_clarification": true,
+      "clarification_kind": "topic",
+      "seconds": 0.04
+    },
+    {
+      "question": "Promise",
+      "conversation_id": 374,
+      "answer": "Dưới đây là ví dụ về cách sử dụng Promise để tạo một tác vụ bất đồng bộ (giả lập chờ 1 giây):\n\n```javascript\nconst cho = (ms) => new Promise((resolve) => setTimeout(resolve, ms));\n\ncho(1000)\n  .then(() => console.log(\"Sau 1 giây\"))\n  .catch((loi) => console.error(loi));\n```\n\nTrong ví dụ này:\n- `new Promise` tạo ra đối tượng đại diện cho tác vụ bất đồng bộ.\n- `.then()` được dùng để xử lý khi Promise hoàn thành thành công (fulfilled).\n- `.catch()` được dùng để bắt lỗi nếu Promise thất bại (rejected).",
+      "sources": [
+        {
+          "document_id": 106,
+          "document": "Promise & Async/Await — Thực hành bổ sung 29/10/2026",
+          "page": 3,
+          "score": 0.4549
+        },
+        {
+          "document_id": 79,
+          "document": "Promise & Async/Await",
+          "page": 1,
+          "score": 0.5793
+        }
+      ],
+      "used_context": true,
+      "needs_clarification": false,
+      "clarification_kind": null,
+      "seconds": 7.03
+    },
+    {
+      "question": "Giải thích thêm nữa",
+      "conversation_id": 374,
+      "answer": "Promise trong JavaScript là đối tượng đại diện cho một tác vụ bất đồng bộ với ba trạng thái:\n- **Pending (đang chờ):** Tác vụ đang thực hiện.\n- **Fulfilled (hoàn thành thành công):** Tác vụ đã xong và trả kết quả qua `.then()`.\n- **Rejected (thất bại):** Tác vụ gặp lỗi và được bắt bằng `.catch()`.\n\nCơ chế này giúp xử lý các tác vụ tốn thời gian (như gọi API, đọc file, hẹn giờ) chạy nền mà không làm chặn chương trình. Ngoài ra, bạn có thể dùng `async/await` để viết mã bất đồng bộ trông giống mã đồng bộ: từ khóa `await` sẽ tạm dừng hàm `async` cho tới khi Promise được giải quyết, và dùng `try...catch` để xử lý lỗi thay cho `.catch()`. Nếu có nhiều tác vụ độc lập, `Promise.all` cho phép chờ tất cả hoàn thành cùng lúc.",
+      "sources": [
+        {
+          "document_id": 106,
+          "document": "Promise & Async/Await — Thực hành bổ sung 29/10/2026",
+          "page": 3,
+          "score": 0.5742
+        },
+        {
+          "document_id": 79,
+          "document": "Promise & Async/Await",
+          "page": 1,
+          "score": 0.7055
+        },
+        {
+          "document_id": 13,
+          "document": "JavaScript Nền Tảng — Tài liệu tổng hợp",
+          "page": null,
+          "score": 0.6463
+        }
+      ],
+      "used_context": true,
+      "needs_clarification": false,
+      "clarification_kind": null,
+      "seconds": 5.44
+    }
+  ]
+}

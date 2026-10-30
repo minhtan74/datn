@@ -24,13 +24,15 @@ def get_current_user(request: Request, db: Session = Depends(get_db)) -> dict[st
     # Đối chiếu DB để việc khóa / xóa / đổi quyền có hiệu lực ngay, không chờ token hết hạn.
     user = q_one(
         db,
-        "SELECT id, fullname, email, role, is_active FROM users WHERE id = :id",
+        "SELECT id, fullname, email, role, is_active, token_version FROM users WHERE id = :id",
         id=payload.get("id"),
     )
     if not user:
         raise ApiError("Tài khoản không còn tồn tại. Vui lòng đăng nhập lại.", 401)
     if not user["is_active"]:
         raise ApiError("Tài khoản của bạn đã bị khóa.", 401)
+    if payload.get("token_version", 0) != user["token_version"]:
+        raise ApiError("Phiên đăng nhập đã hết hiệu lực. Vui lòng đăng nhập lại.", 401)
 
     # Lấy tên, email, vai trò mới nhất từ DB (đè lên giá trị cũ lưu trong token)
     return {**payload, "fullname": user["fullname"], "email": user["email"], "role": user["role"]}

@@ -1,0 +1,34 @@
+{
+  "passed": 21,
+  "checks": [
+    "Report states match management counts",
+    "Report revenue matches management revenue",
+    "Recent payments contain only VNPay",
+    "Old method comparison removed",
+    "Status chart drawn",
+    "Accessible count: Thành công",
+    "Accessible count: Đang chờ",
+    "Accessible count: Thất bại",
+    "Accessible count: Đã hoàn tiền",
+    "Status chart labels all-time scope",
+    "No legacy method labels in page",
+    "Desktop chart cards have equal width and height",
+    "Revenue range remains functional",
+    "CSV download works",
+    "Mobile chart cards stack at the same width",
+    "Mobile report does not overflow horizontally",
+    "Empty data has clear placeholder",
+    "Empty chart does not create misleading ring",
+    "Single-state chart works",
+    "Zero status counts remain visible",
+    "No JavaScript exceptions"
+  ],
+  "errors": [],
+  "liveCounts": {
+    "completed": 2,
+    "pending": 0,
+    "failed": 10,
+    "refunded": 1
+  },
+  "scope": "Read-only; simulated empty and single-state UI cases."
+}

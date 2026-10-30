@@ -1,0 +1,62 @@
+{
+  "checks": [
+    "teacher cannot manage",
+    "teacher cannot reconcile",
+    "teacher cannot reconcile-pending",
+    "teacher cannot refund",
+    "student cannot manage",
+    "student cannot reconcile",
+    "student cannot reconcile-pending",
+    "student cannot refund",
+    "Guest cannot manage",
+    "Pagination total and first page",
+    "Counts accurate",
+    "Revenue accurate",
+    "Second page has no duplicate rows",
+    "Status filter completed",
+    "Status filter pending",
+    "Status filter failed",
+    "Status filter refunded",
+    "Search transaction reference",
+    "Search gateway number",
+    "Inclusive date bounds",
+    "Invalid filter rejected: {'status': 'invalid'}",
+    "Invalid filter rejected: {'date_from': '2026-13-01'}",
+    "Invalid filter rejected: {'method': 'momo'}",
+    "Invalid filter rejected: {'page': 0}",
+    "Confirmed missing refund fields",
+    "Confirmed duplicate gateway calls on concurrent refund",
+    "Confirmed partial local commit on refund failure",
+    "Confirmed bulk reconcile ignores displayed search"
+  ],
+  "findings": {
+    "missing_refund_detail": {
+      "missing_api_fields": [
+        "refunded_at",
+        "refund_reason",
+        "refund_txn_no"
+      ],
+      "database_values_present": true
+    },
+    "concurrent_refund": {
+      "gateway_attempts": 2,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "real_money_movement_tested": false
+    },
+    "non_atomic_refund": {
+      "http_status": 500,
+      "payment_status": "refunded",
+      "enrollment_retained": true
+    },
+    "bulk_filter_scope": {
+      "visible_pending": 1,
+      "fixture_pending_queried": 7,
+      "isolated_to_fixture": true
+    }
+  },
+  "external_gateway_calls": 0,
+  "temporary_data_cleaned": true
+}

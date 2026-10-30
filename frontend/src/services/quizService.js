@@ -22,9 +22,9 @@ export const quizService = {
     return axiosClient.delete(`/api/quizzes?id=${id}`);
   },
 
-  // Câu hỏi của quiz (học viên nhận bản đã ẩn đáp án); các hàm sau: thêm / sửa / xóa câu hỏi
-  getQuestions(quizId) {
-    return axiosClient.get(`/api/quizzes/questions?quiz_id=${quizId}`);
+  // Học viên: gọi sau khi xác nhận bắt đầu; resumeOnly không tạo lượt mới nếu lượt cũ đã hết hạn.
+  getQuestions(quizId, { resumeOnly = false } = {}) {
+    return axiosClient.get(`/api/quizzes/questions?quiz_id=${quizId}${resumeOnly ? '&resume_only=1' : ''}`);
   },
   getQuestion(id) {
     return axiosClient.get(`/api/quizzes/questions?id=${id}`);
